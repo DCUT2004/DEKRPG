@@ -1,0 +1,416 @@
+class RPGClass extends RPGDeathAbility
+	config(UT2004RPG) 
+	abstract;
+
+var config int LowLevel;
+var config int MediumLevel;
+var config float MaxXPperHit;
+var config float LowLevelDmgReduction, ResurrectionWeaponDamageMultiplier, ResurrectionSuperWeaponDamageMultiplier;
+var config float MedLevelDmgReduction;
+
+static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
+{
+	local int x;
+	if(CurrentLevel > 1)
+		return 0;
+
+	for (x = 0; x < Data.Abilities.length; x++)
+	{
+		if(ClassIsChildOf(Data.Abilities[x], Class'RPGClass') && Data.Abilities[x] != default.Class)
+			return 0;
+	}
+	return default.StartingCost;
+}
+
+static simulated function RPGStatsInv getPlayerStats(Controller c)
+{
+	Local GameRules G;
+	Local RPGRules RPG;
+	for(G = C.Level.Game.GameRulesModifiers; G != None; G = G.NextGameRules)
+	{
+		if(G.isA('RPGRules'))
+		{
+			RPG = RPGRules(G);
+			break;
+		}
+	}
+
+	if(RPG == None)
+	{
+		Log("WARNING: Unable to find RPGRules in GameRules.");
+		return None;
+	}
+	return RPG.GetStatsInvFor(C);
+}
+
+static function bool PrePreventDeath(Pawn Killed, Controller Killer, class<DamageType> DamageType, vector HitLocation, int AbilityLevel)
+{
+	Local InvulnerabilityInv IInv;
+	local PaladinInv PInv;
+	Local float XPGained;
+
+	IInv = InvulnerabilityInv(Killed.FindInventoryType(class'InvulnerabilityInv'));
+	PInv = PaladinInv(Killed.FindInventoryType(class'PaladinInv'));
+	if (IInv != None)
+	{
+	    if (Killed == IInv.PlayerPawn)
+			Killed.Health = max(IInv.PlayerHealth,10);  // keep alive
+	    else
+			Killed.Health = max(10,Killed.Health);  // keep alive
+	    // killed player is in a invulnerability sphere. Give them 10 health and give xp to sphere spawner
+		if ( Killed != None && Killed.Controller != None && IInv.InvPlayerController != None && IInv.InvPlayerController.Pawn != None && Killed != Killer.Pawn
+			&& Killed.Controller.SameTeamAs(IInv.InvPlayerController) )
+		{
+		    // saved some damage from an enemy. Let's give xp.
+		    if (IInv.InvPlayerController != None && IInv.InvPlayerController.Pawn != None && IInv.Rules != None && IInv.InvPlayerController != Killer && IInv.InvPlayerController != Killed.Controller)
+		    {
+		        XPGained = fmin(fmax(3.0, Killed.Health*IInv.ExpPerDamage),default.MaxXPperHit); // between 3 and 10 xp for preventing death
+		        IInv.Rules.ShareExperience(RPGStatsInv(IInv.InvPlayerController.Pawn.FindInventoryType(class'RPGStatsInv')), XPGained);
+		        Log("******* Player:" $ IInv.InvPlayerController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
+			}
+		}
+		return true;
+	}
+	if (PInv != None && PInv.GuardianController.Pawn != None && PInv.GuardianController.Pawn.Health > 0 && PInv.GuardianController.Adrenaline >= PInv.AdrenalineRequired && PInv.bInvulReady)
+	{
+	    if (Killed == PInv.PawnOwner)
+			Killed.Health = max(PInv.PlayerHealth,10);  // keep alive
+	    else
+			Killed.Health = max(10,Killed.Health);  // keep alive
+	    // killed player is in a invulnerability sphere. Give them 10 health and give xp to sphere spawner
+		if ( Killed != None && Killed.Controller != None && PInv.GuardianController != None && PInv.GuardianController.Pawn != None && Killed != Killer.Pawn
+			&& Killed.Controller.SameTeamAs(PInv.GuardianController) )
+		{
+		    // saved some damage from an enemy. Let's give xp.
+		    if (PInv.GuardianController != None && PInv.GuardianController.Pawn != None && PInv.Rules != None && PInv.GuardianController != Killer && PInv.GuardianController != Killed.Controller)
+		    {
+		        XPGained = fmin(fmax(3.0, Killed.Health*PInv.ExpPerDamage),default.MaxXPperHit); // between 3 and 10 xp for preventing death
+		        PInv.Rules.ShareExperience(RPGStatsInv(PInv.GuardianController.Pawn.FindInventoryType(class'RPGStatsInv')), XPGained);
+		        Log("******* Player:" $ PInv.GuardianController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
+			}
+		}
+		PInv.Counter = 0;
+		PInv.GuardianController.Adrenaline -= PInv.AdrenalineRequired;
+		if (PInv.GuardianController.Adrenaline < 0)
+			PInv.GuardianController.Adrenaline = 0;
+		PInv.GuardianController.Pawn.ReceiveLocalizedMessage(class'PaladinActivatedMessage', 0, PInv.PawnOwner.PlayerReplicationInfo);
+		if (IInv == None)
+		{
+			IInv = Killed.spawn(class'InvulnerabilityInv', Killed,,, rot(0,0,0));
+			IInv.EstimatedRunTime = PInv.InvulTime;
+			IInv.InvPlayerController = PInv.GuardianController;
+			IInv.ExpPerDamage = PInv.ExpPerDamage;
+			IInv.CoreLocation = Killed.Location;
+			IInv.Rules = PInv.Rules;
+			IInv.GiveTo(Killed);
+		}
+		return true;
+	}
+	
+	if(Killed == None)
+		return false;
+
+	return false;
+}
+
+static function bool GenuinePreventDeath(Pawn Killed, Controller Killer, class<DamageType> DamageType, vector HitLocation, int AbilityLevel)
+{
+	local RPGStatsInv StatsInv;
+	local int y;
+	local int GhostLevel;
+	local int GhostIndex;
+	GhostIndex = -1;
+	
+	StatsInv = RPGStatsInv(Killed.FindInventoryType(class'RPGStatsInv'));
+ 	if (StatsInv != None && StatsInv.DataObject.Level <= default.MediumLevel)
+ 	{
+ 		for (y = 0; y < StatsInv.Data.Abilities.length; y++)
+ 		{
+ 			if (ClassIsChildOf(StatsInv.Data.Abilities[y], class'AbilityGhost'))
+ 			{
+ 				GhostLevel = StatsInv.Data.AbilityLevels[y];
+ 				GhostIndex = y;
+ 			}
+ 		}
+
+		if(StatsInv.DataObject.Level <= default.LowLevel)
+		{
+			if(GhostIndex >= 0)
+				return StatsInv.Data.Abilities[GhostIndex].static.PreventDeath(Killed, Killer, DamageType, HitLocation, 2, false);
+			else
+				return class'DruidGhost'.static.GenuinePreventDeath(Killed, Killer, DamageType, HitLocation, 2);
+			
+		}
+		else if(StatsInv.DataObject.Level <= default.MediumLevel)
+		{
+			if(GhostIndex >= 0)
+				return StatsInv.Data.Abilities[GhostIndex].static.PreventDeath(Killed, Killer, DamageType, HitLocation, 1, false);
+			else
+				return class'DruidGhost'.static.GenuinePreventDeath(Killed, Killer, DamageType, HitLocation, 1);
+		}
+ 	}
+}
+
+static function bool PreventSever(Pawn Killed, name boneName, int Damage, class<DamageType> DamageType, int AbilityLevel)
+{
+	local RPGStatsInv StatsInv;
+	Local InvulnerabilityInv IInv;
+	local PaladinInv PInv;
+	local int y;
+	local int GhostLevel;
+	local int GhostIndex;
+	GhostIndex = -1;
+	
+	IInv = InvulnerabilityInv(Killed.FindInventoryType(class'InvulnerabilityInv'));
+	if (IInv != None)
+	{
+	    return true;
+	}
+	PInv = PaladinInv(Killed.FindInventoryType(class'PaladinInv'));
+	if (PInv != None && PInv.GuardianController.Pawn != None && PInv.GuardianController.Pawn.Health > 0 && PInv.GuardianController.Adrenaline >= PInv.AdrenalineRequired && PInv.bInvulReady)
+	{
+	    return true;
+	}
+	
+	StatsInv = RPGStatsInv(Killed.FindInventoryType(class'RPGStatsInv'));
+ 	if (StatsInv != None && StatsInv.DataObject.Level <= default.MediumLevel)
+ 	{
+ 		for (y = 0; y < StatsInv.Data.Abilities.length; y++)
+ 		{
+ 			if (ClassIsChildOf(StatsInv.Data.Abilities[y], class'AbilityGhost'))
+ 			{
+ 				GhostLevel = StatsInv.Data.AbilityLevels[y];
+ 				GhostIndex = y;
+ 			}
+ 		}
+
+		if(StatsInv.DataObject.Level <= default.LowLevel)
+		{
+			if(GhostIndex >=0)
+				return StatsInv.Data.Abilities[GhostIndex].static.PreventSever(Killed, boneName, Damage, DamageType, 3);
+			else
+				return class'DruidGhost'.static.PreventSever(Killed, boneName, Damage, DamageType, 3);
+		}
+		else if(StatsInv.DataObject.Level <= default.MediumLevel)
+		{
+			if(GhostIndex >=0)
+				return StatsInv.Data.Abilities[GhostIndex].static.PreventSever(Killed, boneName, Damage, DamageType, Min(3, GhostLevel + 2));
+			else
+				return class'DruidGhost'.static.PreventSever(Killed, boneName, Damage, DamageType, 2);
+		}
+ 	}
+}
+
+static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
+{
+	local RPGClassInv RPGInv;
+
+	if (Other != None)
+	{
+		RPGInv = RPGClassInv(Other.FindInventoryType(class'RPGClassInv'));
+
+		if (RPGInv == None)
+		{
+			RPGInv = Other.Spawn(class'RPGClassInv');
+			RPGInv.GiveTo(Other);
+		}
+	}
+}
+
+static simulated function ModifyVehicle(Vehicle V, int AbilityLevel)
+{
+	// called when player enters a vehicle
+	// UT2004RPG resets the vehicle health back to defaults when you get in. We need to reapply bonus
+	local float Healthperc;
+
+	if (V.SuperHealthMax == 199)
+		return;					// not spawned by Engineer
+
+	// need to undo the change done by the MutUT2004RPG.DriverEnteredVehicle function
+	Healthperc = float(V.Health) / V.HealthMax;	// current health percent
+	V.HealthMax = V.SuperHealthMax;
+	V.Health =Healthperc * V.HealthMax;		// now applied to new max
+
+}
+
+static simulated function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKiller, int AbilityLevel)
+{
+	Local DamageInv DInv;
+	local InvulnerabilityInv IInv;
+	Local float DamageXPGained;
+	local DEKFriendlyMonsterController MC;
+	local PriestInv PInv;
+
+	if (!bOwnedByKiller)
+		return;
+		
+    if (Killer == None || Killer.Pawn == None || Killed == None || Killed.Pawn == None)
+        return; // nothing we can do
+		
+	MC = DEKFriendlyMonsterController(Killed);
+		
+	if (Killer != None && !Killer.Pawn.IsA('Monster') && Killer.Pawn.HasUDamage())
+	{
+		DInv = DamageInv(Killer.Pawn.FindInventoryType(class'DamageInv'));
+		if (DInv != None)
+		{
+		    // player has DamageInv, which means they have their Damage Boosted by another player. So lets give them a bit of xp
+		    if (DInv.DamagePlayerController != None && DInv.DamagePlayerController.Pawn != None && DInv.Rules != None && DInv.DamagePlayerController != Killer)
+		    {
+		        DamageXPGained = DInv.KillXPPerc * float(Killed.Pawn.GetPropertyText("ScoringValue"));
+		        DInv.Rules.ShareExperience(RPGStatsInv(DInv.DamagePlayerController.Pawn.FindInventoryType(class'RPGStatsInv')), DamageXPGained);
+				
+				//Now for Priest niche on Craftsman
+				PInv = PriestInv(DInv.DamagePlayerController.Pawn.FindInventoryType(class'PriestInv'));
+				if (PInv != None)
+				{
+					if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
+					{
+						DInv.DamagePlayerController.AwardAdrenaline(float(Killed.Pawn.GetPropertyText("ScoringValue")) * 0.10 * PInv.AbilityLevel);
+					}
+					if (Killer.bIsPlayer && Killed.bIsPlayer)
+					{
+						DInv.DamagePlayerController.AwardAdrenaline(Deathmatch(Killer.Level.Game).ADR_Kill * 0.10 * PInv.AbilityLevel);
+					}
+				}
+			}
+		}
+	}
+	if (Killer != None && Killer.Pawn != None && !Killer.Pawn.IsA('Monster') && Killed.Pawn != None)
+	{
+		IInv = InvulnerabilityInv(Killer.Pawn.FindInventoryType(class'InvulnerabilityInv'));
+		if (IInv != None)
+		{
+		    if (IInv.InvPlayerController != None && IInv.InvPlayerController.Pawn != None && IInv.InvPlayerController != Killer)
+		    {
+				PInv = PriestInv(IInv.InvPlayerController.Pawn.FindInventoryType(class'PriestInv'));
+				if (PInv != None)
+				{
+					if (Killed.Pawn.IsA('Monster'))
+					{
+						IInv.InvPlayerController.AwardAdrenaline(float(Killed.Pawn.GetPropertyText("ScoringValue")) * 0.10 * PInv.AbilityLevel);
+					}
+					if (Killer.bIsPlayer && Killed.bIsPlayer)
+					{
+						IInv.InvPlayerController.AwardAdrenaline(Deathmatch(Killer.Level.Game).ADR_Kill * 0.10 * PInv.AbilityLevel);
+					}
+				}
+			}
+		}
+	}
+}
+
+static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
+{
+	Local float OriginalDamage;
+	Local InvulnerabilityInv IInv;
+	Local float XPGained;
+	Local MissionPortalBall Ball;
+	local NecroInv NInv;
+	local float VampireDamage;
+	local RPGStatsInv StatsInv;
+
+	if(Damage > 0 && bOwnedByInstigator)
+	{
+		if (Instigator != None)
+		{
+			//Adjust damage for resurrected players
+			NInv = NecroInv(Instigator.FindInventoryType(class'NecroInv'));
+			if (NInv != None)
+			{
+				if (NInv.NecromancerController != None && NInv.NecromancerController.Pawn != None)
+				{
+					if (NInv.bVampireResurrect)
+					{
+						VampireDamage = (Damage * NInv.VampirePerc);
+						NInv.NecromancerController.Pawn.GiveHealth(VampireDamage, NInv.NecromancerController.Pawn.HealthMax);
+					}
+					else if (NInv.bPowerResurrect)
+					{
+						Damage *= 1 + (NInv.PowerPerc);
+					}
+					else
+					{
+						if (ClassIsChildOf(DamageType, class'WeaponDamageType'))
+						{
+							if (DamageType.IsA('DamTypeRedeemer') || DamageType.IsA('DamTypeIonBlast'))
+								Damage *= default.ResurrectionSuperWeaponDamageMultiplier;
+							else
+								Damage *= default.ResurrectionWeaponDamageMultiplier;						
+						}
+					}
+				}
+			}
+		}
+		if (ClassIsChildOf(Injured.Class, class'MissionPortalBall'))
+		{
+			Ball = MissionPortalBall(Injured);
+			if (Ball != None)
+			{
+				//Momentum = vect(0,0,0);
+				Ball.Velocity.Z = 100;
+				Damage = 0;
+			}
+		}
+	}
+		
+	if(Damage > 0 && !bOwnedByInstigator)
+	{
+		if (Injured != None)
+		{
+			//Reduce damage for low level players
+			StatsInv = RPGStatsInv(Injured.FindInventoryType(class'RPGStatsInv'));
+			if (StatsInv != None && StatsInv.DataObject.Level <= default.MediumLevel)
+			{
+				if(StatsInv.DataObject.Level <= default.LowLevel)
+					Damage *= (1 - default.LowLevelDmgReduction);
+				else
+					Damage *= (1 - default.MedLevelDmgReduction);
+			}
+			
+			//Reduce damage for players with Invulnerability Inv
+			IInv = InvulnerabilityInv(Injured.FindInventoryType(class'InvulnerabilityInv'));
+			if (IInv != None)
+			{
+				// injured player is in a invulnerability sphere. Reduce damage and give xp to sphere spawner
+				OriginalDamage = Damage;
+				Damage = 0;
+				Momentum = vect(0,0,0);
+				// check for not same team before awarding xp
+				if ( Injured != None && Injured.Controller != None && IInv.InvPlayerController != None && IInv.InvPlayerController.Pawn != None && Injured.Controller.SameTeamAs(IInv.InvPlayerController) )
+				{
+					// saved some damage from an enemy. Let's give xp.
+					if (IInv.InvPlayerController != None && IInv.InvPlayerController.Pawn != None && IInv.Rules != None && Instigator != None && Instigator.Controller != None && IInv.InvPlayerController != Instigator.Controller && IInv.InvPlayerController != Injured.Controller)
+					{
+						XPGained = fmin(IInv.ExpPerDamage * OriginalDamage, default.MaxXPperHit); // max 10 xp per hit
+						IInv.Rules.ShareExperience(RPGStatsInv(IInv.InvPlayerController.Pawn.FindInventoryType(class'RPGStatsInv')), XPGained);
+						//Log("******* Player:" $ IInv.InvPlayerController.Pawn @ "is getting" @ XPGained @ "xp for preventing" @ OriginalDamage @ "to" @ Injured @ "Damagetype:" $ DamageType);
+					}
+				}
+				// now let's do a status check on the pawn
+				if (Injured == IInv.PlayerPawn)
+				{
+					IInv.PlayerHealth = Injured.Health;
+				}
+				else
+				{
+					IInv.PlayerPawn = Injured;
+					IInv.PlayerHealth = Injured.Health;
+				}
+			}
+		}
+	}
+}
+
+defaultproperties
+{
+     LowLevel=20
+     MediumLevel=40
+     MaxXPperHit=10.000000
+     LowLevelDmgReduction=0.500000
+	 MedLevelDmgReduction=0.150000
+     ResurrectionWeaponDamageMultiplier=0.650000
+     ResurrectionSuperWeaponDamageMultiplier=0.450000
+     StartingCost=1
+     MaxLevel=1
+}

@@ -1,0 +1,14 @@
+class NecromancerBloodWeapon extends Weapon
+	CacheExempt;
+
+defaultproperties
+{
+     FireModeClass(0)=Class'DEKRPG208AA.NecromancerBloodWeaponFire'
+     FireModeClass(1)=Class'DEKRPG208AA.NecromancerBloodWeaponAltFire'
+     bCanThrow=False
+     HudColor=(G=0,R=77)
+     IconMaterial=Texture'DEKRPGTexturesMaster208K.NecroIcons.BloodMagicIcon'
+     IconCoords=(X1=1,Y1=1,X2=64,Y2=64)
+     ItemName="Blood Magic"
+     DrawScale=0.050000
+}

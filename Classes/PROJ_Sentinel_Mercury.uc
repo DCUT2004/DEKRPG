@@ -1,0 +1,29 @@
+class PROJ_Sentinel_Mercury extends MercuryMissiles2.MercuryMissile;
+
+defaultproperties
+{
+     SplashDamageType=Class'DEKRPG208AA.DamTypeMercurySENTSplashDamage'
+     ImpactDamageAmount=45.000000
+     HeadHitDamage=Class'DEKRPG208AA.DamTypeMercurySENTHeadHit'
+     DirectHitDamage=Class'DEKRPG208AA.DamTypeMercurySENTDirectHit'
+     PunchThroughDamage=Class'DEKRPG208AA.DamTypeMercurySENTPunchThrough'
+     ThroughHeadDamage=Class'DEKRPG208AA.DamTypeMercurySENTPunchThroughHead'
+     AirHeadHitDamage=Class'DEKRPG208AA.DamTypeMercurySENTAirHeadHit'
+     AirHitDamage=Class'DEKRPG208AA.DamTypeMercurySENTAirHit'
+     AirPunchThroughDamage=Class'DEKRPG208AA.DamTypeMercurySENTAirPunchThrough'
+     AirThroughHeadDamage=Class'DEKRPG208AA.DamTypeMercurySENTAirPunchThroughHead'
+     AccelRate=15000.000000
+     HeadShotSizeAdjust=1.250000
+     PunchThroughSpeed=9000.000000
+     UDamageMomentumBoost=1.250000
+     RocketJumpBoost=1.000000
+     Speed=12000.000000
+     MaxSpeed=27500.000000
+     Damage=45.000000
+     MyDamageType=Class'DEKRPG208AA.DamTypeMercurySENTDirectHit'
+     LifeSpan=3.000000
+     DrawScale=0.250000
+     Skins(0)=TexScaler'MercuryMissiles2.Skins.MercuryMissileTexGreen'
+     SoundVolume=100
+     SoundRadius=250.000000
+}
