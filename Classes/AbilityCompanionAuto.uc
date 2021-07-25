@@ -27,8 +27,8 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 defaultproperties
 {
      HealthMultiplier=0.750000
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityRoboticsAuto'
-     RequiredAbilities(0)=Class'DEKRPG208AA.AbilityVehicleDrone'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityRoboticsAuto'
+     RequiredAbilities(0)=Class'DEKRPG208AB.AbilityVehicleDrone'
      AbilityName="Niche: Companion"
      Description="Adds defense bolts to your healing drone, but reduces the max health of your constructions.|You must have the healing drone ability before purchasing this niche. You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=50

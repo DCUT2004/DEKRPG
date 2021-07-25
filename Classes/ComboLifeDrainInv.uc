@@ -64,5 +64,5 @@ defaultproperties
 	 bBuff=False
 	 ComboNameMessage="- Life Drain: "
 	 MinimumHealth=50
-     EffectEmitterClass=Class'DEKRPG208AA.ComboInaccuracyEffect'
+     EffectEmitterClass=Class'DEKRPG208AB.ComboInaccuracyEffect'
 }

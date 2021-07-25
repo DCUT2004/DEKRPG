@@ -118,7 +118,7 @@ defaultproperties
      AdrenalineRequired=100
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AA.ArtifactPoisonBlastPickup'
+     PickupClass=Class'DEKRPG208AB.ArtifactPoisonBlastPickup'
      IconMaterial=Texture'XEffects.Skins.MuzFlashLink_t'
      ItemName="PoisonBlast"
 }

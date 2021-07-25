@@ -36,45 +36,45 @@ static function LuckyStrike(Controller Killer, Controller Killed, bool bOwnedByK
 		
 		if (Killer.Pawn.Health <= default.MaxHealthForLetter && Killer.Adrenaline <= default.MaxAdrenForLetter)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.ArtifactLetterOPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG208AB.ArtifactLetterOPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPTitan') || ClassIsChildOf(M.Class, class'SMPStoneTitan'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.ArtifactLetterNPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG208AB.ArtifactLetterNPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPQueen'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.ArtifactLetterUPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG208AB.ArtifactLetterUPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'Warlord'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.ArtifactLetterBPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG208AB.ArtifactLetterBPickup', None, 1);
 			return;
 		}
 		if (M.ScoringValue >= default.ScoringValueForS)
 		{
 			if (default.LetterSChance >= rand(99))
 			{
-				DropPickups(Killed, Killer, class'DEKRPG208AA.ArtifactLetterSPickup', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG208AB.ArtifactLetterSPickup', None, 1);
 				return;
 			}
 			else
 			{	
-				DropPickups(Killed, Killer, class'DEKRPG208AA.GemExperiencePickupPurple', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG208AB.GemExperiencePickupPurple', None, 1);
 				return;
 			}
 		}
 		else if(M.ScoringValue > 6)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.GemExperiencePickupGreen', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG208AB.GemExperiencePickupGreen', None, 1);
 			return;
 		}
 		else
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AA.GemExperiencePickupBlue', None, 1);			
+			DropPickups(Killed, Killer, class'DEKRPG208AB.GemExperiencePickupBlue', None, 1);			
 			return;	
 		}
 	}

@@ -46,5 +46,5 @@ defaultproperties
 {
 	 bBuff=False
 	 ComboNameMessage="- Accuracy: "
-     EffectEmitterClass=Class'DEKRPG208AA.ComboInaccuracyEffect'
+     EffectEmitterClass=Class'DEKRPG208AB.ComboInaccuracyEffect'
 }

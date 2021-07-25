@@ -50,7 +50,7 @@ simulated function Dropped()
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG208AA.GenomeVialCosmicPickup'
+     PickupClass=Class'DEKRPG208AB.GenomeVialCosmicPickup'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

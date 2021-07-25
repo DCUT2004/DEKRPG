@@ -105,7 +105,7 @@ defaultproperties
      XPReward=30
      MissionGoal=60
      Description="Keep moving!"
-     PickupClass=Class'DEKRPG208AA.ArtifactMissionTippyToesPickup'
+     PickupClass=Class'DEKRPG208AB.ArtifactMissionTippyToesPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.TippyToesMission'
      ItemName="Tippy Toes"
 }

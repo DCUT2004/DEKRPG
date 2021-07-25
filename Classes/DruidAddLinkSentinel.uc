@@ -50,8 +50,8 @@ function AddDefaultInventory()
 defaultproperties
 {
      SwivelSound=Sound'GeneralAmbience.texture7'
-     TurretBaseClass=Class'DEKRPG208AA.DruidAddLinkSentinelBase'
-     TurretSwivelClass=Class'DEKRPG208AA.DruidAddLinkSentinelSwivel'
+     TurretBaseClass=Class'DEKRPG208AB.DruidAddLinkSentinelBase'
+     TurretSwivelClass=Class'DEKRPG208AB.DruidAddLinkSentinelSwivel'
      AmbientSoundScaling=3.000000
      DrawScale=0.350000
      Skins(0)=Shader'DEKRPGTexturesMaster208K.Skins.LinkSentHiding'

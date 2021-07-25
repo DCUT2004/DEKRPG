@@ -37,7 +37,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AA.MTGutblowFXB.SpriteEmitter10'
+     Emitters(0)=SpriteEmitter'DEKRPG208AB.MTGutblowFXB.SpriteEmitter10'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter12
          FadeOut=True
@@ -67,7 +67,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AA.MTGutblowFXB.SpriteEmitter12'
+     Emitters(1)=SpriteEmitter'DEKRPG208AB.MTGutblowFXB.SpriteEmitter12'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter0
          StaticMesh=StaticMesh'XEffects.GibOrganicCalf'
@@ -92,7 +92,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(2)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter0'
+     Emitters(2)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter0'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter1
          StaticMesh=StaticMesh'XEffects.GibOrganicForearm'
@@ -117,7 +117,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(3)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter1'
+     Emitters(3)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter1'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter2
          StaticMesh=StaticMesh'XEffects.GibOrganicHand'
@@ -142,7 +142,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(4)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter2'
+     Emitters(4)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter2'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter3
          StaticMesh=StaticMesh'XEffects.GibOrganicHead'
@@ -167,7 +167,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(5)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter3'
+     Emitters(5)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter3'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter4
          StaticMesh=StaticMesh'XEffects.GibOrganicUpperarm'
@@ -192,7 +192,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=-150.000000,Max=-150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(6)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter4'
+     Emitters(6)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter0
          FadeOut=True
@@ -221,7 +221,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(7)=SpriteEmitter'DEKRPG208AA.MTGutblowFXB.SpriteEmitter0'
+     Emitters(7)=SpriteEmitter'DEKRPG208AB.MTGutblowFXB.SpriteEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          FadeOut=True
@@ -251,7 +251,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(8)=SpriteEmitter'DEKRPG208AA.MTGutblowFXB.SpriteEmitter1'
+     Emitters(8)=SpriteEmitter'DEKRPG208AB.MTGutblowFXB.SpriteEmitter1'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter5
          StaticMesh=StaticMesh'XEffects.GibOrganicCalf'
@@ -276,7 +276,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(9)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter5'
+     Emitters(9)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter5'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter6
          StaticMesh=StaticMesh'XEffects.GibOrganicTorso'
@@ -301,7 +301,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(10)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter6'
+     Emitters(10)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter6'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter7
          StaticMesh=StaticMesh'XEffects.GibOrganicTorso'
@@ -326,7 +326,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(11)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter7'
+     Emitters(11)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter7'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter8
          StaticMesh=StaticMesh'XEffects.GibOrganicUpperarm'
@@ -351,7 +351,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(12)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter8'
+     Emitters(12)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter8'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter9
          StaticMesh=StaticMesh'XEffects.GibOrganicForearm'
@@ -376,7 +376,7 @@ defaultproperties
          InitialDelayRange=(Max=1.500000)
          StartVelocityRange=(X=(Min=-300.000000,Max=-300.000000),Y=(Min=150.000000,Max=150.000000),Z=(Min=50.000000,Max=50.000000))
      End Object
-     Emitters(13)=MeshEmitter'DEKRPG208AA.MTGutblowFXB.MeshEmitter9'
+     Emitters(13)=MeshEmitter'DEKRPG208AB.MTGutblowFXB.MeshEmitter9'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter2
          RespawnDeadParticles=False
@@ -390,7 +390,7 @@ defaultproperties
          SpawningSoundProbability=(Min=1.000000,Max=1.000000)
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(14)=SpriteEmitter'DEKRPG208AA.MTGutblowFXB.SpriteEmitter2'
+     Emitters(14)=SpriteEmitter'DEKRPG208AB.MTGutblowFXB.SpriteEmitter2'
 
      AutoDestroy=True
      bNoDelete=False

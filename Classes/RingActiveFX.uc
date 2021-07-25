@@ -24,7 +24,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.AirBlast'
          LifetimeRange=(Min=0.300000,Max=0.300000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AA.RingActiveFX.SpriteEmitter4'
+     Emitters(0)=SpriteEmitter'DEKRPG208AB.RingActiveFX.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseRevolution=True
@@ -43,7 +43,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.SoftFlare'
          LifetimeRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AA.RingActiveFX.SpriteEmitter5'
+     Emitters(1)=SpriteEmitter'DEKRPG208AB.RingActiveFX.SpriteEmitter5'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter6
          UseColorScale=True
@@ -68,7 +68,7 @@ defaultproperties
          TextureVSubdivisions=2
          LifetimeRange=(Min=0.300000,Max=0.300000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AA.RingActiveFX.SpriteEmitter6'
+     Emitters(2)=SpriteEmitter'DEKRPG208AB.RingActiveFX.SpriteEmitter6'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter9
          SpinParticles=True
@@ -79,7 +79,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.FlickerFlare'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG208AA.RingActiveFX.SpriteEmitter9'
+     Emitters(3)=SpriteEmitter'DEKRPG208AB.RingActiveFX.SpriteEmitter9'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter10
          UseDirectionAs=PTDU_Normal
@@ -101,7 +101,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.AirBlast'
          LifetimeRange=(Min=0.400000,Max=0.400000)
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG208AA.RingActiveFX.SpriteEmitter10'
+     Emitters(4)=SpriteEmitter'DEKRPG208AB.RingActiveFX.SpriteEmitter10'
 
      bNoDelete=False
      RemoteRole=ROLE_DumbProxy

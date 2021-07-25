@@ -4,6 +4,6 @@ class DamTypeMercurySENTAirHit extends DamTypeMercuryAirHit abstract;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AA.DEKMercurySentinelWeapon'
+     WeaponClass=Class'DEKRPG208AB.DEKMercurySentinelWeapon'
      DeathString="%k's sentinel picked off %o in mid-air with a mercury missile."
 }

@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=700
      Description="Use the Flak Cannon."
-     PickupClass=Class'DEKRPG208AA.ArtifactMissionFlakFrenzyPickup'
+     PickupClass=Class'DEKRPG208AB.ArtifactMissionFlakFrenzyPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionFlakCannon'
      ItemName="Flak Frenzy"
 }

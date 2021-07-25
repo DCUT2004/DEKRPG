@@ -77,5 +77,5 @@ function bool IsEngineerLocked()
 defaultproperties
 {
      RedSkin1=Texture'MTII.MTBlue'
-     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AA.MTRearGunPawnBlue')
+     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AB.MTRearGunPawnBlue')
 }

@@ -121,6 +121,6 @@ simulated function Destroyed()
 defaultproperties
 {
 	 ComboNameMessage="Attack: "
-     EffectDownxEmitterClass=Class'DEKRPG208AA.ComboAttackDownEffect'
-     EffectxEmitterClass=Class'DEKRPG208AA.ComboAttackUpEffect'
+     EffectDownxEmitterClass=Class'DEKRPG208AB.ComboAttackDownEffect'
+     EffectxEmitterClass=Class'DEKRPG208AB.ComboAttackUpEffect'
 }

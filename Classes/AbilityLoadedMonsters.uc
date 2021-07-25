@@ -126,8 +126,8 @@ defaultproperties
      PetHealthFraction=1.000000
      WeaponDamage=0.500000
      ExtremeLevel=11
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityNicheSummonerLoadedFireMonsters'
-     ExcludingAbilities(1)=Class'DEKRPG208AA.AbilityNicheSummonerLoadedIceMonsters'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityNicheSummonerLoadedFireMonsters'
+     ExcludingAbilities(1)=Class'DEKRPG208AB.AbilityNicheSummonerLoadedIceMonsters'
      AbilityName="Loaded Monsters"
      Description="Learn new monsters to summon with Monster Points. At each level, you can summon a better monster. At level 11 and beyond, weapon damage is reduced for Summoners.|Cost (per level): 2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,.."
      StartingCost=2

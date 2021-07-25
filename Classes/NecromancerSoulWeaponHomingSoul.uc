@@ -98,7 +98,7 @@ defaultproperties
      Speed=800.000000
      MaxSpeed=800.000000
      Damage=60.000000
-     MyDamageType=Class'DEKRPG208AA.DamTypeNecromancerSoulWeapon'
+     MyDamageType=Class'DEKRPG208AB.DamTypeNecromancerSoulWeapon'
      LightSaturation=255
      LightBrightness=10.000000
      DrawType=DT_Mesh

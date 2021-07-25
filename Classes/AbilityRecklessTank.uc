@@ -22,8 +22,8 @@ defaultproperties
 {
      SelfDamageMultiplier=0.150000
      ProtectionMultiplier=0.050000
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityHeavyTank'
-     ExcludingAbilities(1)=Class'DEKRPG208AA.AbilityLargeTank'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityHeavyTank'
+     ExcludingAbilities(1)=Class'DEKRPG208AB.AbilityLargeTank'
      ExcludingAbilities(2)=Class'UT2004RPG.AbilityReduceSelfDamage'
      AbilityName="Niche: Reckless"
      Description="Increases your cumulative total damage reduction by 5% per level, but also doubles self-damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|You cannot have this ability and Cautiousness at the same time.|Cost (per level): 10."

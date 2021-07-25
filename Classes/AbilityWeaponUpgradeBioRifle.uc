@@ -22,12 +22,12 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (BioFire(FireMode[0]) != None && BioRifle(W) != None)
 	{
-		BioFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AA.UpgradeBioGlob';
+		BioFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AB.UpgradeBioGlob';
 	}
 	if (BioChargedFire(FireMode[1]) != None && BioRifle(W) != None)
 	{
 		BioChargedFire(FireMode[1]).MaxGoopLoad=15;
-		BioChargedFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AA.UpgradeBioGlob';
+		BioChargedFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AB.UpgradeBioGlob';
 	}
 }
 

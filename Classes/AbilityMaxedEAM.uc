@@ -35,8 +35,8 @@ defaultproperties
 {
      AdrenReductionPerLevel=-10
      HealthReductionPerLevel=10
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityWizardEAM'
-     ExcludingAbilities(1)=Class'DEKRPG208AA.AbilityPowerEAM'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityWizardEAM'
+     ExcludingAbilities(1)=Class'DEKRPG208AB.AbilityPowerEAM'
      AbilityName="Niche: Maxed"
      Description="Increases your max adrenaline by 10 per level, but also decreases max health by 10 per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

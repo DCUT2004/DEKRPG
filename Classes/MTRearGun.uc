@@ -77,8 +77,8 @@ state ProjectileFireMode
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG208AA.MTRedProjectile'
-     TeamProjectileClasses(1)=Class'DEKRPG208AA.MTGunProjectile'
+     TeamProjectileClasses(0)=Class'DEKRPG208AB.MTRedProjectile'
+     TeamProjectileClasses(1)=Class'DEKRPG208AB.MTGunProjectile'
      MinAim=0.900000
      YawBone="REARgunBASE"
      PitchBone="REARgunTURRET"
@@ -99,8 +99,8 @@ defaultproperties
      AltFireSoundVolume=255.000000
      FireForce="Laser01"
      AltFireForce="Laser01"
-     ProjectileClass=Class'DEKRPG208AA.MTRedProjectile'
-     AltFireProjectileClass=Class'DEKRPG208AA.MTMissle'
+     ProjectileClass=Class'DEKRPG208AB.MTRedProjectile'
+     AltFireProjectileClass=Class'DEKRPG208AB.MTMissle'
      AIInfo(0)=(bLeadTarget=True,RefireRate=0.550000)
      AIInfo(1)=(bLeadTarget=True,aimerror=400.000000,RefireRate=0.500000)
      bUseDynamicLights=True

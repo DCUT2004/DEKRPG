@@ -38,8 +38,8 @@ defaultproperties
 {
      VampirePercPerLevel=0.050000
      AdrenReductionPerLevel=10.000000
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityPowerResurrector'
-     RequiredAbilities(0)=Class'DEKRPG208AA.AbilityNecromancer'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityPowerResurrector'
+     RequiredAbilities(0)=Class'DEKRPG208AB.AbilityNecromancer'
      AbilityName="Niche: Vampire Resurrector"
      Description="Whenever your resurrectee damages an opponent, you are healed for 5% of the damage per level. Reduces your maximum adrenaline by 10 per level.||You must be level 180 and have Loaded Necromancer before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

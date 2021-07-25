@@ -49,7 +49,7 @@ defaultproperties
          LifetimeRange=(Min=0.400000,Max=0.600000)
          StartVelocityRange=(X=(Max=100.000000),Y=(Max=100.000000),Z=(Max=100.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AA.DEKLightningTurretMiniboltExplosion.SE0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AB.DEKLightningTurretMiniboltExplosion.SE0'
 
      Begin Object Class=SpriteEmitter Name=SE1
          UseDirectionAs=PTDU_Normal
@@ -74,7 +74,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Smoke.SparkCloud_01aw'
          LifetimeRange=(Min=0.300000,Max=0.500000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AA.DEKLightningTurretMiniboltExplosion.SE1'
+     Emitters(1)=SpriteEmitter'DEKRPG208AB.DEKLightningTurretMiniboltExplosion.SE1'
 
      AutoDestroy=True
      bNoDelete=False

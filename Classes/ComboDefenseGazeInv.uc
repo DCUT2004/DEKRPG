@@ -35,5 +35,5 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 defaultproperties
 {
 	 bBuff=False
-     EffectEmitterClass=Class'DEKRPG208AA.ComboDefenseDownEffect'
+     EffectEmitterClass=Class'DEKRPG208AB.ComboDefenseDownEffect'
 }

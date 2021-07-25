@@ -31,6 +31,6 @@ defaultproperties
          WarmupTicksPerSecond=20.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AA.DEKSkyMineShockBall.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AB.DEKSkyMineShockBall.SpriteEmitter0'
 
 }

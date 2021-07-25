@@ -372,7 +372,7 @@ simulated function destroyed()
 defaultproperties
 {
      ModifierOverlay=Shader'AWGlobal.Shaders.FlowingBlood02'
-     NecroDamageType=Class'DEKRPG208AA.DamTypeNecroSuicide'
+     NecroDamageType=Class'DEKRPG208AB.DamTypeNecroSuicide'
      XPMultiplier=1.000000
      RevenantSound=Sound'GeneralAmbience.tortureloop3'
      bOnlyRelevantToOwner=False

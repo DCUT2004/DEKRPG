@@ -14,7 +14,7 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 	if ( Killed == Killer || Killed == None || Killer == None || Killed.Level == None || Killed.Level.Game == None)
 		return;
 		
-	class'DEKRPG208AA.AbilityLuckyStrike'.static.LuckyStrike(Killer, Killed, bOwnedByKiller, AbilityLevel, default.ChancePerLevel);
+	class'DEKRPG208AB.AbilityLuckyStrike'.static.LuckyStrike(Killer, Killed, bOwnedByKiller, AbilityLevel, default.ChancePerLevel);
 }
 
 defaultproperties

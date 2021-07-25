@@ -40,8 +40,8 @@ defaultproperties
      HealthBonusPerLevel=20
      HealthMultiplierPerLevel=0.010000
      WeaponDamage=0.850000
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityMasterSoulSorcerer'
-     RequiredAbilities(0)=Class'DEKRPG208AA.AbilityNecroDecay'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityMasterSoulSorcerer'
+     RequiredAbilities(0)=Class'DEKRPG208AB.AbilityNecroDecay'
      AbilityName="Niche: Eternal"
      Description="Increases your max health when healing with Blood Magic by 20 per level, and increases the amount of healing by 1% per level. Decreases your weapon damage by 15%, except for the Blood Magic weapon.||You must be level 180 and have Blood Magic before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

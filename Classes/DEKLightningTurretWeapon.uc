@@ -46,8 +46,8 @@ function byte BestMode()
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AA.DEKLightningTurretProjFire'
-     FireModeClass(1)=Class'DEKRPG208AA.DEKLightningTurretInstantFire'
+     FireModeClass(0)=Class'DEKRPG208AB.DEKLightningTurretProjFire'
+     FireModeClass(1)=Class'DEKRPG208AB.DEKLightningTurretInstantFire'
      ItemName="Lightning Turret"
      Skins(0)=Combiner'AS_Weapons_TX.LinkTurret.LinkTurret_Skin2_C'
      Skins(1)=Combiner'AS_Weapons_TX.LinkTurret.LinkTurret_Skin1_C'

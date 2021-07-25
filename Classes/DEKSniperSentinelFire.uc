@@ -44,9 +44,9 @@ simulated function vector MyGetFireStart(vector X, vector Y, vector Z)
 
 defaultproperties
 {
-     BeamEffectClass=Class'DEKRPG208AA.DEKSniperSentinelTracer'
+     BeamEffectClass=Class'DEKRPG208AB.DEKSniperSentinelTracer'
      ProjSpawnOffset=(X=15.000000)
-     DamageType=Class'DEKRPG208AA.DamTypeSniperSentinel'
+     DamageType=Class'DEKRPG208AB.DamTypeSniperSentinel'
      DamageMin=60
      DamageMax=60
      FireSound=Sound'NewWeaponSounds.NewSniperShot'

@@ -62,7 +62,7 @@ function Activate()
 			MMPI.MissionGoal = MissionGoal;
 			for ( C = Level.ControllerList; C != None; C = C.NextController )
 				if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AA.MissionSounds.MPSelect');
+					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AB.MissionSounds.MPSelect');
 		}
 		SetTimer(0.5,True);
 		TeamMissionBroadcast(ItemName, Description,XPReward);
@@ -90,7 +90,7 @@ defaultproperties
      TimeLimit=120
      Description="(T)Shoot the ball into the portal!"
      TeamMission=True
-     PickupClass=Class'DEKRPG208AA.ArtifactMissionTeamPortalBallPickup'
+     PickupClass=Class'DEKRPG208AB.ArtifactMissionTeamPortalBallPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.PortalBall'
      ItemName="Portal Ball"
 }

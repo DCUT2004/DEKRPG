@@ -2,6 +2,6 @@ class WildfireTrapAmmoPickup extends ONSGrenadeAmmoPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AA.WildfireTrapAmmo'
+     InventoryType=Class'DEKRPG208AB.WildfireTrapAmmo'
      PickupMessage="You picked up some wildfire."
 }

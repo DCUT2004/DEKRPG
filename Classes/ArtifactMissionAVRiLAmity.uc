@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=150
      Description="Use the AVRiL."
-     PickupClass=Class'DEKRPG208AA.ArtifactMissionAVRiLAmityPickup'
+     PickupClass=Class'DEKRPG208AB.ArtifactMissionAVRiLAmityPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionAVRIL'
      ItemName="AVRiL Amity"
 }

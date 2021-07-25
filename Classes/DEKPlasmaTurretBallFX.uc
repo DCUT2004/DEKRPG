@@ -22,7 +22,7 @@ defaultproperties
          TextureVSubdivisions=2
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AA.DEKPlasmaTurretBallFX.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG208AB.DEKPlasmaTurretBallFX.SpriteEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter2
          SpinParticles=True
@@ -38,7 +38,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.HardSpot'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AA.DEKPlasmaTurretBallFX.SpriteEmitter2'
+     Emitters(1)=SpriteEmitter'DEKRPG208AB.DEKPlasmaTurretBallFX.SpriteEmitter2'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter4
          ProjectionNormal=(X=1.000000,Z=0.000000)
@@ -64,7 +64,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG208AA.DEKPlasmaTurretBallFX.SpriteEmitter4'
+     Emitters(3)=SpriteEmitter'DEKRPG208AB.DEKPlasmaTurretBallFX.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -91,7 +91,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=-100.000000,Max=-150.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG208AA.DEKPlasmaTurretBallFX.SpriteEmitter5'
+     Emitters(4)=SpriteEmitter'DEKRPG208AB.DEKPlasmaTurretBallFX.SpriteEmitter5'
 
      bNoDelete=False
      bHardAttach=True

@@ -222,7 +222,7 @@ defaultproperties
      TargetRadius=2000.000000
      HitEmitterClass=Class'XEffects.LightningBolt'
      CostPerSec=1
-     PickupClass=Class'DEKRPG208AA.DruidArtifactLightningRodPickup'
+     PickupClass=Class'DEKRPG208AB.DruidArtifactLightningRodPickup'
      IconMaterial=Texture'UTRPGTextures.Icons.LightningIcon'
      ItemName="Lightning Rod"
 }

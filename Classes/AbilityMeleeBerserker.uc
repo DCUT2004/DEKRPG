@@ -73,8 +73,8 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 defaultproperties
 {
      DamageMultiplier=0.050000
-     ExcludingAbilities(0)=Class'DEKRPG208AA.AbilityNimbleBerserker'
-     RequiredAbilities(0)=Class'DEKRPG208AA.DEKLoadedClassicShield'
+     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityNimbleBerserker'
+     RequiredAbilities(0)=Class'DEKRPG208AB.DEKLoadedClassicShield'
      AbilityName="Niche: Melee"
      Description="Increases the Shield Gun's damage by 5% per level, but reduces all other weapon damage by 5% per level. Also reduces self damage with the Shield Gun, and increases Shield Gun jump boosting.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

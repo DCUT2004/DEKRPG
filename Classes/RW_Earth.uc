@@ -142,10 +142,10 @@ defaultproperties
      DamageBonus=0.020000
      EarthFlowerChance=7.000000
      MaxFlowerChance=50.000000
-     Flowers(0)=Class'DEKRPG208AA.FlowerBluePickup'
-     Flowers(1)=Class'DEKRPG208AA.FlowerRedPickup'
-     Flowers(2)=Class'DEKRPG208AA.FlowerOrangePickup'
-     Flowers(3)=Class'DEKRPG208AA.FlowerYellowPickup'
+     Flowers(0)=Class'DEKRPG208AB.FlowerBluePickup'
+     Flowers(1)=Class'DEKRPG208AB.FlowerRedPickup'
+     Flowers(2)=Class'DEKRPG208AB.FlowerOrangePickup'
+     Flowers(3)=Class'DEKRPG208AB.FlowerYellowPickup'
      ModifierOverlay=FinalBlend'FireEngine.Liquids.water03GO-finalblend'
      MinModifier=3
      MaxModifier=7
