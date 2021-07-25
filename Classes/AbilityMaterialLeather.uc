@@ -2,24 +2,20 @@ class AbilityMaterialLeather extends AbilityMaterial
 	config(UT2004RPG)
 	abstract;
 	
-var config float SpeedMultiplier;
+var config float LevMultiplier;
 	
-static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
+static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
-	local xPawn X;
-	
-	X = xPawn(Other);
-	if (X.Role == ROLE_Authority)
-	{
-		X.DodgeSpeedFactor *= 1.0 + default.SpeedMultiplier * float(AbilityLevel);
-		X.DodgeSpeedZ *= 1.0 + default.SpeedMultiplier * float(AbilityLevel);
-	}
+	if(!bOwnedByInstigator)
+		return;
+	if(Damage > 0)
+		if (Injured != None && BossInv(Injured.FindInventoryType(Class'BossInv')) != None)
+			Damage *= (1 + (AbilityLevel * default.LevMultiplier));
 }
-
 defaultproperties
 {
-	 SpeedMultiplier=0.00100000
+	 LevMultiplier=0.00100000
      AbilityName="Fine Leather**"
-     Description="Fine leather from many monsters. Increases your dodge speed by 0.1% per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Fine leather from many monsters. Increases your cumulative damage bonus against Bosses by 0.1% per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }
