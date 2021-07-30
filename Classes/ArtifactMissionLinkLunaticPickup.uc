@@ -2,6 +2,6 @@ class ArtifactMissionLinkLunaticPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AB.ArtifactMissionLinkLunatic'
+     InventoryType=Class'DEKRPG208AC.ArtifactMissionLinkLunatic'
      PickupMessage="You picked up the Link Lunatic Mission!"
 }

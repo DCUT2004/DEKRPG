@@ -286,7 +286,7 @@ defaultproperties
      Damage=50.000000
      DamageRadius=87.500000
      MomentumTransfer=30000.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeLaserGrenadeExplosion'
+     MyDamageType=Class'DEKRPG208AC.DamTypeLaserGrenadeExplosion'
      ImpactSound=Sound'MenuSounds.select3'
      ExplosionDecal=Class'Onslaught.ONSRocketScorch'
      DrawType=DT_StaticMesh

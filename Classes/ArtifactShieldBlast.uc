@@ -200,7 +200,7 @@ defaultproperties
      HealingRadius=2200.000000
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AB.ArtifactShieldBlastPickup'
+     PickupClass=Class'DEKRPG208AC.ArtifactShieldBlastPickup'
      IconMaterial=Texture'XEffectMat.Link.link_muz_yellow'
      ItemName="ShieldBlast"
 }

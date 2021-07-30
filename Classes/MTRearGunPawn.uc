@@ -5,7 +5,7 @@ class MTRearGunPawn extends ONSWeaponPawn;
 
 defaultproperties
 {
-     GunClass=Class'DEKRPG208AB.MTRearGun'
+     GunClass=Class'DEKRPG208AC.MTRearGun'
      CameraBone="REARgunTURRET"
      DrivePos=(X=-20.000000,Z=90.000000)
      ExitPositions(0)=(X=-235.000000)

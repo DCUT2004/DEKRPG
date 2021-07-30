@@ -27,7 +27,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=1.500000)
          StartVelocityRange=(X=(Min=-200.000000,Max=200.000000),Y=(Min=-200.000000,Max=200.000000),Z=(Min=-200.000000,Max=200.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AB.MTGutblowFX.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG208AC.MTGutblowFX.SpriteEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter2
          RespawnDeadParticles=False
@@ -41,7 +41,7 @@ defaultproperties
          SpawningSoundProbability=(Min=1.000000,Max=1.000000)
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AB.MTGutblowFX.SpriteEmitter2'
+     Emitters(1)=SpriteEmitter'DEKRPG208AC.MTGutblowFX.SpriteEmitter2'
 
      AutoDestroy=True
      bNoDelete=False

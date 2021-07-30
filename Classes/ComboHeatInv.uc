@@ -5,6 +5,7 @@ var RPGRules RPGRules;
 function PostBeginPlay()
 {
 	Local GameRules G;
+	
 	super.PostBeginPlay();
 	for(G = Level.Game.GameRulesModifiers; G != None; G = G.NextGameRules)
 	{
@@ -24,34 +25,41 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local SuperHeatInv Inv;
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
+	local ComboWardInv WardInv;
 	
 	bBuff = False;
 	
-	if (Other != None && Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard') && !bBuff)
+	if (Other != None)
 	{
-		W = RW_MagicalWard(Other.Weapon);
-		if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+		WardInv = ComboWardInv(Other.FindInventoryType(Class'ComboWardInv'));
+		if (!bBuff && WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
-			MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-			if (MWInv == None)
-			{
-				MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-				MWInv.GiveTo(Other);
-			}
-			else
-			{
-				MWInv.Lifespan = MWInv.default.Lifespan;
-				MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-				if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-					MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-			}
 			Destroy();
 			return;
 		}
-	}
-	
-	if (Other != None)
-	{
+		if (Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard') && !bBuff)
+		{
+			W = RW_MagicalWard(Other.Weapon);
+			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+			{
+				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+				if (MWInv == None)
+				{
+					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+					MWInv.GiveTo(Other);
+				}
+				else
+				{
+					MWInv.Lifespan = MWInv.default.Lifespan;
+					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+				}
+				Destroy();
+				return;
+			}
+		}
+		
 		Inv = SuperHeatInv(Other.FindInventoryType(class'SuperHeatInv'));
 		if (Inv == None)
 		{

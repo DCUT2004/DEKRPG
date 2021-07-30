@@ -165,7 +165,7 @@ defaultproperties
      Speed=800.000000
      MaxSpeed=800.000000
      Damage=60.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeGlowStreak'
+     MyDamageType=Class'DEKRPG208AC.DamTypeGlowStreak'
      LightHue=0
      LightBrightness=10.000000
      AmbientSound=Sound'ONSBPSounds.Artillery.ShellAmbient'

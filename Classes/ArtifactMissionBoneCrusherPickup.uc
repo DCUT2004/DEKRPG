@@ -2,6 +2,6 @@ class ArtifactMissionBoneCrusherPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AB.ArtifactMissionBoneCrusher'
+     InventoryType=Class'DEKRPG208AC.ArtifactMissionBoneCrusher'
      PickupMessage="You picked up the Bone Crusher Mission!"
 }

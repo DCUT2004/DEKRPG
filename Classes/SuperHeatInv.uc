@@ -31,6 +31,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local xPawn X;
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
+	local ComboWardInv WardInv;
 	
 	if (InstigatorController == None)
 		InstigatorController = Other.DelayedDamageInstigatorController;
@@ -38,62 +39,75 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	
 	stopped = false;
 	
-	if (PawnOwner != None && PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+	if (PawnOwner != None)
 	{
-		W = RW_MagicalWard(PawnOwner.Weapon);
-		if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+		WardInv = ComboWardInv(PawnOwner.FindInventoryType(Class'ComboWardInv'));
+		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
-			MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-			if (MWInv == None)
-			{
-				MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-				MWInv.GiveTo(Other);
-			}
-			else
-			{
-				MWInv.Lifespan = MWInv.default.Lifespan;
-				MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-				if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-					MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-			}
+			Log("Warded an ailment");
+			if (PlayerController(PawnOwner.Controller) != None)	
+				PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'PickupSounds.ShieldPack');
 			Destroy();
 			return;
 		}
-	}
 	
-	MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
-	M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
-	M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
-	M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
+		if (PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+		{
+			W = RW_MagicalWard(PawnOwner.Weapon);
+			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+			{
+				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+				if (MWInv == None)
+				{
+					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+					MWInv.GiveTo(Other);
+				}
+				else
+				{
+					MWInv.Lifespan = MWInv.default.Lifespan;
+					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+				}
+				Destroy();
+				return;
+			}
+		}
+		
+		MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
+		M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
+		M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
+		M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
+		
+		if (MiInv != None && !MiInv.WizardryComplete)
+		{
+			if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
+			{
+				M1Inv.MissionCount++;
+			}
+			if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
+			{
+				M2Inv.MissionCount++;
+			}
+			if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
+			{
+				M3Inv.MissionCount++;
+			}
+		}
 	
-	if (PawnOwner != None && MiInv != None && !MiInv.WizardryComplete)
-	{
-		if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
+		X = xPawn(PawnOwner);
+		FX = Spawn(class'SuperHeatFX', PawnOwner,, PawnOwner.Location);
+		if (FX != None)
 		{
-			M1Inv.MissionCount++;
+			//FX.Emitters[0].SkeletalMeshActor = X;
+			FX.SetLocation(PawnOwner.Location);
+			FX.SetRotation(PawnOwner.Rotation + rot(0, -16384, 0));
+			FX.SetBase(PawnOwner);
+			FX.bOwnerNoSee = true;
+			FX.RemoteRole = ROLE_SimulatedProxy;
 		}
-		if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
-		{
-			M2Inv.MissionCount++;
-		}
-		if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
-		{
-			M3Inv.MissionCount++;
-		}
+		SetTimer(1, True);
 	}
-	
-	X = xPawn(PawnOwner);
-	FX = Spawn(class'SuperHeatFX', PawnOwner,, PawnOwner.Location);
-	if (FX != None)
-	{
-		//FX.Emitters[0].SkeletalMeshActor = X;
-		FX.SetLocation(PawnOwner.Location);
-		FX.SetRotation(PawnOwner.Rotation + rot(0, -16384, 0));
-		FX.SetBase(PawnOwner);
-		FX.bOwnerNoSee = true;
-		FX.RemoteRole = ROLE_SimulatedProxy;
-	}
-	SetTimer(1, True);
 	Super.GiveTo(Other);
 }
 

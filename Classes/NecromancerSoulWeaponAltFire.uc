@@ -96,6 +96,6 @@ defaultproperties
      MaxRange=90000.000000
      bModeExclusive=False
      FireRate=2.000000
-     AmmoClass=Class'DEKRPG208AB.NecromancerSoulWeaponAmmo'
+     AmmoClass=Class'DEKRPG208AC.NecromancerSoulWeaponAmmo'
      AmmoPerFire=20
 }

@@ -278,7 +278,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AB.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG208AC.LightningBeamEmitter'
      MaxRange=3000.000000
      AdrenalineForMiss=4
      MaxDamage=180
@@ -286,7 +286,7 @@ defaultproperties
      AdrenalineRequired=7
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AB.ArtifactLightningBeamPickup'
+     PickupClass=Class'DEKRPG208AC.ArtifactLightningBeamPickup'
      IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.LightningBeamIcon'
      ItemName="Ice Beam"
 }

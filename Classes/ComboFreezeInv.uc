@@ -5,11 +5,18 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local FreezeInv Inv;
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
+	local ComboWardInv WardInv;
 	
 	bBuff = False;
 	
 	if (Other != None)
 	{
+		WardInv = ComboWardInv(Other.FindInventoryType(Class'ComboWardInv'));
+		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
+		{
+			Destroy();
+			return;
+		}
 		if (Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard'))
 		{
 			W = RW_MagicalWard(Other.Weapon);
@@ -42,8 +49,10 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		}
 		else
 		{
-			Inv.Lifespan= Lifespan;
-			Inv.Modifier = EffectMultiplier;
+			if (Inv.Lifespan < Lifespan)
+				Inv.Lifespan= Lifespan;
+			if (Inv.Modifier < EffectMultiplier)
+				Inv.Modifier = EffectMultiplier;
 		}
 		Other.ReceiveLocalizedMessage(MessageClass, Lifespan, None, None, Class);
 	}

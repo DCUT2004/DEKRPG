@@ -29,7 +29,7 @@ function Timer()
 				EffectxEmitter.mSizeRange[1] = (PawnOwner.CollisionRadius*0.3);
 			}
 		}*/
-		PawnOwner.GiveHealth(EffectMultiplier, PawnOwner.HealthMax);
+		PawnOwner.GiveHealth(EffectMultiplier, PawnOwner.Health + EffectMultiplier);
 		if (MInv != None && MInv.LifeMendActive)
 		{
 			MInv.MissionCount += EffectMultiplier;
@@ -51,6 +51,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
 	 bBuff=True
-	 ComboNameMessage="+ Regenerate: "
+	 ComboNameMessage="Regenerate: "
      EffectxEmitterClass=Class'XEffects.RegenCrosses'
 }

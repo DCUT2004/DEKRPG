@@ -48,7 +48,7 @@ function Activate()
 			MMPI.MissionGoal = MissionGoal;
 			for ( C = Level.ControllerList; C != None; C = C.NextController )
 				if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AB.MissionSounds.MPSelect');
+					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AC.MissionSounds.MPSelect');
 		}
 		SetTimer(0.5,True);
 		TeamMissionBroadcast(ItemName, Description,XPReward);
@@ -73,7 +73,7 @@ defaultproperties
      TimeLimit=80
      Description="(T)Pop the balloons!"
      TeamMission=True
-     PickupClass=Class'DEKRPG208AB.ArtifactMissionTeamBalloonPopPickup'
+     PickupClass=Class'DEKRPG208AC.ArtifactMissionTeamBalloonPopPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.BalloonPop'
      ItemName="Balloon Pop"
 }

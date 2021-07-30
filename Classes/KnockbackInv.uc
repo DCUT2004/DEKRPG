@@ -21,6 +21,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local MIssion3Inv M3Inv;
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
+	local ComboWardInv WardInv;
 	
 	if(Other == None)
 	{
@@ -30,59 +31,71 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	
 	PawnOwner = Other;
 	
-	NInv = NecroInv(PawnOwner.FindInventoryType(class'NecroInv'));
-	if(NInv != None)
-	{
-		return;
-	}
-	
 	stopped = false;
 	
-	if (PawnOwner != None && PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+	if (PawnOwner != None)
 	{
-		W = RW_MagicalWard(PawnOwner.Weapon);
-		if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+		NInv = NecroInv(PawnOwner.FindInventoryType(class'NecroInv'));
+		if(NInv != None)
 		{
-			MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-			if (MWInv == None)
-			{
-				MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-				MWInv.GiveTo(Other);
-			}
-			else
-			{
-				MWInv.Lifespan = MWInv.default.Lifespan;
-				MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-				if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-					MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-			}
+			Log("Warded an ailment");
+			if (PlayerController(PawnOwner.Controller) != None)	
+				PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'PickupSounds.ShieldPack');
 			Destroy();
 			return;
 		}
-	}
-	
-	MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
-	M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
-	M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
-	M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
-	
-	if (PawnOwner != None && MiInv != None && !MiInv.WizardryComplete)
-	{
-		if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
+		WardInv = ComboWardInv(PawnOwner.FindInventoryType(Class'ComboWardInv'));
+		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
-			M1Inv.MissionCount++;
+			Destroy();
+			return;
 		}
-		if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
+		if (PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
 		{
-			M2Inv.MissionCount++;
+			W = RW_MagicalWard(PawnOwner.Weapon);
+			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+			{
+				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+				if (MWInv == None)
+				{
+					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+					MWInv.GiveTo(Other);
+				}
+				else
+				{
+					MWInv.Lifespan = MWInv.default.Lifespan;
+					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+				}
+				Destroy();
+				return;
+			}
 		}
-		if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
+		
+		MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
+		M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
+		M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
+		M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
+		
+		if (MiInv != None && !MiInv.WizardryComplete)
 		{
-			M3Inv.MissionCount++;
+			if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
+			{
+				M1Inv.MissionCount++;
+			}
+			if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
+			{
+				M2Inv.MissionCount++;
+			}
+			if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
+			{
+				M3Inv.MissionCount++;
+			}
 		}
-	}
 
-	SetTimer(1/Modifier, true);
+		SetTimer(1/Modifier, true);
+	}
 	Super.GiveTo(Other);
 }
 

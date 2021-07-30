@@ -58,7 +58,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=1.600000,Max=1.700000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AB.MatrixTrail.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AC.MatrixTrail.SpriteEmitter0'
 
      AutoDestroy=True
      bNoDelete=False

@@ -184,6 +184,8 @@ function DoEffect(Pawn P, float Lifespan, class<ComboEffectInv> ComboClass, floa
 					Inv.EffectMultiplier += abs(1.0-EffectMultiplier);				//If the current multiplier is < 1 and we are applying a multiplier > 1, then multiplier to the current multiplier
 				if (Inv.EffectMultiplier < 0.0)
 					Inv.EffectMultiplier = 0.1;										//Last resort to stop EffectMultiplier from reaching 0
+				//For some combos, they apply a buff or ailment at an instantaneous moment rather than over time. Call GiveTo() again
+				Inv.GiveTo(P);
 			}
 		}
 	}
@@ -193,12 +195,11 @@ function DoEffect(Pawn P, float Lifespan, class<ComboEffectInv> ComboClass, floa
 function DispelAilment(Pawn Instigator, bool bAll, bool bSingle)
 {
 	local Controller C, NextC;
-	local Inventory Inv;
+	local Inventory Inv, TempInv;
 	local ComboEffectInv CInv;
 	local int Count;
 
 	C = Level.ControllerList;
-	Count = 0;
 	
 	if (bAll)
 	{
@@ -207,15 +208,31 @@ function DispelAilment(Pawn Instigator, bool bAll, bool bSingle)
 			NextC = C.NextController;
 			if (C != None && C.Pawn != None && C.Pawn.Health > 0 && Instigator != None &&
 			(Instigator.IsA('Monster') && ((C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None))) ||
-			(!Instigator.IsA('Monster') && C.SameTeamAs(Instigator.Controller) && !C.Pawn.IsA('Vehicle') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None) )
+			(!Instigator.IsA('Monster') && Instigator.GetTeamNum() == C.Pawn.GetTeamNum()))
 			{
-				for( Inv=Inventory; Inv!=None && Count < 1000; Inv=Inv.Inventory )
+				Count = 0;
+				for( Inv=C.Pawn.Inventory; Inv!=None && Count < 1000; Inv=Inv.Inventory )
 				{
+					if (TempInv != None)	//Loop automatically iterates to next slot in inventory. This will set Inv back to the temp pointer
+					{
+						Inv = TempInv;
+						TempInv = None;
+					}
 					if (ClassIsChildOf(Inv.Class, class'ComboEffectInv'))
 					{
 						CInv = ComboEffectInv(Inv);
 						if (CInv != None && !CInv.bBuff && CInv.bDispellable)
+						{
+							TempInv = Inv.Inventory;
 							CInv.Destroy();
+							Inv = TempInv;
+						}
+					}
+					else if (Inv.IsA('FreezeInv') || Inv.IsA('DruidPoisonInv') || Inv.IsA('SuperHeatInv'))
+					{
+						TempInv = Inv.Inventory;
+						Inv.Destroy();
+						Inv = TempInv;
 					}
 					Count++;
 				}
@@ -503,7 +520,7 @@ function Monster SummonMinion(Pawn Instigator, class<Monster> MinionClass, int H
 				CInv = M.Spawn(class'ComboInv');
 				CInv.GiveTo(M);
 			}
-			CInv.AddBuff(M, False, False, True, ComboLifespan, class'DEKRPG208AB.ComboTauntInv', EffectMultiplier, Dispellable);
+			CInv.AddBuff(M, False, False, True, ComboLifespan, class'DEKRPG208AC.ComboTauntInv', EffectMultiplier, Dispellable);
 		}
 		return M;
 	}
@@ -556,7 +573,7 @@ function ComboDamage(int ComboDamage, bool bComboDamageAll, bool bComboDamageMul
 		while (C != None)
 		{
 			NextC = C.NextController;
-			if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() != Instigator.GetTeamNum() && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !ClassIsChildOf(C.Pawn.Class, class'SMPNaliRabbit'))
+			if (C != None && C.Pawn != None && C.Pawn.Health > 0 && Instigator != None && C.Pawn.GetTeamNum() != Instigator.GetTeamNum() && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !ClassIsChildOf(C.Pawn.Class, class'SMPNaliRabbit'))
 			{
 				C.Pawn.TakeDamage(ComboDamage, Instigator, C.Pawn.Location, vect(0,0,0), ComboDamageType);
 				A = C.Pawn.Spawn(EffectEmitter,,, C.Pawn.Location);

@@ -2,6 +2,6 @@ class ArtifactMissionLifeMendPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AB.ArtifactMissionLifeMend'
+     InventoryType=Class'DEKRPG208AC.ArtifactMissionLifeMend'
      PickupMessage="You picked up the Life Mend Mission!"
 }

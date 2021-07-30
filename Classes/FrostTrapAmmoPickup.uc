@@ -2,6 +2,6 @@ class FrostTrapAmmoPickup extends ONSGrenadeAmmoPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AB.FrostTrapAmmo'
+     InventoryType=Class'DEKRPG208AC.FrostTrapAmmo'
      PickupMessage="You picked up some frosties."
 }

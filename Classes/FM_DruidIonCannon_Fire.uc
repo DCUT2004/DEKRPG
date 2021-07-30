@@ -2,7 +2,7 @@ class FM_DruidIonCannon_Fire extends FM_Turret_IonCannon_Fire;
 
 defaultproperties
 {
-     BeamEffectClass=Class'DEKRPG208AB.FX_DruidIonCannon_BeamFire'
+     BeamEffectClass=Class'DEKRPG208AC.FX_DruidIonCannon_BeamFire'
      MaxHoldTime=1.800000
      FireRate=1.800000
 }

@@ -125,9 +125,9 @@ defaultproperties
 {
      DamageMultiplier=0.050000
      AdrenReductionPerLevel=10
-     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityDualityProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG208AB.AbilityGunsmithProficiency'
-     RequiredAbilities(0)=Class'DEKRPG208AB.AbilityWeaponsProficiency'
+     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityDualityProficiency'
+     ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityGunsmithProficiency'
+     RequiredAbilities(0)=Class'DEKRPG208AC.AbilityWeaponsProficiency'
      AbilityName="Niche: Specialist"
      Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, your max adrenaline is reduced by 10 per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

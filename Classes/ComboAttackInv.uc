@@ -7,40 +7,47 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 {
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
-	
-	if (Other != None)
-		PawnOwner = Other;
+	local ComboWardInv WardInv;
 	
 	if (EffectMultiplier > 1.0)
 		bBuff = True;
 	else if (EffectMultiplier < 1.0)
 		bBuff = False;
 		
-	if (Other != None && Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard') && !bBuff)
+	if (Other != None)
 	{
-		W = RW_MagicalWard(Other.Weapon);
-		if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+		PawnOwner = Other;
+		WardInv = ComboWardInv(Other.FindInventoryType(Class'ComboWardInv'));
+		if (!bBuff && WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
-			MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-			if (MWInv == None)
-			{
-				MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-				MWInv.GiveTo(Other);
-			}
-			else
-			{
-				MWInv.Lifespan = MWInv.default.Lifespan;
-				MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-				if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-					MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-			}
 			Destroy();
 			return;
 		}
-	}
-	default.EffectMultiplier = EffectMultiplier;	//"Initialize" for static GetLocalString function
-	if (Other != None)
+		if (Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard') && !bBuff)
+		{
+			W = RW_MagicalWard(Other.Weapon);
+			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+			{
+				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+				if (MWInv == None)
+				{
+					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+					MWInv.GiveTo(Other);
+				}
+				else
+				{
+					MWInv.Lifespan = MWInv.default.Lifespan;
+					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+				}
+				Destroy();
+				return;
+			}
+		}
+		default.EffectMultiplier = EffectMultiplier;	//"Initialize" for static GetLocalString function
 		Other.ReceiveLocalizedMessage(MessageClass, Lifespan, None, None, Class);
+	}
 	Super.GiveTo(Other);
 }
 
@@ -121,6 +128,6 @@ simulated function Destroyed()
 defaultproperties
 {
 	 ComboNameMessage="Attack: "
-     EffectDownxEmitterClass=Class'DEKRPG208AB.ComboAttackDownEffect'
-     EffectxEmitterClass=Class'DEKRPG208AB.ComboAttackUpEffect'
+     EffectDownxEmitterClass=Class'DEKRPG208AC.ComboAttackDownEffect'
+     EffectxEmitterClass=Class'DEKRPG208AC.ComboAttackUpEffect'
 }

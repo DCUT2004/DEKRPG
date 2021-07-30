@@ -80,8 +80,8 @@ function Timer()
 		{
 			if (Combo != None)
 			{
-				Combo.AddAilment(Pawn(Owner), bAll, False, bSingle, ComboLifespan, class'ComboDefenseGazeInv', EffectMultiplier, bDispellable, HitPawn);
-				Combo.AddAilment(Pawn(Owner), bAll, False, bSingle, ComboLifespan, class'ComboVampireTargetInv', 0.5000, bDispellable, HitPawn);
+				Combo.AddAilment(Pawn(Owner), False, False, False, ComboLifespan, class'ComboDefenseGazeInv', EffectMultiplier, bDispellable, HitPawn);
+				//Combo.AddAilment(Pawn(Owner), bAll, False, bSingle, ComboLifespan, class'ComboVampireTargetInv', 0.5000, bDispellable, HitPawn);
 			}
 			bDefenseDown = True;
 		}

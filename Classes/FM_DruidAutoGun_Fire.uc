@@ -18,7 +18,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG208AB.PROJ_AutoGun_Laser_Red'
-     TeamProjectileClasses(1)=Class'DEKRPG208AB.PROJ_AutoGun_Laser'
+     TeamProjectileClasses(0)=Class'DEKRPG208AC.PROJ_AutoGun_Laser_Red'
+     TeamProjectileClasses(1)=Class'DEKRPG208AC.PROJ_AutoGun_Laser'
      FireRate=0.450000
 }

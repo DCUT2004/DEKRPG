@@ -3,8 +3,8 @@ class DruidCrimboLowWall extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=4
-     Blocks(0)=(BlockType=Class'DEKRPG208AB.DruidCrimboSmallBlockA',XOffset=-45,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG208AB.DruidCrimboSmallBlockB',XOffset=-135,ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG208AB.DruidCrimboSmallBlockB',XOffset=45,ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG208AB.DruidCrimboSmallBlockA',XOffset=135,ZOffset=20)
+     Blocks(0)=(BlockType=Class'DEKRPG208AC.DruidCrimboSmallBlockA',XOffset=-45,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG208AC.DruidCrimboSmallBlockB',XOffset=-135,ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG208AC.DruidCrimboSmallBlockB',XOffset=45,ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG208AC.DruidCrimboSmallBlockA',XOffset=135,ZOffset=20)
 }

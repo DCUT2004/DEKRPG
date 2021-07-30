@@ -65,8 +65,8 @@ state ProjectileFireMode
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG208AB.MTRedProjectile'
-     TeamProjectileClasses(1)=Class'DEKRPG208AB.MTGunProjectile'
+     TeamProjectileClasses(0)=Class'DEKRPG208AC.MTRedProjectile'
+     TeamProjectileClasses(1)=Class'DEKRPG208AC.MTGunProjectile'
      ShockMomentum=-9500.000000
      ShockRadius=2000.000000
      ShockSound=Sound'MTII.SuperSuck'
@@ -85,6 +85,6 @@ defaultproperties
      AltFireSoundVolume=85.000000
      FireForce="Laser01"
      AltFireForce="Laser01"
-     ProjectileClass=Class'DEKRPG208AB.MTGunProjectile'
+     ProjectileClass=Class'DEKRPG208AC.MTGunProjectile'
      Mesh=SkeletalMesh'ONSWeapons-A.PlasmaGun'
 }

@@ -277,9 +277,9 @@ defaultproperties
      Damage=100.000000
      DamageRadius=240.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeBombTrap'
+     MyDamageType=Class'DEKRPG208AC.DamTypeBombTrap'
      ImpactSound=Sound'MenuSounds.select3'
-     ExplosionDecal=Class'DEKRPG208AB.BombTrapMark'
+     ExplosionDecal=Class'DEKRPG208AC.BombTrapMark'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.BombTrap'
      CullDistance=5000.000000

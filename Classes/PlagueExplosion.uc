@@ -24,7 +24,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AB.PlagueExplosion.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AC.PlagueExplosion.SpriteEmitter0'
 
      AutoDestroy=True
      bNoDelete=False

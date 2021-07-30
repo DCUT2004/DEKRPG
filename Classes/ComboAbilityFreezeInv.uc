@@ -11,7 +11,6 @@ function DoEffect()
 		if (Combo != None)
 		{
 			Combo.AddAilment(Pawn(Owner), bAll, False, bSingle, ComboLifespan, class'ComboFreezeInv', EffectMultiplier, bDispellable);
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, ComboDamageType, , False);
 		}
 		EffectxEmitter = Pawn(Owner).Spawn(EffectxEmitterClass, Pawn(Owner), , Pawn(Owner).Location, Pawn(Owner).Rotation);
 	}

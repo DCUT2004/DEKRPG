@@ -1,7 +1,8 @@
 //-----------------------------------------------------------
 //
 //-----------------------------------------------------------
-class GiveItemsInv extends Inventory;
+class GiveItemsInv extends Inventory
+	config(UT2004RPG);
 
 //client side only
 var PlayerController PC;
@@ -1377,7 +1378,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-	 MaxNumCombos=3
+	 MaxNumCombos=1
 	 CheckInterval=1.00000
 	 MessageClass=Class'UnrealGame.StringMessagePlus'
      bOnlyRelevantToOwner=False

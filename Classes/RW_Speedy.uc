@@ -88,7 +88,7 @@ static function quickfoot(int localModifier, Pawn PawnOwner)
 	found = false;
 
 	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
-		if (StatsInv.Data.Abilities[x] == class'AbilityDEKSpeed')
+		if (StatsInv.Data.Abilities[x] == class'AbilitySpeed')
 		{
 			found = true;
 			break;

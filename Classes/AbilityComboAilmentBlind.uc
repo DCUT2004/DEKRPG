@@ -1,0 +1,57 @@
+class AbilityComboAilmentBlind extends AbilityCombo
+	config(UT2004RPG)
+	abstract;
+	
+static function ModifyPawn(Pawn Other, int AbilityLevel)
+{
+	local ComboAbilityBlindInv Inv;
+
+	if (Other != None)
+	{
+		Inv = ComboAbilityBlindInv(Other.FindInventoryType(class'ComboAbilityBlindInv'));
+		if (Inv == None)
+		{
+			Inv = Other.Spawn(class'ComboAbilityBlindInv');
+			Inv.GiveTo(Other);
+		}
+		if (Inv != None)
+		{
+			Inv.EffectMultiplier = default.BaseMultiplier*AbilityLevel;
+			Inv.bAll = default.All;
+			Inv.bSingle = default.Single;
+			Inv.ComboLifespan = default.BaseLifespan;
+		}
+	}
+}
+
+defaultproperties
+{
+    ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityComboAilmentAttack'
+	ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityComboAilmentCurse'
+	ExcludingAbilities(2)=Class'DEKRPG208AC.AbilityComboAilmentDefense'
+	ExcludingAbilities(3)=Class'DEKRPG208AC.AbilityComboAilmentFreeze'
+	ExcludingAbilities(4)=Class'DEKRPG208AC.AbilityComboAilmentJinx'
+	ExcludingAbilities(5)=Class'DEKRPG208AC.AbilityComboAilmentPoison'
+	AbilityName="Ailment: Blind"
+	Description="All targets receive Blind for 25 seconds. Blinded targets have a 3.5% chance per level to have their damage reduced to 1 on each hit. If a similar ailment is applied, the effect is stacked.||You can only have one type of Ailment combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Nanite Fragment||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Nanite Fragment||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Nanite Fragment||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	MaxLevel=10
+	StartingCost=5
+	CostAddPerLevel=5
+	BaseMultiplier=3.5000
+	MultiplierAddPerStep=25.000000
+	MultiplierStep=1.00000
+	BaseLifespan=25.000
+	Dispellable=True
+	All=True
+	Single=False
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLumber',Class'DEKRPG208AC.AbilityMaterialNaliFruit',Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite'),RequiredMaterialLevels=(50,50,50,50,50))
+}

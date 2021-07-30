@@ -4,7 +4,7 @@ class DamTypeMercurySENTSplashDamage extends DamTypeMercurySplashDamage abstract
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AB.DEKMercurySentinelWeapon'
+     WeaponClass=Class'DEKRPG208AC.DEKMercurySentinelWeapon'
      DeathString="%k's sentinel took out %o with a missile's shrapnel."
      FemaleSuicide="%o checked if her mercury sentinel was loaded."
      MaleSuicide="%o checked if his mercury sentinel was loaded."

@@ -3,9 +3,9 @@ class DruidCinderWall extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=5
-     Blocks(0)=(BlockType=Class'DEKRPG208AB.DruidCinderBlock',XOffset=-120,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG208AB.DruidCinderBlock',ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG208AB.DruidCinderBlock',XOffset=120,ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG208AB.DruidCinderBlock',XOffset=-90,ZOffset=100)
-     Blocks(4)=(BlockType=Class'DEKRPG208AB.DruidCinderBlock',XOffset=90,ZOffset=100)
+     Blocks(0)=(BlockType=Class'DEKRPG208AC.DruidCinderBlock',XOffset=-120,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG208AC.DruidCinderBlock',ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG208AC.DruidCinderBlock',XOffset=120,ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG208AC.DruidCinderBlock',XOffset=-90,ZOffset=100)
+     Blocks(4)=(BlockType=Class'DEKRPG208AC.DruidCinderBlock',XOffset=90,ZOffset=100)
 }

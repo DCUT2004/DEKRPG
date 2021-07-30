@@ -407,11 +407,11 @@ defaultproperties
      HealFreq=6
 	 MonsterAdrenThreshold=20	//Every 20 hits by def sent rewards 1 monster adren
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG208AB.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG208AB.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG208AB.BlueBoltEmitter'
-     AdrenalineEmitterClass=Class'DEKRPG208AB.WhiteBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG208AB.RedBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG208AB.BronzeBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AC.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG208AC.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG208AC.BlueBoltEmitter'
+     AdrenalineEmitterClass=Class'DEKRPG208AC.WhiteBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG208AC.RedBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG208AC.BronzeBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
 }

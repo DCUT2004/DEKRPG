@@ -38,8 +38,8 @@ defaultproperties
 {
      AdrenReductionPerLevel=75
      MaxModifierMultiplier=2.000000
-     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityPriestCraftsman'
-     ExcludingAbilities(1)=Class'DEKRPG208AB.AbilityPaladinCraftsman'
+     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityPriestCraftsman'
+     ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityPaladinCraftsman'
      AbilityName="Niche: Enchanter"
      Description="Increases the max modifier on all magic weapons, but reduces your max adrenaline.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost(per level): 50"
      StartingCost=50

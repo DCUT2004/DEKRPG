@@ -39,8 +39,8 @@ defaultproperties
 {
      PowerPercPerLevel=0.050000
      HealthReductionPerLevel=10.000000
-     ExcludingAbilities(0)=Class'DEKRPG208AB.AbilityVampireResurrector'
-     RequiredAbilities(0)=Class'DEKRPG208AB.AbilityNecromancer'
+     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityVampireResurrector'
+     RequiredAbilities(0)=Class'DEKRPG208AC.AbilityNecromancer'
      AbilityName="Niche: Power Resurrector"
      Description="Provides an additional 5% damage bonus per level to your resurrectees. Reduces your maximum health by 10 per level.||You must be level 180 and have Loaded Necromancer before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

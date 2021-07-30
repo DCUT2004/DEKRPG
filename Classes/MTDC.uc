@@ -184,8 +184,8 @@ defaultproperties
      RedSkin1=Texture'MTII.MTRed'
      BlueSkin1=Texture'MTII.MTBlue'
      GutBlowALocation=(X=101.970001,Z=-6.910000)
-     GutBlowAEffect=Class'DEKRPG208AB.MTGutblowFX'
-     GutBlowBEffect=Class'DEKRPG208AB.MTGutblowFXB'
+     GutBlowAEffect=Class'DEKRPG208AC.MTGutblowFX'
+     GutBlowBEffect=Class'DEKRPG208AC.MTGutblowFXB'
      WheelSoftness=0.025000
      WheelPenScale=1.200000
      WheelPenOffset=0.010000
@@ -244,8 +244,8 @@ defaultproperties
      AirPitchDamping=35.000000
      AirRollTorque=35.000000
      AirRollDamping=35.000000
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AB.MTMachineGun',WeaponBone="RFrontStrut")
-     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AB.MTRearGunPawn',WeaponBone="Attachment")
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AC.MTMachineGun',WeaponBone="RFrontStrut")
+     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AC.MTRearGunPawn',WeaponBone="Attachment")
      RedSkin=Texture'MTII.MTUnderside'
      BlueSkin=Texture'MTII.MTUnderside'
      IdleSound=Sound'MTII.MTEng01'
@@ -283,7 +283,7 @@ defaultproperties
          SupportBoneName="RrearStrut"
          SupportBoneAxis=AXIS_X
      End Object
-     Wheels(0)=SVehicleWheel'DEKRPG208AB.MTDC.RRWheel'
+     Wheels(0)=SVehicleWheel'DEKRPG208AC.MTDC.RRWheel'
 
      Begin Object Class=SVehicleWheel Name=LRWheel
          bPoweredWheel=True
@@ -295,7 +295,7 @@ defaultproperties
          SupportBoneName="LrearStrut"
          SupportBoneAxis=AXIS_X
      End Object
-     Wheels(1)=SVehicleWheel'DEKRPG208AB.MTDC.LRWheel'
+     Wheels(1)=SVehicleWheel'DEKRPG208AC.MTDC.LRWheel'
 
      Begin Object Class=SVehicleWheel Name=RFWheel
          bPoweredWheel=True
@@ -307,7 +307,7 @@ defaultproperties
          SupportBoneName="RFrontStrut"
          SupportBoneAxis=AXIS_X
      End Object
-     Wheels(2)=SVehicleWheel'DEKRPG208AB.MTDC.RFWheel'
+     Wheels(2)=SVehicleWheel'DEKRPG208AC.MTDC.RFWheel'
 
      Begin Object Class=SVehicleWheel Name=LFWheel
          bPoweredWheel=True
@@ -319,7 +319,7 @@ defaultproperties
          SupportBoneName="LfrontStrut"
          SupportBoneAxis=AXIS_X
      End Object
-     Wheels(3)=SVehicleWheel'DEKRPG208AB.MTDC.LFWheel'
+     Wheels(3)=SVehicleWheel'DEKRPG208AC.MTDC.LFWheel'
 
      VehicleMass=7.250000
      bDrawDriverInTP=True
@@ -383,6 +383,6 @@ defaultproperties
          KFriction=0.500000
          KImpactThreshold=700.000000
      End Object
-     KParams=KarmaParamsRBFull'DEKRPG208AB.MTDC.KParams0'
+     KParams=KarmaParamsRBFull'DEKRPG208AC.MTDC.KParams0'
 
 }

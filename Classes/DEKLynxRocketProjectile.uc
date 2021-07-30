@@ -71,5 +71,5 @@ defaultproperties
      MaxSpeed=2000.000000
      Damage=58.500000
      DamageRadius=120.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeLynxRocket'
+     MyDamageType=Class'DEKRPG208AC.DamTypeLynxRocket'
 }

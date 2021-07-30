@@ -113,7 +113,7 @@ defaultproperties
      XPReward=30
      MissionGoal=700
      Description="Use the Utility Rifle."
-     PickupClass=Class'DEKRPG208AB.ArtifactMissionUtilityMutilityPickup'
+     PickupClass=Class'DEKRPG208AC.ArtifactMissionUtilityMutilityPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionUtility'
      ItemName="Utility Mutility"
 }

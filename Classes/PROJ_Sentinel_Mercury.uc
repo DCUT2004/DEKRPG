@@ -2,16 +2,16 @@ class PROJ_Sentinel_Mercury extends MercuryMissiles2.MercuryMissile;
 
 defaultproperties
 {
-     SplashDamageType=Class'DEKRPG208AB.DamTypeMercurySENTSplashDamage'
+     SplashDamageType=Class'DEKRPG208AC.DamTypeMercurySENTSplashDamage'
      ImpactDamageAmount=45.000000
-     HeadHitDamage=Class'DEKRPG208AB.DamTypeMercurySENTHeadHit'
-     DirectHitDamage=Class'DEKRPG208AB.DamTypeMercurySENTDirectHit'
-     PunchThroughDamage=Class'DEKRPG208AB.DamTypeMercurySENTPunchThrough'
-     ThroughHeadDamage=Class'DEKRPG208AB.DamTypeMercurySENTPunchThroughHead'
-     AirHeadHitDamage=Class'DEKRPG208AB.DamTypeMercurySENTAirHeadHit'
-     AirHitDamage=Class'DEKRPG208AB.DamTypeMercurySENTAirHit'
-     AirPunchThroughDamage=Class'DEKRPG208AB.DamTypeMercurySENTAirPunchThrough'
-     AirThroughHeadDamage=Class'DEKRPG208AB.DamTypeMercurySENTAirPunchThroughHead'
+     HeadHitDamage=Class'DEKRPG208AC.DamTypeMercurySENTHeadHit'
+     DirectHitDamage=Class'DEKRPG208AC.DamTypeMercurySENTDirectHit'
+     PunchThroughDamage=Class'DEKRPG208AC.DamTypeMercurySENTPunchThrough'
+     ThroughHeadDamage=Class'DEKRPG208AC.DamTypeMercurySENTPunchThroughHead'
+     AirHeadHitDamage=Class'DEKRPG208AC.DamTypeMercurySENTAirHeadHit'
+     AirHitDamage=Class'DEKRPG208AC.DamTypeMercurySENTAirHit'
+     AirPunchThroughDamage=Class'DEKRPG208AC.DamTypeMercurySENTAirPunchThrough'
+     AirThroughHeadDamage=Class'DEKRPG208AC.DamTypeMercurySENTAirPunchThroughHead'
      AccelRate=15000.000000
      HeadShotSizeAdjust=1.250000
      PunchThroughSpeed=9000.000000
@@ -20,7 +20,7 @@ defaultproperties
      Speed=12000.000000
      MaxSpeed=27500.000000
      Damage=45.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeMercurySENTDirectHit'
+     MyDamageType=Class'DEKRPG208AC.DamTypeMercurySENTDirectHit'
      LifeSpan=3.000000
      DrawScale=0.250000
      Skins(0)=TexScaler'MercuryMissiles2.Skins.MercuryMissileTexGreen'

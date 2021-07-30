@@ -9,7 +9,7 @@ simulated function PostBeginPlay()
 
 defaultproperties
 {
-     TurretSwivelClass=Class'DEKRPG208AB.DEKCeilingMachineGunSentinelSwivel'
+     TurretSwivelClass=Class'DEKRPG208AC.DEKCeilingMachineGunSentinelSwivel'
      DefaultWeaponClassName="DEKMachineGunWeaponSentinel"
      VehicleProjSpawnOffset=(X=65.000000)
      VehicleNameString="Machine Gun Sentinel"

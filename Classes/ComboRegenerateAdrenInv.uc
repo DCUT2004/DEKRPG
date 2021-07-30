@@ -28,7 +28,7 @@ function Timer()
 		}*/
 		PawnOwner.Controller.AwardAdrenaline(EffectMultiplier);
 		if (PlayerController(PawnOwner.Controller) != None)
-		PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'AdrenelinPickup');
+			PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'AdrenelinPickup');
 	}
 	Super.Timer();
 }
@@ -45,5 +45,5 @@ defaultproperties
 {
 	 bBuff=True
 	 ComboNameMessage="+ Adren Drip"
-     EffectxEmitterClass=Class'DEKRPG208AB.ComboRegenerateAdrenEffect'
+     EffectxEmitterClass=Class'DEKRPG208AC.ComboRegenerateAdrenEffect'
 }

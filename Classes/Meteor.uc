@@ -264,7 +264,7 @@ defaultproperties
      Damage=150.000000
      DamageRadius=550.000000
      MomentumTransfer=70000.000000
-     MyDamageType=Class'DEKRPG208AB.DamTypeMeteor'
+     MyDamageType=Class'DEKRPG208AC.DamTypeMeteor'
      ImpactSound=Sound'WeaponSounds.ShockRifle.ShockRifleExplosion'
      ExplosionDecal=Class'XEffects.RocketMark'
      MaxEffectDistance=7000.000000

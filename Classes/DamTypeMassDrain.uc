@@ -3,7 +3,7 @@ class DamTypeMassDrain extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AB.WeaponMassDrain'
+     WeaponClass=Class'DEKRPG208AC.WeaponMassDrain'
      DeathString="%o was drained of his life by %k."
      FemaleSuicide="%o messed around with magic and killed herself."
      MaleSuicide="%o messed around with magic and killed himself."

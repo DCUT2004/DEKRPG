@@ -86,12 +86,14 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local ComboDefenseInv ComboDefense;
 	local ComboDefenseGazeInv ComboDefenseGaze;
 	local ComboAttackInv ComboAttack;
+	local ComboCriticalHitInv ComboCriticalHit;
 	//local ComboSharedDamageInv ComboSharedDamage;
 	local ComboInaccuracyInv ComboInaccuracy;
 	local ComboVampireTargetInv ComboVampireTarget;
 	local ComboTauntInv ComboTaunt;
 	local int DamageToTauntPawn;
 	local int InaccuracyChance;
+	local ComboAbilityHealingStrikeInv HealStrike;
 	local Actor A;
 	
 	//Add to monster team adrenaline on each hit
@@ -126,6 +128,27 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		if (ComboDefenseGaze != None)
 		{
 			Damage *= ComboDefenseGaze.EffectMultiplier;
+		}
+		
+		//If the attacker has ComboCriticalHit, double the damage
+		ComboCriticalHit = ComboCriticalHitInv(instigatedBy.FindInventoryType(Class'ComboCriticalHitInv'));
+		if (ComboCriticalHit != None && DamageType != Class'DamTypeRetaliation' && Rand(100) <= ComboCriticalHit.EffectMultiplier)
+		{
+			Damage *= 2;
+			A = spawn(class'GamblerHitEffect',,, instigatedBy.Location);
+			if (A != None)
+			{
+				A.RemoteRole = ROLE_SimulatedProxy;
+				A.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*instigatedBy.TransientSoundVolume,,instigatedBy.TransientSoundRadius);
+			}
+				
+			A = spawn(class'GamblerHitEffect',,, injured.Location);
+		
+			if (A != None)
+			{
+				A.RemoteRole = ROLE_SimulatedProxy;
+				A.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*injured.TransientSoundVolume,,injured.TransientSoundRadius);
+			}
 		}
 		
 		//If the attacker has ComboInaccuracy, modify the damage
@@ -195,6 +218,23 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		if (ComboVampireTarget != None)
 		{
 			instigatedBy.GiveHealth(ComboVampireTarget.EffectMultiplier*Damage, instigatedBy.HealthMax + 50);
+		}
+		
+		//If the instigator used Healing Strike, heal the instigator and his allies
+		if (DamageType == class'DamTypeHealingStrike' && instigatedBy != None && instigatedBy.Health > 0)
+		{
+			HealStrike = ComboAbilityHealingStrikeInv(instigatedBy.FindInventoryType(Class'ComboAbilityHealingStrikeInv'));
+			if (HealStrike != None)
+			{
+				C = Level.ControllerList;
+				while (C != None)
+				{
+					NextC = C.NextController;
+					if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() == instigatedBy.GetTeamNum())
+						C.Pawn.GiveHealth(HealStrike.EffectMultiplier*Damage, C.Pawn.HealthMax);
+					C = NextC;
+				}
+			}
 		}
 	}
 	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
@@ -271,20 +311,20 @@ defaultproperties
 	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material
 	MediumMaterialChance=95	//15% chance to get a medium material, 5% for a high material
-	LowMaterials(0)=Class'DEKRPG208AB.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG208AB.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG208AB.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG208AB.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG208AB.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG208AB.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG208AB.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG208AB.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG208AB.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG208AB.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG208AB.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG208AB.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG208AB.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG208AB.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG208AB.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG208AB.AbilityMaterialIcicle'
+	LowMaterials(0)=Class'DEKRPG208AC.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG208AC.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG208AC.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG208AC.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG208AC.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG208AC.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG208AC.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG208AC.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG208AC.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG208AC.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG208AC.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG208AC.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG208AC.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG208AC.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG208AC.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG208AC.AbilityMaterialIcicle'
 }

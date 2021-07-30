@@ -2,6 +2,6 @@ class ArtifactMissionEmeraldShatterPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AB.ArtifactMissionEmeraldShatter'
+     InventoryType=Class'DEKRPG208AC.ArtifactMissionEmeraldShatter'
      PickupMessage="You picked up the Emerald Shatter Mission!"
 }

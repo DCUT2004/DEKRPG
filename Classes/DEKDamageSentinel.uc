@@ -24,7 +24,7 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 defaultproperties
 {
      ResupplyAmount=1.000000
-     TurretBaseClass=Class'DEKRPG208AB.DEKDamageSentinelBase'
+     TurretBaseClass=Class'DEKRPG208AC.DEKDamageSentinelBase'
      VehicleNameString="Damage Sentinel"
      bCanBeBaseForPawns=False
      Mesh=SkeletalMesh'AS_Vehicles_M.FloorTurretGun'

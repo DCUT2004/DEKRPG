@@ -4,6 +4,6 @@ class DamTypeMercurySENTAirPunchThrough extends DamTypeMercuryAirPunchThrough ab
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AB.DEKMercurySentinelWeapon'
+     WeaponClass=Class'DEKRPG208AC.DEKMercurySentinelWeapon'
      DeathString="%k's sentinel drove a mercury missile through %o in mid-air."
 }

@@ -3,8 +3,8 @@ class NecromancerSoulWeapon extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AB.NecromancerSoulWeaponFire'
-     FireModeClass(1)=Class'DEKRPG208AB.NecromancerSoulWeaponAltFire'
+     FireModeClass(0)=Class'DEKRPG208AC.NecromancerSoulWeaponFire'
+     FireModeClass(1)=Class'DEKRPG208AC.NecromancerSoulWeaponAltFire'
      bCanThrow=False
      HudColor=(B=255)
      IconMaterial=Texture'DEKRPGTexturesMaster208K.NecroIcons.BloodMagicIcon'

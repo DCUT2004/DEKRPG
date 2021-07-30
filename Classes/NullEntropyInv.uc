@@ -26,6 +26,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local MIssion3Inv M3Inv;
 	local RW_MagicalWard W;
 	local MagicalWardProtectionInv MWInv;
+	local ComboWardInv WardInv;
 
 	if(Other == None)
 	{
@@ -37,26 +38,39 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	
 	stopped = false;
 	
-	if (PawnOwner != None && PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+	if (PawnOwner != None)
 	{
-		W = RW_MagicalWard(PawnOwner.Weapon);
-		if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+		WardInv = ComboWardInv(PawnOwner.FindInventoryType(Class'ComboWardInv'));
+		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
-			MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-			if (MWInv == None)
-			{
-				MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-				MWInv.GiveTo(Other);
-			}
-			else
-			{
-				MWInv.Lifespan = MWInv.default.Lifespan;
-				MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-				if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-					MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-			}
+			Log("Warded an ailment");
+			if (PlayerController(PawnOwner.Controller) != None)	
+				PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'PickupSounds.ShieldPack');
 			Destroy();
 			return;
+		}
+		
+		if (PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+		{
+			W = RW_MagicalWard(PawnOwner.Weapon);
+			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
+			{
+				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+				if (MWInv == None)
+				{
+					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+					MWInv.GiveTo(Other);
+				}
+				else
+				{
+					MWInv.Lifespan = MWInv.default.Lifespan;
+					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+				}
+				Destroy();
+				return;
+			}
 		}
 	}
 
@@ -76,6 +90,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		NInv = NecroInv(PawnOwner.FindInventoryType(class'NecroInv'));
 		if(NInv != None)
 		{
+			Destroy();
 			return;
 		}
 	

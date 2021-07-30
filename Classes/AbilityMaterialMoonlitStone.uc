@@ -6,8 +6,17 @@ var config float LevMultiplier;
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	if (Other != None)
-		Other.HealthMax *= 1 + default.LevMultiplier*AbilityLevel;
+	local HealthMaxPermInv Inv;
+	if (Other != None && Other.Controller != None)
+	{
+		Inv = HealthMaxPermInv(Other.FindInventoryType(Class'HealthMaxPermInv'));
+		if (Inv == None)
+		{
+			Inv = Other.Spawn(Class'HealthMaxPermInv');
+			Inv.Boost = 1 + AbilityLevel*default.LevMultiplier;
+			Inv.GiveTo(Other);
+		}
+	}
 }
 
 defaultproperties
