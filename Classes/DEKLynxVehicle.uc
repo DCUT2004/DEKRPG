@@ -153,11 +153,11 @@ function bool RecommendLongRangedAttack()
 defaultproperties
 {
      LockOverlay=Shader'DEKRPGTexturesMaster208K.fX.PulseRedShader'
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AC.DEKLynxRocketPack')
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AD.DEKLynxRocketPack')
      VehiclePositionString="in a Lynx"
      VehicleNameString="Lynx"
-     RanOverDamageType=Class'DEKRPG208AC.DamTypeLynxRoadkill'
-     CrushedDamageType=Class'DEKRPG208AC.DamTypeLynxPancake'
+     RanOverDamageType=Class'DEKRPG208AD.DamTypeLynxRoadkill'
+     CrushedDamageType=Class'DEKRPG208AD.DamTypeLynxPancake'
      HealthMax=400.000000
      Health=400
      Skins(0)=Shader'DEKRPGTexturesMaster208K.Skins.Lynx'

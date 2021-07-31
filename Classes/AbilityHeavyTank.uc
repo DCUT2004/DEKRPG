@@ -33,8 +33,8 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      DamageMultiplier=0.050000
-     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityLargeTank'
-     ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityRecklessTank'
+     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityLargeTank'
+     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityRecklessTank'
      AbilityName="Niche: Heavy"
      Description="Increases your cumulative total damage bonus by 5% per level. However, your maximum jumping and dodging decreases by 1 per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

@@ -3,7 +3,7 @@ class DamTypeBloodSpear extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AC.NecromancerBloodWeapon'
+     WeaponClass=Class'DEKRPG208AD.NecromancerBloodWeapon'
      DeathString="%o was pierced through with the Blood Spear."
      FemaleSuicide="%o didn't use Blood Spear correctly."
      MaleSuicide="%o didn't use Blood Spear correctly."

@@ -94,7 +94,7 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
 	if (Healer != None && TeamLink(Healer.GetTeamNum()))
 	{	
 		// check the healer is an engineer
-		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None || DruidAddLinkSentinel(Healer.Pawn) != None))
+		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None))
 		{
 
 			// now add to list
@@ -198,8 +198,8 @@ function bool HasUDamage()
 defaultproperties
 {
      LockOverlay=Shader'DEKRPGTexturesMaster208K.fX.PulseRedShader'
-     TurretBaseClass=Class'DEKRPG208AC.DruidIonCannon_Base'
-     TurretSwivelClass=Class'DEKRPG208AC.DruidIonCannon_Swivel'
+     TurretBaseClass=Class'DEKRPG208AD.DruidIonCannon_Base'
+     TurretSwivelClass=Class'DEKRPG208AD.DruidIonCannon_Swivel'
      RotPitchConstraint=(Min=12084.000000)
      CamRelLocation=(Z=100.000000)
      CamDistance=(X=-200.000000)

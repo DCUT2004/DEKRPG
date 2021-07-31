@@ -94,7 +94,7 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
 	if (Healer != None && TeamLink(Healer.GetTeamNum()))
 	{	
 		// check the healer is an engineer
-		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None || DruidAddLinkSentinel(Healer.Pawn) != None))
+		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None))
 		{
 
 			// now add to list

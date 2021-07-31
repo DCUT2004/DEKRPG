@@ -66,9 +66,9 @@ defaultproperties
 {
      AttractionRadius=800.000000
      AttractionStrength=300000.000000
-     LightningDamageType=Class'DEKRPG208AC.DamTypeMagnet'
+     LightningDamageType=Class'DEKRPG208AD.DamTypeMagnet'
      DetonationTime=2.000000
      Speed=600.000000
      MaxSpeed=600.000000
-     MyDamageType=Class'DEKRPG208AC.DamTypeMagnet'
+     MyDamageType=Class'DEKRPG208AD.DamTypeMagnet'
 }

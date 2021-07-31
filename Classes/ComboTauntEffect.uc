@@ -25,7 +25,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          InitialDelayRange=(Min=0.150000,Max=0.150000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AC.ComboTauntEffect.SpriteEmitter4'
+     Emitters(0)=SpriteEmitter'DEKRPG208AD.ComboTauntEffect.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -49,7 +49,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          InitialDelayRange=(Min=0.250000,Max=0.250000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AC.ComboTauntEffect.SpriteEmitter5'
+     Emitters(1)=SpriteEmitter'DEKRPG208AD.ComboTauntEffect.SpriteEmitter5'
 
      AutoReset=True
      CullDistance=5000.000000

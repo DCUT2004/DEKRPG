@@ -104,9 +104,9 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      DamageMultiplier=0.250000
-     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilitySpecialistProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityGunsmithProficiency'
-     RequiredAbilities(0)=Class'DEKRPG208AC.AbilityWeaponsProficiency'
+     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilitySpecialistProficiency'
+     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityGunsmithProficiency'
+     RequiredAbilities(0)=Class'DEKRPG208AD.AbilityWeaponsProficiency'
      AbilityName="Niche: Duality"
      Description="You are granted the Duality artifacts. Use the artifact to select two weapons. Making kills with either weapons will increase the proficiency bonus for both weapons. If you die, your proficiency bonus will save and can be reapplied to two new weapons after respawning.|In exchange, the proficiency bonus will not apply to other weapons, and your damage reduction is lowered.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost: 50."
      StartingCost=50

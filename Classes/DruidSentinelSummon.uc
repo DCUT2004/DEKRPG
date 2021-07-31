@@ -395,7 +395,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	}
 
 	bGotSpace = CheckSpace(SpawnLoc,150,180);
-	if (ClassIsChildOf(SummonItem,class'DruidSentinel') || ClassIsChildOf(SummonItem,class'DEKMercurySentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinel') || ClassIsChildOf(SummonItem,class'DruidLightningSentinel') || ClassIsChildOf(SummonItem,class'DruidLinkSentinel') || ClassIsChildOf(SummonItem,class'DEKBeamSentinel') || ClassIsChildOf(SummonItem,class'DEKAutoMachinegun') || ClassIsChildOf(SummonItem,class'DruidAddLinkSentinel') || ClassIsChildOf(SummonItem,class'DEKDamageSentinel') || ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo') || ClassIsChildOf(SummonItem,class'DEKRocketSentinel') || ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel') || ClassIsChildOf(SummonItem,class'DEKSniperSentinel') || ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
+	if (ClassIsChildOf(SummonItem,class'DruidSentinel') || ClassIsChildOf(SummonItem,class'DEKMercurySentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinel') || ClassIsChildOf(SummonItem,class'DruidLightningSentinel') || ClassIsChildOf(SummonItem,class'DruidLinkSentinel') || ClassIsChildOf(SummonItem,class'DEKBeamSentinel') || ClassIsChildOf(SummonItem,class'DEKAutoMachinegun') || ClassIsChildOf(SummonItem,class'DEKDamageSentinel') || ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo') || ClassIsChildOf(SummonItem,class'DEKRocketSentinel') || ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel') || ClassIsChildOf(SummonItem,class'DEKSniperSentinel') || ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
 	{
 		// need to check if ceiling variant is required
 		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);	// its a ceiling sentinel - special case.
@@ -954,40 +954,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 		}
 	}
 	else if (RealSummonItem == class'DruidLinkSentinel')
-	{	// its a link sentinel
-		if (bOnCeiling)
-		{
-			SpawnLoc.z -= 70;		// leave on ceiling
-			SpawnRotation.Yaw = 0;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			SpawnLoc.z += 67;		// lift just off ground, and then base steps back a bit
-			SpawnRotation.Yaw = 32768;
-			NewSentinel =  epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DLSC = spawn(class'DruidLinkSentinelController');
-			if ( DLSC != None )
-			{
-				//DLSC.DamageAdjust = epi.SentinelDamageAdjust;
-				DLSC.SetPlayerSpawner(Instigator.Controller);
-				DLSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidAddLinkSentinel')
 	{	// its a link sentinel
 		if (bOnCeiling)
 		{

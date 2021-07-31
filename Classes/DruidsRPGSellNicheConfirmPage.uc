@@ -49,7 +49,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=YesButton
          Caption="YES"
@@ -60,7 +60,7 @@ defaultproperties
          OnClick=DruidsRPGSellNicheConfirmPage.InternalOnClick
          OnKeyEvent=YesButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.YesButton'
+     Controls(1)=GUIButton'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.YesButton'
 
      Begin Object Class=GUIButton Name=NoButton
          Caption="NO"
@@ -71,7 +71,7 @@ defaultproperties
          OnClick=DruidsRPGSellNicheConfirmPage.InternalOnClick
          OnKeyEvent=NoButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.NoButton'
+     Controls(2)=GUIButton'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.NoButton'
 
      Begin Object Class=GUILabel Name=SellDesc
          Caption="This will refund your niche."
@@ -81,7 +81,7 @@ defaultproperties
          WinTop=0.400000
          WinHeight=32.000000
      End Object
-     Controls(3)=GUILabel'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.SellDesc'
+     Controls(3)=GUILabel'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.SellDesc'
 
      Begin Object Class=GUILabel Name=SellDesc2
          Caption="You will be automatically reconnected."
@@ -91,7 +91,7 @@ defaultproperties
          WinTop=0.450000
          WinHeight=32.000000
      End Object
-     Controls(4)=GUILabel'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.SellDesc2'
+     Controls(4)=GUILabel'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.SellDesc2'
 
      Begin Object Class=GUILabel Name=SellDesc3
          Caption="Are you SURE?"
@@ -101,7 +101,7 @@ defaultproperties
          WinTop=0.500000
          WinHeight=32.000000
      End Object
-     Controls(5)=GUILabel'DEKRPG208AC.DruidsRPGSellNicheConfirmPage.SellDesc3'
+     Controls(5)=GUILabel'DEKRPG208AD.DruidsRPGSellNicheConfirmPage.SellDesc3'
 
      WinTop=0.375000
      WinHeight=0.250000

@@ -98,7 +98,7 @@ defaultproperties
      XPReward=20
      MissionGoal=35
      Description="Kill pupae, razorfly, and mantas."
-     PickupClass=Class'DEKRPG208AC.ArtifactMissionBugHuntPickup'
+     PickupClass=Class'DEKRPG208AD.ArtifactMissionBugHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.BugHuntMission'
      ItemName="Bug Hunt"
 }

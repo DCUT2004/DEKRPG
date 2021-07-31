@@ -2,6 +2,6 @@ class ArtifactMissionTeamBalloonPopPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AC.ArtifactMissionTeamBalloonPop'
+     InventoryType=Class'DEKRPG208AD.ArtifactMissionTeamBalloonPop'
      PickupMessage="You picked up the Balloon Pop team mission!"
 }

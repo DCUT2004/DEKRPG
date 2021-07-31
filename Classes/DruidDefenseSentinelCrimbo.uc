@@ -32,7 +32,7 @@ defaultproperties
      ArmorHealingAmount=1.000000
      TargetRadius=700.000000
      XPPerHit=0.066000
-     TurretBaseClass=Class'DEKRPG208AC.DruidDefenseSentinelBaseCrimbo'
+     TurretBaseClass=Class'DEKRPG208AD.DruidDefenseSentinelBaseCrimbo'
      VehicleNameString="Defense Sentinel"
      bCanBeBaseForPawns=False
      StaticMesh=StaticMesh'DEKStaticsMaster208K.ChristmasMeshes.FloorCandyCane'

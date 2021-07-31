@@ -31,9 +31,9 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
      AdrenalineUsage=1.500000
-     ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityBeastSummoner'
-     ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityMindControlSummoner'
-     RequiredAbilities(0)=Class'DEKRPG208AC.AbilityMonsterPoints'
+     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityBeastSummoner'
+     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityMindControlSummoner'
+     RequiredAbilities(0)=Class'DEKRPG208AD.AbilityMonsterPoints'
      AbilityName="Niche: Horde"
      Description="Increases your maximum Monster Points by 5, and increases your maximum summonable pets by 1. However, the cost of your healing artifacts also increases.|You must be level 180 and have at least level 1 of Monster Points before buying this niche. You can not be in more than one niche at a same time.||Cost(per level): 50"
      StartingCost=50

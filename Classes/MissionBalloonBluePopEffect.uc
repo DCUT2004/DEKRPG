@@ -29,7 +29,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AC.MissionBalloonBluePopEffect.SpriteEmitter22'
+     Emitters(0)=SpriteEmitter'DEKRPG208AD.MissionBalloonBluePopEffect.SpriteEmitter22'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter23
          UseDirectionAs=PTDU_Normal
@@ -56,7 +56,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AC.MissionBalloonBluePopEffect.SpriteEmitter23'
+     Emitters(1)=SpriteEmitter'DEKRPG208AD.MissionBalloonBluePopEffect.SpriteEmitter23'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter53
          UseDirectionAs=PTDU_Scale
@@ -77,6 +77,6 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.FlashFlare1'
          LifetimeRange=(Min=0.300000,Max=0.300000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AC.MissionBalloonBluePopEffect.SpriteEmitter53'
+     Emitters(2)=SpriteEmitter'DEKRPG208AD.MissionBalloonBluePopEffect.SpriteEmitter53'
 
 }

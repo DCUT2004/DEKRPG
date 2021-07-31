@@ -3,7 +3,7 @@ class DamTypeSkyMineBeam extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AC.DEKSkyMineTurret'
+     VehicleClass=Class'DEKRPG208AD.DEKSkyMineTurret'
      DeathString="%k's laser shocked %o."
      FemaleSuicide="%o used her laser on herself."
      MaleSuicide="%o used his laser on himself."

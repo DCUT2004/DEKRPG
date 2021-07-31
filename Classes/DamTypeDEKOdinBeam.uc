@@ -13,7 +13,7 @@ static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictimHealt
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AC.DEKOdinTurret'
+     VehicleClass=Class'DEKRPG208AD.DEKOdinTurret'
      DeathString="%o was evaporated into thin air by %k's Odin turret."
      FemaleSuicide="%o's Odin turret malfunctioned."
      bDetonatesGoop=True

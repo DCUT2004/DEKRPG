@@ -7,6 +7,6 @@ var config float HealTimeDelay;		// when linking to turrets how long after heali
 defaultproperties
 {
      HealTimeDelay=0.500000
-     FireModeClass(0)=Class'DEKRPG208AC.EngineerLinkProjFire'
-     FireModeClass(1)=Class'DEKRPG208AC.EngineerLinkFire'
+     FireModeClass(0)=Class'DEKRPG208AD.EngineerLinkProjFire'
+     FireModeClass(1)=Class'DEKRPG208AD.EngineerLinkFire'
 }

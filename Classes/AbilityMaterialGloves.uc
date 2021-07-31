@@ -4,11 +4,22 @@ class AbilityMaterialGloves extends AbilityMaterial
 	
 var config float LevMultiplier;
 
-static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
+static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	if (xPawn(Other) != None)
-		xPawn(Other).ShieldStrengthMax *= 1 + default.LevMultiplier * AbilityLevel;
+	local ShieldMaxPermInv Inv;
+	
+	if (Other != None && Other.Controller != None)
+	{
+		Inv = ShieldMaxPermInv(Other.FindInventoryType(Class'ShieldMaxPermInv'));
+		if (Inv == None)
+		{
+			Inv = Other.Spawn(Class'ShieldMaxPermInv');
+			Inv.Boost = 1 + AbilityLevel*default.LevMultiplier;
+			Inv.GiveTo(Other);
+		}
+	}
 }
+
 
 
 defaultproperties

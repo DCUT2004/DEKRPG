@@ -49,18 +49,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -73,18 +73,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AC.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -208,7 +208,7 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 	if (M == None)
 		return;
 	
-	if (DamageType == class'DamTypeLightningRod' || DamageType == class'DamTypeEnhLightningRod' || DamageType == class'DamTypeLightningBolt' || DamageType == class'DamTypeLightningSent' || DamageType == class'DamTypeMachinegunSentinel' || DamageType == class'DamTypeSniperSentinel' || DamageType == class'DamTypeBeamSentinel' || DamageType == class'DamTypeBlasterLaser' || DamageType == class'DamTypeEnergyWall' || DamageType == class'DamTypeHellfireSentinel' || DamageType == class'DamTypeLightningTurretMinibolt' || DamageType == class'DamTypeLightningTurretProj' || DamageType == class'DamTypeMassDrain' || DamageType == class'DamTypeMercurySENTAirHeadHit' || DamageType == class'DamTypeMercurySENTAirHit' || DamageType == class'DamTypeMercurySENTAirPunchThrough' || DamageType == class'DamTypeMercurySENTAirPunchThroughHead' || DamageType == class'DamTypeMercurySENTDirectHit' || DamageType == class'DamTypeMercurySENTHeadHit' || DamageType == class'DamTypeMercurySENTPunchThrough' || DamageType == class'DamTypeMercurySENTPunchThroughHead' || DamageType == class'DamTypeMercurySENTSplashDamage' || DamageType == class'DamTypeRocketSentinelProj' || DamageType == class'DamTypeAerialTrap' || DamageType == class'DamTypeBombTrap' || DamageType == class'DamTypeFrostTrap' || DamageType == class'DamTypeLaserGrenadeLaser' || DamageType == class'DamTypeShockTrap' || DamageType == class'DamTypeShockTrapShock' || DamageType == class'DamTypeWildfireTrap' || DamageType == class'DamTypeDronePlasma')
+	if (ClassIsChildOf(damageType, class'VehicleDamageType') || DamageType == class'DamTypeLightningRod' || DamageType == class'DamTypeEnhLightningRod' || DamageType == class'DamTypeLightningBolt'  || DamageType == class'DamTypeMassDrain'  || DamageType == class'DamTypeAerialTrap' || DamageType == class'DamTypeBombTrap' || DamageType == class'DamTypeFrostTrap' || DamageType == class'DamTypeLaserGrenadeLaser' || DamageType == class'DamTypeShockTrap' || DamageType == class'DamTypeShockTrapShock' || DamageType == class'DamTypeWildfireTrap' || DamageType == class'DamTypeDronePlasma')
 	{
 		return; //These things are out of our control.
 	}
@@ -260,5 +260,5 @@ defaultproperties
      CloseRangeDistance=200.000000
      ScoringValue=0
      Health=30
-     ControllerClass=Class'DEKRPG208AC.HealerNaliController'
+     ControllerClass=Class'DEKRPG208AD.HealerNaliController'
 }

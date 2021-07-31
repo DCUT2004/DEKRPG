@@ -3,6 +3,8 @@ class DEKLightningTurretProj extends Projectile
 
 var DEKLightningTurretProjFX LightningEffect;
 
+#exec OBJ LOAD FILE="..\Sounds\GeneralAmbience.uax"
+
 var(Minibolts)  float           MiniboltInterval;
 var(Minibolts)  int             MiniboltDamage;
 var(Minibolts)  int             MiniboltRadius;
@@ -377,11 +379,11 @@ defaultproperties
      MiniboltInterval=0.200000
      MiniboltDamage=40
      MiniboltRadius=400
-     MiniboltClass=Class'DEKRPG208AC.DEKLightningTurretMinibolt'
-     MiniboltDamageType=Class'DEKRPG208AC.DamTypeLightningTurretMinibolt'
+     MiniboltClass=Class'DEKRPG208AD.DEKLightningTurretMinibolt'
+     MiniboltDamageType=Class'DEKRPG208AD.DamTypeLightningTurretMinibolt'
      LightningComboDamage=70
      LightningComboRadius=900
-     LightningComboDamageType=Class'DEKRPG208AC.DamTypeLightningTurretCombo'
+     LightningComboDamageType=Class'DEKRPG208AD.DamTypeLightningTurretCombo'
      DischargeChance=30
      Speed=3000.000000
      MaxSpeed=3000.000000
@@ -389,7 +391,7 @@ defaultproperties
      Damage=70.000000
      DamageRadius=60.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG208AC.DamTypeLightningTurretProj'
+     MyDamageType=Class'DEKRPG208AD.DamTypeLightningTurretProj'
      ImpactSound=Sound'WeaponSounds.ShockRifle.ShockRifleExplosion'
      ExplosionDecal=Class'XEffects.LinkScorch'
      MaxEffectDistance=7000.000000

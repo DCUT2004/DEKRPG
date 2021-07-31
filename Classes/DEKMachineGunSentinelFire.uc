@@ -28,7 +28,7 @@ function InitEffects()
 
 defaultproperties
 {
-     DamageType=Class'DEKRPG208AC.DamTypeMachineGunSentinel'
+     DamageType=Class'DEKRPG208AD.DamTypeMachineGunSentinel'
      DamageMin=4
      DamageMax=5
      FireSound=Sound'ONSVehicleSounds-S.Tank.TankMachineGun01'

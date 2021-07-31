@@ -26,7 +26,7 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 	
 	DLSC = DruidLinkSentinelController(Other.Controller);
 	
-	if (DruidLinkSentinel(Other) != None || DruidAddLinkSentinel(Other) != None)
+	if (DruidLinkSentinel(Other) != None)
 	{
 		if (DLSC != None)
 		{

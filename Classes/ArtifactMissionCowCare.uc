@@ -48,7 +48,7 @@ defaultproperties
 {
      XPReward=15
      Description="Keep your cow alive each wave."
-     PickupClass=Class'DEKRPG208AC.ArtifactMissionCowCarePickup'
+     PickupClass=Class'DEKRPG208AD.ArtifactMissionCowCarePickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.CowCareMission'
      ItemName="Cow Care"
 }

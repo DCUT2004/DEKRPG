@@ -141,7 +141,7 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
 	if (Healer != None && TeamLink(Healer.GetTeamNum()))
 	{	
 		// check the healer is an engineer
-		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None || DruidAddLinkSentinel(Healer.Pawn) != None))
+		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None))
 		{
 
 			// now add to list
@@ -307,6 +307,6 @@ defaultproperties
      ZoomSpeed=1.500000
      bPowered=True
      RespawnTime=5.000000
-     GunClass=Class'DEKRPG208AC.DruidEnergyWeapon'
+     GunClass=Class'DEKRPG208AD.DruidEnergyWeapon'
      AutoTurretControllerClass=None
 }

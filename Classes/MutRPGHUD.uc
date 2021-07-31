@@ -405,6 +405,6 @@ function NotifyLogout(Controller Exiting)
 defaultproperties
 {
      GroupName="RPGHUDInvasion"
-     FriendlyName="DEKRPG208AC Druid's Invasion RPG HUD"
+     FriendlyName="DEKRPG208AD Druid's Invasion RPG HUD"
      Description="Show Friendly Monsters In HUD and show monsters on a danger scale from Green to Red. Also show xp gained on Invasion scoreboard."
 }

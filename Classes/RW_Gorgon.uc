@@ -16,7 +16,7 @@ static function bool AllowedFor(class<Weapon> Weapon, Pawn Other)
 	          && class'MutUT2004RPG'.static.IsSuperWeaponAmmo(Weapon.default.FireModeClass[0].default.AmmoClass) )
 		return false;
 	
-	if ( ClassIsChildOf(Weapon, class'MercuryLauncher') || ClassIsChildOf(Weapon, class'INAVRiL') || ClassIsChildOf(Weapon, class'ONSAVRiL') || ClassIsChildOf(Weapon, class'FlakCannon') || ClassIsChildOf(Weapon, class'LinkGun') || ClassIsChildOf(Weapon, class'RocketLauncher') || ClassIsChildOf(Weapon, class'ONSMineLayer') || ClassIsChildOf(Weapon, class'PlasmaGrenadeLauncher') || ClassIsChildOf(Weapon, class'ONSGrenadeLauncher') || ClassIsChildOf(Weapon, class'BioRifle') || ClassIsChildOf(Weapon, class'ShieldGun') || ClassIsChildOf(Weapon,Class'ProAss'))
+	if (  ClassIsChildOf(Weapon, class'INAVRiL') || ClassIsChildOf(Weapon, class'ONSAVRiL') || ClassIsChildOf(Weapon, class'FlakCannon') || ClassIsChildOf(Weapon, class'LinkGun') || ClassIsChildOf(Weapon, class'RocketLauncher') || ClassIsChildOf(Weapon, class'ONSMineLayer') || ClassIsChildOf(Weapon, class'PlasmaGrenadeLauncher') || ClassIsChildOf(Weapon, class'ONSGrenadeLauncher') || ClassIsChildOf(Weapon, class'BioRifle') || ClassIsChildOf(Weapon, class'ShieldGun') || ClassIsChildOf(Weapon,Class'ProAss'))
 		return false;
 		
 	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));

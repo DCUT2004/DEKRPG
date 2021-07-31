@@ -36,7 +36,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.700000,Max=0.700000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG208AC.RepulsionExplosion.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG208AD.RepulsionExplosion.MeshEmitter0'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter1
          StaticMesh=StaticMesh'AW-2k4XP.Weapons.ShockTankEffectRing'
@@ -70,7 +70,7 @@ defaultproperties
          LifetimeRange=(Min=0.700000,Max=0.700000)
          InitialDelayRange=(Min=0.030000,Max=0.030000)
      End Object
-     Emitters(1)=MeshEmitter'DEKRPG208AC.RepulsionExplosion.MeshEmitter1'
+     Emitters(1)=MeshEmitter'DEKRPG208AD.RepulsionExplosion.MeshEmitter1'
 
      AutoDestroy=True
      bNoDelete=False

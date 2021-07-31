@@ -139,7 +139,7 @@ defaultproperties
      TargetRadius=600.000000
      XPPerHealing=0.033333
      TimeBetweenShots=1.000000
-     HealEmitterClass=Class'DEKRPG208AC.LightningBeamEmitter'
+     HealEmitterClass=Class'DEKRPG208AD.LightningBeamEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
      bHidden=True
      Physics=PHYS_Trailer

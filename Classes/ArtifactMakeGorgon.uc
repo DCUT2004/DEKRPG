@@ -148,15 +148,6 @@ function Activate()
 			return;
 		}
 
-		if (DEKMercuryLauncher(Instigator.Weapon) != None)
-		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-			GotoState('');
-			bActive = false;
-			ActivatedOldWeapon = None;
-			return;
-		}
-
 		if (INAVRiL(Instigator.Weapon) != None)
 		{
 			Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);

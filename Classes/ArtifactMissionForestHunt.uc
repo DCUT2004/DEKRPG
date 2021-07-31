@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=15
      Description="Kill Earth monsters."
-     PickupClass=Class'DEKRPG208AC.ArtifactMissionForestHuntPickup'
+     PickupClass=Class'DEKRPG208AD.ArtifactMissionForestHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.ForestHuntMission'
      ItemName="Forest Hunt"
 }

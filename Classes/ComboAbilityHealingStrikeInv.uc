@@ -7,7 +7,7 @@ function DoEffect()
 	{
 		if (Combo != None)
 		{
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG208AC.DamTypeHealingStrike', class'RocketExplosion', True);
+			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG208AD.DamTypeHealingStrike', class'RocketExplosion', True);
 		}
 	}
 }

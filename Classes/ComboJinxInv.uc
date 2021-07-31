@@ -161,7 +161,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AC.RedBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AD.RedBoltEmitter'
 	 TargetRadius=750.000
 	 bBuff=False
 	 ComboNameMessage="- Jinx: "

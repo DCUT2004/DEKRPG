@@ -51,7 +51,7 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 
 defaultproperties
 {
-     MyDamageType=Class'DEKRPG208AC.DamTypeBloodBurst'
+     MyDamageType=Class'DEKRPG208AD.DamTypeBloodBurst'
      StaticMesh=StaticMesh'Editor.TexPropSphere'
      AmbientSound=None
      DrawScale=0.085000

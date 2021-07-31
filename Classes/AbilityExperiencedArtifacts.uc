@@ -111,7 +111,7 @@ defaultproperties
      Lev3RemoteMaxExp=23
      Lev4RemoteMaxExp=24
      Lev5RemoteMaxExp=25
-     RequiredAbilities(0)=Class'DEKRPG208AC.AbilityLoadedCraftsman'
+     RequiredAbilities(0)=Class'DEKRPG208AD.AbilityLoadedCraftsman'
      AbilityName="Experienced Artifacts"
      Description="Increases the XP of your team artifacts including remotes and spheres.||You will need to have Loaded Craftsman maxed before purchasing this ability.|Cost(per level): 5,10,15,20,25"
      StartingCost=5

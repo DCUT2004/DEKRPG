@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AC.AbilityComboOffensePurifyingStrike'
-	ExcludingAbilities(1)=Class'DEKRPG208AC.AbilityComboOffenseRecklessStrike'
-	ExcludingAbilities(2)=Class'DEKRPG208AC.AbilityComboOffenseStab'
-	ExcludingAbilities(3)=Class'DEKRPG208AC.AbilityComboOffenseStrike'
+    ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityComboOffensePurifyingStrike'
+	ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityComboOffenseRecklessStrike'
+	ExcludingAbilities(2)=Class'DEKRPG208AD.AbilityComboOffenseStab'
+	ExcludingAbilities(3)=Class'DEKRPG208AD.AbilityComboOffenseStrike'
 	AbilityName="Offense: Healing Strike"
 	Description="Deals 20 damage per level to all targets. The caster and all allies heal for 2% of the damage dealt per level. The damage is affected by buffs and ailments.||You can only have one type of Offense combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Arctic Suit and Fine Leather you wish to purchase. Additionally:||Level 5: 10 Nanite Fragments, 10 Cosmic Dust||Level 6: 20 Nanite Fragments, 20 Cosmic Dust||Level 7: 30 Nanite Fragments, 30 Cosmic Dust||Level 8: 40 Nanite Fragments, 40 Cosmic Dust||Level 9: 45 Nanite Fragments, 45 Cosmic Dust||Level 10: 50 Nanite Fragments, 50 Cosmic Dust||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -39,14 +39,14 @@ defaultproperties
 	MultiplierStep=0.0200000
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(40,40,40,40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(45,45,45,45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AC.AbilityMaterialLeather',Class'DEKRPG208AC.AbilityMaterialArcticSuit',Class'DEKRPG208AC.AbilityMaterialNanite',Class'DEKRPG208AC.AbilityMaterialDust'),RequiredMaterialLevels=(50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(40,40,40,40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(45,45,45,45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialArcticSuit',Class'DEKRPG208AD.AbilityMaterialNanite',Class'DEKRPG208AD.AbilityMaterialDust'),RequiredMaterialLevels=(50,50,50,50))
 }

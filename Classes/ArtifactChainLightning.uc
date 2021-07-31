@@ -372,7 +372,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AC.ChainLightningEmitter'
+     HitEmitterClass=Class'DEKRPG208AD.ChainLightningEmitter'
      MaxRange=3000.000000
      MaxStepRange=650.000000
      AdrenalineForMiss=4

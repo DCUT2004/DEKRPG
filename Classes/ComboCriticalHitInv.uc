@@ -27,6 +27,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
 	 ComboNameMessage="Critical Hit: "
-     EffectDownxEmitterClass=Class'DEKRPG208AC.ComboAttackDownEffect'
-     EffectxEmitterClass=Class'DEKRPG208AC.ComboAttackUpEffect'
+     EffectDownxEmitterClass=Class'DEKRPG208AD.ComboAttackDownEffect'
+     EffectxEmitterClass=Class'DEKRPG208AD.ComboAttackUpEffect'
 }
