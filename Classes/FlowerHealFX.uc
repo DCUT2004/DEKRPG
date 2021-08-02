@@ -31,7 +31,7 @@ defaultproperties
          VelocityScale(1)=(RelativeTime=0.600000)
          VelocityScale(2)=(RelativeTime=1.000000,RelativeVelocity=(X=-10.000000,Y=-10.000000,Z=-10.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AD.FlowerHealFX.SpriteEmitter2'
+     Emitters(0)=SpriteEmitter'DEKRPG208AE.FlowerHealFX.SpriteEmitter2'
 
      CullDistance=2000.000000
      bNoDelete=False

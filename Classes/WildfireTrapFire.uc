@@ -33,8 +33,8 @@ defaultproperties
      bSplashDamage=False
      bRecommendSplashDamage=False
      FireRate=0.650000
-     AmmoClass=Class'DEKRPG208AD.WildfireTrapAmmo'
+     AmmoClass=Class'DEKRPG208AE.WildfireTrapAmmo'
      AmmoPerFire=0
-     ProjectileClass=Class'DEKRPG208AD.WildfireTrapProjectile'
+     ProjectileClass=Class'DEKRPG208AE.WildfireTrapProjectile'
      FlashEmitterClass=None
 }

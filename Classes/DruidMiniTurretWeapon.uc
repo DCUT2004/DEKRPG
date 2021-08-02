@@ -10,6 +10,6 @@ simulated function ClientStartFire(int mode)
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AD.FM_DruidMiniTurret_Fire'
-     FireModeClass(1)=Class'DEKRPG208AD.FM_DruidMiniTurret_AltFire'
+     FireModeClass(0)=Class'DEKRPG208AE.FM_DruidMiniTurret_Fire'
+     FireModeClass(1)=Class'DEKRPG208AE.FM_DruidMiniTurret_AltFire'
 }

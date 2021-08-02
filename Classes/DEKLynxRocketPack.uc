@@ -34,7 +34,7 @@ defaultproperties
      FlashEmitterClass=Class'Onslaught.ONSTankFireEffect'
      FireSoundClass=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
      FireForce="RocketLauncherFire"
-     ProjectileClass=Class'DEKRPG208AD.DEKLynxRocketProjectile'
+     ProjectileClass=Class'DEKRPG208AE.DEKLynxRocketProjectile'
      AIInfo(0)=(bTrySplash=True)
      CollisionRadius=60.000000
 }

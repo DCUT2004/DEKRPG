@@ -10,7 +10,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 		Momentum = vect(0,0,0);
 	if (bOwnedByInstigator)
 	{
-		if (DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic')
+		if (DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic' || ClassIsChildOf(DamageType, Class'DamTypeMercuryDirectHit'))
 		{
 			if (Instigator.bIsCrouched)
 				Damage *= (1 + (AbilityLevel * default.CrouchMultiplier));
@@ -29,7 +29,7 @@ defaultproperties
      CrouchMultiplier=0.080000
      RootedMultiplier=0.050000
      RootedCrouchMultiplier=0.080000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityAssassinSniper'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityAssassinSniper'
      AbilityName="Niche: Rooted"
      Description="Increases your cumulative total damage bonus on sniper-type weapons by 5% while remaining stationary, and 8% while crouched or while both stationary and crouched. Damage is reduced if not crouching or stationary.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

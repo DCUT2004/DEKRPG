@@ -38,9 +38,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		NInv = NecroInv(PawnOwner.FindInventoryType(class'NecroInv'));
 		if(NInv != None)
 		{
-			Log("Warded an ailment");
-			if (PlayerController(PawnOwner.Controller) != None)	
-				PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'PickupSounds.ShieldPack');
+			if (Other.Controller != None && PlayerController(Other.Controller) != None)
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AE.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -68,6 +67,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
+				if (Other.Controller != None && PlayerController(Other.Controller) != None)
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AE.ComboSounds.Ward');
 				Destroy();
 				return;
 			}

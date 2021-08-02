@@ -5,8 +5,8 @@ class DEKAutoMercuryWeapon extends Weapon_Sentinel
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AD.DEKAutoMercuryFire'
-     FireModeClass(1)=Class'DEKRPG208AD.DEKAutoMercuryFire'
+     FireModeClass(0)=Class'DEKRPG208AE.DEKAutoMercuryFire'
+     FireModeClass(1)=Class'DEKRPG208AE.DEKAutoMercuryFire'
      AttachmentClass=None
      ItemName="Auto Mercury"
 }

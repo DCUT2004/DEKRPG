@@ -46,7 +46,7 @@ defaultproperties
          VelocityScale(2)=(RelativeTime=0.400000,RelativeVelocity=(X=20.000000,Y=20.000000,Z=20.000000))
          VelocityScale(3)=(RelativeTime=1.000000,RelativeVelocity=(X=200.000000,Y=200.000000,Z=200.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AD.FriendlyPortalDeresEffect.SpriteEmitter4'
+     Emitters(0)=SpriteEmitter'DEKRPG208AE.FriendlyPortalDeresEffect.SpriteEmitter4'
 
      AutoDestroy=True
      bNoDelete=False

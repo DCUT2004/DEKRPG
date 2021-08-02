@@ -80,8 +80,8 @@ defaultproperties
 {
      LightningMaxDamageMultiplier=1.500000
      DamageMultiplier=0.200000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityWizardEAM'
-     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityMaxedEAM'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityWizardEAM'
+     ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityMaxedEAM'
      AbilityName="Niche: Power"
      Description="Increases artifact damage by 20% per level, but also increases the adrenaline cost of artifacts.|You must be level 180 to buy a niche. You need Loaded Artifacts 5 before purchasing this ability. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

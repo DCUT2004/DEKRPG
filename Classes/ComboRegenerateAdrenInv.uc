@@ -45,5 +45,5 @@ defaultproperties
 {
 	 bBuff=True
 	 ComboNameMessage="+ Adren Drip"
-     EffectxEmitterClass=Class'DEKRPG208AD.ComboRegenerateAdrenEffect'
+     EffectxEmitterClass=Class'DEKRPG208AE.ComboRegenerateAdrenEffect'
 }

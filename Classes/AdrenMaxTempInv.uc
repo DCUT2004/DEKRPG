@@ -1,6 +1,7 @@
 //Adds temporary adrenaline over the default max
+//This called by the Adren Heal combo, which heals adren beyond the max, which is stored as temporary max adren
 //When the adrenaline drops below the default max, this inventory item is destroyed
-class AdrenMaxInv extends Inventory;
+class AdrenMaxTempInv extends Inventory;
 
 var Pawn PawnOwner;
 var int OriginalMaxAdren;

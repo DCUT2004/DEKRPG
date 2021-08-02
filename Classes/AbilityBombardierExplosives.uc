@@ -33,29 +33,29 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (BombTrapFire(FireMode[0]) != None && BombTrap(W) != None)
 	{
-		BombTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AD.BombTrapProjectileBombardier';
+		BombTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AE.BombTrapProjectileBombardier';
 	}
 	if (WildfireTrapFire(FireMode[0]) != None && WildfireTrap(W) != None)
 	{
-		WildfireTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AD.WildfireTrapProjectileBombardier';
+		WildfireTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AE.WildfireTrapProjectileBombardier';
 	}
 	if (FrostTrapFire(FireMode[0]) != None && FrostTrap(W) != None)
 	{
-		FrostTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AD.FrostTrapProjectileBombardier';
+		FrostTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AE.FrostTrapProjectileBombardier';
 	}
 	if (ShockTrapFire(FireMode[0]) != None && ShockTrap(W) != None)
 	{
-		ShockTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AD.ShockTrapProjectileBombardier';
+		ShockTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AE.ShockTrapProjectileBombardier';
 	}
 	if (AerialTrapFire(FireMode[0]) != None && AerialTrap(W) != None)
 	{
-		AerialTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AD.AerialTrapProjectileBombardier';
+		AerialTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AE.AerialTrapProjectileBombardier';
 	}
 }
 
 defaultproperties
 {
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityNuclearExplosives'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityNuclearExplosives'
      AbilityName="Niche: Bombardier"
      Description="Decreases the time between all trap explosions. Decreases the max sentinels summonable by one.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50

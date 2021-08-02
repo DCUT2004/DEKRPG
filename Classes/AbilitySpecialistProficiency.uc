@@ -3,36 +3,40 @@ class AbilitySpecialistProficiency extends AbilityNiche
 	abstract;
 	
 var config float DamageMultiplier;
-var config int AdrenReductionPerLevel;
+var config int AdrenMultiplier;
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local ArtifactSpecialize AS;
 	local SpecialistInv Inv;
-	local AdrenReducerInv AInv;
+	local AdrenMaxModifierInv AInv;
 	
-	AS = ArtifactSpecialize(Other.FindInventoryType(class'ArtifactSpecialize'));
-	if (AS == None)
+	if (Other != None)
 	{
-		AS = Other.spawn(class'ArtifactSpecialize');		
-		AS.giveTo(Other);
+		AS = ArtifactSpecialize(Other.FindInventoryType(class'ArtifactSpecialize'));
+		if (AS == None)
+		{
+			AS = Other.spawn(class'ArtifactSpecialize');		
+			AS.giveTo(Other);
+		}
+		Inv = SpecialistInv(Other.FindInventoryType(class'SpecialistInv'));
+		if (Inv == None)
+		{
+			Inv = Other.spawn(class'SpecialistInv');		
+			Inv.giveTo(Other);
+		}
+		if(Other.SelectedItem == None)
+			Other.NextItem();
+		
+		AInv = AdrenMaxModifierInv(Other.FindInventoryType(Class'AdrenMaxModifierInv'));
+		if (AInv == None)
+		{
+			AInv = Other.Spawn(Class'AdrenMaxModifierInv');
+			AInv.Multiplier = abs((AbilityLevel*default.AdrenMultiplier)-1);
+			AInv.GiveTo(Other);			
+		}
+		
 	}
-	Inv = SpecialistInv(Other.FindInventoryType(class'SpecialistInv'));
-	if (Inv == None)
-	{
-		Inv = Other.spawn(class'SpecialistInv');		
-		Inv.giveTo(Other);
-	}
-	AInv = AdrenReducerInv(Other.FindInventoryType(class'AdrenReducerInv'));
-	if (AInv == None)
-	{
-		AInv = Other.spawn(class'AdrenReducerInv');		
-		AInv.AbilityLevel = AbilityLevel;
-		AInv.AdrenReductionPerLevel = default.AdrenReductionPerLevel;
-		AInv.giveTo(Other);
-	}
-	if(Other.SelectedItem == None)
-		Other.NextItem();
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
@@ -123,13 +127,12 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 
 defaultproperties
 {
-     DamageMultiplier=0.050000
-     AdrenReductionPerLevel=10
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityDualityProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityGunsmithProficiency'
-     RequiredAbilities(0)=Class'DEKRPG208AD.AbilityWeaponsProficiency'
+     AdrenMultiplier=0.030000
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityDualityProficiency'
+     ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityGunsmithProficiency'
+     RequiredAbilities(0)=Class'DEKRPG208AE.AbilityWeaponsProficiency'
      AbilityName="Niche: Specialist"
-     Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, your max adrenaline is reduced by 10 per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
+     Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, your max adrenaline is reduced by 3% per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10
      MaxLevel=20
 }

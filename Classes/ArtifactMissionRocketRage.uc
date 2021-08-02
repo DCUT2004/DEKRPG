@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=300
      Description="Use the Rocket Launcher."
-     PickupClass=Class'DEKRPG208AD.ArtifactMissionRocketRagePickup'
+     PickupClass=Class'DEKRPG208AE.ArtifactMissionRocketRagePickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionRocketLauncher'
      ItemName="Rocket Rage"
 }

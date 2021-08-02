@@ -21,7 +21,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AD.MeteorExplosion.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AE.MeteorExplosion.SpriteEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter3
          UseColorScale=True
@@ -38,7 +38,7 @@ defaultproperties
          Texture=Texture'ONSstructureTextures.CoreGroup.CoreBreachShockRINGorange'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AD.MeteorExplosion.SpriteEmitter3'
+     Emitters(1)=SpriteEmitter'DEKRPG208AE.MeteorExplosion.SpriteEmitter3'
 
      AutoDestroy=True
      bNoDelete=False

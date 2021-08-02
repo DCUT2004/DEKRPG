@@ -6,16 +6,19 @@ var config float LevMultiplier;
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local HealthMaxPermInv Inv;
-	if (Other != None && Other.Controller != None)
+	local HealthMaxMaterialInv Inv;
+	
+	if (Other != None)
 	{
-		Inv = HealthMaxPermInv(Other.FindInventoryType(Class'HealthMaxPermInv'));
+		Inv = HealthMaxMaterialInv(Other.FindInventoryType(Class'HealthMaxMaterialInv'));
 		if (Inv == None)
 		{
-			Inv = Other.Spawn(Class'HealthMaxPermInv');
+			Inv = Other.Spawn(Class'HealthMaxMaterialInv');
 			Inv.Boost = 1 + AbilityLevel*default.LevMultiplier;
 			Inv.GiveTo(Other);
 		}
+		else
+			Inv.SetTimer(5, False);
 	}
 }
 

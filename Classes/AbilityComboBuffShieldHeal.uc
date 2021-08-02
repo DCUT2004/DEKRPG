@@ -26,16 +26,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG208AD.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG208AD.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG208AD.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG208AD.AbilityComboBuffHeal'
-	ExcludingAbilities(6)=Class'DEKRPG208AD.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG208AD.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG208AD.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG208AD.AbilityComboBuffWard'
+    ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityComboBuffAdrenBoost'
+	ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityComboBuffAdrenHeal'
+	ExcludingAbilities(2)=Class'DEKRPG208AE.AbilityComboBuffAttack'
+	ExcludingAbilities(3)=Class'DEKRPG208AE.AbilityComboBuffCriticalHit'
+	ExcludingAbilities(4)=Class'DEKRPG208AE.AbilityComboBuffDefense'
+	ExcludingAbilities(5)=Class'DEKRPG208AE.AbilityComboBuffHeal'
+	ExcludingAbilities(6)=Class'DEKRPG208AE.AbilityComboBuffHPBoost'
+	ExcludingAbilities(7)=Class'DEKRPG208AE.AbilityComboBuffRegenerate'
+	ExcludingAbilities(8)=Class'DEKRPG208AE.AbilityComboBuffShieldBoost'
+	ExcludingAbilities(9)=Class'DEKRPG208AE.AbilityComboBuffWard'
 	AbilityName="Buff: Shield Heal"
 	MaxLevel=10
 	Description="Caster and all allies receive 40 shield per level. Healing over the max shield is added as temporary max shield.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Lumber and Steel you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Plated Armor||Level 6: 20 Fine Leather, 20 Plated Armor||Level 7: 30 Fine Leather, 30 Plated Armor||Level 8: 40 Fine Leather, 40 Plated Armor, 10 Nanite Fragment||Level 9: 45 Fine Leather, 45 Plated Armor, 25 Nanite Fragment||Level 10: 50 Fine Leather, 50 Plated Armor, 50 Nanite Fragment||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
@@ -47,14 +47,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor',Class'DEKRPG208AD.AbilityMaterialNanite'),RequiredMaterialLevels=(40,40,40,40,10))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor',Class'DEKRPG208AD.AbilityMaterialNanite'),RequiredMaterialLevels=(45,45,45,45,25))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AD.AbilityMaterialSteel',Class'DEKRPG208AD.AbilityMaterialLumber',Class'DEKRPG208AD.AbilityMaterialLeather',Class'DEKRPG208AD.AbilityMaterialPlatedArmor',Class'DEKRPG208AD.AbilityMaterialNanite'),RequiredMaterialLevels=(50,50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor',Class'DEKRPG208AE.AbilityMaterialNanite'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor',Class'DEKRPG208AE.AbilityMaterialNanite'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AE.AbilityMaterialSteel',Class'DEKRPG208AE.AbilityMaterialLumber',Class'DEKRPG208AE.AbilityMaterialLeather',Class'DEKRPG208AE.AbilityMaterialPlatedArmor',Class'DEKRPG208AE.AbilityMaterialNanite'),RequiredMaterialLevels=(50,50,50,50,50))
 }

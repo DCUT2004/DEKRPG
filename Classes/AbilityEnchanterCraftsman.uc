@@ -1,20 +1,22 @@
 class AbilityEnchanterCraftsman extends AbilityNiche
 	config(UT2004RPG);
 	
-var config int AdrenReductionPerLevel;
+var config float AdrenMultiplier;
 var config float MaxModifierMultiplier;
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local AdrenReducerInv Inv;
+	local AdrenMaxModifierInv Inv;
 	
-	Inv = AdrenReducerInv(Other.FindInventoryType(class'AdrenReducerInv'));
-	if (Inv == None)
+	if (Other != None)
 	{
-		Inv = Other.spawn(class'AdrenReducerInv');		
-		Inv.AbilityLevel = AbilityLevel;
-		Inv.AdrenReductionPerLevel = default.AdrenReductionPerLevel;
-		Inv.giveTo(Other);
+		Inv = AdrenMaxModifierInv(Other.FindInventoryType(Class'AdrenMaxModifierInv'));
+		if (Inv == None)
+		{
+			Inv = Other.Spawn(Class'AdrenMaxModifierInv');
+			Inv.Multiplier = abs((AbilityLevel*default.AdrenMultiplier)-1);
+			Inv.GiveTo(Other);
+		}
 	}
 }
 
@@ -36,12 +38,12 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 
 defaultproperties
 {
-     AdrenReductionPerLevel=75
+     AdrenMultiplier=0.250000000
      MaxModifierMultiplier=2.000000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityPriestCraftsman'
-     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityPaladinCraftsman'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityPriestCraftsman'
+     ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityPaladinCraftsman'
      AbilityName="Niche: Enchanter"
-     Description="Increases the max modifier on all magic weapons, but reduces your max adrenaline.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost(per level): 50"
+     Description="Increases the max modifier on all magic weapons, but reduces your max adrenaline by 25%.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost(per level): 50"
      StartingCost=50
      MaxLevel=1
 }

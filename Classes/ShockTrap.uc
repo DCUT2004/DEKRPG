@@ -187,8 +187,8 @@ defaultproperties
 {
      MaxMines=1
      FadedColor=(B=128,G=128,R=128,A=128)
-     FireModeClass(0)=Class'DEKRPG208AD.ShockTrapFire'
-     FireModeClass(1)=Class'DEKRPG208AD.ShockTrapAltFire'
+     FireModeClass(0)=Class'DEKRPG208AE.ShockTrapFire'
+     FireModeClass(1)=Class'DEKRPG208AE.ShockTrapAltFire'
      PutDownAnim="PutDown"
      SelectAnimRate=3.100000
      PutDownAnimRate=2.500000
@@ -210,7 +210,7 @@ defaultproperties
      CustomCrosshair=15
      CustomCrossHairTextureName="ONSInterface-TX.grenadeLauncherReticle"
      GroupOffset=1
-     PickupClass=Class'DEKRPG208AD.ShockTrapPickup'
+     PickupClass=Class'DEKRPG208AE.ShockTrapPickup'
      PlayerViewOffset=(X=11.000000)
      BobDamping=2.200000
      AttachmentClass=Class'XWeapons.BallAttachment'

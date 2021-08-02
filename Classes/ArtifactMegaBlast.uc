@@ -125,7 +125,7 @@ defaultproperties
      AdrenalineRequired=200
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AD.ArtifactMegaBlastPickup'
+     PickupClass=Class'DEKRPG208AE.ArtifactMegaBlastPickup'
      IconMaterial=Texture'XEffects.Skins.MuzFlashA_t'
      ItemName="MegaBlast"
 }

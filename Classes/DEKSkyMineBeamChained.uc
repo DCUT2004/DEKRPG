@@ -28,7 +28,7 @@ defaultproperties
          LifetimeRange=(Min=2.300000,Max=2.300000)
          StartVelocityRange=(X=(Min=500.000000,Max=500.000000))
      End Object
-     Emitters(0)=BeamEmitter'DEKRPG208AD.DEKSkyMineBeamChained.BeamEmitter0'
+     Emitters(0)=BeamEmitter'DEKRPG208AE.DEKSkyMineBeamChained.BeamEmitter0'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter1
          BeamDistanceRange=(Min=1.000000,Max=1.000000)
@@ -58,7 +58,7 @@ defaultproperties
          LifetimeRange=(Min=2.500000,Max=2.500000)
          StartVelocityRange=(X=(Min=500.000000,Max=500.000000))
      End Object
-     Emitters(1)=BeamEmitter'DEKRPG208AD.DEKSkyMineBeamChained.BeamEmitter1'
+     Emitters(1)=BeamEmitter'DEKRPG208AE.DEKSkyMineBeamChained.BeamEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter3
          UseDirectionAs=PTDU_Normal
@@ -82,7 +82,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar2'
          LifetimeRange=(Min=2.200000,Max=2.200000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AD.DEKSkyMineBeamChained.SpriteEmitter3'
+     Emitters(2)=SpriteEmitter'DEKRPG208AE.DEKSkyMineBeamChained.SpriteEmitter3'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter11
          UseColorScale=True
@@ -108,6 +108,6 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaFlare'
          LifetimeRange=(Min=2.200000,Max=2.200000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG208AD.DEKSkyMineBeamChained.SpriteEmitter11'
+     Emitters(3)=SpriteEmitter'DEKRPG208AE.DEKSkyMineBeamChained.SpriteEmitter11'
 
 }

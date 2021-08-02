@@ -13,12 +13,8 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	Inv = DecayInv(Other.FindInventoryType(class'DecayInv'));
 	if (Inv != None)
 	{
-		Log("Decay Max Health bonus is " $ Inv.DecayBonus);
 		Inv.DecayBonus = (Inv.default.DecayBonus + (default.HealthBonusPerLevel*AbilityLevel));
-		Log("Decay Max Health bonus with Dracula is " $ Inv.DecayBonus);
-		Log("Decay Health Multiplier is " $ Inv.HealthMultiplier);
 		Inv.HealthMultiplier = (Inv.default.HealthMultiplier + (default.HealthMultiplierPerLevel*AbilityLevel));
-		Log("Decay Health Multiplier with Dracula is " $ Inv.HealthMultiplier);
 	}
 	else
 		return;
@@ -40,8 +36,8 @@ defaultproperties
      HealthBonusPerLevel=20
      HealthMultiplierPerLevel=0.010000
      WeaponDamage=0.850000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityMasterSoulSorcerer'
-     RequiredAbilities(0)=Class'DEKRPG208AD.AbilityNecroDecay'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityMasterSoulSorcerer'
+     RequiredAbilities(0)=Class'DEKRPG208AE.AbilityNecroDecay'
      AbilityName="Niche: Eternal"
      Description="Increases your max health when healing with Blood Magic by 20 per level, and increases the amount of healing by 1% per level. Decreases your weapon damage by 15%, except for the Blood Magic weapon.||You must be level 180 and have Blood Magic before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

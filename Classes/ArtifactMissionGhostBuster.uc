@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=20
      Description="Kill Ghost monsters, including Ghost Nali."
-     PickupClass=Class'DEKRPG208AD.ArtifactMissionGhostBusterPickup'
+     PickupClass=Class'DEKRPG208AE.ArtifactMissionGhostBusterPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.GhostBusterMission'
      ItemName="Ghost Buster"
 }

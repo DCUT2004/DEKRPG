@@ -138,7 +138,7 @@ defaultproperties
      TimeBetweenShots=0.400000
      TargetRadius=700.000000
      XPPerHit=0.060000
-     ResupplyEmitterClass=Class'DEKRPG208AD.RedBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG208AE.RedBoltEmitter'
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG208AD.PurpleBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AE.PurpleBoltEmitter'
 }

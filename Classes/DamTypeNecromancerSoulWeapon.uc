@@ -3,7 +3,7 @@ class DamTypeNecromancerSoulWeapon extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AD.NecromancerSoulWeapon'
+     WeaponClass=Class'DEKRPG208AE.NecromancerSoulWeapon'
      DeathString="%o met their fate with the damned souls of a Necromancer."
      FemaleSuicide="%o's captured souls turned against her."
      MaleSuicide="%o's captured soul turned against him."

@@ -8,6 +8,7 @@ var bool active;
 
 var config float DamageBonus;
 var config float SpeedBonus;
+var config float CombatBootsBonus;
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
@@ -100,6 +101,19 @@ static function quickfoot(int localModifier, Pawn PawnOwner)
 	else
 		ModifyPawn(PawnOwner, StatsInv.Data.AbilityLevels[x] + localModifier);
 		
+	//Check if the player has Combat Boots bonus
+	found = false;
+	for (x = 0;  StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
+	{
+		if (StatsInv.Data.Abilities[x] == Class'AbilityMaterialCombatBoots')
+		{
+			found = true;
+			break;
+		}
+	}
+	if (found)
+		AddMaterialBoost(PawnOwner, StatsInv.Data.AbilityLevels[x]);
+		
 	// now check for having the Tank IncreasingProtection ability
 	found = false;
 	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
@@ -115,7 +129,6 @@ static function quickfoot(int localModifier, Pawn PawnOwner)
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-
 	if(AbilityLevel > 0)
 	{
 		Other.GroundSpeed = Other.default.GroundSpeed * (1.0 + default.SpeedBonus * float(AbilityLevel));
@@ -134,6 +147,11 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		Other.WaterSpeed = Other.default.WaterSpeed;
 		Other.AirSpeed = Other.default.AirSpeed;
 	}
+}
+
+static function AddMaterialBoost(Pawn Other, int AbilityLevel)
+{
+	Other.GroundSpeed *= 1 + AbilityLevel*default.CombatBootsBonus;
 }
 
 function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType)
@@ -165,6 +183,7 @@ function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, ou
 
 defaultproperties
 {
+	 CombatBootsBonus=0.0010000000
      DamageBonus=0.080000
      SpeedBonus=0.050000
      ModifierOverlay=FinalBlend'DEKWeaponsMaster206.fX.Speed'

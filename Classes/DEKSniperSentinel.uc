@@ -53,8 +53,8 @@ defaultproperties
 {
      TargetRange=2400.000000
      OpenCloseSound=None
-     TurretBaseClass=Class'DEKRPG208AD.AutoGunBase'
-     TurretSwivelClass=Class'DEKRPG208AD.AutoGunSwivel'
+     TurretBaseClass=Class'DEKRPG208AE.AutoGunBase'
+     TurretSwivelClass=Class'DEKRPG208AE.AutoGunSwivel'
      DefaultWeaponClassName="DEKSniperWeaponSentinel"
      VehicleProjSpawnOffset=(X=45.000000)
      AutoTurretControllerClass=None

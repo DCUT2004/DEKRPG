@@ -24,7 +24,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG208AD.SphereHealing700r.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG208AE.SphereHealing700r.MeshEmitter0'
 
      AutoDestroy=True
      bNoDelete=False

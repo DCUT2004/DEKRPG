@@ -32,44 +32,44 @@ simulated function destroyed()
 	if (PawnOwner != None && PawnOwner.Controller != None && LetterNumber <= LetterDropChance)
 	{
 		if (Rand(99) <= 20)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.ArtifactLetterBPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.ArtifactLetterBPickup', None, 1);
 		else if (Rand(99) <= 40)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.ArtifactLetterOPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.ArtifactLetterOPickup', None, 1);
 		else if (Rand(99) <= 60)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.ArtifactLetterNPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.ArtifactLetterNPickup', None, 1);
 		else if (Rand(99) <= 80)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.ArtifactLetterUPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.ArtifactLetterUPickup', None, 1);
 		else if (Rand(99) <= 100)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.ArtifactLetterSPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.ArtifactLetterSPickup', None, 1);
 	}
 	
 	if (PawnOwner != None && PawnOwner.Controller != None && GemNumber <= GemDropChance)
 	{
 		if (Rand(99) <= 33)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.GemExperiencePickupBlue', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.GemExperiencePickupBlue', None, 1);
 		else if (Rand(99) <= 66)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.GemExperiencePickupGreen', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.GemExperiencePickupGreen', None, 1);
 		else if (Rand(99) <= 100)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.GemExperiencePickupPurple', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.GemExperiencePickupPurple', None, 1);
 	}
 	if (PawnOwner != None && PawnOwner.Controller != None && ArtifactNumber <= ArtifactDropChance)
 	{
 		if (Rand(99) <= 12.5)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactFlightPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactFlightPickup', None, 1);
 		else if (Rand(99) <= 25)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactInvulnerabilityPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactInvulnerabilityPickup', None, 1);
 		else if (Rand(99) <= 37.5)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactLightningRodPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactLightningRodPickup', None, 1);
 		else if (Rand(99) <= 50)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactMakeMagicWeaponPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactMakeMagicWeaponPickup', None, 1);
 		else if (Rand(99) <= 62.5)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactTeleportPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactTeleportPickup', None, 1);
 		else if (Rand(99) <= 75)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidSpiderPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidSpiderPickup', None, 1);
 		else if (Rand(99) <= 87.5)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidArtifactTripleDamagePickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidArtifactTripleDamagePickup', None, 1);
 		else if (Rand(99) <= 100)
-			DropPickups(PawnOwner.Controller, class'DEKRPG208AD.DruidEnhancedArtifactMonsterSummonPickup', None, 1);
+			DropPickups(PawnOwner.Controller, class'DEKRPG208AE.DruidEnhancedArtifactMonsterSummonPickup', None, 1);
 	}
 	Super.Destroyed();
 

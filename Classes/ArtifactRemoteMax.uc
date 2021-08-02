@@ -197,7 +197,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AD.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG208AE.LightningBeamEmitter'
      AdrenalineRequired=150
      MaxRange=3000.000000
      XPforUse=20

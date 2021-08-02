@@ -13,7 +13,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 		return;
 	if(bOwnedByInstigator)
 	{
-		if(DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic')
+		if(DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic' || ClassIsChildOf(DamageType, class'DamTypeMercuryDirectHit'))
 		{
 			Damage *= (1 + (AbilityLevel * default.LevMultiplier));
 		}

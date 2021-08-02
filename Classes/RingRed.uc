@@ -59,7 +59,7 @@ simulated function SpawnEffect()
 	{
 		if (FX == None)
 		{
-			FX = Self.spawn(class'DEKRPG208AD.RingActiveFX', Self,,Self.Location);
+			FX = Self.spawn(class'DEKRPG208AE.RingActiveFX', Self,,Self.Location);
 			if (FX != None)
 			{
 				FX.SetCollision(False,False,False);

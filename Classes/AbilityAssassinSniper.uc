@@ -34,7 +34,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 	if (bOwnedByInstigator)
 	{
 		Inv = AssassinInv(Instigator.FindInventoryType(class'AssassinInv'));
-		if ((DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic'))
+		if ((DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic') || ClassIsChildOf(DamageType, Class'DamTypeMercuryDirectHit'))
 		{
 			if (Inv != None && Inv.Target != None)
 			{
@@ -52,7 +52,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      DamageMultiplier=0.100000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityRootedSniper'
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityRootedSniper'
      AbilityName="Niche: Assassin"
      Description="You are granted the Assassin Mark artifact. Use the artifact to mark a target. This target will take an extra 10% damage per level from a sniper-type weapon. Unmarked targets will receive less damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

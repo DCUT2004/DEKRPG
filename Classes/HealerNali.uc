@@ -49,18 +49,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -73,18 +73,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AD.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG208AE.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -260,5 +260,5 @@ defaultproperties
      CloseRangeDistance=200.000000
      ScoringValue=0
      Health=30
-     ControllerClass=Class'DEKRPG208AD.HealerNaliController'
+     ControllerClass=Class'DEKRPG208AE.HealerNaliController'
 }

@@ -56,6 +56,6 @@ function bool IsEngineerLocked()
 defaultproperties
 {
      LockOverlay=Shader'DEKRPGTexturesMaster208K.fX.PulseRedShader'
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AD.DruidGoliathCannon')
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AE.DruidGoliathCannon')
      Skins(0)=Texture'VMVehicles-TX.HoverTankGroup.TankNoColor'
 }

@@ -2,5 +2,5 @@ class DruidHellBenderSideGunPawn extends ONSPRVSideGunPawn;
 
 defaultproperties
 {
-     GunClass=Class'DEKRPG208AD.DruidHellBenderSideGun'
+     GunClass=Class'DEKRPG208AE.DruidHellBenderSideGun'
 }

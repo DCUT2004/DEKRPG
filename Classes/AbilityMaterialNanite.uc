@@ -6,7 +6,9 @@ var config float LevMultiplier;
 	
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
-	if (Damage > 0 && Instigator != None && Injured != None && !bOwnedByInstigator)
+	if (bOwnedByInstigator)
+		return;
+	if (Damage > 0 && Instigator != None && Injured != None)
 		if (TechInv(Instigator.FindInventoryType(Class'TechInv')) != None)
 			Damage *= (abs((AbilityLevel * default.LevMultiplier)-1));
 }

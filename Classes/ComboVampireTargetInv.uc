@@ -13,6 +13,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		WardInv = ComboWardInv(Other.FindInventoryType(Class'ComboWardInv'));
 		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
+			if (Other.Controller != None && PlayerController(Other.Controller) != None)
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AE.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -34,6 +36,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
+				if (Other.Controller != None && PlayerController(Other.Controller) != None)
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AE.ComboSounds.Ward');
 				Destroy();
 				return;
 			}

@@ -5,7 +5,7 @@ class ComboAbilityAdrenBoostInv extends ComboAbilityInv
 function DoEffect()
 {
 	local Controller C, NextC;
-	local AdrenMaxInv Inv;
+	local AdrenMaxTempInv Inv;
 	
 	if (Owner != None && Pawn(Owner) != None && Pawn(Owner).Controller != None)
 	{
@@ -16,7 +16,7 @@ function DoEffect()
 			NextC = C.NextController;
 			if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.SameTeamAs(Pawn(Owner).Controller))
 			{
-				Inv = AdrenMaxInv(C.Pawn.FindInventoryType(Class'AdrenMaxInv'));
+				Inv = AdrenMaxTempInv(C.Pawn.FindInventoryType(Class'AdrenMaxTempInv'));
 				if (Inv != None)
 					Inv.OriginalMaxAdren += int(EffectMultiplier);
 				else

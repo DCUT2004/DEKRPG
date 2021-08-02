@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=1000
      Description="Heal allies with a healing weapon."
-     PickupClass=Class'DEKRPG208AD.ArtifactMissionLifeMendPickup'
+     PickupClass=Class'DEKRPG208AE.ArtifactMissionLifeMendPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.LifeMendMission'
      ItemName="Life Mend"
 }

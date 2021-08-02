@@ -1,8 +1,5 @@
 class ComboCriticalHitInv extends ComboEffectInv;
 
-var class<xEmitter> EffectDownxEmitterClass;
-var xEmitter EffectDownxEmitter;
-
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
 	if (Other != None)
@@ -27,6 +24,4 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
 	 ComboNameMessage="Critical Hit: "
-     EffectDownxEmitterClass=Class'DEKRPG208AD.ComboAttackDownEffect'
-     EffectxEmitterClass=Class'DEKRPG208AD.ComboAttackUpEffect'
 }

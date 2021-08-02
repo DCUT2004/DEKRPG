@@ -59,9 +59,9 @@ function float DetourWeight(Pawn Other, float PathWeight)
 defaultproperties
 {
      MaxDesireability=1.500000
-     InventoryType=Class'DEKRPG208AD.LetterOInv'
+     InventoryType=Class'DEKRPG208AE.LetterOInv'
      PickupMessage="You got letter O! Spell BONUS!"
-     PickupSound=Sound'DEKRPG208AD.ArtifactSounds.ExpPickup'
+     PickupSound=Sound'DEKRPG208AE.ArtifactSounds.ExpPickup'
      PickupForce="SniperRiflePickup"
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'DEKStaticsMaster208K.Artifacts.BONUSlettersO'

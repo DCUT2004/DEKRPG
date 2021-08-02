@@ -3,22 +3,17 @@ class AbilityHeavyTank extends AbilityNiche
 	abstract;
 
 var config float DamageMultiplier;
-var config float SpeedMultiplier;
 
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local xPawn X;
 	
 	X = xPawn(Other);
+
 	if (X != None)
 	{
-		X.MaxMultiJump -= AbilityLevel;
-		X.MultiJumpRemaining -= AbilityLevel;
-		if (AbilityLevel >= 4)
-		{
-			X.JumpZ = 0;
-			X.bCanDodgeDoubleJump = False;
-		}
+		X.JumpZ = 0;
+		X.bCanDodgeDoubleJump = False;
 	}
 }
 
@@ -32,11 +27,11 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 
 defaultproperties
 {
-     DamageMultiplier=0.050000
-     ExcludingAbilities(0)=Class'DEKRPG208AD.AbilityLargeTank'
-     ExcludingAbilities(1)=Class'DEKRPG208AD.AbilityRecklessTank'
+     DamageMultiplier=0.250000
+     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityLargeTank'
+     ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityRecklessTank'
      AbilityName="Niche: Heavy"
-     Description="Increases your cumulative total damage bonus by 5% per level. However, your maximum jumping and dodging decreases by 1 per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
-     StartingCost=10
-     MaxLevel=20
+     Description="Increases your cumulative total damage bonus by 25%. However, you cannot jump.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 50."
+     StartingCost=50
+     MaxLevel=1
 }

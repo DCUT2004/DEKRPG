@@ -28,6 +28,6 @@ defaultproperties
      bSplashDamage=False
      bRecommendSplashDamage=False
      FireRate=0.650000
-     AmmoClass=Class'DEKRPG208AD.DEKLaserGrenadeAmmo'
-     ProjectileClass=Class'DEKRPG208AD.DEKLaserGrenadeProjectile'
+     AmmoClass=Class'DEKRPG208AE.DEKLaserGrenadeAmmo'
+     ProjectileClass=Class'DEKRPG208AE.DEKLaserGrenadeProjectile'
 }
