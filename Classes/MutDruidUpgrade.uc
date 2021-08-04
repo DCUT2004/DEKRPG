@@ -22,8 +22,8 @@ function ModifyPlayer(Pawn Other)
 
 defaultproperties
 {
-     Upgrader=Class'DEKRPG208AE.DruidUpgradeInv'
+     Upgrader=Class'DEKRPG208AF.DruidUpgradeInv'
      GroupName="DruidsRPGUpgradeMutator"
-     FriendlyName="DEKRPG208AE Druid's RPG Upgrade Mutator"
+     FriendlyName="DEKRPG208AF Druid's RPG Upgrade Mutator"
      Description="Druid's RPG Upgrade Mutator. Needed to upgrade old RPG Data"
 }

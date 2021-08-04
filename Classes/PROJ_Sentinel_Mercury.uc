@@ -2,16 +2,16 @@ class PROJ_Sentinel_Mercury extends MercuryMissiles2.MercuryMissile;
 
 defaultproperties
 {
-     SplashDamageType=Class'DEKRPG208AE.DamTypeMercury'
+     SplashDamageType=Class'DEKRPG208AF.DamTypeMercury'
      ImpactDamageAmount=45.000000
-     HeadHitDamage=Class'DEKRPG208AE.DamTypeMercury'
-     DirectHitDamage=Class'DEKRPG208AE.DamTypeMercury'
-     PunchThroughDamage=Class'DEKRPG208AE.DamTypeMercury'
-     ThroughHeadDamage=Class'DEKRPG208AE.DamTypeMercury'
-     AirHeadHitDamage=Class'DEKRPG208AE.DamTypeMercury'
-     AirHitDamage=Class'DEKRPG208AE.DamTypeMercury'
-     AirPunchThroughDamage=Class'DEKRPG208AE.DamTypeMercury'
-     AirThroughHeadDamage=Class'DEKRPG208AE.DamTypeMercury'
+     HeadHitDamage=Class'DEKRPG208AF.DamTypeMercury'
+     DirectHitDamage=Class'DEKRPG208AF.DamTypeMercury'
+     PunchThroughDamage=Class'DEKRPG208AF.DamTypeMercury'
+     ThroughHeadDamage=Class'DEKRPG208AF.DamTypeMercury'
+     AirHeadHitDamage=Class'DEKRPG208AF.DamTypeMercury'
+     AirHitDamage=Class'DEKRPG208AF.DamTypeMercury'
+     AirPunchThroughDamage=Class'DEKRPG208AF.DamTypeMercury'
+     AirThroughHeadDamage=Class'DEKRPG208AF.DamTypeMercury'
      AccelRate=15000.000000
      HeadShotSizeAdjust=1.250000
      PunchThroughSpeed=9000.000000
@@ -20,7 +20,7 @@ defaultproperties
      Speed=12000.000000
      MaxSpeed=27500.000000
      Damage=45.000000
-     MyDamageType=Class'DEKRPG208AE.DamTypeMercury'
+     MyDamageType=Class'DEKRPG208AF.DamTypeMercury'
      LifeSpan=3.000000
      DrawScale=0.250000
      Skins(0)=TexScaler'MercuryMissiles2.Skins.MercuryMissileTexGreen'

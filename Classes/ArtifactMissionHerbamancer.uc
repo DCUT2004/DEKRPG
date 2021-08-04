@@ -98,7 +98,7 @@ defaultproperties
      XPReward=20
      MissionGoal=25
      Description="Collect flowers with an Earth weapon!."
-     PickupClass=Class'DEKRPG208AE.ArtifactMissionHerbamancerPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactMissionHerbamancerPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.HerbamancerMission'
      ItemName="Herbamancer"
 }

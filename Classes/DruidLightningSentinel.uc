@@ -20,7 +20,7 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG208AE.DruidLightningSentinelBase'
+     TurretBaseClass=Class'DEKRPG208AF.DruidLightningSentinelBase'
      VehicleNameString="Lightning Sentinel"
      bCanBeBaseForPawns=False
      Mesh=SkeletalMesh'AS_Vehicles_M.FloorTurretGun'

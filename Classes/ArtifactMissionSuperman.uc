@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=50
      Description="Make kills while airborne."
-     PickupClass=Class'DEKRPG208AE.ArtifactMissionSupermanPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactMissionSupermanPickup'
      IconMaterial=Texture'MissionsTex6.ArtifactMissions.SupermanMission'
      ItemName="Superman"
 }

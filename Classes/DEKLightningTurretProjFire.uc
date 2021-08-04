@@ -16,10 +16,10 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG208AE.DEKLightningTurretProj'
-     TeamProjectileClasses(1)=Class'DEKRPG208AE.DEKLightningTurretProj'
+     TeamProjectileClasses(0)=Class'DEKRPG208AF.DEKLightningTurretProj'
+     TeamProjectileClasses(1)=Class'DEKRPG208AF.DEKLightningTurretProj'
      FireAnimRate=6.000000
-     FireSound=Sound'DEKRPG208AE.TurretSounds.LightningTurretFire'
+     FireSound=Sound'DEKRPG208AF.TurretSounds.LightningTurretFire'
      FireRate=0.500000
-     ProjectileClass=Class'DEKRPG208AE.DEKLightningTurretProj'
+     ProjectileClass=Class'DEKRPG208AF.DEKLightningTurretProj'
 }

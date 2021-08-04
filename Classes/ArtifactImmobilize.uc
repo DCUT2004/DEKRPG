@@ -117,7 +117,7 @@ function Activate()
 			Inv.Lifespan = ImmobilizeLifespan;
 			Inv.RegenAmount = RegenAmount;
 			Inv.GiveTo(HitPawn);
-			Instigator.PlaySound(Sound'DEKRPG208AE.TurretSounds.SolarTurretAltCharge', SLOT_None, Instigator.TransientSoundVolume*1.75);
+			Instigator.PlaySound(Sound'DEKRPG208AF.TurretSounds.SolarTurretAltCharge', SLOT_None, Instigator.TransientSoundVolume*1.75);
 			SetRecoveryTime(TimeBetweenUses*TimeUsage);
 			Instigator.Controller.Adrenaline -= AdrenalineRequired*AdrenalineUsage;
 			if (Instigator.Controller.Adrenaline < 0)

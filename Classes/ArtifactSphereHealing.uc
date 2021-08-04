@@ -310,7 +310,7 @@ state Activated
 			// now let's add to the people around us
 			HealTeam(SpawnLocation);
 			SetTimer(0.5, true);
-			Instigator.PlaySound(Sound'DEKRPG208AE.ArtifactSounds.SphereActivate',,200.00);
+			Instigator.PlaySound(Sound'DEKRPG208AF.ArtifactSounds.SphereActivate',,200.00);
 		}
 	}
 	function Timer()
@@ -349,7 +349,7 @@ state Activated
 	{
 		SetTimer(0, false);
 		bActive = false;
-		Instigator.PlaySound(Sound'DEKRPG208AE.ArtifactSounds.SphereDeactivate',,200.00);
+		Instigator.PlaySound(Sound'DEKRPG208AF.ArtifactSounds.SphereDeactivate',,200.00);
 	}
 }
 
@@ -406,7 +406,7 @@ defaultproperties
      EffectOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
      AdrenalineRequired=28
      CostPerSec=7
-     PickupClass=Class'DEKRPG208AE.ArtifactSphereHealingPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactSphereHealingPickup'
      IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.SphereHealing'
      ItemName="Healing Sphere"
 }

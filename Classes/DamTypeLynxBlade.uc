@@ -2,7 +2,7 @@ class DamTypeLynxBlade extends VehicleDamageType;
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AE.DEKLynxVehicle'
+     VehicleClass=Class'DEKRPG208AF.DEKLynxVehicle'
      DeathString="%o was cut down."
      FemaleSuicide="%o was cut down."
      MaleSuicide="%o was cut down."

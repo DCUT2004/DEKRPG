@@ -2,7 +2,7 @@ class DamTypePlague extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AE.WeaponPlague'
+     WeaponClass=Class'DEKRPG208AF.WeaponPlague'
      DeathString="%o succumbed to %k's plague."
      FemaleSuicide="%o succumbed to the plague."
      MaleSuicide="%o succumbed to the plague."

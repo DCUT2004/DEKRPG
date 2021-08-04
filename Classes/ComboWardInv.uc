@@ -1,6 +1,6 @@
 class ComboWardInv extends ComboEffectInv;
 
-#exec  AUDIO IMPORT NAME="Ward" FILE="Sounds\WardFour.WAV" GROUP="ComboSounds"
+#exec  AUDIO IMPORT NAME="Ward" FILE="Sounds\Ward.WAV" GROUP="ComboSounds"
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {

@@ -49,7 +49,7 @@ defaultproperties
          DrawStyle=PTDS_Brighten
          LifetimeRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG208AE.DEKSolarTurretHeatRayHitEffect.MoltenSpot'
+     Emitters(0)=MeshEmitter'DEKRPG208AF.DEKSolarTurretHeatRayHitEffect.MoltenSpot'
 
      Begin Object Class=TrailEmitter Name=Sparks
          MaxPointsPerTrail=10
@@ -69,7 +69,7 @@ defaultproperties
          LifetimeRange=(Min=0.800000,Max=1.000000)
          StartVelocityRange=(X=(Min=-500.000000,Max=-200.000000),Y=(Min=-200.000000,Max=200.000000),Z=(Min=-200.000000,Max=200.000000))
      End Object
-     Emitters(1)=TrailEmitter'DEKRPG208AE.DEKSolarTurretHeatRayHitEffect.Sparks'
+     Emitters(1)=TrailEmitter'DEKRPG208AF.DEKSolarTurretHeatRayHitEffect.Sparks'
 
      Begin Object Class=SpriteEmitter Name=HotspotSprite
          UseDirectionAs=PTDU_Normal
@@ -90,7 +90,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Fire.NapalmSpot'
          LifetimeRange=(Min=1.500000,Max=1.700000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AE.DEKSolarTurretHeatRayHitEffect.HotspotSprite'
+     Emitters(2)=SpriteEmitter'DEKRPG208AF.DEKSolarTurretHeatRayHitEffect.HotspotSprite'
 
      Begin Object Class=SpriteEmitter Name=Fumes
          FadeOut=True
@@ -116,7 +116,7 @@ defaultproperties
          LifetimeRange=(Min=0.300000,Max=0.500000)
          StartVelocityRange=(X=(Min=-100.000000,Max=-70.000000),Y=(Min=-20.000000,Max=20.000000),Z=(Min=-20.000000,Max=20.000000))
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG208AE.DEKSolarTurretHeatRayHitEffect.Fumes'
+     Emitters(3)=SpriteEmitter'DEKRPG208AF.DEKSolarTurretHeatRayHitEffect.Fumes'
 
      Begin Object Class=SpriteEmitter Name=FlashSprite
          FadeOut=True
@@ -130,7 +130,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.FlashFlare1'
          LifetimeRange=(Min=0.250000,Max=0.250000)
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG208AE.DEKSolarTurretHeatRayHitEffect.FlashSprite'
+     Emitters(4)=SpriteEmitter'DEKRPG208AF.DEKSolarTurretHeatRayHitEffect.FlashSprite'
 
      AutoDestroy=True
      bNoDelete=False

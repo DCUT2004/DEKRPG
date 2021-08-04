@@ -36,7 +36,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStarRed'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AE.ComboSomeFXB.SpriteEmitter4'
+     Emitters(1)=SpriteEmitter'DEKRPG208AF.ComboSomeFXB.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -63,7 +63,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=-100.000000,Max=-150.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AE.ComboSomeFXB.SpriteEmitter5'
+     Emitters(2)=SpriteEmitter'DEKRPG208AF.ComboSomeFXB.SpriteEmitter5'
 
      bNoDelete=False
      bHardAttach=True

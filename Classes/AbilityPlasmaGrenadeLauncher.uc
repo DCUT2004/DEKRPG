@@ -164,7 +164,7 @@ static function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponTyp
 
 defaultproperties
 {
-     AGGLWeaponOne(0)="DEKWeapons208AE.PlasmaGrenadeLauncher"
+     AGGLWeaponOne(0)="DEKWeapons208AF.PlasmaGrenadeLauncher"
      AbilityName="Plasma Grenade Launcher"
      Description="You are granted the Plasma Grenade Launcher.||Level 2 generates a magic weapon with a positive enchantment and full ammo.||Cost (per level): 5,10."
      StartingCost=5

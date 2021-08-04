@@ -74,7 +74,7 @@ defaultproperties
      AdditionalLinkDamagePerLevel=0.020000
      VehicleDamage=0.500000
      PlayerLevelReqd(1)=180
-     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityMannedBuilder'
+     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityMannedBuilder'
      AbilityName="Niche: Linked"
      Description="Extends the range of your link sentinel by 10% per level as well as the amount of healing per level. Also increases turret boosting damage with the Engineer Link Gun by 2% per level. Reduces operated turret and vehicle damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50

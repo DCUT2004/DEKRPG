@@ -193,7 +193,7 @@ defaultproperties
 	 MonsterClass=Class'SkaarjPack.SkaarjPupae'
      MonsterLifeSpan=240.000000
      AdrenRequired=30
-     PickupClass=Class'DEKRPG208AE.ArtifactSummonSkaarjPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactSummonSkaarjPickup'
      ItemName="Skaarj Summon"
      IconMaterial=Texture'UTRPGTextures.Icons.SummoningCharmIcon'
      TimeBetweenUses=20.000000

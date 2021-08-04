@@ -23,11 +23,11 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 	if (FlakFire(FireMode[0]) != None && FlakCannon(W) != None)
 	{
 		FlakFire(FireMode[0]).ProjPerFire=7;
-		FlakFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AE.UpgradeFlakChunk';
+		FlakFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeFlakChunk';
 	}
 	if (FlakAltFire(FireMode[1]) != None && FlakCannon(W) != None)
 	{
-		FlakAltFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AE.UpgradeFlakShell';
+		FlakAltFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AF.UpgradeFlakShell';
 	}
 }
 

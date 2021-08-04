@@ -24,6 +24,6 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AE.DruidEnhancedArtifactMonsterSummon'
+     InventoryType=Class'DEKRPG208AF.DruidEnhancedArtifactMonsterSummon'
      AmbientGlow=255
 }

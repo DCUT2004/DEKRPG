@@ -32,8 +32,8 @@ defaultproperties
 {
      AdrenReductionPerLevel=10
      ExpAddPerLevel=0.010000
-     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityPriestCraftsman'
-     ExcludingAbilities(1)=Class'DEKRPG208AE.AbilityEnchanterCraftsman'
+     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityPriestCraftsman'
+     ExcludingAbilities(1)=Class'DEKRPG208AF.AbilityEnchanterCraftsman'
      AbilityName="Niche: Paladin"
      Description="Allows you to protect one teammate by automatically casting safety on that player when they take fatal damage, provided you have 200 adrenaline at the time of impact. Each level of this ability reduces the adrenaline cost by 10, and also increases the XP when saving this player.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost(per level): 10"
      StartingCost=10

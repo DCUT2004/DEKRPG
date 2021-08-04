@@ -33,7 +33,7 @@ defaultproperties
 {
      SpeedMultiplier=0.100000
      HealthMultiplier=0.0300000000
-     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityMeleeBerserker'
+     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityMeleeBerserker'
      AbilityName="Niche: Nimble"
      Description="Increases your dodging speed by 10% per level, but reduces max health by 3% per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

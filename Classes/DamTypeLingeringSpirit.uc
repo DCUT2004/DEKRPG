@@ -3,7 +3,7 @@ class DamTypeLingeringSpirit extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AE.WeaponLingeringSpirit'
+     WeaponClass=Class'DEKRPG208AF.WeaponLingeringSpirit'
      DeathString="%k's lingering spirit haunted %o."
      FemaleSuicide="%k's spirit was dumb."
      MaleSuicide="%%k's spirit was dumb."

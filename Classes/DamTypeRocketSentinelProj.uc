@@ -3,7 +3,7 @@ class DamTypeRocketSentinelProj extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AE.DEKRocketSentinel'
+     VehicleClass=Class'DEKRPG208AF.DEKRocketSentinel'
      DeathString="%o rode %k's rocket."
      FemaleSuicide="%o rode her own rocket."
      MaleSuicide="%o rode his own rocket."

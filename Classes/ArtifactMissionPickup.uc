@@ -31,7 +31,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AE.ArtifactMission'
+     InventoryType=Class'DEKRPG208AF.ArtifactMission'
      PickupMessage="You picked up a Mission!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

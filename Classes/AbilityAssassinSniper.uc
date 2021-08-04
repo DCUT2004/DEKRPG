@@ -52,7 +52,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      DamageMultiplier=0.100000
-     ExcludingAbilities(0)=Class'DEKRPG208AE.AbilityRootedSniper'
+     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityRootedSniper'
      AbilityName="Niche: Assassin"
      Description="You are granted the Assassin Mark artifact. Use the artifact to mark a target. This target will take an extra 10% damage per level from a sniper-type weapon. Unmarked targets will receive less damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

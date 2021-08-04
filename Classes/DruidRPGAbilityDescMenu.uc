@@ -15,7 +15,7 @@ defaultproperties
          WinHeight=0.070000
          bNeverFocus=True
      End Object
-     MaxText=GUIScrollTextBox'DEKRPG208AE.DruidRPGAbilityDescMenu.MaxLevelText'
+     MaxText=GUIScrollTextBox'DEKRPG208AF.DruidRPGAbilityDescMenu.MaxLevelText'
 
      Begin Object Class=GUIScrollTextBox Name=InfoText
          CharDelay=0.002500
@@ -27,7 +27,7 @@ defaultproperties
          WinHeight=0.380000
          bNeverFocus=True
      End Object
-     MyScrollText=GUIScrollTextBox'DEKRPG208AE.DruidRPGAbilityDescMenu.InfoText'
+     MyScrollText=GUIScrollTextBox'DEKRPG208AF.DruidRPGAbilityDescMenu.InfoText'
 
      Begin Object Class=GUIButton Name=ButtonClose
          Caption="Close"
@@ -37,6 +37,6 @@ defaultproperties
          OnClick=DruidRPGAbilityDescMenu.CloseClick
          OnKeyEvent=ButtonClose.InternalOnKeyEvent
      End Object
-     CloseButton=GUIButton'DEKRPG208AE.DruidRPGAbilityDescMenu.ButtonClose'
+     CloseButton=GUIButton'DEKRPG208AF.DruidRPGAbilityDescMenu.ButtonClose'
 
 }

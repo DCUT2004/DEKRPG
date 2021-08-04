@@ -2,7 +2,7 @@ class DamTypeWildfireTrap extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AE.WeaponWildfireTrap'
+     WeaponClass=Class'DEKRPG208AF.WeaponWildfireTrap'
      DeathString="%k blew up %o with the Wildfire Trap."
      FemaleSuicide="How did your mines taste %o?."
      MaleSuicide="How did your mines taste %o?."

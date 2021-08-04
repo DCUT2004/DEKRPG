@@ -3,7 +3,7 @@ class DamTypeHellfireSentinel extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AE.DEKHellfireSentinel'
+     VehicleClass=Class'DEKRPG208AF.DEKHellfireSentinel'
      DeathString="%k rained death on %o."
      FemaleSuicide="%o stood in front of her Hellfire Sentinel."
      MaleSuicide="%o stood in front of his Hellfire Sentinel."

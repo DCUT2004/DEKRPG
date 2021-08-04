@@ -537,7 +537,7 @@ function Timer()
 				}
 					
 				Level.Game.Broadcast(self, P.PlayerReplicationInfo.PlayerName $ " achieved " $ MissionName $ "!");
-				P.PlaySound(Sound'DEKRPG208AE.MissionSounds.MissionComplete1', SLOT_None, 400.0);
+				P.PlaySound(Sound'DEKRPG208AF.MissionSounds.MissionComplete1', SLOT_None, 400.0);
 				Inv.MissionsCompleted += 1;
 				if (Rand(100) <= MaterialChance)
 				{
@@ -644,20 +644,20 @@ defaultproperties
 	MaterialChance=5
 	LowMaterialChance=80	//80% chance for a low material
 	MediumMaterialChance=95	//15% chance for a medium material, 5% chance for high material
-	LowMaterials(0)=Class'DEKRPG208AE.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG208AE.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG208AE.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG208AE.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG208AE.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG208AE.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG208AE.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG208AE.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG208AE.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG208AE.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG208AE.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG208AE.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG208AE.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG208AE.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG208AE.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG208AE.AbilityMaterialIcicle'
+	LowMaterials(0)=Class'DEKRPG208AF.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG208AF.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG208AF.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG208AF.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG208AF.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG208AF.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG208AF.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG208AF.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG208AF.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG208AF.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG208AF.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG208AF.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG208AF.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG208AF.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG208AF.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG208AF.AbilityMaterialIcicle'
 }

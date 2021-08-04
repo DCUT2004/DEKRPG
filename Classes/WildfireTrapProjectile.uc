@@ -190,7 +190,7 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 
 function BoomSound()
 {
-	self.PlaySound(sound'DEKRPG208AE.TurretSounds.SolarTurretAltFire',,500.00);
+	self.PlaySound(sound'DEKRPG208AF.TurretSounds.SolarTurretAltFire',,500.00);
 }
 
 simulated function Timer()
@@ -272,7 +272,7 @@ defaultproperties
      Damage=200.000000
      DamageRadius=300.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG208AE.DamTypeWildfireTrap'
+     MyDamageType=Class'DEKRPG208AF.DamTypeWildfireTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.WildfireTrap'

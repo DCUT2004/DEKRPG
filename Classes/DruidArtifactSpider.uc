@@ -104,7 +104,7 @@ defaultproperties
 {
      NotInVehicleMessage="An Electro-Magnet would totally screw up this sweet ride."
      CostPerSec=2
-     PickupClass=Class'DEKRPG208AE.DruidSpiderPickup'
+     PickupClass=Class'DEKRPG208AF.DruidSpiderPickup'
      IconMaterial=Texture'XGameShaders.BRShaders.BRBall'
      ItemName="Electro-Magnet"
 }

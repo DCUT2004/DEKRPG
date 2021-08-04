@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=500
      Description="Heal yourself with vampire ability or weapon."
-     PickupClass=Class'DEKRPG208AE.ArtifactMissionDraculaPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactMissionDraculaPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.DraculaMission'
      ItemName="Dracula"
 }

@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AE.ArtifactPriestMagnet'
+     InventoryType=Class'DEKRPG208AF.ArtifactPriestMagnet'
      RespawnTime=30.000000
      PickupMessage="You got a Magnet artifact"
      PickupSound=Sound'PickupSounds.LinkAmmoPickup'

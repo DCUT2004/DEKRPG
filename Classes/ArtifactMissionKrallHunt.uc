@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=20
      Description="Kill Krall."
-     PickupClass=Class'DEKRPG208AE.ArtifactMissionKrallHuntPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactMissionKrallHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.KrallHuntMission'
      ItemName="Krall Hunt"
 }

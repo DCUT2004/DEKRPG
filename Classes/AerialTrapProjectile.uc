@@ -309,7 +309,7 @@ defaultproperties
      DampenFactorParallel=0.800000
      HitEffectClass=Class'XEffects.WallSparks'
      StrikeInterval=5.000000
-     MiniboltDamageType=Class'DEKRPG208AE.DamTypeAerialTrapBolt'
+     MiniboltDamageType=Class'DEKRPG208AF.DamTypeAerialTrapBolt'
      MiniboltDamage=100
      MiniboltRadius=700
      TossZ=0.000000
@@ -317,7 +317,7 @@ defaultproperties
      Damage=50.000000
      DamageRadius=200.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG208AE.DamTypeAerialTrap'
+     MyDamageType=Class'DEKRPG208AF.DamTypeAerialTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.AerialTrap'

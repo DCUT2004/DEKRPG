@@ -13,7 +13,7 @@ static function ScoreKill(Controller Killer, Controller Killed)
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AE.DEKRaptor'
+     VehicleClass=Class'DEKRPG208AF.DEKRaptor'
      DeathString="Pro Tip for %k: %o is not a monster."
      FemaleSuicide="Pro Tip for %o: You are not a monster."
      MaleSuicide="Pro Tip for %o: You are not a monster."

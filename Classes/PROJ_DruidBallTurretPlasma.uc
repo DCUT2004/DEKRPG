@@ -86,5 +86,5 @@ defaultproperties
 {
      MaxSpeed=8000.000000
      Damage=44.250000
-     MyDamageType=Class'DEKRPG208AE.DamTypeDruidBallTurret'
+     MyDamageType=Class'DEKRPG208AF.DamTypeDruidBallTurret'
 }

@@ -45,7 +45,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AE.CometOrangeHitEffect.SpriteEmitter22'
+     Emitters(0)=SpriteEmitter'DEKRPG208AF.CometOrangeHitEffect.SpriteEmitter22'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter23
          UseDirectionAs=PTDU_Normal
@@ -72,7 +72,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AE.CometOrangeHitEffect.SpriteEmitter23'
+     Emitters(1)=SpriteEmitter'DEKRPG208AF.CometOrangeHitEffect.SpriteEmitter23'
 
      AutoDestroy=True
      bNoDelete=False

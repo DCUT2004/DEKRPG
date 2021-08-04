@@ -2,6 +2,6 @@ class ArtifactMissionSharpShotFlyPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AE.ArtifactMissionSharpShotFly'
+     InventoryType=Class'DEKRPG208AF.ArtifactMissionSharpShotFly'
      PickupMessage="You picked up the Sharp Shot Fly Mission!"
 }

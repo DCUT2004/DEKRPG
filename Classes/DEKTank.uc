@@ -57,8 +57,8 @@ defaultproperties
 {
      LockOverlay=FinalBlend'D-E-K-HoloGramFX.FullFB.HoloMaterial_2'
      MaxPitchSpeed=750.000000
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AE.DEKTankCannon')
-     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AE.DEKTankSecondaryTurretPawn')
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AF.DEKTankCannon')
+     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AF.DEKTankSecondaryTurretPawn')
      VehicleMass=20.000000
      VehiclePositionString="in a DEK Tank"
      VehicleNameString="DEK Tank"

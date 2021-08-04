@@ -207,7 +207,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AE.LightningBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AF.LightningBoltEmitter'
      TargetRadius=2000.000000
      MaxDamage=100
      AdrenalineForMiss=10
@@ -215,7 +215,7 @@ defaultproperties
      AdrenalineRequired=4
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AE.ArtifactLightningBoltPickup'
+     PickupClass=Class'DEKRPG208AF.ArtifactLightningBoltPickup'
      IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.LightningBoltIcon'
      ItemName="Lightning Bolt"
 }

@@ -205,7 +205,7 @@ defaultproperties
      ClassicAROne(0)="XWeapons.AssaultRifle"
      PlayerLevelReqd(1)=1
      PlayerLevelReqd(2)=1
-     ExcludingAbilities(0)=Class'DEKRPG208AE.DEKLoadedAVRiL'
+     ExcludingAbilities(0)=Class'DEKRPG208AF.DEKLoadedAVRiL'
      AbilityName="Starting Weapon: Assault Rifle"
      Description="When you spawn:|You are granted an Assault Rifle, replacing your AVRiL.||Level 2 generates a magic weapon with a positive enchantment and full ammo.||Cost: 1,5"
      StartingCost=1

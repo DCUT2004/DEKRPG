@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AE.ArtifactPlusAddon'
+     InventoryType=Class'DEKRPG208AF.ArtifactPlusAddon'
      RespawnTime=30.000000
      PickupMessage="You got a Modifier Plus Powerup"
      PickupSound=Sound'PickupSounds.AdrenelinPickup'
