@@ -23,7 +23,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AF.FrostFX.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AG.FrostFX.SpriteEmitter0'
 
      AutoDestroy=True
      bNoDelete=False

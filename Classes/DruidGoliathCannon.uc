@@ -3,5 +3,5 @@ class DruidGoliathCannon extends ONSHoverTankCannon;
 defaultproperties
 {
      FireInterval=4.000000
-     ProjectileClass=Class'DEKRPG208AF.DruidGoliathProjectile'
+     ProjectileClass=Class'DEKRPG208AG.DruidGoliathProjectile'
 }

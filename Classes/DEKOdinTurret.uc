@@ -126,9 +126,9 @@ simulated event Destroyed()
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG208AF.DruidIonCannon_Base'
-     TurretSwivelClass=Class'DEKRPG208AF.DruidIonCannon_Swivel'
-     GunClass=Class'DEKRPG208AF.DEKOdinTurretWeapon'
+     TurretBaseClass=Class'DEKRPG208AG.DruidIonCannon_Base'
+     TurretSwivelClass=Class'DEKRPG208AG.DruidIonCannon_Swivel'
+     GunClass=Class'DEKRPG208AG.DEKOdinTurretWeapon'
      CameraBone="Object03"
      bDrawDriverInTP=False
      bDrawMeshInFP=False

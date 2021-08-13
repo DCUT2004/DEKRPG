@@ -69,11 +69,11 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 	if (default.BioKills >= default.RequiredKills)
 	{
 		if (BioFire(FireMode[0]) != None && BioRifle(W) != None)
-			BioFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeBioGlob';
+			BioFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AG.UpgradeBioGlob';
 		if (BioChargedFire(FireMode[1]) != None && BioRifle(W) != None)
 		{
 			BioChargedFire(FireMode[1]).MaxGoopLoad=15;
-			BioChargedFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AF.UpgradeBioGlob';
+			BioChargedFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AG.UpgradeBioGlob';
 		}
 	}
 	if (default.FlakKills >= default.RequiredKills)
@@ -81,25 +81,25 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		if (FlakFire(FireMode[0]) != None && FlakCannon(W) != None)
 		{
 			FlakFire(FireMode[0]).ProjPerFire=7;
-			FlakFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeFlakChunk';
+			FlakFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AG.UpgradeFlakChunk';
 		}
 		if (FlakAltFire(FireMode[1]) != None && FlakCannon(W) != None)
 		{
-			FlakAltFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AF.UpgradeFlakShell';
+			FlakAltFire(FireMode[1]).ProjectileClass=class'DEKWeapons208AG.UpgradeFlakShell';
 		}
 	}
 	if (default.GrenadeKills >= default.RequiredKills)
 	{
 		if (ONSGrenadeFire(FireMode[0]) != None)
 		{
-			ONSGrenadeFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeGrenadeProjectile';
+			ONSGrenadeFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AG.UpgradeGrenadeProjectile';
 		}
 	}
 	if (default.AVRiLKills >= default.RequiredKills)
 	{
 		if (INAVRiLFire(FireMode[0]) != None)
 		{
-			INAVRiLFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeINAVRiLRocket';
+			INAVRiLFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AG.UpgradeINAVRiLRocket';
 		}
 	}
 	if (default.IonKills >= default.RequiredKills)
@@ -182,7 +182,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 	{
 		if (RedeemerFire(FireMode[0]) != None)
 		{
-			RedeemerFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AF.UpgradeRedeemerProj';
+			RedeemerFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AG.UpgradeRedeemerProj';
 		}
 	}
 	if (default.RocketKills >= default.RequiredKills)
@@ -211,7 +211,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 	{
 		if (ShockProjFire(FireMode[1]) != None)
 		{
-			ShockProjFire(FireMode[1]).ProjectileClass=Class'DEKWeapons208AF.UpgradeShockProjectile';
+			ShockProjFire(FireMode[1]).ProjectileClass=Class'DEKWeapons208AG.UpgradeShockProjectile';
 		}
 	}
 }
@@ -229,8 +229,8 @@ defaultproperties
      L8MaxMines=11
      L9MaxMines=12
      L10MaxMines=13
-     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilitySpecialistProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG208AF.AbilityDualityProficiency'
+     ExcludingAbilities(0)=Class'DEKRPG208AG.AbilitySpecialistProficiency'
+     ExcludingAbilities(1)=Class'DEKRPG208AG.AbilityDualityProficiency'
      AbilityName="Niche: Gunsmith"
      Description="Once you make 20 kills with a weapon, that weapon receives an upgrade such as in larger explosions, longer projectile lifespans, and so on.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

@@ -23,7 +23,7 @@ defaultproperties
          TextureVSubdivisions=1
          LifetimeRange=(Min=2.000000,Max=2.000000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AF.ShockTrapShockProjTrail.SE0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AG.ShockTrapShockProjTrail.SE0'
 
      Begin Object Class=SpriteEmitter Name=SE1
          FadeOut=True
@@ -61,7 +61,7 @@ defaultproperties
          VelocityScale(0)=(RelativeVelocity=(X=1.000000,Y=1.000000,Z=1.000000))
          VelocityScale(1)=(RelativeTime=1.000000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AF.ShockTrapShockProjTrail.SE1'
+     Emitters(1)=SpriteEmitter'DEKRPG208AG.ShockTrapShockProjTrail.SE1'
 
      Begin Object Class=BeamEmitter Name=BE2
          BeamDistanceRange=(Min=200.000000,Max=200.000000)
@@ -78,7 +78,7 @@ defaultproperties
          LifetimeRange=(Min=0.100000,Max=0.400000)
          StartVelocityRange=(X=(Min=-1.000000,Max=1.000000),Y=(Min=-1.000000,Max=1.000000),Z=(Min=-1.000000,Max=1.000000))
      End Object
-     Emitters(2)=BeamEmitter'DEKRPG208AF.ShockTrapShockProjTrail.BE2'
+     Emitters(2)=BeamEmitter'DEKRPG208AG.ShockTrapShockProjTrail.BE2'
 
      bNoDelete=False
      LifeSpan=30.000000

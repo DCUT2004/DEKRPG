@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=900
      Description="Use the Minigun."
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionMinigunMayhemPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionMinigunMayhemPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionMiniGun'
      ItemName="Minigun Mayhem"
 }

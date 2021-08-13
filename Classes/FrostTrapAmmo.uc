@@ -6,6 +6,6 @@ class FrostTrapAmmo extends ONSGrenadeAmmo;
 defaultproperties
 {
      MaxAmmo=10
-     PickupClass=Class'DEKRPG208AF.FrostTrapAmmoPickup'
+     PickupClass=Class'DEKRPG208AG.FrostTrapAmmoPickup'
      ItemName="Frost"
 }

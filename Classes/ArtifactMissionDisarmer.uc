@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=25
      Description="Destroy enemy mines and rockets."
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionDisarmerPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionDisarmerPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.DisarmerMission'
      ItemName="Disarmer"
 }

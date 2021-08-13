@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AF.ArtifactSummonWarlord'
+     InventoryType=Class'DEKRPG208AG.ArtifactSummonWarlord'
      PickupMessage="You got a Warlord Summoning Charm"
      AmbientGlow=255
 }

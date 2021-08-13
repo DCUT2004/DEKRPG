@@ -21,5 +21,5 @@ defaultproperties
 {
 	 bBuff=True
 	 ComboNameMessage="+ Taunt: Absorb "
-     EffectEmitterClass=Class'DEKRPG208AF.ComboTauntEffect'
+     EffectEmitterClass=Class'DEKRPG208AG.ComboTauntEffect'
 }

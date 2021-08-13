@@ -6,8 +6,8 @@ defaultproperties
      bModeExclusive=False
      TransientSoundVolume=0.400000
      FireRate=1.000000
-     AmmoClass=Class'DEKRPG208AF.NecromancerBloodWeaponAmmo'
+     AmmoClass=Class'DEKRPG208AG.NecromancerBloodWeaponAmmo'
      AmmoPerFire=20
-     ProjectileClass=Class'DEKRPG208AF.NecromancerBloodWeaponProj'
+     ProjectileClass=Class'DEKRPG208AG.NecromancerBloodWeaponProj'
      BotRefireRate=0.350000
 }

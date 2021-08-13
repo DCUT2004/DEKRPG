@@ -48,7 +48,7 @@ defaultproperties
      Amount=25
      MaxDesireability=0.000000
      PickupMessage="Experience Gem +"
-     PickupSound=Sound'DEKRPG208AF.ArtifactSounds.ExpPickup'
+     PickupSound=Sound'DEKRPG208AG.ArtifactSounds.ExpPickup'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence
      LightHue=45

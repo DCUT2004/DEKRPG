@@ -99,7 +99,7 @@ defaultproperties
      XPReward=50
      MissionGoal=5
      Description="Remain airbone without boots or translocator."
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionFeatherweightPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionFeatherweightPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.FeatherWeightMission'
      ItemName="Featherweight"
 }

@@ -2,6 +2,6 @@ class ArtifactMissionTeamGenomeProjectPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AF.ArtifactMissionTeamGenomeProject'
+     InventoryType=Class'DEKRPG208AG.ArtifactMissionTeamGenomeProject'
      PickupMessage="You picked up the Genome Project team mission!"
 }

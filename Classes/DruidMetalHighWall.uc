@@ -3,11 +3,11 @@ class DruidMetalHighWall extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=7
-     Blocks(0)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=-120,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=120,ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=-120,ZOffset=100)
-     Blocks(4)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=120,ZOffset=100)
-     Blocks(5)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=-60,ZOffset=180)
-     Blocks(6)=(BlockType=Class'DEKRPG208AF.DruidMetalBlock',XOffset=60,ZOffset=180)
+     Blocks(0)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=-120,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=120,ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=-120,ZOffset=100)
+     Blocks(4)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=120,ZOffset=100)
+     Blocks(5)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=-60,ZOffset=180)
+     Blocks(6)=(BlockType=Class'DEKRPG208AG.DruidMetalBlock',XOffset=60,ZOffset=180)
 }

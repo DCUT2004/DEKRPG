@@ -79,9 +79,9 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     Invalid(0)=Class'DEKRPG208AF.RW_Rage'
-     Invalid(1)=Class'DEKRPG208AF.RW_Vorpal'
-     Invalid(2)=Class'DEKRPG208AF.RW_EngineerLink'
+     Invalid(0)=Class'DEKRPG208AG.RW_Rage'
+     Invalid(1)=Class'DEKRPG208AG.RW_Vorpal'
+     Invalid(2)=Class'DEKRPG208AG.RW_EngineerLink'
      CostPerSec=10
-     PickupClass=Class'DEKRPG208AF.DruidArtifactTripleDamagePickup'
+     PickupClass=Class'DEKRPG208AG.DruidArtifactTripleDamagePickup'
 }

@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AF.ArtifactSummonSkaarj'
+     InventoryType=Class'DEKRPG208AG.ArtifactSummonSkaarj'
      PickupMessage="You got a Skaarj Summoning Charm"
      AmbientGlow=255
 }

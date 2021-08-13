@@ -108,7 +108,7 @@ Begin:
 
 defaultproperties
 {
-     DamageType=Class'DEKRPG208AF.DamTypeMegaExplosion'
+     DamageType=Class'DEKRPG208AG.DamTypeMegaExplosion'
      MomentumTransfer=20000.000000
      ChargeTime=2.000000
      Damage=1300.000000

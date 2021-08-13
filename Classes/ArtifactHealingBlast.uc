@@ -215,7 +215,7 @@ defaultproperties
      AdrenalineRequired=50
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AF.ArtifactHealingBlastPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactHealingBlastPickup'
      IconMaterial=Texture'XEffectMat.Link.link_muz_blue'
      ItemName="HealingBlast"
 }

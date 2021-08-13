@@ -2,6 +2,6 @@ class ArtifactMissionZombieSlayerPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AF.ArtifactMissionZombieSlayer'
+     InventoryType=Class'DEKRPG208AG.ArtifactMissionZombieSlayer'
      PickupMessage="You picked up the Zombie Slayer Mission!"
 }

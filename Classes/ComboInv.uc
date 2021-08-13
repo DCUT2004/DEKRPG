@@ -520,7 +520,7 @@ function Monster SummonMinion(Pawn Instigator, class<Monster> MinionClass, int H
 				CInv = M.Spawn(class'ComboInv');
 				CInv.GiveTo(M);
 			}
-			CInv.AddBuff(M, False, False, True, ComboLifespan, class'DEKRPG208AF.ComboTauntInv', EffectMultiplier, Dispellable);
+			CInv.AddBuff(M, False, False, True, ComboLifespan, class'DEKRPG208AG.ComboTauntInv', EffectMultiplier, Dispellable);
 		}
 		return M;
 	}

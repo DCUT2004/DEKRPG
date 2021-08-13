@@ -3,5 +3,5 @@ class DamTypeLynxPancake extends DamTypePancake
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AF.DEKLynxVehicle'
+     VehicleClass=Class'DEKRPG208AG.DEKLynxVehicle'
 }

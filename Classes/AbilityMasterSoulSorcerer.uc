@@ -30,8 +30,8 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
 	 DamageMultiplier=1.1000
-     ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityEternalSoulSorcerer'
-     RequiredAbilities(0)=Class'DEKRPG208AF.AbilityNecroDecay'
+     ExcludingAbilities(0)=Class'DEKRPG208AG.AbilityEternalSoulSorcerer'
+     RequiredAbilities(0)=Class'DEKRPG208AG.AbilityNecroDecay'
      AbilityName="Niche: Master"
      Description="Each time a target you are chained to dies, this ability summons a hostile soul that seeks out other targets.|Your defense is decreased by 10%.||You must be level 180 and have Blood Magic before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50

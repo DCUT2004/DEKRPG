@@ -6,14 +6,13 @@ class ComboAbilityVoidedCubesInv extends ComboAbilityInv
 	
 function DoEffect()
 {
+	local Controller C;
 	local VoidedCube Cube;
-	local bool bSuccessful;
 	local NavigationPoint Dest;
 	local int x, y;
 	
 	if (Owner != None && Pawn(Owner) != None && Pawn(Owner).Controller != None)
 	{
-		bSuccessful = False;
 		for (x = 0; x < 3; x++)
 		{
 			Dest = Pawn(Owner).Controller.FindRandomDest();
@@ -37,11 +36,9 @@ function DoEffect()
 				Cube.AdrenAmount = int(EffectMultiplier);
 			}
 		}
-		
-		if (Cube != None)
-		{
-			Pawn(Owner).PlaySound(Sound'VoidedCube', SLOT_None, 1300.0, , 800.00);
-		}
+		for ( C = Level.ControllerList; C != None; C = C.NextController )
+			if (C != None && C.Pawn != None && VSize(Pawn(Owner).Location - C.Pawn.Location) <= 800.00 && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.VoidedCube');
 	}
 }
 

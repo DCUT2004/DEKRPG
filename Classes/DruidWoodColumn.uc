@@ -3,7 +3,7 @@ class DruidWoodColumn extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=3
-     Blocks(0)=(BlockType=Class'DEKRPG208AF.DruidWoodBlock',ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG208AF.DruidWoodBlock',ZOffset=100)
-     Blocks(2)=(BlockType=Class'DEKRPG208AF.DruidWoodBlock',ZOffset=180)
+     Blocks(0)=(BlockType=Class'DEKRPG208AG.DruidWoodBlock',ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG208AG.DruidWoodBlock',ZOffset=100)
+     Blocks(2)=(BlockType=Class'DEKRPG208AG.DruidWoodBlock',ZOffset=180)
 }

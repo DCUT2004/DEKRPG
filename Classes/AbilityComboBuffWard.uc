@@ -26,16 +26,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AF.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG208AF.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG208AF.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG208AF.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG208AF.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG208AF.AbilityComboBuffHeal'
-	ExcludingAbilities(6)=Class'DEKRPG208AF.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG208AF.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG208AF.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG208AF.AbilityComboBuffShieldHeal'
+    ExcludingAbilities(0)=Class'DEKRPG208AG.AbilityComboBuffAdrenBoost'
+	ExcludingAbilities(1)=Class'DEKRPG208AG.AbilityComboBuffAdrenHeal'
+	ExcludingAbilities(2)=Class'DEKRPG208AG.AbilityComboBuffAttack'
+	ExcludingAbilities(3)=Class'DEKRPG208AG.AbilityComboBuffCriticalHit'
+	ExcludingAbilities(4)=Class'DEKRPG208AG.AbilityComboBuffDefense'
+	ExcludingAbilities(5)=Class'DEKRPG208AG.AbilityComboBuffHeal'
+	ExcludingAbilities(6)=Class'DEKRPG208AG.AbilityComboBuffHPBoost'
+	ExcludingAbilities(7)=Class'DEKRPG208AG.AbilityComboBuffRegenerate'
+	ExcludingAbilities(8)=Class'DEKRPG208AG.AbilityComboBuffShieldBoost'
+	ExcludingAbilities(9)=Class'DEKRPG208AG.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Ward"
 	Description="The caster and all allies receive a 10% chance per level to resist any new ailments, including magic effects, for 25 seconds. If a similar buff is applied, the chance to ward the ailment is stacked. A sound will play if you have warded an Ailment.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Combat Boots and Gloves you wish to purchase. Additionally:||Level 5: 10 Fine Burning Embers, 10 Arctic Suit||Level 6: 20 Fine Burning Embers, 20 Arctic Suit||Level 7: 30 Fine Burning Embers, 30 Arctic Suit||Level 8: 40 Fine Burning Embers, 40 Arctic Suit, 10 Icicles||Level 9: 45 Fine Burning Embers, 45 Arctic Suit, 25 Icicles||Level 10: 50 Fine Burning Embers, 50 Arctic Suit, 50 Icicles||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -48,14 +48,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit',Class'DEKRPG208AF.AbilityMaterialIcicle'),RequiredMaterialLevels=(40,40,40,40,10))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit',Class'DEKRPG208AF.AbilityMaterialIcicle'),RequiredMaterialLevels=(45,45,45,45,25))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AF.AbilityMaterialGloves',Class'DEKRPG208AF.AbilityMaterialCombatBoots',Class'DEKRPG208AF.AbilityMaterialEmbers',Class'DEKRPG208AF.AbilityMaterialArcticSuit',Class'DEKRPG208AF.AbilityMaterialIcicle'),RequiredMaterialLevels=(50,50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit',Class'DEKRPG208AG.AbilityMaterialIcicle'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit',Class'DEKRPG208AG.AbilityMaterialIcicle'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialGloves',Class'DEKRPG208AG.AbilityMaterialCombatBoots',Class'DEKRPG208AG.AbilityMaterialEmbers',Class'DEKRPG208AG.AbilityMaterialArcticSuit',Class'DEKRPG208AG.AbilityMaterialIcicle'),RequiredMaterialLevels=(50,50,50,50,50))
 }

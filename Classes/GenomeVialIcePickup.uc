@@ -2,7 +2,7 @@ class GenomeVialIcePickup extends GenomeVialCosmicPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AF.GenomeVialIce'
+     InventoryType=Class'DEKRPG208AG.GenomeVialIce'
      PickupMessage="You picked up an ice vial."
      LightHue=120
      LightSaturation=45

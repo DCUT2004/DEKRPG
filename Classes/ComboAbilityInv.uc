@@ -67,7 +67,7 @@ simulated function Tick(float DeltaTime)
 
 defaultproperties
 {
-	 ComboDamageType=Class'DEKRPG208AF.DamTypeCombo'
+	 ComboDamageType=Class'DEKRPG208AG.DamTypeCombo'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

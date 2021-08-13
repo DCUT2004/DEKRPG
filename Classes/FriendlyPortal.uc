@@ -119,7 +119,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
-	OrbEffectClass=Class'DEKRPG208AF.FriendlyPortalEffect'
+	OrbEffectClass=Class'DEKRPG208AG.FriendlyPortalEffect'
 	SpawnInterval=10.000000
 	FriendlyMonsterClass(0)=Class'SkaarjPack.SkaarjPupae'
 	MaxSpeed=0.000000

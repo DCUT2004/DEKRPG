@@ -35,7 +35,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AF.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -59,7 +59,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AF.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.Ward');
 				Destroy();
 				return;
 			}
@@ -138,5 +138,5 @@ defaultproperties
 {
 	 bBuff=False
 	 ComboNameMessage="- Curse: "
-	 EffectxEmitterClass=Class'DEKRPG208AF.ComboCurseFX'
+	 EffectxEmitterClass=Class'DEKRPG208AG.ComboCurseFX'
 }

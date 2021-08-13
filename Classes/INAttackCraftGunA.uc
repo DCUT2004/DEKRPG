@@ -222,8 +222,8 @@ defaultproperties
      LockAim=0.996000
      packName="satoreMonsterPackv"
      Version=104
-     TeamProjectileClasses(0)=Class'DEKRPG208AF.DEKONSAttackCraftPlasmaProjectileRed'
-     TeamProjectileClasses(1)=Class'DEKRPG208AF.DEKONSAttackCraftPlasmaProjectileBlue'
-     ProjectileClass=Class'DEKRPG208AF.DEKONSAttackCraftPlasmaProjectileBlue'
-     AltFireProjectileClass=Class'DEKRPG208AF.INAttackCraftMissleA'
+     TeamProjectileClasses(0)=Class'DEKRPG208AG.DEKONSAttackCraftPlasmaProjectileRed'
+     TeamProjectileClasses(1)=Class'DEKRPG208AG.DEKONSAttackCraftPlasmaProjectileBlue'
+     ProjectileClass=Class'DEKRPG208AG.DEKONSAttackCraftPlasmaProjectileBlue'
+     AltFireProjectileClass=Class'DEKRPG208AG.INAttackCraftMissleA'
 }

@@ -10,7 +10,7 @@ static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictemHealt
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AF.DruidLightningSentinel'
+     VehicleClass=Class'DEKRPG208AG.DruidLightningSentinel'
      DeathString="%o was electrocuted by %k's lightning sentinel."
      FemaleSuicide="%o had an electrifying experience."
      MaleSuicide="%o had an electrifying experience."

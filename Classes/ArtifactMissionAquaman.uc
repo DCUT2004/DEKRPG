@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=50
      Description="Make kills while underwater."
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionAquamanPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionAquamanPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.AquamanMission'
      ItemName="Aquaman"
 }

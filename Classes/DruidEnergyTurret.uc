@@ -307,6 +307,6 @@ defaultproperties
      ZoomSpeed=1.500000
      bPowered=True
      RespawnTime=5.000000
-     GunClass=Class'DEKRPG208AF.DruidEnergyWeapon'
+     GunClass=Class'DEKRPG208AG.DruidEnergyWeapon'
      AutoTurretControllerClass=None
 }

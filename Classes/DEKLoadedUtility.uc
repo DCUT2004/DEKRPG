@@ -197,7 +197,7 @@ defaultproperties
      LoadedUtilityOne(0)="XWeapons.ShieldGun"
      PlayerLevelReqd(1)=1
      PlayerLevelReqd(2)=1
-     ExcludingAbilities(0)=Class'DEKRPG208AF.DEKLoadedClassicShield'
+     ExcludingAbilities(0)=Class'DEKRPG208AG.DEKLoadedClassicShield'
      AbilityName="Starting Weapon: Utility Rifle"
      Description="When you spawn:|You are granted a Utility Rifle.||This skill is only necessary for players with the skill Loaded Weapons.  Make sure to purchase Loaded Weapons before purchasing this skill or it will not work properly.  It cannot be purchased if you have the skill granting you a Classic Shield Gun.||Level 2 generates a magic weapon with a positive enchantment and full ammo.||Cost: 1,5"
      StartingCost=1

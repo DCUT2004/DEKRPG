@@ -2,6 +2,6 @@ class ArtifactMissionTeamTarydiumKeepPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AF.ArtifactMissionTeamTarydiumKeep'
+     InventoryType=Class'DEKRPG208AG.ArtifactMissionTeamTarydiumKeep'
      PickupMessage="You picked up the Tarydium Keep team mission!"
 }

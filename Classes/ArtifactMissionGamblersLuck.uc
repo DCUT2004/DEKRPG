@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=1000
      Description="Deal double damage with a Gambler's weapon"
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionGamblersLuckPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionGamblersLuckPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.GamblersLuckMission'
      ItemName="Gambler's Luck"
 }

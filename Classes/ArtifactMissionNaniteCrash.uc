@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=20
      Description="Kill Tech monsters."
-     PickupClass=Class'DEKRPG208AF.ArtifactMissionNaniteCrashPickup'
+     PickupClass=Class'DEKRPG208AG.ArtifactMissionNaniteCrashPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.NaniteCrashMission'
      ItemName="Nanite Crash"
 }
