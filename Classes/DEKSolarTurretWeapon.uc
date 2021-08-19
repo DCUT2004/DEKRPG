@@ -496,9 +496,9 @@ defaultproperties
      BeamRehitDelay=0.400000
      BlastBuildUpDelay=0.500000
      WeaponAltFireAttachmentBone="Muzzle"
-     AltFireBuildUpSound=Sound'DEKRPG208AG.TurretSounds.SolarTurretAltCharge'
-     BuildUpEffectClass=Class'DEKRPG208AG.DEKSolarTurretEnergyWaveChargeEffect'
-     BeamEffectClass=Class'DEKRPG208AG.DEKSolarTurretHeatRayEffect'
+     AltFireBuildUpSound=Sound'DEKRPG208AH.TurretSounds.SolarTurretAltCharge'
+     BuildUpEffectClass=Class'DEKRPG208AH.DEKSolarTurretEnergyWaveChargeEffect'
+     BeamEffectClass=Class'DEKRPG208AH.DEKSolarTurretHeatRayEffect'
      YawBone="Object02"
      PitchBone="Wheel"
      PitchUpLimit=16000
@@ -510,16 +510,16 @@ defaultproperties
      Spread=500.045013
      FireInterval=5.500000
      AltFireInterval=3.800000
-     EffectEmitterClass=Class'DEKRPG208AG.DEKSolarTurretEnergyWaveTrailer'
-     FireSoundClass=Sound'DEKRPG208AG.TurretSounds.SolarTurretFire'
+     EffectEmitterClass=Class'DEKRPG208AH.DEKSolarTurretEnergyWaveTrailer'
+     FireSoundClass=Sound'DEKRPG208AH.TurretSounds.SolarTurretFire'
      FireSoundVolume=412.000000
-     AltFireSoundClass=Sound'DEKRPG208AG.TurretSounds.SolarTurretAltFire'
-     DamageType=Class'DEKRPG208AG.DamTypeDEKSolarTurretBeam'
+     AltFireSoundClass=Sound'DEKRPG208AH.TurretSounds.SolarTurretAltFire'
+     DamageType=Class'DEKRPG208AH.DamTypeDEKSolarTurretBeam'
      DamageMin=35
      DamageMax=40
      TraceRange=20000.000000
      Momentum=10000.000000
-     AltFireProjectileClass=Class'DEKRPG208AG.DEKSolarTurretEnergyWave'
+     AltFireProjectileClass=Class'DEKRPG208AH.DEKSolarTurretEnergyWave'
      AIInfo(0)=(bLeadTarget=True,WarnTargetPct=0.750000,RefireRate=0.500000)
      AIInfo(1)=(bLeadTarget=True,WarnTargetPct=0.750000,RefireRate=0.500000)
      Mesh=SkeletalMesh'AS_VehiclesFull_M.LinkBody'

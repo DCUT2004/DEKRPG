@@ -59,8 +59,6 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		bSoulMage = True;
 	else
 		bSoulMage = False;
-		
-	MInv = MissionSoloInv(Other.FindInventoryType(class'MissionSoloInv'));
 }
 
 simulated function Timer()
@@ -82,6 +80,8 @@ simulated function Timer()
 	
 	if (PawnOwner != None)
 	{
+		if (MInv == None)
+			MInv = MissionSoloInv(PawnOwner.FindInventoryType(class'MissionSoloInv'));	//Look for MissionInv here because it might not exist yet when GiveTo() is called
 		PInv = PhantomDeathGhostInv(PawnOwner.FindInventoryType(class'PhantomDeathGhostInv'));
 		V = PawnOwner.DrivenVehicle;
 		if (V != None)

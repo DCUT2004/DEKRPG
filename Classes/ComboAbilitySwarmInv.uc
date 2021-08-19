@@ -2,7 +2,9 @@
 class ComboAbilitySwarmInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
-#exec  AUDIO IMPORT NAME="Swarm" FILE="Sounds\SwarmWAV.WAV" GROUP="ComboSounds"
+var Monster Gnat1, Gnat2, Gnat3, Gnat4, Gnat5;
+	
+#exec  AUDIO IMPORT NAME="Swarm" FILE="Sounds\Swarm.WAV" GROUP="ComboSounds"
 	
 function DoEffect()
 {
@@ -24,16 +26,48 @@ function DoEffect()
 		R5 = getSpawnRotator(V5);
 		
 		//Spawn the gnats
-		spawnGnat(V1, R1);
-		spawnGnat(V2, R2);
-		spawnGnat(V3, R3);
-		spawnGnat(V4, R4);
-		spawnGnat(V5, R5);
+		if (Gnat1 == None)
+			Gnat1 = spawnGnat(V1, R1);
+		else
+		{
+			Gnat1.Lifespan = ComboLifespan;
+			Gnat1.Health = Gnat1.Default.HealthMax;
+		}
+		if (Gnat2 == None)
+			Gnat2 = spawnGnat(V2, R2);
+		else
+		{
+			Gnat2.Lifespan = ComboLifespan;
+			Gnat2.Health = Gnat1.Default.HealthMax;		
+		}
+		if (Gnat3 == None)
+			Gnat3 = spawnGnat(V3, R3);
+		else
+		{
+			Gnat3.Lifespan = ComboLifespan;
+			Gnat3.Health = Gnat1.Default.HealthMax;
+		}
+		if (Gnat4 == None)
+			Gnat4 = spawnGnat(V4, R4);
+		else
+		{
+			Gnat4.Lifespan = ComboLifespan;
+			Gnat4.Health = Gnat1.Default.HealthMax;
+		}
+		if (Gnat5 == None)
+			Gnat5 = spawnGnat(V5, R5);
+		else
+		{
+			Gnat5.Lifespan = ComboLifespan;
+			Gnat5.Health = Gnat1.Default.HealthMax;
+		}
+		if (Pawn(Owner).PlayerReplicationInfo != None)
+			Level.Game.Broadcast(self, Pawn(Owner).PlayerReplicationInfo.PlayerName $ " casted Swarm!");
 		//Pawn(Owner).PlayOwnedSound(Sound'Swarm', SLOT_None, 1300.0, , 800.00);
 	}
 }
 
-function spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
+function Monster spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 {
 	local LeechGnat M;
 	local FriendlyMonsterInv FriendlyInv;
@@ -43,7 +77,7 @@ function spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 	local RPGStatsInv StatsInv;
 	local int x;
 	
-	M = spawn(Class'DEKRPG208AG.LeechGnat',,, SpawnLocation, SpawnRotation);
+	M = spawn(Class'DEKRPG208AH.LeechGnat',,, SpawnLocation, SpawnRotation);
 
 	if (M != None)
 	{
@@ -70,6 +104,7 @@ function spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 		
 		M.Master = Pawn(Owner);
 		M.HealthMultiplier = EffectMultiplier;
+		M.Lifespan = ComboLifespan;
 		
 		//allow Instigator's abilities to affect the monster
 		for (Inv = Pawn(Owner).Controller.Inventory; Inv != None; Inv = Inv.Inventory)
@@ -100,9 +135,11 @@ function spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 			}
 		}
 		for ( C = Level.ControllerList; C != None; C = C.NextController )
-			if (C != None && C.Pawn != None && VSize(Pawn(Owner).Location - C.Pawn.Location) <= 800.00 && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
-				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.Swarm');
+			if (C != None && C.Pawn != None && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.Swarm');
+		return M;
 	}
+	return None;
 }
 
 function vector getSpawnLocation(Class<Monster> ChosenMonster)

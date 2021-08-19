@@ -5,7 +5,7 @@ class DamTypeDEKTankAltFire extends VehicleDamageType;
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AG.DEKTank'
+     VehicleClass=Class'DEKRPG208AH.DEKTank'
      DeathString="%o made %k go boom."
      bAlwaysSevers=True
      bDetonatesGoop=True

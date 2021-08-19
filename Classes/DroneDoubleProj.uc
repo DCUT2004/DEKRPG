@@ -54,7 +54,7 @@ defaultproperties
      MaxSpeed=2400.000000
      Damage=18.000000
      MomentumTransfer=1600.000000
-     MyDamageType=Class'DEKRPG208AG.DamTypeDronePlasma'
+     MyDamageType=Class'DEKRPG208AH.DamTypeDronePlasma'
      DrawType=DT_None
      bNetTemporary=False
      AmbientSound=Sound'WeaponSounds.LinkGun.LinkGunProjectile'

@@ -23,7 +23,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG208AG.PROJ_BlasterSent'
-     TeamProjectileClasses(1)=Class'DEKRPG208AG.PROJ_BlasterSent'
+     TeamProjectileClasses(0)=Class'DEKRPG208AH.PROJ_BlasterSent'
+     TeamProjectileClasses(1)=Class'DEKRPG208AH.PROJ_BlasterSent'
      FireRate=0.330000
 }

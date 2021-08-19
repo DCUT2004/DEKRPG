@@ -1,13 +1,13 @@
-class TutorialInv extends Inventory;
+class TutorialInv extends Inventory
+	config(UT2004RPG);
 
 var config int TutorialLevel;
 var RPGStatsInv StatsInv;
+var TutorialDrone D;
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
-	if (Other != None && Other.Controller != None)
-		Other.Controller.bGodMode = True;
-	SetTimer(0.5, True);
+	SetTimer(1.5, False);
 	Super.GiveTo(Other);
 }
 
@@ -23,18 +23,26 @@ function Timer()
 		
 	if (StatsInv != None && StatsInv.DataObject.Level > TutorialLevel)	//This player is above the tutorial level. Turn off god mode and destroy this inventory
 	{
-		Instigator.Controller.bGodMode = False;
 		Destroy();
 		return;
 	}
-		
-	if (!Instigator.Controller.bGodMode)
-		Instigator.Controller.bGodMode = True;
+	SpawnDrone(Instigator);
+}
+
+simulated function SpawnDrone(Pawn P)
+{
+	D = P.Spawn(class'TutorialDrone',P,,P.Location+vect(0,-32,64),P.Rotation);
+	if (D != None)
+	{
+		D.protPawn = P;
+		if (D.P != None)
+			D.P.CanDefend = True;
+	}
 }
 
 defaultproperties
 {
-	 TutorialLevel=23
+	 TutorialLevel=30
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

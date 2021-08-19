@@ -67,8 +67,9 @@ simulated function Tick(float DeltaTime)
 
 defaultproperties
 {
-	 ComboDamageType=Class'DEKRPG208AG.DamTypeCombo'
-     bOnlyRelevantToOwner=False
-     bAlwaysRelevant=True
-     bReplicateInstigator=True
+	ComboDamageType=Class'DEKRPG208AH.DamTypeCombo'
+	bOnlyRelevantToOwner=False
+	bAlwaysRelevant=True
+	bReplicateInstigator=True
+	MessageClass=Class'UnrealGame.StringMessagePlus'
 }

@@ -46,7 +46,7 @@ function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector H
 defaultproperties
 {
      BeamEffectClass=Class'Onslaught.ONSChargeBeamEffect'
-     DamageType=Class'DEKRPG208AG.DamTypeBeamSentinel'
+     DamageType=Class'DEKRPG208AH.DamTypeBeamSentinel'
      DamageMin=140
      DamageMax=160
      TraceRange=17000.000000

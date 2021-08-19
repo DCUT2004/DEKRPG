@@ -105,7 +105,7 @@ defaultproperties
      XPReward=50
      MissionGoal=500
      Description="Use the lightning rod combo and artifact simultaneously."
-     PickupClass=Class'DEKRPG208AG.ArtifactMissionThundergodPickup'
+     PickupClass=Class'DEKRPG208AH.ArtifactMissionThundergodPickup'
      IconMaterial=Texture'MissionsTex6.ArtifactMissions.ThunderGodMission'
      ItemName="Thunder God"
 }

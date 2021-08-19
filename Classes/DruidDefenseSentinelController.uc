@@ -27,6 +27,8 @@ var Material HealingOverlay;
 
 var bool bHealing;
 var int DoHealCount;
+var config bool bDestroyProjs;
+var config float DamageMultiplier;
 
 
 simulated event PostBeginPlay()
@@ -345,9 +347,10 @@ simulated function Timer()
 		BestP.bHidden = true;
 		if (BestP.Physics != PHYS_None)	// to stop attacking an exploding redeemer
 		{
-		    // destroy it
-			BestP.Lifespan=0.01000;
-			//BestP.Explode(BestP.Location,vect(0,0,0));
+			if (bDestroyProjs)
+				BestP.Explode(BestP.Location,vect(0,0,0));
+			else
+				BestP.Damage *= DamageMultiplier;
 			
 			// ok, lets see if the initiator gets any xp
        		if (StatsInv == None && PlayerSpawner != None && PlayerSpawner.Pawn != None)
@@ -407,11 +410,13 @@ defaultproperties
      HealFreq=6
 	 MonsterAdrenThreshold=20	//Every 20 hits by def sent rewards 1 monster adren
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG208AG.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG208AG.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG208AG.BlueBoltEmitter'
-     AdrenalineEmitterClass=Class'DEKRPG208AG.WhiteBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG208AG.RedBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG208AG.BronzeBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AH.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG208AH.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG208AH.BlueBoltEmitter'
+     AdrenalineEmitterClass=Class'DEKRPG208AH.WhiteBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG208AH.RedBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG208AH.BronzeBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
+	 bDestroyProjs=False
+	 DamageMultiplier=0.10000000
 }

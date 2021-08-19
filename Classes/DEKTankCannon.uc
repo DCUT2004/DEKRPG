@@ -8,7 +8,7 @@ defaultproperties
      PitchUpLimit=7000
      FireInterval=3.000000
      FireSoundVolume=150.000000
-     ProjectileClass=Class'DEKRPG208AG.DruidGoliathProjectile'
+     ProjectileClass=Class'DEKRPG208AH.DruidGoliathProjectile'
      ShakeRotMag=(Z=150.000000)
      ShakeRotTime=4.000000
      ShakeOffsetRate=(Z=100.000000)

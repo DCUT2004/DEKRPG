@@ -137,7 +137,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG208AG.DruidsRPGBuyClassPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG208AH.DruidsRPGBuyClassPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=ClassBuyButton
          Caption="Buy"
@@ -148,7 +148,7 @@ defaultproperties
          OnClick=DruidsRPGBuyClassPage.BuyClass
          OnKeyEvent=ClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG208AG.DruidsRPGBuyClassPage.ClassBuyButton'
+     Controls(1)=GUIButton'DEKRPG208AH.DruidsRPGBuyClassPage.ClassBuyButton'
 
      Begin Object Class=GUIButton Name=CloseButton
          Caption="Close"
@@ -160,7 +160,7 @@ defaultproperties
          OnClick=DruidsRPGBuyClassPage.CloseClick
          OnKeyEvent=CloseButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG208AG.DruidsRPGBuyClassPage.CloseButton'
+     Controls(2)=GUIButton'DEKRPG208AH.DruidsRPGBuyClassPage.CloseButton'
 
      Begin Object Class=GUIListBox Name=ClassList
          bVisibleWhenEmpty=True
@@ -175,7 +175,7 @@ defaultproperties
          bScaleToParent=True
          OnClick=DruidsRPGBuyClassPage.UpdateClassButtons
      End Object
-     Controls(3)=GUIListBox'DEKRPG208AG.DruidsRPGBuyClassPage.ClassList'
+     Controls(3)=GUIListBox'DEKRPG208AH.DruidsRPGBuyClassPage.ClassList'
 
      Begin Object Class=GUILabel Name=SelectText
          Caption="Choose a class:"
@@ -187,7 +187,7 @@ defaultproperties
          bBoundToParent=True
          bScaleToParent=True
      End Object
-     Controls(4)=GUILabel'DEKRPG208AG.DruidsRPGBuyClassPage.SelectText'
+     Controls(4)=GUILabel'DEKRPG208AH.DruidsRPGBuyClassPage.SelectText'
 
      Begin Object Class=GUIButton Name=ClassInfoButton
          Caption="Info"
@@ -199,7 +199,7 @@ defaultproperties
          OnClick=DruidsRPGBuyClassPage.ClassInfo
          OnKeyEvent=ClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(5)=GUIButton'DEKRPG208AG.DruidsRPGBuyClassPage.ClassInfoButton'
+     Controls(5)=GUIButton'DEKRPG208AH.DruidsRPGBuyClassPage.ClassInfoButton'
 
      WinTop=0.150000
      WinLeft=0.200000

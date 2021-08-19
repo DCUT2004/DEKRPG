@@ -209,7 +209,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG208AG.DruidsRPGBuyMaterialsPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG208AH.DruidsRPGBuyMaterialsPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=MaterialBuyButton
          Caption="Buy"
@@ -220,7 +220,7 @@ defaultproperties
          OnClick=DruidsRPGBuyMaterialsPage.BuyMaterial
          OnKeyEvent=MaterialBuyButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG208AG.DruidsRPGBuyMaterialsPage.MaterialBuyButton'
+     Controls(1)=GUIButton'DEKRPG208AH.DruidsRPGBuyMaterialsPage.MaterialBuyButton'
 
      Begin Object Class=GUIButton Name=CloseButton
          Caption="Close"
@@ -232,7 +232,7 @@ defaultproperties
          OnClick=DruidsRPGBuyMaterialsPage.CloseClick
          OnKeyEvent=CloseButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG208AG.DruidsRPGBuyMaterialsPage.CloseButton'
+     Controls(2)=GUIButton'DEKRPG208AH.DruidsRPGBuyMaterialsPage.CloseButton'
 
      Begin Object Class=GUIListBox Name=MaterialList
          bVisibleWhenEmpty=True
@@ -247,7 +247,7 @@ defaultproperties
          bScaleToParent=True
          OnClick=DruidsRPGBuyMaterialsPage.UpdateAbilityButtons
      End Object
-     Controls(3)=GUIListBox'DEKRPG208AG.DruidsRPGBuyMaterialsPage.MaterialList'
+     Controls(3)=GUIListBox'DEKRPG208AH.DruidsRPGBuyMaterialsPage.MaterialList'
 
      Begin Object Class=GUILabel Name=SelectText
          Caption="Material Shop"
@@ -259,7 +259,7 @@ defaultproperties
          bBoundToParent=True
          bScaleToParent=True
      End Object
-     Controls(4)=GUILabel'DEKRPG208AG.DruidsRPGBuyMaterialsPage.SelectText'
+     Controls(4)=GUILabel'DEKRPG208AH.DruidsRPGBuyMaterialsPage.SelectText'
 
      Begin Object Class=GUIButton Name=MaterialInfoButton
          Caption="Info"
@@ -271,7 +271,7 @@ defaultproperties
          OnClick=DruidsRPGBuyMaterialsPage.MaterialInfo
          OnKeyEvent=ClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(5)=GUIButton'DEKRPG208AG.DruidsRPGBuyMaterialsPage.MaterialInfoButton'
+     Controls(5)=GUIButton'DEKRPG208AH.DruidsRPGBuyMaterialsPage.MaterialInfoButton'
 	 
      Begin Object Class=moEditBox Name=PointsAvailableSelect
          bReadOnly=True
@@ -284,7 +284,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(6)=moEditBox'DEKRPG208AG.DruidsRPGBuyMaterialsPage.PointsAvailableSelect'
+     Controls(6)=moEditBox'DEKRPG208AH.DruidsRPGBuyMaterialsPage.PointsAvailableSelect'
 
      WinTop=0.150000
      WinLeft=0.200000

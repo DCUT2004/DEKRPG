@@ -50,7 +50,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=5.000000,Max=-5.000000),Y=(Min=5.000000,Max=-5.000000),Z=(Min=-40.000000,Max=20.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AG.NecroInvFX.GlowEm0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AH.NecroInvFX.GlowEm0'
 
      AutoDestroy=True
      bNoDelete=False

@@ -3,5 +3,5 @@ class PROJ_BlasterSent extends PROJ_Sentinel_Laser;
 defaultproperties
 {
      Speed=3000.000000
-     MyDamageType=Class'DEKRPG208AG.DamTypeBlasterLaser'
+     MyDamageType=Class'DEKRPG208AH.DamTypeBlasterLaser'
 }

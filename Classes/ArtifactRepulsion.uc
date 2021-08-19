@@ -167,7 +167,7 @@ defaultproperties
      AdrenalineRequired=20
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AG.ArtifactRepulsionPickup'
+     PickupClass=Class'DEKRPG208AH.ArtifactRepulsionPickup'
      IconMaterial=Texture'XGame.Water.xCausticRing2'
      ItemName="Repulsion"
 }

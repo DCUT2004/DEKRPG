@@ -58,9 +58,9 @@ simulated function PostBeginPlay()
 	{
 		P.Drone = Self;
 		P.SetBase(self);
+		DefenseRadius = P.TargetRadius;
+		TimeBetweenShots = P.TimeBetweenShots;
 	}
-	DefenseRadius = P.TargetRadius;
-	TimeBetweenShots = P.TimeBetweenShots;
 }
 
 simulated function Timer()
@@ -99,6 +99,7 @@ simulated function Destroyed()
 		Trail.Destroy();
 	if (P!=None)
 		P.Destroy();
+	Super.Destroyed();
 }
 
 defaultproperties

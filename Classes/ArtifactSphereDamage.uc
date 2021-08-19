@@ -152,7 +152,7 @@ state Activated
 			// now let's add to the people around us
 			SetTeamDamage(SpawnLocation);
 			SetTimer(0.5, true);
-			Instigator.PlaySound(Sound'DEKRPG208AG.ArtifactSounds.SphereActivate',,200.00);
+			Instigator.PlaySound(Sound'DEKRPG208AH.ArtifactSounds.SphereActivate',,200.00);
 		}
 	}
 	function Timer()
@@ -199,7 +199,7 @@ state Activated
 		{
 			Instigator.DisableUDamage();
 			Instigator.SetOverlayMaterial(EffectOverlay, -1, true);
-			Instigator.PlaySound(Sound'DEKRPG208AG.ArtifactSounds.SphereDeactivate',,200.00);
+			Instigator.PlaySound(Sound'DEKRPG208AH.ArtifactSounds.SphereDeactivate',,200.00);
 		}
 		bActive = false;
 		// perhaps ought to put a check in to ensure no glitches. Check everyone that has UDamage set and check there is a reason for it. However, haven't got many clues for the DD pickup.
@@ -240,7 +240,7 @@ defaultproperties
      EffectOverlay=Shader'XGameShaders.PlayerShaders.WeaponUDamageShader'
      AdrenalineRequired=40
      CostPerSec=15
-     PickupClass=Class'DEKRPG208AG.ArtifactSphereDamagePickup'
+     PickupClass=Class'DEKRPG208AH.ArtifactSphereDamagePickup'
      IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.SphereDamage'
      ItemName="Damage Sphere"
 }

@@ -5,8 +5,8 @@ class DEKAutoMachinegunWeapon extends Weapon_Sentinel
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AG.DEKMachineGunSentinelFire'
-     FireModeClass(1)=Class'DEKRPG208AG.DEKMachineGunSentinelFire'
-     AttachmentClass=Class'DEKRPG208AG.DEKMachineGunAttachment'
+     FireModeClass(0)=Class'DEKRPG208AH.DEKMachineGunSentinelFire'
+     FireModeClass(1)=Class'DEKRPG208AH.DEKMachineGunSentinelFire'
+     AttachmentClass=Class'DEKRPG208AH.DEKMachineGunAttachment'
      ItemName="Auto Assault Sentinel"
 }

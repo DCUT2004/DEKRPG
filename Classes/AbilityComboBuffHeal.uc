@@ -25,16 +25,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AG.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG208AG.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG208AG.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG208AG.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG208AG.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG208AG.AbilityComboBuffWard'
-	ExcludingAbilities(6)=Class'DEKRPG208AG.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG208AG.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG208AG.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG208AG.AbilityComboBuffShieldHeal'
+    ExcludingAbilities(0)=Class'DEKRPG208AH.AbilityComboBuffAdrenBoost'
+	ExcludingAbilities(1)=Class'DEKRPG208AH.AbilityComboBuffAdrenHeal'
+	ExcludingAbilities(2)=Class'DEKRPG208AH.AbilityComboBuffAttack'
+	ExcludingAbilities(3)=Class'DEKRPG208AH.AbilityComboBuffCriticalHit'
+	ExcludingAbilities(4)=Class'DEKRPG208AH.AbilityComboBuffDefense'
+	ExcludingAbilities(5)=Class'DEKRPG208AH.AbilityComboBuffWard'
+	ExcludingAbilities(6)=Class'DEKRPG208AH.AbilityComboBuffHPBoost'
+	ExcludingAbilities(7)=Class'DEKRPG208AH.AbilityComboBuffRegenerate'
+	ExcludingAbilities(8)=Class'DEKRPG208AH.AbilityComboBuffShieldBoost'
+	ExcludingAbilities(9)=Class'DEKRPG208AH.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Heal"
 	Description="Heals the caster and all allies. Healing over the max health is added as temporary max health.||Each level adds 25 health per level.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Honeysuckle Vine||Level 6: 20 Fine Leather, 20 Honeysuckle Vine||Level 7: 30 Fine Leather, 30 Honeysuckle Vine||Level 8: 40 Fine Leather, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Fine Leather, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Fine Leather, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -49,14 +49,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AG.AbilityMaterialMoss'),RequiredMaterialLevels=(40,40,40,40,10))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AG.AbilityMaterialMoss'),RequiredMaterialLevels=(45,45,45,45,25))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AG.AbilityMaterialTarydiumShards',Class'DEKRPG208AG.AbilityMaterialNaliFruit',Class'DEKRPG208AG.AbilityMaterialLeather',Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AG.AbilityMaterialMoss'),RequiredMaterialLevels=(50,50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AH.AbilityMaterialMoss'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AH.AbilityMaterialMoss'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AH.AbilityMaterialTarydiumShards',Class'DEKRPG208AH.AbilityMaterialNaliFruit',Class'DEKRPG208AH.AbilityMaterialLeather',Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AH.AbilityMaterialMoss'),RequiredMaterialLevels=(50,50,50,50,50))
 }

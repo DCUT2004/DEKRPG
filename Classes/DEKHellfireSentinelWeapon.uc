@@ -5,8 +5,8 @@ class DEKHellfireSentinelWeapon extends Weapon_Sentinel
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG208AG.DEKHellfireSentinelFire'
-     FireModeClass(1)=Class'DEKRPG208AG.DEKHellfireSentinelFire'
-     AttachmentClass=Class'DEKRPG208AG.DEKHellfireSentinelAttachment'
+     FireModeClass(0)=Class'DEKRPG208AH.DEKHellfireSentinelFire'
+     FireModeClass(1)=Class'DEKRPG208AH.DEKHellfireSentinelFire'
+     AttachmentClass=Class'DEKRPG208AH.DEKHellfireSentinelAttachment'
      ItemName="Hellfire Sentinel"
 }

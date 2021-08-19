@@ -1,12 +1,5 @@
 class MutTutorial extends Mutator
 	config(UT2004RPG);
-	
-var config int TutorialLevel;
-
-function PostBeginPlay()
-{
-	Enable('Tick');
-}
 
 function ModifyPlayer(Pawn Other)
 {
@@ -23,16 +16,12 @@ function ModifyPlayer(Pawn Other)
 		{
 			TutInv = Other.Spawn(class'TutorialInv');
 			TutInv.GiveTo(Other);
-			Log("Giving Tutorial");
 		}
 	}
-	else
-		Log("Other is none");
 }
 
 defaultproperties
 {
-	TutorialLevel=23
      bAddToServerPackages=True
      GroupName="LowLevelTutorial"
      FriendlyName="Low Level Tutorial"

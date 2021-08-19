@@ -256,7 +256,7 @@ function ReviveInstigator()
 		Instigator.bCollideWorld = true;
 		Instigator.SetPhysics(PHYS_Falling);
 		Inv = DruidGhostInvulInv(Instigator.FindInventoryType(class'DruidGhostInvulInv'));
-		if (Inv == None && TutorialInv(Instigator.FindInventoryType(Class'TutorialInv')) == None)
+		if (Inv == None)
 		{
 			Inv = Instigator.Spawn(class'DruidGhostInvulInv');
 			Inv.GiveTo(Instigator);

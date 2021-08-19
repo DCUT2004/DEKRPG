@@ -37,7 +37,7 @@ defaultproperties
          LifetimeRange=(Min=0.800000,Max=2.000000)
          StartVelocityRange=(X=(Min=5.000000,Max=-5.000000),Y=(Min=5.000000,Max=-5.000000),Z=(Min=-5.000000,Max=5.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AG.WildfireFlameFX.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG208AH.WildfireFlameFX.SpriteEmitter1'
 
      AutoDestroy=True
      bNoDelete=False

@@ -13,7 +13,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -36,7 +36,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AG.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.Ward');
 				Destroy();
 				return;
 			}
@@ -44,6 +44,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		
 		Other.ReceiveLocalizedMessage(MessageClass, Lifespan, None, None, Class);
 	}
+	SetTimer(0.1, True);
 	Super.GiveTo(Other);
 }
 
@@ -81,6 +82,7 @@ simulated function Timer()
 				else
 					P.SetRespawn();
 			}
+			PawnOwner.ReceiveLocalizedMessage(class'MisfortuneMessage');
 		}
 	}
 }

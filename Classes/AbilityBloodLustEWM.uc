@@ -64,8 +64,8 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      DamageMultiplier=0.250000
-     ExcludingAbilities(0)=Class'DEKRPG208AG.AbilityPrimalEWM'
-     ExcludingAbilities(1)=Class'DEKRPG208AG.AbilityRageEWM'
+     ExcludingAbilities(0)=Class'DEKRPG208AH.AbilityPrimalEWM'
+     ExcludingAbilities(1)=Class'DEKRPG208AH.AbilityRageEWM'
      AbilityName="Niche: Bloodlust"
      Description="For each level of this ability, you gain health from all kills. Your damage reduction is reduced by 25%.|You must have at least 50 Damage Bonus to purchase this niche. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10"
      StartingCost=10

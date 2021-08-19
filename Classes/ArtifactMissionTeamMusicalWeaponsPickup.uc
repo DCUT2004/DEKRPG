@@ -2,6 +2,6 @@ class ArtifactMissionTeamMusicalWeaponsPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AG.ArtifactMissionTeamMusicalWeapons'
+     InventoryType=Class'DEKRPG208AH.ArtifactMissionTeamMusicalWeapons'
      PickupMessage="You picked up the Musical Weapons team mission!"
 }

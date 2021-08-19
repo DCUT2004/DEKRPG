@@ -2,7 +2,7 @@ class DamTypeDEKSolarTurretHeatWave extends VehicleDamageType abstract;
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AG.DEKSolarTurret'
+     VehicleClass=Class'DEKRPG208AH.DEKSolarTurret'
      DeathString="%o was caught by %k's solar burst."
      FemaleSuicide="%o stood in the way of her own solar burst."
      MaleSuicide="%o stood in the way of his own solar burst."

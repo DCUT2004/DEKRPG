@@ -94,6 +94,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local int DamageToTauntPawn;
 	local int InaccuracyChance;
 	local ComboAbilityHealingStrikeInv HealStrike;
+	local ComboAbilityTeleStealthInv TeleStealth;
 	local Actor A;
 	
 	//Add to monster team adrenaline on each hit
@@ -111,24 +112,18 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	//Combo effects that modify damage where injured and instigatedBy are not on the same team
 	if (instigatedBy != None && injured != None && instigatedBy.GetTeamNum() != injured.GetTeamNum())
 	{
-		//If the attacker has ComboAttack, modify the damage
+		//If the attacker has Attack buff/ailment, modify the damage
 		ComboAttack = ComboAttackInv(instigatedBy.FindInventoryType(class'ComboAttackInv'));
 		if (ComboAttack != None)
-		{
 			Damage *= ComboAttack.EffectMultiplier;				
-		}
 		
-		//If the injured has ComboDefense or ComboDefenseGaze, modify the damage
+		//If the injured has defense buff/ailment, modify the damage
 		ComboDefense = ComboDefenseInv(Injured.FindInventoryType(class'ComboDefenseInv'));
 		ComboDefenseGaze = ComboDefenseGazeInv(Injured.FindInventoryType(class'ComboDefenseGazeInv'));
 		if (ComboDefense != None)
-		{
 			Damage *= ComboDefense.EffectMultiplier;		
-		}
 		if (ComboDefenseGaze != None)
-		{
 			Damage *= ComboDefenseGaze.EffectMultiplier;
-		}
 		
 		//If the attacker has ComboCriticalHit, double the damage
 		ComboCriticalHit = ComboCriticalHitInv(instigatedBy.FindInventoryType(Class'ComboCriticalHitInv'));
@@ -151,7 +146,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 			}
 		}
 		
-		//If the attacker has ComboInaccuracy, modify the damage
+		//If the attacker has Blind ailment, add a % chance to set the damage to 1
 		ComboInaccuracy = ComboInaccuracyInv(instigatedBy.FindInventoryType(class'ComboInaccuracyInv'));
 		if (ComboInaccuracy != None)
 		{
@@ -161,18 +156,6 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 				Damage = 1;
 			}
 		}
-		//If the injured has ComboSharedDamage, modify the damage
-		/*ComboSharedDamage = ComboSharedDamageInv(Injured.FindInventoryType(class'ComboSharedDamageInv'));
-		if (ComboSharedDamage != None && Injured.Controller != None && instigatedBy != None && instigatedBy.Controller != None && !instigatedBy.Controller.SameTeamAs(Injured.Controller) && !DamageType.IsA('DamTypeSharedDamage'))
-		{
-			if (ComboSharedDamage.TotalPlayers > 1)
-			{
-				ComboSharedDamage.ServeDamage(Damage, instigatedBy);
-				Damage /= ComboSharedDamage.TotalPlayers;
-			}
-			if (Damage <= 0)
-				Damage = 1;
-		}*/
 		
 		//If the injured is protected by an ally with Taunt, modify the damage
 		//Search for a TauntPawn iff a Taunt Pawn does not exist
@@ -236,6 +219,11 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 				}
 			}
 		}
+		
+		//If the instigator has TeleStealth, accumulate his damage
+		TeleStealth = ComboAbilityTeleStealthInv(instigatedBy.FindInventoryType(Class'ComboAbilityTeleStealthInv'));
+		if (TeleStealth != None)
+			TeleStealth.AccumulatedDamage += Damage;
 	}
 	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 }
@@ -311,20 +299,20 @@ defaultproperties
 	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material
 	MediumMaterialChance=95	//15% chance to get a medium material, 5% for a high material
-	LowMaterials(0)=Class'DEKRPG208AG.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG208AG.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG208AG.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG208AG.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG208AG.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG208AG.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG208AG.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG208AG.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG208AG.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG208AG.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG208AG.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG208AG.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG208AG.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG208AG.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG208AG.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG208AG.AbilityMaterialIcicle'
+	LowMaterials(0)=Class'DEKRPG208AH.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG208AH.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG208AH.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG208AH.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG208AH.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG208AH.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG208AH.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG208AH.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG208AH.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG208AH.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG208AH.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG208AH.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG208AH.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG208AH.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG208AH.AbilityMaterialIcicle'
 }
