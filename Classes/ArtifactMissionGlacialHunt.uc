@@ -98,7 +98,7 @@ defaultproperties
      XPReward=20
      MissionGoal=25
      Description="Kill Ice monsters."
-     PickupClass=Class'DEKRPG208AH.ArtifactMissionGlacialHuntPickup'
+     PickupClass=Class'DEKRPG208AJ.ArtifactMissionGlacialHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.GlacialHuntMission'
      ItemName="Glacial Hunt"
 }

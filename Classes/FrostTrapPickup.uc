@@ -2,6 +2,6 @@ class FrostTrapPickup extends ONSGrenadePickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AH.FrostTrap'
+     InventoryType=Class'DEKRPG208AJ.FrostTrap'
      PickupMessage="You got the Frost Trap."
 }

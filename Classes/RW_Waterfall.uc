@@ -83,7 +83,7 @@ function deactivate()
 	active = false;
 }
 
-function Timer()
+simulated function Timer()
 {
 	Super.Timer();
 	if (PawnOwner != None)

@@ -21,29 +21,29 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (BombTrapFire(FireMode[0]) != None && BombTrap(W) != None)
 	{
-		BombTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AH.BombTrapProjectileNuclear';
+		BombTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AJ.BombTrapProjectileNuclear';
 	}
 	if (WildfireTrapFire(FireMode[0]) != None && WildfireTrap(W) != None)
 	{
-		WildfireTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AH.WildfireTrapProjectileNuclear';
+		WildfireTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AJ.WildfireTrapProjectileNuclear';
 	}
 	if (FrostTrapFire(FireMode[0]) != None && FrostTrap(W) != None)
 	{
-		FrostTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AH.FrostTrapProjectileNuclear';
+		FrostTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AJ.FrostTrapProjectileNuclear';
 	}
 	if (ShockTrapFire(FireMode[0]) != None && ShockTrap(W) != None)
 	{
-		ShockTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AH.ShockTrapProjectileNuclear';
+		ShockTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AJ.ShockTrapProjectileNuclear';
 	}
 	if (AerialTrapFire(FireMode[0]) != None && AerialTrap(W) != None)
 	{
-		AerialTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AH.AerialTrapProjectileNuclear';
+		AerialTrapFire(FireMode[0]).ProjectileClass=class'DEKRPG208AJ.AerialTrapProjectileNuclear';
 	}
 }
 
 defaultproperties
 {
-     ExcludingAbilities(0)=Class'DEKRPG208AH.AbilityBombardierExplosives'
+     ExcludingAbilities(0)=Class'DEKRPG208AJ.AbilityBombardierExplosives'
      AbilityName="Niche: Nuclear"
      Description="Increases the damage radius of all traps, but increases the time between trap explosions.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50

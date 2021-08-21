@@ -2,7 +2,7 @@ class DamTypeFrostTrap extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AH.WeaponFrostTrap'
+     WeaponClass=Class'DEKRPG208AJ.WeaponFrostTrap'
      DeathString="%k blew up %o with the Frost Trap."
      FemaleSuicide="How did your mines taste %o?."
      MaleSuicide="How did your mines taste %o?."

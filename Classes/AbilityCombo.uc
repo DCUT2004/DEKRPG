@@ -103,7 +103,7 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 
 defaultproperties
 {
-	 MaxCombos=3
+	 MaxCombos=4
      AbilityName="Combo Ability"
 	 MinPlayerLevel=90
 }

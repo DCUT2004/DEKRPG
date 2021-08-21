@@ -31,7 +31,7 @@ simulated function DoTrace(Vector Start, Rotator Dir)
 	
 	Start = GetFireStart(X, Y, Z);
 	
-    tmpHitEmitClass = class'DEKRPG208AH.DEKLightningTurretLightningBeamFX';
+    tmpHitEmitClass = class'DEKRPG208AJ.DEKLightningTurretLightningBeamFX';
 
 	ReflectNum = 0;
 	while (true)
@@ -161,8 +161,8 @@ defaultproperties
      NumArcs=10
      SecDamageMult=2.000000
      SecTraceDist=1000.000000
-     DamageTypeHeadShot=Class'DEKRPG208AH.DamTypeLightningTurretHeadShot'
-     DamageType=Class'DEKRPG208AH.DamTypeLightningTurretLightningBeam'
+     DamageTypeHeadShot=Class'DEKRPG208AJ.DamTypeLightningTurretHeadShot'
+     DamageType=Class'DEKRPG208AJ.DamTypeLightningTurretLightningBeam'
      DamageMin=55
      DamageMax=55
      FireSound=None

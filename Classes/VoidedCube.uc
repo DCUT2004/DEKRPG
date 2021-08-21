@@ -31,7 +31,7 @@ function Touch(Actor Other)
 	{
 		if (Pawn(Other) != None && Pawn(Other).Health > 0 && PawnOwner != None && PawnOwner.Health > 0 && Pawn(Other).GetTeamNum() != PawnOwner.GetTeamNum() && BossInv(Pawn(Other).FindInventoryType(Class'BossInv')) == None)
 		{
-			if (!Pawn(Other).IsA('HealerNali') && !Pawn(Other).IsA('MissionCow'))
+			if (!ClassIsChildOf(Pawn(Other).Class, Class'DruidBlock') && !Pawn(Other).IsA('HealerNali') && !Pawn(Other).IsA('MissionCow') && !Pawn(Other).IsA('MissionPortalBall') && !Pawn(Other).IsA('TarydiumCrystal'))
 			{
 				Pawn(Other).Died(PawnOwner.Controller, class'DamTypeVoidedCube', Pawn(Other).Location);
 				if (TeamAdrenaline != None)

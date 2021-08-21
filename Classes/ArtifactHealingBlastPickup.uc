@@ -2,7 +2,7 @@ class ArtifactHealingBlastPickup extends RPGArtifactPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AH.ArtifactHealingBlast'
+     InventoryType=Class'DEKRPG208AJ.ArtifactHealingBlast'
      PickupMessage="You got the Healing Bomb!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

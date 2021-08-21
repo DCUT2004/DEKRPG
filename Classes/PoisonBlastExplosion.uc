@@ -43,7 +43,7 @@ defaultproperties
          VelocityScale(2)=(RelativeTime=0.700000,RelativeVelocity=(X=3000.000000,Y=3000.000000,Z=1000.000000))
          VelocityScale(3)=(RelativeTime=1.000000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          UseDirectionAs=PTDU_Forward
@@ -86,7 +86,7 @@ defaultproperties
          VelocityScale(2)=(RelativeTime=0.700000,RelativeVelocity=(X=-3000.000000,Y=-3000.000000,Z=-1000.000000))
          VelocityScale(3)=(RelativeTime=1.000000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter1'
+     Emitters(1)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter2
          UseDirectionAs=PTDU_Forward
@@ -133,7 +133,7 @@ defaultproperties
          VelocityScale(2)=(RelativeTime=0.700000,RelativeVelocity=(X=3000.000000,Y=3000.000000,Z=1000.000000))
          VelocityScale(3)=(RelativeTime=1.000000,RelativeVelocity=(X=300.000000,Y=300.000000,Z=100.000000))
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter2'
+     Emitters(2)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter2'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter3
          UseDirectionAs=PTDU_Forward
@@ -178,7 +178,7 @@ defaultproperties
          VelocityScale(2)=(RelativeTime=0.700000,RelativeVelocity=(X=2000.000000,Y=2000.000000,Z=500.000000))
          VelocityScale(3)=(RelativeTime=1.000000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter3'
+     Emitters(3)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter3'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter0
          StaticMesh=StaticMesh'ParticleMeshes.Complex.ExplosionRing'
@@ -206,7 +206,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(4)=MeshEmitter'DEKRPG208AH.PoisonBlastExplosion.MeshEmitter0'
+     Emitters(4)=MeshEmitter'DEKRPG208AJ.PoisonBlastExplosion.MeshEmitter0'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter1
          StaticMesh=StaticMesh'ParticleMeshes.Complex.ExplosionSphere'
@@ -237,7 +237,7 @@ defaultproperties
          LifetimeRange=(Min=0.750000,Max=0.750000)
          InitialDelayRange=(Min=1.500000,Max=1.500000)
      End Object
-     Emitters(5)=MeshEmitter'DEKRPG208AH.PoisonBlastExplosion.MeshEmitter1'
+     Emitters(5)=MeshEmitter'DEKRPG208AJ.PoisonBlastExplosion.MeshEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter4
          UseColorScale=True
@@ -261,7 +261,7 @@ defaultproperties
          LifetimeRange=(Min=1.250000,Max=1.250000)
          InitialDelayRange=(Min=0.800000,Max=0.800000)
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter4'
+     Emitters(6)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -285,7 +285,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(7)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter5'
+     Emitters(7)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter5'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter6
          UseDirectionAs=PTDU_Right
@@ -309,7 +309,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=200.000000,Max=200.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(8)=SpriteEmitter'DEKRPG208AH.PoisonBlastExplosion.SpriteEmitter6'
+     Emitters(8)=SpriteEmitter'DEKRPG208AJ.PoisonBlastExplosion.SpriteEmitter6'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter2
          StaticMesh=StaticMesh'ParticleMeshes.Complex.ExplosionSphere'
@@ -335,7 +335,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=1.200000,Max=1.200000)
      End Object
-     Emitters(9)=MeshEmitter'DEKRPG208AH.PoisonBlastExplosion.MeshEmitter2'
+     Emitters(9)=MeshEmitter'DEKRPG208AJ.PoisonBlastExplosion.MeshEmitter2'
 
      AutoDestroy=True
      bNoDelete=False

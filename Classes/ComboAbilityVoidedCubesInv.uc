@@ -2,7 +2,7 @@
 class ComboAbilityVoidedCubesInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
-#exec  AUDIO IMPORT NAME="VoidedCube" FILE="Sounds\VoidedCube2.WAV" GROUP="ComboSounds"
+#exec  AUDIO IMPORT NAME="VoidedCube" FILE="Sounds\VoidedCube.WAV" GROUP="ComboSounds"
 	
 function DoEffect()
 {
@@ -40,7 +40,7 @@ function DoEffect()
 			Level.Game.Broadcast(self, Pawn(Owner).PlayerReplicationInfo.PlayerName $ " casted Voided Cubes!");
 		for ( C = Level.ControllerList; C != None; C = C.NextController )
 			if (C != None && C.Pawn != None && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
-				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.VoidedCube');
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.VoidedCube');
 	}
 }
 

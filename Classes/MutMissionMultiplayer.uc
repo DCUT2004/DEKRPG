@@ -157,7 +157,7 @@ simulated function Timer()
 			//Mission has started. Play a sound and read a message to all players
 			for ( C = Level.ControllerList; C != None; C = C.NextController )
 				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController'))
-					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AH.MissionSounds.MP3VoiceStart');
+					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.MissionSounds.MP3VoiceStart');
 			Level.Game.Broadcast(self, "Start!");
 		}
 		else if (Countdown > 0)	//still counting down to start minigame/mission.
@@ -176,7 +176,7 @@ simulated function Timer()
 			//Play the "Time Up!" sound to all players
 			for ( C = Level.ControllerList; C != None; C = C.NextController )
 				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') )
-					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AH.MissionSounds.MP3VoiceTimeUp');
+					PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.MissionSounds.MP3VoiceTimeUp');
 					
 			//Certain missions do not have a mission goal, and we don't want to penalize players by not reaching a goal that hasn't been set
 			//StopMission() will end the mission in a Mission Failed state for those missions that indeed have a goal
@@ -346,7 +346,7 @@ simulated function MissionComplete()
 				if (!GenomeProjectActive)
 				{
 					if (PlayerController(C) != None)
-						PlayerController(C).ClientPlaySound(Sound'DEKRPG208AH.MissionSounds.MP3VoiceFinish');
+						PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.MissionSounds.MP3VoiceFinish');
 				}
 			}
 		}
@@ -473,20 +473,20 @@ defaultproperties
 {
 	CheckInterval=1.000000
 	CountDown=10
-	BalloonClass(0)=Class'DEKRPG208AH.MissionBalloon'
-	BalloonClass(1)=Class'DEKRPG208AH.MissionBalloonBlue'
-	BalloonClass(2)=Class'DEKRPG208AH.MissionBalloonGreen'
-	BalloonClass(3)=Class'DEKRPG208AH.MissionBalloonOrange'
-	BalloonClass(4)=Class'DEKRPG208AH.MissionBalloonYellow'
-	BalloonClass(5)=Class'DEKRPG208AH.MissionBalloonPurple'
+	BalloonClass(0)=Class'DEKRPG208AJ.MissionBalloon'
+	BalloonClass(1)=Class'DEKRPG208AJ.MissionBalloonBlue'
+	BalloonClass(2)=Class'DEKRPG208AJ.MissionBalloonGreen'
+	BalloonClass(3)=Class'DEKRPG208AJ.MissionBalloonOrange'
+	BalloonClass(4)=Class'DEKRPG208AJ.MissionBalloonYellow'
+	BalloonClass(5)=Class'DEKRPG208AJ.MissionBalloonPurple'
 	GenomeXPPerVial=5
 	NumMaxVials=2
-	VialPickupClass(0)=Class'DEKRPG208AH.GenomeVialCosmicPickup'
-	VialPickupClass(1)=Class'DEKRPG208AH.GenomeVialFirePickup'
-	VialPickupClass(2)=Class'DEKRPG208AH.GenomeVialIcePickup'
-	VialPickupClass(3)=Class'DEKRPG208AH.GenomeVialGhostPickup'
-	VialPickupClass(4)=Class'DEKRPG208AH.GenomeVialTechPickup'
-	MusicalWeaponsList(0)=Class'DEKWeapons208AH.INAVRiL'
+	VialPickupClass(0)=Class'DEKRPG208AJ.GenomeVialCosmicPickup'
+	VialPickupClass(1)=Class'DEKRPG208AJ.GenomeVialFirePickup'
+	VialPickupClass(2)=Class'DEKRPG208AJ.GenomeVialIcePickup'
+	VialPickupClass(3)=Class'DEKRPG208AJ.GenomeVialGhostPickup'
+	VialPickupClass(4)=Class'DEKRPG208AJ.GenomeVialTechPickup'
+	MusicalWeaponsList(0)=Class'DEKWeapons208AJ.INAVRiL'
 	MusicalWeaponsList(1)=Class'XWeapons.BioRifle'
 	MusicalWeaponsList(2)=Class'XWeapons.ShockRifle'
 	MusicalWeaponsList(3)=Class'UT2004RPG.RPGLinkGun'
@@ -496,31 +496,31 @@ defaultproperties
 	MusicalWeaponsList(7)=Class'XWeapons.SniperRifle'
 	MusicalChangeChance=10.000000
 	MusicalMinimumTime=5
-	PortalBallClass(0)=Class'DEKRPG208AH.MissionPortalBallBlue'
-	PortalBallClass(1)=Class'DEKRPG208AH.MissionPortalBallGreen'
-	PortalBallClass(2)=Class'DEKRPG208AH.MissionPortalBallOrange'
-	PortalBallClass(3)=Class'DEKRPG208AH.MissionPortalBallPink'
-	PortalBallClass(4)=Class'DEKRPG208AH.MissionPortalBallPurple'
-	PortalBallClass(5)=Class'DEKRPG208AH.MissionPortalBallRed'
+	PortalBallClass(0)=Class'DEKRPG208AJ.MissionPortalBallBlue'
+	PortalBallClass(1)=Class'DEKRPG208AJ.MissionPortalBallGreen'
+	PortalBallClass(2)=Class'DEKRPG208AJ.MissionPortalBallOrange'
+	PortalBallClass(3)=Class'DEKRPG208AJ.MissionPortalBallPink'
+	PortalBallClass(4)=Class'DEKRPG208AJ.MissionPortalBallPurple'
+	PortalBallClass(5)=Class'DEKRPG208AJ.MissionPortalBallRed'
 	MaterialChance=5
 	LowMaterialChance=80
 	MediumMaterialChance=95
-	LowMaterial(0)=Class'DEKRPG208AH.AbilityMaterialLumber'
-	LowMaterial(1)=Class'DEKRPG208AH.AbilityMaterialCombatBoots'
-	LowMaterial(2)=Class'DEKRPG208AH.AbilityMaterialTarydiumShards'
-	LowMaterial(3)=Class'DEKRPG208AH.AbilityMaterialSteel'
-	LowMaterial(4)=Class'DEKRPG208AH.AbilityMaterialNaliFruit'
-	LowMaterial(5)=Class'DEKRPG208AH.AbilityMaterialGloves'
-	MediumMaterial(0)=Class'DEKRPG208AH.AbilityMaterialLeather'
-	MediumMaterial(1)=Class'DEKRPG208AH.AbilityMaterialPlatedArmor'
-	MediumMaterial(2)=Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'
-	MediumMaterial(3)=Class'DEKRPG208AH.AbilityMaterialEmbers'
-	MediumMaterial(4)=Class'DEKRPG208AH.AbilityMaterialArcticSuit'
-	HighMaterial(0)=Class'DEKRPG208AH.AbilityMaterialMoss'
-	HighMaterial(1)=Class'DEKRPG208AH.AbilityMaterialDust'
-	HighMaterial(2)=Class'DEKRPG208AH.AbilityMaterialNanite'
-	HighMaterial(3)=Class'DEKRPG208AH.AbilityMaterialPumice'
-	HighMaterial(4)=Class'DEKRPG208AH.AbilityMaterialIcicle'
+	LowMaterial(0)=Class'DEKRPG208AJ.AbilityMaterialLumber'
+	LowMaterial(1)=Class'DEKRPG208AJ.AbilityMaterialCombatBoots'
+	LowMaterial(2)=Class'DEKRPG208AJ.AbilityMaterialTarydiumShards'
+	LowMaterial(3)=Class'DEKRPG208AJ.AbilityMaterialSteel'
+	LowMaterial(4)=Class'DEKRPG208AJ.AbilityMaterialNaliFruit'
+	LowMaterial(5)=Class'DEKRPG208AJ.AbilityMaterialGloves'
+	MediumMaterial(0)=Class'DEKRPG208AJ.AbilityMaterialLeather'
+	MediumMaterial(1)=Class'DEKRPG208AJ.AbilityMaterialPlatedArmor'
+	MediumMaterial(2)=Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine'
+	MediumMaterial(3)=Class'DEKRPG208AJ.AbilityMaterialEmbers'
+	MediumMaterial(4)=Class'DEKRPG208AJ.AbilityMaterialArcticSuit'
+	HighMaterial(0)=Class'DEKRPG208AJ.AbilityMaterialMoss'
+	HighMaterial(1)=Class'DEKRPG208AJ.AbilityMaterialDust'
+	HighMaterial(2)=Class'DEKRPG208AJ.AbilityMaterialNanite'
+	HighMaterial(3)=Class'DEKRPG208AJ.AbilityMaterialPumice'
+	HighMaterial(4)=Class'DEKRPG208AJ.AbilityMaterialIcicle'
 	NumMaxBalls=2
 	bAddToServerPackages=True
 	GroupName="TeamMission"

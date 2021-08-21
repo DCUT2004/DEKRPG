@@ -12,5 +12,5 @@ defaultproperties
      MaxSpeed=12500.000000
      Damage=22.000000
      DamageRadius=200.000000
-     MyDamageType=Class'DEKRPG208AH.DamTypeDEKRaptorPlasma'
+     MyDamageType=Class'DEKRPG208AJ.DamTypeDEKRaptorPlasma'
 }

@@ -27,8 +27,9 @@ var Material HealingOverlay;
 
 var bool bHealing;
 var int DoHealCount;
-var config bool bDestroyProjs;
-var config float DamageMultiplier;
+var config bool bDestroyProjs;	//If true, defense sentinels will destroy hostile projectiles. Otherwise, will just reduce the damage
+var config float DamageMultiplier;	//If bDestroyPojs is false, then this is the % of the hostile projectile's damage that will be multiplied
+var config int MinimumDamage;	//If bDestroyProjs is false, then this is the minimum amount a hostile projectile's damage will be (ie at most how much damage reduction gets applied)
 
 
 simulated event PostBeginPlay()
@@ -305,12 +306,26 @@ simulated function Timer()
 				// otherwise just go for the closest
 				if ( BestGuidedPdist > VSize(Pawn.Location - P.Location) && P.bNetTemporary == false && !P.bDeleteMe)
 				{
-					BestGuidedP = P;
+					//Check if we've already shot down this projectile if bDestroyProjs is false
+					if (!bDestroyProjs)
+					{
+						if (P.Damage >= P.default.Damage)	//Damage is still normal, so target it
+							BestGuidedP = P;
+					}
+					else					//bDestroyProjs is true, so this projectile needs to get destroyed. Target it
+						BestGuidedP = P;
 					BestGuidedPdist = VSize(Pawn.Location - P.Location);
 				}
 				if ( ClosestPdist > VSize(Pawn.Location - P.Location) && !P.bDeleteMe)
 				{
-					ClosestP = P;
+					//Check if we've already shot down this projectile if bDestroyProjs is false
+					if (!bDestroyProjs)
+					{
+						if (P.Damage >= P.default.Damage)	//Damage is still normal, so target it
+							ClosestP = P;
+					}
+					else					//bDestroyProjs is true, so this projectile needs to get destroyed. Target it
+						ClosestP = P;
 					ClosestPdist = VSize(Pawn.Location - P.Location);
 				}
 
@@ -342,15 +357,23 @@ simulated function Timer()
 		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(BestP.Location - Pawn.Location));
 		if (HitEmitter != None)
 			HitEmitter.mSpawnVecA = BestP.Location;
-
-		BestP.NetUpdateTime = Level.TimeSeconds - 1;
-		BestP.bHidden = true;
+		
+		if (bDestroyProjs)
+		{
+			BestP.NetUpdateTime = Level.TimeSeconds - 1;
+			BestP.bHidden = true;
+		}
 		if (BestP.Physics != PHYS_None)	// to stop attacking an exploding redeemer
 		{
 			if (bDestroyProjs)
 				BestP.Explode(BestP.Location,vect(0,0,0));
 			else
-				BestP.Damage *= DamageMultiplier;
+			{
+				if (BestP.Damage >= BestP.default.Damage)
+					BestP.Damage *= DamageMultiplier;
+				if (BestP.Damage < MinimumDamage)
+					BestP.Damage = MinimumDamage;
+			}
 			
 			// ok, lets see if the initiator gets any xp
        		if (StatsInv == None && PlayerSpawner != None && PlayerSpawner.Pawn != None)
@@ -409,13 +432,14 @@ defaultproperties
      XPPerHealing=0.020000
      HealFreq=6
 	 MonsterAdrenThreshold=20	//Every 20 hits by def sent rewards 1 monster adren
+	 MinimumDamage=10
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG208AH.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG208AH.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG208AH.BlueBoltEmitter'
-     AdrenalineEmitterClass=Class'DEKRPG208AH.WhiteBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG208AH.RedBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG208AH.BronzeBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AJ.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG208AJ.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG208AJ.BlueBoltEmitter'
+     AdrenalineEmitterClass=Class'DEKRPG208AJ.WhiteBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG208AJ.RedBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG208AJ.BronzeBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
 	 bDestroyProjs=False
 	 DamageMultiplier=0.10000000

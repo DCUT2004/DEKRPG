@@ -114,5 +114,4 @@ defaultproperties
 {
 	CheckInterval=0.0500000
 	GazeDistance=1200.000
-	//EffectEmitterClass=Class'ComboAbilityBurnFX'
 }

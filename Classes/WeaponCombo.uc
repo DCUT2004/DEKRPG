@@ -4,5 +4,5 @@ class WeaponCombo extends Weapon
 
 defaultproperties
 {
-     ItemName="Plague"
+     ItemName="Combo"
 }

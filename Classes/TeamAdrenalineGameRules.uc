@@ -7,6 +7,7 @@ var config Array < Class < AbilityMaterial > > LowMaterials, MediumMaterials, Hi
 var config int MaterialKillChance, MaterialGameWinChance;	//The chance to unlock a material upon a kill or upon winning game
 var config int LowMaterialChance, MediumMaterialChance;
 var config float PlayerAdrenPerKill, MonsterAdrenPerHit;
+var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
 
 function PostBeginPlay()
 {
@@ -95,6 +96,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local int InaccuracyChance;
 	local ComboAbilityHealingStrikeInv HealStrike;
 	local ComboAbilityTeleStealthInv TeleStealth;
+	local ComboAbilityBeastsRevengeInv BeastsRevenge;
 	local Actor A;
 	
 	//Add to monster team adrenaline on each hit
@@ -115,7 +117,13 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		//If the attacker has Attack buff/ailment, modify the damage
 		ComboAttack = ComboAttackInv(instigatedBy.FindInventoryType(class'ComboAttackInv'));
 		if (ComboAttack != None)
-			Damage *= ComboAttack.EffectMultiplier;				
+			Damage *= ComboAttack.EffectMultiplier;
+
+		//If the injured has BeastsRevenge, accumulate his damage
+		//We do this here, before defense buffs/ailments are applied, so the defense buff from Beasts Revenge does not negate the effect
+		BeastsRevenge = ComboAbilityBeastsRevengeInv(injured.FindInventoryType(Class'ComboAbilityBeastsRevengeInv'));
+		if (BeastsRevenge != None)
+			BeastsRevenge.AccumulatedDamage += Damage;			
 		
 		//If the injured has defense buff/ailment, modify the damage
 		ComboDefense = ComboDefenseInv(Injured.FindInventoryType(class'ComboDefenseInv'));
@@ -233,6 +241,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 	local int MaterialRankChance;
 	local int RandIndex;
 	local GiveItemsInv GInv;
+	local Monster M;
 	
 	if (TA != None)
 	{
@@ -240,7 +249,13 @@ function ScoreKill(Controller Killer, Controller Killed)
 		{
 			if (Killer.Pawn != None && Killer.Pawn.Health > 0 && Killed.Pawn != None && Killed.Pawn.IsA('Monster') && Killer.Pawn.GetTeamNum() != Killed.Pawn.GetTeamNum() && !Killed.Pawn.IsA('HealerNali') && !Killed.Pawn.IsA('MissionCow') && TA.PlayerTeamAdrenaline < TA.FullAdrenalinePlayer)
 			{
-				AddPlayerTeamAdren();
+				if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
+				{
+					M = Monster(Killed.Pawn);
+					AddPlayerTeamAdren(M.ScoringValue * MonsterScoreMultiplier);
+				}
+				else
+					AddPlayerTeamAdren(1);
 			}
 		}
 	}
@@ -271,11 +286,11 @@ function ScoreKill(Controller Killer, Controller Killed)
 	Super.ScoreKill(Killer, Killed);
 }
 
-function AddPlayerTeamAdren()
+function AddPlayerTeamAdren(int AdrenAmount)
 {
 	if (TA != None)
 	{
-		TA.PlayerTeamAdrenaline += PlayerAdrenPerKill;
+		TA.PlayerTeamAdrenaline += AdrenAmount;
 		if (TA.PlayerTeamAdrenaline > TA.FullAdrenalinePlayer)
 			TA.PlayerTeamAdrenaline = TA.FullAdrenalinePlayer;
 	}
@@ -293,26 +308,26 @@ function AddMonsterTeamAdren()
 
 defaultproperties
 {
-	PlayerAdrenPerKill=1.00000000
+	MonsterScoreMultiplier=0.50000000
 	MonsterAdrenPerHit=0.20000000
 	MaterialKillChance=1
 	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material
 	MediumMaterialChance=95	//15% chance to get a medium material, 5% for a high material
-	LowMaterials(0)=Class'DEKRPG208AH.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG208AH.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG208AH.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG208AH.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG208AH.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG208AH.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG208AH.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG208AH.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG208AH.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG208AH.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG208AH.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG208AH.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG208AH.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG208AH.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG208AH.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG208AH.AbilityMaterialIcicle'
+	LowMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG208AJ.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialIcicle'
 }

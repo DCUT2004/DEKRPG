@@ -229,7 +229,7 @@ defaultproperties
      Speed=6000.000000
      Damage=25.000000
      MomentumTransfer=4000.000000
-     MyDamageType=Class'DEKRPG208AH.DamTypeStingerTurret'
+     MyDamageType=Class'DEKRPG208AJ.DamTypeStingerTurret'
      ImpactSound=Sound'WeaponSounds.BaseImpactAndExplosions.BBulletImpact9'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence

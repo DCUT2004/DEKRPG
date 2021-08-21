@@ -229,7 +229,7 @@ defaultproperties
      LevelCost(8)=9
      LevelCost(9)=9
      LevelCost(10)=9
-     RequiredAbilities(0)=Class'DEKRPG208AH.AbilityLoadedCraftsman'
+     RequiredAbilities(0)=Class'DEKRPG208AJ.AbilityLoadedCraftsman'
      AbilityName="Enhanced Artifacts"
      Description="Each level of this ability will decrease the adrenaline cost of all your artifacts, except sphere artifacts and enchanter artifacts, by 10%, until level 5.|After level 5, each level will decrease the adrenaline cost of your sphere artifacts by 10%.||You will need to have Loaded Craftsman maxed before purchasing this ability.|Cost(per level): 7,7,7,7,7,9,9,9,9,9"
      MaxLevel=10

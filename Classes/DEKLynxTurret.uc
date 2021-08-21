@@ -4,7 +4,7 @@ class DEKLynxTurret extends DruidEnergyTurret;
 
 defaultproperties
 {
-     GunClass=Class'DEKRPG208AH.DEKLynxTurretWeapon'
+     GunClass=Class'DEKRPG208AJ.DEKLynxTurretWeapon'
      VehicleNameString="Lynx Turret"
      HealthMax=900.000000
      Health=900

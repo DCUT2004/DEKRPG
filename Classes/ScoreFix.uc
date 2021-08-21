@@ -130,6 +130,6 @@ defaultproperties
      ScoreConfigs(10)=(GameType="UT2K4Assault.ASGameInfo",EXPForWin=30,MonsterScoreMultiplier=0.050000,LevelDiffExpGainDiv=100.000000,WeaponModifierChance=0.333333)
      ScoreConfigs(11)=(GameType="Onslaught.ONSOnslaughtGame",EXPForWin=30,MonsterScoreMultiplier=0.050000,LevelDiffExpGainDiv=100.000000,WeaponModifierChance=0.333333)
      GroupName="ScoreFix"
-     FriendlyName="DEKRPG208AH Score Fix"
+     FriendlyName="DEKRPG208AJ Score Fix"
      Description="Changes scoring and RPG Points for various game types."
 }

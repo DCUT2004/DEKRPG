@@ -3,7 +3,7 @@ class DamTypeEnergyWall extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AH.DruidEnergyWall'
+     VehicleClass=Class'DEKRPG208AJ.DruidEnergyWall'
      DeathString="%o was SIZZLED by the power of %k's wall!"
      FemaleSuicide="%o was SIZZLED!"
      MaleSuicide="%o was SIZZLED!"

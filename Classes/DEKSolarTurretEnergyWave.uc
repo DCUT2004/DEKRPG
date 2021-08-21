@@ -210,7 +210,7 @@ defaultproperties
      MaxSpeed=2800.000000
      Damage=115.000000
      MomentumTransfer=30000.000000
-     MyDamageType=Class'DEKRPG208AH.DamTypeDEKSolarTurretHeatWave'
+     MyDamageType=Class'DEKRPG208AJ.DamTypeDEKSolarTurretHeatWave'
      LightType=LT_Steady
      LightEffect=LE_Spotlight
      LightHue=20

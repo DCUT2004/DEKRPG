@@ -19,7 +19,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -43,7 +43,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AH.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.Ward');
 				Destroy();
 				return;
 			}
@@ -166,9 +166,9 @@ simulated function Destroyed()
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AH.RedBoltEmitter'
+     HitEmitterClass=Class'DEKRPG208AJ.RedBoltEmitter'
 	 TargetRadius=750.000
 	 bBuff=False
 	 ComboNameMessage="- Jinx: "
-	 EffectxEmitterClass=Class'DEKRPG208AH.ComboJinxFX'
+	 EffectxEmitterClass=Class'DEKRPG208AJ.ComboJinxFX'
 }

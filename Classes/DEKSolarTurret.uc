@@ -166,9 +166,9 @@ simulated event Destroyed()
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG208AH.DruidLinkTurretBase'
-     TurretSwivelClass=Class'DEKRPG208AH.DruidLinkTurretSwivel'
-     GunClass=Class'DEKRPG208AH.DEKSolarTurretWeapon'
+     TurretBaseClass=Class'DEKRPG208AJ.DruidLinkTurretBase'
+     TurretSwivelClass=Class'DEKRPG208AJ.DruidLinkTurretSwivel'
+     GunClass=Class'DEKRPG208AJ.DEKSolarTurretWeapon'
      bHasAltFire=True
      CameraBone="LinkBarrel"
      bDrawDriverInTP=False
