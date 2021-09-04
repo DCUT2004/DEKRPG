@@ -189,7 +189,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AJ.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209A.LightningBeamEmitter'
      MaxRange=3000.000000
      AmplifierLifespan=20
      XPforUse=10
@@ -197,6 +197,6 @@ defaultproperties
      AdrenalineRequired=100
      CostPerSec=1
      MinActivationTime=0.000001
-     IconMaterial=Shader'DEKRPGTexturesMaster208K.Artifacts.RemoteDoubleModifier'
+     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.RemoteDoubleModifier'
      ItemName="Remote Amplifier"
 }

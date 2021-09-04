@@ -42,6 +42,6 @@ function BotConsider()
 defaultproperties
 {
      MinActivationTime=0.000000
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.KillSummonVehicleIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.KillSummonVehicleIcon'
      ItemName="Kill All Summoned Vehicles"
 }

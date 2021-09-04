@@ -2,6 +2,6 @@ class ArtifactMissionGhostBusterPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionGhostBuster'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionGhostBuster'
      PickupMessage="You picked up the Ghost Buster Mission!"
 }

@@ -3,6 +3,7 @@ class ComboAbilityRavenRitualInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
 var config int HealAmount;
+var config float MaxMultiplier;
 
 #exec  AUDIO IMPORT NAME="RavenRitual" FILE="Sounds\RavenRitual1.WAV" GROUP="ComboSounds"
 	
@@ -14,6 +15,8 @@ function DoEffect()
 	{
 		//Boost health
 		Pawn(Owner).GiveHealth(HealAmount, Pawn(Owner).Health + HealAmount);
+		if (Pawn(Owner).Health > Pawn(Owner).HealthMax*MaxMultiplier)
+			Pawn(Owner).Health = Pawn(Owner).HealthMax*MaxMultiplier;
 		
 		//Deal damage if health is over max
 		if (Pawn(Owner).Health > Pawn(Owner).HealthMax)
@@ -26,7 +29,7 @@ function DoEffect()
 			Level.Game.Broadcast(self, Pawn(Owner).PlayerReplicationInfo.PlayerName $ " casted Raven Ritual!");
 		for ( C = Level.ControllerList; C != None; C = C.NextController )
 			if (C != None && C.Pawn != None && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
-				PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.RavenRitual');
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG209A.ComboSounds.RavenRitual');
 	}
 }
 
@@ -55,5 +58,6 @@ function Timer()
 
 defaultproperties
 {
+	MaxMultiplier=2.00000000
 	HealAmount=100
 }

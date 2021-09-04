@@ -163,11 +163,11 @@ defaultproperties
      MaxKnockbackMomentum=5000.000000
      MinKnockbackMomentum=2500.000000
      KnockbackSound=Sound'WeaponSounds.Misc.ballgun_launch'
-     KnockbackOverlay=Shader'DEKRPGTexturesMaster208K.fX.PulseRedShader'
+     KnockbackOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
      AdrenalineRequired=20
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG208AJ.ArtifactRepulsionPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactRepulsionPickup'
      IconMaterial=Texture'XGame.Water.xCausticRing2'
      ItemName="Repulsion"
 }

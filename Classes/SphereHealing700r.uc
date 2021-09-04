@@ -8,7 +8,7 @@ class SphereHealing700r extends Emitter
 defaultproperties
 {
      Begin Object Class=MeshEmitter Name=MeshEmitter0
-         StaticMesh=StaticMesh'DEKStaticsMaster208K.fX.SphereHealing'
+         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SphereHealing'
          RenderTwoSided=True
          UseParticleColor=True
          RespawnDeadParticles=False
@@ -24,13 +24,13 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG208AJ.SphereHealing700r.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG209A.SphereHealing700r.MeshEmitter0'
 
      AutoDestroy=True
      bNoDelete=False
      bNetTemporary=True
      RemoteRole=ROLE_DumbProxy
-     Skins(0)=Shader'DEKRPGTexturesMaster208K.fX.sb_4'
+     Skins(0)=Shader'DEKRPGTexturesMaster209A.fX.sb_4'
      Style=STY_Masked
      bBlockZeroExtentTraces=False
      bBlockNonZeroExtentTraces=False

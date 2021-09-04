@@ -8,5 +8,5 @@ class DruidCrimboBlockA extends DruidBlock;
 
 defaultproperties
 {
-     Skins(0)=Texture'DEKRPGTexturesMaster208K.SkinsChristmas.CrimboA'
+     Skins(0)=Texture'DEKRPGTexturesMaster209A.SkinsChristmas.CrimboA'
 }

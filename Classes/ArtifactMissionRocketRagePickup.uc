@@ -2,6 +2,6 @@ class ArtifactMissionRocketRagePickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionRocketRage'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionRocketRage'
      PickupMessage="You picked up the Rocket Rage Mission!"
 }

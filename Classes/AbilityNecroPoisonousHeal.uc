@@ -24,7 +24,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	 RegenPerLevel=1
-	 RequiredAbilities(0)=Class'DEKRPG208AJ.AbilityNecroPlague'
+	 RequiredAbilities(0)=Class'DEKRPG209A.AbilityNecroPlague'
      MinHealthBonus=30
      HealthBonusStep=30
      AbilityName="Poisonous Regeneration"

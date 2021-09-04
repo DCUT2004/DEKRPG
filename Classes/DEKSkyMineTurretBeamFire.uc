@@ -231,12 +231,12 @@ function PlayFiring()
 
 defaultproperties
 {
-     BeamEffectClass=Class'DEKRPG208AJ.DEKSkyMineBeam'
+     BeamEffectClass=Class'DEKRPG209A.DEKSkyMineBeam'
      ProjSpawnOffset=(X=200.000000,Y=14.000000,Z=-14.000000)
      FireAnimLeft="FireL"
      FireAnimRight="FireR"
      MinAim=0.925000
-     DamageType=Class'DEKRPG208AJ.DamTypeSkyMineBeam'
+     DamageType=Class'DEKRPG209A.DamTypeSkyMineBeam'
      DamageMin=25
      DamageMax=25
      FireSound=Sound'ONSVehicleSounds-S.PRV.PRVFire02'

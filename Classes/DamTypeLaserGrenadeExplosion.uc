@@ -5,7 +5,7 @@ class DamTypeLaserGrenadeExplosion extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AJ.DEKLaserGrenadeLauncher'
+     WeaponClass=Class'DEKRPG209A.DEKLaserGrenadeLauncher'
      DeathString="%k blew up %o."
      FemaleSuicide="Silly %o tripped over her own grenades."
      MaleSuicide="Silly %o tripped over his own grenades."

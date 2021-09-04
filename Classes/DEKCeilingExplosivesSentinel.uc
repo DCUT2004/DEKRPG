@@ -6,8 +6,8 @@ defaultproperties
      TurretBaseClass=None
      Mesh=SkeletalMesh'AS_Vehicles_M.CeilingTurretBase'
      DrawScale=0.300000
-     Skins(0)=Combiner'DEKRPGTexturesMaster208K.Skins.MineChargerCeilingCombiner'
-     Skins(1)=Combiner'DEKRPGTexturesMaster208K.Skins.MineChargerCeilingCombiner'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209A.Skins.MineChargerCeilingCombiner'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209A.Skins.MineChargerCeilingCombiner'
      CollisionRadius=45.000000
      CollisionHeight=60.000000
 }

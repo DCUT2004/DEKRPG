@@ -166,6 +166,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      CostPerSec=5
-     IconMaterial=Shader'DEKRPGTexturesMaster208K.Artifacts.InfinityWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.InfinityWeaponMakerIconShader'
      ItemName="Infinity Enchanter"
 }

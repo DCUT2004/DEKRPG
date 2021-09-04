@@ -11,7 +11,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (ONSGrenadeFire(FireMode[0]) != None)
 	{
-		ONSGrenadeFire(FireMode[0]).ProjectileClass=class'DEKWeapons208AJ.UpgradeGrenadeProjectile';
+		ONSGrenadeFire(FireMode[0]).ProjectileClass=class'DEKWeapons209A.UpgradeGrenadeProjectile';
 	}
 }
 

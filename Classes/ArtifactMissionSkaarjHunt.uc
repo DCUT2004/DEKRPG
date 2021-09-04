@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=30
      Description="Kill Skaarj, Troopers, and Snipers."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionSkaarjHuntPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionSkaarjHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.SkaarjHuntMission'
      ItemName="Skaarj Hunt"
 }

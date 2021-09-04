@@ -49,7 +49,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG208AJ.DruidsRPGForcedSellPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG209A.DruidsRPGForcedSellPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=SellButton
          Caption="Sell SubClass"
@@ -60,7 +60,7 @@ defaultproperties
          OnClick=DruidsRPGForcedSellPage.InternalOnClick
          OnKeyEvent=SellButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG208AJ.DruidsRPGForcedSellPage.SellButton'
+     Controls(1)=GUIButton'DEKRPG209A.DruidsRPGForcedSellPage.SellButton'
 
      Begin Object Class=GUILabel Name=SellDesc
          Caption="Your current subclass is no longer valid."
@@ -70,7 +70,7 @@ defaultproperties
          WinTop=0.400000
          WinHeight=32.000000
      End Object
-     Controls(2)=GUILabel'DEKRPG208AJ.DruidsRPGForcedSellPage.SellDesc'
+     Controls(2)=GUILabel'DEKRPG209A.DruidsRPGForcedSellPage.SellDesc'
 
      Begin Object Class=GUILabel Name=SellDesc2
          Caption="The subclass will be sold, and you will be automatically reconnected."
@@ -80,7 +80,7 @@ defaultproperties
          WinTop=0.450000
          WinHeight=32.000000
      End Object
-     Controls(3)=GUILabel'DEKRPG208AJ.DruidsRPGForcedSellPage.SellDesc2'
+     Controls(3)=GUILabel'DEKRPG209A.DruidsRPGForcedSellPage.SellDesc2'
 
      WinTop=0.375000
      WinHeight=0.250000

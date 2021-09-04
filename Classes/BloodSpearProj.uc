@@ -91,7 +91,7 @@ simulated function SpawnEffects( vector HitLocation, vector HitNormal )
 	{
 		PC = Level.GetLocalPlayerController();
 		if ( (PC.ViewTarget != None) && VSize(PC.ViewTarget.Location - Location) < 3000 )
-			spawn(class'DEKRPG208AJ.BloodSpearExplosion',,,HitLocation + HitNormal*16 );
+			spawn(class'DEKRPG209A.BloodSpearExplosion',,,HitLocation + HitNormal*16 );
 		if ( (ExplosionDecal != None) && (Level.NetMode != NM_DedicatedServer) )
 			Spawn(ExplosionDecal,self,,HitLocation, rotator(-HitNormal));
 	}
@@ -104,7 +104,7 @@ defaultproperties
      Damage=200.000000
      DamageRadius=300.000000
      MomentumTransfer=70000.000000
-     MyDamageType=Class'DEKRPG208AJ.DamTypeBloodSpear'
+     MyDamageType=Class'DEKRPG209A.DamTypeBloodSpear'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'AS_Weapons_SM.Projectiles.Skaarj_Energy'
      AmbientSound=Sound'WeaponSounds.ShockRifle.ShockRifleProjectile'

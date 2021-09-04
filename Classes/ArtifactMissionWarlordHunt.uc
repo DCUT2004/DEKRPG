@@ -105,7 +105,7 @@ defaultproperties
      XPReward=30
      MissionGoal=15
      Description="Kill Warlords."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionWarlordHuntPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionWarlordHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.WarlordHuntMission'
      ItemName="Warlord Hunt"
 }

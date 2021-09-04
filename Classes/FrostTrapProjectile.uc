@@ -274,10 +274,10 @@ defaultproperties
      Damage=200.000000
      DamageRadius=300.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG208AJ.DamTypeFrostTrap'
+     MyDamageType=Class'DEKRPG209A.DamTypeFrostTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.FrostTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.FrostTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

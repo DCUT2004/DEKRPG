@@ -51,6 +51,6 @@ function bool IsEngineerLocked()
 
 defaultproperties
 {
-     LockOverlay=Shader'DEKRPGTexturesMaster208K.fX.PulseRedShader'
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG208AJ.Druid_IonPlasma_Weapon')
+     LockOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG209A.Druid_IonPlasma_Weapon')
 }

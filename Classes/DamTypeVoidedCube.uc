@@ -3,7 +3,7 @@ class DamTypeVoidedCube extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AJ.WeaponVoidedCube'
+     WeaponClass=Class'DEKRPG209A.WeaponVoidedCube'
      DeathString="%o fell into %k's Voided Cube."
      FemaleSuicide="%o fell into her own Voided Cube."
      MaleSuicide="%o fell into his own Voided Cube."

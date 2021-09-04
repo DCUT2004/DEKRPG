@@ -2,6 +2,6 @@ class ArtifactMissionAngerManagementPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionAngerManagement'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionAngerManagement'
      PickupMessage="You picked up the Anger Management Mission!"
 }

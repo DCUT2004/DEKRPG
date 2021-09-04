@@ -214,8 +214,8 @@ defaultproperties
      EntryRadius=120.000000
      VehicleNameString="Lightning Turret"
      DrawScale=0.200000
-     Skins(0)=Combiner'DEKRPGTexturesMaster208K.Skins.LightningLinkTurret1Combiner'
-     Skins(1)=Combiner'DEKRPGTexturesMaster208K.Skins.LightningLinkTurret2Combiner'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209A.Skins.LightningLinkTurret1Combiner'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209A.Skins.LightningLinkTurret2Combiner'
      Skins(2)=Shader'EpicParticles.Beams.hotbolt03SHAD'
      CollisionRadius=60.000000
      CollisionHeight=90.000000

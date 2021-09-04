@@ -50,7 +50,7 @@ function Died(Controller Killer, class<DamageType> damageType, vector HitLocatio
 defaultproperties
 {
 	 BiteDamage=20
-     ControllerClass=Class'DEKRPG208AJ.DEKFriendlyMonsterController'
+     ControllerClass=Class'DEKRPG209A.DEKFriendlyMonsterController'
      HealthMax=200.000000
      Health=200
      AirSpeed=2000.000000

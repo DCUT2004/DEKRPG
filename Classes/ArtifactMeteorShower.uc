@@ -142,6 +142,6 @@ defaultproperties
      AdrenalineRequired=50
      CostPerSec=1
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.MeteorShower'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.MeteorShower'
      ItemName="Meteor Shower"
 }

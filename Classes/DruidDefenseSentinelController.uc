@@ -4,15 +4,12 @@ class DruidDefenseSentinelController extends Controller
 var Controller PlayerSpawner;
 var RPGStatsInv StatsInv;
 var MutUT2004RPG RPGMut;
-var MutTeamAdrenaline MutTA;
 
 var config float TimeBetweenShots;
 var config float TargetRadius;
 var config float XPPerHit;      // the amount of xp the summoner gets per projectile taken out
 var config float XPPerHealing;      // the amount of xp the summoner gets per projectile taken out
 var config int HealFreq;        // how often to go through the healing loop. 2 means every other time.
-var int MonsterAdrenCounter;
-var config int MonsterAdrenThreshold;	//How many hits def sent does to reward 1 monster team adrenaline
 
 var float DamageAdjust;		// set by AbilityLoadedEngineer
 
@@ -45,13 +42,6 @@ simulated event PostBeginPlay()
 				RPGMut = MutUT2004RPG(m);
 				break;
 			}
-		for (m = Level.Game.BaseMutator; m != None; m = m.NextMutator)
-			if (MutTeamAdrenaline(m) != None)
-			{
-				MutTA = MutTeamAdrenaline(m);
-				break;
-			}
-	MonsterAdrenCounter = 0;
 }
 
 function SetPlayerSpawner(Controller PlayerC)
@@ -371,6 +361,8 @@ simulated function Timer()
 			{
 				if (BestP.Damage >= BestP.default.Damage)
 					BestP.Damage *= DamageMultiplier;
+				if (BestP.IsA('SMPTitanBigRock'))
+					BestP.SetDrawscale(BestP.Drawscale/2);
 				if (BestP.Damage < MinimumDamage)
 					BestP.Damage = MinimumDamage;
 			}
@@ -391,12 +383,6 @@ simulated function Timer()
 			if ((DefPawn.XPPerHit > 0) && (StatsInv != None) && (StatsInv.DataObject != None) && (RPGMut != None) && (PlayerSpawner != None) && (PlayerSpawner.Pawn != None))
 			{
 					StatsInv.DataObject.AddExperienceFraction(DefPawn.XPPerHit, RPGMut, PlayerSpawner.Pawn.PlayerReplicationInfo);
-			}
-			MonsterAdrenCounter++;
-			if (MutTA != None && MonsterAdrenCounter >= MonsterAdrenThreshold)
-			{
-				MutTA.MonsterTeamAdrenaline += 1.000000000;
-				MonsterAdrenCounter = 0;
 			}
 		}
 	}
@@ -431,15 +417,14 @@ defaultproperties
      XPPerHit=0.066000
      XPPerHealing=0.020000
      HealFreq=6
-	 MonsterAdrenThreshold=20	//Every 20 hits by def sent rewards 1 monster adren
 	 MinimumDamage=10
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG208AJ.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG208AJ.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG208AJ.BlueBoltEmitter'
-     AdrenalineEmitterClass=Class'DEKRPG208AJ.WhiteBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG208AJ.RedBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG208AJ.BronzeBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209A.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG209A.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG209A.BlueBoltEmitter'
+     AdrenalineEmitterClass=Class'DEKRPG209A.WhiteBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG209A.RedBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG209A.BronzeBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
 	 bDestroyProjs=False
 	 DamageMultiplier=0.10000000

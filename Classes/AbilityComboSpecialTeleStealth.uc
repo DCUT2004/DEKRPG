@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AJ.AbilityComboSpecialVoidedCubes'
-    ExcludingAbilities(1)=Class'DEKRPG208AJ.AbilityComboSpecialSwarm'
-    ExcludingAbilities(2)=Class'DEKRPG208AJ.AbilityComboSpecialBeastsRevenge'
-    ExcludingAbilities(3)=Class'DEKRPG208AJ.AbilityComboSpecialRavenRitual'
+    ExcludingAbilities(0)=Class'DEKRPG209A.AbilityComboSpecialVoidedCubes'
+    ExcludingAbilities(1)=Class'DEKRPG209A.AbilityComboSpecialSwarm'
+    ExcludingAbilities(2)=Class'DEKRPG209A.AbilityComboSpecialBeastsRevenge'
+    ExcludingAbilities(3)=Class'DEKRPG209A.AbilityComboSpecialRavenRitual'
 	AbilityName="Special: Tele-Stealth"
 	Description="Teleports the caster to a random location. For 20 seconds, the caster is invisible to monsters and is immune to new ailments. While the caster is invisible, the caster accumulates energy equivalent to 3% of the damage dealt to enemies per level. When the caster becomes visible, the caster deals damage equivalent to the accumulated energy to a single target.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Universal Translator you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -42,14 +42,14 @@ defaultproperties
 	Dispellable=True
 	All=False
 	Single=True
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(25))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(30))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(35))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialTranslator'),RequiredMaterialLevels=(50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(25))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(30))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(35))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialTranslator'),RequiredMaterialLevels=(50))
 }

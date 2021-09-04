@@ -41,7 +41,7 @@ defaultproperties
      LightBrightness=255.000000
      LightRadius=3.000000
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.TeamMushrooms'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.TeamMushrooms'
      bDynamicLight=True
      DrawScale=0.400000
      Skins(0)=Texture'MissionsTex6.TeamMissions.TeamMushroomRedSkin'

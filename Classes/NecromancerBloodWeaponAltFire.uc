@@ -10,8 +10,8 @@ defaultproperties
      TransientSoundVolume=0.400000
      FireSound=Sound'PlayerSounds.NewGibs.NewGib1'
      FireRate=1.110000
-     AmmoClass=Class'DEKRPG208AJ.NecromancerBloodWeaponAmmo'
+     AmmoClass=Class'DEKRPG209A.NecromancerBloodWeaponAmmo'
      AmmoPerFire=2
-     ProjectileClass=Class'DEKRPG208AJ.NecromancerBloodWeaponAltProj'
+     ProjectileClass=Class'DEKRPG209A.NecromancerBloodWeaponAltProj'
      BotRefireRate=0.500000
 }

@@ -6,6 +6,6 @@ class AerialTrapAmmo extends ONSGrenadeAmmo;
 defaultproperties
 {
      MaxAmmo=10
-     PickupClass=Class'DEKRPG208AJ.AerialTrapAmmoPickup'
+     PickupClass=Class'DEKRPG209A.AerialTrapAmmoPickup'
      ItemName="Aerial Bombs"
 }

@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AJ.ArtifactRepulsion'
+     InventoryType=Class'DEKRPG209A.ArtifactRepulsion'
      PickupMessage="You got the Repulsion Artifact!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

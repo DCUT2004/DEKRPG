@@ -25,7 +25,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=0.300000,Max=0.300000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AJ.BombTrapBeacon.SpriteEmitter4'
+     Emitters(0)=SpriteEmitter'DEKRPG209A.BombTrapBeacon.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -49,7 +49,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG208AJ.BombTrapBeacon.SpriteEmitter5'
+     Emitters(1)=SpriteEmitter'DEKRPG209A.BombTrapBeacon.SpriteEmitter5'
 
      TimeTillResetRange=(Min=5.000000,Max=5.000000)
      AutoReset=True

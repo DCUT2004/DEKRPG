@@ -3,7 +3,7 @@ class DamTypeBloodBurst extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG208AJ.NecromancerBloodWeapon'
+     WeaponClass=Class'DEKRPG209A.NecromancerBloodWeapon'
      DeathString="%o caught %k's blood ball."
      FemaleSuicide="%o mishandled blood magic."
      MaleSuicide="%o mishandled blood magic."

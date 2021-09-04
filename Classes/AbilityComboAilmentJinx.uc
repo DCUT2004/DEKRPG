@@ -26,12 +26,12 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG208AJ.AbilityComboAilmentBlind'
-	ExcludingAbilities(1)=Class'DEKRPG208AJ.AbilityComboAilmentCurse'
-	ExcludingAbilities(2)=Class'DEKRPG208AJ.AbilityComboAilmentDefense'
-	ExcludingAbilities(3)=Class'DEKRPG208AJ.AbilityComboAilmentFreeze'
-	ExcludingAbilities(4)=Class'DEKRPG208AJ.AbilityComboAilmentAttack'
-	ExcludingAbilities(5)=Class'DEKRPG208AJ.AbilityComboAilmentPoison'
+    ExcludingAbilities(0)=Class'DEKRPG209A.AbilityComboAilmentBlind'
+	ExcludingAbilities(1)=Class'DEKRPG209A.AbilityComboAilmentCurse'
+	ExcludingAbilities(2)=Class'DEKRPG209A.AbilityComboAilmentDefense'
+	ExcludingAbilities(3)=Class'DEKRPG209A.AbilityComboAilmentFreeze'
+	ExcludingAbilities(4)=Class'DEKRPG209A.AbilityComboAilmentAttack'
+	ExcludingAbilities(5)=Class'DEKRPG209A.AbilityComboAilmentPoison'
 	AbilityName="Ailment: Jinx"
 	Description="A single target receives Jinx. While jinxed, the target strikes down any of its projectiles as well as its allies' projectiles. If the target dies, the curse moves to a new target, and will continue this process for 25 seconds. Each level increases the speed at which projectiles are shot down. This ailment can not be stacked. Jinxed targets have a pink-purple glow.||You can only have one type of Ailment combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Gloves and Steel you wish to purchase. Additionally:||Level 5: 10 Honeysuckle Vine, 10 Arctic Suit||Level 6: 20 Honeysuckle Vine, 20 Arctic Suit||Level 7: 30 Honeysuckle Vine, 30 Arctic Suit||Level 8: 40 Honeysuckle Vine, 40 Arctic Suit, 10 Nanite Fragments||Level 9: 45 Honeysuckle Vine, 45 Arctic Suit, 25 Nanite Fragments||Level 10: 50 Honeysuckle Vine, 50 Arctic Suit, 50 Nanite Fragments||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -44,14 +44,14 @@ defaultproperties
 	Dispellable=True
 	All=False
 	Single=True
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit',Class'DEKRPG208AJ.AbilityMaterialNanite'),RequiredMaterialLevels=(40,40,40,40,10))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit',Class'DEKRPG208AJ.AbilityMaterialNanite'),RequiredMaterialLevels=(45,45,45,45,25))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG208AJ.AbilityMaterialSteel',Class'DEKRPG208AJ.AbilityMaterialGloves',Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine',Class'DEKRPG208AJ.AbilityMaterialArcticSuit',Class'DEKRPG208AJ.AbilityMaterialNanite'),RequiredMaterialLevels=(50,50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit',Class'DEKRPG209A.AbilityMaterialNanite'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit',Class'DEKRPG209A.AbilityMaterialNanite'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialSteel',Class'DEKRPG209A.AbilityMaterialGloves',Class'DEKRPG209A.AbilityMaterialHoneysuckleVine',Class'DEKRPG209A.AbilityMaterialArcticSuit',Class'DEKRPG209A.AbilityMaterialNanite'),RequiredMaterialLevels=(50,50,50,50,50))
 }

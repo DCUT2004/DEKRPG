@@ -8,6 +8,7 @@ var config int MaterialKillChance, MaterialGameWinChance;	//The chance to unlock
 var config int LowMaterialChance, MediumMaterialChance;
 var config float PlayerAdrenPerKill, MonsterAdrenPerHit;
 var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
+var config int MinAdrenAmount;	//Minimum adrenaline amount to award on an event
 
 function PostBeginPlay()
 {
@@ -104,7 +105,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	{
 		if (injured != None && instigatedBy != None)
 		{
-			if (instigatedBy.IsA('Monster') && injured.GetTeamNum() != instigatedBy.GetTeamNum() && TA.MonsterTeamAdrenaline < TA.FullAdrenalineMonster)
+			if (instigatedBy.IsA('Monster') && !injured.IsA('Monster') && !injured.IsA('DruidBlock') && injured.GetTeamNum() != instigatedBy.GetTeamNum() && TA.MonsterTeamAdrenaline < TA.FullAdrenalineMonster)
 			{
 				AddMonsterTeamAdren();
 			}
@@ -290,6 +291,8 @@ function AddPlayerTeamAdren(int AdrenAmount)
 {
 	if (TA != None)
 	{
+		if (AdrenAmount < MinAdrenAmount)
+			AdrenAmount = MinAdrenAmount;
 		TA.PlayerTeamAdrenaline += AdrenAmount;
 		if (TA.PlayerTeamAdrenaline > TA.FullAdrenalinePlayer)
 			TA.PlayerTeamAdrenaline = TA.FullAdrenalinePlayer;
@@ -308,26 +311,27 @@ function AddMonsterTeamAdren()
 
 defaultproperties
 {
+	MinAdrenAmount=1
 	MonsterScoreMultiplier=0.50000000
 	MonsterAdrenPerHit=0.20000000
 	MaterialKillChance=1
 	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material
 	MediumMaterialChance=95	//15% chance to get a medium material, 5% for a high material
-	LowMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG208AJ.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG208AJ.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG208AJ.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG208AJ.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG208AJ.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG208AJ.AbilityMaterialIcicle'
+	LowMaterials(0)=Class'DEKRPG209A.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG209A.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG209A.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG209A.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG209A.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG209A.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG209A.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG209A.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG209A.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG209A.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG209A.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG209A.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG209A.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG209A.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG209A.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG209A.AbilityMaterialIcicle'
 }

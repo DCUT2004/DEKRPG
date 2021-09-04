@@ -85,5 +85,5 @@ defaultproperties
 {
      Damage=39.000000
      DamageRadius=0.000000
-     MyDamageType=Class'DEKRPG208AJ.DamTypePlasmaTurret'
+     MyDamageType=Class'DEKRPG209A.DamTypePlasmaTurret'
 }

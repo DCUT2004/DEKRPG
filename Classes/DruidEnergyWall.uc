@@ -190,7 +190,7 @@ defaultproperties
 	DefaultPost=class'DruidEnergyWallPost'
 	RemoteRole=ROLE_SimulatedProxy
 	DrawType=DT_StaticMesh
-	StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.TestBlock'
+	StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.TestBlock'
 	Skins(0)=FinalBlend'AW-ShieldShaders.Shaders.RedShieldFinal'
 	Skins(1)=FinalBlend'AW-ShieldShaders.Shaders.RedShieldFinal'
 	DrawScale=0.5

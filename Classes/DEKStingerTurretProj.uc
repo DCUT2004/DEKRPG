@@ -229,7 +229,7 @@ defaultproperties
      Speed=6000.000000
      Damage=25.000000
      MomentumTransfer=4000.000000
-     MyDamageType=Class'DEKRPG208AJ.DamTypeStingerTurret'
+     MyDamageType=Class'DEKRPG209A.DamTypeStingerTurret'
      ImpactSound=Sound'WeaponSounds.BaseImpactAndExplosions.BBulletImpact9'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence
@@ -239,7 +239,7 @@ defaultproperties
      LightRadius=1.000000
      LightPeriod=10
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.CrystalA'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.CrystalA'
      bDynamicLight=True
      LifeSpan=4.000000
      LODBias=7.000000

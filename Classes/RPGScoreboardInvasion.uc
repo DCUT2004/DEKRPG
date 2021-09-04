@@ -97,7 +97,7 @@ simulated function DrawXP (Canvas Canvas, int PlayerIndex, int PTypeXPos, int XP
 			}
 			else if (CopyXPs[j].PlayerClass == 7)
 			{	//Necromancer
-				Canvas.DrawTile(Material'DEKRPGTexturesMaster208K.NecroIcons.NecroClassIcon',YL,YL,1,1,64,64);
+				Canvas.DrawTile(Material'DEKRPGTexturesMaster209A.NecroIcons.NecroClassIcon',YL,YL,1,1,64,64);
 				if (CopyXps[j].SubClass != "" && CopyXps[j].SubClass != "None")
 					DrawSubClass (Canvas, CopyXps[j].SubClass, PTypeXPos + (YL/2), NewYPos);
 				Canvas.DrawColor = NecroRedColor;

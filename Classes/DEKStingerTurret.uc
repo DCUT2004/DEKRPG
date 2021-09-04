@@ -295,8 +295,8 @@ defaultproperties
      DriverDamageMult=0.000000
      VehiclePositionString="manning a Stinger Turret"
      VehicleNameString="Stinger Turret"
-     Skins(0)=Combiner'DEKRPGTexturesMaster208K.Skins.StingerMinigunTurret2Combiner'
-     Skins(1)=Combiner'DEKRPGTexturesMaster208K.Skins.StingerMinigunTurret1Combiner'
-     Skins(2)=FinalBlend'DEKRPGTexturesMaster208K.Skins.StingerMinigunTurretTopFinalBlend'
-     Skins(3)=FinalBlend'DEKRPGTexturesMaster208K.Skins.StingerMinigunTurretTopFinalBlend'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209A.Skins.StingerMinigunTurret2Combiner'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209A.Skins.StingerMinigunTurret1Combiner'
+     Skins(2)=FinalBlend'DEKRPGTexturesMaster209A.Skins.StingerMinigunTurretTopFinalBlend'
+     Skins(3)=FinalBlend'DEKRPGTexturesMaster209A.Skins.StingerMinigunTurretTopFinalBlend'
 }

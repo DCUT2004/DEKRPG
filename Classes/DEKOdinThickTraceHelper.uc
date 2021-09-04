@@ -23,8 +23,8 @@ static function array<THitInfo> TraceHits(Actor Requester, vector Start, vector 
 	Helper = Requester.Spawn(default.Class, None, '', Start);
 	if (Helper != None)
 	{
-		Helper.SetCollisionSize(TraceRadius * 1.2, TraceRadius * 1.2);
 		Helper.SetCollision(True, False, False);
+		Helper.SetCollisionSize(TraceRadius * 1.2, TraceRadius * 1.2);
 
 		TraceDir = End - Start;
 		TraceLength = VSize(TraceDir);

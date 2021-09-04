@@ -2,6 +2,6 @@ class ArtifactMissionNaniteCrashPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionNaniteCrash'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionNaniteCrash'
      PickupMessage="You picked up the Nanite Crash Mission!"
 }

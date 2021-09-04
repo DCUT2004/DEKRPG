@@ -59,7 +59,7 @@ function Activate()
 				MMPI.GenomeXPPerVial = XPReward;
 				for ( C = Level.ControllerList; C != None; C = C.NextController )
 					if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-						PlayerController(C).ClientPlaySound(Sound'DEKRPG208AJ.MissionSounds.MPSelect');
+						PlayerController(C).ClientPlaySound(Sound'DEKRPG209A.MissionSounds.MPSelect');
 				SetTimer(0.5,True);
 				BroadcastMission();
 			}
@@ -106,7 +106,7 @@ defaultproperties
      TimeLimit=120
      Description="(T)Find and return vials to the node for study!"
      TeamMission=True
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionTeamGenomeProjectPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionTeamGenomeProjectPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.GenomeProject'
      ItemName="Genome Project"
 }

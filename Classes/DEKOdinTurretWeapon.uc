@@ -490,7 +490,7 @@ function TraceFire(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     FireBuildUpSound=Sound'DEKRPG208AJ.TurretSounds.OdinMainCharge'
+     FireBuildUpSound=Sound'DEKRPG209A.TurretSounds.OdinMainCharge'
      BlastBuildUpDelay=1.250000
      EffectsAttachBone="Muzzle"
      OuterTraceOffset=35.000000
@@ -507,10 +507,10 @@ defaultproperties
      bDoOffsetTrace=True
      FireIntervalAimLock=0.400000
      FireInterval=8.500000
-     FireSoundClass=Sound'DEKRPG208AJ.TurretSounds.OdinMainFire'
+     FireSoundClass=Sound'DEKRPG209A.TurretSounds.OdinMainFire'
      FireSoundVolume=512.000000
      RotateSound=Sound'ONSBPSounds.ShockTank.TurretHorizontal'
-     DamageType=Class'DEKRPG208AJ.DamTypeDEKOdinBeam'
+     DamageType=Class'DEKRPG209A.DamTypeDEKOdinBeam'
      DamageMin=200
      DamageMax=315
      TraceRange=20000.000000

@@ -245,6 +245,6 @@ defaultproperties
      TimeBetweenUses=2.000000
      AdrenalineRequired=100
      CostPerSec=1
-     IconMaterial=Shader'DEKRPGTexturesMaster208K.Artifacts.ResurrectionWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.ResurrectionWeaponMakerIconShader'
      ItemName="One Use Revive"
 }

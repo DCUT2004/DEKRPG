@@ -195,7 +195,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AJ.PurpleBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209A.PurpleBoltEmitter'
      AdrenalineRequired=100
      MaxRange=3000.000000
      DamageRunTime=20
@@ -203,6 +203,6 @@ defaultproperties
      KillXPPerc=0.250000
      CostPerSec=1
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.RemoteDamageIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.RemoteDamageIcon'
      ItemName="Remote Extra Damage"
 }

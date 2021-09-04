@@ -83,7 +83,7 @@ defaultproperties
      AirSpeed=540.000000
      HealthMax=1.000000
      Health=1
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.Balloon1'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.Balloon1'
      Physics=PHYS_Flying
      DrawScale=0.350000
      Skins(0)=Texture'MissionsTex6.Colors.Red'

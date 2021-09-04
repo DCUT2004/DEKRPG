@@ -15,7 +15,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if (WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209A.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -38,7 +38,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG208AJ.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209A.ComboSounds.Ward');
 				Destroy();
 				return;
 			}
@@ -77,5 +77,5 @@ defaultproperties
 	 bBuff=False
 	 ComboNameMessage="- Life Drain: "
 	 MinimumHealth=50
-     EffectEmitterClass=Class'DEKRPG208AJ.ComboInaccuracyEffect'
+     EffectEmitterClass=Class'DEKRPG209A.ComboInaccuracyEffect'
 }

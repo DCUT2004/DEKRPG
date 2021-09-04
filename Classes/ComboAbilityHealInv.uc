@@ -2,6 +2,8 @@
 class ComboAbilityHealInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
+var config float MaxMultiplier;
+	
 function DoEffect()
 {
 	local Controller C, NextC;
@@ -16,6 +18,8 @@ function DoEffect()
 			if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.SameTeamAs(Pawn(Owner).Controller))
 			{
 				C.Pawn.GiveHealth(EffectMultiplier, C.Pawn.Health + EffectMultiplier);
+				if (C.Pawn.Health > C.Pawn.HealthMax*MaxMultiplier)
+					C.Pawn.Health = C.Pawn.HealthMax*MaxMultiplier;
 				if (PlayerController(C) != None)
 					PlayerController(C).ClientPlaySound(Sound'PickupSounds.HealthPack');
 			}
@@ -26,4 +30,5 @@ function DoEffect()
 
 defaultproperties
 {
+	MaxMultiplier=2.000000
 }

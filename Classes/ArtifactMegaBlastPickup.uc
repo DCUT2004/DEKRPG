@@ -2,7 +2,7 @@ class ArtifactMegaBlastPickup extends RPGArtifactPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMegaBlast'
+     InventoryType=Class'DEKRPG209A.ArtifactMegaBlast'
      PickupMessage="You got the MegaBlast!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

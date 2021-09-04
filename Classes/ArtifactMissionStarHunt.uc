@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=20
      Description="Kill Cosmic monsters."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionStarHuntPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionStarHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.StarHuntMission'
      ItemName="Star Hunt"
 }

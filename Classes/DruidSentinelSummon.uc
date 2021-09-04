@@ -1099,6 +1099,6 @@ function bool SpawnEnergyWall(TranslocatorBeacon Beacon, Pawn P, EngineerPointsI
 
 defaultproperties
 {
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.SummonSentinelIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.SummonSentinelIcon'
      ItemName=""
 }

@@ -1,6 +1,8 @@
-class ComboRegenerateInv extends ComboEffectInv;
+class ComboRegenerateInv extends ComboEffectInv
+	config(UT2004RPG);
 
 var MissionSoloInv MInv;
+var config float MaxMultiplier;
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
@@ -30,6 +32,8 @@ function Timer()
 			}
 		}*/
 		PawnOwner.GiveHealth(EffectMultiplier, PawnOwner.Health + EffectMultiplier);
+		if (PawnOwner.Health > PawnOwner.HealthMax*MaxMultiplier)
+			PawnOwner.Health = PawnOwner.HealthMax*MaxMultiplier;
 		if (MInv != None && MInv.LifeMendActive)
 		{
 			MInv.MissionCount += EffectMultiplier;
@@ -50,6 +54,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
+	 MaxMultiplier=2.00000
 	 bBuff=True
 	 ComboNameMessage="Regenerate: "
      EffectxEmitterClass=Class'XEffects.RegenCrosses'

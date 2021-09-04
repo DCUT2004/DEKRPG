@@ -98,7 +98,7 @@ defaultproperties
          InitialDelayRange=(Min=0.200000,Max=0.200000)
          StartVelocityRange=(X=(Min=-20.000000,Max=20.000000),Y=(Min=-30.000000,Max=30.000000),Z=(Min=-10.000000,Max=30.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG208AJ.DEKOdinBlastEmitter.BeamSmoke'
+     Emitters(0)=SpriteEmitter'DEKRPG209A.DEKOdinBlastEmitter.BeamSmoke'
 
      Begin Object Class=BeamEmitter Name=MainBeam
          BeamDistanceRange=(Min=30000.000000,Max=30000.000000)
@@ -119,12 +119,12 @@ defaultproperties
          StartSizeRange=(X=(Min=120.000000,Max=120.000000))
          InitialParticlesPerSecond=1000.000000
          DrawStyle=PTDS_Brighten
-         Texture=Texture'DEKRPGTexturesMaster208K.fX.OdinMainBeam'
+         Texture=Texture'DEKRPGTexturesMaster209A.fX.OdinMainBeam'
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=1.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=1.000000,Max=1.000000))
      End Object
-     Emitters(1)=BeamEmitter'DEKRPG208AJ.DEKOdinBlastEmitter.MainBeam'
+     Emitters(1)=BeamEmitter'DEKRPG209A.DEKOdinBlastEmitter.MainBeam'
 
      Begin Object Class=BeamEmitter Name=MuzzleFlash
          BeamDistanceRange=(Min=150.000000,Max=150.000000)
@@ -146,7 +146,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          StartVelocityRange=(X=(Min=1.000000,Max=1.000000))
      End Object
-     Emitters(2)=BeamEmitter'DEKRPG208AJ.DEKOdinBlastEmitter.MuzzleFlash'
+     Emitters(2)=BeamEmitter'DEKRPG209A.DEKOdinBlastEmitter.MuzzleFlash'
 
      AutoDestroy=True
      bNoDelete=False

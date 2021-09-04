@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=50
      Description="Make kills while standing still."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionRootedStancePickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionRootedStancePickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.RootedStanceMission'
      ItemName="Rooted Stance"
 }

@@ -255,19 +255,6 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 
 defaultproperties
 {
-     Weapons(0)="XWeapons.RocketLauncher"
-     Weapons(1)="XWeapons.ShockRifle"
-     Weapons(2)="UT2004RPG.RPGLinkGun"
-     Weapons(3)="XWeapons.SniperRifle"
-     Weapons(4)="XWeapons.FlakCannon"
-     Weapons(5)="XWeapons.MiniGun"
-     Weapons(6)="XWeapons.BioRifle"
-     ONSWeapons(0)="UTClassic.ClassicSniperRifle"
-     ONSWeapons(1)="Onslaught.ONSGrenadeLauncher"
-     ONSWeapons(2)="Onslaught.ONSAVRiL"
-     ONSWeapons(3)="Onslaught.ONSMineLayer"
-     SuperWeapons(0)="XWeapons.Redeemer"
-     SuperWeapons(1)="XWeapons.Painter"
      WeaponDamage=1.200000
      AdrenalineDamage=0.500000
      PlayerLevelReqd(1)=1

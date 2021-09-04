@@ -5,6 +5,6 @@ class DEKLaserGrenadePickup extends ONSGrenadePickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.DEKLaserGrenadeLauncher'
+     InventoryType=Class'DEKRPG209A.DEKLaserGrenadeLauncher'
      PickupMessage="You got the Laser Grenade Launcher."
 }

@@ -42,6 +42,6 @@ function BotConsider()
 defaultproperties
 {
      MinActivationTime=0.000000
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.KillSummoningCharmIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.KillSummoningCharmIcon'
      ItemName="Kill All Summoned Monsters"
 }

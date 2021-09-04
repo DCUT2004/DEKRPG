@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AJ.ArtifactFreezeBomb'
+     InventoryType=Class'DEKRPG209A.ArtifactFreezeBomb'
      PickupMessage="You got the FreezeBomb!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

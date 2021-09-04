@@ -41,7 +41,7 @@ static function int BotBuyChance(Bot B, RPGPlayerDataObject Data, int CurrentLev
 
 defaultproperties
 {
-     RequiredAbilities(0)=Class'DEKRPG208AJ.AbilityDEKLoadedHealing'
+     RequiredAbilities(0)=Class'DEKRPG209A.AbilityDEKLoadedHealing'
      AbilityName="Medic Awareness"
      Description="Informs you of your friends' health with a display over their heads. At level 1 you get a small dully-colored indicator - blue for very healthy, green for reasonably healthy, yellow for hurt, and then red for near death. At level 2 you get a larger and more brightly colored health bar with a white background, that shrinks and changes colors as the target gains health. The bar will turn a full solid blue if the target is fully healed. You need to have the same level of Loaded Medic to purchase this skill. Cost per level: 10, 15. "
      StartingCost=10

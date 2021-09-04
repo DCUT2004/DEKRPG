@@ -2,6 +2,6 @@ class ArtifactMissionMightyLightningPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionMightyLightning'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionMightyLightning'
      PickupMessage="You picked up the Mighty Lightning Mission!"
 }

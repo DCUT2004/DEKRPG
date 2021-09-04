@@ -1,6 +1,6 @@
 class DruidDefenseSentinelCrimbo extends ASTurret;
-#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster208K.usx
-#exec OBJ LOAD FILE=..\Textures\DEKRPGTexturesMaster208K.utx
+#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209B.usx
+#exec OBJ LOAD FILE=..\Textures\DEKRPGTexturesMaster209A.utx
 
 var int ShieldHealingLevel;
 var int HealthHealingLevel;
@@ -32,13 +32,13 @@ defaultproperties
      ArmorHealingAmount=1.000000
      TargetRadius=700.000000
      XPPerHit=0.066000
-     TurretBaseClass=Class'DEKRPG208AJ.DruidDefenseSentinelBaseCrimbo'
+     TurretBaseClass=Class'DEKRPG209A.DruidDefenseSentinelBaseCrimbo'
      VehicleNameString="Defense Sentinel"
      bCanBeBaseForPawns=False
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.ChristmasMeshes.FloorCandyCane'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.ChristmasMeshes.FloorCandyCane'
      DrawScale=0.300000
-     Skins(0)=Shader'DEKRPGTexturesMaster208K.SkinsChristmas.FloorSentShader'
-     Skins(1)=FinalBlend'DEKRPGTexturesMaster208K.fX.DefensePanFinal'
+     Skins(0)=Shader'DEKRPGTexturesMaster209A.SkinsChristmas.FloorSentShader'
+     Skins(1)=FinalBlend'DEKRPGTexturesMaster209A.fX.DefensePanFinal'
      CollisionRadius=0.000000
      CollisionHeight=0.000000
 }

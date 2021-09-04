@@ -11,7 +11,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (ShockProjFire(FireMode[1]) != None)
 	{
-		ShockProjFire(FireMode[1]).ProjectileClass=Class'DEKWeapons208AJ.UpgradeShockProjectile';
+		ShockProjFire(FireMode[1]).ProjectileClass=Class'DEKWeapons209A.UpgradeShockProjectile';
 	}
 }
 

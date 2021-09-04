@@ -34,8 +34,8 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 defaultproperties
 {
      WeaponDamage=0.500000
-     ExcludingAbilities(0)=Class'DEKRPG208AJ.AbilityPaladinCraftsman'
-     ExcludingAbilities(1)=Class'DEKRPG208AJ.AbilityEnchanterCraftsman'
+     ExcludingAbilities(0)=Class'DEKRPG209A.AbilityPaladinCraftsman'
+     ExcludingAbilities(1)=Class'DEKRPG209A.AbilityEnchanterCraftsman'
      AbilityName="Niche: Priest"
      Description="Each time a team player that you've granted invulnerability or boost damage to makes a kill, you receive 10% per level of their adrenaline kill value as adrenaline. This can be useful for sustaining spheres and remote artifacts. Weapon and vehicle damage is reduced.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

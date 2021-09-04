@@ -24,13 +24,13 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG208AJ.ArtifactLightningBeam'
+     InventoryType=Class'DEKRPG209A.ArtifactLightningBeam'
      PickupMessage="You got the Lightning Beam!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Artifacts.LightningBeam'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Artifacts.LightningBeam'
      DrawScale=0.250000
-     Skins(0)=Shader'DEKRPGTexturesMaster208K.Artifacts.LBeam'
+     Skins(0)=Shader'DEKRPGTexturesMaster209A.Artifacts.LBeam'
      AmbientGlow=128
 }

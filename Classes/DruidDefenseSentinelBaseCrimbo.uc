@@ -1,14 +1,14 @@
 class DruidDefenseSentinelBaseCrimbo extends ASTurret_Base;
 
-#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster208K.usx
-#exec OBJ LOAD FILE=..\Textures\DEKRPGTexturesMaster208K.utx
+#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209B.usx
+#exec OBJ LOAD FILE=..\Textures\DEKRPGTexturesMaster209A.utx
 
 defaultproperties
 {
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.ChristmasMeshes.FloorCandyCane'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.ChristmasMeshes.FloorCandyCane'
      DrawScale=0.300000
-     Skins(0)=Shader'DEKRPGTexturesMaster208K.SkinsChristmas.FloorSentShader'
-     Skins(1)=FinalBlend'DEKRPGTexturesMaster208K.fX.DefensePanFinal'
+     Skins(0)=Shader'DEKRPGTexturesMaster209A.SkinsChristmas.FloorSentShader'
+     Skins(1)=FinalBlend'DEKRPGTexturesMaster209A.fX.DefensePanFinal'
      AmbientGlow=1
      CollisionRadius=1.000000
      CollisionHeight=10.000000

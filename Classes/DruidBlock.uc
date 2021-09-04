@@ -1,5 +1,5 @@
 class DruidBlock extends Pawn;
-#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster208K.usx
+#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209B.usx
 var byte Team;
 
 function SetTeamNum(byte T)
@@ -94,14 +94,14 @@ defaultproperties
      Health=2000
      ControllerClass=None
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster208K.Meshes.TestBlock'
+     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.TestBlock'
      bOrientOnSlope=True
      bAlwaysRelevant=True
      bIgnoreVehicles=True
      Physics=PHYS_Falling
      NetUpdateFrequency=4.000000
      DrawScale=1.200000
-     Skins(0)=Texture'DEKRPGTexturesMaster208K.Skins.ConcreteBlock'
+     Skins(0)=Texture'DEKRPGTexturesMaster209A.Skins.ConcreteBlock'
      AmbientGlow=10
      bShouldBaseAtStartup=False
      CollisionRadius=29.500000

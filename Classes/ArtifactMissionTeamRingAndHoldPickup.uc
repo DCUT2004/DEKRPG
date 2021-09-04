@@ -2,6 +2,6 @@ class ArtifactMissionTeamRingAndHoldPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionTeamRingAndHold'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionTeamRingAndHold'
      PickupMessage="You picked up the Ring and Hold team mission!"
 }

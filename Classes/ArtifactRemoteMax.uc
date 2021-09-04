@@ -197,13 +197,13 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG208AJ.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209A.LightningBeamEmitter'
      AdrenalineRequired=150
      MaxRange=3000.000000
      XPforUse=20
      bWeaponDroppable=True
      CostPerSec=1
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.RemoteMaxIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.RemoteMaxIcon'
      ItemName="Remote Max Modifier"
 }

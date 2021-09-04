@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=100
      Description="Use the Lightning Gun."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionMightyLightningPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionMightyLightningPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionLightningGun'
      ItemName="Mighty Lightning"
 }

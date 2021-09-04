@@ -105,7 +105,7 @@ defaultproperties
 {
      MissionGoal=5
      Description="Kill monsters resurrected by a Sorcerer."
-     PickupClass=Class'DEKRPG208AJ.ArtifactMissionZombieSlayerPickup'
+     PickupClass=Class'DEKRPG209A.ArtifactMissionZombieSlayerPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.ZombieSlayerMission'
      ItemName="Zombie Slayer"
 }

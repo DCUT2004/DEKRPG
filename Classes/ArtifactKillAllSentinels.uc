@@ -42,6 +42,6 @@ function BotConsider()
 defaultproperties
 {
      MinActivationTime=0.000000
-     IconMaterial=Texture'DEKRPGTexturesMaster208K.Artifacts.KillSummonSentinelIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.KillSummonSentinelIcon'
      ItemName="Kill All Summoned Sentinels"
 }

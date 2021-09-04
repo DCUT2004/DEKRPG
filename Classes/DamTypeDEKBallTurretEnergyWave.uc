@@ -3,7 +3,7 @@ class DamTypeDEKBallTurretEnergyWave extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG208AJ.DruidBallTurret'
+     VehicleClass=Class'DEKRPG209A.DruidBallTurret'
      DeathString="%o was burnt to a crisp by %k's energy wave."
      FemaleSuicide="%o fried herself with her own energy wave."
      MaleSuicide="%o fried himself with his own energy wave."

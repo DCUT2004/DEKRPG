@@ -2,6 +2,6 @@ class ArtifactMissionUtilityMutilityPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG208AJ.ArtifactMissionUtilityMutility'
+     InventoryType=Class'DEKRPG209A.ArtifactMissionUtilityMutility'
      PickupMessage="You picked up the Utility Mutility Mission!"
 }

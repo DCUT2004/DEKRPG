@@ -22,6 +22,6 @@ defaultproperties
 {
      AdrenalineAmount=25.000000
      PickupMessage="A gift of 25 Adrenaline"
-     Skins(0)=Texture'DEKRPGTexturesMaster208K.Skins.DG-PowerAdrenalineD'
+     Skins(0)=Texture'DEKRPGTexturesMaster209A.Skins.DG-PowerAdrenalineD'
      Skins(1)=TexPanner'XGameTextures.SuperPickups.AdrenalineInnerP'
 }

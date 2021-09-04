@@ -36,45 +36,45 @@ static function LuckyStrike(Controller Killer, Controller Killed, bool bOwnedByK
 		
 		if (Killer.Pawn.Health <= default.MaxHealthForLetter && Killer.Adrenaline <= default.MaxAdrenForLetter)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.ArtifactLetterOPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG209A.ArtifactLetterOPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPTitan') || ClassIsChildOf(M.Class, class'SMPStoneTitan'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.ArtifactLetterNPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG209A.ArtifactLetterNPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPQueen'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.ArtifactLetterUPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG209A.ArtifactLetterUPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'Warlord'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.ArtifactLetterBPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG209A.ArtifactLetterBPickup', None, 1);
 			return;
 		}
 		if (M.ScoringValue >= default.ScoringValueForS)
 		{
 			if (default.LetterSChance >= rand(99))
 			{
-				DropPickups(Killed, Killer, class'DEKRPG208AJ.ArtifactLetterSPickup', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG209A.ArtifactLetterSPickup', None, 1);
 				return;
 			}
 			else
 			{	
-				DropPickups(Killed, Killer, class'DEKRPG208AJ.GemExperiencePickupPurple', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG209A.GemExperiencePickupPurple', None, 1);
 				return;
 			}
 		}
 		else if(M.ScoringValue > 6)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.GemExperiencePickupGreen', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG209A.GemExperiencePickupGreen', None, 1);
 			return;
 		}
 		else
 		{
-			DropPickups(Killed, Killer, class'DEKRPG208AJ.GemExperiencePickupBlue', None, 1);			
+			DropPickups(Killed, Killer, class'DEKRPG209A.GemExperiencePickupBlue', None, 1);			
 			return;	
 		}
 	}

@@ -8,7 +8,7 @@ class SphereDamage700r extends Emitter
 defaultproperties
 {
      Begin Object Class=MeshEmitter Name=MeshEmitter0
-         StaticMesh=StaticMesh'DEKStaticsMaster208K.fX.SphereDamage'
+         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SphereDamage'
          RenderTwoSided=True
          UseParticleColor=True
          RespawnDeadParticles=False
@@ -24,13 +24,13 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG208AJ.SphereDamage700r.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG209A.SphereDamage700r.MeshEmitter0'
 
      AutoDestroy=True
      bNoDelete=False
      bNetTemporary=True
      RemoteRole=ROLE_DumbProxy
-     Skins(0)=Shader'DEKRPGTexturesMaster208K.fX.sb_1'
+     Skins(0)=Shader'DEKRPGTexturesMaster209A.fX.sb_1'
      Style=STY_Masked
      bBlockZeroExtentTraces=False
      bBlockNonZeroExtentTraces=False

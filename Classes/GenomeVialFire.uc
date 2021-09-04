@@ -2,5 +2,5 @@ class GenomeVialFire extends GenomeVialCosmic;
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG208AJ.GenomeVialFirePickup'
+     PickupClass=Class'DEKRPG209A.GenomeVialFirePickup'
 }

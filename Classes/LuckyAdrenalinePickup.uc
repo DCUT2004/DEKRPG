@@ -11,6 +11,6 @@ defaultproperties
 {
      AdrenalineAmount=7.000000
      PickupMessage="Lucky Adrenaline "
-     Skins(0)=Texture'DEKRPGTexturesMaster208K.Skins.DG-MultiAdrenalineD'
+     Skins(0)=Texture'DEKRPGTexturesMaster209A.Skins.DG-MultiAdrenalineD'
      Skins(1)=TexPanner'XGameTextures.SuperPickups.AdrenalineInnerP'
 }

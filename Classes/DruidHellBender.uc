@@ -52,5 +52,5 @@ function bool IsEngineerLocked()
 defaultproperties
 {
      LockOverlay=FinalBlend'D-E-K-HoloGramFX.FullFB.HoloMaterial_2'
-     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG208AJ.DruidHellBenderSideGunPawn')
+     PassengerWeapons(0)=(WeaponPawnClass=Class'DEKRPG209A.DruidHellBenderSideGunPawn')
 }
