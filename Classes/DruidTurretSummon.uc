@@ -144,6 +144,6 @@ function BotConsider()
 
 defaultproperties
 {
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.SummonTurretIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.SummonTurretIcon'
      ItemName=""
 }

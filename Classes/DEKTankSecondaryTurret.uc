@@ -18,7 +18,7 @@ defaultproperties
      FireInterval=3.000000
      EffectEmitterClass=Class'OnslaughtBP.ONSShockTankMuzzleFlash'
      FireSoundClass=Sound'ONSBPSounds.ShockTank.ShockBallFire'
-     DamageType=Class'DEKRPG209A.DamTypeDEKTankAltFire'
+     DamageType=Class'DEKRPG209B.DamTypeDEKTankAltFire'
      DamageMin=150
      DamageMax=150
      ProjectileClass=Class'OnslaughtBP.ONSShockTankProjectile'

@@ -86,7 +86,7 @@ defaultproperties
      HealAmount=1.000000
      MaxHealAmount=10.000000
      MaxLifespan=20.000000
-     EffectOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader1'
+     EffectOverlay=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader1'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

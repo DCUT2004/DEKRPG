@@ -51,5 +51,5 @@ function bool IsEngineerLocked()
 
 defaultproperties
 {
-     LockOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     LockOverlay=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
 }

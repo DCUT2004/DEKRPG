@@ -6,6 +6,6 @@ class BombTrapAmmo extends ONSGrenadeAmmo;
 defaultproperties
 {
      MaxAmmo=10
-     PickupClass=Class'DEKRPG209A.BombTrapAmmoPickup'
+     PickupClass=Class'DEKRPG209B.BombTrapAmmoPickup'
      ItemName="Bombs"
 }

@@ -1,0 +1,17 @@
+class RuneBarrageFire extends RuneProjectileFire
+	config(DEKWeapons);
+
+defaultproperties
+{
+     ProjPerFire=9
+	 AdrenCost=1
+     bSplashDamage=True
+     bSplashJump=True
+     bRecommendSplashDamage=True
+     FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
+     FireForce="RocketLauncherFire"
+     FireRate=5.000000
+     ProjectileClass=Class'DEKRPG209B.RuneBarrageProj'
+     Spread=2800.000000
+     SpreadStyle=SS_Random
+}

@@ -8,13 +8,13 @@ static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictemHealt
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209A.RuneFireball_Meteor'
+     WeaponClass=Class'DEKRPG209B.RuneFireball_Heatwave'
      DeathString="%o was fried by %k's fireball."
      FemaleSuicide="%o snuffed herself with the fireball."
      MaleSuicide="%o snuffed himself with the fireball."
      bDetonatesGoop=True
      bDelayedDamage=True
-     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
      DamageOverlayTime=0.800000
      bSkeletize=True
 }

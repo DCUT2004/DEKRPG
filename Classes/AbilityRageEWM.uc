@@ -40,8 +40,8 @@ defaultproperties
 {
      MaxDamageIncrease=1.750000
      HealthMultiplier=0.030000000
-     ExcludingAbilities(0)=Class'DEKRPG209A.AbilityPrimalEWM'
-     ExcludingAbilities(1)=Class'DEKRPG209A.AbilityBloodLustEWM'
+     ExcludingAbilities(0)=Class'DEKRPG209B.AbilityPrimalEWM'
+     ExcludingAbilities(1)=Class'DEKRPG209B.AbilityBloodLustEWM'
      AbilityName="Niche: Vengeance"
      Description="Each level of this ability increases your cumulative damage bonus as your health decreases. Your maximum health bonus decreases by 3% per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time. Cost (per level): 10."
      StartingCost=10

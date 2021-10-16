@@ -265,7 +265,7 @@ defaultproperties
      Damage=50.000000
      DamageRadius=150.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG209A.DamTypeShockTrap'
+     MyDamageType=Class'DEKRPG209B.DamTypeShockTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.ShockTrap'

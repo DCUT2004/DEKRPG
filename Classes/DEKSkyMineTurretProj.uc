@@ -228,14 +228,14 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
 defaultproperties
 {
-     BeamEffectClass=Class'DEKRPG209A.DEKSkyMineBeamChained'
-     ProjectileEffectClass=Class'DEKRPG209A.DEKSkyMineShockBall'
+     BeamEffectClass=Class'DEKRPG209B.DEKSkyMineBeamChained'
+     ProjectileEffectClass=Class'DEKRPG209B.DEKSkyMineShockBall'
      ComboDamage=80.000000
      ComboRadius=375.000000
-     ComboDamageType=Class'DEKRPG209A.DamTypeSkyMineBeam'
+     ComboDamageType=Class'DEKRPG209B.DamTypeSkyMineBeam'
      Damage=12.000000
      DamageRadius=100.000000
-     MyDamageType=Class'DEKRPG209A.DamTypeDEKSkyMine'
+     MyDamageType=Class'DEKRPG209B.DamTypeDEKSkyMine'
      ExplosionDecal=None
      LightHue=10
      LightSaturation=30

@@ -17,5 +17,5 @@ defaultproperties
      CoilClass=None
      LightHue=230
      bNetTemporary=False
-     Skins(0)=ColorModifier'DEKRPGTexturesMaster209A.Runes.IceBeam'
+     Skins(0)=ColorModifier'DEKRPGTexturesMaster209B.Runes.IceBeam'
 }

@@ -3,10 +3,12 @@ class RuneLaser_Guard extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209A.RuneLaserFire'
-     FireModeClass(1)=Class'DEKRPG209A.RuneGuardFire'
+     FireModeClass(0)=Class'DEKRPG209B.RuneLaserFire'
+     FireModeClass(1)=Class'DEKRPG209B.RuneGuardFire'
      bCanThrow=False
-     HudColor=(B=255)
-     InventoryGroup=9
-     ItemName="Laser / Guard"
+     HudColor=(R=171,G=141,B=77)
+     InventoryGroup=6
+     ItemName="Forcerip / Guard"
+	 IconMaterial=Texture'DEKRPGTexturesMaster209B.Runes.ForceripGuard'
+	 IconCoords=(X1=1,Y1=1,X2=128,Y2=64)
 }

@@ -1,6 +1,6 @@
 class DEKLynxVehicle extends ONSRV;
 
-#exec OBJ LOAD FILE=..\textures\DEKRPGTexturesMaster209A.utx
+#exec OBJ LOAD FILE=..\textures\DEKRPGTexturesMaster209B.utx
 
 var bool IsLockedForSelf;
 var Controller PlayerSpawner;
@@ -152,13 +152,13 @@ function bool RecommendLongRangedAttack()
 
 defaultproperties
 {
-     LockOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG209A.DEKLynxRocketPack')
+     LockOverlay=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG209B.DEKLynxRocketPack')
      VehiclePositionString="in a Lynx"
      VehicleNameString="Lynx"
-     RanOverDamageType=Class'DEKRPG209A.DamTypeLynxRoadkill'
-     CrushedDamageType=Class'DEKRPG209A.DamTypeLynxPancake'
+     RanOverDamageType=Class'DEKRPG209B.DamTypeLynxRoadkill'
+     CrushedDamageType=Class'DEKRPG209B.DamTypeLynxPancake'
      HealthMax=400.000000
      Health=400
-     Skins(0)=Shader'DEKRPGTexturesMaster209A.Skins.Lynx'
+     Skins(0)=Shader'DEKRPGTexturesMaster209B.Skins.Lynx'
 }

@@ -148,6 +148,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      CostPerSec=5
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.HeavyGuardWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.HeavyGuardWeaponMakerIconShader'
      ItemName="Heavy Guard Enchanter"
 }

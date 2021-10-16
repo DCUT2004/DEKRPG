@@ -6,5 +6,5 @@ defaultproperties
      mMaxParticles=6
      mLifeRange(0)=0.200000
      mLifeRange(1)=0.400000
-     Skins(0)=Texture'DEKRPGTexturesMaster209A.fX.TexLightningBolt'
+     Skins(0)=Texture'DEKRPGTexturesMaster209B.fX.TexLightningBolt'
 }

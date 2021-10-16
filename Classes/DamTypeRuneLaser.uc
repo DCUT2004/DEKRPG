@@ -3,7 +3,7 @@ class DamTypeRuneLaser extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209A.RuneLaser_Guard'
+     WeaponClass=Class'DEKRPG209B.RuneLaser_Guard'
      DeathString="%o was riddled with holes by %k's Laser."
      FemaleSuicide="%o shot herself."
      MaleSuicide="%o shot himself."

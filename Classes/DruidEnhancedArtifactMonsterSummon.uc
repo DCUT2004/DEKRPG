@@ -138,5 +138,5 @@ defaultproperties
      DestroyOnUse=True
      DestroyOnUseForLA=True
      MaxAdrenaline=150
-     PickupClass=Class'DEKRPG209A.DruidEnhancedArtifactMonsterSummonPickup'
+     PickupClass=Class'DEKRPG209B.DruidEnhancedArtifactMonsterSummonPickup'
 }

@@ -21,7 +21,7 @@ defaultproperties
          LifetimeRange=(Min=0.100000,Max=0.100000)
          StartVelocityRange=(X=(Min=-300.000000,Max=300.000000),Y=(Min=-300.000000,Max=300.000000),Z=(Min=800.000000,Max=1200.000000))
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209A.FX_DruidExplodingBarrel.MeshEmitter2'
+     Emitters(0)=MeshEmitter'DEKRPG209B.FX_DruidExplodingBarrel.MeshEmitter2'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter98
          RespawnDeadParticles=False
@@ -53,7 +53,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=1.000000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter98'
+     Emitters(1)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter98'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter99
          RespawnDeadParticles=False
@@ -85,7 +85,7 @@ defaultproperties
          LifetimeRange=(Min=0.550000,Max=0.750000)
          InitialDelayRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter99'
+     Emitters(2)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter99'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter100
          UseColorScale=True
@@ -115,7 +115,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter100'
+     Emitters(3)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter100'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter101
          UseCollision=True
@@ -148,7 +148,7 @@ defaultproperties
          StartVelocityRange=(X=(Min=-4000.000000,Max=4000.000000),Y=(Min=-4000.000000,Max=4000.000000),Z=(Min=-4000.000000,Max=4000.000000))
          VelocityLossRange=(X=(Min=0.900000,Max=0.900000),Y=(Min=0.900000,Max=0.900000))
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter101'
+     Emitters(4)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter101'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter102
          UseColorScale=True
@@ -179,7 +179,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.500000)
          InitialDelayRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(5)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter102'
+     Emitters(5)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter102'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter103
          RespawnDeadParticles=False
@@ -209,7 +209,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=1.000000)
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter103'
+     Emitters(6)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter103'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter104
          UseColorScale=True
@@ -238,6 +238,6 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.500000)
          AddVelocityFromOtherEmitter=0
      End Object
-     Emitters(7)=SpriteEmitter'DEKRPG209A.FX_DruidExplodingBarrel.SpriteEmitter104'
+     Emitters(7)=SpriteEmitter'DEKRPG209B.FX_DruidExplodingBarrel.SpriteEmitter104'
 
 }

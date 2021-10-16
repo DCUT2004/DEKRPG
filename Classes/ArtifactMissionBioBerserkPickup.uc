@@ -2,6 +2,6 @@ class ArtifactMissionBioBerserkPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209A.ArtifactMissionBioBerserk'
+     InventoryType=Class'DEKRPG209B.ArtifactMissionBioBerserk'
      PickupMessage="You picked up the Bio Berserk Mission!"
 }

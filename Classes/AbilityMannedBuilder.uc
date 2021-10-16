@@ -70,7 +70,7 @@ defaultproperties
      Level3MaxPoints=26
      Level4MaxPoints=28
      Level5MaxPoints=30
-     ExcludingAbilities(0)=Class'DEKRPG209A.AbilityLinkUpBuilder'
+     ExcludingAbilities(0)=Class'DEKRPG209B.AbilityLinkUpBuilder'
      AbilityName="Niche: Manned"
      Description="Increases your maximum turret points by 2 per level and your maximum turrets summonable by 1. Decreases offensive sentinel damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

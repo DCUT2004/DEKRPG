@@ -209,6 +209,6 @@ defaultproperties
      EntryRadius=120.000000
      FPCamPos=(X=-25.000000,Y=13.000000,Z=93.000000)
      VehicleNameString="Plasma Turret"
-     Skins(0)=Combiner'DEKRPGTexturesMaster209A.Skins.PlasmaBallTurretBaseCombiner'
-     Skins(1)=Combiner'DEKRPGTexturesMaster209A.Skins.PlasmaBallTurretCannonCombiner'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209B.Skins.PlasmaBallTurretBaseCombiner'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209B.Skins.PlasmaBallTurretCannonCombiner'
 }

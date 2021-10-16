@@ -6,8 +6,8 @@ defaultproperties
      TurretBaseClass=None
      VehicleNameString="Ceiling Defense Sentinel"
      Mesh=SkeletalMesh'AS_Vehicles_M.CeilingTurretBase'
-     Skins(0)=Combiner'DEKRPGTexturesMaster209A.CeilingSentCombiner'
-     Skins(1)=Combiner'DEKRPGTexturesMaster209A.CeilingSentCombiner'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209B.CeilingSentCombiner'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209B.CeilingSentCombiner'
      CollisionRadius=45.000000
      CollisionHeight=60.000000
 }

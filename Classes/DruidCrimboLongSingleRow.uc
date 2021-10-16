@@ -3,9 +3,9 @@ class DruidCrimboLongSingleRow extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=5
-     Blocks(0)=(BlockType=Class'DEKRPG209A.DruidCrimboBlockA',XOffset=-240,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG209A.DruidCrimboBlockC',XOffset=-120,ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG209A.DruidCrimboBlockB',ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG209A.DruidCrimboBlockD',XOffset=120,ZOffset=20)
-     Blocks(4)=(BlockType=Class'DEKRPG209A.DruidCrimboBlockE',XOffset=240,ZOffset=20)
+     Blocks(0)=(BlockType=Class'DEKRPG209B.DruidCrimboBlockA',XOffset=-240,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG209B.DruidCrimboBlockC',XOffset=-120,ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG209B.DruidCrimboBlockB',ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG209B.DruidCrimboBlockD',XOffset=120,ZOffset=20)
+     Blocks(4)=(BlockType=Class'DEKRPG209B.DruidCrimboBlockE',XOffset=240,ZOffset=20)
 }

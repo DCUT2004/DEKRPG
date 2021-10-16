@@ -22,13 +22,14 @@ function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector H
 
 defaultproperties
 {
-     DamageType=Class'DEKRPG209A.DamTypeRuneLaser'
+     bModeExclusive=False
+     DamageType=Class'DEKRPG209B.DamTypeRuneLaser'
 	 AdrenCost=1
 	 DamageMin=16
 	 DamageMax=18
      FireRate=0.2000000
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser09'
-     BeamEffectClass=Class'DEKRPG209A.RuneLaserEffect'
+     BeamEffectClass=Class'DEKRPG209B.RuneLaserEffect'
      bReflective=False
      TraceRange=17000.000000
      Momentum=15000.000000

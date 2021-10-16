@@ -2,7 +2,7 @@ class DamTypePhantomPass extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKWeapons209A.NecromancerWeapon'
+     WeaponClass=Class'DEKWeapons209B.NecromancerWeapon'
      DeathString="%k possessed %o."
      FemaleSuicide="%o forever remained a restless spirit."
      MaleSuicide="%o forever remained a restless spirit."

@@ -147,6 +147,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      CostPerSec=5
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.LuckyWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.LuckyWeaponMakerIconShader'
      ItemName="Lucky Enchanter"
 }

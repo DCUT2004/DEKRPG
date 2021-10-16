@@ -101,7 +101,7 @@ defaultproperties
      Physics=PHYS_Falling
      NetUpdateFrequency=4.000000
      DrawScale=1.200000
-     Skins(0)=Texture'DEKRPGTexturesMaster209A.Skins.ConcreteBlock'
+     Skins(0)=Texture'DEKRPGTexturesMaster209B.Skins.ConcreteBlock'
      AmbientGlow=10
      bShouldBaseAtStartup=False
      CollisionRadius=29.500000

@@ -13,6 +13,6 @@ defaultproperties
      MaleSuicide="%o crushed himself with his meteor."
      bDetonatesGoop=True
      bDelayedDamage=True
-     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
      DamageOverlayTime=0.800000
 }

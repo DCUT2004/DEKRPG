@@ -144,7 +144,7 @@ function bool HasUDamage()
 
 defaultproperties
 {
-     LockOverlay=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     LockOverlay=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
      TurretBaseClass=None
      TurretSwivelClass=None
      DefaultWeaponClassName="Weapon_DruidLink"

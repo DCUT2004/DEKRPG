@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=200
      Description="Apply null entropy magic."
-     PickupClass=Class'DEKRPG209A.ArtifactMissionNullmancerPickup'
+     PickupClass=Class'DEKRPG209B.ArtifactMissionNullmancerPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.NullMancerMission'
      ItemName="Nullmancer"
 }

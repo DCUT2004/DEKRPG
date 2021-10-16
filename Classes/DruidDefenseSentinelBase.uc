@@ -6,8 +6,8 @@ defaultproperties
      DrawType=DT_Mesh
      Mesh=SkeletalMesh'AS_Vehicles_M.FloorTurretBase'
      DrawScale=0.140000
-     Skins(0)=FinalBlend'DEKRPGTexturesMaster209A.fX.DefensePanFinal'
-     Skins(1)=FinalBlend'DEKRPGTexturesMaster209A.fX.DefensePanFinal'
+     Skins(0)=FinalBlend'DEKRPGTexturesMaster209B.fX.DefensePanFinal'
+     Skins(1)=FinalBlend'DEKRPGTexturesMaster209B.fX.DefensePanFinal'
      AmbientGlow=1
      CollisionRadius=30.000000
      CollisionHeight=70.000000

@@ -176,9 +176,9 @@ defaultproperties
 {
      TimeBetweenShots=0.400000
      TargetRadius=750.000000
-     HitEmitterClass=Class'DEKRPG209A.DefenseBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG209A.BronzeBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG209A.RedBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209B.DefenseBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG209B.BronzeBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG209B.RedBoltEmitter'
      XPPerHealing=0.020000
      HealFreq=2
      bHidden=True

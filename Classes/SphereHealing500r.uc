@@ -24,13 +24,13 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209A.SphereHealing500r.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG209B.SphereHealing500r.MeshEmitter0'
 
      AutoDestroy=True
      bNoDelete=False
      bNetTemporary=True
      RemoteRole=ROLE_DumbProxy
-     Skins(0)=Shader'DEKRPGTexturesMaster209A.fX.sb_4'
+     Skins(0)=Shader'DEKRPGTexturesMaster209B.fX.sb_4'
      Style=STY_Masked
      bBlockZeroExtentTraces=False
      bBlockNonZeroExtentTraces=False

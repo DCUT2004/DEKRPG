@@ -3,12 +3,12 @@ class RuneBeam_Chain extends Weapon
 
 defaultproperties
 {
-	FireModeClass(0)=Class'DEKRPG209A.RuneIceBeamFire'
-	FireModeClass(1)=Class'DEKRPG209A.RuneChainFire'
+	FireModeClass(0)=Class'DEKRPG209B.RuneIceBeamFire'
+	FireModeClass(1)=Class'DEKRPG209B.RuneChainFire'
 	bCanThrow=False
-	HudColor=(B=255)
+    HudColor=(R=33,G=159,B=222)
 	InventoryGroup=9
 	ItemName="Ice Beam / Lightning Chain"
-	//IconMaterial=Texture'DEKRPGTexturesMaster209ARunetest.Runes.IceBeamLightningChain'
-	//IconCoords=(X1=1,Y1=1,X2=128,Y2=64)
+	IconMaterial=Texture'DEKRPGTexturesMaster209B.Runes.IceBeamLightningChain'
+	IconCoords=(X1=1,Y1=1,X2=128,Y2=64)
 }

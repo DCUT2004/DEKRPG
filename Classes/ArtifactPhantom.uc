@@ -113,7 +113,7 @@ defaultproperties
      RegenAmount=5
      AdrenalineRequired=75
      CostPerSec=1
-     PickupClass=Class'DEKRPG209A.DruidArtifactInvulnerabilityPickup'
+     PickupClass=Class'DEKRPG209B.DruidArtifactInvulnerabilityPickup'
      IconMaterial=FinalBlend'AW-2k4XP.Weapons.ShockShieldFallbackFinal'
      ItemName="Phantom"
 }

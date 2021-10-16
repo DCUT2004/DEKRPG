@@ -3,9 +3,9 @@ class DruidWoodWall extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=5
-     Blocks(0)=(BlockType=Class'DEKRPG209A.DruidWoodBlock',XOffset=-120,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG209A.DruidWoodBlock',ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG209A.DruidWoodBlock',XOffset=120,ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG209A.DruidWoodBlock',XOffset=-90,ZOffset=100)
-     Blocks(4)=(BlockType=Class'DEKRPG209A.DruidWoodBlock',XOffset=90,ZOffset=100)
+     Blocks(0)=(BlockType=Class'DEKRPG209B.DruidWoodBlock',XOffset=-120,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG209B.DruidWoodBlock',ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG209B.DruidWoodBlock',XOffset=120,ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG209B.DruidWoodBlock',XOffset=-90,ZOffset=100)
+     Blocks(4)=(BlockType=Class'DEKRPG209B.DruidWoodBlock',XOffset=90,ZOffset=100)
 }

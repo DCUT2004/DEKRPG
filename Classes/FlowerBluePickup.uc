@@ -78,10 +78,10 @@ defaultproperties
      StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.EarthWeaponFlower'
      Physics=PHYS_Rotating
      DrawScale=0.255000
-     Skins(0)=Texture'DEKRPGTexturesMaster209A.EarthFlowers.BlueFlowerLeaf0'
-     Skins(1)=Texture'DEKRPGTexturesMaster209A.EarthFlowers.BlueFlowerCenter1'
-     Skins(2)=Texture'DEKRPGTexturesMaster209A.EarthFlowers.BlueFlowerBottom2and3'
-     Skins(3)=Texture'DEKRPGTexturesMaster209A.EarthFlowers.BlueFlowerBottom2and3'
+     Skins(0)=Texture'DEKRPGTexturesMaster209B.EarthFlowers.BlueFlowerLeaf0'
+     Skins(1)=Texture'DEKRPGTexturesMaster209B.EarthFlowers.BlueFlowerCenter1'
+     Skins(2)=Texture'DEKRPGTexturesMaster209B.EarthFlowers.BlueFlowerBottom2and3'
+     Skins(3)=Texture'DEKRPGTexturesMaster209B.EarthFlowers.BlueFlowerBottom2and3'
      AmbientGlow=255
      ScaleGlow=0.500000
      Style=STY_AlphaZ

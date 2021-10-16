@@ -54,10 +54,10 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG209A.AbilityComboSpecialVoidedCubes'
-    ExcludingAbilities(1)=Class'DEKRPG209A.AbilityComboSpecialTeleStealth'
-    ExcludingAbilities(2)=Class'DEKRPG209A.AbilityComboSpecialBeastsRevenge'
-    ExcludingAbilities(3)=Class'DEKRPG209A.AbilityComboSpecialRavenRitual'
+    ExcludingAbilities(0)=Class'DEKRPG209B.AbilityComboSpecialVoidedCubes'
+    ExcludingAbilities(1)=Class'DEKRPG209B.AbilityComboSpecialTeleStealth'
+    ExcludingAbilities(2)=Class'DEKRPG209B.AbilityComboSpecialBeastsRevenge'
+    ExcludingAbilities(3)=Class'DEKRPG209B.AbilityComboSpecialRavenRitual'
 	AbilityName="Special: Swarm"
 	Description="Summons five Leech Gnats. Each Leech Gnat heals the caster for 2% of the damage dealt to an enemy per level.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Arcane Hourglass you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -70,14 +70,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(25))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(30))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(35))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG209A.AbilityMaterialHourglass'),RequiredMaterialLevels=(50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(25))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(30))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(35))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209B.AbilityMaterialHourglass'),RequiredMaterialLevels=(50))
 }

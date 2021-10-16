@@ -22,7 +22,7 @@ defaultproperties
          TextureVSubdivisions=2
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209A.FriendlyPortalEffect.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG209B.FriendlyPortalEffect.SpriteEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter2
          SpinParticles=True
@@ -38,7 +38,7 @@ defaultproperties
          Texture=Texture'XEffects.Skins.LBBT'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209A.FriendlyPortalEffect.SpriteEmitter2'
+     Emitters(1)=SpriteEmitter'DEKRPG209B.FriendlyPortalEffect.SpriteEmitter2'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter4
          ProjectionNormal=(X=1.000000,Z=0.000000)
@@ -64,7 +64,7 @@ defaultproperties
          Texture=Texture'XEffectMat.Link.link_ring_green'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209A.FriendlyPortalEffect.SpriteEmitter4'
+     Emitters(3)=SpriteEmitter'DEKRPG209B.FriendlyPortalEffect.SpriteEmitter4'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -91,7 +91,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=-100.000000,Max=-150.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209A.FriendlyPortalEffect.SpriteEmitter5'
+     Emitters(4)=SpriteEmitter'DEKRPG209B.FriendlyPortalEffect.SpriteEmitter5'
 
      bNoDelete=False
      bHardAttach=True

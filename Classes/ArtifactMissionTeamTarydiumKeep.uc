@@ -61,7 +61,7 @@ function Activate()
 				MMPI.MissionGoal = MissionGoal;
 				for ( C = Level.ControllerList; C != None; C = C.NextController )
 					if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-						PlayerController(C).ClientPlaySound(Sound'DEKRPG209A.MissionSounds.MPSelect');
+						PlayerController(C).ClientPlaySound(Sound'DEKRPG209B.MissionSounds.MPSelect');
 				SetTimer(0.5,True);
 				TeamMissionBroadcast(ItemName, Description,XPReward);
 			}
@@ -103,7 +103,7 @@ defaultproperties
      TimeLimit=130
      Description="(T)Defend the tarydium crystals!"
      TeamMission=True
-     PickupClass=Class'DEKRPG209A.ArtifactMissionTeamTarydiumKeepPickup'
+     PickupClass=Class'DEKRPG209B.ArtifactMissionTeamTarydiumKeepPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.TarydiumKeep'
      ItemName="Tarydium Keep"
 }

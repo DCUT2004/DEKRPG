@@ -128,6 +128,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      HealingDamage=1.000000
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.MedicWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.MedicWeaponMakerIconShader'
      ItemName="Medic Weapon Maker"
 }

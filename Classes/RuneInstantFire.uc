@@ -1,7 +1,7 @@
 class RuneInstantFire extends InstantFire
 	config(DEKWeapons);
 
-var config int AdrenCost;
+var config float AdrenCost;
 
 function DoFireEffect()
 {
@@ -31,6 +31,6 @@ function DoFireEffect()
 defaultproperties
 {
      TweenTime=0.000000
-     AmmoClass=Class'DEKRPG209A.RuneAmmo'
+     AmmoClass=Class'DEKRPG209B.RuneAmmo'
      AmmoPerFire=0
 }

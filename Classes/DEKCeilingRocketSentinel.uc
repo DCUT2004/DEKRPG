@@ -9,12 +9,12 @@ simulated function PostBeginPlay()
 
 defaultproperties
 {
-     TurretSwivelClass=Class'DEKRPG209A.DEKMercurySentinelCeilingSwivel'
+     TurretSwivelClass=Class'DEKRPG209B.DEKMercurySentinelCeilingSwivel'
      DefaultWeaponClassName="DEKRocketSentinelWeapon"
      VehicleProjSpawnOffset=(X=150.000000)
      VehicleNameString="Ceiling Rocket Sentinel"
      bNoTeamBeacon=False
-     Skins(0)=Combiner'DEKRPGTexturesMaster209A.Skins.MercCeilingTurret'
-     Skins(1)=Combiner'DEKRPGTexturesMaster209A.Skins.MercCeilingTurret'
-     Skins(2)=Combiner'DEKRPGTexturesMaster209A.Skins.MercCeilingTurret'
+     Skins(0)=Combiner'DEKRPGTexturesMaster209B.Skins.MercCeilingTurret'
+     Skins(1)=Combiner'DEKRPGTexturesMaster209B.Skins.MercCeilingTurret'
+     Skins(2)=Combiner'DEKRPGTexturesMaster209B.Skins.MercCeilingTurret'
 }

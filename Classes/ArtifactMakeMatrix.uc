@@ -146,6 +146,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      CostPerSec=5
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.MatrixWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.MatrixWeaponMakerIconShader'
      ItemName="Matrix Enchanter"
 }

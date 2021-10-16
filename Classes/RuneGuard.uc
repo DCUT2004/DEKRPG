@@ -16,6 +16,7 @@ simulated function Touch(Actor Other)
 			P = Projectile(Other);
 			if (P != None && P.InstigatorController != None && PawnOwner != None && PawnOwner.Controller != None && !P.InstigatorController.SameTeamAs(PawnOwner.Controller))
 			{
+				P.HitWall(-1*Normal(P.Velocity),self);
 				P.Explode(P.Location, HitNormal);
 			}
 		}
@@ -30,7 +31,7 @@ simulated function Tick(float DeltaTime)
 
 defaultproperties
 {
-	AmbientSound=Sound'DEKRPG209A.ArtifactSounds.ImmobilizeAmbient'
+	AmbientSound=Sound'DEKRPG209B.ArtifactSounds.ImmobilizeAmbient'
 	LightType=LT_Steady
 	LightEffect=LE_QuadraticNonIncidence
 	LightHue=135

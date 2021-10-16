@@ -113,6 +113,6 @@ defaultproperties
      AdrenalineRequired=20
      CostPerSec=1
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.Decoy'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.Decoy'
      ItemName="Decoy"
 }

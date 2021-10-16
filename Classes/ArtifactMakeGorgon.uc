@@ -240,6 +240,6 @@ defaultproperties
 {
      AdrenalineRequired=100
      CostPerSec=5
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.GorgonWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.GorgonWeaponMakerIconShader'
      ItemName="Gorgon Enchanter"
 }

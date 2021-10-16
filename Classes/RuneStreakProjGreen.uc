@@ -2,8 +2,8 @@ class RuneStreakProjGreen extends RuneStreakProj;
 
 defaultproperties
 {
-	 RealSmokeTrailClass=Class'DEKRPG209A.RuneStreakProjGreenTrail'
-	 RealCoronaClass=Class'DEKRPG209A.RuneStreakProjGreenCorona'
-	 HitEffectClass=Class'DEKRPG209A.RuneStreakProjGreenHitEffect'
+	 RealSmokeTrailClass=Class'DEKRPG209B.RuneStreakProjGreenTrail'
+	 RealCoronaClass=Class'DEKRPG209B.RuneStreakProjGreenCorona'
+	 HitEffectClass=Class'DEKRPG209B.RuneStreakProjGreenHitEffect'
      LightHue=75
 }

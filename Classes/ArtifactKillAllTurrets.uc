@@ -42,6 +42,6 @@ function BotConsider()
 defaultproperties
 {
      MinActivationTime=0.000000
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.KillSummonTurretIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.KillSummonTurretIcon'
      ItemName="Kill All Summoned Turrets"
 }

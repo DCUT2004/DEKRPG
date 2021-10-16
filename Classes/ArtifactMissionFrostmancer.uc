@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=300
      Description="Apply freezing magic."
-     PickupClass=Class'DEKRPG209A.ArtifactMissionFrostmancerPickup'
+     PickupClass=Class'DEKRPG209B.ArtifactMissionFrostmancerPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.FrostmancerMission'
      ItemName="Frostmancer"
 }

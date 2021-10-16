@@ -49,8 +49,8 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG209A.AutoGunBase'
-     TurretSwivelClass=Class'DEKRPG209A.AutoGunSwivel'
+     TurretBaseClass=Class'DEKRPG209B.AutoGunBase'
+     TurretSwivelClass=Class'DEKRPG209B.AutoGunSwivel'
      DefaultWeaponClassName="DEKAutoSniperWeapon"
      VehicleProjSpawnOffset=(X=45.000000,Y=0.000000,Z=0.000000)
      bNonHumanControl=True

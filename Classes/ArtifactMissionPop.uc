@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=15
      Description="Make kills with the vorpal pop!"
-     PickupClass=Class'DEKRPG209A.ArtifactMissionPopPickup'
+     PickupClass=Class'DEKRPG209B.ArtifactMissionPopPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.PopMission'
      ItemName="Pop!"
 }

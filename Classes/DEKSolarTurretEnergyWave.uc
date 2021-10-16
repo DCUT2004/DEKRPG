@@ -210,7 +210,7 @@ defaultproperties
      MaxSpeed=2800.000000
      Damage=115.000000
      MomentumTransfer=30000.000000
-     MyDamageType=Class'DEKRPG209A.DamTypeDEKSolarTurretHeatWave'
+     MyDamageType=Class'DEKRPG209B.DamTypeDEKSolarTurretHeatWave'
      LightType=LT_Steady
      LightEffect=LE_Spotlight
      LightHue=20
@@ -224,7 +224,7 @@ defaultproperties
      LifeSpan=0.500000
      DrawScale=4.000000
      PrePivot=(X=210.000000)
-     Skins(0)=FinalBlend'DEKRPGTexturesMaster209A.fX.ShieldHitOrangeEdgesFinal'
+     Skins(0)=FinalBlend'DEKRPGTexturesMaster209B.fX.ShieldHitOrangeEdgesFinal'
      Skins(1)=Texture'AW-2k4XP.Weapons.ElectricShockTex2'
      AmbientGlow=254
      bCollideWorld=False

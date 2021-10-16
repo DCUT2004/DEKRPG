@@ -209,10 +209,10 @@ function DropFrom(vector StartLocation)
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG209A.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209B.LightningBeamEmitter'
      MaxRange=2000.000000
      ExpPerDamage=0.030000
      AdrenalineRequired=200
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.PaladinGuard'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.PaladinGuard'
      ItemName="Paladin Guard"
 }

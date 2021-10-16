@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209A.DruidArtifactSpider'
+     InventoryType=Class'DEKRPG209B.DruidArtifactSpider'
      PickupMessage="You got the Electro-Magnet!"
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'XGame_rc.BallMesh'

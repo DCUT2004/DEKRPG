@@ -24,7 +24,7 @@ static function int BotBuyChance(Bot B, RPGPlayerDataObject Data, int CurrentLev
 
 defaultproperties
 {
-     RequiredAbilities(0)=Class'DEKRPG209A.AbilityShieldHealing'
+     RequiredAbilities(0)=Class'DEKRPG209B.AbilityShieldHealing'
      AbilityName="Engineer Awareness"
      Description="Informs you of your friends' shield strength with a display over their heads. You get a large, brightly colored health bar with a white background, that shrinks and changes color as the target shield gains health. The bar will turn a full solid yellow if the shield is fully healed. You need to have Shield Healing to purchase this skill. Cost per level: 10. "
      StartingCost=10

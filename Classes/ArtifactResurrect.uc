@@ -345,7 +345,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     NecroDamageType=Class'DEKRPG209A.DamTypeNecro'
+     NecroDamageType=Class'DEKRPG209B.DamTypeNecro'
      XPMultiplier=1.000000
      SacrificePerc=0.500000
      RevenantLifeSpan=20.000000
@@ -353,6 +353,6 @@ defaultproperties
      TimeBetweenUses=4.000000
      AdrenalineRequired=150
      CostPerSec=1
-     IconMaterial=Shader'DEKRPGTexturesMaster209A.Artifacts.ResurrectionWeaponMakerIconShader'
+     IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.ResurrectionWeaponMakerIconShader'
      ItemName="Resurrection"
 }

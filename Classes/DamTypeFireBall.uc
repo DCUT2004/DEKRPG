@@ -13,6 +13,6 @@ defaultproperties
      MaleSuicide="%o snuffed himself with the fireball."
      bDetonatesGoop=True
      bDelayedDamage=True
-     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209A.fX.PulseRedShader'
+     DamageOverlayMaterial=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
      DamageOverlayTime=0.800000
 }

@@ -11,7 +11,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (INAVRiLFire(FireMode[0]) != None)
 	{
-		INAVRiLFire(FireMode[0]).ProjectileClass=class'DEKWeapons209A.UpgradeINAVRiLRocket';
+		INAVRiLFire(FireMode[0]).ProjectileClass=class'DEKWeapons209B.UpgradeINAVRiLRocket';
 	}
 }
 

@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=200
      Description="Apply heat magic."
-     PickupClass=Class'DEKRPG209A.ArtifactMissionPyromancerPickup'
+     PickupClass=Class'DEKRPG209B.ArtifactMissionPyromancerPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.PyromancerMission'
      ItemName="Pyromancer"
 }

@@ -107,6 +107,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 defaultproperties
 {
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.2'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.2'
      ItemName="Set Dual Weapon 2"
 }

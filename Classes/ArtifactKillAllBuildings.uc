@@ -42,6 +42,6 @@ function BotConsider()
 defaultproperties
 {
      MinActivationTime=0.000000
-     IconMaterial=Texture'DEKRPGTexturesMaster209A.Artifacts.KillSummonBlockIcon'
+     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.KillSummonBlockIcon'
      ItemName="Kill All Summoned Buildings"
 }
