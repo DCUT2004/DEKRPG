@@ -1,5 +1,5 @@
 class DruidDefenseSentinelCrimbo extends ASTurret;
-#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209B.usx
+#exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209C.usx
 #exec OBJ LOAD FILE=..\Textures\DEKRPGTexturesMaster209B.utx
 
 var int ShieldHealingLevel;
@@ -35,7 +35,7 @@ defaultproperties
      TurretBaseClass=Class'DEKRPG209B.DruidDefenseSentinelBaseCrimbo'
      VehicleNameString="Defense Sentinel"
      bCanBeBaseForPawns=False
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.ChristmasMeshes.FloorCandyCane'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.ChristmasMeshes.FloorCandyCane'
      DrawScale=0.300000
      Skins(0)=Shader'DEKRPGTexturesMaster209B.SkinsChristmas.FloorSentShader'
      Skins(1)=FinalBlend'DEKRPGTexturesMaster209B.fX.DefensePanFinal'

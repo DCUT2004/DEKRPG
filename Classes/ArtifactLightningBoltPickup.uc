@@ -29,7 +29,7 @@ defaultproperties
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Artifacts.LightningBolt'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Artifacts.LightningBolt'
      DrawScale=0.250000
      Skins(0)=Shader'DEKRPGTexturesMaster209B.Artifacts.LBolt'
      AmbientGlow=128

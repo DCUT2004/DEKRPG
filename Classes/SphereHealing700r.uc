@@ -8,7 +8,7 @@ class SphereHealing700r extends Emitter
 defaultproperties
 {
      Begin Object Class=MeshEmitter Name=MeshEmitter0
-         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SphereHealing'
+         StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.SphereHealing'
          RenderTwoSided=True
          UseParticleColor=True
          RespawnDeadParticles=False

@@ -67,7 +67,7 @@ defaultproperties
 	 ImmobilizeLifespan=6.000000
 	 ImmobilizeRadius=200.00000
 	 RegenAmount=1
-	 AdrenCost=10
+	 AdrenCost=5
      FireRate=7.0000000
      bReflective=False
      TraceRange=17000.000000

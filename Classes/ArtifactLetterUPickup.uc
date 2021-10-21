@@ -64,7 +64,7 @@ defaultproperties
      PickupSound=Sound'DEKRPG209B.ArtifactSounds.ExpPickup'
      PickupForce="SniperRiflePickup"
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Artifacts.BONUSlettersU'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Artifacts.BONUSlettersU'
      LifeSpan=30.000000
      DrawScale=0.900000
      Skins(0)=FinalBlend'D-E-K-HoloGramFX.NonWireframe.SBlend_1'

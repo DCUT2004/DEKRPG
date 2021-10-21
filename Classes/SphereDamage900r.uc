@@ -8,7 +8,7 @@ class SphereDamage900r extends Emitter
 defaultproperties
 {
      Begin Object Class=MeshEmitter Name=MeshEmitter0
-         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SphereDamage'
+         StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.SphereDamage'
          RenderTwoSided=True
          UseParticleColor=True
          RespawnDeadParticles=False

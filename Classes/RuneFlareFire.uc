@@ -53,7 +53,7 @@ defaultproperties
 	 Bursts(1)=Class'DEKRPG209B.RuneFlareBurstBlue'
 	 Bursts(2)=Class'DEKRPG209B.RuneFlareBurstGreen'
 	 AdrenCost=0.60000000
-	 BurstDamage=80
+	 BurstDamage=60
 	 BurstDamageRadius=300.000
      FireRate=0.100000
 	 DamageType=Class'DEKRPG209B.DamTypeRuneFlare'

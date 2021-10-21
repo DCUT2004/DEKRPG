@@ -4,7 +4,7 @@ class RuneHeatwaveFire extends RuneProjectileFire
 defaultproperties
 {
 	 bModeExclusive=False
-	 AdrenCost=10
+	 AdrenCost=15
      bSplashDamage=True
      bRecommendSplashDamage=True
      FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'

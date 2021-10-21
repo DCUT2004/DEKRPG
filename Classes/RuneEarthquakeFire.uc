@@ -25,7 +25,7 @@ defaultproperties
 {
      bModeExclusive=False
 	 TraceRange=1400.000000
-	 AdrenCost=10.00000000
+	 AdrenCost=20.00000000
      FireRate=2.5000000
      //FireSound=Sound'ONSVehicleSounds-S.HoverBike.HoverBikeFire01'
      bReflective=False

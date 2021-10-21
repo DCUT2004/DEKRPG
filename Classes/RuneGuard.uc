@@ -38,7 +38,7 @@ defaultproperties
 	LightBrightness=255.000000
 	LightRadius=15.000000
 	DrawType=DT_StaticMesh
-	StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.GuardShield'
+	StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.GuardShield'
 	bDynamicLight=True
 	bIgnoreVehicles=True
 	Physics=PHYS_None

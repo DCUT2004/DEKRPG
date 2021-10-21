@@ -4,7 +4,7 @@ class RuneBarrageFire extends RuneProjectileFire
 defaultproperties
 {
      ProjPerFire=9
-	 AdrenCost=1
+	 AdrenCost=2
      bSplashDamage=True
      bSplashJump=True
      bRecommendSplashDamage=True

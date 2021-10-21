@@ -6,7 +6,7 @@ class GenomeProjectNodeFX extends Emitter;
 defaultproperties
 {
      Begin Object Class=MeshEmitter Name=MeshEmitter0
-         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.GenomeNodeFX'
+         StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.GenomeNodeFX'
          UseColorScale=True
          ColorScale(1)=(RelativeTime=0.200000,Color=(B=244,G=66,R=179))
          ColorScale(2)=(RelativeTime=0.800000,Color=(B=244,G=66,R=170))

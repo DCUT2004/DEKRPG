@@ -11,8 +11,8 @@ var int TouchCounter;
 var config int TouchThreshold;
 var config int MaxShards;
 
-#exec  AUDIO IMPORT NAME="IcicleGrowth" FILE="Sounds\IcicleGrowthOne.WAV" GROUP="RuneSounds"
-#exec  AUDIO IMPORT NAME="IcicleShatter" FILE="Sounds\IcicleShatter1.WAV" GROUP="RuneSounds"
+#exec  AUDIO IMPORT NAME="IcicleGrowth" FILE="Sounds\IcicleGrowth.WAV" GROUP="RuneSounds"
+#exec  AUDIO IMPORT NAME="IcicleShatter" FILE="Sounds\IcicleShatter.WAV" GROUP="RuneSounds"
 
 simulated function PostBeginPlay()
 {

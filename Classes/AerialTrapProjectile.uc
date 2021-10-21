@@ -320,7 +320,7 @@ defaultproperties
      MyDamageType=Class'DEKRPG209B.DamTypeAerialTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.AerialTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.AerialTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

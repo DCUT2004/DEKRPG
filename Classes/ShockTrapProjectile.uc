@@ -268,7 +268,7 @@ defaultproperties
      MyDamageType=Class'DEKRPG209B.DamTypeShockTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.ShockTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.ShockTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

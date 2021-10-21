@@ -218,7 +218,7 @@ defaultproperties
      LightBrightness=300.000000
      LightRadius=30.000000
      DrawType=DT_None
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SolarWave'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.SolarWave'
      bDynamicLight=True
      bIgnoreEncroachers=True
      LifeSpan=0.500000

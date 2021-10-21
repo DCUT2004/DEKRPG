@@ -239,7 +239,7 @@ defaultproperties
      LightRadius=1.000000
      LightPeriod=10
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.CrystalA'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.CrystalA'
      bDynamicLight=True
      LifeSpan=4.000000
      LODBias=7.000000

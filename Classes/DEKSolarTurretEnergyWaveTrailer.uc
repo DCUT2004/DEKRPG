@@ -61,7 +61,7 @@ defaultproperties
      Emitters(0)=TrailEmitter'DEKRPG209B.DEKSolarTurretEnergyWaveTrailer.ShockwaveTrail'
 
      Begin Object Class=MeshEmitter Name=ShockwaveFront
-         StaticMesh=StaticMesh'DEKStaticsMaster209B.fX.SolarWave'
+         StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.SolarWave'
          UseParticleColor=True
          FadeOut=True
          RespawnDeadParticles=False

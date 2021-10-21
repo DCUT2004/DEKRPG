@@ -52,7 +52,7 @@ defaultproperties
 	 MaxFlurryRangeY=150.00000
 	 MinFlurryRangeZ=0.0000
 	 MaxFlurryRangeZ=200.00000
-	 AdrenCost=1
+	 AdrenCost=2
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser16'
      FireForce="RocketLauncherFire"
      FireRate=0.300000

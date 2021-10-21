@@ -75,7 +75,7 @@ defaultproperties
      PickupSound=Sound'PlayerSounds.BFootsteps.BFootstepDirt6'
      PickupForce="AdrenelinPickup"
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.EarthWeaponFlower'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.EarthWeaponFlower'
      Physics=PHYS_Rotating
      DrawScale=0.255000
      Skins(0)=Texture'DEKRPGTexturesMaster209B.EarthFlowers.RedFlowerLeaf0'

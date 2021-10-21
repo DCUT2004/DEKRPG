@@ -1,7 +1,7 @@
 class RuneHeatWhipFire extends RuneInstantFire
 	config(DEKWeapons);
 	
-#exec  AUDIO IMPORT NAME="HeatWhipThrow" FILE="Sounds\HeatWhipThrow1.WAV" GROUP="RuneSounds"
+#exec  AUDIO IMPORT NAME="HeatWhipThrow" FILE="Sounds\HeatWhipThrow.WAV" GROUP="RuneSounds"
 #exec  AUDIO IMPORT NAME="HeatWhipCrack" FILE="Sounds\HeatWhipCrack.WAV" GROUP="RuneSounds"
 
 var RuneHeatWhipFX FX;
@@ -175,7 +175,7 @@ defaultproperties
 {
 	 bModeExclusive=False
      DamageType=Class'DEKRPG209B.DamTypeRuneHeatWhip'
-	 AdrenCost=1
+	 AdrenCost=10
 	 DamageMin=100
 	 DamageMax=110
 	 FireRate=3.500000

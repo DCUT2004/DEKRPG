@@ -9,4 +9,6 @@ defaultproperties
      HudColor=(R=222,G=154,B=33)
      InventoryGroup=2
      ItemName="Energy Steal"
+	 IconMaterial=Texture'DEKRPGTexturesMaster209B.Runes.AdrenalineSuck'
+	 IconCoords=(X1=1,Y1=1,X2=128,Y2=64)
 }

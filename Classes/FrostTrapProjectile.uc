@@ -277,7 +277,7 @@ defaultproperties
      MyDamageType=Class'DEKRPG209B.DamTypeFrostTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.FrostTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.FrostTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

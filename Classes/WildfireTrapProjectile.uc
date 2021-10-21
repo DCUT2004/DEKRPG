@@ -275,7 +275,7 @@ defaultproperties
      MyDamageType=Class'DEKRPG209B.DamTypeWildfireTrap'
      ImpactSound=Sound'MenuSounds.select3'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.WildfireTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.WildfireTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

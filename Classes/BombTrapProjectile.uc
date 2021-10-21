@@ -281,7 +281,7 @@ defaultproperties
      ImpactSound=Sound'MenuSounds.select3'
      ExplosionDecal=Class'DEKRPG209B.BombTrapMark'
      DrawType=DT_StaticMesh
-     StaticMesh=StaticMesh'DEKStaticsMaster209B.Meshes.BombTrap'
+     StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.BombTrap'
      CullDistance=5000.000000
      bNetTemporary=False
      bOnlyDirtyReplication=True

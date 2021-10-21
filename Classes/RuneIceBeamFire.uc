@@ -1,7 +1,7 @@
 class RuneIceBeamFire extends RuneInstantFire
 	config(DEKWeapons);
 	
-#exec  AUDIO IMPORT NAME="IceBeam" FILE="Sounds\IceBeam1.WAV" GROUP="RuneSounds"
+#exec  AUDIO IMPORT NAME="IceBeam" FILE="Sounds\IceBeam.WAV" GROUP="RuneSounds"
 
 var() class<RuneIceBeamEffect> BeamEffectClass;
 var Class<Emitter> ExplosionEffectClass;
@@ -78,7 +78,7 @@ defaultproperties
 	BlastDamage=100.0000
 	BlastRadius=400.0000
 	DamageType=Class'DEKRPG209B.DamTypeRuneIceBeam'
-	AdrenCost=10
+	AdrenCost=15
 	DamageMin=110
 	DamageMax=120
 	FireRate=2.00000000
