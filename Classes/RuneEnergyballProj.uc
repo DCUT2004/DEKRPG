@@ -137,7 +137,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
-	 AdrenAddPerStrike=2
+	 AdrenAddPerStrike=4
 	 StrikeDamage=10
 	 EnergyStealInterval=0.700000
 	 EnergyStealRadius=600.00000
@@ -146,8 +146,8 @@ defaultproperties
      ComboMomentumTransfer=0.000000
      Speed=500.000000
      MaxSpeed=500.000000
-     StrikeEmitterClass=Class'DEKRPG209B.BronzeBoltEmitter'
-     MyDamageType=Class'DEKRPG209B.DamTypeRuneEnergySteal'
+     StrikeEmitterClass=Class'DEKRPG209C.BronzeBoltEmitter'
+     MyDamageType=Class'DEKRPG209C.DamTypeRuneEnergySteal'
 	 DrawType=DT_Sprite
      DrawScale=0.010000
      Skins(0)=FinalBlend'D-E-K-HoloGramFX.NonWireframe.FunkyStuff_0'

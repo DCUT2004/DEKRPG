@@ -77,14 +77,14 @@ defaultproperties
 {
 	BlastDamage=100.0000
 	BlastRadius=400.0000
-	DamageType=Class'DEKRPG209B.DamTypeRuneIceBeam'
+	DamageType=Class'DEKRPG209C.DamTypeRuneIceBeam'
 	AdrenCost=15
 	DamageMin=110
 	DamageMax=120
 	FireRate=2.00000000
-	FireSound=Sound'DEKRPG209B.RuneSounds.IceBeam'
-	BeamEffectClass=Class'DEKRPG209B.RuneIceBeamEffect'
-	ExplosionEffectClass=Class'DEKRPG209B.RuneIceBeamExplosion'
+	FireSound=Sound'DEKRPG209C.RuneSounds.IceBeam'
+	BeamEffectClass=Class'DEKRPG209C.RuneIceBeamEffect'
+	ExplosionEffectClass=Class'DEKRPG209C.RuneIceBeamExplosion'
 	bReflective=False
 	Momentum=60000.000000
 	aimerror=900.000000

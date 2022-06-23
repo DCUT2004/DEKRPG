@@ -35,7 +35,7 @@ function byte BestMode()
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209B.DEKPlasmaTurretFire'
-     FireModeClass(1)=Class'DEKRPG209B.DEKPlasmaTurretAltFire'
-     AttachmentClass=Class'DEKRPG209B.DEKPlasmaTurretAttachment'
+     FireModeClass(0)=Class'DEKRPG209C.DEKPlasmaTurretFire'
+     FireModeClass(1)=Class'DEKRPG209C.DEKPlasmaTurretAltFire'
+     AttachmentClass=Class'DEKRPG209C.DEKPlasmaTurretAttachment'
 }

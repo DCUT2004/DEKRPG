@@ -86,6 +86,6 @@ defaultproperties
 {
      ProjSpawnOffset=(X=25.000000,Y=6.000000,Z=-6.000000)
      TweenTime=0.000000
-     AmmoClass=Class'DEKRPG209B.RuneAmmo'
+     AmmoClass=Class'DEKRPG209C.RuneAmmo'
      AmmoPerFire=0
 }

@@ -83,7 +83,7 @@ defaultproperties
      Damage=30.000000
      DamageRadius=500.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG209B.DamTypeHellfireSentinel'
+     MyDamageType=Class'DEKRPG209C.DamTypeHellfireSentinel'
      ImpactSound=Sound'WeaponSounds.BaseImpactAndExplosions.BExplosion3'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh

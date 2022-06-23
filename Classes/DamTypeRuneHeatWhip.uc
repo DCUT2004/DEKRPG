@@ -3,7 +3,7 @@ class DamTypeRuneHeatWhip extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.RuneHeatWhip_Flare'
+     WeaponClass=Class'DEKRPG209C.RuneHeatWhip_Flare'
      DeathString="%o was whipped by %k's Heat Whip."
      FemaleSuicide="%o whipped herself. Kinky."
      MaleSuicide="%o whipped himself. Kinky."

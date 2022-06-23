@@ -157,7 +157,7 @@ auto state Charging
 
 defaultproperties
 {
-     DamageType=Class'DEKRPG209B.DamTypeMegaExplosion'
+     DamageType=Class'DEKRPG209C.DamTypeMegaExplosion'
      MomentumTransfer=20000.000000
      ChargeTime=2.000000
      Damage=260.000000

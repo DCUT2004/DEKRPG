@@ -3,6 +3,6 @@ class DamTypeCombo extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.WeaponCombo'
+     WeaponClass=Class'DEKRPG209C.WeaponCombo'
      DeathString="%o was struck down by %k's combo."
 }

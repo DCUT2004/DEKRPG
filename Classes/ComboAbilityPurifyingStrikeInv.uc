@@ -8,7 +8,7 @@ function DoEffect()
 	{
 		if (Combo != None)
 		{
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209B.DamTypeCombo', class'RocketExplosion', True);
+			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209C.DamTypeCombo', class'RocketExplosion', True);
 			Combo.DispelAilment(Pawn(Owner), True, False);
 		}
 	}

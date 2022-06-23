@@ -7,7 +7,7 @@ simulated function ClientStartFire(int mode)
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209B.DEKStingerTurretFire'
-     FireModeClass(1)=Class'DEKRPG209B.DEKStingerTurretAltFire'
-     AttachmentClass=Class'DEKRPG209B.DEKStingerTurretAttachment'
+     FireModeClass(0)=Class'DEKRPG209C.DEKStingerTurretFire'
+     FireModeClass(1)=Class'DEKRPG209C.DEKStingerTurretAltFire'
+     AttachmentClass=Class'DEKRPG209C.DEKStingerTurretAttachment'
 }

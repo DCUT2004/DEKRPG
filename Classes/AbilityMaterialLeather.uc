@@ -24,7 +24,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 		for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
 		{
-			if (StatsInv.Data.Abilities[x] == Class'DEKRPG209B.AbilityNimbleBerserker')
+			if (StatsInv.Data.Abilities[x] == Class'DEKRPG209C.AbilityNimbleBerserker')
 			{
 				bHasBaseAbility = True;
 				break;

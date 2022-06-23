@@ -112,7 +112,7 @@ defaultproperties
      AdrenalineRequired=75
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG209B.ArtifactFreezeBombPickup'
+     PickupClass=Class'DEKRPG209C.ArtifactFreezeBombPickup'
      IconMaterial=Texture'Engine.DefaultTexture'
      ItemName="FreezeBomb"
 }

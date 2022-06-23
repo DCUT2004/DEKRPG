@@ -10,8 +10,8 @@ defaultproperties
      bRecommendSplashDamage=True
      FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
      FireForce="RocketLauncherFire"
-     FireRate=5.000000
-     ProjectileClass=Class'DEKRPG209B.RuneBarrageProj'
+     FireRate=3.000000
+     ProjectileClass=Class'DEKRPG209C.RuneBarrageProj'
      Spread=2800.000000
      SpreadStyle=SS_Random
 }

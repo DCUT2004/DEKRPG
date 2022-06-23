@@ -55,7 +55,7 @@ simulated function SpawnEffects(vector HitLocation, vector HitNormal)
 		spawn(class'FlashExplosion',,,HitLocation + HitNormal*16 );
         if (ExplosionDecal != None && Level.NetMode != NM_DedicatedServer)
             Spawn(ExplosionDecal, self,, HitLocation, rotator(-HitNormal));
-		Spawn(class'EarthquakeExplosion', Self,, HitLocation, rotator(-HitNormal));
+		//Spawn(class'EarthquakeExplosion', Self,, HitLocation, rotator(-HitNormal));
     }
 }
 
@@ -83,12 +83,13 @@ defaultproperties
      Damage=60.000000
      DamageRadius=200.000000
      MomentumTransfer=75000.000000
-     MyDamageType=Class'DEKRPG209B.DamTypeRuneBarrage'
+     MyDamageType=Class'DEKRPG209C.DamTypeRuneBarrage'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'WeaponStaticMesh.FlakChunk'
      CullDistance=4000.000000
      AmbientSound=Sound'WeaponSounds.BaseProjectileSounds.BFlakCannonProjectile'
+	 ImpactSound=Sound'WeaponSounds.BExplosion3'
      DrawScale=14.000000
      AmbientGlow=100
      bProjTarget=True

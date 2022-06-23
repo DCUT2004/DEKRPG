@@ -198,8 +198,8 @@ function bool HasUDamage()
 defaultproperties
 {
      LockOverlay=Shader'DEKRPGTexturesMaster209B.fX.PulseRedShader'
-     TurretBaseClass=Class'DEKRPG209B.DruidIonCannon_Base'
-     TurretSwivelClass=Class'DEKRPG209B.DruidIonCannon_Swivel'
+     TurretBaseClass=Class'DEKRPG209C.DruidIonCannon_Base'
+     TurretSwivelClass=Class'DEKRPG209C.DruidIonCannon_Swivel'
      RotPitchConstraint=(Min=12084.000000)
      CamRelLocation=(Z=100.000000)
      CamDistance=(X=-200.000000)

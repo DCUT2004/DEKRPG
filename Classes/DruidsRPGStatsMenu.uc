@@ -866,7 +866,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(2)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.WeaponSpeedSelect'
+     Controls(2)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.WeaponSpeedSelect'
 
      Begin Object Class=moEditBox Name=HealthBonusSelect
          bReadOnly=True
@@ -879,7 +879,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(3)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.HealthBonusSelect'
+     Controls(3)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.HealthBonusSelect'
 
      Begin Object Class=moEditBox Name=AdrenalineMaxSelect
          bReadOnly=True
@@ -892,7 +892,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(4)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.AdrenalineMaxSelect'
+     Controls(4)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.AdrenalineMaxSelect'
 
      Begin Object Class=moEditBox Name=AttackSelect
          bReadOnly=True
@@ -905,7 +905,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(5)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.AttackSelect'
+     Controls(5)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.AttackSelect'
 
      Begin Object Class=moEditBox Name=DefenseSelect
          bReadOnly=True
@@ -918,7 +918,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(6)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.DefenseSelect'
+     Controls(6)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.DefenseSelect'
 
      Begin Object Class=moEditBox Name=MaxAmmoSelect
          bReadOnly=True
@@ -931,7 +931,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(7)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.MaxAmmoSelect'
+     Controls(7)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.MaxAmmoSelect'
 
      Begin Object Class=moEditBox Name=PointsAvailableSelect
          bReadOnly=True
@@ -944,7 +944,7 @@ defaultproperties
          WinWidth=0.362500
          WinHeight=0.040000
      End Object
-     Controls(8)=moEditBox'DEKRPG209B.DruidsRPGStatsMenu.PointsAvailableSelect'
+     Controls(8)=moEditBox'DEKRPG209C.DruidsRPGStatsMenu.PointsAvailableSelect'
 
      Begin Object Class=GUIButton Name=WeaponSpeedButton
          Caption="+"
@@ -954,7 +954,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=WeaponSpeedButton.InternalOnKeyEvent
      End Object
-     Controls(9)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.WeaponSpeedButton'
+     Controls(9)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.WeaponSpeedButton'
 
      Begin Object Class=GUIButton Name=HealthBonusButton
          Caption="+"
@@ -964,7 +964,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=HealthBonusButton.InternalOnKeyEvent
      End Object
-     Controls(10)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.HealthBonusButton'
+     Controls(10)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.HealthBonusButton'
 
      Begin Object Class=GUIButton Name=AdrenalineMaxButton
          Caption="+"
@@ -974,7 +974,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=AdrenalineMaxButton.InternalOnKeyEvent
      End Object
-     Controls(11)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AdrenalineMaxButton'
+     Controls(11)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AdrenalineMaxButton'
 
      Begin Object Class=GUIButton Name=AttackButton
          Caption="+"
@@ -984,7 +984,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=AttackButton.InternalOnKeyEvent
      End Object
-     Controls(12)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AttackButton'
+     Controls(12)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AttackButton'
 
      Begin Object Class=GUIButton Name=DefenseButton
          Caption="+"
@@ -994,7 +994,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=DefenseButton.InternalOnKeyEvent
      End Object
-     Controls(13)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.DefenseButton'
+     Controls(13)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.DefenseButton'
 
      Begin Object Class=GUIButton Name=AmmoMaxButton
          Caption="+"
@@ -1004,7 +1004,7 @@ defaultproperties
          OnClick=RPGStatsMenu.StatPlusClick
          OnKeyEvent=AmmoMaxButton.InternalOnKeyEvent
      End Object
-     Controls(14)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AmmoMaxButton'
+     Controls(14)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AmmoMaxButton'
 	 
      Begin Object Class=GUIListBox Name=AbilityList
          bVisibleWhenEmpty=True
@@ -1017,7 +1017,7 @@ defaultproperties
          WinHeight=0.150000
          OnClick=RPGStatsMenu.UpdateAbilityButtons
      End Object
-     Controls(16)=GUIListBox'DEKRPG209B.DruidsRPGStatsMenu.AbilityList'
+     Controls(16)=GUIListBox'DEKRPG209C.DruidsRPGStatsMenu.AbilityList'
 
      Begin Object Class=GUIButton Name=AbilityDescButton
          Caption="Info"
@@ -1027,7 +1027,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.ShowAbilityDesc
          OnKeyEvent=AbilityDescButton.InternalOnKeyEvent
      End Object
-     Controls(17)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AbilityDescButton'
+     Controls(17)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AbilityDescButton'
 	 
      Begin Object Class=GUIButton Name=AbilityBuyButton
          Caption="Buy"
@@ -1037,7 +1037,7 @@ defaultproperties
          OnClick=RPGStatsMenu.BuyAbility
          OnKeyEvent=AbilityBuyButton.InternalOnKeyEvent
      End Object
-     Controls(18)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AbilityBuyButton'
+     Controls(18)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AbilityBuyButton'
 
      Begin Object Class=GUINumericEdit Name=WeaponSpeedAmt
          Value="5"
@@ -1048,7 +1048,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=WeaponSpeedAmt.ValidateValue
      End Object
-     Controls(19)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.WeaponSpeedAmt'
+     Controls(19)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.WeaponSpeedAmt'
 
      Begin Object Class=GUINumericEdit Name=HealthBonusAmt
          Value="5"
@@ -1059,7 +1059,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=HealthBonusAmt.ValidateValue
      End Object
-     Controls(20)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.HealthBonusAmt'
+     Controls(20)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.HealthBonusAmt'
 
      Begin Object Class=GUINumericEdit Name=AdrenalineMaxAmt
          Value="5"
@@ -1070,7 +1070,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=AdrenalineMaxAmt.ValidateValue
      End Object
-     Controls(21)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.AdrenalineMaxAmt'
+     Controls(21)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.AdrenalineMaxAmt'
 
      Begin Object Class=GUINumericEdit Name=AttackAmt
          Value="5"
@@ -1081,7 +1081,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=AttackAmt.ValidateValue
      End Object
-     Controls(22)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.AttackAmt'
+     Controls(22)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.AttackAmt'
 
      Begin Object Class=GUINumericEdit Name=DefenseAmt
          Value="5"
@@ -1092,7 +1092,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=DefenseAmt.ValidateValue
      End Object
-     Controls(23)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.DefenseAmt'
+     Controls(23)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.DefenseAmt'
 
      Begin Object Class=GUINumericEdit Name=MaxAmmoAmt
          Value="5"
@@ -1103,7 +1103,7 @@ defaultproperties
          WinWidth=0.080000
          OnDeActivate=MaxAmmoAmt.ValidateValue
      End Object
-     Controls(24)=GUINumericEdit'DEKRPG209B.DruidsRPGStatsMenu.MaxAmmoAmt'
+     Controls(24)=GUINumericEdit'DEKRPG209C.DruidsRPGStatsMenu.MaxAmmoAmt'
 
      Begin Object Class=GUIButton Name=SellButton
          Caption="Refund"
@@ -1113,7 +1113,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.SellClick
          OnKeyEvent=SellButton.InternalOnKeyEvent
      End Object
-     Controls(29)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.SellButton'
+     Controls(29)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.SellButton'
 
      Begin Object Class=GUILabel Name=ClassLabel
          Caption="Class:"
@@ -1124,7 +1124,7 @@ defaultproperties
          bBoundToParent=True
          bScaleToParent=True
      End Object
-     Controls(30)=GUILabel'DEKRPG209B.DruidsRPGStatsMenu.ClassLabel'
+     Controls(30)=GUILabel'DEKRPG209C.DruidsRPGStatsMenu.ClassLabel'
 
      Begin Object Class=GUILabel Name=SubClassLabel
          Caption="SubClass:"
@@ -1135,7 +1135,7 @@ defaultproperties
          bBoundToParent=True
          bScaleToParent=True
      End Object
-     Controls(31)=GUILabel'DEKRPG209B.DruidsRPGStatsMenu.SubClassLabel'
+     Controls(31)=GUILabel'DEKRPG209C.DruidsRPGStatsMenu.SubClassLabel'
 
      Begin Object Class=GUIButton Name=ClassBuyButton
          Caption="Buy a Class"
@@ -1145,7 +1145,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.ClassBuyClick
          OnKeyEvent=ClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(32)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.ClassBuyButton'
+     Controls(32)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.ClassBuyButton'
 
      Begin Object Class=GUIButton Name=SubClassBuyButton
          Caption="Buy a Subclass"
@@ -1155,7 +1155,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.SubClassBuyClick
          OnKeyEvent=SubClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(33)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.SubClassBuyButton'
+     Controls(33)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.SubClassBuyButton'
 
      Begin Object Class=GUIButton Name=AbilityMaxButton
          Caption="Max"
@@ -1165,7 +1165,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.MaxAbility
          OnKeyEvent=AbilityBuyButton.InternalOnKeyEvent
      End Object
-     Controls(34)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.AbilityMaxButton'
+     Controls(34)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.AbilityMaxButton'
 	 
      Begin Object Class=GUIButton Name=ShowMaterialButton
          Caption="Materials"
@@ -1175,7 +1175,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.ShowMaterials
          OnKeyEvent=ShowMaterialButton.InternalOnKeyEvent
      End Object
-     Controls(35)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.ShowMaterialButton'
+     Controls(35)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.ShowMaterialButton'
 	 
      Begin Object Class=GUIButton Name=ShowAbilityButton
          Caption="Abilities"
@@ -1185,7 +1185,7 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.ShowAbilities
          OnKeyEvent=ShowAbilityButton.InternalOnKeyEvent
      End Object
-     Controls(36)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.ShowAbilityButton'
+     Controls(36)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.ShowAbilityButton'
 	 
      Begin Object Class=GUIButton Name=ShowComboButton
          Caption="Combos"
@@ -1195,6 +1195,6 @@ defaultproperties
          OnClick=DruidsRPGStatsMenu.ShowCombos
          OnKeyEvent=ShowAbilityButton.InternalOnKeyEvent
      End Object
-     Controls(37)=GUIButton'DEKRPG209B.DruidsRPGStatsMenu.ShowComboButton'
+     Controls(37)=GUIButton'DEKRPG209C.DruidsRPGStatsMenu.ShowComboButton'
 
 }

@@ -2,6 +2,6 @@ class ArtifactMissionTippyToesPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209B.ArtifactMissionTippyToes'
+     InventoryType=Class'DEKRPG209C.ArtifactMissionTippyToes'
      PickupMessage="You picked up the Tippy Toes Mission!"
 }

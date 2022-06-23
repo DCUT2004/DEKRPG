@@ -50,15 +50,20 @@ static function bool OverridePickupQuery(Pawn Other, Pickup item, out byte bAllo
 defaultproperties
 {
 	 AddAmount=10
-     Weapons(0)="DEKRPG209B.RuneFireball_Heatwave"
-     Weapons(1)="DEKRPG209B.RuneLaser_Guard"
-     Weapons(2)="DEKRPG209B.RuneImmobilize_Magnet"
-     Weapons(3)="DEKRPG209B.RuneFlurry_Barrage"
-     Weapons(4)="DEKRPG209B.RuneEnergySteal"
-     ONSWeapons(0)="DEKRPG209B.RuneBeam_Chain"
-     ONSWeapons(1)="DEKRPG209B.RuneHeatWhip_Flare"
-     ONSWeapons(3)="DEKRPG209B.RuneEarthquake_Blizzard"
-     SuperWeapons(0)="DEKRPG209B.RuneMegaBlast_PoisonBlast"
+     PlayerLevelReqd(1)=1
+     PlayerLevelReqd(2)=1
+     PlayerLevelReqd(3)=1
+     PlayerLevelReqd(4)=1
+     PlayerLevelReqd(5)=1
+     Weapons(0)="DEKRPG209C.RuneFireball_Heatwave"
+     Weapons(1)="DEKRPG209C.RuneLaser_Guard"
+     Weapons(2)="DEKRPG209C.RuneImmobilize_Magnet"
+     Weapons(3)="DEKRPG209C.RuneFlurry_Barrage"
+     Weapons(4)="DEKRPG209C.RuneEnergySteal"
+     ONSWeapons(0)="DEKRPG209C.RuneBeam_Chain"
+     ONSWeapons(1)="DEKRPG209C.RuneHeatWhip_Flare"
+     ONSWeapons(3)="DEKRPG209C.RuneEarthquake_Blizzard"
+     SuperWeapons(0)="DEKRPG209C.RuneMegaBlast_PoisonBlast"
      WeaponDamage=1.000000
      AdrenalineDamage=1.000000
      AbilityName="Loaded Runes"

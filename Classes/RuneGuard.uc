@@ -31,7 +31,7 @@ simulated function Tick(float DeltaTime)
 
 defaultproperties
 {
-	AmbientSound=Sound'DEKRPG209B.ArtifactSounds.ImmobilizeAmbient'
+	AmbientSound=Sound'DEKRPG209C.ArtifactSounds.ImmobilizeAmbient'
 	LightType=LT_Steady
 	LightEffect=LE_QuadraticNonIncidence
 	LightHue=135
@@ -49,5 +49,5 @@ defaultproperties
 	bCollideActors=True
 	bCollideWorld=True
 	Mass=2000.000000
-	Lifespan=4.0000
+	Lifespan=8.0000
 }

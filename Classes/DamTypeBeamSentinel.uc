@@ -3,7 +3,7 @@ class DamTypeBeamSentinel extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209B.DEKBeamSentinel'
+     VehicleClass=Class'DEKRPG209C.DEKBeamSentinel'
      DeathString="%o was shot down by %k's beam sentinel."
      FemaleSuicide="%o shot herself down."
      MaleSuicide="%o shot himself down."

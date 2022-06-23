@@ -2,6 +2,6 @@ class ArtifactMissionThundergodPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209B.ArtifactMissionThundergod'
+     InventoryType=Class'DEKRPG209C.ArtifactMissionThundergod'
      PickupMessage="You picked up the Thunder God Mission!"
 }

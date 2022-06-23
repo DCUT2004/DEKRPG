@@ -8,6 +8,7 @@ var RuneHeatWhipFX FX;
 var Vector WhipEnd;
 var Pawn Victim;
 var bool bCracked;
+var config float SearchHitRadius;
 
 simulated function ModeTick(float dt)
 {
@@ -42,7 +43,7 @@ function DoTrace(Vector Start, Rotator Dir)
 		FX.Destroy();
 		FX = None;
 	}
-	Instigator.PlaySound(Sound'DEKRPG209B.RuneSounds.HeatWhipThrow',SLOT_None,Instigator.TransientSoundVolume*5.0);
+	Instigator.PlaySound(Sound'DEKRPG209C.RuneSounds.HeatWhipThrow',SLOT_None,Instigator.TransientSoundVolume*5.0);
 	MaxRange();
 	X = Vector(Dir);
 	End = Start + TraceRange * X;
@@ -56,20 +57,44 @@ function DoTrace(Vector Start, Rotator Dir)
 			{
 				SpawnHeatWhip(HitLocation);
 				Victim = Pawn(Other);
-				GoToState('Crack');
 			}
 		}
-		else	//Hit some Actor, but not a Pawn
+		else	//Hit some Actor, but not a Pawn. Check if there's a nearby Pawn
 		{
 			SpawnHeatWhip(HitLocation);
-			GoToState('WhipMiss');
+			Victim = searchPawn(HitLocation);
 		}
 	}
-	else	//Hit nothing at all
+	else	//Hit nothing at all. See if we can find a nearby Pawn
 	{
 		SpawnHeatWhip(End);
-		GoToState('WhipMiss');
+		Victim = searchPawn(End);
 	}
+	
+	
+	if (Victim != None)
+		GoToState('Crack');
+	else
+		GoToState('WhipMiss');
+}
+
+function Pawn searchPawn(vector SearchLocation)
+{
+	local Controller C, NextC;
+	
+	C = Level.ControllerList;
+	
+	while (C != None)
+	{
+		NextC = C.NextController;
+		if (C != None && C.Pawn != None && C.Pawn.Health > 0 && Instigator != None && !C.SameTeamAs(Instigator.Controller) && VSize(C.Pawn.Location - SearchLocation) <= SearchHitRadius){
+			if (!C.Pawn.IsA('SMPTitan') &&  BossInv(C.Pawn.FindInventoryType(class'BossInv')) == None){
+				return C.Pawn;
+			}
+		}
+		C = NextC;
+	}
+	return None;
 }
 
 function SpawnHeatWhip(Vector EndLocation)
@@ -130,7 +155,7 @@ state Crack
 			return;
 		}
 		
-		Instigator.PlaySound(Sound'DEKRPG209B.RuneSounds.HeatWhipCrack',SLOT_None,Instigator.TransientSoundVolume*7.0);
+		Instigator.PlaySound(Sound'DEKRPG209C.RuneSounds.HeatWhipCrack',SLOT_None,Instigator.TransientSoundVolume*7.0);
 		if (Victim != None)
 		{
 			//Control the Pawn(Other)'s movements
@@ -173,13 +198,14 @@ state Crack
 
 defaultproperties
 {
+	 SearchHitRadius=80.0000
 	 bModeExclusive=False
-     DamageType=Class'DEKRPG209B.DamTypeRuneHeatWhip'
+     DamageType=Class'DEKRPG209C.DamTypeRuneHeatWhip'
 	 AdrenCost=10
-	 DamageMin=100
-	 DamageMax=110
+	 DamageMin=150
+	 DamageMax=160
 	 FireRate=3.500000
-     //FireSound=Sound'DEKRPG209B.RuneSounds.HeatWhipThrow'
+     //FireSound=Sound'DEKRPG209C.RuneSounds.HeatWhipThrow'
      bReflective=False
      TraceRange=30000.000000
 }

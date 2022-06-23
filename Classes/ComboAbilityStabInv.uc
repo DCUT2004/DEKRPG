@@ -10,7 +10,7 @@ function DoEffect()
 	{
 		if (Combo != None)
 		{
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209B.DamTypeCombo', class'RocketExplosion', True);
+			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209C.DamTypeCombo', class'RocketExplosion', True);
 		}
 	}
 	Counter = ComboLifespan;
@@ -26,7 +26,7 @@ simulated function Timer()
 		{
 			if (Combo != None)
 			{
-				Combo.ComboDamage(EffectMultiplier, bAll, False, bSingle, class'DEKRPG209B.DamTypeCombo', class'RocketExplosion', True);
+				Combo.ComboDamage(EffectMultiplier, bAll, False, bSingle, class'DEKRPG209C.DamTypeCombo', class'RocketExplosion', True);
 			}
 			Counter--;
 			Log("Counter: " $ Counter);

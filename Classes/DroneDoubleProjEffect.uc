@@ -29,7 +29,7 @@ defaultproperties
          LifetimeRange=(Min=2.000000,Max=2.000000)
          InitialDelayRange=(Min=0.050000,Max=0.050000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209B.DroneDoubleProjEffect.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG209C.DroneDoubleProjEffect.SpriteEmitter1'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter1
          BeamEndPoints(0)=(offset=(X=(Min=40.000000,Max=40.000000)),Weight=1.000000)
@@ -50,7 +50,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=10.000000,Max=10.000000)
      End Object
-     Emitters(1)=BeamEmitter'DEKRPG209B.DroneDoubleProjEffect.BeamEmitter1'
+     Emitters(1)=BeamEmitter'DEKRPG209C.DroneDoubleProjEffect.BeamEmitter1'
 
      bNoDelete=False
      bDirectional=True

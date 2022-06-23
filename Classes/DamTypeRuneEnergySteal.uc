@@ -3,7 +3,7 @@ class DamTypeRuneEnergySteal extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.RuneEnergySteal'
+     WeaponClass=Class'DEKRPG209C.RuneEnergySteal'
      DeathString="%k stole all of %o's energy."
      bDelayedDamage=True
 }

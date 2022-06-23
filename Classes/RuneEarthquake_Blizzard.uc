@@ -3,8 +3,8 @@ class RuneEarthquake_Blizzard extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209B.RuneEarthquakeFire'
-     FireModeClass(1)=Class'DEKRPG209B.RuneIcicleFire'
+     FireModeClass(0)=Class'DEKRPG209C.RuneEarthquakeFire'
+     FireModeClass(1)=Class'DEKRPG209C.RuneIcicleFire'
      bCanThrow=False
      HudColor=(R=98,G=189,B=168)
      InventoryGroup=3

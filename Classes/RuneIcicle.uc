@@ -42,7 +42,7 @@ simulated function Timer()
 
 function DoSound()
 {
-	PlaySound(Sound'DEKRPG209B.RuneSounds.IcicleGrowth', SLOT_None, 1 * TransientSoundVolume);
+	PlaySound(Sound'DEKRPG209C.RuneSounds.IcicleGrowth', SLOT_None, 3 * TransientSoundVolume);
 }
 
 simulated function Touch(Actor Other)
@@ -76,7 +76,7 @@ function Shatter()
 	{
 		Shards = Spawn(Class'RuneIcicleShard', Instigator, , Self.Location + Vect(0,0,60), RotRand());
 	}
-	PlaySound(Sound'DEKRPG209B.RuneSounds.IcicleShatter', SLOT_None, 1 * TransientSoundVolume);
+	PlaySound(Sound'DEKRPG209C.RuneSounds.IcicleShatter', SLOT_None, 3 * TransientSoundVolume);
 	Destroy();
 }
 
@@ -84,8 +84,8 @@ defaultproperties
 {
 	MaxDrawscale=1.0000000000
 	DrawInterval=0.1000000	//The interval rate to grow the icicle to simulate the appearance of icicles forming from the ground
-	StopCounter=2	//Divide this number by DrawInterval to get the number of iterations done to grow the icicle
-	TouchThreshold=3
+	StopCounter=1	//Divide this number by DrawInterval to get the number of iterations done to grow the icicle
+	TouchThreshold=2
 	SpikeDamage=2
 	MaxShards=6
 	Lifespan=10.00000
@@ -93,8 +93,6 @@ defaultproperties
 	StaticMesh=StaticMesh'AW-2004Crystals.Crops.CrystalOutcrop3'
 	Drawscale=0.000000000
 	bIgnoreVehicles=True
-    //CollisionRadius=29.500000
-    //CollisionHeight=15.000000
 	bOrientOnSlope=True
 	bIgnoreEncroachers=True
 	bUseCollisionStaticMesh=True

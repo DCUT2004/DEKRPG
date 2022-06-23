@@ -3,7 +3,7 @@ class DamTypeRuneIceball extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.RuneEarthquake_Blizzard'
+     WeaponClass=Class'DEKRPG209C.RuneEarthquake_Blizzard'
      DeathString="%o was frozen by %k's Iceball."
      FemaleSuicide="%o froze herself with her own Iceball."
      MaleSuicide="%o froze himself with his own Iceball."

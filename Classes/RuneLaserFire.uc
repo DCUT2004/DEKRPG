@@ -3,7 +3,7 @@ class RuneLaserFire extends RuneInstantFire
 
 var class<ONSTurretBeamEffect> BeamEffectClass;
 
-function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector HitNormal, int ReflectNum)
+simulated function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector HitNormal, int ReflectNum)
 {
     local ONSTurretBeamEffect Beam;
 
@@ -12,6 +12,7 @@ function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector H
         Beam = Weapon.Spawn(BeamEffectClass,,, Start, Dir);
 		if (Beam != None)
 		{
+			Beam.RemoteRole = ROLE_SimulatedProxy;
 			BeamEmitter(Beam.Emitters[0]).BeamDistanceRange.Min = VSize(Start - HitLocation);
 			BeamEmitter(Beam.Emitters[0]).BeamDistanceRange.Max = VSize(Start - HitLocation);
 			BeamEmitter(Beam.Emitters[1]).BeamDistanceRange.Min = VSize(Start - HitLocation);
@@ -23,13 +24,13 @@ function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector H
 defaultproperties
 {
      bModeExclusive=False
-     DamageType=Class'DEKRPG209B.DamTypeRuneLaser'
+     DamageType=Class'DEKRPG209C.DamTypeRuneLaser'
 	 AdrenCost=1
 	 DamageMin=16
 	 DamageMax=18
      FireRate=0.2000000
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser09'
-     BeamEffectClass=Class'DEKRPG209B.RuneLaserEffect'
+     BeamEffectClass=Class'DEKRPG209C.RuneLaserEffect'
      bReflective=False
      TraceRange=17000.000000
      Momentum=15000.000000

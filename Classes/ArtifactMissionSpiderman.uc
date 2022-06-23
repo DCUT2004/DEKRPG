@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=50
      Description="Make kills while using electro-magnet."
-     PickupClass=Class'DEKRPG209B.ArtifactMissionSpidermanPickup'
+     PickupClass=Class'DEKRPG209C.ArtifactMissionSpidermanPickup'
      IconMaterial=Texture'MissionsTex6.ArtifactMissions.SpidermanMission'
      ItemName="Spiderman"
 }

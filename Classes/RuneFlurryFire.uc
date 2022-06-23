@@ -38,6 +38,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 		return None;
 	
 	MuzFlash = Spawn(Class'RuneFlurryMuzzle',,, SpawnLocation);
+	if (MuzFlash != None)
+		MuzFlash.RemoteRole = ROLE_SimulatedProxy;
     p.Damage *= DamageAtten;
 	Instigator.Controller.Adrenaline -= AdrenCost;
 	return P;
@@ -56,7 +58,7 @@ defaultproperties
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser16'
      FireForce="RocketLauncherFire"
      FireRate=0.300000
-     ProjectileClass=Class'DEKRPG209B.RuneFlurryProj'
+     ProjectileClass=Class'DEKRPG209C.RuneFlurryProj'
      //Spread=1500.0000
      //SpreadStyle=SS_Random
 }

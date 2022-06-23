@@ -2,7 +2,7 @@ class ArtifactSphereHealingPickup extends RPGArtifactPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209B.ArtifactSphereHealing'
+     InventoryType=Class'DEKRPG209C.ArtifactSphereHealing'
      PickupMessage="You got the Sphere of Healing!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

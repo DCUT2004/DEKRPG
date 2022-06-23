@@ -110,8 +110,8 @@ static function rotator getSpawnRotator(Vector SpawnLocation, Pawn Master)
 defaultproperties
 {
      SummonChance=75.000000
-     ExcludingAbilities(0)=Class'DEKRPG209B.AbilityHordeSummoner'
-     ExcludingAbilities(1)=Class'DEKRPG209B.AbilityBeastSummoner'
+     ExcludingAbilities(0)=Class'DEKRPG209C.AbilityHordeSummoner'
+     ExcludingAbilities(1)=Class'DEKRPG209C.AbilityBeastSummoner'
      AbilityName="Niche: Mind Control"
      Description="Further increases the damage dealt by your pets by 25%, but also reduces your maximum monster points by 5.|You must be level 180 and have maxed out Monster Points before buying this niche. You can not be in more than one niche at a same time.||Cost(per level): 50"
      StartingCost=50

@@ -2,6 +2,6 @@ class ArtifactMissionFlakFrenzyPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209B.ArtifactMissionFlakFrenzy'
+     InventoryType=Class'DEKRPG209C.ArtifactMissionFlakFrenzy'
      PickupMessage="You picked up the Flak Frenzy Mission!"
 }

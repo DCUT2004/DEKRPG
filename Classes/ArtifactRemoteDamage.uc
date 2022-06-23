@@ -195,7 +195,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG209B.PurpleBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209C.PurpleBoltEmitter'
      AdrenalineRequired=100
      MaxRange=3000.000000
      DamageRunTime=20

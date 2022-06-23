@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=1000
      Description="Use a rage weapon."
-     PickupClass=Class'DEKRPG209B.ArtifactMissionAngerManagementPickup'
+     PickupClass=Class'DEKRPG209C.ArtifactMissionAngerManagementPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.AngerManagementMission'
      ItemName="Anger Management"
 }

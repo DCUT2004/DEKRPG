@@ -5,7 +5,7 @@ class DruidWeaponAutoGun extends Weapon_Sentinel
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209B.FM_DruidAutoGun_Fire'
-     FireModeClass(1)=Class'DEKRPG209B.FM_DruidAutoGun_Fire'
+     FireModeClass(0)=Class'DEKRPG209C.FM_DruidAutoGun_Fire'
+     FireModeClass(1)=Class'DEKRPG209C.FM_DruidAutoGun_Fire'
      ItemName="AutoGun weapon"
 }

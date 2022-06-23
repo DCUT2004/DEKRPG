@@ -5,8 +5,8 @@ class DEKSniperWeaponSentinel extends Weapon_Sentinel
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209B.DEKSniperSentinelFire'
-     FireModeClass(1)=Class'DEKRPG209B.DEKSniperSentinelFire'
-     AttachmentClass=Class'DEKRPG209B.DEKSniperSentinelAttachment'
+     FireModeClass(0)=Class'DEKRPG209C.DEKSniperSentinelFire'
+     FireModeClass(1)=Class'DEKRPG209C.DEKSniperSentinelFire'
+     AttachmentClass=Class'DEKRPG209C.DEKSniperSentinelAttachment'
      ItemName="Sniper Sentinel"
 }

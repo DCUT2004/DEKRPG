@@ -3,7 +3,7 @@ class DamTypeRuneIceBeam extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.RuneBeam_Chain'
+     WeaponClass=Class'DEKRPG209C.RuneBeam_Chain'
      DeathString="%o was frozen solid by %k's Ice Beam."
      FemaleSuicide="%o froze herself with her Ice Beam."
      MaleSuicide="%o froze himself with his Ice Beam."

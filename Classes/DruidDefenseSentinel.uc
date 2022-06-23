@@ -43,7 +43,7 @@ defaultproperties
      ArmorHealingAmount=1.000000
      TargetRadius=700.000000
      XPPerHit=0.066000
-     TurretBaseClass=Class'DEKRPG209B.DruidDefenseSentinelBase'
+     TurretBaseClass=Class'DEKRPG209C.DruidDefenseSentinelBase'
      VehicleNameString="Defense Sentinel"
      bCanBeBaseForPawns=False
      Mesh=SkeletalMesh'AS_Vehicles_M.FloorTurretGun'

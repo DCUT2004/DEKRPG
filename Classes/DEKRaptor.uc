@@ -72,5 +72,5 @@ simulated function DrawHUD(Canvas Canvas)
 defaultproperties
 {
      LockOverlay=FinalBlend'D-E-K-HoloGramFX.FullFB.HoloMaterial_2'
-     DriverWeapons(0)=(WeaponClass=Class'DEKRPG209B.INAttackCraftGunA')
+     DriverWeapons(0)=(WeaponClass=Class'DEKRPG209C.INAttackCraftGunA')
 }

@@ -77,7 +77,7 @@ function Monster spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 	local RPGStatsInv StatsInv;
 	local int x;
 	
-	M = spawn(Class'DEKRPG209B.LeechGnat',,, SpawnLocation, SpawnRotation);
+	M = spawn(Class'DEKRPG209C.LeechGnat',,, SpawnLocation, SpawnRotation);
 
 	if (M != None)
 	{
@@ -136,7 +136,7 @@ function Monster spawnGnat(Vector SpawnLocation, Rotator SpawnRotation)
 		}
 		for ( C = Level.ControllerList; C != None; C = C.NextController )
 			if (C != None && C.Pawn != None && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
-				PlayerController(C).ClientPlaySound(Sound'DEKRPG209B.ComboSounds.Swarm');
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG209C.ComboSounds.Swarm');
 		return M;
 	}
 	return None;

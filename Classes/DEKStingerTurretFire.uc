@@ -44,7 +44,7 @@ simulated function bool AllowFire()
 defaultproperties
 {
      FireRate=0.200000
-     ProjectileClass=Class'DEKRPG209B.DEKStingerTurretProj'
+     ProjectileClass=Class'DEKRPG209C.DEKStingerTurretProj'
      Spread=0.015000
      SpreadStyle=SS_Random
 }

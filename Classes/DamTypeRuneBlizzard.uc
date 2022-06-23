@@ -3,7 +3,7 @@ class DamTypeRuneBlizzard extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209B.RuneEarthquake_Blizzard'
+     WeaponClass=Class'DEKRPG209C.RuneEarthquake_Blizzard'
      DeathString="%o was caught in %k's Blizzard."
      FemaleSuicide="%o was caught in her own Blizzard."
      MaleSuicide="%o was caught in his own Blizzard."

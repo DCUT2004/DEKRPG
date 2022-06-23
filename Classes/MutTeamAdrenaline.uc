@@ -252,7 +252,7 @@ simulated function PlayMonsterComboSound()
 	
 	for ( C = Level.ControllerList; C != None; C = C.NextController )
 		if (C != None && C.IsA('PlayerController'))
-			PlayerController(C).ClientPlaySound(Sound'DEKRPG209B.MonsterComboSound');
+			PlayerController(C).ClientPlaySound(Sound'DEKRPG209C.MonsterComboSound');
 }
 
 simulated function AnnounceCombo(int RandIndex)
@@ -267,17 +267,17 @@ defaultproperties
 	 MinimumMonsters=5
 	 FullAdrenalinePlayer=100.000000000
 	 FullAdrenalineMonster=100.00000000
-     ComboClass(0)=Class'DEKRPG209B.ComboAttackInv'
-     ComboClass(1)=Class'DEKRPG209B.ComboAttackInv'
-     ComboClass(2)=Class'DEKRPG209B.ComboDefenseInv'
-     ComboClass(3)=Class'DEKRPG209B.ComboDefenseInv'
-     ComboClass(4)=Class'DEKRPG209B.ComboFreezeInv'
-     ComboClass(5)=Class'DEKRPG209B.ComboHeatInv'
-     ComboClass(6)=Class'DEKRPG209B.ComboRegenerateInv'
-     ComboClass(7)=Class'DEKRPG209B.ComboHealStopInv'
-     ComboClass(8)=Class'DEKRPG209B.ComboHealthMaxInv'
-     ComboClass(9)=Class'DEKRPG209B.ComboInaccuracyInv'
-     ComboClass(10)=Class'DEKRPG209B.ComboMisfortuneInv'
+     ComboClass(0)=Class'DEKRPG209C.ComboAttackInv'
+     ComboClass(1)=Class'DEKRPG209C.ComboAttackInv'
+     ComboClass(2)=Class'DEKRPG209C.ComboDefenseInv'
+     ComboClass(3)=Class'DEKRPG209C.ComboDefenseInv'
+     ComboClass(4)=Class'DEKRPG209C.ComboFreezeInv'
+     ComboClass(5)=Class'DEKRPG209C.ComboHeatInv'
+     ComboClass(6)=Class'DEKRPG209C.ComboRegenerateInv'
+     ComboClass(7)=Class'DEKRPG209C.ComboHealStopInv'
+     ComboClass(8)=Class'DEKRPG209C.ComboHealthMaxInv'
+     ComboClass(9)=Class'DEKRPG209C.ComboInaccuracyInv'
+     ComboClass(10)=Class'DEKRPG209C.ComboMisfortuneInv'
      ComboData(0)=(LifeSpan=25,Multiplier=1.200000,bDispellable=True,bSingle=True,bBuff=True)
      ComboData(1)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bAll=True,bBuff=False)
      ComboData(2)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bSingle=True,bBuff=True)

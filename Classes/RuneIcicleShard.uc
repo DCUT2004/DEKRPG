@@ -66,7 +66,7 @@ simulated function HitWall (vector HitNormal, actor Wall)
 	speed = VSize(velocity);
 	if (Bounces > 0 && speed>100)
 	{
-		PlaySound(ImpactSound, SLOT_Interact, DrawScale/10);
+		//PlaySound(ImpactSound, SLOT_Interact, DrawScale/10);
 		SetPhysics(PHYS_Falling);
 		RealHitNormal = HitNormal;
 		if ( FRand() < 0.5 )
@@ -95,8 +95,8 @@ defaultproperties
      Speed=6000.000000
      Damage=25.000000
      MomentumTransfer=4000.000000
-     MyDamageType=Class'DEKRPG209B.DamTypeStingerTurret'
-     ImpactSound=ProceduralSound'WeaponSounds.PGrenFloor1.P1GrenFloor1'
+     MyDamageType=Class'DEKRPG209C.DamTypeStingerTurret'
+     //ImpactSound=ProceduralSound'WeaponSounds.PGrenFloor1.P1GrenFloor1'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence
      LightHue=152
@@ -112,7 +112,7 @@ defaultproperties
      DrawScale=5.000000
 	 CollisionHeight=20.000000
 	 CollisionRadius=5.00000
-     //DrawScale3D=(X=0.437500,Y=0.437500,Z=0.437500)
+     DrawScale3D=(X=0.437500,Y=0.437500,Z=0.437500)
      AmbientGlow=15
      bBounce=True
 }

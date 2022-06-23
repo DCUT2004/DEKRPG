@@ -3,5 +3,5 @@ class DamTypeLynxRoadkill extends DamTypeRoadkill
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209B.DEKLynxVehicle'
+     VehicleClass=Class'DEKRPG209C.DEKLynxVehicle'
 }

@@ -2,6 +2,6 @@ class ArtifactMissionBugHuntPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209B.ArtifactMissionBugHunt'
+     InventoryType=Class'DEKRPG209C.ArtifactMissionBugHunt'
      PickupMessage="You picked up the Bug Hunt Mission!"
 }
