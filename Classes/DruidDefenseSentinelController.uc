@@ -271,6 +271,7 @@ simulated function Timer()
 	local Mutator m;
 	Local DruidDefenseSentinel DefPawn;
 	local ONSMineProjectile Mine;
+	local SMPTitanBigRock TitanRock;
 
 	if (PlayerSpawner == None || PlayerSpawner.Pawn == None || Pawn == None || Pawn.Health <= 0 || DruidDefenseSentinel(Pawn) == None)
 		return;		// going to die soon.
@@ -341,8 +342,8 @@ simulated function Timer()
 		BestP = BestGuidedP;
 	else
 		BestP = ClosestP;
-
-	if (BestP != None && !BestP.bDeleteMe)
+	TitanRock = SMPTitanBigRock(BestP);
+	if (BestP != None && !BestP.bDeleteMe && (TitanRock == None || TitanRock != None && TitanRock.Drawscale > 2) )	//Ignore the small chunks of Titan rocks
 	{
 		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(BestP.Location - Pawn.Location));
 		if (HitEmitter != None)
@@ -362,7 +363,9 @@ simulated function Timer()
 				if (BestP.Damage >= BestP.default.Damage)
 					BestP.Damage *= DamageMultiplier;
 				if (BestP.IsA('SMPTitanBigRock'))
-					BestP.SetDrawscale(BestP.Drawscale/2);
+				{
+					BestP.TakeDamage(10, PlayerSpawner.Pawn, BestP.Location, Vect(0,0,0), class'DamageType');
+				}
 				if (BestP.Damage < MinimumDamage)
 					BestP.Damage = MinimumDamage;
 			}
