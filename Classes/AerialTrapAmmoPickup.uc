@@ -2,6 +2,6 @@ class AerialTrapAmmoPickup extends ONSGrenadeAmmoPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.AerialTrapAmmo'
+     InventoryType=Class'DEKRPG209D.AerialTrapAmmo'
      PickupMessage="You picked up some aerial bombs."
 }

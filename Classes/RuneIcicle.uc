@@ -42,7 +42,7 @@ simulated function Timer()
 
 function DoSound()
 {
-	PlaySound(Sound'DEKRPG209C.RuneSounds.IcicleGrowth', SLOT_None, 3 * TransientSoundVolume);
+	PlaySound(Sound'DEKRPG209D.RuneSounds.IcicleGrowth', SLOT_None, 3 * TransientSoundVolume);
 }
 
 simulated function Touch(Actor Other)
@@ -76,7 +76,7 @@ function Shatter()
 	{
 		Shards = Spawn(Class'RuneIcicleShard', Instigator, , Self.Location + Vect(0,0,60), RotRand());
 	}
-	PlaySound(Sound'DEKRPG209C.RuneSounds.IcicleShatter', SLOT_None, 3 * TransientSoundVolume);
+	PlaySound(Sound'DEKRPG209D.RuneSounds.IcicleShatter', SLOT_None, 3 * TransientSoundVolume);
 	Destroy();
 }
 

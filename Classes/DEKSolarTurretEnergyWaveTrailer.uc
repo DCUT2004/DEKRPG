@@ -58,7 +58,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=-3000.000000,Max=-3000.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(0)=TrailEmitter'DEKRPG209C.DEKSolarTurretEnergyWaveTrailer.ShockwaveTrail'
+     Emitters(0)=TrailEmitter'DEKRPG209D.DEKSolarTurretEnergyWaveTrailer.ShockwaveTrail'
 
      Begin Object Class=MeshEmitter Name=ShockwaveFront
          StaticMesh=StaticMesh'DEKStaticsMaster209C.fX.SolarWave'
@@ -77,7 +77,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          StartVelocityRange=(X=(Min=3000.000000,Max=3000.000000))
      End Object
-     Emitters(1)=MeshEmitter'DEKRPG209C.DEKSolarTurretEnergyWaveTrailer.ShockwaveFront'
+     Emitters(1)=MeshEmitter'DEKRPG209D.DEKSolarTurretEnergyWaveTrailer.ShockwaveFront'
 
      AutoDestroy=True
      bNoDelete=False

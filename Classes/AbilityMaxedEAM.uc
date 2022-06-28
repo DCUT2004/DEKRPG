@@ -33,8 +33,8 @@ defaultproperties
 {
      AdrenMultiplier=0.0300000
      HealthMultiplier=0.0300000000
-     ExcludingAbilities(0)=Class'DEKRPG209C.AbilityWizardEAM'
-     ExcludingAbilities(1)=Class'DEKRPG209C.AbilityPowerEAM'
+     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityWizardEAM'
+     ExcludingAbilities(1)=Class'DEKRPG209D.AbilityPowerEAM'
      AbilityName="Niche: Maxed"
      Description="Increases your max adrenaline by 3% per level, but also decreases max health by 3% per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

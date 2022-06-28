@@ -187,13 +187,19 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
+	local RPGWeapon Weapon;
+	
 	if(!bOwnedByInstigator)
 		return;
-	if(Damage > 0 && AbilityLevel >= 8)
+	if(Instigator != None && Damage > 0 && AbilityLevel >= 8)
 	{
-		// half weapon damage
-		if (ClassIsChildOf(DamageType, class'WeaponDamageType') || ClassIsChildOf(DamageType, class'VehicleDamageType'))
+		// reduce damage for medic weapon
+
+		Weapon = RPGWeapon(Instigator.Weapon);
+		if ( (Weapon != None && Weapon.IsA('RW_SuperHealer')) || ClassIsChildOf(DamageType, class'VehicleDamageType'))
+		{
 			Damage *= default.WeaponDamage;
+		}
 	}
 }
 
@@ -213,7 +219,7 @@ defaultproperties
      Lev3HealingDamage=3.000000
      AdrenalineUsage=0.500000
      AbilityName="Loaded Medic"
-     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker.|Each level of Loaded Healing thereafter allows you to use the Medic Gun to heal teammates +20 beyond their max health. |Level 5 grants you the Healing Sphere and Healing Blast artifacts, and your healing output is doubled.|Level 8, for the Healer subclass, triples your healing output and reduces adrenaline for healing artifacts, but also reduces weapon damage.|Level 10 grants the Remote Booster artifact.|Cost (per level): 7"
+     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker.|Each level of Loaded Healing thereafter allows you to use the Medic Gun to heal teammates +20 beyond their max health. |Level 5 grants you the Healing Sphere and Healing Blast artifacts, and your healing output is doubled.|Level 8, for the Healer subclass, triples your healing output and reduces adrenaline for healing artifacts, but also reduces damage on your medic weapon.|Level 10 grants the Remote Booster artifact.|Cost (per level): 7"
      StartingCost=7
      BotChance=7
      MaxLevel=10

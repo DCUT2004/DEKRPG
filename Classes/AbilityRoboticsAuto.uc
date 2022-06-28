@@ -39,7 +39,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	}
 	for (i = 0; i < Inv.SentinelAvailability.length; i++)
 	{
-		Inv.SentinelAvailability[i].Number++;
+		Inv.SentinelAvailability[i].Number = 5;
 	}
 	
 }
@@ -66,7 +66,7 @@ defaultproperties
      Level3MaxPoints=21
      Level4MaxPoints=23
      Level5MaxPoints=25
-     ExcludingAbilities(0)=Class'DEKRPG209C.AbilityCompanionAuto'
+     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityCompanionAuto'
      AbilityName="Niche: Robotics"
      Description="Increases your maximum sentinel points by 2 per level and your maximum sentinels summonable by 1. Decreases weapon damage.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10

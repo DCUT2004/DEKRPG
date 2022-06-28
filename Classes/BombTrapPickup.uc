@@ -2,6 +2,6 @@ class BombTrapPickup extends ONSGrenadePickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.BombTrap'
+     InventoryType=Class'DEKRPG209D.BombTrap'
      PickupMessage="You got the Bomb Trap."
 }

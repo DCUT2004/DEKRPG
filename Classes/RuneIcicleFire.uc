@@ -10,8 +10,8 @@ defaultproperties
      bSplashDamage=True
      bSplashJump=True
      bRecommendSplashDamage=True
-     FireSound=Sound'DEKRPG209C.RuneSounds.IcicleFireSound'
+     FireSound=Sound'DEKRPG209D.RuneSounds.IcicleFireSound'
      FireForce="RocketLauncherFire"
      FireRate=1.510000
-     ProjectileClass=Class'DEKRPG209C.RuneIcicleProj'
+     ProjectileClass=Class'DEKRPG209D.RuneIcicleProj'
 }

@@ -128,7 +128,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG209C.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209D.LightningBeamEmitter'
      MaxRange=3000.000000
      CostPerSec=1
      MinActivationTime=0.000001

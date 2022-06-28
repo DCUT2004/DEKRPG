@@ -88,7 +88,7 @@ defaultproperties
 	Damage=10
 	DamageInterval=0.15000
 	DamageRadius=100
-	MagnetEffectClass=Class'DEKWeapons209C.UpgradeShockRifleBlackHoleEffect'
+	MagnetEffectClass=Class'DEKWeapons209D.UpgradeShockRifleBlackHoleEffect'
     AttractionRadius=1000.000000
     AttractionStrength=150000.000000
 	Lifespan=0.00000

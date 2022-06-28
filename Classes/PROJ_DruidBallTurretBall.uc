@@ -162,19 +162,19 @@ simulated function SpawnEffects( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     ProjectileEffectClass=Class'DEKRPG209C.DEKPlasmaTurretBallFX'
+     ProjectileEffectClass=Class'DEKRPG209D.DEKPlasmaTurretBallFX'
      ExplosionEmitterClass=Class'Onslaught.ONSPlasmaHitPurple'
      Speed=1200.000000
      TossZ=225.000000
      Damage=200.000000
      DamageRadius=330.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG209C.DamTypeDruidBallTurret'
-     ImpactSound=Sound'DEKRPG209C.TurretSounds.PlasmaTurretBallExplode'
+     MyDamageType=Class'DEKRPG209D.DamTypeDruidBallTurret'
+     ImpactSound=Sound'DEKRPG209D.TurretSounds.PlasmaTurretBallExplode'
      ExplosionDecal=Class'Onslaught.ONSRocketScorch'
      CullDistance=4000.000000
      Physics=PHYS_Falling
-     AmbientSound=Sound'DEKRPG209C.TurretSounds.PlasmaTurretBallAmb'
+     AmbientSound=Sound'DEKRPG209D.TurretSounds.PlasmaTurretBallAmb'
      LifeSpan=3.000000
      DrawScale=0.300000
      AmbientGlow=100

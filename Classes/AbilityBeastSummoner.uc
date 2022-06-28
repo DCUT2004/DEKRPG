@@ -26,22 +26,20 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local MonsterPointsInv Inv;
 	local RPGStatsInv StatsInv;
-	local int x, y;
+	local int x, MonsterPointLevel;
 
 	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
 
 	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
 		if (StatsInv.Data.Abilities[x] == class'AbilityMonsterPoints')
-			y = StatsInv.Data.AbilityLevels[x];
+			MonsterPointLevel = StatsInv.Data.AbilityLevels[x];
 
 	Inv = MonsterPointsInv(Other.FindInventoryType(class'MonsterPointsInv'));
 	
 	if (Inv == None)
 		return;
-	else
-	{
-		Inv.TotalMonsterPoints -= default.MonsterPointSubtract;
-	}
+		
+	Inv.TotalMonsterPoints = MonsterPointLevel - default.MonsterPointSubtract;
 
 }
 
@@ -58,9 +56,9 @@ defaultproperties
 {
      DamageMultiplier=0.250000
      MonsterPointSubtract=5
-     ExcludingAbilities(0)=Class'DEKRPG209C.AbilityHordeSummoner'
-     ExcludingAbilities(1)=Class'DEKRPG209C.AbilityMindControlSummoner'
-     RequiredAbilities(0)=Class'DEKRPG209C.AbilityMonsterPoints'
+     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityHordeSummoner'
+     ExcludingAbilities(1)=Class'DEKRPG209D.AbilityMindControlSummoner'
+     RequiredAbilities(0)=Class'DEKRPG209D.AbilityMonsterPoints'
      AbilityName="Niche: Beast"
      Description="Further increases the damage dealt by your pets by 25%, but also reduces your maximum monster points by 5.|You must be level 180 and have maxed out Monster Points before buying this niche. You can not be in more than one niche at a same time.||Cost(per level): 50"
      StartingCost=50

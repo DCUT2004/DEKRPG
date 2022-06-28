@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209C.DruidArtifactMakeMagicWeapon'
+     InventoryType=Class'DEKRPG209D.DruidArtifactMakeMagicWeapon'
      PickupMessage="You got the artifact to make magic weapons!"
      PickupSound=Sound'PickupSounds.ShieldPack'
      PickupForce="ShieldPack"

@@ -329,7 +329,7 @@ function bool EncroachingOn(Actor Other)
 
 defaultproperties
 {
-     EffectWhenDestroyed=Class'DEKRPG209C.FX_DruidExplodingBarrel'
+     EffectWhenDestroyed=Class'DEKRPG209D.FX_DruidExplodingBarrel'
      bDamageable=True
      RadiusDamage=300.000000
      ExplodingDamage=150.000000

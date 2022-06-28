@@ -470,9 +470,9 @@ defaultproperties
 {
      TimeBetweenShots=0.400000
      TargetRadius=1000.000000
-     ResupplyEmitterClass=Class'DEKRPG209C.RedBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG209D.RedBoltEmitter'
      DamageAdjust=1.000000
      XPPerHit=0.050000
-     HitEmitterClass=Class'DEKRPG209C.PurpleBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209D.PurpleBoltEmitter'
      SpiderGrowthRate=1.100000
 }

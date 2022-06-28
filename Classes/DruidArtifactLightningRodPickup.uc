@@ -24,5 +24,5 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209C.DruidArtifactLightningRod'
+     InventoryType=Class'DEKRPG209D.DruidArtifactLightningRod'
 }

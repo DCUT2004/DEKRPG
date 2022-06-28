@@ -49,7 +49,7 @@ defaultproperties
 {
      AdrenReductionPerLevel=10
      MinimumAdrenRequired=50
-     ExcludingAbilities(0)=Class'DEKRPG209C.AbilityShamanHealer'
+     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityShamanHealer'
      AbilityName="Niche: Guardian"
      Description="Select a teammate with the Guardian artifact. Any time this teammate's health drops below a certain level, a healing blast is automatically spawned at the teammate's location, provided you have 100 adrenaline. Each level of this ability decreases the adrenaline cost by 10.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a same time.||Cost(per level): 10"
      StartingCost=10

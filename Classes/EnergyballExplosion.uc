@@ -50,7 +50,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.SoftFlare'
          LifetimeRange=(Min=0.700000,Max=0.700000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter43'
+     Emitters(0)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter43'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter25
          UseColorScale=True
@@ -77,7 +77,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter25'
+     Emitters(1)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter25'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter37
          UseColorScale=True
@@ -97,7 +97,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.JumpDuck'
          LifetimeRange=(Min=0.600000,Max=0.600000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter37'
+     Emitters(2)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter37'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter35
          UseColorScale=True
@@ -116,7 +116,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.SmoothRing'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter35'
+     Emitters(3)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter35'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter39
          UseColorScale=True
@@ -137,7 +137,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.BoloBlob'
          LifetimeRange=(Min=0.600000,Max=0.600000)
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter39'
+     Emitters(4)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter39'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter36
          UseColorScale=True
@@ -158,7 +158,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Fire.BlastMark'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(5)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter36'
+     Emitters(5)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter36'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          UseColorScale=True
@@ -185,7 +185,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=50.000000,Max=80.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG209C.EnergyballExplosion.SpriteEmitter1'
+     Emitters(6)=SpriteEmitter'DEKRPG209D.EnergyballExplosion.SpriteEmitter1'
 
      AutoDestroy=True
      bNoDelete=False

@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=120
      Description="You will lose health. Survive the duration of the hex."
-     PickupClass=Class'DEKRPG209C.ArtifactMissionHexedPickup'
+     PickupClass=Class'DEKRPG209D.ArtifactMissionHexedPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.HexedMission'
      ItemName="Hexed"
 }

@@ -3,8 +3,8 @@ class RuneEnergySteal extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209C.RuneEnergyStealLanceFire'
-     FireModeClass(1)=Class'DEKRPG209C.RuneEnergyBallFire'
+     FireModeClass(0)=Class'DEKRPG209D.RuneEnergyStealLanceFire'
+     FireModeClass(1)=Class'DEKRPG209D.RuneEnergyBallFire'
      bCanThrow=False
      HudColor=(R=222,G=154,B=33)
      InventoryGroup=2

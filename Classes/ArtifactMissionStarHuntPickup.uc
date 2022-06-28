@@ -2,6 +2,6 @@ class ArtifactMissionStarHuntPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.ArtifactMissionStarHunt'
+     InventoryType=Class'DEKRPG209D.ArtifactMissionStarHunt'
      PickupMessage="You picked up the Star Hunt Mission!"
 }

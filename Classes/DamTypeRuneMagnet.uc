@@ -3,7 +3,7 @@ class DamTypeRuneMagnet extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209C.RuneImmobilize_Magnet'
+     WeaponClass=Class'DEKRPG209D.RuneImmobilize_Magnet'
      DeathString="%o was sucked into the black hole."
      FemaleSuicide="%o was caught in her own black hole."
      MaleSuicide="%o was caught in his own black hole."

@@ -58,7 +58,7 @@ defaultproperties
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser16'
      FireForce="RocketLauncherFire"
      FireRate=0.300000
-     ProjectileClass=Class'DEKRPG209C.RuneFlurryProj'
+     ProjectileClass=Class'DEKRPG209D.RuneFlurryProj'
      //Spread=1500.0000
      //SpreadStyle=SS_Random
 }

@@ -84,7 +84,7 @@ function Timer()
 				{
 					// set projectile instigator so owner gets kill credit
 					DDP.Instigator = Drone.protPawn;
-					PlaySound(Sound'DEKRPG209C.TurretSounds.PlasmaTurretFire');
+					PlaySound(Sound'DEKRPG209D.TurretSounds.PlasmaTurretFire');
 				}
 			}
 			else

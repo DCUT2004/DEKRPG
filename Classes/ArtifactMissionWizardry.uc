@@ -105,7 +105,7 @@ defaultproperties
      XPReward=50
      MissionGoal=3
      Description="Receive magic effects applied to you simultaneously."
-     PickupClass=Class'DEKRPG209C.ArtifactMissionWizardryPickup'
+     PickupClass=Class'DEKRPG209D.ArtifactMissionWizardryPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.WizardryMission'
      ItemName="Wizardry"
 }

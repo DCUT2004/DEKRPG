@@ -25,7 +25,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209C.WildfireExplodeFX.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG209D.WildfireExplodeFX.SpriteEmitter0'
 
      AutoDestroy=True
      bNoDelete=False

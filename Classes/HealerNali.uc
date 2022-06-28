@@ -49,18 +49,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -73,18 +73,18 @@ function RangedAttack(Actor A)
 			if (rand(99) <= DropLetterChance && Invasion(Level.Game) != None && Invasion(Level.Game).FinalWave <= 16)
 			{
 				if (rand(99) <= 20)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterBPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterBPickup', None, 1);
 				else if (rand(99) <= 40)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterOPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterOPickup', None, 1);
 				else if (rand(99) >= 60)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterNPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterNPickup', None, 1);
 				else if (rand(99) <= 80)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterUPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterUPickup', None, 1);
 				else if (rand(99) <= 100)
-					DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.ArtifactLetterSPickup', None, 1);
+					DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.ArtifactLetterSPickup', None, 1);
 			}
 			else
-				DropPickups(Self.Controller, P.Controller, class'DEKRPG209C.GemExperiencePickupBlue', None, 1);
+				DropPickups(Self.Controller, P.Controller, class'DEKRPG209D.GemExperiencePickupBlue', None, 1);
 		}
 		else
 			AddHealth(HealthDamage);
@@ -220,12 +220,13 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 			return;
 		if (InstigatedBy.IsA('HealerNali'))
 			return;
-		if (M != None)
-		{
-			if (M.ControllerClass != None && M.ControllerClass == class'DEKFriendlyMonsterController')
-				return;
-		}
+		if (M.ControllerClass != None && M.ControllerClass == class'DEKFriendlyMonsterController')
+			return;
 	}
+	
+	if (instigatedBy != None && instigatedBy.Controller != None)
+		Died(instigatedBy.Controller, DamageType, HitLocation);
+	
 	Super.TakeDamage(Damage, instigatedBy, hitlocation, momentum, damagetype);
 }
 
@@ -260,5 +261,5 @@ defaultproperties
      CloseRangeDistance=200.000000
      ScoringValue=0
      Health=30
-     ControllerClass=Class'DEKRPG209C.HealerNaliController'
+     ControllerClass=Class'DEKRPG209D.HealerNaliController'
 }

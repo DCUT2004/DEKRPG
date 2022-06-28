@@ -60,7 +60,7 @@ defaultproperties
 	StrikeDamage=15
 	EnergyStealInterval=0.700000
 	EnergyStealRadius=900.00000
-	FusionEffectClass=Class'DEKRPG209C.EnergyFusionEffect'
+	FusionEffectClass=Class'DEKRPG209D.EnergyFusionEffect'
 	DrawType=DT_Sprite
 	DrawScale=0.010000
 	Skins(0)=FinalBlend'D-E-K-HoloGramFX.NonWireframe.FunkyStuff_0'
@@ -72,6 +72,6 @@ defaultproperties
     LightHue=20
 	CollisionHeight=10.00000
 	CollisionRadius=10.00000
-    StrikeEmitterClass=Class'DEKRPG209C.BronzeBoltEmitter'
-	AmbientSound=Sound'DEKRPG209C.RuneSounds.EnergyStealAmbient'
+    StrikeEmitterClass=Class'DEKRPG209D.BronzeBoltEmitter'
+	AmbientSound=Sound'DEKRPG209D.RuneSounds.EnergyStealAmbient'
 }

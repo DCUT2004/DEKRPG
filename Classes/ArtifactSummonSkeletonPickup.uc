@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209C.ArtifactSummonSkeleton'
+     InventoryType=Class'DEKRPG209D.ArtifactSummonSkeleton'
      PickupMessage="You got a Skeleton Summoning Charm"
      AmbientGlow=255
 }

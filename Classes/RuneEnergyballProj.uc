@@ -146,8 +146,8 @@ defaultproperties
      ComboMomentumTransfer=0.000000
      Speed=500.000000
      MaxSpeed=500.000000
-     StrikeEmitterClass=Class'DEKRPG209C.BronzeBoltEmitter'
-     MyDamageType=Class'DEKRPG209C.DamTypeRuneEnergySteal'
+     StrikeEmitterClass=Class'DEKRPG209D.BronzeBoltEmitter'
+     MyDamageType=Class'DEKRPG209D.DamTypeRuneEnergySteal'
 	 DrawType=DT_Sprite
      DrawScale=0.010000
      Skins(0)=FinalBlend'D-E-K-HoloGramFX.NonWireframe.FunkyStuff_0'

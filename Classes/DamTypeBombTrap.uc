@@ -2,7 +2,7 @@ class DamTypeBombTrap extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209C.WeaponBombTrap'
+     WeaponClass=Class'DEKRPG209D.WeaponBombTrap'
      DeathString="%k blew up %o with the Bomb Trap."
      FemaleSuicide="How did your bombs taste %o?."
      MaleSuicide="How did your bombs taste %o?."

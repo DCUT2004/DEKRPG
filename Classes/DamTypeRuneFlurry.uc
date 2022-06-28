@@ -3,7 +3,7 @@ class DamTypeRuneFlurry extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209C.RuneFlurry_Barrage'
+     WeaponClass=Class'DEKRPG209D.RuneFlurry_Barrage'
      DeathString="%o was shot down by %k's Flurry."
      FemaleSuicide="%o got in the way of her own Flurry."
      MaleSuicide="%o got in the way of his own Flurry."

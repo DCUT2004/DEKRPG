@@ -84,7 +84,7 @@ function Activate()
 				RG.RB = RB;
 				for ( C = Level.ControllerList; C != None; C = C.NextController )
 					if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-						PlayerController(C).ClientPlaySound(Sound'DEKRPG209C.MissionSounds.MPSelect');
+						PlayerController(C).ClientPlaySound(Sound'DEKRPG209D.MissionSounds.MPSelect');
 				SetTimer(0.5,True);
 				TeamMissionBroadcast(ItemName, Description,XPReward);
 			}
@@ -132,7 +132,7 @@ defaultproperties
      TimeLimit=130
      Description="(T)Hold position at each of three rings simultaneously!"
      TeamMission=True
-     PickupClass=Class'DEKRPG209C.ArtifactMissionTeamRingAndHoldPickup'
+     PickupClass=Class'DEKRPG209D.ArtifactMissionTeamRingAndHoldPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.RingAndHold'
      ItemName="Ring and Hold"
 }

@@ -92,7 +92,7 @@ simulated function Timer()
 
 defaultproperties
 {
-     ImmobilizedSound=Sound'DEKRPG209C.ArtifactSounds.ImmobilizeAmbient'
+     ImmobilizedSound=Sound'DEKRPG209D.ArtifactSounds.ImmobilizeAmbient'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

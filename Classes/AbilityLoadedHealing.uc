@@ -139,13 +139,21 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
+	local RPGWeapon Weapon;
+	
 	if(!bOwnedByInstigator)
 		return;
-	if(Damage > 0 && AbilityLevel >= 4)
+	if(Instigator != None && Damage > 0 && AbilityLevel >= 4)
 	{
-		// half weapon damage
+		// reduce damage for medic weapon
 		if (ClassIsChildOf(DamageType, class'WeaponDamageType') || ClassIsChildOf(DamageType, class'VehicleDamageType'))
-			Damage *= default.WeaponDamage;
+		{
+			Weapon = RPGWeapon(Instigator.Weapon);
+			if (Weapon.IsA('RW_SuperHealer'))
+			{
+				Damage *= default.WeaponDamage;
+			}
+		}
 	}
 }
 
@@ -158,7 +166,7 @@ defaultproperties
      HealingDamage=3.000000
      AdrenalineUsage=0.500000
      AbilityName="Loaded Medic"
-     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker. |Level 2 allows you to use the Medic Gun to heal teammates +100 beyond their max health. |Level 3 allows you to heal teammates +150 points beyond their max health. Level 4 gives extra healing power for the medic weapon and less adrenaline requirements for healing artifacts, but less weapon damage(|Cost (per level): 3,6,9,12"
+     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker. |Level 2 allows you to use the Medic Gun to heal teammates +100 beyond their max health. |Level 3 allows you to heal teammates +150 points beyond their max health. Level 4 gives extra healing power for the medic weapon and less adrenaline requirements for healing artifacts, but less damage for the medic weapon.(|Cost (per level): 3,6,9,12"
      StartingCost=3
      CostAddPerLevel=3
      BotChance=7

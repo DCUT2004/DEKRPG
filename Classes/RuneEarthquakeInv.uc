@@ -90,7 +90,7 @@ defaultproperties
 	 DamageMultiplier=0.1000000
 	 RadiusMultiplier=0.500000
 	 RequiredVelocity=2000.000000
-	 EarthquakeDamageType=Class'DEKRPG209C.DamTypeRuneEarthquake'
+	 EarthquakeDamageType=Class'DEKRPG209D.DamTypeRuneEarthquake'
 	 CheckInterval=0.10000
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True

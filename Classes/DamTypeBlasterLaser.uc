@@ -3,7 +3,7 @@ class DamTypeBlasterLaser extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209C.DruidSentinel'
+     VehicleClass=Class'DEKRPG209D.DruidSentinel'
      DeathString="%o was served an extra helping of %k's lasers."
      FemaleSuicide="%o fried herself with her own laser blast."
      MaleSuicide="%o fried himself with his own laser blast."

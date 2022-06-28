@@ -92,5 +92,5 @@ defaultproperties
      ComboMomentumTransfer=235000.000000
      Speed=1200.000000
      MaxSpeed=1200.000000
-     MyDamageType=Class'DEKRPG209C.DamTypeRuneIceball'
+     MyDamageType=Class'DEKRPG209D.DamTypeRuneIceball'
 }

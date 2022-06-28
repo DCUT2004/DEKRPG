@@ -6,6 +6,6 @@ class ShockTrapAmmo extends ONSGrenadeAmmo;
 defaultproperties
 {
      MaxAmmo=10
-     PickupClass=Class'DEKRPG209C.ShockTrapAmmoPickup'
+     PickupClass=Class'DEKRPG209D.ShockTrapAmmoPickup'
      ItemName="Shock Charges"
 }

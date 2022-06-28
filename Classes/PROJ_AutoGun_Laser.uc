@@ -4,5 +4,5 @@ defaultproperties
 {
      Speed=5500.000000
      Damage=60.000000
-     MyDamageType=Class'DEKRPG209C.DamTypeAutoGunLaser'
+     MyDamageType=Class'DEKRPG209D.DamTypeAutoGunLaser'
 }

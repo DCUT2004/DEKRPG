@@ -2,7 +2,7 @@
 //
 //-----------------------------------------------------------
 class DEKLaserGrenadeLauncher extends Weapon
-	config(DEKRPG209C);
+	config(DEKRPG209D);
 	
 #exec OBJ LOAD FILE=HudContent.utx
 
@@ -190,8 +190,8 @@ defaultproperties
 {
      MaxMines=1
      FadedColor=(B=128,G=128,R=128,A=128)
-     FireModeClass(0)=Class'DEKRPG209C.DEKLaserGrenadeFire'
-     FireModeClass(1)=Class'DEKRPG209C.DEKLaserGrenadeAltFire'
+     FireModeClass(0)=Class'DEKRPG209D.DEKLaserGrenadeFire'
+     FireModeClass(1)=Class'DEKRPG209D.DEKLaserGrenadeAltFire'
      PutDownAnim="PutDown"
      SelectAnimRate=3.100000
      PutDownAnimRate=2.800000
@@ -209,7 +209,7 @@ defaultproperties
      CustomCrossHairTextureName="ONSInterface-TX.grenadeLauncherReticle"
      InventoryGroup=3
      GroupOffset=1
-     PickupClass=Class'DEKRPG209C.DEKLaserGrenadePickup'
+     PickupClass=Class'DEKRPG209D.DEKLaserGrenadePickup'
      PlayerViewOffset=(X=150.000000,Y=40.000000,Z=-46.000000)
      BobDamping=2.200000
      AttachmentClass=Class'Onslaught.ONSGrenadeAttachment'

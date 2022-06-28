@@ -2,6 +2,6 @@ class ArtifactMissionHerbamancerPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.ArtifactMissionHerbamancer'
+     InventoryType=Class'DEKRPG209D.ArtifactMissionHerbamancer'
      PickupMessage="You picked up the Herbamancer Mission!"
 }

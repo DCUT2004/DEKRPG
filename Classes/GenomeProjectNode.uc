@@ -27,7 +27,7 @@ simulated function PostBeginPlay()
 			}
 			
 	SetTimer(1.0, True);
-	FX = Self.spawn(class'DEKRPG209C.GenomeProjectNodeFX', Self,,Self.Location + vect(0,0,-50));
+	FX = Self.spawn(class'DEKRPG209D.GenomeProjectNodeFX', Self,,Self.Location + vect(0,0,-50));
 	if (FX != None)
 	{
 		FX.SetCollision(False,False,False);

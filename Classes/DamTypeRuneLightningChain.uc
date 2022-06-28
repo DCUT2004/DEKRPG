@@ -3,7 +3,7 @@ class DamTypeRuneLightningChain extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209C.RuneBeam_Chain'
+     WeaponClass=Class'DEKRPG209D.RuneBeam_Chain'
      DeathString="%o became a part of %k's Lightning Chain."
      FemaleSuicide="%o became of her own Lightning Chain."
      MaleSuicide="%o became of his own Lightning Chain."

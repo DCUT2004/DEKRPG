@@ -3,7 +3,7 @@ class DamTypeLynxRocket extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209C.DEKLynxVehicle'
+     VehicleClass=Class'DEKRPG209D.DEKLynxVehicle'
      DeathString="%o was seeked down by %k's Lynx."
      FemaleSuicide="%k got in the way of her own Lynx rocket."
      MaleSuicide="%k got in the way of his own Lynx rocket."

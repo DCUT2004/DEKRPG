@@ -2,7 +2,7 @@ class GenomeVialTechPickup extends GenomeVialCosmicPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.GenomeVialTech'
+     InventoryType=Class'DEKRPG209D.GenomeVialTech'
      PickupMessage="You picked up a tech vial."
      LightHue=45
      LightSaturation=90

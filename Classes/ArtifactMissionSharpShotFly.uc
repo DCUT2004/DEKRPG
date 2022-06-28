@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=7
      Description="Kill vampire gnats with a sniper-type weapon."
-     PickupClass=Class'DEKRPG209C.ArtifactMissionSharpShotFlyPickup'
+     PickupClass=Class'DEKRPG209D.ArtifactMissionSharpShotFlyPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.SharpShotFlyMission'
      ItemName="Sharp Shot Fly"
 }

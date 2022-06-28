@@ -133,7 +133,7 @@ defaultproperties
      LimitOverMaximum=1
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG209C.ArtifactPlusAddonPickup'
+     PickupClass=Class'DEKRPG209D.ArtifactPlusAddonPickup'
      IconMaterial=FinalBlend'EpicParticles.Shaders.IonFallFinal'
      ItemName="Plus Addon Powerup"
 }

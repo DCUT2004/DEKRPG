@@ -51,5 +51,5 @@ defaultproperties
 {
      FireSound=Sound'ONSVehicleSounds-S.Tank.TankFire01'
      FireRate=3.000000
-     ProjectileClass=Class'DEKRPG209C.DEKHellfireSentinelProj'
+     ProjectileClass=Class'DEKRPG209D.DEKHellfireSentinelProj'
 }

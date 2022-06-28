@@ -2,6 +2,6 @@ class ArtifactMissionSupermanPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209C.ArtifactMissionSuperman'
+     InventoryType=Class'DEKRPG209D.ArtifactMissionSuperman'
      PickupMessage="You picked up the Superman Mission!"
 }
