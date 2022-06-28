@@ -2,7 +2,7 @@ class ArtifactSphereDamagePickup extends RPGArtifactPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.ArtifactSphereDamage'
+     InventoryType=Class'DEKRPG209E.ArtifactSphereDamage'
      PickupMessage="You got the Sphere of Damage!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

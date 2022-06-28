@@ -137,7 +137,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209D.GenomeVialCosmic'
+     InventoryType=Class'DEKRPG209E.GenomeVialCosmic'
      RespawnTime=10.000000
      PickupMessage="You picked up a cosmic vial."
      PickupSound=Sound'SkaarjPack_rc.Skaarj.roam11s'

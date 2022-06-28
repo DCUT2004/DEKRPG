@@ -38,12 +38,12 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG209D.AbilityComboAilmentBlind'
-	ExcludingAbilities(1)=Class'DEKRPG209D.AbilityComboAilmentCurse'
-	ExcludingAbilities(2)=Class'DEKRPG209D.AbilityComboAilmentDefense'
-	ExcludingAbilities(3)=Class'DEKRPG209D.AbilityComboAilmentAttack'
-	ExcludingAbilities(4)=Class'DEKRPG209D.AbilityComboAilmentJinx'
-	ExcludingAbilities(5)=Class'DEKRPG209D.AbilityComboAilmentPoison'
+    ExcludingAbilities(0)=Class'DEKRPG209E.AbilityComboAilmentBlind'
+	ExcludingAbilities(1)=Class'DEKRPG209E.AbilityComboAilmentCurse'
+	ExcludingAbilities(2)=Class'DEKRPG209E.AbilityComboAilmentDefense'
+	ExcludingAbilities(3)=Class'DEKRPG209E.AbilityComboAilmentAttack'
+	ExcludingAbilities(4)=Class'DEKRPG209E.AbilityComboAilmentJinx'
+	ExcludingAbilities(5)=Class'DEKRPG209E.AbilityComboAilmentPoison'
 	AbilityName="Ailment: Freeze"
 	Description="All targets receive Freeze for 25 seconds. Additionally for 25 seconds, the target you look at receives Null Entropy and -1% defense per level for 15 seconds. You can only apply Null and lowered defense to one target at a time. If another defense ailment is applied on the target you look at, the effect is stacked.||You can only have one type of Ailment combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Gloves and Combat Boots you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Icicles||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Icicles||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Icicles||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -56,14 +56,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit',Class'DEKRPG209D.AbilityMaterialIcicle'),RequiredMaterialLevels=(40,40,40,40,10))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit',Class'DEKRPG209D.AbilityMaterialIcicle'),RequiredMaterialLevels=(45,45,45,45,25))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialCombatBoots',Class'DEKRPG209D.AbilityMaterialGloves',Class'DEKRPG209D.AbilityMaterialLeather',Class'DEKRPG209D.AbilityMaterialArcticSuit',Class'DEKRPG209D.AbilityMaterialIcicle'),RequiredMaterialLevels=(50,50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit',Class'DEKRPG209E.AbilityMaterialIcicle'),RequiredMaterialLevels=(40,40,40,40,10))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit',Class'DEKRPG209E.AbilityMaterialIcicle'),RequiredMaterialLevels=(45,45,45,45,25))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialCombatBoots',Class'DEKRPG209E.AbilityMaterialGloves',Class'DEKRPG209E.AbilityMaterialLeather',Class'DEKRPG209E.AbilityMaterialArcticSuit',Class'DEKRPG209E.AbilityMaterialIcicle'),RequiredMaterialLevels=(50,50,50,50,50))
 }

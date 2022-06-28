@@ -3,8 +3,8 @@ class RuneBeam_Chain extends Weapon
 
 defaultproperties
 {
-	FireModeClass(0)=Class'DEKRPG209D.RuneIceBeamFire'
-	FireModeClass(1)=Class'DEKRPG209D.RuneChainFire'
+	FireModeClass(0)=Class'DEKRPG209E.RuneIceBeamFire'
+	FireModeClass(1)=Class'DEKRPG209E.RuneChainFire'
 	bCanThrow=False
     HudColor=(R=33,G=159,B=222)
 	InventoryGroup=9

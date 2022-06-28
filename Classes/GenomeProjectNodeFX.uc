@@ -16,7 +16,7 @@ defaultproperties
          MaxParticles=1
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209D.GenomeProjectNodeFX.MeshEmitter0'
+     Emitters(0)=MeshEmitter'DEKRPG209E.GenomeProjectNodeFX.MeshEmitter0'
 
      bNoDelete=False
      RemoteRole=ROLE_DumbProxy

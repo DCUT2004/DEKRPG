@@ -98,7 +98,7 @@ defaultproperties
      XPReward=50
      MissionGoal=50
      Description="Deflect projectiles with a reflecting weapon."
-     PickupClass=Class'DEKRPG209D.ArtifactMissionDeflectorPickup'
+     PickupClass=Class'DEKRPG209E.ArtifactMissionDeflectorPickup'
      IconMaterial=Texture'MissionsTex6.MagicWeaponMissions.DeflectorMission'
      ItemName="Deflector"
 }

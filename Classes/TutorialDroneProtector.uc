@@ -153,10 +153,10 @@ defaultproperties
 	 HealthHealingAmount=5
 	 ShieldHealingAmount=10
 	 ResupplyAmount=3
-     HitEmitterClass=Class'DEKRPG209D.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG209D.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG209D.BlueBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG209D.RedBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209E.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG209E.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG209E.BlueBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG209E.RedBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
      HealFreq=2
      bHidden=True

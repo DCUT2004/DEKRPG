@@ -2,5 +2,5 @@ class GenomeVialIce extends GenomeVialCosmic;
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG209D.GenomeVialIcePickup'
+     PickupClass=Class'DEKRPG209E.GenomeVialIcePickup'
 }

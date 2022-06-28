@@ -39,7 +39,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.SoftFlare'
          LifetimeRange=(Min=0.020000,Max=0.020000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter7'
+     Emitters(0)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter7'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter9
          UseColorScale=True
@@ -67,7 +67,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter9'
+     Emitters(1)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter9'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter11
          UseColorScale=True
@@ -92,7 +92,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter11'
+     Emitters(2)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter11'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter12
          UseColorScale=True
@@ -116,7 +116,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter12'
+     Emitters(3)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter12'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter13
          UseColorScale=True
@@ -140,7 +140,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter13'
+     Emitters(4)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter13'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter7
          StaticMesh=StaticMesh'AW-2004Particles.Weapons.PlasmaSphere'
@@ -156,7 +156,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(5)=MeshEmitter'DEKRPG209D.EnergyballEffect.MeshEmitter7'
+     Emitters(5)=MeshEmitter'DEKRPG209E.EnergyballEffect.MeshEmitter7'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter14
          UseColorScale=True
@@ -182,7 +182,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG209D.EnergyballEffect.SpriteEmitter14'
+     Emitters(6)=SpriteEmitter'DEKRPG209E.EnergyballEffect.SpriteEmitter14'
 
      AutoDestroy=True
      bNoDelete=False

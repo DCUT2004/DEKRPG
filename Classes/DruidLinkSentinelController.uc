@@ -104,6 +104,6 @@ defaultproperties
      TimeBetweenShots=0.250000
      LinkRadius=700.000000
      VehicleHealPerShot=20.000000
-     TurretLinkEmitterClass=Class'DEKRPG209D.DruidLinkSentinelBeamEffect'
-     VehicleLinkEmitterClass=Class'DEKRPG209D.BronzeBoltEmitter'
+     TurretLinkEmitterClass=Class'DEKRPG209E.DruidLinkSentinelBeamEffect'
+     VehicleLinkEmitterClass=Class'DEKRPG209E.BronzeBoltEmitter'
 }

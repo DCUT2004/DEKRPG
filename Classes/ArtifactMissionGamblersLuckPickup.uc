@@ -2,6 +2,6 @@ class ArtifactMissionGamblersLuckPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.ArtifactMissionGamblersLuck'
+     InventoryType=Class'DEKRPG209E.ArtifactMissionGamblersLuck'
      PickupMessage="You picked up the Gambler's Luck Mission!"
 }

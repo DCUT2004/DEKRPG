@@ -10,5 +10,5 @@ defaultproperties
      FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
      FireForce="RocketLauncherFire"
      FireRate=3.000000
-     ProjectileClass=Class'DEKRPG209D.RuneHeatwaveProj'
+     ProjectileClass=Class'DEKRPG209E.RuneHeatwaveProj'
 }

@@ -2,6 +2,6 @@ class ArtifactMissionHexedPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.ArtifactMissionHexed'
+     InventoryType=Class'DEKRPG209E.ArtifactMissionHexed'
      PickupMessage="You picked up the Hexed Mission!"
 }

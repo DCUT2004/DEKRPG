@@ -3,8 +3,8 @@ class RuneHeatWhip_Flare extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209D.RuneHeatWhipFire'
-     FireModeClass(1)=Class'DEKRPG209D.RuneFlareFire'
+     FireModeClass(0)=Class'DEKRPG209E.RuneHeatWhipFire'
+     FireModeClass(1)=Class'DEKRPG209E.RuneFlareFire'
      bCanThrow=False
      HudColor=(R=201,G=22,B=115)
      InventoryGroup=7

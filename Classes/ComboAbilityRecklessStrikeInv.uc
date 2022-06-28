@@ -8,7 +8,7 @@ function DoEffect()
 	{
 		if (Combo != None)
 		{
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209D.DamTypeCombo', class'RocketExplosion', True);
+			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, class'DEKRPG209E.DamTypeCombo', class'RocketExplosion', True);
 			Combo.AddBuff(Pawn(Owner), False, False, True,  ComboLifespan, class'ComboDefenseInv', EffectMultiplier, False);
 		}
 	}

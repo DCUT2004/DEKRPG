@@ -3,7 +3,7 @@ class DamTypeRuneFlare extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209D.RuneHeatWhip_Flare'
+     WeaponClass=Class'DEKRPG209E.RuneHeatWhip_Flare'
      DeathString="%o came too close to %k's Flare."
      bDetonatesGoop=True
      bDelayedDamage=True

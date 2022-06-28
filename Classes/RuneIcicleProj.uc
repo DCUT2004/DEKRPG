@@ -89,7 +89,7 @@ defaultproperties
      Damage=90.000000
      DamageRadius=220.000000
      MomentumTransfer=75000.000000
-     MyDamageType=Class'DEKRPG209D.DamTypeRuneIceball'
+     MyDamageType=Class'DEKRPG209E.DamTypeRuneIceball'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'WeaponStaticMesh.FlakChunk'

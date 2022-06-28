@@ -35,6 +35,6 @@ function byte BestMode()
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209D.FM_DruidBallTurret_Fire'
-     FireModeClass(1)=Class'DEKRPG209D.FM_DruidBallTurret_AltFire'
+     FireModeClass(0)=Class'DEKRPG209E.FM_DruidBallTurret_Fire'
+     FireModeClass(1)=Class'DEKRPG209E.FM_DruidBallTurret_AltFire'
 }

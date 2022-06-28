@@ -21,7 +21,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if (!bBuff && WardInv != None && Rand(100) <= WardInv.EffectMultiplier)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209D.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209E.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -44,7 +44,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209D.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209E.ComboSounds.Ward');
 				Destroy();
 				return;
 			}
@@ -132,6 +132,6 @@ simulated function Destroyed()
 defaultproperties
 {
 	 ComboNameMessage="Attack: "
-     EffectDownxEmitterClass=Class'DEKRPG209D.ComboAttackDownEffect'
-     EffectxEmitterClass=Class'DEKRPG209D.ComboAttackUpEffect'
+     EffectDownxEmitterClass=Class'DEKRPG209E.ComboAttackDownEffect'
+     EffectxEmitterClass=Class'DEKRPG209E.ComboAttackUpEffect'
 }

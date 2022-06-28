@@ -3,8 +3,8 @@ class RuneFlurry_Barrage extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209D.RuneFlurryFire'
-     FireModeClass(1)=Class'DEKRPG209D.RuneBarrageFire'
+     FireModeClass(0)=Class'DEKRPG209E.RuneFlurryFire'
+     FireModeClass(1)=Class'DEKRPG209E.RuneBarrageFire'
      bCanThrow=False
      HudColor=(R=125,G=98,B=189)
      InventoryGroup=5

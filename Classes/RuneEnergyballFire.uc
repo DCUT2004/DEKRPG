@@ -7,10 +7,10 @@ defaultproperties
 {
 	 AdrenCost=0
      bModeExclusive=False
-     FireSound=Sound'DEKRPG209D.RuneSounds.EnergyballFire'
+     FireSound=Sound'DEKRPG209E.RuneSounds.EnergyballFire'
      FireForce="RocketLauncherFire"
      FireRate=4.000000
-     ProjectileClass=Class'DEKRPG209D.RuneEnergyballProj'
+     ProjectileClass=Class'DEKRPG209E.RuneEnergyballProj'
      AmmoPerFire=4
-     AmmoClass=Class'DEKRPG209D.RuneEnergyAmmo'
+     AmmoClass=Class'DEKRPG209E.RuneEnergyAmmo'
 }

@@ -2,7 +2,7 @@ class GenomeVialFirePickup extends GenomeVialCosmicPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.GenomeVialFire'
+     InventoryType=Class'DEKRPG209E.GenomeVialFire'
      PickupMessage="You picked up a fire vial."
      LightHue=15
      LightSaturation=15

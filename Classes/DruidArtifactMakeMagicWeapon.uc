@@ -411,7 +411,7 @@ defaultproperties
      AdrenalineRequired=75
      CostPerSec=25
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG209D.DruidArtifactMakeMagicWeaponPickup'
+     PickupClass=Class'DEKRPG209E.DruidArtifactMakeMagicWeaponPickup'
      IconMaterial=Shader'DEKRPGTexturesMaster209B.Artifacts.MagicWeaponMakerIconShader'
      ItemName="Magic Weapon Maker"
 }

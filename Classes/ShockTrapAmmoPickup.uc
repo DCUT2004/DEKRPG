@@ -2,6 +2,6 @@ class ShockTrapAmmoPickup extends ONSGrenadeAmmoPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.ShockTrapAmmo'
+     InventoryType=Class'DEKRPG209E.ShockTrapAmmo'
      PickupMessage="You picked up some shock charges."
 }

@@ -31,6 +31,6 @@ function DoFireEffect()
 defaultproperties
 {
      TweenTime=0.000000
-     AmmoClass=Class'DEKRPG209D.RuneAmmo'
+     AmmoClass=Class'DEKRPG209E.RuneAmmo'
      AmmoPerFire=0
 }

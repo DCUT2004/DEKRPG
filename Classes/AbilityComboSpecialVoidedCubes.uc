@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG209D.AbilityComboSpecialSwarm'
-    ExcludingAbilities(1)=Class'DEKRPG209D.AbilityComboSpecialTeleStealth'
-    ExcludingAbilities(2)=Class'DEKRPG209D.AbilityComboSpecialBeastsRevenge'
-    ExcludingAbilities(3)=Class'DEKRPG209D.AbilityComboSpecialRavenRitual'
+    ExcludingAbilities(0)=Class'DEKRPG209E.AbilityComboSpecialSwarm'
+    ExcludingAbilities(1)=Class'DEKRPG209E.AbilityComboSpecialTeleStealth'
+    ExcludingAbilities(2)=Class'DEKRPG209E.AbilityComboSpecialBeastsRevenge'
+    ExcludingAbilities(3)=Class'DEKRPG209E.AbilityComboSpecialRavenRitual'
 	AbilityName="Special: Voided Cubes"
 	Description="Summons three Voided Cubes at random locations. Each Voided Cube kills a non-Boss enemy that comes into contact with it before disappearing. Each kill decreases the enemy team adrenaline by 3 per level.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Star Chart you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -42,14 +42,14 @@ defaultproperties
 	Dispellable=True
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(25))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(30))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(35))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG209D.AbilityMaterialStarChart'),RequiredMaterialLevels=(50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(25))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(30))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(35))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialStarChart'),RequiredMaterialLevels=(50))
 }

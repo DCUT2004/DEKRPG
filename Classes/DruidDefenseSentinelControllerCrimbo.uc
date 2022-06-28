@@ -392,11 +392,11 @@ defaultproperties
      XPPerHealing=0.020000
      HealFreq=6
      DamageAdjust=1.000000
-     HitEmitterClass=Class'DEKRPG209D.DefenseBoltEmitter'
-     ShieldEmitterClass=Class'DEKRPG209D.GoldBoltEmitter'
-     HealthEmitterClass=Class'DEKRPG209D.LightningBeamEmitter'
-     AdrenalineEmitterClass=Class'DEKRPG209D.LightningBoltEmitter'
-     ResupplyEmitterClass=Class'DEKRPG209D.RedBoltEmitter'
-     ArmorEmitterClass=Class'DEKRPG209D.BronzeBoltEmitter'
+     HitEmitterClass=Class'DEKRPG209E.DefenseBoltEmitter'
+     ShieldEmitterClass=Class'DEKRPG209E.GoldBoltEmitter'
+     HealthEmitterClass=Class'DEKRPG209E.LightningBeamEmitter'
+     AdrenalineEmitterClass=Class'DEKRPG209E.LightningBoltEmitter'
+     ResupplyEmitterClass=Class'DEKRPG209E.RedBoltEmitter'
+     ArmorEmitterClass=Class'DEKRPG209E.BronzeBoltEmitter'
      HealingOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
 }

@@ -203,7 +203,7 @@ defaultproperties
      bSwitchToZeroCollision=True
      Damage=100.000000
      MomentumTransfer=70000.000000
-     MyDamageType=Class'DEKRPG209D.DamTypeRuneFireball'
+     MyDamageType=Class'DEKRPG209E.DamTypeRuneFireball'
      ImpactSound=Sound'WeaponSounds.ShockRifle.ShockRifleExplosion'
      ExplosionDecal=Class'XEffects.RocketMark'
      MaxEffectDistance=7000.000000

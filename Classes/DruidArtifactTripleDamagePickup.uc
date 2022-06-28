@@ -24,5 +24,5 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209D.DruidArtifactTripleDamage'
+     InventoryType=Class'DEKRPG209E.DruidArtifactTripleDamage'
 }

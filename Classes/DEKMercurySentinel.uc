@@ -24,8 +24,8 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 defaultproperties
 {
      TargetRange=1800.000000
-     TurretBaseClass=Class'DEKRPG209D.DEKMercurySentinelFloorBase'
-     TurretSwivelClass=Class'DEKRPG209D.DEKMercurySentinelFloorSwivel'
+     TurretBaseClass=Class'DEKRPG209E.DEKMercurySentinelFloorBase'
+     TurretSwivelClass=Class'DEKRPG209E.DEKMercurySentinelFloorSwivel'
      DefaultWeaponClassName="DEKMercurySentinelWeapon"
      VehicleProjSpawnOffset=(X=122.500000)
      bNoTeamBeacon=False

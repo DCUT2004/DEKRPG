@@ -58,7 +58,7 @@ defaultproperties
          LifetimeRange=(Min=1.500000,Max=1.750000)
          StartVelocityRange=(Y=(Min=25.000000,Max=25.000000))
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209D.PossessEffect.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG209E.PossessEffect.SpriteEmitter1'
 
      bNoDelete=False
      RemoteRole=ROLE_SimulatedProxy

@@ -39,7 +39,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityGuardianHealer'
+     ExcludingAbilities(0)=Class'DEKRPG209E.AbilityGuardianHealer'
      AbilityName="Niche: Shaman"
      Description="Use the Sacrificial Heal artifact to heal up to three teammates with the lowest health. You will lose health equivalent to the healing amount received by your teammates.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50

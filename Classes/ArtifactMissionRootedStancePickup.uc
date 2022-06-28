@@ -2,6 +2,6 @@ class ArtifactMissionRootedStancePickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209D.ArtifactMissionRootedStance'
+     InventoryType=Class'DEKRPG209E.ArtifactMissionRootedStance'
      PickupMessage="You picked up the Rooted Stance Mission!"
 }

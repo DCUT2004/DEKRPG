@@ -24,7 +24,7 @@ auto state Pickup
 defaultproperties
 {
      MaxDesireability=0.000000
-     InventoryType=Class'DEKRPG209D.ArtifactLightningBolt'
+     InventoryType=Class'DEKRPG209E.ArtifactLightningBolt'
      PickupMessage="You got the Lightning Bolt!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

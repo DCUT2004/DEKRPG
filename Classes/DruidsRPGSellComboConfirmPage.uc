@@ -49,7 +49,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG209D.DruidsRPGSellComboConfirmPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG209E.DruidsRPGSellComboConfirmPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=YesButton
          Caption="YES"
@@ -60,7 +60,7 @@ defaultproperties
          OnClick=DruidsRPGSellComboConfirmPage.InternalOnClick
          OnKeyEvent=YesButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG209D.DruidsRPGSellComboConfirmPage.YesButton'
+     Controls(1)=GUIButton'DEKRPG209E.DruidsRPGSellComboConfirmPage.YesButton'
 
      Begin Object Class=GUIButton Name=NoButton
          Caption="NO"
@@ -71,7 +71,7 @@ defaultproperties
          OnClick=DruidsRPGSellComboConfirmPage.InternalOnClick
          OnKeyEvent=NoButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG209D.DruidsRPGSellComboConfirmPage.NoButton'
+     Controls(2)=GUIButton'DEKRPG209E.DruidsRPGSellComboConfirmPage.NoButton'
 
      Begin Object Class=GUILabel Name=SellDesc
          Caption="This will refund your all your combos!"
@@ -81,7 +81,7 @@ defaultproperties
          WinTop=0.400000
          WinHeight=32.000000
      End Object
-     Controls(3)=GUILabel'DEKRPG209D.DruidsRPGSellComboConfirmPage.SellDesc'
+     Controls(3)=GUILabel'DEKRPG209E.DruidsRPGSellComboConfirmPage.SellDesc'
 
      Begin Object Class=GUILabel Name=SellDesc2
          Caption="You will be automatically reconnected."
@@ -91,7 +91,7 @@ defaultproperties
          WinTop=0.450000
          WinHeight=32.000000
      End Object
-     Controls(4)=GUILabel'DEKRPG209D.DruidsRPGSellComboConfirmPage.SellDesc2'
+     Controls(4)=GUILabel'DEKRPG209E.DruidsRPGSellComboConfirmPage.SellDesc2'
 
      Begin Object Class=GUILabel Name=SellDesc3
          Caption="Are you SURE?"
@@ -101,7 +101,7 @@ defaultproperties
          WinTop=0.500000
          WinHeight=32.000000
      End Object
-     Controls(5)=GUILabel'DEKRPG209D.DruidsRPGSellComboConfirmPage.SellDesc3'
+     Controls(5)=GUILabel'DEKRPG209E.DruidsRPGSellComboConfirmPage.SellDesc3'
 
      WinTop=0.375000
      WinHeight=0.250000

@@ -56,9 +56,9 @@ defaultproperties
 {
      DamageMultiplier=0.250000
      MonsterPointSubtract=5
-     ExcludingAbilities(0)=Class'DEKRPG209D.AbilityHordeSummoner'
-     ExcludingAbilities(1)=Class'DEKRPG209D.AbilityMindControlSummoner'
-     RequiredAbilities(0)=Class'DEKRPG209D.AbilityMonsterPoints'
+     ExcludingAbilities(0)=Class'DEKRPG209E.AbilityHordeSummoner'
+     ExcludingAbilities(1)=Class'DEKRPG209E.AbilityMindControlSummoner'
+     RequiredAbilities(0)=Class'DEKRPG209E.AbilityMonsterPoints'
      AbilityName="Niche: Beast"
      Description="Further increases the damage dealt by your pets by 25%, but also reduces your maximum monster points by 5.|You must be level 180 and have maxed out Monster Points before buying this niche. You can not be in more than one niche at a same time.||Cost(per level): 50"
      StartingCost=50

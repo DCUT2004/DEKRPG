@@ -189,7 +189,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG209D.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209E.LightningBeamEmitter'
      MaxRange=3000.000000
      AmplifierLifespan=20
      XPforUse=10

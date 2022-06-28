@@ -3,7 +3,7 @@ class DamTypeRuneEarthquake extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209D.RuneEarthquake_Blizzard'
+     WeaponClass=Class'DEKRPG209E.RuneEarthquake_Blizzard'
      DeathString="%o was shattered by %k's Earthquake."
      bDetonatesGoop=True
      bDelayedDamage=True

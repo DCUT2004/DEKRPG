@@ -232,22 +232,22 @@ static function bool OverridePickupQuery(Pawn Other, Pickup item, out byte bAllo
 
 defaultproperties
 {
-     Level1Artifact(0)=Class'DEKRPG209D.DruidArtifactMakeMagicWeapon'
-     Level1Artifact(1)=Class'DEKRPG209D.DruidMaxModifier'
-     Level1Artifact(2)=Class'DEKRPG209D.ArtifactPlusAddon'
-     Level2Artifact(0)=Class'DEKRPG209D.DruidDoubleModifier'
-     Level2Artifact(1)=Class'DEKRPG209D.DruidPlusOneModifier'
-     Level2Artifact(2)=Class'DEKRPG209D.ArtifactRemoteMax'
-     Level2Artifact(3)=Class'DEKRPG209D.ArtifactRemoteDamage'
-     Level2Artifact(4)=Class'DEKRPG209D.ArtifactRemoteInvulnerability'
-     Level2Artifact(5)=Class'DEKRPG209D.ArtifactRemoteAmplifier'
-     Level3Artifact(0)=Class'DEKRPG209D.ArtifactSphereInvulnerability'
-     Level3Artifact(1)=Class'DEKRPG209D.ArtifactSphereDamage'
-     Level3Artifact(2)=Class'DEKRPG209D.ArtifactMakeInfinity'
-     Level3Artifact(3)=Class'DEKRPG209D.ArtifactMakeLucky'
-     Level3Artifact(4)=Class'DEKRPG209D.ArtifactMakeMatrix'
-     Level3Artifact(5)=Class'DEKRPG209D.ArtifactMakeGorgon'
-     Level3Artifact(6)=Class'DEKRPG209D.ArtifactMakeHeavyGuard'
+     Level1Artifact(0)=Class'DEKRPG209E.DruidArtifactMakeMagicWeapon'
+     Level1Artifact(1)=Class'DEKRPG209E.DruidMaxModifier'
+     Level1Artifact(2)=Class'DEKRPG209E.ArtifactPlusAddon'
+     Level2Artifact(0)=Class'DEKRPG209E.DruidDoubleModifier'
+     Level2Artifact(1)=Class'DEKRPG209E.DruidPlusOneModifier'
+     Level2Artifact(2)=Class'DEKRPG209E.ArtifactRemoteMax'
+     Level2Artifact(3)=Class'DEKRPG209E.ArtifactRemoteDamage'
+     Level2Artifact(4)=Class'DEKRPG209E.ArtifactRemoteInvulnerability'
+     Level2Artifact(5)=Class'DEKRPG209E.ArtifactRemoteAmplifier'
+     Level3Artifact(0)=Class'DEKRPG209E.ArtifactSphereInvulnerability'
+     Level3Artifact(1)=Class'DEKRPG209E.ArtifactSphereDamage'
+     Level3Artifact(2)=Class'DEKRPG209E.ArtifactMakeInfinity'
+     Level3Artifact(3)=Class'DEKRPG209E.ArtifactMakeLucky'
+     Level3Artifact(4)=Class'DEKRPG209E.ArtifactMakeMatrix'
+     Level3Artifact(5)=Class'DEKRPG209E.ArtifactMakeGorgon'
+     Level3Artifact(6)=Class'DEKRPG209E.ArtifactMakeHeavyGuard'
      AdrenDecreasePerLevel=50
      CostPerSecReduction=5
      SphereCostReduction=20

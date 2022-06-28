@@ -32,7 +32,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
     {
 		Proj = Weapon.Spawn(class'DEKStingerTurretAltProj',,, Start, Dir);
     }
-	Instigator.PlaySound(Sound'DEKRPG209D.TurretSounds.StingerAltFire',,0.500);
+	Instigator.PlaySound(Sound'DEKRPG209E.TurretSounds.StingerAltFire',,0.500);
 	return none;
 }
 
@@ -46,7 +46,7 @@ defaultproperties
      ProjectileCount=5
      FireRate=1.000000
      AmmoClass=Class'UT2k4Assault.Ammo_Dummy'
-     ProjectileClass=Class'DEKRPG209D.DEKStingerTurretAltProj'
+     ProjectileClass=Class'DEKRPG209E.DEKStingerTurretAltProj'
      BotRefireRate=0.700000
-     FlashEmitterClass=Class'DEKRPG209D.DEKStingerTurretMuzFX'
+     FlashEmitterClass=Class'DEKRPG209E.DEKStingerTurretMuzFX'
 }

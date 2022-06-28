@@ -25,7 +25,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.EclipseCircle'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209D.ProtectionEffect.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG209E.ProtectionEffect.SpriteEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          UseColorScale=True
@@ -40,7 +40,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.SmoothRing'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209D.ProtectionEffect.SpriteEmitter1'
+     Emitters(1)=SpriteEmitter'DEKRPG209E.ProtectionEffect.SpriteEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter3
          UseColorScale=True
@@ -53,7 +53,7 @@ defaultproperties
          Texture=Texture'AW-2k4XP.Weapons.ShockTankEffectCore2'
          LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209D.ProtectionEffect.SpriteEmitter3'
+     Emitters(2)=SpriteEmitter'DEKRPG209E.ProtectionEffect.SpriteEmitter3'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter4
          UseColorScale=True
@@ -81,7 +81,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.SmoothRing'
          LifetimeRange=(Min=1.000000,Max=1.000000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209D.ProtectionEffect.SpriteEmitter4'
+     Emitters(3)=SpriteEmitter'DEKRPG209E.ProtectionEffect.SpriteEmitter4'
 
      bNoDelete=False
      RemoteRole=ROLE_SimulatedProxy

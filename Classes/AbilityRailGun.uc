@@ -164,7 +164,7 @@ static function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponTyp
 
 defaultproperties
 {
-     WeaponRailGunOne(0)="DEKWeapons209D.DEKRailGun"
+     WeaponRailGunOne(0)="DEKWeapons209E.DEKRailGun"
      AbilityName="Rail Gun"
      Description="You are granted the Rail Gun.||Level 2 generates a magic weapon with a positive enchantment and full ammo.||Cost(per level): 5,10."
      StartingCost=5

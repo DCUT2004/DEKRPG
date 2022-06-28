@@ -122,7 +122,7 @@ defaultproperties
      XPReward=50
      MissionGoal=30
      Description="Survive while frozen!"
-     PickupClass=Class'DEKRPG209D.ArtifactMissionHaltPickup'
+     PickupClass=Class'DEKRPG209E.ArtifactMissionHaltPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.HaltMission'
      ItemName="Halt!"
 }

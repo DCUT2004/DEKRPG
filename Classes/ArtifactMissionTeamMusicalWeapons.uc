@@ -50,7 +50,7 @@ function Activate()
 			MMPI.ActiveWeapon = MMPI.MusicalWeaponsList[Rand(MMPI.MusicalWeaponsList.Length)];
 			for ( C = Level.ControllerList; C != None; C = C.NextController )
 				if ( C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(Instigator.Controller) )
-					PlayerController(C).ClientPlaySound(Sound'DEKRPG209D.MissionSounds.MPSelect');
+					PlayerController(C).ClientPlaySound(Sound'DEKRPG209E.MissionSounds.MPSelect');
 			SetTimer(0.5,True);
 			TeamMissionBroadcast(ItemName, Description,XPReward);
 		}
@@ -75,7 +75,7 @@ defaultproperties
      TimeLimit=120
      Description="(T)Make kills with the correct weapon."
      TeamMission=True
-     PickupClass=Class'DEKRPG209D.ArtifactMissionTeamMusicalWeaponsPickup'
+     PickupClass=Class'DEKRPG209E.ArtifactMissionTeamMusicalWeaponsPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.MusicalWeapons'
      ItemName="Musical Weapons"
 }

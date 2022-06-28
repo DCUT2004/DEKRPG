@@ -43,7 +43,7 @@ function DoTrace(Vector Start, Rotator Dir)
 		FX.Destroy();
 		FX = None;
 	}
-	Instigator.PlaySound(Sound'DEKRPG209D.RuneSounds.HeatWhipThrow',SLOT_None,Instigator.TransientSoundVolume*5.0);
+	Instigator.PlaySound(Sound'DEKRPG209E.RuneSounds.HeatWhipThrow',SLOT_None,Instigator.TransientSoundVolume*5.0);
 	MaxRange();
 	X = Vector(Dir);
 	End = Start + TraceRange * X;
@@ -155,7 +155,7 @@ state Crack
 			return;
 		}
 		
-		Instigator.PlaySound(Sound'DEKRPG209D.RuneSounds.HeatWhipCrack',SLOT_None,Instigator.TransientSoundVolume*7.0);
+		Instigator.PlaySound(Sound'DEKRPG209E.RuneSounds.HeatWhipCrack',SLOT_None,Instigator.TransientSoundVolume*7.0);
 		if (Victim != None)
 		{
 			//Control the Pawn(Other)'s movements
@@ -200,12 +200,12 @@ defaultproperties
 {
 	 SearchHitRadius=80.0000
 	 bModeExclusive=False
-     DamageType=Class'DEKRPG209D.DamTypeRuneHeatWhip'
+     DamageType=Class'DEKRPG209E.DamTypeRuneHeatWhip'
 	 AdrenCost=10
 	 DamageMin=150
 	 DamageMax=160
 	 FireRate=3.500000
-     //FireSound=Sound'DEKRPG209D.RuneSounds.HeatWhipThrow'
+     //FireSound=Sound'DEKRPG209E.RuneSounds.HeatWhipThrow'
      bReflective=False
      TraceRange=30000.000000
 }

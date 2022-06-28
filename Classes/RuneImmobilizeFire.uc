@@ -57,7 +57,7 @@ function GiveImmobilize(Pawn P)
 		Inv.Lifespan = ImmobilizeLifespan;
 		Inv.RegenAmount = RegenAmount;
 		Inv.GiveTo(P);
-		Instigator.PlaySound(Sound'DEKRPG209D.TurretSounds.SolarTurretAltCharge', SLOT_None, Instigator.TransientSoundVolume*1.75);
+		Instigator.PlaySound(Sound'DEKRPG209E.TurretSounds.SolarTurretAltCharge', SLOT_None, Instigator.TransientSoundVolume*1.75);
 	}
 }
 
