@@ -9,6 +9,7 @@ var Vector WhipEnd;
 var Pawn Victim;
 var bool bCracked;
 var config float SearchHitRadius;
+var config float DamageScale;		// % of distance between player and target, when whipped, that should be returned as damage to target
 
 simulated function ModeTick(float dt)
 {
@@ -168,7 +169,11 @@ state Crack
 			Victim.Velocity.Z += 5*Victim.Mass;
 			Victim.Velocity += 7*Direction*Magnitude;
 			
-			Damage = DamageMin;
+			Damage = abs(Magnitude) * DamageScale;
+			if (Damage < DamageMin)
+				Damage = DamageMin;
+			if (Damage > DamageMax)
+				Damage = DamageMax;
 			if ( (DamageMin != DamageMax) && (FRand() > 0.5) )
 				Damage += Rand(1 + DamageMax - DamageMin);
 			Damage = Damage * DamageAtten;
@@ -198,12 +203,13 @@ state Crack
 
 defaultproperties
 {
-	 SearchHitRadius=80.0000
+	 SearchHitRadius=150.0000
 	 bModeExclusive=False
      DamageType=Class'DEKRPG209E.DamTypeRuneHeatWhip'
 	 AdrenCost=10
+	 DamageScale=0.200000
 	 DamageMin=150
-	 DamageMax=160
+	 DamageMax=400
 	 FireRate=3.500000
      //FireSound=Sound'DEKRPG209E.RuneSounds.HeatWhipThrow'
      bReflective=False

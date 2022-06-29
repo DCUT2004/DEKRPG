@@ -1,5 +1,7 @@
 class RuneIcicleProj extends Projectile
 	config(UT2004RPG);
+	
+#exec  AUDIO IMPORT NAME="IcicleImpact" FILE="Sounds\IcicleImpact.WAV" GROUP="RuneSounds"
 
 var Emitter Glow;
 var	xemitter trail;
@@ -83,6 +85,7 @@ simulated function destroyed()
 
 defaultproperties
 {
+	 ImpactSound=Sound'DEKRPG209E.RuneSounds.IcicleImpact'
      TossZ=225.000000
      Physics=PHYS_Falling
      Speed=1200.000000
