@@ -23,8 +23,8 @@ var Array< int > PlayerLevelReqd;
 // if LevelCost set, takes precedence over (default.StartingCost + default.CostAddPerLevel * CurrentLevel)
 var Array< int > LevelCost;		
 
-var Array<class<RPGAbility> > ExcludingAbilities;	// if you have one of these you cannot purchase
-var Array<class<RPGAbility> > RequiredAbilities;	// you must have all of these
+var config Array<class<RPGAbility> > ExcludingAbilities;	// if you have one of these you cannot purchase
+var config Array<class<RPGAbility> > RequiredAbilities;	// you must have all of these
 
 static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel)
 {
