@@ -25,9 +25,9 @@ defaultproperties
      PlagueDamagePerLevel=3
      PlagueLifespan=5.000000
      ExcludingAbilities(0)=Class'DEKRPG209E.AbilityDiseasedPoisonMage'
-     RequiredAbilities(0)=Class'DEKRPG209E.AbilityNecroPlague'
+     //RequiredAbilities(0)=Class'DEKRPG209E.AbilityNecroPlague'
      AbilityName="Niche: Lethal"
-     Description="Increases your plague damage by 3 per level. Reduces the maximum amount of time you can carry the plague and the maximum time you have with Phantom.||You must be level 180 and have Plague before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
+     Description="Increases your plague damage by 3 per level. Reduces the maximum amount of time you can carry the plague and the maximum time you have with Phantom.||You must be level 180 and have Poisoned Zombie before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 10"
      StartingCost=10
      MaxLevel=10
 }

@@ -1,4 +1,5 @@
 class CostRPGAbility extends RPGAbility
+	config(UT2004RPG)
 	abstract;
 
 var int MinWeaponSpeed;
