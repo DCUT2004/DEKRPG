@@ -12,6 +12,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 	local Vector SpawnLocation;
 	local Vector HitLocation, HitNormal, End;
 	local Actor Other, MuzFlash;
+	local RW_EnhancedInfinity Infinity;
 	
 	End = Start + Vector(Dir)*Range;
 	
@@ -41,7 +42,9 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 	if (MuzFlash != None)
 		MuzFlash.RemoteRole = ROLE_SimulatedProxy;
     p.Damage *= DamageAtten;
-	Instigator.Controller.Adrenaline -= AdrenCost;
+	Infinity = RW_EnhancedInfinity(Instigator.Weapon);
+	if (Infinity == None)
+		Instigator.Controller.Adrenaline -= AdrenCost;
 	return P;
 }
 
