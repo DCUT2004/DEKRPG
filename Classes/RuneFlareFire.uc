@@ -53,8 +53,8 @@ defaultproperties
 	 Bursts(1)=Class'DEKRPG209E.RuneFlareBurstBlue'
 	 Bursts(2)=Class'DEKRPG209E.RuneFlareBurstGreen'
 	 AdrenCost=0.60000000
-	 BurstDamage=20
-	 BurstDamageRadius=150.000
+	 BurstDamage=40
+	 BurstDamageRadius=225.000
      FireRate=0.100000
 	 DamageType=Class'DEKRPG209E.DamTypeRuneFlare'
      FireSound=Sound'ONSVehicleSounds-S.HoverBike.HoverBikeFire01'
