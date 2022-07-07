@@ -25,6 +25,7 @@ simulated function PostNetBeginPlay()
 
 simulated function ProcessTouch (Actor Other, vector HitLocation)
 {
+	local Actor A;
     if ( (RuneFlurryProj(Other) == None) && (Other != Instigator))
     {
 		if ( Role == ROLE_Authority )
@@ -34,6 +35,9 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
 			if (NumBounces > 0)
 				Other.TakeDamage(Damage*NumBounces, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 		}
+		A = Spawn(Class'ONSPlasmaHitPurple', , , HitLocation);
+		if (A != None)
+			A.RemoteRole = ROLE_SimulatedProxy;
         Destroy();
     }
 }

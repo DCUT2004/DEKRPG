@@ -7,7 +7,7 @@ var Pawn PawnOwner;
 simulated function Touch(Actor Other)
 {
 	local Projectile P;
-	local Vector HitNormal;
+	local SyncDestroy Sync;
 	
     if (Other != None)
 	{
@@ -16,8 +16,20 @@ simulated function Touch(Actor Other)
 			P = Projectile(Other);
 			if (P != None && P.InstigatorController != None && PawnOwner != None && PawnOwner.Controller != None && !P.InstigatorController.SameTeamAs(PawnOwner.Controller))
 			{
-				P.HitWall(-1*Normal(P.Velocity),self);
-				P.Explode(P.Location, HitNormal);
+				//Want to simulate destroying the projectile on a client
+				//Unfortunately, simply calling Destroy() does not do it (e.g. defense sentinel issue)
+				//Instead, set the lifespan to a small value, and the lifespan should also be replicated to the client as well
+				if (Role == ROLE_Authority)
+				{
+					P.Lifespan = 0.05;
+					//Tell the clients
+					if(Level.NetMode == NM_DedicatedServer)
+					{
+						Sync = P.Instigator.Spawn(class'SyncDestroy');
+						Sync.Proj = P;
+						Sync.ProjLifespan = 0.05;
+					}
+				}
 			}
 		}
 	}

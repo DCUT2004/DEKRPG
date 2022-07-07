@@ -58,7 +58,7 @@ defaultproperties
 	 MinFlurryRangeZ=0.0000
 	 MaxFlurryRangeZ=200.00000
 	 AdrenCost=2
-     FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser16'
+	 FireSound=Sound'DEKRPG209E.TurretSounds.PlasmaTurretFire'
      FireForce="RocketLauncherFire"
      FireRate=0.300000
      ProjectileClass=Class'DEKRPG209E.RuneFlurryProj'
