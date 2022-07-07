@@ -44,18 +44,12 @@ simulated function Tick(float DeltaTime)
 defaultproperties
 {
 	AmbientSound=Sound'DEKRPG209E.ArtifactSounds.ImmobilizeAmbient'
-	LightType=LT_Steady
-	LightEffect=LE_QuadraticNonIncidence
-	LightHue=135
-	LightBrightness=255.000000
-	LightRadius=15.000000
 	DrawType=DT_StaticMesh
 	StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.GuardShield'
-	bDynamicLight=True
+	bDynamicLight=False
 	bIgnoreVehicles=True
 	Physics=PHYS_None
-	//Skins(0)=FinalBlend'XEffectMat.Shield.RedShell'
-	Skins(0)=Shader'ONSBPTextures.fX.RedShieldShader'
+	Skins(0)=FinalBlend'XEffectMat.Shield.RedShell'
 	CollisionRadius=60.000000
 	CollisionHeight=60.000000
 	bCollideActors=True

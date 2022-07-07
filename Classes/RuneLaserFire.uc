@@ -17,6 +17,7 @@ simulated function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation
 			BeamEmitter(Beam.Emitters[0]).BeamDistanceRange.Max = VSize(Start - HitLocation);
 			BeamEmitter(Beam.Emitters[1]).BeamDistanceRange.Min = VSize(Start - HitLocation);
 			BeamEmitter(Beam.Emitters[1]).BeamDistanceRange.Max = VSize(Start - HitLocation);
+			Beam.SpawnEffects(HitLocation, HitNormal);
 		}
     }
 }
