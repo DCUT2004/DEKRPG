@@ -209,7 +209,7 @@ defaultproperties
 	 AdrenCost=10
 	 DamageScale=0.200000
 	 DamageMin=150
-	 DamageMax=400
+	 DamageMax=350
 	 FireRate=3.500000
      //FireSound=Sound'DEKRPG209E.RuneSounds.HeatWhipThrow'
      bReflective=False
