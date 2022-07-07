@@ -104,12 +104,12 @@ defaultproperties
          StartSpinRange=(X=(Max=0.025000))
          SizeScale(0)=(RelativeSize=0.250000)
          SizeScale(1)=(RelativeTime=1.000000,RelativeSize=1.000000)
-         StartSizeRange=(X=(Min=10.000000,Max=25.000000))
-         InitialParticlesPerSecond=900.000000
+         StartSizeRange=(X=(Min=5.000000,Max=12.500000))
+         InitialParticlesPerSecond=450.000000
          Texture=Texture'AW-2004Particles.Weapons.SmokePanels1'
          TextureUSubdivisions=4
          TextureVSubdivisions=4
-         LifetimeRange=(Min=1.500000,Max=1.500000)
+         LifetimeRange=(Min=0.500000,Max=0.500000)
          StartVelocityRange=(Z=(Max=15.000000))
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=0.200000
@@ -135,12 +135,12 @@ defaultproperties
          UseRotationFrom=PTRS_Actor
          SizeScale(0)=(RelativeSize=0.100000)
          SizeScale(1)=(RelativeTime=1.000000,RelativeSize=1.000000)
-         StartSizeRange=(X=(Min=10.000000,Max=15.000000))
-         InitialParticlesPerSecond=3000.000000
+         StartSizeRange=(X=(Min=5.000000,Max=7.500000))
+         InitialParticlesPerSecond=1500.000000
          Texture=Texture'AW-2004Particles.Weapons.SmokePanels1'
          TextureUSubdivisions=4
          TextureVSubdivisions=4
-         LifetimeRange=(Min=0.200000,Max=0.200000)
+         LifetimeRange=(Min=0.100000,Max=0.100000)
      End Object
      Emitters(4)=SpriteEmitter'DEKRPG209E.RuneLaserEffect.SpriteEmitter20'
 
