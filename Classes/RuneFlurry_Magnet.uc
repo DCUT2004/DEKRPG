@@ -1,4 +1,4 @@
-class RuneImmobilize_Magnet extends Weapon
+class RuneFlurry_Magnet extends Weapon
 	CacheExempt;
 
 defaultproperties

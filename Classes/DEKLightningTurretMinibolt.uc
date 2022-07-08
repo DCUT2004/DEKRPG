@@ -44,7 +44,7 @@ defaultproperties
          MaxParticles=1
          UseRotationFrom=PTRS_Actor
          StartSizeRange=(X=(Min=10.000000,Max=20.000000),Y=(Min=0.000000,Max=0.000000),Z=(Min=0.000000,Max=0.000000))
-         InitialParticlesPerSecond=6412.159180
+         InitialParticlesPerSecond=3000
          Texture=Texture'AS_FX_TX.Beams.HotBolt_1'
          LifetimeRange=(Min=0.500000,Max=1.000000)
          StartVelocityRange=(X=(Min=1.000000,Max=1.000000))
