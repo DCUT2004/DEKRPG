@@ -3,7 +3,7 @@ class DamTypeRuneSparkle extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209E.RuneSparkle_Barrage'
+     WeaponClass=Class'DEKRPG209F.RuneSparkle_Barrage'
      DeathString="%o was zapped by %k's Sparkle."
      FemaleSuicide="%o zapped herself."
      MaleSuicide="%o zapped himself."

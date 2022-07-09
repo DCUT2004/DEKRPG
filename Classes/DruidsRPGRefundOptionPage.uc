@@ -60,7 +60,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG209E.DruidsRPGRefundOptionPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG209F.DruidsRPGRefundOptionPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=RefundAbilityButton
          Caption="Refund Abilities"
@@ -71,7 +71,7 @@ defaultproperties
          OnClick=DruidsRPGRefundOptionPage.InternalOnClick
          OnKeyEvent=RefundAbilityButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG209E.DruidsRPGRefundOptionPage.RefundAbilityButton'
+     Controls(1)=GUIButton'DEKRPG209F.DruidsRPGRefundOptionPage.RefundAbilityButton'
 
      Begin Object Class=GUIButton Name=RefundNicheButton
          Caption="Refund Niches"
@@ -82,7 +82,7 @@ defaultproperties
          OnClick=DruidsRPGRefundOptionPage.InternalOnClick
          OnKeyEvent=RefundNicheButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG209E.DruidsRPGRefundOptionPage.RefundNicheButton'
+     Controls(2)=GUIButton'DEKRPG209F.DruidsRPGRefundOptionPage.RefundNicheButton'
 	 
      Begin Object Class=GUIButton Name=RefundComboButton
          Caption="Refund Combos"
@@ -93,7 +93,7 @@ defaultproperties
          OnClick=DruidsRPGRefundOptionPage.InternalOnClick
          OnKeyEvent=RefundComboButton.InternalOnKeyEvent
      End Object
-     Controls(3)=GUIButton'DEKRPG209E.DruidsRPGRefundOptionPage.RefundComboButton'
+     Controls(3)=GUIButton'DEKRPG209F.DruidsRPGRefundOptionPage.RefundComboButton'
 
      Begin Object Class=GUIButton Name=CloseButton
          Caption="Close"
@@ -104,7 +104,7 @@ defaultproperties
          OnClick=DruidsRPGRefundOptionPage.InternalOnClick
          OnKeyEvent=CloseButton.InternalOnKeyEvent
      End Object
-     Controls(4)=GUIButton'DEKRPG209E.DruidsRPGRefundOptionPage.CloseButton'	
+     Controls(4)=GUIButton'DEKRPG209F.DruidsRPGRefundOptionPage.CloseButton'	
 
      WinTop=0.375000
      WinHeight=0.250000

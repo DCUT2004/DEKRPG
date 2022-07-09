@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG209E.AbilityComboSpecialVoidedCubes'
-    ExcludingAbilities(1)=Class'DEKRPG209E.AbilityComboSpecialSwarm'
-    ExcludingAbilities(2)=Class'DEKRPG209E.AbilityComboSpecialTeleStealth'
-    ExcludingAbilities(3)=Class'DEKRPG209E.AbilityComboSpecialBeastsRevenge'
+    ExcludingAbilities(0)=Class'DEKRPG209F.AbilityComboSpecialVoidedCubes'
+    ExcludingAbilities(1)=Class'DEKRPG209F.AbilityComboSpecialSwarm'
+    ExcludingAbilities(2)=Class'DEKRPG209F.AbilityComboSpecialTeleStealth'
+    ExcludingAbilities(3)=Class'DEKRPG209F.AbilityComboSpecialBeastsRevenge'
 	AbilityName="Special: Raven Ritual"
 	Description="Heals the caster by 100 health. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health. For as long as the caster has boosted health, the caster deals 20 damage per level every 10 seconds to a single target. This effect ends when the caster's health drops below the normal max health amount.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Moonlit Stone you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -40,14 +40,14 @@ defaultproperties
 	Dispellable=True
 	All=False
 	Single=True
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(25))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(30))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(35))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG209E.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(25))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(30))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(35))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialMoonlitStone'),RequiredMaterialLevels=(50))
 }

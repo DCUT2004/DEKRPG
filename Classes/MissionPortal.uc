@@ -92,7 +92,7 @@ function Touch(Actor Other)
 					}
 					C = NextC;
 				}
-				Self.PlaySound(Sound'DEKRPG209E.MissionSounds.PortalBallScore',,100.0);
+				Self.PlaySound(Sound'DEKRPG209F.MissionSounds.PortalBallScore',,100.0);
 				A = Spawn(class'MissionPortalBallScoreFX',,,Self.Location);
 				if (A != None)
 					A.RemoteRole = ROLE_SimulatedProxy;

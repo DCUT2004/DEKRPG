@@ -2,6 +2,6 @@ class ArtifactMissionWizardryPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209E.ArtifactMissionWizardry'
+     InventoryType=Class'DEKRPG209F.ArtifactMissionWizardry'
      PickupMessage="You picked up the Wizardry Mission!"
 }

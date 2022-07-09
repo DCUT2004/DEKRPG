@@ -209,7 +209,7 @@ function DropFrom(vector StartLocation)
 
 defaultproperties
 {
-     HitEmitterClass=Class'DEKRPG209E.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209F.LightningBeamEmitter'
      MaxRange=2000.000000
      ExpPerDamage=0.030000
      AdrenalineRequired=200

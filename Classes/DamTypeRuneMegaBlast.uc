@@ -3,7 +3,7 @@ class DamTypeRuneMegaBlast extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209E.RuneMegaBlast_PoisonBlast'
+     WeaponClass=Class'DEKRPG209F.RuneMegaBlast_PoisonBlast'
      DeathString="%o was blasted away by %k's MegaBlast."
      FemaleSuicide="%o was blasted by her own MegaBlast."
      MaleSuicide="%o was blasted by his own MegaBlast."

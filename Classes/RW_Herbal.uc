@@ -159,10 +159,10 @@ defaultproperties
      DamageBonus=0.040000
      EarthFlowerChance=7.000000
      MaxFlowerChance=50.000000
-     Flowers(0)=Class'DEKRPG209E.FlowerBluePickup'
-     Flowers(1)=Class'DEKRPG209E.FlowerRedPickup'
-     Flowers(2)=Class'DEKRPG209E.FlowerOrangePickup'
-     Flowers(3)=Class'DEKRPG209E.FlowerYellowPickup'
+     Flowers(0)=Class'DEKRPG209F.FlowerBluePickup'
+     Flowers(1)=Class'DEKRPG209F.FlowerRedPickup'
+     Flowers(2)=Class'DEKRPG209F.FlowerOrangePickup'
+     Flowers(3)=Class'DEKRPG209F.FlowerYellowPickup'
      ModifierOverlay=TexRotator'ArboreaTerrain.Miscellaneous.goopRotA'
      MinModifier=3
      MaxModifier=9

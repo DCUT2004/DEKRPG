@@ -120,7 +120,7 @@ defaultproperties
      LevelCost(3)=20
      ExcludingAbilities(0)=Class'UT2004RPG.AbilityUltima'
      ExcludingAbilities(1)=Class'UT2004RPG.AbilityGhost'
-     ExcludingAbilities(2)=Class'DEKRPG209E.AbilityNecroGhost'
+     ExcludingAbilities(2)=Class'DEKRPG209F.AbilityNecroGhost'
      AbilityName="Ghost"
      Description="The first time each spawn that you take damage that would kill you, instead of dying you will become non-corporeal and move to a new location, where you will continue your life. At level 1 you will move slowly as a ghost and return with a health of 1. At level 2 you will move somewhat more quickly and will return with 100 health. At level 3 you will move fastest and will return with your normal starting health. You need to have at least 200 Health Bonus and 50 Damage Reduction to purchase this ability. |Cost (per level): 40,25,20"
      MaxLevel=3

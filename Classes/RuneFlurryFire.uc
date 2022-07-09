@@ -58,10 +58,10 @@ defaultproperties
 	 MinFlurryRangeZ=0.0000
 	 MaxFlurryRangeZ=200.00000
 	 AdrenCost=2
-	 FireSound=Sound'DEKRPG209E.TurretSounds.PlasmaTurretFire'
+	 FireSound=Sound'DEKRPG209F.TurretSounds.PlasmaTurretFire'
      FireForce="RocketLauncherFire"
      FireRate=0.300000
-     ProjectileClass=Class'DEKRPG209E.RuneFlurryProj'
+     ProjectileClass=Class'DEKRPG209F.RuneFlurryProj'
      //Spread=1500.0000
      //SpreadStyle=SS_Random
 }

@@ -42,7 +42,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.SoftFlare'
          LifetimeRange=(Min=0.020000,Max=0.020000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter7'
+     Emitters(0)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter7'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter9
          UseColorScale=True
@@ -70,7 +70,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter9'
+     Emitters(1)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter9'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter11
          UseColorScale=True
@@ -95,7 +95,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter11'
+     Emitters(2)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter11'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter12
          UseColorScale=True
@@ -119,7 +119,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter12'
+     Emitters(3)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter12'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter13
          UseColorScale=True
@@ -143,7 +143,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter13'
+     Emitters(4)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter13'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter7
          StaticMesh=StaticMesh'AW-2004Particles.Weapons.PlasmaSphere'
@@ -159,7 +159,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(5)=MeshEmitter'DEKRPG209E.IceballEffect.MeshEmitter7'
+     Emitters(5)=MeshEmitter'DEKRPG209F.IceballEffect.MeshEmitter7'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter14
          UseColorScale=True
@@ -185,7 +185,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG209E.IceballEffect.SpriteEmitter14'
+     Emitters(6)=SpriteEmitter'DEKRPG209F.IceballEffect.SpriteEmitter14'
 
      AutoDestroy=True
      bNoDelete=False

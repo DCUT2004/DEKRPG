@@ -8,8 +8,8 @@ defaultproperties
      bSplashDamage=True
      bSplashJump=False
      bRecommendSplashDamage=True
-     FireSound=Sound'DEKRPG209E.TurretSounds.LightningTurretFire'
+     FireSound=Sound'DEKRPG209F.TurretSounds.LightningTurretFire'
      FireForce="RocketLauncherFire"
      FireRate=0.380000
-     ProjectileClass=Class'DEKRPG209E.RuneSparkleProj'
+     ProjectileClass=Class'DEKRPG209F.RuneSparkleProj'
 }

@@ -199,7 +199,7 @@ function DropFrom(vector StartLocation)
 defaultproperties
 {
      MaxNumPlayers=1
-     HitEmitterClass=Class'DEKRPG209E.LightningBeamEmitter'
+     HitEmitterClass=Class'DEKRPG209F.LightningBeamEmitter'
      MaxRange=2000.000000
      HealingRadius=1100.000000
      ChargeTime=0.050000

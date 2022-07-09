@@ -22,7 +22,7 @@ function DoEffect()
 			Level.Game.Broadcast(self, Pawn(Owner).PlayerReplicationInfo.PlayerName $ " casted Beast's Revenge!");
 		for ( C = Level.ControllerList; C != None; C = C.NextController )
 			if (C != None && C.Pawn != None && C.IsA('PlayerController') && Pawn(Owner) != None && Pawn(Owner).Controller != None && C.SameTeamAs(Pawn(Owner).Controller))
-				PlayerController(C).ClientPlaySound(Sound'DEKRPG209E.ComboSounds.BeastsRevenge');
+				PlayerController(C).ClientPlaySound(Sound'DEKRPG209F.ComboSounds.BeastsRevenge');
 	}
 }
 

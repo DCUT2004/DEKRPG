@@ -181,7 +181,7 @@ defaultproperties
      LevelCost(1)=40
      LevelCost(2)=40
      ExcludingAbilities(0)=Class'UT2004RPG.AbilityGhost'
-     ExcludingAbilities(1)=Class'DEKRPG209E.DruidGhost'
+     ExcludingAbilities(1)=Class'DEKRPG209F.DruidGhost'
      AbilityName="Phantom"
      Description="Level One:|Much like the traditional ghost ability, the first time each spawn that you take damage that would kill you, instead of dying you will become a non-corporeal phantom where you will continue your life. This ability allows you to control your phantom state, and you will regenerate health and deal more damage during this state.||Level Two:|Upon taking a second fatal hit, instead of dying you will once again become a phantom, but this time you cannot return from the phantom state and you cannot directly attack targets. If all other team members are dead or are also phantoms during the second phantom state, you will automatically suicide. During this phantom state, you can pass through targets to build up energy for an attack.||You need at least 200 Health Bonus and 50 Damage Reduction to purchase this ability. You cannot have this ability and Ghost at the same time.||Cost(per level): 40"
      MaxLevel=2

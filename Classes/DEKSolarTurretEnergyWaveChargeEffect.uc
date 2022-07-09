@@ -45,7 +45,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BeamBolt1a'
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(0)=BeamEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter0'
+     Emitters(0)=BeamEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter0'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter1
          BeamEndPoints(0)=(offset=(X=(Min=50.000000,Max=55.000000),Y=(Min=20.000000,Max=24.000000),Z=(Min=30.000000,Max=34.000000)))
@@ -65,7 +65,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BeamBolt1a'
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(1)=BeamEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter1'
+     Emitters(1)=BeamEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter1'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter2
          BeamEndPoints(0)=(offset=(X=(Min=50.000000,Max=55.000000),Y=(Min=-24.000000,Max=-20.000000),Z=(Min=30.000000,Max=34.000000)))
@@ -85,7 +85,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BeamBolt1a'
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(2)=BeamEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter2'
+     Emitters(2)=BeamEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter2'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter3
          BeamEndPoints(0)=(offset=(X=(Min=50.000000,Max=55.000000),Y=(Min=20.000000,Max=24.000000),Z=(Min=-34.000000,Max=-30.000000)))
@@ -105,7 +105,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BeamBolt1a'
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(3)=BeamEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter3'
+     Emitters(3)=BeamEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter3'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter4
          BeamEndPoints(0)=(offset=(X=(Min=50.000000,Max=55.000000),Y=(Min=-24.000000,Max=-20.000000),Z=(Min=-34.000000,Max=-30.000000)))
@@ -125,7 +125,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BeamBolt1a'
          LifetimeRange=(Min=0.750000,Max=0.750000)
      End Object
-     Emitters(4)=BeamEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter4'
+     Emitters(4)=BeamEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.BeamEmitter4'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter0
          StaticMesh=StaticMesh'ParticleMeshes.Simple.ParticleSphere2'
@@ -143,7 +143,7 @@ defaultproperties
          InitialParticlesPerSecond=1000.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(5)=MeshEmitter'DEKRPG209E.DEKSolarTurretEnergyWaveChargeEffect.MeshEmitter0'
+     Emitters(5)=MeshEmitter'DEKRPG209F.DEKSolarTurretEnergyWaveChargeEffect.MeshEmitter0'
 
      bNoDelete=False
      bReplicateInstigator=True

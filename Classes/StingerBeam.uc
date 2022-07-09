@@ -28,7 +28,7 @@ defaultproperties
          LifetimeRange=(Min=0.300000,Max=0.300000)
          StartVelocityRange=(X=(Min=500.000000,Max=500.000000))
      End Object
-     Emitters(0)=BeamEmitter'DEKRPG209E.StingerBeam.BeamEmitter0'
+     Emitters(0)=BeamEmitter'DEKRPG209F.StingerBeam.BeamEmitter0'
 
      Begin Object Class=BeamEmitter Name=BeamEmitter1
          BeamDistanceRange=(Min=512.000000,Max=512.000000)
@@ -58,7 +58,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          StartVelocityRange=(X=(Min=500.000000,Max=500.000000))
      End Object
-     Emitters(1)=BeamEmitter'DEKRPG209E.StingerBeam.BeamEmitter1'
+     Emitters(1)=BeamEmitter'DEKRPG209F.StingerBeam.BeamEmitter1'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter3
          UseDirectionAs=PTDU_Normal
@@ -82,7 +82,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar2'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209E.StingerBeam.SpriteEmitter3'
+     Emitters(2)=SpriteEmitter'DEKRPG209F.StingerBeam.SpriteEmitter3'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter11
          UseColorScale=True
@@ -108,6 +108,6 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaFlare'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209E.StingerBeam.SpriteEmitter11'
+     Emitters(3)=SpriteEmitter'DEKRPG209F.StingerBeam.SpriteEmitter11'
 
 }

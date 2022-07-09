@@ -25,8 +25,8 @@ defaultproperties
      AdrenMultiplier=0.050000000
      SpeedMultiplier=0.050000
      PlayerLevelReqd(1)=180
-     ExcludingAbilities(0)=Class'DEKRPG209E.AbilityBloodLustEWM'
-     ExcludingAbilities(1)=Class'DEKRPG209E.AbilityRageEWM'
+     ExcludingAbilities(0)=Class'DEKRPG209F.AbilityBloodLustEWM'
+     ExcludingAbilities(1)=Class'DEKRPG209F.AbilityRageEWM'
      AbilityName="Niche: Primal"
      Description="Increases your cumulative weapon speed by 5% per level, but also decreases your max adrenaline by 5% per level.|You must be level 180 to buy a niche. You can not be in more than one niche at a time. Cost (per level): 10."
      StartingCost=10

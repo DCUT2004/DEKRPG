@@ -345,7 +345,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     NecroDamageType=Class'DEKRPG209E.DamTypeNecro'
+     NecroDamageType=Class'DEKRPG209F.DamTypeNecro'
      XPMultiplier=1.000000
      SacrificePerc=0.500000
      RevenantLifeSpan=20.000000

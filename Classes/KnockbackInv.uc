@@ -39,7 +39,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		if(NInv != None)
 		{
 			if (Other.Controller != None && PlayerController(Other.Controller) != None)
-				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209E.ComboSounds.Ward');
+				PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209F.ComboSounds.Ward');
 			Destroy();
 			return;
 		}
@@ -68,7 +68,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
 				}
 				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209E.ComboSounds.Ward');
+					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG209F.ComboSounds.Ward');
 				Destroy();
 				return;
 			}

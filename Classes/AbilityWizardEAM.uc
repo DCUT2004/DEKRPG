@@ -51,8 +51,8 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 
 defaultproperties
 {
-     ExcludingAbilities(0)=Class'DEKRPG209E.AbilityPowerEAM'
-     ExcludingAbilities(1)=Class'DEKRPG209E.AbilityMaxedEAM'
+     ExcludingAbilities(0)=Class'DEKRPG209F.AbilityPowerEAM'
+     ExcludingAbilities(1)=Class'DEKRPG209F.AbilityMaxedEAM'
      AbilityName="Niche: Wizard"
      Description="Adrenaline usage and cooldown time is reduced even further for artifacts. However, the max modifier on magic weapons is reduced.|You must be level 180 to buy a niche. You need Loaded Artifacts 5 before purchasing this ability. You can not be in more than one niche at a time.|Cost (per level): 50."
      StartingCost=50

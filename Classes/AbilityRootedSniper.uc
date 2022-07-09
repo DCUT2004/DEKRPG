@@ -29,7 +29,7 @@ defaultproperties
      CrouchMultiplier=0.080000
      RootedMultiplier=0.050000
      RootedCrouchMultiplier=0.080000
-     ExcludingAbilities(0)=Class'DEKRPG209E.AbilityAssassinSniper'
+     ExcludingAbilities(0)=Class'DEKRPG209F.AbilityAssassinSniper'
      AbilityName="Niche: Rooted"
      Description="Increases your cumulative total damage bonus on sniper-type weapons by 5% while remaining stationary, and 8% while crouched or while both stationary and crouched. Damage is reduced if not crouching or stationary.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

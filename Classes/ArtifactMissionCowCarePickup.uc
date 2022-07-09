@@ -2,6 +2,6 @@ class ArtifactMissionCowCarePickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209E.ArtifactMissionCowCare'
+     InventoryType=Class'DEKRPG209F.ArtifactMissionCowCare'
      PickupMessage="You picked up the Cow Care Mission!"
 }

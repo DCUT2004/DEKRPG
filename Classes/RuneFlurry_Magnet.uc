@@ -3,8 +3,8 @@ class RuneFlurry_Magnet extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209E.RuneFlurryFire'
-     FireModeClass(1)=Class'DEKRPG209E.RuneMagnetFire'
+     FireModeClass(0)=Class'DEKRPG209F.RuneFlurryFire'
+     FireModeClass(1)=Class'DEKRPG209F.RuneMagnetFire'
      bCanThrow=False
      HudColor=(R=73,G=19,B=138)
      InventoryGroup=4

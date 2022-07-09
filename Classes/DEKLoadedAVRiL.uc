@@ -212,7 +212,7 @@ defaultproperties
      WeaponAVRiLOne(0)="DEKWeapons209E.INAVRiL"
      PlayerLevelReqd(1)=1
      PlayerLevelReqd(2)=1
-     ExcludingAbilities(0)=Class'DEKRPG209E.DEKLoadedClassicAR'
+     ExcludingAbilities(0)=Class'DEKRPG209F.DEKLoadedClassicAR'
      AbilityName="Starting Weapon: AVRiL"
      Description="When you spawn:|You are granted an AVRiL.||This skill is only necessary for players with the skill Loaded Weapons.  Make sure to purchase Loaded Weapons before purchasing this skill or it will not work properly.  It cannot be purchased if you have the skill granting you a Classic Assault Rifle.||Level 2 generates a magic weapon with a positive enchantment and full ammo.||Cost: 1,5"
      StartingCost=1

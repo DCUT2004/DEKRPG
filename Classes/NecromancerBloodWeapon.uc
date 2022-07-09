@@ -3,8 +3,8 @@ class NecromancerBloodWeapon extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209E.NecromancerBloodWeaponFire'
-     FireModeClass(1)=Class'DEKRPG209E.NecromancerBloodWeaponAltFire'
+     FireModeClass(0)=Class'DEKRPG209F.NecromancerBloodWeaponFire'
+     FireModeClass(1)=Class'DEKRPG209F.NecromancerBloodWeaponAltFire'
      bCanThrow=False
      HudColor=(G=0,R=77)
      IconMaterial=Texture'DEKRPGTexturesMaster209B.NecroIcons.BloodMagicIcon'

@@ -2444,7 +2444,7 @@ function PostRender(Canvas Canvas)
 
 defaultproperties
 {
-     ArtifactKeyConfigs(0)=(Alias="SelectTriple",ArtifactClass=Class'DEKRPG209E.DruidArtifactTripleDamage')
+     ArtifactKeyConfigs(0)=(Alias="SelectTriple",ArtifactClass=Class'DEKRPG209F.DruidArtifactTripleDamage')
      HealthBarMaterial=Texture'Engine.WhiteSquareTexture'
      RedColor=(B=159,G=159,R=255,A=159)
      OrangeColor=(B=159,G=223,R=255,A=255)

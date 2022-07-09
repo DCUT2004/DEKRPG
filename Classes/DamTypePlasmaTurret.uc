@@ -3,7 +3,7 @@ class DamTypePlasmaTurret extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209E.DEKPlasmaTurret'
+     VehicleClass=Class'DEKRPG209F.DEKPlasmaTurret'
      DeathString="%o was served an extra helping of %k's plasma."
      FemaleSuicide="%o fried herself with her own plasma blast."
      MaleSuicide="%o fried himself with his own plasma blast."

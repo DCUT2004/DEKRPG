@@ -13,6 +13,6 @@ simulated function destroyed()
 
 defaultproperties
 {
-     LetterClass=Class'DEKRPG209E.LetterOInv'
-     PickupClass=Class'DEKRPG209E.ArtifactLetterOPickup'
+     LetterClass=Class'DEKRPG209F.LetterOInv'
+     PickupClass=Class'DEKRPG209F.ArtifactLetterOPickup'
 }

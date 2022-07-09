@@ -51,12 +51,12 @@ simulated function Timer()
 
 defaultproperties
 {
-     ChildProjectileClass=Class'DEKRPG209E.DEKHellfireSentinelProjChild'
+     ChildProjectileClass=Class'DEKRPG209F.DEKHellfireSentinelProjChild'
      SpreadFactor=400.000000
      Speed=1200.000000
      TossZ=225.000000
      MomentumTransfer=75000.000000
-     MyDamageType=Class'DEKRPG209E.DamTypeHellfireSentinel'
+     MyDamageType=Class'DEKRPG209F.DamTypeHellfireSentinel'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'ONS-BPJW1.Meshes.Mini_Shell'

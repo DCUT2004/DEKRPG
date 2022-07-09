@@ -25,7 +25,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209E.DEKSkyMineComboEffect.MeshEmitter3'
+     Emitters(0)=MeshEmitter'DEKRPG209F.DEKSkyMineComboEffect.MeshEmitter3'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter4
          StaticMesh=StaticMesh'AW-2004Particles.Weapons.HellB_Ring'
@@ -50,7 +50,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(1)=MeshEmitter'DEKRPG209E.DEKSkyMineComboEffect.MeshEmitter4'
+     Emitters(1)=MeshEmitter'DEKRPG209F.DEKSkyMineComboEffect.MeshEmitter4'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter5
          StaticMesh=StaticMesh'AW-2004Particles.Weapons.HellB_Ring'
@@ -75,7 +75,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=1.000000)
          InitialDelayRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(2)=MeshEmitter'DEKRPG209E.DEKSkyMineComboEffect.MeshEmitter5'
+     Emitters(2)=MeshEmitter'DEKRPG209F.DEKSkyMineComboEffect.MeshEmitter5'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter6
          UseColorScale=True
@@ -97,7 +97,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.EclipseCircle'
          LifetimeRange=(Min=0.400000,Max=0.400000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209E.DEKSkyMineComboEffect.SpriteEmitter6'
+     Emitters(3)=SpriteEmitter'DEKRPG209F.DEKSkyMineComboEffect.SpriteEmitter6'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter8
          UseDirectionAs=PTDU_Right
@@ -125,7 +125,7 @@ defaultproperties
          VelocityScale(1)=(RelativeTime=0.250000,RelativeVelocity=(X=1.500000,Y=1.500000,Z=1.500000))
          VelocityScale(2)=(RelativeTime=1.000000,RelativeVelocity=(X=2.000000,Y=2.000000,Z=2.000000))
      End Object
-     Emitters(4)=SpriteEmitter'DEKRPG209E.DEKSkyMineComboEffect.SpriteEmitter8'
+     Emitters(4)=SpriteEmitter'DEKRPG209F.DEKSkyMineComboEffect.SpriteEmitter8'
 
      AutoDestroy=True
      bNoDelete=False

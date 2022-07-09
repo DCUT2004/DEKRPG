@@ -3,8 +3,8 @@ class RuneFireball_Heatwave extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209E.RuneFireballFire'
-     FireModeClass(1)=Class'DEKRPG209E.RuneHeatwaveFire'
+     FireModeClass(0)=Class'DEKRPG209F.RuneFireballFire'
+     FireModeClass(1)=Class'DEKRPG209F.RuneHeatwaveFire'
      bCanThrow=False
      HudColor=(R=222,G=93,B=33)
      InventoryGroup=8

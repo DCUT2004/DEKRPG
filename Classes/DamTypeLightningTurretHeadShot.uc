@@ -12,7 +12,7 @@ static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictemHealt
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209E.DEKLightningTurret'
+     VehicleClass=Class'DEKRPG209F.DEKLightningTurret'
      DeathString="%o's head was blown off by %k's lightning turret."
      FemaleSuicide="%o shot herself in the head with her turret."
      MaleSuicide="%o shot himself in the head with his turret."

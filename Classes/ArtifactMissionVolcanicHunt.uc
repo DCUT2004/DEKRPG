@@ -105,7 +105,7 @@ defaultproperties
      XPReward=50
      MissionGoal=35
      Description="Kill Fire monsters."
-     PickupClass=Class'DEKRPG209E.ArtifactMissionVolcanicHuntPickup'
+     PickupClass=Class'DEKRPG209F.ArtifactMissionVolcanicHuntPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.VolcanicHuntMission'
      ItemName="Volcanic Hunt"
 }

@@ -2,5 +2,5 @@ class GenomeVialTech extends GenomeVialCosmic;
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG209E.GenomeVialTechPickup'
+     PickupClass=Class'DEKRPG209F.GenomeVialTechPickup'
 }

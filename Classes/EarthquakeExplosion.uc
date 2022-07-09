@@ -23,7 +23,7 @@ defaultproperties
          LifetimeRange=(Min=2.000000)
          StartVelocityRange=(X=(Min=-250.000000,Max=250.000000),Y=(Min=-250.000000,Max=250.000000),Z=(Min=500.000000,Max=800.000000))
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209E.EarthquakeExplosion.MeshEmitter18'
+     Emitters(0)=MeshEmitter'DEKRPG209F.EarthquakeExplosion.MeshEmitter18'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter19
          StaticMesh=StaticMesh'ArboreaLanscape.Cliffs.littlerock01'
@@ -44,7 +44,7 @@ defaultproperties
          LifetimeRange=(Min=2.000000,Max=1.000000)
          StartVelocityRange=(X=(Min=-100.000000,Max=100.000000),Y=(Min=-100.000000,Max=100.000000),Z=(Min=500.000000,Max=800.000000))
      End Object
-     Emitters(1)=MeshEmitter'DEKRPG209E.EarthquakeExplosion.MeshEmitter19'
+     Emitters(1)=MeshEmitter'DEKRPG209F.EarthquakeExplosion.MeshEmitter19'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter27
          FadeOut=True
@@ -68,7 +68,7 @@ defaultproperties
          LifetimeRange=(Min=1.000000,Max=2.000000)
          StartVelocityRange=(X=(Min=-100.000000,Max=100.000000),Y=(Min=-100.000000,Max=100.000000),Z=(Min=800.000000,Max=1000.000000))
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209E.EarthquakeExplosion.SpriteEmitter27'
+     Emitters(2)=SpriteEmitter'DEKRPG209F.EarthquakeExplosion.SpriteEmitter27'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter28
          UseColorScale=True
@@ -102,7 +102,7 @@ defaultproperties
          StartVelocityRange=(X=(Min=-50.000000,Max=50.000000),Y=(Min=-50.000000,Max=50.000000),Z=(Min=400.000000,Max=900.000000))
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209E.EarthquakeExplosion.SpriteEmitter28'
+     Emitters(3)=SpriteEmitter'DEKRPG209F.EarthquakeExplosion.SpriteEmitter28'
 
      AutoDestroy=True
      bLightChanged=True

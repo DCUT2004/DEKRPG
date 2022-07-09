@@ -183,7 +183,7 @@ defaultproperties
      Damage=115.000000
      DamageRadius=225.000000
      MomentumTransfer=50000.000000
-     MyDamageType=Class'DEKRPG209E.DamTypeINAttackCraftMissleA'
+     MyDamageType=Class'DEKRPG209F.DamTypeINAttackCraftMissleA'
      ExplosionDecal=Class'Onslaught.ONSRocketScorch'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'WeaponStaticMesh.RocketProj'

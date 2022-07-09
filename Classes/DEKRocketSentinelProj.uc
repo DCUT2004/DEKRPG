@@ -2,5 +2,5 @@ class DEKRocketSentinelProj extends RocketProj;
 
 defaultproperties
 {
-     MyDamageType=Class'DEKRPG209E.DamTypeRocketSentinelProj'
+     MyDamageType=Class'DEKRPG209F.DamTypeRocketSentinelProj'
 }
