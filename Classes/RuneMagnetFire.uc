@@ -23,11 +23,22 @@ event ModeTick(float dt)
 			}
 			
 			if (Instigator.Controller != None && Instigator.Controller.Adrenaline <= AdrenCost && Magnet != None)
-				Magnet.Destroy();
+			{
+				if (Magnet != None)
+				{
+					Magnet.Destroy();
+					RuneFlurry_Magnet(Weapon).Magnet = None;
+				}
+				if (Glow != None)
+					Glow.Destroy();
+			}
 		}
 		else{
 			if (Magnet != None)
+			{
 				Magnet.Destroy();
+				RuneFlurry_Magnet(Weapon).Magnet = None;
+			}
 			if (Glow != None)
 				Glow.Destroy();
 			if (Instigator.AmbientSound == Sound'DEKRPG209F.RuneSounds.MagnetAltFire'){
@@ -58,6 +69,16 @@ function DoTrace(Vector Start, Rotator Dir)
 		Magnet = Weapon.Spawn(Class'RuneMagnet', Instigator, , HitLocation);
 	else
 		Magnet = Weapon.Spawn(Class'RuneMagnet', Instigator, , End);
+		
+	if (Magnet != None)
+		RuneFlurry_Magnet(Weapon).Magnet = Magnet;
+}
+
+simulated function DestroyEffects()
+{
+	Super.DestroyEffects();
+	if (Glow != None)
+		Glow.Destroy();
 }
 
 defaultproperties

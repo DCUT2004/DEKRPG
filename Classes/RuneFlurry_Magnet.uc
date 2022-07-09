@@ -1,5 +1,14 @@
 class RuneFlurry_Magnet extends Weapon
 	CacheExempt;
+	
+var RuneMagnet Magnet;
+
+simulated function Destroyed()
+{
+	Super.Destroyed();
+	if (Magnet != None)
+		Magnet.Destroy();
+}
 
 defaultproperties
 {

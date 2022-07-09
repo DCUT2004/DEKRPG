@@ -31,6 +31,9 @@ simulated function Attract(float DeltaTime)
 	local float dist;
 	local vector dir, attraction;
 	
+	if (Instigator == None || Instigator.Controller == None)
+		Destroy();
+	
 	for ( C = Level.ControllerList; C != None; C = C.NextController )
 		if ( C != None && C.Pawn != None && Instigator != None && Instigator.Controller != None && C.Pawn.Health > 0 && !C.SameTeamAs(Instigator.Controller) && !ClassIsChildOf(C.Pawn.Class, Class'Vehicle'))
 		{
@@ -72,7 +75,7 @@ simulated function Attract(float DeltaTime)
 simulated function Timer()
 {
 	if (Instigator == None || Instigator.Controller == None)
-		return;
+		Destroy();
 	Instigator.HurtRadius(Damage, DamageRadius, class'DamTypeRuneMagnet', 0, Location);
 }
 
