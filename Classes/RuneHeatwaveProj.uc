@@ -96,7 +96,7 @@ function bool EncroachingOn(Actor Other)
 defaultproperties
 {
      HeatBlastDamage=200
-	 HeatBlastRadius=800.000000
+     HeatBlastRadius=600.000000
      Speed=600.000000
      MaxSpeed=600.000000
      Damage=80.000000
