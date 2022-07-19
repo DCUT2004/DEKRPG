@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=300
      Description="Use the Bio Rifle."
-     PickupClass=Class'DEKRPG209F.ArtifactMissionBioBerserkPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactMissionBioBerserkPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionBioRifle'
      ItemName="Bio Berserk"
 }

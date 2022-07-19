@@ -98,7 +98,7 @@ defaultproperties
      XPReward=20
      MissionGoal=30
      Description="Kill skeletons and skulls."
-     PickupClass=Class'DEKRPG209F.ArtifactMissionBoneCrusherPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactMissionBoneCrusherPickup'
      IconMaterial=Texture'MissionsTex6.HuntMissions.BoneCrusherMission'
      ItemName="Bone Crusher"
 }

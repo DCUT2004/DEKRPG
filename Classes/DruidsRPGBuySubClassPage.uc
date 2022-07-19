@@ -134,7 +134,7 @@ defaultproperties
          bNeverFocus=True
          OnKeyEvent=QuitBackground.InternalOnKeyEvent
      End Object
-     Controls(0)=GUIButton'DEKRPG209F.DruidsRPGBuySubClassPage.QuitBackground'
+     Controls(0)=GUIButton'DEKRPG999X.DruidsRPGBuySubClassPage.QuitBackground'
 
      Begin Object Class=GUIButton Name=SubClassBuyButton
          Caption="Buy"
@@ -146,7 +146,7 @@ defaultproperties
          OnClick=DruidsRPGBuySubClassPage.BuySubClass
          OnKeyEvent=SubClassBuyButton.InternalOnKeyEvent
      End Object
-     Controls(1)=GUIButton'DEKRPG209F.DruidsRPGBuySubClassPage.SubClassBuyButton'
+     Controls(1)=GUIButton'DEKRPG999X.DruidsRPGBuySubClassPage.SubClassBuyButton'
 
      Begin Object Class=GUIButton Name=CloseButton
          Caption="Close"
@@ -158,7 +158,7 @@ defaultproperties
          OnClick=DruidsRPGBuySubClassPage.CloseClick
          OnKeyEvent=CloseButton.InternalOnKeyEvent
      End Object
-     Controls(2)=GUIButton'DEKRPG209F.DruidsRPGBuySubClassPage.CloseButton'
+     Controls(2)=GUIButton'DEKRPG999X.DruidsRPGBuySubClassPage.CloseButton'
 
      Begin Object Class=GUIListBox Name=SubClassList
          bVisibleWhenEmpty=True
@@ -173,7 +173,7 @@ defaultproperties
          bScaleToParent=True
          OnClick=DruidsRPGBuySubClassPage.UpdateSubClassButtons
      End Object
-     Controls(3)=GUIListBox'DEKRPG209F.DruidsRPGBuySubClassPage.SubClassList'
+     Controls(3)=GUIListBox'DEKRPG999X.DruidsRPGBuySubClassPage.SubClassList'
 
      Begin Object Class=GUILabel Name=SelectText
          Caption="Choose a subclass:"
@@ -185,7 +185,7 @@ defaultproperties
          bBoundToParent=True
          bScaleToParent=True
      End Object
-     Controls(4)=GUILabel'DEKRPG209F.DruidsRPGBuySubClassPage.SelectText'
+     Controls(4)=GUILabel'DEKRPG999X.DruidsRPGBuySubClassPage.SelectText'
 
      WinTop=0.150000
      WinLeft=0.200000

@@ -2,6 +2,6 @@ class ArtifactMissionDeflectorPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionDeflector'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionDeflector'
      PickupMessage="You picked up the Deflector Mission!"
 }

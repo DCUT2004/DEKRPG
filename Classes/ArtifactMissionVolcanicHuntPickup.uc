@@ -2,6 +2,6 @@ class ArtifactMissionVolcanicHuntPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionVolcanicHunt'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionVolcanicHunt'
      PickupMessage="You picked up the Volcanic Hunt Mission!"
 }

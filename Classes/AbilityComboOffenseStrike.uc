@@ -25,10 +25,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG209F.AbilityComboOffensePurifyingStrike'
-	ExcludingAbilities(1)=Class'DEKRPG209F.AbilityComboOffenseRecklessStrike'
-	ExcludingAbilities(2)=Class'DEKRPG209F.AbilityComboOffenseStab'
-	ExcludingAbilities(3)=Class'DEKRPG209F.AbilityComboOffenseHealingStrike'
+    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboOffensePurifyingStrike'
+	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboOffenseRecklessStrike'
+	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboOffenseStab'
+	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboOffenseHealingStrike'
 	AbilityName="Offense: Strike"
 	Description="Deals 30 damage per level to all targets. The damage is affected by buffs and ailments.||You can only have one type of Offense combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Honeysuckle Vine and Fine Leather you wish to purchase. Additionally:||Level 5: 10 Moss, 10 Pumice||Level 6: 20 Moss, 20 Pumice||Level 7: 30 Moss, 30 Pumice||Level 8: 40 Moss, 40 Pumice||Level 9: 45 Moss, 45 Pumice||Level 10: 50 Moss, 50 Pumice||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
@@ -37,14 +37,14 @@ defaultproperties
 	BaseMultiplier=20.000000
 	All=True
 	Single=False
-	Materials(0)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(5,5))
-	Materials(1)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(10,10))
-	Materials(2)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(15,15))
-	Materials(3)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(20,20))
-	Materials(4)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(25,25,10,10))
-	Materials(5)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(30,30,20,20))
-	Materials(6)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(35,35,30,30))
-	Materials(7)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(40,40,40,40))
-	Materials(8)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(45,45,45,45))
-	Materials(9)=(RequiredMaterials=(Class'DEKRPG209F.AbilityMaterialLeather',Class'DEKRPG209F.AbilityMaterialHoneysuckleVine',Class'DEKRPG209F.AbilityMaterialMoss',Class'DEKRPG209F.AbilityMaterialPumice'),RequiredMaterialLevels=(50,50,50,50))
+	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(5,5))
+	Materials(1)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(10,10))
+	Materials(2)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(15,15))
+	Materials(3)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(20,20))
+	Materials(4)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(25,25,10,10))
+	Materials(5)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(30,30,20,20))
+	Materials(6)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(35,35,30,30))
+	Materials(7)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(40,40,40,40))
+	Materials(8)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(45,45,45,45))
+	Materials(9)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLeather',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine',Class'DEKRPG999X.AbilityMaterialMoss',Class'DEKRPG999X.AbilityMaterialPumice'),RequiredMaterialLevels=(50,50,50,50))
 }

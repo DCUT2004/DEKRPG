@@ -2,6 +2,6 @@ class ArtifactMissionPopPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionPop'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionPop'
      PickupMessage="You picked up the Pop Mission!"
 }

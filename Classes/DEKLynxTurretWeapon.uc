@@ -40,6 +40,6 @@ defaultproperties
      bInstantFire=False
      FireInterval=0.650000
      FireSoundClass=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
-     ProjectileClass=Class'DEKRPG209F.DEKLynxRocketProjectile'
+     ProjectileClass=Class'DEKRPG999X.DEKLynxRocketProjectile'
      Skins(0)=Shader'DEKRPGTexturesMaster209B.Skins.LynxEnergyTurretShader'
 }

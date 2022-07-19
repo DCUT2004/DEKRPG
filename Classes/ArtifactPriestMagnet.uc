@@ -90,7 +90,7 @@ defaultproperties
      AdrenalineRequired=50
      CostPerSec=1
      MinActivationTime=0.000001
-     PickupClass=Class'DEKRPG209F.ArtifactPriestMagnetPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactPriestMagnetPickup'
      IconMaterial=Texture'XEffects.Skins.MuzShockFlash_t'
      ItemName="Magnet"
 }

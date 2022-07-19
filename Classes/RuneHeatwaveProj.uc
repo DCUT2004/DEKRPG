@@ -101,7 +101,7 @@ defaultproperties
      MaxSpeed=600.000000
      Damage=80.000000
      MomentumTransfer=30000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneHeatwave'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneHeatwave'
      LightType=LT_Steady
      LightEffect=LE_Spotlight
      LightHue=20

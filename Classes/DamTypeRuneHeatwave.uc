@@ -8,7 +8,7 @@ static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictemHealt
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209F.RuneFireball_Heatwave'
+     WeaponClass=Class'DEKRPG999X.RuneFireball_Heatwave'
      DeathString="%o was fried by %k's Heatwave."
      FemaleSuicide="%o fried herself with the Heatwave."
      MaleSuicide="%o fried himself with the Heatwave."

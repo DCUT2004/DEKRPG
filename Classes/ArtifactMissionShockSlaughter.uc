@@ -98,7 +98,7 @@ defaultproperties
      XPReward=30
      MissionGoal=300
      Description="Use the Shock Rifle."
-     PickupClass=Class'DEKRPG209F.ArtifactMissionShockSlaughterPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactMissionShockSlaughterPickup'
      IconMaterial=Texture'MissionsTex6.WeaponMissions.MissionShockRifle'
      ItemName="Shock Slaughter"
 }

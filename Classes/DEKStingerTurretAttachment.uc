@@ -45,6 +45,6 @@ defaultproperties
      mMuzFlashClass=None
      mTracerClass=None
      SmokeEmitterClass=None
-     FiringSound=Sound'DEKRPG209F.TurretSounds.StingerTwoFire'
+     FiringSound=Sound'DEKRPG999X.TurretSounds.StingerTwoFire'
      WindingSound=None
 }

@@ -2,6 +2,6 @@ class ArtifactMissionTeamPowerPartyPickup extends ArtifactMissionTeamPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionTeamPowerParty'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionTeamPowerParty'
      PickupMessage="You picked up the Power Party team mission!"
 }

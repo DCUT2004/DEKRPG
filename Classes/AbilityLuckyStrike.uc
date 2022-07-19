@@ -36,45 +36,45 @@ static function LuckyStrike(Controller Killer, Controller Killed, bool bOwnedByK
 		
 		if (Killer.Pawn.Health <= default.MaxHealthForLetter && Killer.Adrenaline <= default.MaxAdrenForLetter)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.ArtifactLetterOPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterOPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPTitan') || ClassIsChildOf(M.Class, class'SMPStoneTitan'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.ArtifactLetterNPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterNPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'SMPQueen'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.ArtifactLetterUPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterUPickup', None, 1);
 			return;
 		}
 		if (ClassIsChildOf(M.Class, class'Warlord'))
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.ArtifactLetterBPickup', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterBPickup', None, 1);
 			return;
 		}
 		if (M.ScoringValue >= default.ScoringValueForS)
 		{
 			if (default.LetterSChance >= rand(99))
 			{
-				DropPickups(Killed, Killer, class'DEKRPG209F.ArtifactLetterSPickup', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterSPickup', None, 1);
 				return;
 			}
 			else
 			{	
-				DropPickups(Killed, Killer, class'DEKRPG209F.GemExperiencePickupPurple', None, 1);
+				DropPickups(Killed, Killer, class'DEKRPG999X.GemExperiencePickupPurple', None, 1);
 				return;
 			}
 		}
 		else if(M.ScoringValue > 6)
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.GemExperiencePickupGreen', None, 1);
+			DropPickups(Killed, Killer, class'DEKRPG999X.GemExperiencePickupGreen', None, 1);
 			return;
 		}
 		else
 		{
-			DropPickups(Killed, Killer, class'DEKRPG209F.GemExperiencePickupBlue', None, 1);			
+			DropPickups(Killed, Killer, class'DEKRPG999X.GemExperiencePickupBlue', None, 1);			
 			return;	
 		}
 	}

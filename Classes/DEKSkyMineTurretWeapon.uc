@@ -4,6 +4,6 @@ var	array<Projectile> Projectiles;
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209F.DEKSkyMineTurretMineFire'
-     FireModeClass(1)=Class'DEKRPG209F.DEKSkyMineTurretBeamFire'
+     FireModeClass(0)=Class'DEKRPG999X.DEKSkyMineTurretMineFire'
+     FireModeClass(1)=Class'DEKRPG999X.DEKSkyMineTurretBeamFire'
 }

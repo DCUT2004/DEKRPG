@@ -41,7 +41,7 @@ simulated function ClientKDriverLeave(PlayerController PC)
 
 defaultproperties
 {
-     GunClass=Class'DEKRPG209F.DEKTankSecondaryTurret'
+     GunClass=Class'DEKRPG999X.DEKTankSecondaryTurret'
      bHasAltFire=False
      CameraBone="Object02"
      bDrawDriverInTP=False

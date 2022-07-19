@@ -85,14 +85,14 @@ simulated function destroyed()
 
 defaultproperties
 {
-	 ImpactSound=Sound'DEKRPG209F.RuneSounds.IcicleImpact'
+	 ImpactSound=Sound'DEKRPG999X.RuneSounds.IcicleImpact'
      TossZ=225.000000
      Physics=PHYS_Falling
      Speed=1200.000000
      Damage=90.000000
      DamageRadius=220.000000
      MomentumTransfer=75000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneIceball'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneIceball'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh
      StaticMesh=StaticMesh'WeaponStaticMesh.FlakChunk'

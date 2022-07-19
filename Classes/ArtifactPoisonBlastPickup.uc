@@ -2,7 +2,7 @@ class ArtifactPoisonBlastPickup extends RPGArtifactPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactPoisonBlast'
+     InventoryType=Class'DEKRPG999X.ArtifactPoisonBlast'
      PickupMessage="You got the PoisonBlast!"
      PickupSound=Sound'PickupSounds.SniperRiflePickup'
      PickupForce="SniperRiflePickup"

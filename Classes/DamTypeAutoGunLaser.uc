@@ -3,7 +3,7 @@ class DamTypeAutoGunLaser extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209F.AutoGun'
+     VehicleClass=Class'DEKRPG999X.AutoGun'
      DeathString="%o was fried by %k's autogun."
      FemaleSuicide="%o fried herself with her own autogun."
      MaleSuicide="%o fried himself with his own autogun."

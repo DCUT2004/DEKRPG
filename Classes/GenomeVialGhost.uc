@@ -2,5 +2,5 @@ class GenomeVialGhost extends GenomeVialCosmic;
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG209F.GenomeVialGhostPickup'
+     PickupClass=Class'DEKRPG999X.GenomeVialGhostPickup'
 }

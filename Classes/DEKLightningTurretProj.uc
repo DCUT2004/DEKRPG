@@ -379,11 +379,11 @@ defaultproperties
      MiniboltInterval=0.200000
      MiniboltDamage=40
      MiniboltRadius=400
-     MiniboltClass=Class'DEKRPG209F.DEKLightningTurretMinibolt'
-     MiniboltDamageType=Class'DEKRPG209F.DamTypeLightningTurretMinibolt'
+     MiniboltClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
+     MiniboltDamageType=Class'DEKRPG999X.DamTypeLightningTurretMinibolt'
      LightningComboDamage=70
      LightningComboRadius=900
-     LightningComboDamageType=Class'DEKRPG209F.DamTypeLightningTurretCombo'
+     LightningComboDamageType=Class'DEKRPG999X.DamTypeLightningTurretCombo'
      DischargeChance=30
      Speed=3000.000000
      MaxSpeed=3000.000000
@@ -391,7 +391,7 @@ defaultproperties
      Damage=70.000000
      DamageRadius=60.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeLightningTurretProj'
+     MyDamageType=Class'DEKRPG999X.DamTypeLightningTurretProj'
      ImpactSound=Sound'WeaponSounds.ShockRifle.ShockRifleExplosion'
      ExplosionDecal=Class'XEffects.LinkScorch'
      MaxEffectDistance=7000.000000

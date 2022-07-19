@@ -99,7 +99,7 @@ defaultproperties
      LightSaturation=50
      LightBrightness=255.000000
      LightRadius=3.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneFlurry'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneFlurry'
      StaticMesh=StaticMesh'WeaponStaticMesh.LinkProjectile'
 	 Skins(0)=FinalBlend'AW-2004Particles.Fire.TurretFlashFinal'
      CullDistance=3000.000000

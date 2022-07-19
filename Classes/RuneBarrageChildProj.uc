@@ -87,7 +87,7 @@ defaultproperties
      Damage=60.000000
      DamageRadius=400.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneBarrage'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneBarrage'
      ImpactSound=Sound'WeaponSounds.BaseImpactAndExplosions.BExplosion3'
      ExplosionDecal=Class'XEffects.RocketMark'
      DrawType=DT_StaticMesh

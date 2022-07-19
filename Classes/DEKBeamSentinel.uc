@@ -21,8 +21,8 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG209F.DEKBeamSentinelBase'
-     TurretSwivelClass=Class'DEKRPG209F.DEKBeamSentinelSwivel'
+     TurretBaseClass=Class'DEKRPG999X.DEKBeamSentinelBase'
+     TurretSwivelClass=Class'DEKRPG999X.DEKBeamSentinelSwivel'
      DefaultWeaponClassName="DEKWeaponBeamSentinelWeapon"
      VehicleNameString="Beam Sentinel"
      bNoTeamBeacon=False

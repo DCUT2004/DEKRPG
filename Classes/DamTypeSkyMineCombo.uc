@@ -3,7 +3,7 @@ class DamTypeSkyMineCombo extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209F.DEKSkyMineTurret'
+     VehicleClass=Class'DEKRPG999X.DEKSkyMineTurret'
      DeathString="%o couldn't escape the awesome power of %k's skymine combo."
      FemaleSuicide="%o was a little hasty detonation her skymines."
      MaleSuicide="%o was a little hasty detonating his skymines."

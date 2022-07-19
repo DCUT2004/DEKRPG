@@ -88,13 +88,13 @@ defaultproperties
      MiniboltInterval=0.200000
      MiniboltDamage=10
      MiniboltRadius=600
-     MiniboltClass=Class'DEKRPG209F.DEKLightningTurretMinibolt'
-     MiniboltDamageType=Class'DEKRPG209F.DamTypeRuneSparkle'
+     MiniboltClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
+     MiniboltDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
      DischargeChance=40
      Speed=3000.000000
      MaxSpeed=3000.000000
      Damage=33.000000
      DamageRadius=60.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneSparkle'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
 }

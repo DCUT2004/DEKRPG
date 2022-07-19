@@ -3,7 +3,7 @@ class DamTypeAutoSniper extends VehicleDamageType
 
 defaultproperties
 {
-     VehicleClass=Class'DEKRPG209F.DEKAutoSniper'
+     VehicleClass=Class'DEKRPG999X.DEKAutoSniper'
      DeathString="%k put a hole in %o."
      FemaleSuicide="%o shot herself."
      MaleSuicide="%o shot himself."

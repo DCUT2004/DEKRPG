@@ -5,5 +5,5 @@ class DEKLaserGrenadeAmmo extends ONSGrenadeAmmo;
 
 defaultproperties
 {
-     PickupClass=Class'DEKRPG209F.DEKLaserGrenadePickup'
+     PickupClass=Class'DEKRPG999X.DEKLaserGrenadePickup'
 }

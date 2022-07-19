@@ -3,7 +3,7 @@ class DamTypeLifeDrain extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209F.NecromancerBloodWeapon'
+     WeaponClass=Class'DEKRPG999X.NecromancerBloodWeapon'
      DeathString="%o was drained of blood by %k."
      FemaleSuicide="%o messed around with magic and killed herself."
      MaleSuicide="%o messed around with magic and killed himself."

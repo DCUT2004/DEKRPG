@@ -2,6 +2,6 @@ class ArtifactMissionDisarmerPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionDisarmer'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionDisarmer'
      PickupMessage="You picked up the Disarmer Mission!"
 }

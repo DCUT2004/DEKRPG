@@ -169,7 +169,7 @@ defaultproperties
      MaxSpeed=1600.000000
      Damage=90.000000
 	 DamageRadius=120.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeRuneStreak'
+     MyDamageType=Class'DEKRPG999X.DamTypeRuneStreak'
      LightHue=0
      LightBrightness=10.000000
      AmbientSound=Sound'ONSBPSounds.Artillery.ShellAmbient'

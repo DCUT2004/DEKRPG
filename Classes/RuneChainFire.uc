@@ -195,8 +195,8 @@ defaultproperties
 {
 	 AdrenCost=20.0000
 	 TraceRange=3000.00000
-     HitEmitterClass=Class'DEKRPG209F.LightningBeamEmitter'
-     DamageType=Class'DEKRPG209F.DamTypeRuneLightningChain'
+     HitEmitterClass=Class'DEKRPG999X.LightningBeamEmitter'
+     DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
      MaxStepRange=650.000000
      FirstDamage=180
      StepDamageFraction=0.700000

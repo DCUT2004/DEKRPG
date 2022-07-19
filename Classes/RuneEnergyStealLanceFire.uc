@@ -30,7 +30,7 @@ event ModeTick(float dt)
 			}
 			if (Instigator.AmbientSound == None)
 			{
-				Instigator.AmbientSound = Sound'DEKRPG209F.RuneSounds.EnergyStealAmbient';
+				Instigator.AmbientSound = Sound'DEKRPG999X.RuneSounds.EnergyStealAmbient';
 				Instigator.SoundRadius = 150;
 				Instigator.SoundVolume = 150;
 			}
@@ -39,7 +39,7 @@ event ModeTick(float dt)
 		{
 			if (Glow != None)
 				Glow.Destroy();
-			if (Instigator.AmbientSound == Sound'DEKRPG209F.RuneSounds.EnergyStealAmbient')
+			if (Instigator.AmbientSound == Sound'DEKRPG999X.RuneSounds.EnergyStealAmbient')
 			{
 				Instigator.AmbientSound = None;
 			
@@ -94,7 +94,7 @@ defaultproperties
 	 Threshold=3
 	 AdrenAddPerHit=2
      bModeExclusive=False
-     DamageType=Class'DEKRPG209F.DamTypeRuneEnergySteal'
+     DamageType=Class'DEKRPG999X.DamTypeRuneEnergySteal'
 	 AdrenCost=0
 	 DamageMin=5
 	 DamageMax=7
@@ -104,5 +104,5 @@ defaultproperties
      TraceRange=3000.000000
      Momentum=0.000000
      AmmoPerFire=1
-     AmmoClass=Class'DEKRPG209F.RuneEnergyAmmo'
+     AmmoClass=Class'DEKRPG999X.RuneEnergyAmmo'
 }

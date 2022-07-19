@@ -53,7 +53,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.SoftFlare'
          LifetimeRange=(Min=0.700000,Max=0.700000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter43'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter43'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter25
          UseColorScale=True
@@ -80,7 +80,7 @@ defaultproperties
          WarmupTicksPerSecond=1.000000
          RelativeWarmupTime=1.000000
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter25'
+     Emitters(1)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter25'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter37
          UseColorScale=True
@@ -100,7 +100,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.JumpDuck'
          LifetimeRange=(Min=0.600000,Max=0.600000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter37'
+     Emitters(2)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter37'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter35
          UseColorScale=True
@@ -119,7 +119,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.SmoothRing'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(3)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter35'
+     Emitters(3)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter35'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter10
          StaticMesh=StaticMesh'AW-2004Particles.Weapons.PlasmaSphere'
@@ -138,7 +138,7 @@ defaultproperties
          InitialParticlesPerSecond=500.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(4)=MeshEmitter'DEKRPG209F.IceballExplosion.MeshEmitter10'
+     Emitters(4)=MeshEmitter'DEKRPG999X.IceballExplosion.MeshEmitter10'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter39
          UseColorScale=True
@@ -159,7 +159,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.BoloBlob'
          LifetimeRange=(Min=0.600000,Max=0.600000)
      End Object
-     Emitters(5)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter39'
+     Emitters(5)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter39'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter36
          UseColorScale=True
@@ -180,7 +180,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Fire.BlastMark'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(6)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter36'
+     Emitters(6)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter36'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          UseColorScale=True
@@ -207,7 +207,7 @@ defaultproperties
          StartVelocityRadialRange=(Min=50.000000,Max=80.000000)
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(7)=SpriteEmitter'DEKRPG209F.IceballExplosion.SpriteEmitter1'
+     Emitters(7)=SpriteEmitter'DEKRPG999X.IceballExplosion.SpriteEmitter1'
 
      AutoDestroy=True
      bNoDelete=False

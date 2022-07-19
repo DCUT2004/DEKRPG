@@ -47,8 +47,8 @@ defaultproperties
 {
      DamageMultiplier=0.050000
      SizeMultiplier=0.070000
-     ExcludingAbilities(0)=Class'DEKRPG209F.AbilityHeavyTank'
-     ExcludingAbilities(1)=Class'DEKRPG209F.AbilityRecklessTank'
+     ExcludingAbilities(0)=Class'DEKRPG999X.AbilityHeavyTank'
+     ExcludingAbilities(1)=Class'DEKRPG999X.AbilityRecklessTank'
      AbilityName="Niche: Giant"
      Description="Increases your cumulative total damage bonus by 5% per level. However, your collision size increases by 7% per level, making you a larger target.|You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

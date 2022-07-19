@@ -215,12 +215,12 @@ defaultproperties
      MiniboltInterval=0.500000
      MiniboltDamage=10
      MiniboltRadius=800
-     MiniboltClass=Class'DEKRPG209F.ShockTrapShockProjMinibolt'
-     MiniboltDamageType=Class'DEKRPG209F.DamTypeShockTrapShock'
-     TrailClass=Class'DEKRPG209F.ShockTrapShockProjTrail'
+     MiniboltClass=Class'DEKRPG999X.ShockTrapShockProjMinibolt'
+     MiniboltDamageType=Class'DEKRPG999X.DamTypeShockTrapShock'
+     TrailClass=Class'DEKRPG999X.ShockTrapShockProjTrail'
      DamageRadius=0.000000
      MomentumTransfer=8000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeShockTrap'
+     MyDamageType=Class'DEKRPG999X.DamTypeShockTrap'
      ImpactSound=Sound'WeaponSounds.ShockRifle.ShockRifleExplosion'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence

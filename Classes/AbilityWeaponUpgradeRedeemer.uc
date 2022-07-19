@@ -11,7 +11,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		
 	if (RedeemerFire(FireMode[0]) != None)
 	{
-		RedeemerFire(FireMode[0]).ProjectileClass=class'DEKWeapons209E.UpgradeRedeemerProj';
+		RedeemerFire(FireMode[0]).ProjectileClass=class'DEKWeapons999X.UpgradeRedeemerProj';
 	}
 }
 

@@ -95,7 +95,7 @@ defaultproperties
      Speed=6000.000000
      Damage=25.000000
      MomentumTransfer=4000.000000
-     MyDamageType=Class'DEKRPG209F.DamTypeStingerTurret'
+     MyDamageType=Class'DEKRPG999X.DamTypeStingerTurret'
      //ImpactSound=ProceduralSound'WeaponSounds.PGrenFloor1.P1GrenFloor1'
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence

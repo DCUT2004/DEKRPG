@@ -10,7 +10,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
     if ( p == None )
         return None;
 		
-	Instigator.PlaySound(Sound'DEKRPG209F.TurretSounds.PlasmaTurretAltFire',,200.000);
+	Instigator.PlaySound(Sound'DEKRPG999X.TurretSounds.PlasmaTurretAltFire',,200.000);
 
     p.Damage *= DamageAtten;
     return p;
@@ -18,8 +18,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG209F.DEKPlasmaTurretBallProj'
-     TeamProjectileClasses(1)=Class'DEKRPG209F.DEKPlasmaTurretBallProj'
+     TeamProjectileClasses(0)=Class'DEKRPG999X.DEKPlasmaTurretBallProj'
+     TeamProjectileClasses(1)=Class'DEKRPG999X.DEKPlasmaTurretBallProj'
      FireSound=None
      FireRate=1.500000
 }

@@ -12,7 +12,7 @@ event ModeTick(float dt)
 	if (Instigator != None)
 	{
 		if (bIsFiring){
-			Instigator.AmbientSound = Sound'DEKRPG209F.RuneSounds.MagnetAltFire';
+			Instigator.AmbientSound = Sound'DEKRPG999X.RuneSounds.MagnetAltFire';
 			Instigator.SoundRadius = 150;
 			Instigator.SoundVolume = 1000;
 			
@@ -41,7 +41,7 @@ event ModeTick(float dt)
 			}
 			if (Glow != None)
 				Glow.Destroy();
-			if (Instigator.AmbientSound == Sound'DEKRPG209F.RuneSounds.MagnetAltFire'){
+			if (Instigator.AmbientSound == Sound'DEKRPG999X.RuneSounds.MagnetAltFire'){
 				Instigator.AmbientSound = None;
 				Instigator.SoundRadius = Instigator.Default.SoundRadius;
 				Instigator.SoundVolume = Instigator.Default.SoundVolume;

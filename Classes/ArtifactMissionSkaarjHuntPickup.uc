@@ -2,6 +2,6 @@ class ArtifactMissionSkaarjHuntPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionSkaarjHunt'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionSkaarjHunt'
      PickupMessage="You picked up the Skaarj Hunt Mission!"
 }

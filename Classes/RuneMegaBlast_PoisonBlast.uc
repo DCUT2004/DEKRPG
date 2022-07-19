@@ -3,8 +3,8 @@ class RuneMegaBlast_PoisonBlast extends Weapon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209F.RuneMegaBlastFire'
-     FireModeClass(1)=Class'DEKRPG209F.RunePoisonBlastFire'
+     FireModeClass(0)=Class'DEKRPG999X.RuneMegaBlastFire'
+     FireModeClass(1)=Class'DEKRPG999X.RunePoisonBlastFire'
      bCanThrow=False
      HudColor=(R=255,G=255,B=0)
      InventoryGroup=0

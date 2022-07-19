@@ -2,6 +2,6 @@ class ArtifactMissionFrostmancerPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionFrostmancer'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionFrostmancer'
      PickupMessage="You picked up the Frostmancer Mission!"
 }

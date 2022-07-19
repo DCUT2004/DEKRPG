@@ -50,8 +50,8 @@ defaultproperties
      FireSound=Sound'ONSBPSounds.Artillery.ShellAmbient'
      FireForce="RocketLauncherFire"
      FireRate=1.000000
-     //ProjectileClass=Class'DEKRPG209F.RuneStreakProj'
-	 Projectiles(0)=Class'DEKRPG209F.RuneStreakProjBlue'
-	 Projectiles(1)=Class'DEKRPG209F.RuneStreakProjRed'
-	 Projectiles(2)=Class'DEKRPG209F.RuneStreakProjGreen'
+     //ProjectileClass=Class'DEKRPG999X.RuneStreakProj'
+	 Projectiles(0)=Class'DEKRPG999X.RuneStreakProjBlue'
+	 Projectiles(1)=Class'DEKRPG999X.RuneStreakProjRed'
+	 Projectiles(2)=Class'DEKRPG999X.RuneStreakProjGreen'
 }

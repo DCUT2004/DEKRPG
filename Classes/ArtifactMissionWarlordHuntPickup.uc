@@ -2,6 +2,6 @@ class ArtifactMissionWarlordHuntPickup extends ArtifactMissionPickup;
 
 defaultproperties
 {
-     InventoryType=Class'DEKRPG209F.ArtifactMissionWarlordHunt'
+     InventoryType=Class'DEKRPG999X.ArtifactMissionWarlordHunt'
      PickupMessage="You picked up the Warlord Hunt Mission!"
 }

@@ -20,7 +20,7 @@ defaultproperties
          Texture=Texture'ONSstructureTextures.CoreGroup.CoreBreachShockRINGorange'
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209F.BlueShockwaveFX.SpriteEmitter3'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.BlueShockwaveFX.SpriteEmitter3'
 
      AutoDestroy=True
      bNoDelete=False

@@ -16,8 +16,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG209F.DEKPlasmaTurretProj'
-     TeamProjectileClasses(1)=Class'DEKRPG209F.DEKPlasmaTurretProj'
-     FireSound=Sound'DEKRPG209F.TurretSounds.PlasmaTurretFire'
+     TeamProjectileClasses(0)=Class'DEKRPG999X.DEKPlasmaTurretProj'
+     TeamProjectileClasses(1)=Class'DEKRPG999X.DEKPlasmaTurretProj'
+     FireSound=Sound'DEKRPG999X.TurretSounds.PlasmaTurretFire'
      FireRate=0.300000
 }

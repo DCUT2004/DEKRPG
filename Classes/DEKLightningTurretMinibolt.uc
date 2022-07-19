@@ -23,7 +23,7 @@ simulated function SpawnEffects(Actor HitActor, Vector HitLocation, Vector HitNo
 
 defaultproperties
 {
-     Explosion=Class'DEKRPG209F.DEKLightningTurretMiniboltExplosion'
+     Explosion=Class'DEKRPG999X.DEKLightningTurretMiniboltExplosion'
      MaxViewDistance=10000.000000
      Begin Object Class=BeamEmitter Name=BE0
          BeamDistanceRange=(Min=1000.000000,Max=1000.000000)
@@ -49,7 +49,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=1.000000)
          StartVelocityRange=(X=(Min=1.000000,Max=1.000000))
      End Object
-     Emitters(0)=BeamEmitter'DEKRPG209F.DEKLightningTurretMinibolt.BE0'
+     Emitters(0)=BeamEmitter'DEKRPG999X.DEKLightningTurretMinibolt.BE0'
 
      AutoDestroy=True
      bNoDelete=False

@@ -6,6 +6,6 @@ class WildfireTrapAmmo extends ONSGrenadeAmmo;
 defaultproperties
 {
      MaxAmmo=10
-     PickupClass=Class'DEKRPG209F.WildfireTrapAmmoPickup'
+     PickupClass=Class'DEKRPG999X.WildfireTrapAmmoPickup'
      ItemName="Wildfire"
 }

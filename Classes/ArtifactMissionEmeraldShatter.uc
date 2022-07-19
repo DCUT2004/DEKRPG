@@ -99,7 +99,7 @@ defaultproperties
      XPReward=50
      MissionGoal=7
      Description="Kill monsters spawned by the emerald orb."
-     PickupClass=Class'DEKRPG209F.ArtifactMissionEmeraldShatterPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactMissionEmeraldShatterPickup'
      IconMaterial=Texture'MissionsTex6.MiscellaneousMissions.EmeraldShatter'
      ItemName="Emerald Shatter"
 }

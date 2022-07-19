@@ -12,8 +12,8 @@ simulated function Destroyed()
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209F.RuneFlurryFire'
-     FireModeClass(1)=Class'DEKRPG209F.RuneMagnetFire'
+     FireModeClass(0)=Class'DEKRPG999X.RuneFlurryFire'
+     FireModeClass(1)=Class'DEKRPG999X.RuneMagnetFire'
      bCanThrow=False
      HudColor=(R=73,G=19,B=138)
      InventoryGroup=4

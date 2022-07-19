@@ -38,7 +38,7 @@ function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector H
 
 defaultproperties
 {
-     DamageType=Class'DEKRPG209F.DamTypeAutoSniper'
+     DamageType=Class'DEKRPG999X.DamTypeAutoSniper'
      DamageMin=93
      DamageMax=93
      TraceRange=55000.000000

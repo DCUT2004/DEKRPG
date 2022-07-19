@@ -18,7 +18,7 @@ defaultproperties
          LifetimeRange=(Min=9999.000000,Max=9999.000000)
          StartVelocityRange=(X=(Min=3000.000000,Max=3000.000000))
      End Object
-     Emitters(0)=MeshEmitter'DEKRPG209F.DroneFX.DroneBody'
+     Emitters(0)=MeshEmitter'DEKRPG999X.DroneFX.DroneBody'
 
      AutoDestroy=True
      bNoDelete=False

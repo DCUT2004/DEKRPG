@@ -128,9 +128,9 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 defaultproperties
 {
      AdrenMultiplier=0.030000
-     ExcludingAbilities(0)=Class'DEKRPG209F.AbilityDualityProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG209F.AbilityGunsmithProficiency'
-     RequiredAbilities(0)=Class'DEKRPG209F.AbilityWeaponsProficiency'
+     ExcludingAbilities(0)=Class'DEKRPG999X.AbilityDualityProficiency'
+     ExcludingAbilities(1)=Class'DEKRPG999X.AbilityGunsmithProficiency'
+     RequiredAbilities(0)=Class'DEKRPG999X.AbilityWeaponsProficiency'
      AbilityName="Niche: Specialist"
      Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, your max adrenaline is reduced by 3% per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10

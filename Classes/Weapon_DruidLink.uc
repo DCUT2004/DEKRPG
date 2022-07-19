@@ -207,6 +207,6 @@ function byte BestMode()
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209F.FM_DruidLink_Fire'
-     FireModeClass(1)=Class'DEKRPG209F.FM_DruidLink_AltFire'
+     FireModeClass(0)=Class'DEKRPG999X.FM_DruidLink_Fire'
+     FireModeClass(1)=Class'DEKRPG999X.FM_DruidLink_AltFire'
 }

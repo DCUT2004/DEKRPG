@@ -40,7 +40,7 @@ defaultproperties
          SecondsBeforeInactive=0.000000
          LifetimeRange=(Min=0.500000,Max=0.500000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209F.DEKPlasmaTurretMuzzleFX.SpriteEmitter1'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.DEKPlasmaTurretMuzzleFX.SpriteEmitter1'
 
      bNoDelete=False
      bHardAttach=True

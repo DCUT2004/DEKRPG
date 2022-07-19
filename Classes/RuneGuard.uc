@@ -43,7 +43,7 @@ simulated function Tick(float DeltaTime)
 
 defaultproperties
 {
-	AmbientSound=Sound'DEKRPG209F.ArtifactSounds.ImmobilizeAmbient'
+	AmbientSound=Sound'DEKRPG999X.ArtifactSounds.ImmobilizeAmbient'
 	DrawType=DT_StaticMesh
 	StaticMesh=StaticMesh'DEKStaticsMaster209C.Meshes.GuardShield'
 	bDynamicLight=False

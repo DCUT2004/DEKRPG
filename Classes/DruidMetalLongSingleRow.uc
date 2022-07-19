@@ -3,9 +3,9 @@ class DruidMetalLongSingleRow extends DruidMultiBlock;
 defaultproperties
 {
      NumBlocks=5
-     Blocks(0)=(BlockType=Class'DEKRPG209F.DruidMetalBlock',XOffset=-240,ZOffset=20)
-     Blocks(1)=(BlockType=Class'DEKRPG209F.DruidMetalBlock',XOffset=-120,ZOffset=20)
-     Blocks(2)=(BlockType=Class'DEKRPG209F.DruidMetalBlock',ZOffset=20)
-     Blocks(3)=(BlockType=Class'DEKRPG209F.DruidMetalBlock',XOffset=120,ZOffset=20)
-     Blocks(4)=(BlockType=Class'DEKRPG209F.DruidMetalBlock',XOffset=240,ZOffset=20)
+     Blocks(0)=(BlockType=Class'DEKRPG999X.DruidMetalBlock',XOffset=-240,ZOffset=20)
+     Blocks(1)=(BlockType=Class'DEKRPG999X.DruidMetalBlock',XOffset=-120,ZOffset=20)
+     Blocks(2)=(BlockType=Class'DEKRPG999X.DruidMetalBlock',ZOffset=20)
+     Blocks(3)=(BlockType=Class'DEKRPG999X.DruidMetalBlock',XOffset=120,ZOffset=20)
+     Blocks(4)=(BlockType=Class'DEKRPG999X.DruidMetalBlock',XOffset=240,ZOffset=20)
 }

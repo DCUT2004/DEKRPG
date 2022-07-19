@@ -2,7 +2,7 @@ class DamTypePossess extends WeaponDamageType;
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209F.WeaponPossess'
+     WeaponClass=Class'DEKRPG999X.WeaponPossess'
      DeathString="%k possessed %o."
      FemaleSuicide="%o was possessed."
      MaleSuicide="%o was possessed."

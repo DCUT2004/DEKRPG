@@ -3,7 +3,7 @@ class DamTypeRuneBarrage extends WeaponDamageType
 
 defaultproperties
 {
-     WeaponClass=Class'DEKRPG209F.RuneSparkle_Barrage'
+     WeaponClass=Class'DEKRPG999X.RuneSparkle_Barrage'
      DeathString="%o was blown to bits by %k's Barrage."
      FemaleSuicide="%o was blown to bits by her own Barrage."
      MaleSuicide="%o was blown to bits by his own Barrage."

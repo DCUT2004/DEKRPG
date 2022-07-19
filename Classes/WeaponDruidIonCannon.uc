@@ -5,5 +5,5 @@ class WeaponDruidIonCannon extends Weapon_Turret_IonCannon
 
 defaultproperties
 {
-     FireModeClass(0)=Class'DEKRPG209F.FM_DruidIonCannon_Fire'
+     FireModeClass(0)=Class'DEKRPG999X.FM_DruidIonCannon_Fire'
 }

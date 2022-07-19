@@ -79,7 +79,7 @@ defaultproperties
          VelocityLossRange=(Z=(Max=50.000000))
          GetVelocityDirectionFrom=PTVD_AddRadial
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG209F.FriendlyPortalDeres.SpriteEmitter0'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.FriendlyPortalDeres.SpriteEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter1
          UseColorScale=True
@@ -97,7 +97,7 @@ defaultproperties
          LifetimeRange=(Min=0.500000,Max=0.500000)
          InitialDelayRange=(Min=0.400000,Max=0.400000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG209F.FriendlyPortalDeres.SpriteEmitter1'
+     Emitters(1)=SpriteEmitter'DEKRPG999X.FriendlyPortalDeres.SpriteEmitter1'
 
      AutoDestroy=True
      bNoDelete=False

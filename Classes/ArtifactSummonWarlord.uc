@@ -193,7 +193,7 @@ defaultproperties
 	 MonsterClass=Class'SkaarjPack.SkaarjPupae'
      MonsterLifeSpan=240.000000
      AdrenRequired=30
-     PickupClass=Class'DEKRPG209F.ArtifactSummonWarlordPickup'
+     PickupClass=Class'DEKRPG999X.ArtifactSummonWarlordPickup'
      ItemName="Warlord Summon"
      IconMaterial=Texture'UTRPGTextures.Icons.SummoningCharmIcon'
      TimeBetweenUses=20.000000
