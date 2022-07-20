@@ -362,22 +362,22 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
 	if (!bSetPowerTypes)
 	{
 	    //now set what type of weapon it is
-     	AIRatingBonus=0.040000;
+	    AIRatingBonus=0.040000;
 	    bModifierSet = false;
 
 	    if (Rand(100) < PerCentNormalWeapons)
 	    {
 		  // tough luck, its a normal weapon
-            modifier = 0;
-            bModifierSet = true;
-            bSetPowerTypes = true;
-            return;
+		  modifier = 0;
+		  bModifierSet = true;
+		  bSetPowerTypes = true;
+		  return;
 	    }
 
 	    // ok, lets see how many Powers we should give it
 	    iSumChance = ChanceZeroPower;
 	    if (iLocalMaxPowers >= 1)
-            iSumChance += ChanceOnePower;
+		  iSumChance += ChanceOnePower;
 	    if (iLocalMaxPowers >= 2)
 		  iSumChance += ChanceTwoPower;
 	    if (iLocalMaxPowers >= 3)

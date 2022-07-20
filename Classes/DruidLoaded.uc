@@ -112,7 +112,6 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	local class<RPGWeapon> RPGWeaponClass;
 	local Weapon NewWeapon;
 	local RPGWeapon RPGWeapon;
-	local int x;
 
 	if(Other == None || Other.IsA('Monster'))
 		return;
