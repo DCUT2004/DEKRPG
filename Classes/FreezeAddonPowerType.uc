@@ -65,7 +65,7 @@ defaultproperties
 	CanHaveZeroModifier=false
 	CanHaveNegativeModifier=false
 	AIBonus=0.1
-	PowerOverlay=Shader'DCText.DomShaders.PulseGreyShader'
+	PowerOverlay=TexPanner'DEKWeaponsMaster206.fX.GreyPanner'
 	ThisPickupClass=Class'FreezeAddonPowerPickup'
 }
 
