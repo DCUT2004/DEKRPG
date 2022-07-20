@@ -42,7 +42,7 @@ function bool CanUseArtifact()
 		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
 		return false;	// already at maximum number of Powers
 	}
-	if (ThisPowerType != None && !ThisPowerType.static.Allowedfor(CurWeapon))
+	if (ThisPowerType != None && !ThisPowerType.static.AllowedFor(CurWeapon.ModifiedWeapon))
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
 		return false;	// cannot use this Power type on this type of weapon

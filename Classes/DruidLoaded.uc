@@ -142,6 +142,8 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	RPGWeapon = Other.spawn(RPGWeaponClass, Other,,, rot(0,0,0));
 	if(RPGWeapon == None)
 		return;
+    RPGWeapon.ModifiedWeapon = newWeapon;
+
 	RPGWeapon.Generate(None);
 	
 	//I'm checking the state of RPG Weapon a bunch because sometimes it becomes none mid method.
@@ -156,14 +158,7 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 		}
 		else
 		{
-			for(x = 0; x < 50; x++)
-			{
-				if(RPGWeapon.Modifier > -1)
-					break;
-				RPGWeapon.Generate(None);
-				if(RPGWeapon == None)
-					return;
-			}
+            RPGWeapon.Modifier = Rand(RPGWeapon.MaxModifier)  + 1;
 		}
 	}
 

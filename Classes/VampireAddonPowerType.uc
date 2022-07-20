@@ -48,8 +48,8 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 			if (M3Inv != None && !M3Inv.Stopped && M3Inv.DraculaActive)
 				M3Inv.MissionCount += HealthBonus;
             
-            A = Spawn(Class'DEKEffectVampire',,,Owner.Location,rotator(Normal(HitLocation - Location)));
-            A.PlaySound(Sound'GeneralImpacts.Wet.Breakbone_04',,1.0 * Owner.TransientSoundVolume,,Owner.TransientSoundRadius);
+            A = Spawn(Class'DEKEffectVampire',,,TheWeapon.Owner.Location,rotator(Normal(HitLocation - Location)));
+            A.PlaySound(Sound'GeneralImpacts.Wet.Breakbone_04',,1.0 * TheWeapon.Owner.TransientSoundVolume,,TheWeapon.Owner.TransientSoundRadius);
         }
     }
 }

@@ -52,12 +52,9 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	if (!Super.CanCoexist(NewType ))
 		return false;
 
-	//if (NewType == class'NullEntropyAddonPowerType')	// two of them will not really help
-	//	return false;
 	if (NewType == class'FreezeAddonPowerType')	   	// too similar
 		return false;
-	//if (NewType == class'KnockbackAddonPowerType')	   
-	//	return false;
+
 	return true;
 }
 

@@ -421,7 +421,7 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
   					{
   						if (CurrentPowerTypes[x].CanCoexist(newType) == false)
   							ok = false;
-  						if (!CurrentPowerTypes[x].static.AllowedFor(self))
+  						if (!CurrentPowerTypes[x].static.AllowedFor(self.ModifiedWeapon))
   							ok = false;
   					}
   				  }
