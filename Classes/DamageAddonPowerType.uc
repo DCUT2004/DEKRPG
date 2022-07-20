@@ -3,7 +3,7 @@ class DamageAddonPowerType extends AddonPowerType
 
 defaultproperties
 {
-	DamagePercent=10.0		// a further 10%
+	DamagePercent=8.0		// 10% in total
 	PosName="Damage"
 	ZeroName=""
 	NegName="Damage"
