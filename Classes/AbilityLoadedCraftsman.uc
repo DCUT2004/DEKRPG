@@ -246,8 +246,6 @@ defaultproperties
      Level3Artifact(2)=Class'DEKRPG999X.ArtifactMakeInfinity'
      Level3Artifact(3)=Class'DEKRPG999X.ArtifactMakeLucky'
      Level3Artifact(4)=Class'DEKRPG999X.ArtifactMakeMatrix'
-     Level3Artifact(5)=Class'DEKRPG999X.ArtifactMakeGorgon'
-     Level3Artifact(6)=Class'DEKRPG999X.ArtifactMakeHeavyGuard'
      AdrenDecreasePerLevel=50
      CostPerSecReduction=5
      SphereCostReduction=20

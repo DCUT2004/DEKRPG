@@ -166,8 +166,6 @@ function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, ou
 			}
 		}
 	}
-	else
-		return;
 }
 
 defaultproperties

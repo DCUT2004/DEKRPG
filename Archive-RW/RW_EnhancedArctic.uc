@@ -1,21 +1,36 @@
-class RW_Freeze extends OneDropRPGWeapon
-	HideDropDown
-	CacheExempt
+//Arctic includes healing and freezing.  Based off of WailOfSuicide's RW_SkaarjBane in DWRPG from the Death Warrant Invasion Servers
+
+class RW_EnhancedArctic extends RW_Healer
+   HideDropDown
+   CacheExempt
 	config(UT2004RPG);
 
 var Sound FreezeSound;
-var config float DamageBonus;
 var config float IceOnEarthDamageBonus;
 
-function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType)
+static function bool AllowedFor(class<Weapon> Weapon, Pawn Other)
 {
-	if(damage > 0)
-	{
-		if (Damage < (OriginalDamage * class'OneDropRPGWeapon'.default.MinDamagePercent))
-			Damage = OriginalDamage * class'OneDropRPGWeapon'.default.MinDamagePercent;
-	}
+	local int x;
+	local RPGStatsInv StatsInv;
+	
+	if(instr(caps(Weapon), "TRANSLAUNCHER") > -1)
+		return false;	
+	
+	if(instr(caps(Weapon), "MERCURY") > -1)
+		return false;		
 
-	Super.NewAdjustTargetDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
+	if ( Weapon.default.FireModeClass[0] != None && Weapon.default.FireModeClass[0].default.AmmoClass != None
+	          && class'MutUT2004RPG'.static.IsSuperWeaponAmmo(Weapon.default.FireModeClass[0].default.AmmoClass) )
+		return false;
+
+	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+
+	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
+		if (StatsInv.Data.Abilities[x] == class'AbilityMagicVault' && StatsInv.Data.AbilityLevels[x] >= 3)
+		return true;
+
+	return false;
+
 }
 
 function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
@@ -41,7 +56,7 @@ function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, ou
 			{
 				Damage *= (1.0 + IceOnEarthDamageBonus* Modifier);
 				Momentum *= 1.0 + IceOnEarthDamageBonus * Modifier;
-				A = P.spawn(class'FreezeHitEffect', P,, P.Location);
+				A = P.spawn(class'IceMercenaryPlasmaHitEffect', P,, P.Location);
 				if (A != None)
 					A.RemoteRole = ROLE_SimulatedProxy;
 			}
@@ -54,6 +69,7 @@ function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, ou
 		}
 		
 	}
+	Super(RPGWeapon).AdjustTargetDamage(Damage, Victim, HitLocation, Momentum, DamageType);	
 }
 
 function Freeze(Pawn P)
@@ -73,7 +89,7 @@ function Freeze(Pawn P)
 	M2Inv = Mission2Inv(Instigator.FindInventoryType(class'Mission2Inv'));
 	M3Inv = Mission3Inv(Instigator.FindInventoryType(class'Mission3Inv'));
 	
-	if (P != None && P.Health > 0 && canTriggerPhysics(P) && (!P.Controller.SameTeamAs(Instigator.Controller) || P == Instigator))
+	if (P != None && P.Health > 0 && class'RW_Freeze'.static.canTriggerPhysics(P) && (!P.Controller.SameTeamAs(Instigator.Controller) || P == Instigator))
 	{
 		IInv = IceInv(P.FindInventoryType(class'IceInv'));
 		if (IInv != None)
@@ -142,48 +158,14 @@ function Freeze(Pawn P)
 	}
 }
 
-static function bool canTriggerPhysics(Pawn victim)
-{
-	local DruidGhostInv dgInv;
-	local GhostInv gInv;
-	local PhantomGhostInv PInv;
-	local PhantomDeathGhostInv PDInv;
-
-	if(victim == None)
-		return true;
-	
-	//cant heal the dead...
-	dgInv = DruidGhostInv(Victim.FindInventoryType(class'DruidGhostInv'));
-	if(dgInv != None && !dgInv.bDisabled)
-		return false;
-
-	//cant heal the dead...
-	gInv = GhostInv(Victim.FindInventoryType(class'GhostInv'));
-	if(gInv != None && !gInv.bDisabled)
-		return false;
-		
-	PInv = PhantomGhostInv(Victim.FindInventoryType(class'PhantomGhostInv'));
-	if(PInv != None && !PInv.Stopped)
-		return false;
-		
-	PDInv = PhantomDeathGhostInv(Victim.FindInventoryType(class'PhantomDeathGhostInv'));
-	if(PDInv != None && !PDInv.Stopped)
-		return false;
-
-	if(Victim.PlayerReplicationInfo != None && Victim.PlayerReplicationInfo.HasFlag != None)
-		return false;
-	
-	return true;
-}
-
 defaultproperties
 {
      FreezeSound=Sound'Slaughtersounds.Machinery.Heavy_End'
+     IceOnEarthDamageBonus=0.100000
      DamageBonus=0.050000
-	 IceOnEarthDamageBonus=0.100000
-     ModifierOverlay=TexPanner'DEKWeaponsMaster206.fX.GreyPanner'
-     MinModifier=3
-     MaxModifier=6
-     AIRatingBonus=0.025000
-     PrefixPos="Freezing "
+     HealthBonus=0.02000
+     ModifierOverlay=FinalBlend'D-E-K-HoloGramFX.NonWireframe.FunkyStuff_1'
+     MinModifier=2
+     MaxModifier=7
+     PrefixPos="Arctic "
 }
