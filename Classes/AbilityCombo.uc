@@ -15,7 +15,6 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	local int x;
 	local int y;
 	local int ab;
-	local int ComboCount;
 	local int threshold;
 	local int MatchingComboCount;
 	local class <AbilityCombo> ComboClass;
