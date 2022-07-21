@@ -8,15 +8,25 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 {
 	local Pawn P;
 	local EarthInv EInv;
+	local IceInv IInv;
 
 	Super.AdjustDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
 
-	// now if it is an earth monster do more damage
 	if (Damage > 0)
 	{
 		P = Pawn(Victim);
 		if (P != None && P.Health > 0)
 		{
+            // if it is already frozen, then the bonus we have applied for freezing it needs taken off
+         	IInv = IceInv(P.FindInventoryType(class'IceInv'));
+        	if (IInv != None)     // cant freeze something already frozen
+            {
+                // retract freeze damage since it is an ice monster
+        		Damage = Max(1, Damage / (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier())));
+        		Momentum = Momentum / (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier()));
+            }
+       
+           	// alternatively, if it is an earth monster do more damage
 			EInv = EarthInv(P.FindInventoryType(class'EarthInv'));
 			if (EInv != None)
 			{
@@ -26,7 +36,6 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 			}
 		}
 	}
-
 }
 
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
@@ -41,6 +50,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local Mission1Inv M1Inv;
 	local Mission2Inv M2Inv;
 	local MIssion3Inv M3Inv;
+	local IceInv IInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -52,6 +62,10 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		return;
 
 	if (Damage <= 0 || Victim.isA('Vehicle') || TheWeapon.GetModifier() <= 0)
+		return;
+
+	IInv = IceInv(P.FindInventoryType(class'IceInv'));
+	if (IInv != None)     // cant freeze something already frozen
 		return;
 
 	if (P != None && TheWeapon.static.NullCanTriggerPhysics(P))
