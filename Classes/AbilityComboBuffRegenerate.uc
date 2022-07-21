@@ -26,16 +26,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
-	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
-	//ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	//ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
-	//ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
-	//ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffWard'
-	//ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
-	//ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Regenerate"
 	MaxLevel=10
 	Description="Caster and all allies receive Regeneration. Regeneration heals 1 health per second per level for 25 seconds. Regeneration over the max health is added as temporary max health, up to double the amount of the caster's original max health.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Plated Armor, 10 Fine Leather||Level 6: 20 Plated Armor, 20 Fine Leather||Level 7: 30 Plated Armor, 30 Fine Leather||Level 8: 40 Plated Armor, 40 Fine Leather, 10 Moss||Level 9: 45 Plated Armor, 45 Fine Leather, 25 Moss||Level 10: 50 Plated Armor, 50 Fine Leather, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."

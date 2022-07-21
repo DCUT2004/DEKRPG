@@ -26,16 +26,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
-	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffWard'
-	//ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	//ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
-	//ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
-	//ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
-	//ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
-	//ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Critical Hit"
 	Description="The caster and all allies receive Critical Hit for 25 seconds, which provides a 3.5% chance per level to deal double damage on each hit. A purple flash and sound indicates a critical hit.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Tarydium Shard and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Honeysuckle Vine, 10 Burning Embers||Level 6: 20 Fine Honeysuckle Vine, 20 Burning Embers||Level 7: 30 Fine Honeysuckle Vine, 30 Burning Embers||Level 8: 40 Fine Honeysuckle Vine, 40 Burning Embers, 10 Cosmic Dust||Level 9: 45 Fine Honeysuckle Vine, 45 Burning Embers, 25 Cosmic Dust||Level 10: 50 Fine Honeysuckle Vine, 50 Burning Embers, 50 Cosmic Dust||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
