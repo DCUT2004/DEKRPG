@@ -1,4 +1,4 @@
-class AbilityComboOffenseHealingStrike extends AbilityCombo
+class AbilityComboOffenseHealingStrike extends AbilityComboOffense
 	config(UT2004RPG)
 	abstract;
 	
@@ -26,12 +26,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboOffensePurifyingStrike'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboOffenseRecklessStrike'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboOffenseStab'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboOffenseStrike'
 	AbilityName="Offense: Healing Strike"
-	Description="Deals 20 damage per level to all targets. The caster and all allies heal for 2% of the damage dealt per level. The damage is affected by buffs and ailments.||You can only have one type of Offense combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Arctic Suit and Fine Leather you wish to purchase. Additionally:||Level 5: 10 Nanite Fragments, 10 Cosmic Dust||Level 6: 20 Nanite Fragments, 20 Cosmic Dust||Level 7: 30 Nanite Fragments, 30 Cosmic Dust||Level 8: 40 Nanite Fragments, 40 Cosmic Dust||Level 9: 45 Nanite Fragments, 45 Cosmic Dust||Level 10: 50 Nanite Fragments, 50 Cosmic Dust||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	Description="Deals 20 damage per level to all targets. The caster and all allies heal for 2% of the damage dealt per level. The damage is affected by buffs and ailments.||You can only have one type of Offense combo at a time.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Arctic Suit and Fine Leather you wish to purchase. Additionally:||Level 5: 10 Nanite Fragments, 10 Cosmic Dust||Level 6: 20 Nanite Fragments, 20 Cosmic Dust||Level 7: 30 Nanite Fragments, 30 Cosmic Dust||Level 8: 40 Nanite Fragments, 40 Cosmic Dust||Level 9: 45 Nanite Fragments, 45 Cosmic Dust||Level 10: 50 Nanite Fragments, 50 Cosmic Dust||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
 	StartingCost=5
 	CostAddPerLevel=5

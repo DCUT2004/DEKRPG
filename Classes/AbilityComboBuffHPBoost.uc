@@ -1,4 +1,4 @@
-class AbilityComboBuffHPBoost extends AbilityCombo
+class AbilityComboBuffHPBoost extends AbilityComboBuff
 	config(UT2004RPG)
 	abstract;
 	
@@ -25,19 +25,9 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
-	ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffWard'
-	ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: HP Boost"
 	MaxLevel=10
-	Description="Permanently boosts the max health of the caster and all allies.||Each level boosts the max health by 1.5 per level.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Plated Armor, 10 Honeysuckle Vine||Level 6: 20 Plated Armor, 20 Honeysuckle Vine||Level 7: 30 Plated Armor, 30 Honeysuckle Vine||Level 8: 40 Plated Armor, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Plated Armor, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Plated Armor, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	Description="Permanently boosts the max health of the caster and all allies.||Each level boosts the max health by 1.5 per level.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Plated Armor, 10 Honeysuckle Vine||Level 6: 20 Plated Armor, 20 Honeysuckle Vine||Level 7: 30 Plated Armor, 30 Honeysuckle Vine||Level 8: 40 Plated Armor, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Plated Armor, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Plated Armor, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	StartingCost=5
 	CostAddPerLevel=5
 	BaseMultiplier=25.0000

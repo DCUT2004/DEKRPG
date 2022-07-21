@@ -1,4 +1,4 @@
-class AbilityComboBuffAttack extends AbilityCombo
+class AbilityComboBuffAttack extends AbilityComboBuff
 	config(UT2004RPG)
 	abstract;
 	
@@ -26,18 +26,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffWard'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
-	ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Attack"
-	Description="The caster and all allies receive 2.5% damage bonus per level for 25 seconds. If a similar buff is applied, the effect is stacked. Allies with increased attack have a green berserk ring.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Gloves and Steel you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Burning Embers||Level 6: 20 Fine Leather, 20 Burning Embers||Level 7: 30 Fine Leather, 30 Burning Embers||Level 8: 40 Fine Leather, 40 Burning Embers, 10 Pumice||Level 9: 45 Fine Leather, 45 Burning Embers, 25 Pumice||Level 10: 50 Fine Leather, 50 Burning Embers, 50 Pumice||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	Description="The caster and all allies receive 2.5% damage bonus per level for 25 seconds. If a similar buff is applied, the effect is stacked. Allies with increased attack have a green berserk ring.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Steel you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Burning Embers||Level 6: 20 Fine Leather, 20 Burning Embers||Level 7: 30 Fine Leather, 30 Burning Embers||Level 8: 40 Fine Leather, 40 Burning Embers, 10 Pumice||Level 9: 45 Fine Leather, 45 Burning Embers, 25 Pumice||Level 10: 50 Fine Leather, 50 Burning Embers, 50 Pumice||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
 	StartingCost=5
 	CostAddPerLevel=5
