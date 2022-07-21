@@ -1,4 +1,4 @@
-class AbilityComboBuffHeal extends AbilityCombo
+class AbilityComboBuffHeal extends AbilityComboBuff
 	config(UT2004RPG)
 	abstract;
 	
@@ -25,16 +25,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffWard'
-	ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
-	ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
+	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
+	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
+	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
+	//ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
+	//ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffWard'
+	//ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
+	//ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
+	//ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffShieldBoost'
+	//ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Heal"
 	Description="Heals the caster and all allies. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health.||Each level adds 25 health per level.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Honeysuckle Vine||Level 6: 20 Fine Leather, 20 Honeysuckle Vine||Level 7: 30 Fine Leather, 30 Honeysuckle Vine||Level 8: 40 Fine Leather, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Fine Leather, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Fine Leather, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10

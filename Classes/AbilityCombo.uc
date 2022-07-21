@@ -2,11 +2,12 @@ class AbilityCombo extends AbilityUnlockable
 	config(UT2004RPG)
 	abstract;
 
-var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;
-var config int BaseDamage, DamageStep, DamageAddPerStep;
-var config float BaseLifespan, LifespanStep, LifespanAddPerStep;
-var config bool Dispellable, All, Single;
-var config int MaxCombos;
+var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;	//How strong the effect of this combo is
+var config int BaseDamage, DamageStep, DamageAddPerStep;				//How much damage this combo does, if applicable
+var config float BaseLifespan, LifespanStep, LifespanAddPerStep;		//How long this combo will last
+var config bool Dispellable, All, Single;								//How many targets this combo will affect
+var byte ComboType;														//0 = Buff, 1 = Ailment, 2 = Offensive, 3 = Special
+var config int SameTypeLimits[4];										//Specifies how many combos of the same type can be allowed, for each type (same indexing as ComboType)
 
 static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel)
 {
@@ -15,8 +16,14 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	local int ab;
 	local int ComboCount;
 	local int threshold;
+	local int MatchingComboCount;
+	local class <AbilityCombo> ComboClass;
 	
 	if (Data == None)
+		return 0;
+		
+	//Safety check, since ComboType will be used to index a fixed array
+	if (default.ComboType < 0 || default.ComboType > 3)
 		return 0;
 	
 	// check the stats
@@ -32,18 +39,6 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 		return 0;
 	if (Data.AmmoMax < default.MinAmmo + (CurrentLevel * default.AmmoStep))
 		return 0;
-		
-	//Check for max allowable combos
-	ComboCount = 0;
-	for (ab = 0; ab < Data.Abilities.Length; ab++)
-	{
-		if (ClassIsChildOf(Data.Abilities[ab], class'AbilityCombo'))
-			ComboCount++;
-		if (ComboCount >= default.MaxCombos)
-			break;
-	}
-	if (ComboCount >= default.MaxCombos && CurrentLevel <= 0)	//We counted 3 combos, so if CurrentLevel is <= 0, means this player has reached their MaxCombos capacity and cannot buy
-		return 0;
 	
 	// now check the player level
 	if(Data.Level < (default.MinPlayerLevel + CurrentLevel*default.PlayerLevelStep))
@@ -56,12 +51,22 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	// check if already maxed
 	if (CurrentLevel >= default.MaxLevel)
 		return 0;
-		
-	// check for excluding abilities
-	for (ab = 0; ab < default.ExcludingAbilities.length; ab++)
-		for (x = 0; x < Data.Abilities.length; x++)
-			if (Data.Abilities[x] == default.ExcludingAbilities[ab])
-				return 0;
+	
+	// check that this player does not have more of the same type of combo allowed (e.g. 2 Buffs, cannot buy a 3rd Buff)
+	MatchingComboCount = 0;
+	for (ab = 0; ab < Data.Abilities.Length; ab++)
+	{
+		if (ClassIsChildOf(Data.Abilities[ab], class'AbilityCombo') && CurrentLevel == 0)
+		{
+			ComboClass = Class<AbilityCombo>(Data.Abilities[ab]);
+			if (ComboClass.default.ComboType == default.ComboType)	//Player has a combo of the same type
+			{
+				MatchingComboCount++;
+				if (MatchingComboCount >= default.SameTypeLimits[default.ComboType])	//Player already has reached the max allowed number of combos of this type
+					return 0;
+			}
+		}
+	}
 				
 	// check for required materials
 	for (ab = 0; ab < default.Materials.length; ab++)
@@ -103,7 +108,10 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 
 defaultproperties
 {
-	 MaxCombos=4
-     AbilityName="Combo Ability"
-	 MinPlayerLevel=90
+	SameTypeLimits(0)=1
+	SameTypeLimits(1)=1
+	SameTypeLimits(2)=1
+	SameTypeLimits(3)=1
+	AbilityName="Combo Ability"
+	MinPlayerLevel=90
 }

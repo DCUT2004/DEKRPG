@@ -1,4 +1,4 @@
-class AbilityComboBuffShieldBoost extends AbilityCombo
+class AbilityComboBuffShieldBoost extends AbilityComboBuff
 	config(UT2004RPG)
 	abstract;
 	
@@ -25,16 +25,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
-	ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
-	ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
-	ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
-	ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
-	ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffWard'
-	ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboBuffAdrenBoost'
+	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboBuffAdrenHeal'
+	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboBuffAttack'
+	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboBuffCriticalHit'
+	//ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboBuffDefense'
+	//ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboBuffHeal'
+	//ExcludingAbilities(6)=Class'DEKRPG999X.AbilityComboBuffHPBoost'
+	//ExcludingAbilities(7)=Class'DEKRPG999X.AbilityComboBuffRegenerate'
+	//ExcludingAbilities(8)=Class'DEKRPG999X.AbilityComboBuffWard'
+	//ExcludingAbilities(9)=Class'DEKRPG999X.AbilityComboBuffShieldHeal'
 	AbilityName="Buff: Shield Boost"
 	MaxLevel=10
 	Description="Permanently boosts the max shield of the caster and all allies.||Each level boosts the max shield by 2 per level.||You can only have one type of Buff combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Lumber and Steel you wish to purchase. Additionally:||Level 5: 10 Arctic Suit, 10 Plated Armor||Level 6: 20 Arctic Suit, 20 Plated Armor||Level 7: 30 Arctic Suit, 30 Plated Armor||Level 8: 40 Arctic Suit, 40 Plated Armor, 10 Nanite Fragment||Level 9: 45 Arctic Suit, 45 Plated Armor, 25 Nanite Fragment||Level 10: 50 Arctic Suit, 50 Plated Armor, 50 Nanite Fragment||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."

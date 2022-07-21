@@ -1,4 +1,4 @@
-class AbilityComboSpecialRavenRitual extends AbilityCombo
+class AbilityComboSpecialRavenRitual extends AbilityComboSpecial
 	config(UT2004RPG)
 	abstract;
 	
@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboSpecialVoidedCubes'
-    ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboSpecialSwarm'
-    ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboSpecialTeleStealth'
-    ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboSpecialBeastsRevenge'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboSpecialVoidedCubes'
+    //ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboSpecialSwarm'
+    //ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboSpecialTeleStealth'
+    //ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboSpecialBeastsRevenge'
 	AbilityName="Special: Raven Ritual"
 	Description="Heals the caster by 100 health. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health. For as long as the caster has boosted health, the caster deals 20 damage per level every 10 seconds to a single target. This effect ends when the caster's health drops below the normal max health amount.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Moonlit Stone you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10

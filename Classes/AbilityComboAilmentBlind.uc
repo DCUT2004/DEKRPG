@@ -1,4 +1,4 @@
-class AbilityComboAilmentBlind extends AbilityCombo
+class AbilityComboAilmentBlind extends AbilityComboAilment
 	config(UT2004RPG)
 	abstract;
 	
@@ -26,12 +26,12 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboAilmentAttack'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboAilmentCurse'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboAilmentDefense'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboAilmentFreeze'
-	ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboAilmentJinx'
-	ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboAilmentPoison'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboAilmentAttack'
+	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboAilmentCurse'
+	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboAilmentDefense'
+	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboAilmentFreeze'
+	//ExcludingAbilities(4)=Class'DEKRPG999X.AbilityComboAilmentJinx'
+	//ExcludingAbilities(5)=Class'DEKRPG999X.AbilityComboAilmentPoison'
 	AbilityName="Ailment: Blind"
 	Description="All targets receive Blind for 25 seconds. Blinded targets have a 3.5% chance per level to have their damage reduced to 1 on each hit. If a similar ailment is applied, the effect is stacked.||You can only have one type of Ailment combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Nali Fruit and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Nanite Fragment||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Nanite Fragment||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Nanite Fragment||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10

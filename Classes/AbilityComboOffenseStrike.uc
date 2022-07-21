@@ -1,4 +1,4 @@
-class AbilityComboOffenseStrike extends AbilityCombo
+class AbilityComboOffenseStrike extends AbilityComboOffense
 	config(UT2004RPG)
 	abstract;
 	
@@ -25,10 +25,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboOffensePurifyingStrike'
-	ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboOffenseRecklessStrike'
-	ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboOffenseStab'
-	ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboOffenseHealingStrike'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboOffensePurifyingStrike'
+	//ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboOffenseRecklessStrike'
+	//ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboOffenseStab'
+	//ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboOffenseHealingStrike'
 	AbilityName="Offense: Strike"
 	Description="Deals 30 damage per level to all targets. The damage is affected by buffs and ailments.||You can only have one type of Offense combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Honeysuckle Vine and Fine Leather you wish to purchase. Additionally:||Level 5: 10 Moss, 10 Pumice||Level 6: 20 Moss, 20 Pumice||Level 7: 30 Moss, 30 Pumice||Level 8: 40 Moss, 40 Pumice||Level 9: 45 Moss, 45 Pumice||Level 10: 50 Moss, 50 Pumice||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10

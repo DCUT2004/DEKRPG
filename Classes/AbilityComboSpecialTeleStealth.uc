@@ -1,4 +1,4 @@
-class AbilityComboSpecialTeleStealth extends AbilityCombo
+class AbilityComboSpecialTeleStealth extends AbilityComboSpecial
 	config(UT2004RPG)
 	abstract;
 	
@@ -26,10 +26,10 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 defaultproperties
 {
-    ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboSpecialVoidedCubes'
-    ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboSpecialSwarm'
-    ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboSpecialBeastsRevenge'
-    ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboSpecialRavenRitual'
+    //ExcludingAbilities(0)=Class'DEKRPG999X.AbilityComboSpecialVoidedCubes'
+    //ExcludingAbilities(1)=Class'DEKRPG999X.AbilityComboSpecialSwarm'
+    //ExcludingAbilities(2)=Class'DEKRPG999X.AbilityComboSpecialBeastsRevenge'
+    //ExcludingAbilities(3)=Class'DEKRPG999X.AbilityComboSpecialRavenRitual'
 	AbilityName="Special: Tele-Stealth"
 	Description="Teleports the caster to a random location. For 20 seconds, the caster is invisible to monsters and is immune to new ailments. While the caster is invisible, the caster accumulates energy equivalent to 10% of the damage dealt to enemies per level. When the caster becomes visible, the caster deals damage equivalent to the accumulated energy to a single target.||You can only have one type of Special combo at a time.||You must be level 90 to purchase this.||REQUIRED MATERIALS:|You need 5 times the ability level of Universal Translator you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	MaxLevel=10
