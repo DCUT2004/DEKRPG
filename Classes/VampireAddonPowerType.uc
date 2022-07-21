@@ -60,8 +60,8 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 		return false;
 
 	// Put in a test for rage Power type, and bounce
-	//if (NewType == class'RageAddonPowerType')
-	//	return false;
+	if (NewType == class'RageAddonPowerType')
+		return false;
 	return true;
 }
 
