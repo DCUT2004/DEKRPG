@@ -1,6 +1,14 @@
-class AbilityCombo extends AbilityUnlockable
+class AbilityCombo extends CostRPGAbility
 	config(UT2004RPG)
 	abstract;
+	
+struct MaterialsStruct
+{
+	var Array <int> RequiredMaterialLevels;
+	var Array < class < RPGAbility > > RequiredMaterials;
+};
+
+var Array < MaterialsStruct > Materials;								//Required materials to buy this combo
 
 var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;	//How strong the effect of this combo is
 var config int BaseDamage, DamageStep, DamageAddPerStep;				//How much damage this combo does, if applicable

@@ -284,7 +284,7 @@ function UpdateAbilityList()
 	// now lets list the abilities for this subclass.
 	for (x = 0; x < StatsInv.AllAbilities.length; x++)
 	{
-		if (!ClassIsChildOf(StatsInv.AllAbilities[x], class'RPGClass') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'AbilityMaterial') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'AbilityUnlockable') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'SubClass') 
+		if (!ClassIsChildOf(StatsInv.AllAbilities[x], class'RPGClass') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'AbilityMaterial') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'AbilityCombo') && !ClassIsChildOf(StatsInv.AllAbilities[x], class'SubClass') 
 			&& !ClassIsChildOf(StatsInv.AllAbilities[x], class'BotAbility'))
 		{	// do not add classes or subclasses to this abilities list. Handle separately
 			Index = -1;
