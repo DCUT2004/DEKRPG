@@ -1,42 +1,7 @@
 class FreezeAddonPowerType extends AddonPowerType
 	config(UT2004RPG);
 
-var config float IceOnEarthDamageBonus;
 var Sound FreezeSound;
-
-function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType)
-{
-	local Pawn P;
-	local EarthInv EInv;
-	local IceInv IInv;
-
-	Super.AdjustDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
-
-	if (Damage > 0)
-	{
-		P = Pawn(Victim);
-		if (P != None && P.Health > 0)
-		{
-            // if it is already frozen, then the bonus we have applied for freezing it needs taken off
-         	IInv = IceInv(P.FindInventoryType(class'IceInv'));
-        	if (IInv != None)     // cant freeze something already frozen
-            {
-                // retract freeze damage since it is an ice monster
-        		Damage = Max(1, Damage / (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier())));
-        		Momentum = Momentum / (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier()));
-            }
-       
-           	// alternatively, if it is an earth monster do more damage
-			EInv = EarthInv(P.FindInventoryType(class'EarthInv'));
-			if (EInv != None)
-			{
-                // do more damage to Earth monsters
-				Damage *= (1.0 + IceOnEarthDamageBonus * TheWeapon.GetModifier());
-				Momentum *= 1.0 + IceOnEarthDamageBonus * TheWeapon.GetModifier();
-			}
-		}
-	}
-}
 
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
@@ -128,7 +93,10 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	if (!Super.CanCoexist(NewType ))
 		return false;
 
-	if (NewType == class'FreezeAddonPowerType')	   	// too similar
+	if (NewType == class'FreezeAddonPowerType')	   	// 2 of them doesn't really work
+		return false;
+
+	if (NewType == class'SuperHeatAddonPowerType')	   	// opposite
 		return false;
 
 	return true;
@@ -137,7 +105,9 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 defaultproperties
 {
 	DamagePercent=2.0      // since Freezing hurts
-    IceOnEarthDamageBonus=0.100000
+    DamageBonusAgainstEarthMonsters=0.100000
+    DamageBonusAgainstIceMonsters=0.000000
+    DamageBonusAgainstFireMonsters=-0.020000
 	FreezeSound=Sound'Slaughtersounds.Machinery.Heavy_End'
 	PosName="Freezing"
 	ZeroName=""

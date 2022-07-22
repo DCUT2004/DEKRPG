@@ -21,6 +21,9 @@ var Material PowerOverlay;		// what shader to use if this is the only Power type
 var class<AddonPowerPickup> ThisPickupClass;	// Pickup class that gives this Power type
 
 var config float DamagePercent;		// extra damage bonus for this particular Power type
+var config float DamageBonusAgainstEarthMonsters;	// extra damage bonus against Earth monsters
+var config float DamageBonusAgainstIceMonsters;		// extra damage bonus against Ice monsters
+var config float DamageBonusAgainstFireMonsters;	// extra damage bonus against Fire monsters
 var config bool bCanThrow;		// set to true if can throw a weapon with this type
 var config bool bCanShare;		// set to true if can clone a weapon with this type
 
@@ -89,10 +92,49 @@ function PlayerTakenDamage(out int Damage, Pawn InstigatedBy, Vector HitLocation
 // AddDamageBonus - add on the damage bonus.
 function AddDamageBonus(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType)
 {
-	if (Damage > 0)
+	local Pawn P;
+	local EarthInv EInv;
+	local IceInv IInv;
+	local SuperHeatInv SInv;
+
+	if (Damage <= 0)
+		return;
+
+	Damage = Max(1, Damage * (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier())));
+	Momentum = Momentum * (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier()));
+
+	P = Pawn(Victim);
+	if (P == None || P.Health <= 0)
+        	return;
+
+	if (DamageBonusAgainstEarthMonsters != 0.0)
 	{
-		Damage = Max(1, Damage * (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier())));
-		Momentum = Momentum * (1.0 + ((DamagePercent/100.0) * TheWeapon.GetModifier()));
+		EInv = EarthInv(P.FindInventoryType(class'EarthInv'));
+		if (EInv != None)
+		{
+			Damage *= (1.0 + DamageBonusAgainstEarthMonsters * TheWeapon.GetModifier());
+			Momentum *= 1.0 + DamageBonusAgainstEarthMonsters * TheWeapon.GetModifier();
+		}
+	}
+
+	if (DamageBonusAgainstIceMonsters != 0.0)
+	{
+		IInv = IceInv(P.FindInventoryType(class'IceInv'));
+		if (IInv != None)
+		{
+			Damage *= (1.0 + DamageBonusAgainstIceMonsters * TheWeapon.GetModifier());
+			Momentum *= 1.0 + DamageBonusAgainstIceMonsters * TheWeapon.GetModifier();
+		}
+	}
+
+	if (DamageBonusAgainstFireMonsters != 0.0)
+	{
+		SInv = SuperHeatInv(P.FindInventoryType(class'SuperHeatInv'));
+		if (SInv != None)
+		{
+			Damage *= (1.0 + DamageBonusAgainstFireMonsters * TheWeapon.GetModifier());
+			Momentum *= 1.0 + DamageBonusAgainstFireMonsters * TheWeapon.GetModifier();
+		}
 	}
 }
 
@@ -124,6 +166,9 @@ simulated function SetShader()
 defaultproperties
 {
 	DamagePercent=0.0
+	DamageBonusAgainstEarthMonsters=0.0
+	DamageBonusAgainstIceMonsters=0.0
+	DamageBonusAgainstFireMonsters=0.0
 	bCanThrow=true
 	bCanShare=true
 
