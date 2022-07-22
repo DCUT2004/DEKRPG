@@ -2,12 +2,13 @@ class MutTeamAdrenaline extends Mutator
 	config(UT2004RPG);
 	
 var Invasion Invasion;
-
+var MutWaveRandomizer WaveRandomizer;
 var config float FullAdrenalinePlayer, FullAdrenalineMonster;
 var float PlayerTeamAdrenaline, MonsterTeamAdrenaline;
 var config int NumCombos;	//The number of buffs and ailments the monster team can apply
 var config int MinimumWave;		//The wave number when monsters can start applying buffs and ailments
 var config int MinimumMonsters;	//The number of monsters before a monster team combo can be activated
+var bool bComboAddedForBossWave;
 
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
 
@@ -33,20 +34,32 @@ replication
 simulated function PostBeginPlay()
 {
 	local TeamAdrenalineGameRules G;
+	local Mutator M;
 	
-	Invasion = Invasion(Level.Game);
-	if (Invasion != None)
+	if (Level.Game != None)
 	{
-		G = Spawn(class'TeamAdrenalineGameRules');
-		G.TA = Self;
-		if ( Level.Game.GameRulesModifiers == None )
-			Level.Game.GameRulesModifiers = G;
-		else    
-			Level.Game.GameRulesModifiers.AddGameRules(G);
-		PlayerTeamAdrenaline = 0.000000;
-		MonsterTeamAdrenaline = 0.000000;
-		SetTimer(10, True);
+		for (M = Level.Game.BaseMutator; M != None; M = M.NextMutator)
+			if (MutWaveRandomizer(M) != None)
+			{
+				WaveRandomizer = MutWaveRandomizer(M);
+				break;
+			}
+			
+		Invasion = Invasion(Level.Game);
+		if (Invasion != None)
+		{
+			G = Spawn(class'TeamAdrenalineGameRules');
+			G.TA = Self;
+			if ( Level.Game.GameRulesModifiers == None )
+				Level.Game.GameRulesModifiers = G;
+			else    
+				Level.Game.GameRulesModifiers.AddGameRules(G);
+			PlayerTeamAdrenaline = 0.000000;
+			MonsterTeamAdrenaline = 0.000000;
+			SetTimer(10, True);
+		}
 	}
+	bComboAddedForBossWave = false;
 	Super.PostBeginPlay();
 }
 
@@ -77,8 +90,15 @@ simulated function Timer()
 	{
 		GrantMonsterCombo();
 	}
+	//If boss wave, give a combo to everyone
+	if (WaveRandomizer != None && WaveRandomizer.BossWaveInitialized && !bComboAddedForBossWave)
+	{
+		GrantAllPlayersCombo();
+		bComboAddedForBossWave = true;
+	}
 }
 
+//Search for a random player to give combo
 simulated function FindPlayer()
 {
 	local RPGStatsInv StatsInv;
@@ -160,6 +180,26 @@ simulated function FindPlayer()
 	}
 }
 
+//Give a combo to all players
+simulated function GrantAllPlayersCombo()
+{
+	local Controller C, NextC;
+	local GiveItemsInv Inv;
+	
+	C = Level.ControllerList;
+	while (C != None)
+	{
+		NextC = C.NextController;
+		if (C != None && C.PlayerReplicationInfo != None && C.Pawn != None && C.Pawn.Health > 0 && !C.Pawn.IsA('Monster') && !C.PlayerReplicationInfo.bBot)
+		{
+			Inv = class'GiveItemsInv'.static.GetGiveItemsInv(C);
+			GrantPlayerCombo(C, Inv);
+		}
+		C = NextC;
+	}
+}
+
+//Adds the actual combo to player
 simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsInv Inv)
 {
 	if (Inv != None && Inv.NumCombos < Inv.MaxNumCombos)
@@ -172,6 +212,7 @@ simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsI
 	return false;
 }
 
+//Select random buffs and ailments and execute them for monster team
 function GrantMonsterCombo()
 {
 	local Controller C, NextC;
