@@ -24,8 +24,6 @@ struct ComboInfo
 var config Array <ComboInfo> ComboData;
 var config Array < class < ComboEffectInv > > ComboClass;	//The full list of buffs and ailments available to monsters to use
 
-const COMBO_LEVEL = 90;
-
 replication
 {
 	reliable if (Role == ROLE_Authority)
@@ -86,12 +84,14 @@ simulated function FindPlayer()
 	local RPGStatsInv StatsInv;
 	local Controller C, NextC;
 	local Array<Pawn> Pawns;
-	local int RandIndex;	//Array indexing
+	local int Index, Count, x;
 	local GiveItemsInv Inv;
 	local Pawn P;
+	local bool bComboGiven;
 	
 	C = Level.ControllerList;
 	Pawns.Length = 0;
+	
 	
 	//First, create an Array of player Pawns that are eligible to receive a combo
 	while (C != None)
@@ -103,14 +103,19 @@ simulated function FindPlayer()
 				P = Vehicle(C.Pawn).Driver;
 			else
 				P = C.Pawn;
-			if (P != None)
+
+			StatsInv = RPGStatsInv(P.FindInventoryType(Class'RPGStatsInv'));
+			if (StatsInv != None)
 			{
-				StatsInv = RPGStatsInv(P.FindInventoryType(Class'RPGStatsInv'));
-				if (StatsInv != None && StatsInv.Data.Level >= COMBO_LEVEL)
+				//Check if player has bought a combo ability. If no combo ability, don't bother
+				for (x = 0; x < StatsInv.Data.Abilities.Length; x++)
 				{
-					Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
-					Pawns[0] = P;	//Set the new element we just inserted to P
-					//Do not break here, as we want to loop through all controllers that are eligible to receive the combo
+					if ( ClassIsChildOf(StatsInv.Data.Abilities[x] , Class'AbilityCombo' ) )	//Player has a combo ability, add them to list of players
+					{
+						Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
+						Pawns[0] = P;	//Set the new element we just inserted to P
+						break;
+					}
 				}
 			}
 		}
@@ -120,86 +125,41 @@ simulated function FindPlayer()
 	//Now choose a random player
 	if (Pawns.Length != 0)
 	{
-		RandIndex = RandRange(0, Pawns.Length);	//Choose a random number between 0 and Pawns.Length
-		P = Pawns[RandIndex];
-		if (P != None && P.Controller != None)
+		Index = Rand(Pawns.Length);	//Choose a random number between 0 and Pawns.Length-1
+		bComboGiven = false;
+		Count = 0;
+		do
 		{
-			Inv = class'GiveItemsInv'.static.GetGiveItemsInv(P.Controller);
-			if (Inv != None)
-				GrantPlayerCombo(P.Controller, Inv);
+			Count++;
+			P = Pawns[Index];
+			if (P != None && P.Controller != None)
+			{
+				Inv = class'GiveItemsInv'.static.GetGiveItemsInv(P.Controller);
+				if (Inv != None)
+					bComboGiven = GrantPlayerCombo(P.Controller, Inv);
+				if (!bComboGiven)	//This player already the max allowable combos held. Find another player
+				{
+					Index++;
+					if (Index >= Pawns.Length)
+						Index = 0;
+				}
+			}
 		}
-	}
-	
-	
-	
-	
+		until (bComboGiven || Count >= 20);		//Possible all players have max combos, so break upon a counter
 
-	/*foreach DynamicActors(class'Controller', C)	//First, let's try human players
-	{
-		if (C != None && C.PlayerReplicationInfo != None && C.Pawn != None && C.Pawn.Health > 0 && !C.Pawn.IsA('Monster'))
-		{
-			if (Vehicle(C.Pawn) != None)
-				P = Vehicle(C.Pawn).Driver;
-			else
-				P = C.Pawn;
-			if (!C.PlayerReplicationInfo.bBot)	//first, let's try to get a human player
-			{
-				StatsInv = RPGStatsInv(P.FindInventoryType(Class'RPGStatsInv'));
-				if (StatsInv != None && StatsInv.Data.Level >= COMBO_LEVEL)
-				{
-					Inv = class'GiveItemsInv'.static.GetGiveItemsInv(P.Controller);
-					if (Inv != None && Inv.NumCombos < Inv.MaxNumCombos)
-					{
-						Controllers.Insert(0, 1);
-						Controllers[0] = C;
-						break;
-					}
-				}
-			}
-		}
 	}
-	if (Controllers.Length == 0)	//No human players found, lets try bots
-	{
-		foreach DynamicActors(class'Controller', C)	//First, let's try human players
-		{
-			if (C != None && C.PlayerReplicationInfo != None && C.Pawn != None && C.Pawn.Health > 0 && !C.Pawn.IsA('Monster'))
-			{
-				if (Vehicle(C.Pawn) != None)
-					P = Vehicle(C.Pawn).Driver;
-				else
-					P = C.Pawn;
-				if (C.PlayerReplicationInfo.bBot)
-				{
-					StatsInv = RPGStatsInv(P.FindInventoryType(Class'RPGStatsInv'));
-					if (StatsInv != None && StatsInv.Data.Level >= COMBO_LEVEL)
-					{
-						Inv = class'GiveItemsInv'.static.GetGiveItemsInv(P.Controller);
-						if (Inv != None && Inv.NumCombos < Inv.MaxNumCombos)
-						{
-							Controllers.Insert(0, 1);
-							Controllers[0] = C;
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-	
-	if (Controllers.length != 0) //We have some human players we can give combos to
-	{
-		GrantPlayerCombo(Controllers[0], Inv);
-	}*/
 }
 
-simulated function GrantPlayerCombo(Controller TargetController, GiveItemsInv Inv)
+simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsInv Inv)
 {
 	if (Inv.NumCombos < Inv.MaxNumCombos)
 	{
 		Inv.NumCombos++;
 		Level.Game.BroadCast(Self, "Combo given to " $ TargetController.PlayerReplicationInfo.PlayerName $ "!");
 		PlayerTeamAdrenaline = 0.000000;
+		return true;
 	}
+	return false;
 }
 
 function GrantMonsterCombo()
