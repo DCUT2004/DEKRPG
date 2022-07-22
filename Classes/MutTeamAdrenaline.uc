@@ -87,7 +87,7 @@ simulated function FindPlayer()
 	local int Index, Count, x;
 	local GiveItemsInv Inv;
 	local Pawn P;
-	local bool bComboGiven;
+	local bool bComboGiven, bIsAM;
 	
 	C = Level.ControllerList;
 	Pawns.Length = 0;
@@ -108,12 +108,23 @@ simulated function FindPlayer()
 			if (StatsInv != None)
 			{
 				//Check if player has bought a combo ability. If no combo ability, don't bother
+				bIsAM = false;
 				for (x = 0; x < StatsInv.Data.Abilities.Length; x++)
 				{
-					if ( ClassIsChildOf(StatsInv.Data.Abilities[x] , Class'AbilityCombo' ) )	//Player has a combo ability, add them to list of players
+					//Check for AM class
+					if ( StatsInv.Data.Abilities[x] == Class'ClassAdrenalineMaster' )
+						bIsAM = true;
+						
+					//If player has a combo ability and is AM, give a combo. Non-AMs, add them to pool of players
+					if ( ClassIsChildOf(StatsInv.Data.Abilities[x] , Class'AbilityCombo' ) )
 					{
-						Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
-						Pawns[0] = P;	//Set the new element we just inserted to P
+						if (bIsAM)																
+							GrantPlayerCombo(C, class'GiveItemsInv'.static.GetGiveItemsInv(C));
+						else
+						{
+							Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
+							Pawns[0] = P;	//Set the new element we just inserted to P
+						}
 						break;
 					}
 				}
@@ -122,7 +133,7 @@ simulated function FindPlayer()
 		C = NextC;
 	}
 	
-	//Now choose a random player
+	//Now choose a random non-AM player
 	if (Pawns.Length != 0)
 	{
 		Index = Rand(Pawns.Length);	//Choose a random number between 0 and Pawns.Length-1
@@ -135,9 +146,8 @@ simulated function FindPlayer()
 			if (P != None && P.Controller != None)
 			{
 				Inv = class'GiveItemsInv'.static.GetGiveItemsInv(P.Controller);
-				if (Inv != None)
-					bComboGiven = GrantPlayerCombo(P.Controller, Inv);
-				if (!bComboGiven)	//This player already the max allowable combos held. Find another player
+				bComboGiven = GrantPlayerCombo(P.Controller, Inv);
+				if (!bComboGiven)	//This player already has the max allowable combos held. Find another player
 				{
 					Index++;
 					if (Index >= Pawns.Length)
@@ -152,7 +162,7 @@ simulated function FindPlayer()
 
 simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsInv Inv)
 {
-	if (Inv.NumCombos < Inv.MaxNumCombos)
+	if (Inv != None && Inv.NumCombos < Inv.MaxNumCombos)
 	{
 		Inv.NumCombos++;
 		Level.Game.BroadCast(Self, "Combo given to " $ TargetController.PlayerReplicationInfo.PlayerName $ "!");
