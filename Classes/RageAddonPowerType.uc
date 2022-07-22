@@ -4,6 +4,21 @@ class RageAddonPowerType extends AddonPowerType
 var config float RageDamageReturn;
 var config int RageMinimumHealth;
 
+static function bool AllowedFor(Weapon W)
+{
+	if (W == None)
+		return false;
+
+	if ( W.default.FireModeClass[0] != None && W.default.FireModeClass[0].default.AmmoClass != None
+		          && class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.default.FireModeClass[0].default.AmmoClass) )
+		return false;
+	
+	if (ClassIsChildOf(W.Class,class'LinkGun') || ClassIsChildOf(W.Class,class'MiniGun'))
+		return false;
+
+	return true;
+}
+
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
@@ -54,19 +69,6 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	}
 }
 
-static function bool AllowedFor(Weapon W)
-{
-	if ( W.default.FireModeClass[0] != None && W.default.FireModeClass[0].default.AmmoClass != None
-		          && class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.default.FireModeClass[0].default.AmmoClass) )
-		return false;
-	
-	if (ClassIsChildOf(W.Class,class'LinkGun') || ClassIsChildOf(W.Class,class'MiniGun'))
-		return false;
-
-	return true;
-}
-
-
 function bool CanCoexist( class<AddonPowerType> NewType )
 {
 	if (!Super.CanCoexist(NewType ))
@@ -77,8 +79,8 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 		return false;
 	if (NewType == class'VampireAddonPowerType')
 		return false;
-	//if (NewType == class'ProtectionAddonPowerType')
-	//	return false;
+	if (NewType == class'ProtectionAddonPowerType')
+		return false;
 	return true;
 }
 

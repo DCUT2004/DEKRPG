@@ -97,8 +97,8 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 		return false;
 
 	// Put in a test for nullentropy and freeze Power type, and bounce
-	//if (NewType == class'NullEntropyAddonPowerType')
-	//	return false;
+	if (NewType == class'ForceAddonPowerType')
+		return false;
 	if (NewType == class'FreezeAddonPowerType')
 		return false;
 	if (NewType == class'KnockbackAddonPowerType')	// I don't think two of them will help

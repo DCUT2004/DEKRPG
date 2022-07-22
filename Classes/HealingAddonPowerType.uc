@@ -8,6 +8,8 @@ static function bool AllowedFor(Weapon W)
 	// In theory ought to only allow healing in on projectile weapons for non-team games.
 	// however, at the moment can't work out if a team game in a static function
 	// so ignore for the moment
+	if (W == None)
+		return false;
 
 	if
 	(

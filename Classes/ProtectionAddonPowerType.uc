@@ -12,9 +12,9 @@ function AdjustPlayerDamage(out int Damage, Pawn InstigatedBy, Vector HitLocatio
 
 	Damage = Max(1, Damage * (1.0 - ((ProtectionPercent/100.0) *  TheWeapon.GetModifier())));
 
-	if (InstigatedBy != None && TheWeapon.Instigator != None && Damage > 0 && TheWeapon.GetModifier() > 0 && InstigatedBy.Controller != None && !InstigatedBy.Controller.SameTeamAs(Instigator.Controller) && InstigatedBy != TheWeapon.Instigator )
+	if (InstigatedBy != None && TheWeapon.Instigator != None && Damage > 0 && TheWeapon.GetModifier() > 0 && InstigatedBy.Controller != None && !InstigatedBy.Controller.SameTeamAs(TheWeapon.Instigator.Controller) && InstigatedBy != TheWeapon.Instigator )
 	{
-		A = Spawn(Class'DEKEffectProtection',,,Owner.Location,rotator(Normal(HitLocation - Location)));
+		A = Spawn(Class'DEKEffectProtection',,,TheWeapon.Owner.Location,rotator(Normal(HitLocation - Location)));
 		if ( A != None )
 		{
 			A.RemoteRole = ROLE_SimulatedProxy;

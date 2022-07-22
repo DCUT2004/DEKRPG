@@ -8,6 +8,9 @@ static function bool AllowedFor(Weapon W)
 {
 	local int x;
 
+	if (W == None)
+		return false;
+
   	if(instr(caps(string(W)), "AVRIL") > -1)    //can't have slow-6 avril or will cause crash
 	   return false;
 
@@ -61,6 +64,20 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 	if (TheWeapon.GetModifier()<0)
 		Momentum /= 1.0 + (0.05 * abs(TheWeapon.GetModifier()));
+}
+
+function bool CanCoexist( class<AddonPowerType> NewType )
+{
+	if (!Super.CanCoexist(NewType ))
+		return false;
+
+	if (NewType == class'FreezeAddonPowerType')   // incompatible
+		return false;
+	if (NewType == class'ForceAddonPowerType')   // I don't think two of them will help
+		return false;
+	if (NewType == class'KnockbackAddonPowerType')	// I don't think two of them will help
+		return false;
+	return true;
 }
 
 defaultproperties

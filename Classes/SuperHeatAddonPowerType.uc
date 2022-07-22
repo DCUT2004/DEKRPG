@@ -102,6 +102,9 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	if (NewType == class'FreezeAddonPowerType')	   	// opposite
 		return false;
 
+	if (NewType == class'EarthAddonPowerType')	   	// opposite
+		return false;
+
 	if (NewType == class'SuperHeatAddonPowerType')	   	// 2 of them doesn't really work
 		return false;
 

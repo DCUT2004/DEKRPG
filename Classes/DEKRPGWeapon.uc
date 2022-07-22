@@ -537,6 +537,9 @@ simulated function DoDelayedIdentify()
 simulated function ConstructItemName()
 {
 	local int x;
+    local int y;
+    local string newName;
+    local bool GotMultiple;
 
 	if (Role == Role_Authority)
 	{
@@ -553,12 +556,31 @@ simulated function ConstructItemName()
 			for (x = 0; x < NumPowerTypes ; x++)
 				if (CurrentPowerTypes[x] != None)
 				{
-					if (Modifier<0)
-						sMyItemName = sMyItemName @ CurrentPowerTypes[x].NegName;
-					else if (Modifier == 0)
-						sMyItemName = sMyItemName @ CurrentPowerTypes[x].ZeroName;
-					else
-						sMyItemName = sMyItemName @ CurrentPowerTypes[x].PosName;
+                    GotMultiple = false;
+                    for (y = 0; y < x ; y++)
+                        if (CurrentPowerTypes[y].Class == CurrentPowerTypes[x].Class)
+                            GotMultiple = true;
+                    if (GotMultiple == false)
+                    {
+                        // haven't already dealt with this
+    					if (Modifier<0)
+    						newName = CurrentPowerTypes[x].NegName;
+    					else if (Modifier == 0)
+    						newName = CurrentPowerTypes[x].ZeroName;
+    					else
+    						newName = CurrentPowerTypes[x].PosName;
+
+                        // see if it is duplicated later
+                        GotMultiple = false;
+                        for (y = x + 1; y < NumPowerTypes ; y++)
+                            if (CurrentPowerTypes[y].Class == CurrentPowerTypes[x].Class)
+                                GotMultiple = true;
+                        
+                        if (GotMultiple)
+        					sMyItemName = sMyItemName @ caps(newName);
+                        else
+         					sMyItemName = sMyItemName @ newName;
+                    }    
 				}
 		}
 		else

@@ -4,6 +4,9 @@ class InfinityAddonPowerType extends AddonPowerType
 static function bool AllowedFor(Weapon W)
 {
 	// check if superweapon 
+	if (W == None)
+		return false;
+
 	if (  W.default.FireModeClass[0] != None && W.default.FireModeClass[0].default.AmmoClass != None
 		&& class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.default.FireModeClass[0].default.AmmoClass) )
 		return false;

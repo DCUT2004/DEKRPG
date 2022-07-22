@@ -5,6 +5,9 @@ var config float VorpalPercent;
 
 static function bool AllowedFor(Weapon W)
 {
+	if (W == None)
+		return false;
+
 	if(instr(caps(string(W)), "AVRIL") > -1)   //hack for vinv avril
 		return true;
 		

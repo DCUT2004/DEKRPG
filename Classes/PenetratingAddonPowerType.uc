@@ -5,6 +5,9 @@ static function bool AllowedFor(Weapon W)
 {
 	local int x;
 
+	if (W == None)
+		return false;
+
 	for (x = 0; x < W.NUM_FIRE_MODES; x++)
 		if (class<InstantFire>(W.default.FireModeClass[x]) != None)
 			return true;
@@ -56,8 +59,7 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	if (!Super.CanCoexist(NewType ))
 		return false;
 
-	// Put in a test for rage Power type, and bounce
-	if (NewType == class'RageAddonPowerType')
+	if (NewType == class'PenetratingAddonPowerType')	// 2 won't add anything
 		return false;
 
 	return true;
