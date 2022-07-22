@@ -24,7 +24,9 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	if (!Super.CanCoexist(NewType ))
 		return false;
 
-    // could refuse Protection or a second MagicalWard, but let's try it first
+    	// could refuse Protection, but let's try it first
+	if (NewType == class'MagicalWardAddonPowerType')
+		return false;
     
 	return true;
 }

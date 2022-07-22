@@ -23,7 +23,7 @@ function PostBeginPlay()
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
-	local RW_MagicalWard W;
+    local DEKRPGWeapon DW;
 	local MagicalWardProtectionInv MWInv;
 	local ComboWardInv WardInv;
 	
@@ -40,30 +40,33 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 			return;
 		}
 
-		if (Other.Weapon != None && Other.Weapon.IsA('RW_MagicalWard') && !bBuff)
-		{
-			W = RW_MagicalWard(Other.Weapon);
-			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
-			{
-				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-				if (MWInv == None)
-				{
-					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-					MWInv.GiveTo(Other);
-				}
-				else
-				{
-					MWInv.Lifespan = MWInv.default.Lifespan;
-					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-				}
-				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
-				Destroy();
-				return;
-			}
-		}
+		if (Other.Weapon != None && Other.Weapon.IsA('DEKRPGWeapon'))
+        {
+            DW = (DEKRPGWeapon(Other.Weapon));
+    		if (DW.HasThisAddon(class'MagicalWardAddonPowerType'))
+    		{
+    			if (Rand(100) <= DW.GetModifier() * class'MagicalWardAddonPowerType'.default.ChanceToWardPerModifier)
+    			{
+    				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+    				if (MWInv == None)
+    				{
+    					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+    					MWInv.GiveTo(Other);
+    				}
+    				else
+    				{
+    					MWInv.Lifespan = MWInv.default.Lifespan;
+    					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+    					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+    						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+    				}
+    				if (Other.Controller != None && PlayerController(Other.Controller) != None)
+    					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
+    				Destroy();
+    				return;
+    			}
+    		}
+        }
 	}
 	TimeRemaining = Lifespan;
 	if (TimeRemaining <= 0)

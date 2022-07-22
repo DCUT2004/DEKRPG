@@ -21,7 +21,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	local Mission1Inv M1Inv;
 	local Mission2Inv M2Inv;
 	local MIssion3Inv M3Inv;
-	local RW_MagicalWard W;
+	local DEKRPGWeapon DW;
 	local MagicalWardProtectionInv MWInv;
 	local ComboWardInv WardInv;
 	
@@ -46,29 +46,32 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 			Destroy();
 			return;
 		}
-		if (PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('RW_MagicalWard'))
+		if (PawnOwner.Weapon != None && PawnOwner.Weapon.IsA('DEKRPGWeapon'))
 		{
-			W = RW_MagicalWard(PawnOwner.Weapon);
-			if (Rand(100) <= W.Modifier*W.ChanceToWardPerModifier)
-			{
-				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
-				if (MWInv == None)
-				{
-					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
-					MWInv.GiveTo(Other);
-				}
-				else
-				{
-					MWInv.Lifespan = MWInv.default.Lifespan;
-					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
-					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
-						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
-				}
-				if (Other.Controller != None && PlayerController(Other.Controller) != None)
-					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
-				Destroy();
-				return;
-			}
+            DW = (DEKRPGWeapon(Other.Weapon));
+    		if (DW.HasThisAddon(class'MagicalWardAddonPowerType'))
+    		{
+    			if (Rand(100) <= DW.GetModifier() * class'MagicalWardAddonPowerType'.default.ChanceToWardPerModifier)
+    			{
+    				MWInv = MagicalWardProtectionInv(Other.FindInventoryType(class'MagicalWardProtectionInv'));
+    				if (MWInv == None)
+    				{
+    					MWInv = Other.Spawn(Class'MagicalWardProtectionInv');
+    					MWInv.GiveTo(Other);
+    				}
+    				else
+    				{
+    					MWInv.Lifespan = MWInv.default.Lifespan;
+    					MWInv.ProtectionMultiplier -= MWInv.ProtectionPerWardMultiplier;
+    					if (MWInv.ProtectionMultiplier < MWInv.MaxProtectionMultiplier)
+    						MWInv.ProtectionMultiplier = MWInv.MaxProtectionMultiplier;
+    				}
+    				if (Other.Controller != None && PlayerController(Other.Controller) != None)
+    					PlayerController(Other.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
+    				Destroy();
+    				return;
+    			}
+            }
 		}
 		
 		MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));

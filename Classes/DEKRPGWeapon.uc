@@ -601,7 +601,7 @@ simulated function ConstructItemName()
 		else if (NumPowerTypes > MaxNumPowersClonable)
 			ItemName = ItemName @ "*";
 	}
-
+    
 	if (Role == Role_Authority)
 	{
 		if (ModifiedWeapon != None)
@@ -620,6 +620,16 @@ function int GetModifier()
 	if (TempModifier <= 0 && Modifier > 0)
 		TempModifier = 1;
 	return TempModifier;
+}
+
+function bool HasThisAddon(class<AddonPowerType> requiredAddon)
+{
+	local int x;
+	for (x = 0; x < NumPowerTypes ; x++)
+		if (CurrentPowerTypes[x].Class == requiredAddon)
+            return true;
+                
+	return false;
 }
 
 // *** now the checks on what Power types are allowed where
