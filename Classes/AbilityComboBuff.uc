@@ -5,5 +5,8 @@ class AbilityComboBuff extends AbilityCombo
 
 defaultproperties
 {
+	StartingCost=3
+	CostAddPerLevel=3
+	MaxLevel=20
 	ComboType=0
 }

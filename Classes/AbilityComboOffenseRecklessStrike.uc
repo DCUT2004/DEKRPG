@@ -28,10 +28,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Offense: Reckless Strike"
-	Description="Deals 40 damage per level to all targets. The damage is affected by buffs and ailments. The caster receives -3% defense per level for 25 seconds. This cannot be cleansed.||You can only have one type of Offense combo at a time.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Arctic Suit and Burning Embers you wish to purchase. Additionally:||Level 5: 10 Cosmic Dust, 10 Icicles||Level 6: 20 Cosmic Dust, 20 Icicles||Level 7: 30 Cosmic Dust, 30 Icicles||Level 8: 40 Cosmic Dust, 40 Icicles||Level 9: 45 Cosmic Dust, 45 Icicles||Level 10: 50 Cosmic Dust, 50 Icicles||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="Deals 40 damage per level to all targets. The damage is affected by buffs and ailments. The caster receives -3% defense per level for 25 seconds. This cannot be cleansed.||You can only have one type of Offense combo at a time.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Arctic Suit and Burning Embers you wish to purchase. Additionally:||Level 5: 10 Cosmic Dust, 10 Icicles||Level 6: 20 Cosmic Dust, 20 Icicles||Level 7: 30 Cosmic Dust, 30 Icicles||Level 8: 40 Cosmic Dust, 40 Icicles||Level 9: 45 Cosmic Dust, 45 Icicles||Level 10: 50 Cosmic Dust, 50 Icicles||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=20.000000
 	MultiplierStep=0.030000000
 	BaseLifespan=25.00000

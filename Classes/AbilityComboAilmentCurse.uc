@@ -27,10 +27,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Ailment: Curse"
-	Description="A single target receives Curse. While cursed, the caster steals 0.5% of the target's health per second per level. If the target dies, the curse moves to a new target, and will continue this process for 25 seconds. This ailment can not be stacked. Cursed targets have an orange glow.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Tarydium Shards and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Plated Armor||Level 6: 20 Fine Leather, 20 Plated Armor||Level 7: 30 Fine Leather, 30 Plated Armor||Level 8: 40 Fine Leather, 40 Plated Armor, 10 Nanite Fragments||Level 9: 45 Fine Leather, 45 Plated Armor, 25 Nanite Fragments||Level 10: 50 Fine Leather, 50 Plated Armor, 50 Nanite Fragments||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="A single target receives Curse. While cursed, the caster steals 0.5% of the target's health per second per level. If the target dies, the curse moves to a new target, and will continue this process for 25 seconds. This ailment can not be stacked. Cursed targets have an orange glow.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Tarydium Shards and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Plated Armor||Level 6: 20 Fine Leather, 20 Plated Armor||Level 7: 30 Fine Leather, 30 Plated Armor||Level 8: 40 Fine Leather, 40 Plated Armor, 10 Nanite Fragments||Level 9: 45 Fine Leather, 45 Plated Armor, 25 Nanite Fragments||Level 10: 50 Fine Leather, 50 Plated Armor, 50 Nanite Fragments||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=0.0050000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000

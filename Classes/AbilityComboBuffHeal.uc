@@ -26,10 +26,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Buff: Heal"
-	Description="Heals the caster and all allies. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health.||Each level adds 25 health per level.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Honeysuckle Vine||Level 6: 20 Fine Leather, 20 Honeysuckle Vine||Level 7: 30 Fine Leather, 30 Honeysuckle Vine||Level 8: 40 Fine Leather, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Fine Leather, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Fine Leather, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="Heals the caster and all allies. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health.||Each level adds 25 health per level.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Nali Fruit and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Honeysuckle Vine||Level 6: 20 Fine Leather, 20 Honeysuckle Vine||Level 7: 30 Fine Leather, 30 Honeysuckle Vine||Level 8: 40 Fine Leather, 40 Honeysuckle Vine, 10 Moss||Level 9: 45 Fine Leather, 45 Honeysuckle Vine, 25 Moss||Level 10: 50 Fine Leather, 50 Honeysuckle Vine, 50 Moss||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=25.0000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000

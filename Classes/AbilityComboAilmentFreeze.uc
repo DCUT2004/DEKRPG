@@ -39,10 +39,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Ailment: Freeze"
-	Description="All targets receive Freeze for 25 seconds. Additionally for 25 seconds, the target you look at receives Null Entropy and -1% defense per level for 15 seconds. You can only apply this effect to one target at a time. The defense ailment is stacked.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Combat Boots you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Icicles||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Icicles||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Icicles||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="All targets receive Freeze for 25 seconds. Additionally for 25 seconds, the target you look at receives Null Entropy and -1% defense per level for 15 seconds. You can only apply this effect to one target at a time. The defense ailment is stacked.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Combat Boots you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Icicles||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Icicles||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Icicles||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=0.01000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000

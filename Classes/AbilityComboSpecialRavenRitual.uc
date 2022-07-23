@@ -28,9 +28,6 @@ defaultproperties
 {
 	AbilityName="Special: Raven Ritual"
 	Description="Heals the caster by 100 health. Healing over the max health is added as temporary max health, up to double the amount of the caster's original max health. For as long as the caster has boosted health, the caster deals 20 damage per level every 10 seconds to a single target. This effect ends when the caster's health drops below the normal max health amount.||You can only have one type of Special combo at a time.||REQUIRED MATERIALS:|You need 5 times the ability level of Moonlit Stone you wish to purchase.||Cost(per level): 10, 20, 30, 40...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=10
-	CostAddPerLevel=10
 	BaseMultiplier=20.00000
 	BaseLifespan=10.000		//Interval to deal damage
 	Dispellable=True
