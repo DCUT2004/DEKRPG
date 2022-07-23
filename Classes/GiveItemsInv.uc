@@ -50,10 +50,8 @@ var Array<AbilityConfig> AbilityConfigs;
 var RPGStatsInv ClientStatsInv;		// set clientside by RPGMenus
 
 //Combos
-var ComboAbilityInv Combo;
-var MutTeamAdrenaline TA;
-var bool TAInitialized;
-var int NumCombos;
+var ComboAbilityInv Combo;		//Contains a linked list of ComboAbilityInv, and is iterated over by BBFF combo when executed
+var int NumCombos;				//Current number of combos held. Stored here, as combos should be saved when players respawn
 
 //Materials
 var bool bBoots;
@@ -123,7 +121,6 @@ function PostBeginPlay()
 //	if(Level.NetMode == NM_DedicatedServer || Level.NetMode == NM_ListenServer || Level.NetMode == NM_Standalone)
 //	setTimer(default.BuyClassInterval, true);
 	NumCombos = 0;
-	TAInitialized = False;
 	super.postBeginPlay();
 }
 
@@ -139,17 +136,7 @@ simulated function Tick(float deltaTime)
 {
 	local int x;
 	local RPGInteraction rpgi;
-	local Mutator M;
 	
-	if (Level.Game != None && !TAInitialized)
-		for (m = Level.Game.BaseMutator; m != None; m = m.NextMutator)
-			if (MutTeamAdrenaline(m) != None)
-			{
-				TA = MutTeamAdrenaline(m);
-				TAInitialized = True;
-				break;
-			}
-
 	if (Level.NetMode == NM_DedicatedServer || (DKInteraction != None && bRemovedInteraction))
 	{
 		disable('Tick');
@@ -465,26 +452,6 @@ function bool MaterialUnlocked(Class<AbilityMaterial> MaterialClass)
 		return True;
 		
 	return False;
-}
-
-function AddPlayerAdren()
-{
-	if (TA != None)
-	{
-		TA.PlayerTeamAdrenaline += 1.0000000;
-		if (TA.PlayerTeamAdrenaline > TA.FullAdrenalinePlayer)
-			TA.PlayerTeamAdrenaline = TA.FullAdrenalinePlayer;
-	}
-}
-
-function AddMonsterAdren()
-{
-	if (TA != None)
-	{
-		TA.MonsterTeamAdrenaline += 1.000000;
-		if (TA.MonsterTeamAdrenaline > TA.FullAdrenalineMonster)
-			TA.MonsterTeamAdrenaline = TA.FullAdrenalineMonster;
-	}
 }
 
 simulated function Destroyed()
