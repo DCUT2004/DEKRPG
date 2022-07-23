@@ -51,10 +51,9 @@ var RPGStatsInv ClientStatsInv;		// set clientside by RPGMenus
 
 //Combos
 var ComboAbilityInv Combo;
-var config int CheckInterval;
 var MutTeamAdrenaline TA;
 var bool TAInitialized;
-var int NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
+var int NumCombos;
 
 //Materials
 var bool bBoots;
@@ -86,7 +85,7 @@ replication
 	reliable if (Role == ROLE_Authority)
 		ClientReceiveKeys, ClientRemainingAbility, ClientRemoveAbilities, ClientReceiveSubClass, ClientReceiveSubClasses, ClientReceiveSubClassAbilities, ClientSetSubClass, ClientSetSubClassSizes, ClientDoReconnect, RemoveInteraction;
 	reliable if (Role == ROLE_Authority)
-		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
+		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos;
 	reliable if (Role == ROLE_Authority)
 		bBoots, bLumber, bTarydium, bSteel, bNaliFruit, bGloves, bLeather, bArmor, bVines, bEmbers, bArcticSuit, bMoss, bDust, bNanite, bPumice, bIcicle, bTranslator, bStarChart, bUranium, bHourglass, bMoonlitStone;
 }
@@ -125,7 +124,6 @@ function PostBeginPlay()
 //	setTimer(default.BuyClassInterval, true);
 	NumCombos = 0;
 	TAInitialized = False;
-	SetTimer(CheckInterval, True);
 	super.postBeginPlay();
 }
 
@@ -201,15 +199,6 @@ simulated function Tick(float deltaTime)
 			if(DKInteraction != None && bRemovedInteraction)
 				disable('Tick');
 		}
-	}
-}
-
-function Timer()
-{
-	if (TA != None)
-	{
-		PlayerTeamAdrenaline = TA.PlayerTeamAdrenaline;
-		MonsterTeamAdrenaline = TA.MonsterTeamAdrenaline;
 	}
 }
 
@@ -1377,7 +1366,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-	 CheckInterval=1.00000
 	 MessageClass=Class'UnrealGame.StringMessagePlus'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
