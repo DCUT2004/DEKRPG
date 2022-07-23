@@ -55,7 +55,6 @@ var config int CheckInterval;
 var MutTeamAdrenaline TA;
 var bool TAInitialized;
 var int NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
-var config int MaxNumCombos;
 
 //Materials
 var bool bBoots;
@@ -1378,7 +1377,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-	 MaxNumCombos=1
 	 CheckInterval=1.00000
 	 MessageClass=Class'UnrealGame.StringMessagePlus'
      bOnlyRelevantToOwner=False
