@@ -204,8 +204,8 @@ simulated function UpdateHud()
 		if (GInv != None)
 		{
 			ComboCount.Value = GInv.NumCombos;
-			PlayerTeamAdrenalineCount.Value = int(MutTA.PlayerTeamAdrenaline);
-			MonsterTeamAdrenalineCount.Value = int(MutTA.MonsterTeamAdrenaline);
+			PlayerTeamAdrenalineCount.Value = MutTA.GetPlayerTeamAdren();
+			MonsterTeamAdrenalineCount.Value = MutTA.GetMonsterTeamAdren();
 		}
 		else
 		{

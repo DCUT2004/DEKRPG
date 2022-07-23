@@ -3,15 +3,18 @@ class MutTeamAdrenaline extends Mutator
 	
 var Invasion Invasion;
 var MutWaveRandomizer WaveRandomizer;
-var config float FullAdrenalinePlayer, FullAdrenalineMonster;
+var config float PlayerTeamAdrenMax, MonsterTeamAdrenMax;
 var float PlayerTeamAdrenaline, MonsterTeamAdrenaline;
-var config int NumMonsterCombos;	//The number of buffs and ailments the monster team can apply
+var config int NumMonsterCombos;		//The number of buffs and ailments the monster team can apply
 var config byte MinimumWave;			//The wave number when monsters can start applying buffs and ailments
 var config byte MinimumMonsters;		//The number of monsters alive before a monster team combo can be activated
 var bool bComboAddedForBossWave;
 
-var config byte MaxCombosNonAM;		//Max number of combos allowed to be held for Non-AMs
+var config byte MaxCombosNonAM;			//Max number of combos allowed to be held for Non-AMs
 var config byte MaxCombosAM;			//Max number of combos allowed to be held for AMs
+
+var config int MinAdrenAmount;			//Minimum adrenaline amount to award on an event
+var config float MonsterAdrenPerHit;	//How much adren monster team should receive per hit to a player
 
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
 
@@ -52,13 +55,12 @@ simulated function PostBeginPlay()
 		if (Invasion != None)
 		{
 			G = Spawn(class'TeamAdrenalineGameRules');
-			G.TA = Self;
 			if ( Level.Game.GameRulesModifiers == None )
 				Level.Game.GameRulesModifiers = G;
 			else    
 				Level.Game.GameRulesModifiers.AddGameRules(G);
-			PlayerTeamAdrenaline = 0.000000;
-			MonsterTeamAdrenaline = 0.000000;
+			default.PlayerTeamAdrenaline = 0.000000;
+			default.MonsterTeamAdrenaline = 0.000000;
 			SetTimer(10, True);
 		}
 	}
@@ -85,11 +87,11 @@ simulated function ModifyPlayer(Pawn Other)
 simulated function Timer()
 {
 	//Handle player team and monster team adrenaline
-	if (PlayerTeamAdrenaline >= FullAdrenalinePlayer)
+	if (default.PlayerTeamAdrenaline >= PlayerTeamAdrenMax)
 	{
 		FindPlayer();
 	}
-	if (MonsterTeamAdrenaline >= FullAdrenalineMonster && Invasion.WaveNum >= MinimumWave && Invasion.bWaveInProgress && Invasion.NumMonsters >= MinimumMonsters)
+	if (default.MonsterTeamAdrenaline >= MonsterTeamAdrenMax && Invasion.WaveNum >= MinimumWave && Invasion.bWaveInProgress && Invasion.NumMonsters >= MinimumMonsters)
 	{
 		GrantMonsterCombo();
 	}
@@ -99,6 +101,31 @@ simulated function Timer()
 		GrantAllPlayersCombo();
 		bComboAddedForBossWave = true;
 	}
+}
+
+simulated function int GetPlayerTeamAdren()
+{
+	PlayerTeamAdrenaline = default.PlayerTeamAdrenaline;	//For RPGHUD, because default variables are not replicated...
+	return PlayerTeamAdrenaline;
+}
+
+simulated function int GetMonsterTeamAdren()
+{
+	MonsterTeamAdrenaline = default.MonsterTeamAdrenaline;	//For RPGHUD, because default variables are not replicated...
+	return MonsterTeamAdrenaline;
+}
+
+static function AddPlayerTeamAdren(float AdrenAmount)
+{
+	if (AdrenAmount < default.MinAdrenAmount)
+		AdrenAmount = default.MinAdrenAmount;
+	default.PlayerTeamAdrenaline += AdrenAmount;
+	default.PlayerTeamAdrenaline += FMin(AdrenAmount, default.PlayerTeamAdrenMax - default.PlayerTeamAdrenaline);
+}
+
+static function AddMonsterTeamAdren()
+{
+	default.MonsterTeamAdrenaline += FMin(default.MonsterAdrenPerHit, default.MonsterTeamAdrenMax - default.MonsterTeamAdrenaline);
 }
 
 function bool IsAdrenalineMaster(RPGStatsInv StatsInv)
@@ -229,7 +256,7 @@ simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsI
 	if (!bIsAM)		//Don't want to announce combos for all AMs
 		Level.Game.BroadCast(Self, "Combo given to " $ TargetController.PlayerReplicationInfo.PlayerName $ "!");
 	if (!bReward)	//If granting combo to player as a reward or as boss wave, don't take off team adren
-		PlayerTeamAdrenaline = 0.000000;
+		default.PlayerTeamAdrenaline = 0.000000;
 	return true;
 }
 
@@ -273,7 +300,7 @@ function GrantMonsterCombo()
 		AnnounceCombo(RandIndex);
 	}
 	PlayMonsterComboSound();
-	MonsterTeamAdrenaline = 0.000000;
+	default.MonsterTeamAdrenaline = 0.000000;
 }
 
 simulated function PlayMonsterComboSound()
@@ -292,13 +319,15 @@ simulated function AnnounceCombo(int RandIndex)
 
 defaultproperties
 {
+	MinAdrenAmount=1
+	MonsterAdrenPerHit=0.20000000
 	MaxCombosNonAM=1
 	MaxCombosAM=2
 	NumMonsterCombos=3
 	MinimumWave=1
 	MinimumMonsters=5
-	FullAdrenalinePlayer=100.000000000
-	FullAdrenalineMonster=100.00000000
+	PlayerTeamAdrenMax=100.000000000
+	MonsterTeamAdrenMax=100.00000000
 	ComboClass(0)=Class'DEKRPG999X.ComboAttackInv'
 	ComboClass(1)=Class'DEKRPG999X.ComboAttackInv'
 	ComboClass(2)=Class'DEKRPG999X.ComboDefenseInv'
