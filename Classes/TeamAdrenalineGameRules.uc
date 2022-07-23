@@ -1,14 +1,11 @@
 class TeamAdrenalineGameRules extends GameRules
 	config(UT2004RPG);
 
-var MutTeamAdrenaline TA;
 var Pawn TauntPawn;
 var config Array < Class < AbilityMaterial > > LowMaterials, MediumMaterials, HighMaterials;
 var config int MaterialKillChance, MaterialGameWinChance;	//The chance to unlock a material upon a kill or upon winning game
 var config int LowMaterialChance, MediumMaterialChance;
-var config float PlayerAdrenPerKill, MonsterAdrenPerHit;
 var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
-var config int MinAdrenAmount;	//Minimum adrenaline amount to award on an event
 
 function PostBeginPlay()
 {
@@ -101,14 +98,11 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local Actor A;
 	
 	//Add to monster team adrenaline on each hit
-	if (TA != None)
+	if (injured != None && instigatedBy != None)
 	{
-		if (injured != None && instigatedBy != None)
+		if (instigatedBy.IsA('Monster') && !injured.IsA('Monster') && !injured.IsA('DruidBlock') && injured.GetTeamNum() != instigatedBy.GetTeamNum())
 		{
-			if (instigatedBy.IsA('Monster') && !injured.IsA('Monster') && !injured.IsA('DruidBlock') && injured.GetTeamNum() != instigatedBy.GetTeamNum() && TA.MonsterTeamAdrenaline < TA.FullAdrenalineMonster)
-			{
-				AddMonsterTeamAdren();
-			}
+			class'MutTeamAdrenaline'.static.AddMonsterTeamAdren();
 		}
 	}
 	
@@ -244,20 +238,18 @@ function ScoreKill(Controller Killer, Controller Killed)
 	local GiveItemsInv GInv;
 	local Monster M;
 	
-	if (TA != None)
+
+	if (Killer != None && Killed != None)
 	{
-		if (Killer != None && Killed != None)
+		if (Killer.Pawn != None && Killer.Pawn.Health > 0 && Killed.Pawn != None && Killed.Pawn.IsA('Monster') && Killer.Pawn.GetTeamNum() != Killed.Pawn.GetTeamNum() && !Killed.Pawn.IsA('HealerNali') && !Killed.Pawn.IsA('MissionCow'))
 		{
-			if (Killer.Pawn != None && Killer.Pawn.Health > 0 && Killed.Pawn != None && Killed.Pawn.IsA('Monster') && Killer.Pawn.GetTeamNum() != Killed.Pawn.GetTeamNum() && !Killed.Pawn.IsA('HealerNali') && !Killed.Pawn.IsA('MissionCow') && TA.PlayerTeamAdrenaline < TA.FullAdrenalinePlayer)
+			if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
 			{
-				if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
-				{
-					M = Monster(Killed.Pawn);
-					AddPlayerTeamAdren(M.ScoringValue * MonsterScoreMultiplier);
-				}
-				else
-					AddPlayerTeamAdren(1);
+				M = Monster(Killed.Pawn);
+				class'MutTeamAdrenaline'.static.AddPlayerTeamAdren(M.ScoringValue * MonsterScoreMultiplier);
 			}
+			else
+				class'MutTeamAdrenaline'.static.AddPlayerTeamAdren(1);
 		}
 	}
 	
@@ -287,33 +279,9 @@ function ScoreKill(Controller Killer, Controller Killed)
 	Super.ScoreKill(Killer, Killed);
 }
 
-function AddPlayerTeamAdren(int AdrenAmount)
-{
-	if (TA != None)
-	{
-		if (AdrenAmount < MinAdrenAmount)
-			AdrenAmount = MinAdrenAmount;
-		TA.PlayerTeamAdrenaline += AdrenAmount;
-		if (TA.PlayerTeamAdrenaline > TA.FullAdrenalinePlayer)
-			TA.PlayerTeamAdrenaline = TA.FullAdrenalinePlayer;
-	}
-}
-
-function AddMonsterTeamAdren()
-{
-	if (TA != None)
-	{
-		TA.MonsterTeamAdrenaline += MonsterAdrenPerHit;
-		if (TA.MonsterTeamAdrenaline > TA.FullAdrenalineMonster)
-			TA.MonsterTeamAdrenaline = TA.FullAdrenalineMonster;
-	}
-}
-
 defaultproperties
 {
-	MinAdrenAmount=1
 	MonsterScoreMultiplier=0.50000000
-	MonsterAdrenPerHit=0.20000000
 	MaterialKillChance=1
 	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material

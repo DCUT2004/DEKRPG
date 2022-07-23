@@ -91,9 +91,9 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 				
 	// check for required materials, only for non-AM classes
 	// However, if it is a special combo, materials are required no matter the class
-	for (ab = 0; ab < default.Materials.length; ab++)
+	if (!bIsAM || bIsAM && default.ComboType == 3)
 	{
-		if (!bIsAM || bIsAM && default.ComboType == 3)
+		for (ab = 0; ab < default.Materials.length; ab++)
 		{
 			//We are only interested in checking the Materials at the level we want to purchase
 			if (ab < CurrentLevel)

@@ -50,12 +50,8 @@ var Array<AbilityConfig> AbilityConfigs;
 var RPGStatsInv ClientStatsInv;		// set clientside by RPGMenus
 
 //Combos
-var ComboAbilityInv Combo;
-var config int CheckInterval;
-var MutTeamAdrenaline TA;
-var bool TAInitialized;
-var int NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
-var config int MaxNumCombos;
+var ComboAbilityInv Combo;		//Contains a linked list of ComboAbilityInv, and is iterated over by BBFF combo when executed
+var int NumCombos;				//Current number of combos held. Stored here, as combos should be saved when players respawn
 
 //Materials
 var bool bBoots;
@@ -87,7 +83,7 @@ replication
 	reliable if (Role == ROLE_Authority)
 		ClientReceiveKeys, ClientRemainingAbility, ClientRemoveAbilities, ClientReceiveSubClass, ClientReceiveSubClasses, ClientReceiveSubClassAbilities, ClientSetSubClass, ClientSetSubClassSizes, ClientDoReconnect, RemoveInteraction;
 	reliable if (Role == ROLE_Authority)
-		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
+		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos;
 	reliable if (Role == ROLE_Authority)
 		bBoots, bLumber, bTarydium, bSteel, bNaliFruit, bGloves, bLeather, bArmor, bVines, bEmbers, bArcticSuit, bMoss, bDust, bNanite, bPumice, bIcicle, bTranslator, bStarChart, bUranium, bHourglass, bMoonlitStone;
 }
@@ -125,8 +121,6 @@ function PostBeginPlay()
 //	if(Level.NetMode == NM_DedicatedServer || Level.NetMode == NM_ListenServer || Level.NetMode == NM_Standalone)
 //	setTimer(default.BuyClassInterval, true);
 	NumCombos = 0;
-	TAInitialized = False;
-	SetTimer(CheckInterval, True);
 	super.postBeginPlay();
 }
 
@@ -142,17 +136,7 @@ simulated function Tick(float deltaTime)
 {
 	local int x;
 	local RPGInteraction rpgi;
-	local Mutator M;
 	
-	if (Level.Game != None && !TAInitialized)
-		for (m = Level.Game.BaseMutator; m != None; m = m.NextMutator)
-			if (MutTeamAdrenaline(m) != None)
-			{
-				TA = MutTeamAdrenaline(m);
-				TAInitialized = True;
-				break;
-			}
-
 	if (Level.NetMode == NM_DedicatedServer || (DKInteraction != None && bRemovedInteraction))
 	{
 		disable('Tick');
@@ -202,15 +186,6 @@ simulated function Tick(float deltaTime)
 			if(DKInteraction != None && bRemovedInteraction)
 				disable('Tick');
 		}
-	}
-}
-
-function Timer()
-{
-	if (TA != None)
-	{
-		PlayerTeamAdrenaline = TA.PlayerTeamAdrenaline;
-		MonsterTeamAdrenaline = TA.MonsterTeamAdrenaline;
 	}
 }
 
@@ -477,26 +452,6 @@ function bool MaterialUnlocked(Class<AbilityMaterial> MaterialClass)
 		return True;
 		
 	return False;
-}
-
-function AddPlayerAdren()
-{
-	if (TA != None)
-	{
-		TA.PlayerTeamAdrenaline += 1.0000000;
-		if (TA.PlayerTeamAdrenaline > TA.FullAdrenalinePlayer)
-			TA.PlayerTeamAdrenaline = TA.FullAdrenalinePlayer;
-	}
-}
-
-function AddMonsterAdren()
-{
-	if (TA != None)
-	{
-		TA.MonsterTeamAdrenaline += 1.000000;
-		if (TA.MonsterTeamAdrenaline > TA.FullAdrenalineMonster)
-			TA.MonsterTeamAdrenaline = TA.FullAdrenalineMonster;
-	}
 }
 
 simulated function Destroyed()
@@ -1378,8 +1333,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-	 MaxNumCombos=1
-	 CheckInterval=1.00000
 	 MessageClass=Class'UnrealGame.StringMessagePlus'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True

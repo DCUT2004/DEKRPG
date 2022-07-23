@@ -26,10 +26,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Buff: Shield Boost"
-	MaxLevel=10
-	Description="Permanently boosts the max shield of the caster and all allies.||Each level boosts the max shield by 2 per level.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Lumber and Steel you wish to purchase. Additionally:||Level 5: 10 Arctic Suit, 10 Plated Armor||Level 6: 20 Arctic Suit, 20 Plated Armor||Level 7: 30 Arctic Suit, 30 Plated Armor||Level 8: 40 Arctic Suit, 40 Plated Armor, 10 Nanite Fragment||Level 9: 45 Arctic Suit, 45 Plated Armor, 25 Nanite Fragment||Level 10: 50 Arctic Suit, 50 Plated Armor, 50 Nanite Fragment||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="Permanently boosts the max shield of the caster and all allies.||Each level boosts the max shield by 2 per level.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Lumber and Steel you wish to purchase. Additionally:||Level 5: 10 Arctic Suit, 10 Plated Armor||Level 6: 20 Arctic Suit, 20 Plated Armor||Level 7: 30 Arctic Suit, 30 Plated Armor||Level 8: 40 Arctic Suit, 40 Plated Armor, 10 Nanite Fragment||Level 9: 45 Arctic Suit, 45 Plated Armor, 25 Nanite Fragment||Level 10: 50 Arctic Suit, 50 Plated Armor, 50 Nanite Fragment||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=25.0000
 	MultiplierAddPerStep=1.000000
 	MultiplierStep=2.00000

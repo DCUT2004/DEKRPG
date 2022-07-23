@@ -27,10 +27,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
 	AbilityName="Ailment: Jinx"
-	Description="A single target receives Jinx. While jinxed, the target strikes down any of its projectiles as well as its allies' projectiles. If the target dies, the curse moves to a new target, and will continue this process for 25 seconds. Each level increases the speed at which projectiles are shot down. This ailment can not be stacked. Jinxed targets have a pink-purple glow.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Steel you wish to purchase. Additionally:||Level 5: 10 Honeysuckle Vine, 10 Arctic Suit||Level 6: 20 Honeysuckle Vine, 20 Arctic Suit||Level 7: 30 Honeysuckle Vine, 30 Arctic Suit||Level 8: 40 Honeysuckle Vine, 40 Arctic Suit, 10 Nanite Fragments||Level 9: 45 Honeysuckle Vine, 45 Arctic Suit, 25 Nanite Fragments||Level 10: 50 Honeysuckle Vine, 50 Arctic Suit, 50 Nanite Fragments||Cost(per level): 5, 10, 15, 20...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
-	MaxLevel=10
-	StartingCost=5
-	CostAddPerLevel=5
+	Description="A single target receives Jinx. While jinxed, the target strikes down any of its projectiles as well as its allies' projectiles. If the target dies, the curse moves to a new target, and will continue this process for 25 seconds. Each level increases the speed at which projectiles are shot down. This ailment can not be stacked. Jinxed targets have a pink-purple glow.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Steel you wish to purchase. Additionally:||Level 5: 10 Honeysuckle Vine, 10 Arctic Suit||Level 6: 20 Honeysuckle Vine, 20 Arctic Suit||Level 7: 30 Honeysuckle Vine, 30 Arctic Suit||Level 8: 40 Honeysuckle Vine, 40 Arctic Suit, 10 Nanite Fragments||Level 9: 45 Honeysuckle Vine, 45 Arctic Suit, 25 Nanite Fragments||Level 10: 50 Honeysuckle Vine, 50 Arctic Suit, 50 Nanite Fragments||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=0.0500000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000

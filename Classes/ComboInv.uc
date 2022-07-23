@@ -1,5 +1,5 @@
 //ComboInv handles all the buffs and debuffs applied to players and monsters
-//Given to players via RPGClass
+//Given to players via MutTeamAdrenaline
 //Given to Boss monsters via self
 class ComboInv extends Inventory;
 

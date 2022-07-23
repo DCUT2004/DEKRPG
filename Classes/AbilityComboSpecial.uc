@@ -5,5 +5,8 @@ class AbilityComboSpecial extends AbilityCombo
 
 defaultproperties
 {
+	StartingCost=10
+	CostAddPerLevel=10
+	MaxLevel=20
 	ComboType=3
 }
