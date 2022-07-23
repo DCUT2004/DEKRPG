@@ -119,7 +119,6 @@ static function AddPlayerTeamAdren(float AdrenAmount)
 {
 	if (AdrenAmount < default.MinAdrenAmount)
 		AdrenAmount = default.MinAdrenAmount;
-	default.PlayerTeamAdrenaline += AdrenAmount;
 	default.PlayerTeamAdrenaline += FMin(AdrenAmount, default.PlayerTeamAdrenMax - default.PlayerTeamAdrenaline);
 }
 
