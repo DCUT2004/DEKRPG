@@ -12,19 +12,23 @@ function bool shouldBreak()
 
 function constructionFinished(RPGWeapon result)
 {
-	local RW_Matrix Matrix;
+    local DEKRPGWeapon thisWeapon;
+    
+	// need to strip off the existing addons and put Matrix on instead
+    thisWeapon = DEKRPGWeapon(result);
+    if (thisWeapon == none || thisWeapon.HasThisAddon(class'MatrixAddonPowerType'))
+        return;
 
-	if(RW_Matrix(result) != None)
-	{
-		Matrix = RW_Matrix(Instigator.FindInventoryType(class'RW_Matrix'));
-	}
-}
-
-function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponType, Pawn Other)
-{
-	if(class'RW_Matrix'.static.AllowedFor(WeaponType, Other))
-		return class'RW_Matrix';
-	return class'RPGWeapon';
+    while (thisWeapon.NumPowerTypes > 0 && thisWeapon.CanAddPowerType(class'MatrixAddonPowerType') == false)
+    {
+        thisWeapon.CurrentPowerTypes[thisWeapon.NumPowerTypes - 1] = None;
+        thisWeapon.NumPowerTypes--;
+    }        
+    
+    thisWeapon.AddPowerType(class'MatrixAddonPowerType'); 
+    thisWeapon.Modifier = Min(1,thisWeapon.Modifier);
+    thisWeapon.ConstructItemName();
+    thisWeapon.Identify();
 }
 
 exec function TossArtifact()
@@ -41,11 +45,12 @@ function DropFrom(vector StartLocation)
 	Destroy();
 	Instigator.NextItem();
 }
+
 function Activate()
 {
 	local Weapon OldWeapon;
 	
-		if (bActive)
+	if (bActive)
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
 		GotoState('');
