@@ -47,7 +47,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 					InstantFire(TheWeapon.GetFireMode(i)).DoTrace(HitLocation + Normal(HitLocation - StartTrace) * Victim.CollisionRadius * 2, rotator(HitLocation - StartTrace));
 				}
 				else
-					InstantFire(TheWeapon.GetFireMode(i)).DoTrace(HitLocation + Normal(HitLocation - (TheWeapon.Instigator.Location + Instigator.EyePosition())) * Victim.CollisionRadius * 2, rotator(HitLocation - (TheWeapon.Instigator.Location + TheWeapon.Instigator.EyePosition())));
+					InstantFire(TheWeapon.GetFireMode(i)).DoTrace(HitLocation + Normal(HitLocation - (TheWeapon.Instigator.Location + TheWeapon.Instigator.EyePosition())) * Victim.CollisionRadius * 2, rotator(HitLocation - (TheWeapon.Instigator.Location + TheWeapon.Instigator.EyePosition())));
 				i = TheWeapon.NUM_FIRE_MODES;
 			}
 	}
