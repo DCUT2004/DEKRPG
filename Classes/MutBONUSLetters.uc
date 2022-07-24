@@ -1,76 +1,95 @@
-class MutBONUSLetters extends Mutator
-	config(MutBONUSLetters);
+class MutBONUSLetters extends Mutator;
 	
 var bool bFoundB, bFoundO, bFoundN, bFoundU, bFoundS;			//Determines whether a letter was found or not, and will decide whether we should unlock bonus wave
-var MutWaveRandomizer WaveRandomizer;							//So we can tell WaveRandomizer to unlock bonus wave
-var bool bBONUSUnlocked;
 
 simulated function PostBeginPlay()
 {
-	local Mutator M;
-	
 	Super.PostBeginPlay();
-	for (M = Level.Game.BaseMutator; M != None; M = M.NextMutator)
-		if (MutWaveRandomizer(M) != None)
-		{
-			WaveRandomizer = MutWaveRandomizer(M);
-			break;
-		}
+
 	default.bFoundB = false;
 	default.bFoundO  = false;
 	default.bFoundN = false;
 	default.bFoundU = false;
 	default.bFoundS = false;
-	default.bBONUSUnlocked = false;
 }
 
-static function UnlockLetterB()
+static function bool IsLetterBUnlocked()
 {
-	if (default.bFoundB || default.bBONUSUnlocked)
-		return;
+	return default.bFoundB;
+}
+
+static function bool IsLetterOUnlocked()
+{
+	return default.bFoundO;
+}
+
+static function bool IsLetterNUnlocked()
+{
+	return default.bFoundN;
+}
+
+static function bool IsLetterUUnlocked()
+{
+	return default.bFoundU;
+}
+
+static function bool IsLetterSUnlocked()
+{
+	return default.bFoundS;
+}
+
+static function bool UnlockLetterB()
+{
+	if (default.bFoundB || class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+		return false;
 	default.bFoundB = true;
-	UnlockBONUS();
+	CheckBONUS();
+	return true;
 }
 
-static function UnlockLetterO()
+static function bool UnlockLetterO()
 {
-	if (default.bFoundO || default.bBONUSUnlocked)
-		return;
+	if (default.bFoundO || class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+		return false;
 	default.bFoundO = true;
-	UnlockBONUS();
+	CheckBONUS();
+	return true;
 }
 
-static function UnlockLetterN()
+static function bool UnlockLetterN()
 {
-	if (default.bFoundN || default.bBONUSUnlocked)
-		return;
+	if (default.bFoundN || class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+		return false;
 	default.bFoundN = true;
-	UnlockBONUS();
+	CheckBONUS();
+	return true;
 }
 
-static function UnlockLetterU()
+static function bool UnlockLetterU()
 {
-	if (default.bFoundU || default.bBONUSUnlocked)
-		return;
+	if (default.bFoundU || class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+		return false;
 	default.bFoundU = true;
-	UnlockBONUS();
+	CheckBONUS();
+	return true;
 }
 
-static function UnlockLetterS()
+static function bool UnlockLetterS()
 {
-	if (default.bFoundS || default.bBONUSUnlocked)
-		return;
+	if (default.bFoundS || class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+		return false;
 	default.bFoundS = true;
-	UnlockBONUS();
+	CheckBONUS();
+	return true;
 }
 
-static function UnlockBONUS()
+static function CheckBONUS()
 {
-	if (default.bBONUSUnlocked)
+	if (class'MutWaveRandomizer'.static.IsBONUSUnlocked())
 		return;
 	if (!default.bFoundB || !default.bFoundO || !default.bFoundN || !default.bFoundU || !default.bFoundS)
 		return;
-	//To finish...
+	class'MutWaveRandomizer'.static.UnlockBONUSWave();
 }
 
 defaultproperties

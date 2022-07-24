@@ -2,7 +2,7 @@ class DruidsRPGKeysInteraction extends RPGInteraction
 		config(UT2004RPG);
 
 var GiveItemsInv GiveItemsInv;
-
+var MutBONUSLetters LettersMut;
 // Aliases for artifact switching placed in ArtifactKeyConfigs in the DruidsRPGKeyMut, and transfered via GiveItemsInv.
 struct ArtifactKeyConfig
 {
@@ -23,11 +23,6 @@ var EngineerPointsInv EInv;
 var MonsterPointsInv MInv;
 var SpecialistInv SpInv;
 var PlagueSpreader PInv;
-var LetterBInv BInv;
-var LetterOInv OInv;
-var letterNInv NInv;
-var LetterUInv UInv;
-var LetterSInv SInv;
 var MissionInv MissionInv;
 var Mission1Inv M1Inv;
 var Mission2Inv M2Inv;
@@ -41,6 +36,10 @@ event Initialized()
 	BarUSize = HealthBarMaterial.MaterialUSize();
 	BarVSize = HealthBarMaterial.MaterialVSize();
 	EnemyList = ViewportOwner.Actor.Spawn(class'DruidAwarenessEnemyList');
+	
+	if (ViewportOwner.Actor.Level.NetMode != NM_Client)
+		foreach ViewportOwner.Actor.DynamicActors(class'MutBONUSLetters', LettersMut)
+			break;
 	super.Initialized();
 }
 
@@ -56,11 +55,6 @@ event NotifyLevelChange()
 	MInv = None;
 	SPInv = None;
 	PInv = None;
-	BInv = None;
-	OInv = None;
-	NInv = None;
-	UInv = None;
-	SInv = None;
 	GiveItemsInv = None;
 	MissionInv = None;
 	M1Inv = None;
@@ -263,185 +257,6 @@ function FindPInv()
 					{
 						PInv = FoundPInv;
 						Inv.Inventory = PInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-//Find local player's stats inventory item
-function FindLetterBInv()
-{
-	local Inventory Inv;
-	local LetterBInv FoundBInv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundBInv = LetterBInv(Inv);
-		if (FoundBInv != None)
-		{
-			if (FoundBInv.Owner == ViewportOwner.Actor || FoundBInv.Owner == ViewportOwner.Actor.Pawn)
-				BInv = FoundBInv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'LetterBInv', FoundBInv)
-				{
-					if (FoundBInv.Owner == ViewportOwner.Actor || FoundBInv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						BInv = FoundBInv;
-						Inv.Inventory = BInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-//Find local player's stats inventory item
-function FindLetterOInv()
-{
-	local Inventory Inv;
-	local LetterOInv FoundOInv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundOInv = LetterOInv(Inv);
-		if (FoundOInv != None)
-		{
-			if (FoundOInv.Owner == ViewportOwner.Actor || FoundOInv.Owner == ViewportOwner.Actor.Pawn)
-				OInv = FoundOInv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'LetterOInv', FoundOInv)
-				{
-					if (FoundOInv.Owner == ViewportOwner.Actor || FoundOInv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						OInv = FoundOInv;
-						Inv.Inventory = OInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-//Find local player's stats inventory item
-function FindLetterNInv()
-{
-	local Inventory Inv;
-	local LetterNInv FoundNInv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundNInv = LetterNInv(Inv);
-		if (FoundNInv != None)
-		{
-			if (FoundNInv.Owner == ViewportOwner.Actor || FoundNInv.Owner == ViewportOwner.Actor.Pawn)
-				NInv = FoundNInv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'LetterNInv', FoundNInv)
-				{
-					if (FoundNInv.Owner == ViewportOwner.Actor || FoundNInv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						NInv = FoundNInv;
-						Inv.Inventory = NInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-//Find local player's stats inventory item
-function FindLetterUInv()
-{
-	local Inventory Inv;
-	local LetterUInv FoundUInv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundUInv = LetterUInv(Inv);
-		if (FoundUInv != None)
-		{
-			if (FoundUInv.Owner == ViewportOwner.Actor || FoundUInv.Owner == ViewportOwner.Actor.Pawn)
-				UInv = FoundUInv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'LetterUInv', FoundUInv)
-				{
-					if (FoundUInv.Owner == ViewportOwner.Actor || FoundUInv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						UInv = FoundUInv;
-						Inv.Inventory = UInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-function FindLetterSInv()
-{
-	local Inventory Inv;
-	local LetterSInv FoundSInv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundSInv = LetterSInv(Inv);
-		if (FoundSInv != None)
-		{
-			if (FoundSInv.Owner == ViewportOwner.Actor || FoundSInv.Owner == ViewportOwner.Actor.Pawn)
-				SInv = FoundSInv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'LetterSInv', FoundSInv)
-				{
-					if (FoundSInv.Owner == ViewportOwner.Actor || FoundSInv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						SInv = FoundSInv;
-						Inv.Inventory = SInv;
 						break;
 					}
 				}
@@ -1745,59 +1560,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
 	
-	//B O N U S Lettering System
-	if (BInv == None)
-	{
-		FindLetterBInv();
-		if (BInv != None)
-		{
-			if( BInv.InteractionOwner != None )
-				BInv.InteractionOwner.BInv = None;
-			BInv.InteractionOwner = Self;
-		}
-	}
-	if (OInv == None)
-	{
-		FindLetterOInv();
-		if (OInv != None)
-		{
-			if( OInv.InteractionOwner != None )
-				OInv.InteractionOwner.OInv = None;
-			OInv.InteractionOwner = Self;
-		}
-	}
-	if (NInv == None)
-	{
-		FindLetterNInv();
-		if (NInv != None)
-		{
-			if( NInv.InteractionOwner != None )
-				NInv.InteractionOwner.NInv = None;
-			NInv.InteractionOwner = Self;
-		}
-	}
-	if (UInv == None)
-	{
-		FindLetterUInv();
-		if (UInv != None)
-		{
-			if( UInv.InteractionOwner != None )
-				UInv.InteractionOwner.UInv = None;
-			UInv.InteractionOwner = Self;
-		}
-	}
-	if (SInv == None)
-	{
-		FindLetterSInv();
-		if (SInv != None)
-		{
-			if( SInv.InteractionOwner != None )
-				SInv.InteractionOwner.SInv = None;
-			SInv.InteractionOwner = Self;
-		}
-	}
-	
-	if (BInv != None && BInv.Isa('LetterBInv'))
+	if (Class'MutBONUSLetters'.static.IsLetterBUnlocked())
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1818,7 +1581,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (OInv != None && OInv.Isa('LetterOInv'))
+	if (Class'MutBONUSLetters'.static.IsLetterOUnlocked())
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1839,7 +1602,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (NInv != None && NInv.Isa('LetterNInv'))
+	if (Class'MutBONUSLetters'.static.IsLetterNUnlocked())
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1860,7 +1623,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (UInv != None && UInv.Isa('LetterUInv'))
+	if (Class'MutBONUSLetters'.static.IsLetterUUnlocked())
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1881,7 +1644,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (SInv != None && SInv.Isa('LetterSInv'))
+	if (Class'MutBONUSLetters'.static.IsLetterSUnlocked())
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;

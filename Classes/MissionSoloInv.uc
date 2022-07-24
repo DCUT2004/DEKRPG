@@ -13,12 +13,6 @@ var int MissionXP;		//set by artifact.
 var localized string MissionName;
 var config float CheckInterval;
 
-var LetterBInv BInv;
-var LetterOInv OInv;
-var LetterNInv NInv;
-var LetterUInv UInv;
-var LetterSInv SInv;
-
 var NullEntropyInv Null;
 var SuperHeatInv Heat;
 var FreezeInv Freeze;
@@ -224,12 +218,6 @@ function Timer()
 		}
 		else
 		{
-			BInv = LetterBInv(P.FindInventoryType(class'LetterBInv'));
-			OInv = LetterOInv(P.FindInventoryType(class'LetterOInv'));
-			NInv = LetterNInv(P.FindInventoryType(class'LetterNInv'));
-			UInv = LetterUInv(P.FindInventoryType(class'LetterUInv'));
-			SInv = LetterSInv(P.FindInventoryType(class'LetterSInv'));
-	
 			Null = NullEntropyInv(P.FindInventoryType(class'NullEntropyInv'));
 			Heat = SuperHeatInv(P.FindInventoryType(class'SuperHeatInv'));
 			Freeze = FreezeInv(P.FindInventoryType(class'FreezeInv'));
@@ -301,11 +289,7 @@ function Timer()
 				if (AngerManagementActive)
 				{
 					Inv.AngerManagementComplete = True;
-					if (NInv == None)
-					{
-						NInv = P.spawn(class'LetterNInv');
-						NInv.giveTo(P);
-					}
+					Class'MutBONUSLetters'.static.UnlockLetterN();
 				}
 				else if (PyromancerActive)
 					Inv.PyromancerComplete = True;
@@ -333,11 +317,7 @@ function Timer()
 				else if (DisarmerActive)
 				{
 					Inv.DisarmerComplete = True;
-					if (UInv == None)
-					{
-						UInv = P.spawn(class'LetterUInv');
-						UInv.giveTo(P);
-					}
+					Class'MutBONUSLetters'.static.UnlockLetterU();
 				}
 				else if (FlakFrenzyActive)
 					Inv.FlakFrenzyComplete = True;
@@ -386,11 +366,7 @@ function Timer()
 				else if (PopActive)
 				{
 					Inv.PopComplete = True;
-					if (SInv == None)
-					{
-						SInv = P.spawn(class'LetterSInv');
-						SInv.giveTo(P);
-					}
+					Class'MutBONUSLetters'.static.UnlockLetterS();
 				}
 				else if (RocketRageActive)
 					Inv.RocketRageComplete = True;
@@ -399,11 +375,7 @@ function Timer()
 				else if (SharpShotFlyActive)
 				{
 					Inv.SharpShotFlyComplete = True;
-					if (BInv == None)
-					{
-						BInv = P.spawn(class'LetterBInv');
-						BInv.giveTo(P);						
-					}
+					class'MutBONUSLetters'.static.UnlockLetterB();
 				}
 				else if (ShockSlaughterActive)
 					Inv.ShockSlaughterComplete = True;
@@ -463,31 +435,11 @@ function Timer()
 				else if (ZombieSlayerActive)
 				{
 					Inv.ZombieSlayerComplete = True;
-					if (BInv == None)
-					{
-						BInv = P.spawn(class'LetterBInv');
-						BInv.giveTo(P);						
-					}
-					if (OInv == None)
-					{
-						OInv = P.spawn(class'LetterOInv');
-						OInv.giveTo(P);						
-					}
-					if (NInv == None)
-					{
-						NInv = P.spawn(class'LetterNInv');
-						NInv.giveTo(P);						
-					}
-					if (UInv == None)
-					{
-						UInv = P.spawn(class'LetterUInv');
-						UInv.giveTo(P);						
-					}
-					if (SInv == None)
-					{
-						SInv = P.spawn(class'LetterSInv');
-						SInv.giveTo(P);						
-					}
+					class'MutBONUSLetters'.static.UnlockLetterB();
+					class'MutBONUSLetters'.static.UnlockLetterO();
+					class'MutBONUSLetters'.static.UnlockLetterN();
+					class'MutBONUSLetters'.static.UnlockLetterU();
+					class'MutBONUSLetters'.static.UnlockLetterS();
 				}
 				else if (FeatherweightActive)
 				{
@@ -501,11 +453,7 @@ function Timer()
 				else if (EmeraldShatterActive)
 				{
 					Inv.EmeraldShatterComplete = True;
-					if (OInv == None)
-					{
-						OInv = P.spawn(class'LetterOInv');
-						OInv.giveTo(P);						
-					}
+					Class'MutBONUSLetters'.static.UnlockLetterO();
 				}
 				else if (KrallHuntActive)
 					Inv.KrallHuntComplete = True;
