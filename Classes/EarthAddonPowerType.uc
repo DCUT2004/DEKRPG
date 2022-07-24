@@ -4,6 +4,22 @@ class EarthAddonPowerType extends AddonPowerType
 var config float EarthFlowerChance, MaxFlowerChance;
 var config Array < class < Pickup> > Flowers;
 
+static function bool AllowedFor(Weapon W)
+{
+	// check if superweapon 
+	if (W == None)
+		return false;
+
+	if(instr(caps(W), "FIREBALL") > -1)
+		return false;
+	if(instr(caps(W), "HEATWHIP") > -1)
+		return false;
+	if(instr(caps(W), "BLIZZARD") > -1)
+		return false;
+
+	return true;
+}
+
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
@@ -117,7 +133,7 @@ defaultproperties
     Flowers(2)=Class'DEKRPG999X.FlowerOrangePickup'
     Flowers(3)=Class'DEKRPG999X.FlowerYellowPickup'
 
-	PosName="Earth"
+	PosName="Freezing"
 	ZeroName=""
 	NegName=""
 	CanHaveZeroModifier=false

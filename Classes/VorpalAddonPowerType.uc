@@ -35,6 +35,9 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(string(W)), "BIO") > -1)
 		return true;		
 
+	if(instr(caps(string(W)), "MEGABLAST") > -1)
+		return false;		
+
 	return false;
 }
 

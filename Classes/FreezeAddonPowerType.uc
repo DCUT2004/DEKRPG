@@ -3,6 +3,24 @@ class FreezeAddonPowerType extends AddonPowerType
 
 var Sound FreezeSound;
 
+static function bool AllowedFor(Weapon W)
+{
+	// check if superweapon 
+	if (W == None)
+		return false;
+
+	if(instr(caps(W), "FIREBALL") > -1)
+		return false;
+	if(instr(caps(W), "HEATWHIP") > -1)
+		return false;
+	if(instr(caps(W), "BLIZZARD") > -1)
+		return false;
+	if(instr(caps(W), "MAGNET") > -1)
+		return false;
+
+	return true;
+}
+
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {

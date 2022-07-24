@@ -3,6 +3,18 @@ class PoisonAddonPowerType extends AddonPowerType
 
 var config float PoisonLifespan;
 
+static function bool AllowedFor(Weapon W)
+{
+	// check if superweapon 
+	if (W == None)
+		return false;
+
+	if(instr(caps(W), "POISONBLAST") > -1)
+		return false;
+
+	return true;
+}
+
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {

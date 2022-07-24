@@ -602,6 +602,7 @@ simulated function ConstructItemName()
 			ItemName = ItemName @ "*";
 	}
     
+    Log("***** DEKRPGWeapon log initial addons:" @ ItemName);
 	if (Role == Role_Authority)
 	{
 		if (ModifiedWeapon != None)

@@ -16,6 +16,9 @@ static function bool AllowedFor(Weapon W)
 	if (ClassIsChildOf(W.Class,class'LinkGun') || ClassIsChildOf(W.Class,class'MiniGun'))
 		return false;
 
+	if(instr(caps(string(W)), "MEGABLAST") > -1)
+		return false;		
+
 	return true;
 }
 
