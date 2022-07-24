@@ -266,7 +266,6 @@ function GrantMonsterCombo()
 	local int x;
 	local ComboInv Inv;
 	local int RandIndex;
-	local int IntMultiplier;
 	
 	Level.Game.BroadCast(Self, "Monster combo!");
 	
@@ -279,7 +278,7 @@ function GrantMonsterCombo()
 			NextC = C.NextController;
 			if (C != None && C.Pawn != None && C.Pawn.Health > 0)
 			{
-				if (C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None)
+				if (C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow'))
 				{
 					Inv = ComboInv(C.Pawn.FindInventoryType(class'ComboInv'));
 					if (Inv == None)
@@ -295,7 +294,6 @@ function GrantMonsterCombo()
 			}
 			C = NextC;
 		}
-		IntMultiplier = ComboData[RandIndex].Multiplier;
 		AnnounceCombo(RandIndex);
 	}
 	PlayMonsterComboSound();
@@ -335,9 +333,8 @@ defaultproperties
 	ComboClass(5)=Class'DEKRPG999X.ComboHeatInv'
 	ComboClass(6)=Class'DEKRPG999X.ComboRegenerateInv'
 	ComboClass(7)=Class'DEKRPG999X.ComboHealStopInv'
-	ComboClass(8)=Class'DEKRPG999X.ComboHealthMaxInv'
-	ComboClass(9)=Class'DEKRPG999X.ComboInaccuracyInv'
-	ComboClass(10)=Class'DEKRPG999X.ComboMisfortuneInv'
+	ComboClass(8)=Class'DEKRPG999X.ComboInaccuracyInv'
+	ComboClass(9)=Class'DEKRPG999X.ComboMisfortuneInv'
 	ComboData(0)=(LifeSpan=25,Multiplier=1.200000,bDispellable=True,bSingle=True,bBuff=True)
 	ComboData(1)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bAll=True,bBuff=False)
 	ComboData(2)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bSingle=True,bBuff=True)
@@ -346,9 +343,8 @@ defaultproperties
 	ComboData(5)=(LifeSpan=10,Multiplier=2.000000,bDispellable=True,bAll=True,bBuff=False)
 	ComboData(6)=(LifeSpan=25,Multiplier=10.000000,bDispellable=True,bSingle=True,bBuff=True)
 	ComboData(7)=(LifeSpan=25,Multiplier=1.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(8)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(9)=(LifeSpan=25,Multiplier=30.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(10)=(LifeSpan=25,Multiplier=300.000000,bDispellable=True,bAll=True,bBuff=False)
+	ComboData(8)=(LifeSpan=25,Multiplier=30.000000,bDispellable=True,bAll=True,bBuff=False)
+	ComboData(9)=(LifeSpan=25,Multiplier=300.000000,bDispellable=True,bAll=True,bBuff=False)
 	bAddToServerPackages=True
 	GroupName="TeamAdrenaline"
 	FriendlyName="Team Combos"

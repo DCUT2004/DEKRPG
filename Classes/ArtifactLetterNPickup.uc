@@ -1,7 +1,6 @@
 class ArtifactLetterNPickup extends TournamentPickUp;
 
 var ArtifactLetterGlow GemXPGlow;
-var MutUT2004RPG RPGMut;
 
 #exec  AUDIO IMPORT NAME="ExpPickup" FILE="Sounds\ExpPickup.WAV" GROUP="ArtifactSounds"
 
@@ -12,38 +11,38 @@ function PostBeginPlay()
 	GemXPGlow = spawn(class'ArtifactLetterGlow',self,,Location,Rotation);
 	if (GemXPGlow != None)
 		GemXPGlow.RemoteRole = ROLE_SimulatedProxy;
-
-	RPGMut = class'MutUT2004RPG'.static.GetRPGMutator(Level.Game);
 }
 
 auto state Pickup
 {
 	function Touch(Actor Other)
 	{
-	        local Pawn PawnOwner;
-			local Controller C;
-		local LetterOInv O;
-		local LetterBInv B;
-		local LetterUInv U;
-		local LetterSInv S;
+		local Pawn PawnOwner;
+		local Controller C;
 
 		if (ValidTouch(Other))
 		{
 			PawnOwner = Pawn(Other);
-			if (PawnOwner != None && PawnOwner.Health > 0)
+			if (PawnOwner != None && PawnOwner.Health > 0 && !PawnOwner.IsA('Monster'))
 			{
-				O = LetterOInv(PawnOwner.FindInventoryType(class'LetterOInv'));
-				B = LetterBInv(PawnOwner.FindInventoryType(class'LetterBInv'));
-				U = LetterUInv(PawnOwner.FindInventoryType(class'LetterUInv'));
-				S = LetterSInv(PawnOwner.FindInventoryType(class'LetterSInv'));
-				if (O == None || B == None || U == None || S == None)
+				if (class'MutBONUSLetters'.static.UnlockLetterN())
 				{
-					for ( C = Level.ControllerList; C != None; C = C.NextController )
-						if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(PawnOwner.Controller) )
-							PlayerController(C).ClientPlaySound(Sound'GameSounds.Fanfares.UT2k3Fanfare01');
-					
 					if (PawnOwner.PlayerReplicationInfo != None)
 						BroadcastLocalizedMessage(class'LetterNMessage', 0, PawnOwner.PlayerReplicationInfo);
+					if (class'MutWaveRandomizer'.static.IsBONUSUnlocked())
+					{
+						BroadcastLocalizedMessage(Class'BonusWaveMessage');
+						
+						for ( C = Level.ControllerList; C != None; C = C.NextController )
+							if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(PawnOwner.Controller) )
+								PlayerController(C).ClientPlaySound(Sound'GameSounds.Fanfares.UT2k3Fanfare03');
+					}
+					else
+					{
+						for ( C = Level.ControllerList; C != None; C = C.NextController )
+							if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.IsA('PlayerController') && C.SameTeamAs(PawnOwner.Controller) )
+								PlayerController(C).ClientPlaySound(Sound'GameSounds.Fanfares.UT2k3Fanfare01');
+					}
 				}
 			}
 		}
@@ -59,7 +58,6 @@ function float DetourWeight(Pawn Other, float PathWeight)
 defaultproperties
 {
      MaxDesireability=1.500000
-     InventoryType=Class'DEKRPG999X.LetterNInv'
      PickupMessage="You got letter N! Spell BONUS!"
      PickupSound=Sound'DEKRPG999X.ArtifactSounds.ExpPickup'
      PickupForce="SniperRiflePickup"
