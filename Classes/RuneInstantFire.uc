@@ -7,7 +7,6 @@ function DoFireEffect()
 {
     local Vector StartTrace;
     local Rotator R, Aim;
-	local RW_EnhancedInfinity Infinity;
 	
 	if (Instigator == None || Instigator.Controller == None)
 		return;
@@ -25,10 +24,8 @@ function DoFireEffect()
 	R = rotator(vector(Aim) + VRand()*FRand()*Spread);
     DoTrace(StartTrace, R);
 	
-	Infinity = RW_EnhancedInfinity(Instigator.Weapon);
-	
 	//Take off adren
-	if (Infinity == None)
+    if (Instigator.Weapon == None || DEKRPGWeapon(Instigator.Weapon) == None || DEKRPGWeapon(Instigator.Weapon).HasThisAddon(class'InfinityAddonPowerType') == false)
 		Instigator.Controller.Adrenaline -= AdrenCost;
 }
 

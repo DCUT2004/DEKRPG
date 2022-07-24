@@ -33,7 +33,7 @@ function Freeze(float Radius)
 			dist = FMax(1,VSize(dir));
 			damageScale = 1 - FMax(0,dist/Radius);
 
-			if(!C.Pawn.isA('Vehicle') && class'RW_Freeze'.static.canTriggerPhysics(C.Pawn) 
+			if(!C.Pawn.isA('Vehicle') && class'DEKRPGWeapon'.static.NullCanTriggerPhysics(C.Pawn) 
 				&& (C.Pawn.FindInventoryType(class'NullEntropyInv') == None))
 			{
 				Inv = spawn(class'NullEntropyInv', C.Pawn,,, rot(0,0,0));

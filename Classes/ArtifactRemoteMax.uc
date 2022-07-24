@@ -113,9 +113,6 @@ function Activate()
 			needsIdentify = true;
 			setTimer(0.5, true);
 
-			if(HitWeapon.isA('RW_Speedy'))
-				(RW_Speedy(HitWeapon)).deactivate();
-
 			HitEmitter = spawn(HitEmitterClass,,, (StartTrace + Instigator.Location)/2, rotator(HitLocation - ((StartTrace + Instigator.Location)/2)));
 			if (HitEmitter != None)
 			{

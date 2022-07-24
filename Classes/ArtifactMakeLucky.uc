@@ -12,19 +12,23 @@ function bool shouldBreak()
 
 function constructionFinished(RPGWeapon result)
 {
-	local RW_EnhancedLuck Luck;
+    local DEKRPGWeapon thisWeapon;
+    
+	// need to strip off the existing addons and put Luck on instead
+    thisWeapon = DEKRPGWeapon(result);
+    if (thisWeapon == none || thisWeapon.HasThisAddon(class'LuckAddonPowerType'))
+        return;
 
-	if(RW_EnhancedLuck(result) != None)
-	{
-		Luck = RW_EnhancedLuck(Instigator.FindInventoryType(class'RW_EnhancedLuck'));
-	}
-}
-
-function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponType, Pawn Other)
-{
-	if(class'RW_EnhancedLuck'.static.AllowedFor(WeaponType, Other))
-		return class'RW_EnhancedLuck';
-	return class'RPGWeapon';
+    while (thisWeapon.NumPowerTypes > 0 && thisWeapon.CanAddPowerType(class'LuckAddonPowerType') == false)
+    {
+        thisWeapon.CurrentPowerTypes[thisWeapon.NumPowerTypes - 1] = None;
+        thisWeapon.NumPowerTypes--;
+    }        
+    
+    thisWeapon.AddPowerType(class'LuckAddonPowerType'); 
+    thisWeapon.Modifier = Min(1,thisWeapon.Modifier);
+    thisWeapon.ConstructItemName();
+    thisWeapon.Identify();
 }
 
 exec function TossArtifact()

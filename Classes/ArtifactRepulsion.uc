@@ -79,7 +79,7 @@ function Activate()
 				if (C.Pawn.Class == Randomizer.BossMonsterClass[x])
 					Valid = False;
 			}
-			if (Valid && class'RW_Freeze'.static.canTriggerPhysics(C.Pawn) 
+			if (Valid && class'DEKRPGWeapon'.static.NullCanTriggerPhysics(C.Pawn) 
 				&& (C.Pawn.FindInventoryType(class'NullEntropyInv') == None))
 			{
 				if (C.Pawn.FindInventoryType(class'KnockbackInv') == None)

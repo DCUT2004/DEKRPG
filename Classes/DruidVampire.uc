@@ -6,8 +6,9 @@ var config int AdjustableHealingDamage;
 
 static function HandleDamage(int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
-	if(Instigator.Weapon != None && Instigator.Weapon.isA('RW_Rage'))
+	if(Instigator.Weapon != None && DEKRPGWeapon(Instigator.Weapon) != None && DEKRPGWeapon(Instigator.Weapon).HasThisAddon(class'RageAddonPowerType'))
 		return; //no vamp for rage weapons
+        
 	LocalHandleDamage(Damage, Injured, Instigator, Momentum, DamageType, bOwnedByInstigator, float(AbilityLevel));
 }
 

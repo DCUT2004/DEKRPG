@@ -61,8 +61,6 @@ function Activate()
 			setTimer(1, true);
 
 			Weapon.bCanThrow = false;
-			if(Weapon.isA('RW_Speedy'))
-				(RW_Speedy(Weapon)).deactivate();
 			Instigator.Controller.Adrenaline -= getCost();
 
 			bActive = false;

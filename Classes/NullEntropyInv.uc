@@ -131,7 +131,7 @@ function Tick(float deltaTime)
 {
 	if (PawnOwner != None)
 	{
-		if(!class'RW_Freeze'.static.canTriggerPhysics(PawnOwner))
+		if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(PawnOwner))
 			return;
 
 		if(PawnOwner.Physics != PHYS_NONE)

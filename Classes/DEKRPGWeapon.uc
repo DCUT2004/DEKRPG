@@ -938,18 +938,29 @@ static function bool NullCanTriggerPhysics(Pawn victim)
 {
 	local DruidGhostInv dgInv;
 	local GhostInv gInv;
+	local PhantomGhostInv PInv;
+	local PhantomDeathGhostInv PDInv;
 
 	if(victim == None)
 		return true;
 		
 	dgInv = DruidGhostInv(Victim.FindInventoryType(class'DruidGhostInv'));
-	if(dgInv != None && !dgInv.bDisabled)
+	if (dgInv != None && !dgInv.bDisabled)
 		return false;
 
 	gInv = GhostInv(Victim.FindInventoryType(class'GhostInv'));
-	if(gInv != None && !gInv.bDisabled)
+	if (gInv != None && !gInv.bDisabled)
 		return false;
-	else if(Victim.PlayerReplicationInfo != None && Victim.PlayerReplicationInfo.HasFlag != None)
+
+	PInv = PhantomGhostInv(Victim.FindInventoryType(class'PhantomGhostInv'));
+	if (PInv != None && !PInv.Stopped)
+		return false;
+		
+	PDInv = PhantomDeathGhostInv(Victim.FindInventoryType(class'PhantomDeathGhostInv'));
+	if (PDInv != None && !PDInv.Stopped)
+		return false;
+
+	if(Victim.PlayerReplicationInfo != None && Victim.PlayerReplicationInfo.HasFlag != None)
 		return false;
 	
 	return true;

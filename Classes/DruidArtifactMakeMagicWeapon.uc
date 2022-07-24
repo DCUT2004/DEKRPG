@@ -330,8 +330,6 @@ state Activated
 			}
 		}
 		//stupid hack for speedy weapons since I can't seem to get them to work with DetachFromPawn correctly. :P
-		if(ActivatedOldWeapon.isA('RW_Speedy'))
-			(RW_Speedy(ActivatedOldWeapon)).deactivate();
 		ActivatedOldWeapon.DetachFromPawn(Instigator);
 		if(ActivatedOldWeapon.isA('RPGWeapon'))
 		{

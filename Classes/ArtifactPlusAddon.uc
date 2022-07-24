@@ -90,9 +90,6 @@ function Activate()
 	needsIdentify = true;
 	setTimer(0.6, true);
 
-	if(CurWeapon.isA('RW_Speedy'))
-		(RW_Speedy(CurWeapon)).deactivate();
-
 	bActive = false;
 	GotoState('');
 }

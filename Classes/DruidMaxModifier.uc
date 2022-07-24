@@ -61,8 +61,6 @@ function Activate()
 			needsIdentify = true;
 			setTimer(1, true);
 
-			if(Weapon.isA('RW_Speedy'))
-				(RW_Speedy(Weapon)).deactivate();
 			Instigator.Controller.Adrenaline -= AdrenalineRequired;
 
 			bActive = false;

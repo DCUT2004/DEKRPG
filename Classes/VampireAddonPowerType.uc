@@ -1,6 +1,8 @@
 class VampireAddonPowerType extends AddonPowerType
 	config(UT2004RPG);
 
+#exec OBJ LOAD FILE=..\Sounds\GeneralImpacts.uax		
+
 var config float VampirePercent;
 
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)

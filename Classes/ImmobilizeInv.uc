@@ -53,7 +53,7 @@ function Tick(float deltaTime)
 {
 	if (Instigator != None)
 	{
-		if(!class'RW_Freeze'.static.canTriggerPhysics(Instigator))
+		if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
 			return;
 
 		if(Instigator.Physics != PHYS_NONE)

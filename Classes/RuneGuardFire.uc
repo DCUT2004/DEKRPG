@@ -6,7 +6,6 @@ class RuneGuardFire extends RuneProjectileFire
 function projectile SpawnProjectile(Vector Start, Rotator Dir)
 {
     local RuneGuard Guard;
-	local RW_EnhancedInfinity Infinity;
 	
 	if (Instigator == None || Instigator.Controller == None)
 		return None;
@@ -21,8 +20,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 	if (Guard != None)
 	{
 		Guard.PawnOwner = Instigator;
-		Infinity = RW_EnhancedInfinity(Instigator.Weapon);
-		if (Infinity == None)
+    if (Instigator.Weapon == None || DEKRPGWeapon(Instigator.Weapon) == None || DEKRPGWeapon(Instigator.Weapon).HasThisAddon(class'InfinityAddonPowerType') == false)
 			Instigator.Controller.Adrenaline -= AdrenCost;
 	}
 	

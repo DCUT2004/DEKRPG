@@ -34,6 +34,9 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(W), "PHANTOM") > -1)
 		return false;
 
+	if(instr(caps(W), "MEGABLAST") > -1)
+		return false;
+
 	return true;
 }
 

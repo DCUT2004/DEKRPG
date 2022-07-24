@@ -65,7 +65,7 @@ simulated function Timer()
 			return;
 		}
 		
-		if(!class'RW_Freeze'.static.canTriggerPhysics(PawnOwner))
+		if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(PawnOwner))
 		{
 			return;
 		}

@@ -320,7 +320,7 @@ simulated function Timer()
 
 			if(PawnOwner != None)		//change from else if to if - 3/28/20 208A
 			{
-				class'RW_Speedy'.static.quickfoot(-7, PawnOwner);
+				class'AbilityIncreasedProtection'.static.quickfoot(-7, PawnOwner);
 				PawnOwner.setOverlayMaterial(ModifierOverlay, LifeSpan, true);
 			}
 		}
@@ -348,7 +348,7 @@ function stopEffect()
 	}
 	if(PawnOwner != None)
 	{
-		class'RW_Speedy'.static.quickfoot(0, PawnOwner);
+		class'AbilityIncreasedProtection'.static.quickfoot(0, PawnOwner);
 		SwitchOffInvulnerability();
 		PawnOwner.AmbientSound = None;
 		if (PhantomDeath)	//Return this player back to his phantom state
@@ -358,7 +358,7 @@ function stopEffect()
 				PInv.Destroy();
 			PInv = PawnOwner.Spawn(class'PhantomDeathGhostInv', PawnOwner);
 			PInv.GiveTo(PawnOwner);
-			class'RW_Speedy'.static.quickfoot(0, PawnOwner);
+			class'AbilityIncreasedProtection'.static.quickfoot(0, PawnOwner);
 		}
 	}
 }

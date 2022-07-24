@@ -142,7 +142,7 @@ simulated function Timer()
 			if(Owner != None)
 				A = PawnOwner.spawn(class'IceSmoke', PawnOwner,, PawnOwner.Location, PawnOwner.Rotation);
 
-			if(!class'RW_Freeze'.static.canTriggerPhysics(PawnOwner))
+			if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(PawnOwner))
 			{
 				stopEffect();
 				return;
@@ -163,7 +163,7 @@ simulated function Timer()
 			if (Instigator == None && InstigatorController != None)
 				Instigator = InstigatorController.Pawn;
 			else if(PawnOwner != None)
-				class'RW_Speedy'.static.quickfoot(-10 * Modifier, PawnOwner);
+				class'AbilityIncreasedProtection'.static.quickfoot(-10 * Modifier, PawnOwner);
 		}
 	}
 }
@@ -176,7 +176,7 @@ function stopEffect()
 		stopped = true;
 	if(PawnOwner != None)
 	{
-		class'RW_Speedy'.static.quickfoot(0, PawnOwner);
+		class'AbilityIncreasedProtection'.static.quickfoot(0, PawnOwner);
 	}
 }
 

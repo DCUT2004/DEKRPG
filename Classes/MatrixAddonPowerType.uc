@@ -82,7 +82,7 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 
 defaultproperties
 {
-	MatrixRadius=80.000000
+	MatrixRadius=150.000000
 	SpeedMultiplier=0.100000
 	PosName="Bullet Time"
 	ZeroName="Bullet Time"

@@ -87,8 +87,8 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 defaultproperties
 {
 	DamagePercent=20.0		// was 10% on modifier 6-10
-	RageDamageReturn=0.1
-	RageMinimumHealth=70
+	RageDamageReturn=0.125
+	RageMinimumHealth=75
 	PosName="Rage"
 	ZeroName="Rage"
 	NegName="Rage"

@@ -27,7 +27,7 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 	if ( A != None )
     {
         A.RemoteRole = ROLE_SimulatedProxy;
-        A.PlaySound(Sound'WeaponSounds.BaseFiringSounds.BAssaultRifleFire',,1.0 * Owner.TransientSoundVolume,,Owner.TransientSoundRadius);
+        A.PlaySound(Sound'WeaponSounds.BaseFiringSounds.BAssaultRifleFire',,1.0 * TheWeapon.Owner.TransientSoundVolume,,TheWeapon.Owner.TransientSoundRadius);
     }
 }
 

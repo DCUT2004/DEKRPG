@@ -12,19 +12,22 @@ function bool shouldBreak()
 
 function constructionFinished(RPGWeapon result)
 {
-	local RW_EnhancedInfinity Infinity;
+    local DEKRPGWeapon thisWeapon;
+    
+	// need to strip off the existing addons and put Infinity on instead
+    thisWeapon = DEKRPGWeapon(result);
+    if (thisWeapon == none || thisWeapon.HasThisAddon(class'InfinityAddonPowerType'))
+        return;
 
-	if(RW_EnhancedInfinity(result) != None)
-	{
-		Infinity = RW_EnhancedInfinity(Instigator.FindInventoryType(class'RW_EnhancedInfinity'));
-	}
-}
-
-function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponType, Pawn Other)
-{
-	if(class'RW_EnhancedInfinity'.static.AllowedFor(WeaponType, Other))
-		return class'RW_EnhancedInfinity';
-	return class'RPGWeapon';
+    while (thisWeapon.NumPowerTypes > 0 && thisWeapon.CanAddPowerType(class'InfinityAddonPowerType') == false)
+    {
+        thisWeapon.CurrentPowerTypes[thisWeapon.NumPowerTypes - 1] = None;
+        thisWeapon.NumPowerTypes--;
+    }        
+    
+    thisWeapon.AddPowerType(class'InfinityAddonPowerType'); 
+    thisWeapon.ConstructItemName();
+    thisWeapon.Identify();
 }
 
 exec function TossArtifact()

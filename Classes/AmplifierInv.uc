@@ -55,13 +55,9 @@ simulated function BeginWeapon()
 	Weapon = RPGWeapon(RealInstigator.Weapon);
 	if (Weapon != None)
 	{
-		if(Weapon.isA('RW_Speedy'))
-			(RW_Speedy(Weapon)).deactivate();
 		Weapon.Modifier = Weapon.Modifier * 2;
 		oldCanThrow = Weapon.bCanThrow;
 		Weapon.bCanThrow = false;
-		if(Weapon.isA('RW_Speedy'))
-			(RW_Speedy(Weapon)).activate();
 		IdentifyWeapon(Weapon);
 	}
 }
@@ -85,13 +81,8 @@ simulated function EndWeapon()
 {
 	if(Weapon != None)
 	{
-		if(Weapon.isA('RW_Speedy'))
-			(RW_Speedy(Weapon)).deactivate();
 		Weapon.Modifier = Weapon.Modifier/2;
 		Weapon.bCanThrow = oldCanThrow;
-
-		if(Weapon.isA('RW_Speedy'))
-			(RW_Speedy(Weapon)).activate();
 		IdentifyWeapon(Weapon);
 	}
 	Weapon = None;

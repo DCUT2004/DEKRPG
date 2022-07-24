@@ -1,5 +1,9 @@
-class RW_EngineerLink extends RW_EnhancedInfinity
+class RW_EngineerLink extends OneDropRPGWeapon
+	HideDropDown
+	CacheExempt
 	config(UT2004RPG);
+
+var config float DamageBonus;
 
 var config Array<float> DamageBonusFromLinks;
 var config float ShieldHealingXPPercent;
@@ -89,6 +93,37 @@ function setupRules()
 		}
 	}
 	rules = RPGRules(G);
+}
+
+simulated function bool StartFire(int Mode)
+{
+	if (!bIdentified && Role == ROLE_Authority)
+		Identify();
+
+	return Super.StartFire(Mode);
+}
+
+function bool ConsumeAmmo(int Mode, float Load, bool bAmountNeededIsMax)
+{
+	if (!bIdentified)
+		Identify();
+
+	return true;
+}
+
+simulated function WeaponTick(float dt)
+{
+	MaxOutAmmo();
+
+	Super.WeaponTick(dt);
+}
+
+simulated function int MaxAmmo(int mode)
+{
+	if (bNoAmmoInstances && HolderStatsInv != None)
+		return (ModifiedWeapon.MaxAmmo(mode) * (1.0 + 0.01 * HolderStatsInv.Data.AmmoMax));
+
+	return ModifiedWeapon.MaxAmmo(mode);
 }
 
 static function bool AllowedFor(class<Weapon> Weapon, Pawn Other)

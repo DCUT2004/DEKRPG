@@ -12,19 +12,23 @@ function bool shouldBreak()
 
 function constructionFinished(RPGWeapon result)
 {
-	local RW_InfinitePoison IP;
-
-	if(RW_InfinitePoison(result) != None)
-	{
-		IP = RW_InfinitePoison(Instigator.FindInventoryType(class'RW_InfinitePoison'));
-	}
-}
-
-function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponType, Pawn Other)
-{
-	if(class'RW_InfinitePoison'.static.AllowedFor(WeaponType, Other))
-		return class'RW_InfinitePoison';
-	return class'RPGWeapon';
+    local DEKRPGWeapon thisWeapon;
+    local int x;
+    
+	// need to strip off the existing addons and put Matrix on instead
+    thisWeapon = DEKRPGWeapon(result);
+ 
+    for (x = thisWeapon.NumPowerTypes -1; x >= 0; x--)
+    {
+        thisWeapon.CurrentPowerTypes[x] = None;
+        thisWeapon.NumPowerTypes--;
+    }        
+    
+    thisWeapon.AddPowerType(class'InfinityAddonPowerType'); 
+    thisWeapon.AddPowerType(class'PoisonAddonPowerType'); 
+    thisWeapon.Modifier = Min(1,thisWeapon.Modifier);
+    thisWeapon.ConstructItemName();
+    thisWeapon.Identify();
 }
 
 exec function TossArtifact()

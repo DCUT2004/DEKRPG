@@ -1,7 +1,7 @@
 class DruidArtifactTripleDamage extends ArtifactTripleDamage
 	config(UT2004RPG);
 
-var config Array< class<RPGWeapon> > Invalid;
+var config Array< class<AddonPowerType> > Invalid;
 
 function BotConsider()
 {
@@ -52,13 +52,13 @@ state Activated
 			}
 		}
 
-		if(Instigator == None || RPGWeapon(Instigator.Weapon) == None )
+		if(Instigator == None || DEKRPGWeapon(Instigator.Weapon) == None )
 		{
 			return;
 		}
 		for(i = 0; i < Invalid.length; i++)
 		{
-			if(Instigator.Weapon.class == Invalid[i])
+			if(DEKRPGWeapon(Instigator.Weapon).HasThisAddon(Invalid[i]))
 			{
 				Instigator.ReceiveLocalizedMessage(MessageClass, 2906, None, None, Class);
 				GotoState('');
@@ -79,9 +79,8 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     Invalid(0)=Class'DEKRPG999X.RW_Rage'
-     Invalid(1)=Class'DEKRPG999X.RW_Vorpal'
-     Invalid(2)=Class'DEKRPG999X.RW_EngineerLink'
+     Invalid(0)=Class'DEKRPG999X.RageAddonPowerType'
+     Invalid(1)=Class'DEKRPG999X.VorpalAddonPowerType'
      CostPerSec=10
      PickupClass=Class'DEKRPG999X.DruidArtifactTripleDamagePickup'
 }

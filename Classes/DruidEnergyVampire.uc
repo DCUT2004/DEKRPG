@@ -5,7 +5,7 @@ static function HandleDamage(int Damage, Pawn Injured, Pawn Instigator, out vect
 {
 	local float AdrenalineBonus;
 
-	if(Instigator.Weapon != None && Instigator.Weapon.isA('RW_Rage'))
+	if(Instigator.Weapon != None && DEKRPGWeapon(Instigator.Weapon) != None && DEKRPGWeapon(Instigator.Weapon).HasThisAddon(class'RageAddonPowerType'))
 		return; //no vamp for rage weapons
 
 	if (Damage < 1 || !bOwnedByInstigator || DamageType == class'DamTypeRetaliation' || Injured == Instigator || Instigator == None || Injured == None ||  UnrealPlayer(Instigator.Controller) == None || Instigator.Controller.Adrenaline >= Instigator.Controller.AdrenalineMax || Instigator.InCurrentCombo() || HasActiveArtifact(Instigator))

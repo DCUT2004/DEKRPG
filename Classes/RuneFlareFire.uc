@@ -13,7 +13,6 @@ function DoFireEffect()
 	local RuneFlareBurst Burst;
 	local Vector SpawnLocation;
 	local int x;
-	local RW_EnhancedInfinity Infinity;
 	
 	if (Instigator == None || Instigator.Controller == None)
 		return;
@@ -36,10 +35,7 @@ function DoFireEffect()
 	Burst = Instigator.Spawn(Bursts[x], Instigator, , SpawnLocation);
 	if (Burst != None)
 	{
-		Infinity = RW_EnhancedInfinity(Instigator.Weapon);
-	
-		//Take off adren
-		if (Infinity == None)
+        if (Instigator.Weapon == None || DEKRPGWeapon(Instigator.Weapon) == None || DEKRPGWeapon(Instigator.Weapon).HasThisAddon(class'InfinityAddonPowerType') == false)
 			Instigator.Controller.Adrenaline -= AdrenCost;
 
 		Burst.HurtRadius(BurstDamage, BurstDamageRadius, DamageType, Momentum, Burst.Location);
