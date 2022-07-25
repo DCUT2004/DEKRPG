@@ -414,14 +414,12 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
   			   {
   				  // lets try this one
   				  newType = AvailableAddonPowerTypes[q].PowerType;
-  				  ok = true;
-  				  for (x = 0; x < NumPowerTypes ; x++)
+  				  ok = newType.static.AllowedFor(self.ModifiedWeapon);
+  				  for (x = 0; ok && x < NumPowerTypes ; x++)
   				  {
   					if (CurrentPowerTypes[x] != None)
   					{
   						if (CurrentPowerTypes[x].CanCoexist(newType) == false)
-  							ok = false;
-  						if (!CurrentPowerTypes[x].static.AllowedFor(self.ModifiedWeapon))
   							ok = false;
   					}
   				  }
@@ -430,7 +428,7 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
   				  else
   					newType = none;
   			   }
-  			   q += 1;
+  			   q++;
   		    }
 	    }
 	    bSetPowerTypes = true;
