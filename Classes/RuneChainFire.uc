@@ -1,11 +1,13 @@
 class RuneChainFire extends RuneInstantFire
 	config(DEKWeapons);
 
-var class<xEmitter> HitEmitterClass;
+var class<Emitter> BoltEmitterClass;
 var config float MaxStepRange;
 var config int FirstDamage;
+var config float MissedShotFraction;	//How much of FirstDamage to take off if not a direct hit
 var config float StepDamageFraction;
 var config int MaxSteps;				// maximum number of steps. 0 means just hit target like beam. 1 means one additional step
+var config float SearchRadius;			//If initial hit is a miss, how far away can we search for a nearby pawn
 
 var array<Pawn> ChainHitPawn;			// list of those we have hit
 var array<int> ChainStepNumber;			// what step number they were hit with
@@ -15,7 +17,7 @@ var array<int> ChainActive;				// if 1, this pawn has yet to fire (bool didnt wo
 function DoTrace(Vector Start, Rotator Dir)
 {
     local Vector X, End, HitLocation, HitNormal;
-    local Actor Other, A;
+    local Actor Other;
 
 	MaxRange();
 
@@ -24,28 +26,93 @@ function DoTrace(Vector Start, Rotator Dir)
 
 	Other = Weapon.Trace(HitLocation, HitNormal, End, Start, true);
 
-	if ( Other != None && Pawn(Other) != None && Pawn(Other).Health > 0 && Instigator != None && Pawn(Other).GetTeamNum() != Instigator.GetTeamNum())
+	if ( Other != None)
 	{
-		ChainHitPawn.length = 0;
-		ChainStepNumber.length = 0;
-		ChainHitLocation.length = 0;
-		ChainActive.length = 0;
-		A = spawn(class'BlueSparks',,, Instigator.Location);
-		if (A != None)
+		DrawLightningEffect(HitLocation, Start);
+		if (Pawn(Other) != None && Pawn(Other).Health > 0 && Instigator != None && Pawn(Other).GetTeamNum() != Instigator.GetTeamNum())
 		{
-			A.RemoteRole = ROLE_SimulatedProxy;
-			A.PlaySound(Sound'WeaponSounds.LightningGun.LightningGunImpact',,1.5*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
+			StartChain(Other, HitLocation, Start, false);
 		}
-		ChainPawn(Pawn(Other), HitLocation, (Start + Instigator.Location)/2, 0);
+		else if (Pawn(Other) == None)		//Hit something, but not a Pawn. See if we can search for nearby targets
+		{
+			SearchNearbyPawns(Other, HitLocation);
+			if (Pawn(Other) != None)
+			{
+				StartChain(Other, HitLocation, Start, true);
+			}
+		}
+	}
+	else
+	{
+		DrawLightningEffect(End, Start);		//Since HitLocation won't be set correctly, if we didn't hit anything
 	}
 	SetTimer(0.2, true);
+}
+
+function SearchNearbyPawns(out Actor Other, Vector SearchLocation)
+{
+	local Pawn Victim;
+	local float ClosestDistance;
+	
+	ClosestDistance = SearchRadius + 1.0;
+	
+	foreach Other.VisibleCollidingActors( Class'Pawn', Victim, SearchRadius, SearchLocation)
+	{
+		if (Victim != None && Victim.Health > 0 && Victim.GetTeamNum() != Instigator.GetTeamNum())
+		{
+			if (ClosestDistance > VSize(Victim.Location - SearchLocation))
+			{
+				ClosestDistance = VSize(Victim.Location - SearchLocation);
+				Other = Victim;
+			}
+		}
+	}
+}
+
+function StartChain(Actor Other, Vector HitLocation, Vector StartLocation, bool bMissedHit)
+{
+	local Actor A;
+	
+	ChainHitPawn.length = 0;
+	ChainStepNumber.length = 0;
+	ChainHitLocation.length = 0;
+	ChainActive.length = 0;
+	FirstDamage = default.FirstDamage;	//Reset damage to original value
+	if (bMissedHit)						//Draw an additional lightning effect, from the point we hit to the victim. Take same damage off too for an assisted hit
+	{
+		DrawLightningEffect(Other.Location, HitLocation);
+		FirstDamage *= MissedShotFraction;
+	}
+	A = spawn(class'BlueSparks',,, Instigator.Location);
+	if (A != None)
+	{
+		A.RemoteRole = ROLE_SimulatedProxy;
+		A.PlaySound(Sound'WeaponSounds.LightningGun.LightningGunImpact',,1.5*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
+	}
+	ChainPawn(Pawn(Other), HitLocation, (StartLocation + Instigator.Location)/2, 0);
+}
+
+function DrawLightningEffect(Vector HitLocation, Vector StartLocation)
+{
+	local Emitter Bolt;
+	
+	Bolt = spawn(BoltEmitterClass,,,StartLocation , rotator(HitLocation - StartLocation));
+	if (Bolt != None)
+	{
+		BeamEmitter(Bolt.Emitters[0]).BeamDistanceRange.Min = VSize(HitLocation - StartLocation);
+		BeamEmitter(Bolt.Emitters[0]).BeamDistanceRange.Max = VSize(HitLocation - StartLocation);
+		Bolt.RemoteRole = Role_SimulatedProxy;
+		//Bolt.SpawnEffects(Victim, StartLocation, (HitLocation - StartLocation) * -1);
+		//Bolt.SetBase(self);
+		Bolt.RemoteRole = ROLE_SimulatedProxy;
+		Spawn(class'DEKLightningTurretProjSparks',,, HitLocation);
+	}
 }
 
 function ChainPawn(Pawn Victim, vector HitLocation, vector StartLocation, int StepNumber)
 {
 	local Actor A;
 	local int DamageToDo;
-	local xEmitter HitEmitter;
 	local int i;
 	local float CurPercent;
 
@@ -67,11 +134,7 @@ function ChainPawn(Pawn Victim, vector HitLocation, vector StartLocation, int St
 	}
 
 	// first draw the emitter.
-	HitEmitter = spawn(HitEmitterClass,,,StartLocation , rotator(HitLocation - StartLocation));
-	if (HitEmitter != None)
-	{
-		HitEmitter.mSpawnVecA = Victim.Location;
-	}
+	DrawLightningEffect(HitLocation, StartLocation);
 
 	A = spawn(class'BlueSparks',,, Victim.Location);
 	if (A != None)
@@ -195,10 +258,12 @@ defaultproperties
 {
 	 AdrenCost=20.0000
 	 TraceRange=3000.00000
-     HitEmitterClass=Class'DEKRPG999X.LightningBeamEmitter'
+	 SearchRadius=300.00000
+     BoltEmitterClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
      DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
      MaxStepRange=650.000000
      FirstDamage=180
+	 MissedShotFraction=0.600000
      StepDamageFraction=0.700000
      MaxSteps=3
      FireRate=2.000000
