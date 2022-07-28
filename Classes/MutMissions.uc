@@ -1,5 +1,17 @@
 class MutMissions extends Mutator;
 
+simulated function PostBeginPlay()
+{
+	local MissionGameRules G;
+
+	G = Spawn(class'MissionGameRules');
+	if ( Level.Game.GameRulesModifiers == None )
+		Level.Game.GameRulesModifiers = G;
+	else    
+		Level.Game.GameRulesModifiers.AddGameRules(G);
+	Super.PostBeginPlay();
+}
+
 function ModifyPlayer(Pawn Other)
 {
 	local MissionInvBETA MissionInv;

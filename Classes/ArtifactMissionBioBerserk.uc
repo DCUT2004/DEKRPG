@@ -3,76 +3,27 @@ class ArtifactMissionBioBerserk extends ArtifactMission
 
 function Activate()
 {
-	Super(ArtifactMission).Activate();
+	local MissionInvBETA MissionInv;
 	
-	if ((Instigator != None) && (Instigator.Controller != None))
+	if (Instigator == None || Instigator.Controller == None)
+		return;
+		
+	MissionInv = class'MissionInvBETA'.static.GetMissionInv(Instigator.Controller);
+	
+	if (MissionInv == None)
+		return;
+	if (!MissionInv.SetMission(ItemName, MissionGoal, XPReward, 1, Class'XWeapons.DamTypeBioGlob'))
 	{
-		if (Inv == None || M1Inv == None || M2Inv == None || M3Inv == None)
-		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
-			bActive = false;
-			GotoState('');
-			return;
-		}
-		if (!M1Inv.Stopped && !M2Inv.Stopped && !M3Inv.Stopped)
-		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
-			bActive = false;
-			GotoState('');
-			return;
-		}
-		if (M1Inv.BioBerserkActive || M2Inv.BioBerserkActive || M3Inv.BioBerserkActive)
-		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-			bActive = false;
-			GotoState('');
-			return;
-		}
-		if (Inv.BioBerserkComplete)
-		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-			bActive = false;
-			GotoState('');
-			return;
-		}
-		else
-		{
-			if (M1Inv.stopped)
-			{
-				M1Inv.Stopped = False;
-				M1Inv.MissionXP = XPReward;
-				M1Inv.MissionGoal = MissionGoal;
-				M1Inv.BioBerserkActive = True;
-				M1Inv.MissionName = default.ItemName;
-				M1Inv.SetTimer(M1Inv.CheckInterval, True);
-			}
-			else if (M2Inv.stopped)
-			{
-				M2Inv.Stopped = False;
-				M2Inv.MissionXP = XPReward;
-				M2Inv.MissionGoal = MissionGoal;
-				M2Inv.BioBerserkActive = True;
-				M2Inv.MissionName = default.ItemName;
-				M2Inv.SetTimer(M2Inv.CheckInterval, True);
-			}
-			else if (M3Inv.stopped)
-			{
-				M3Inv.Stopped = False;
-				M3Inv.MissionXP = XPReward;
-				M3Inv.MissionGoal = MissionGoal;
-				M3Inv.BioBerserkActive = True;
-				M3Inv.MissionName = default.ItemName;
-				M3Inv.SetTimer(M3Inv.CheckInterval, True);
-			}
-			Instigator.ReceiveLocalizedMessage(MessageClass, 7000, None, None, Class);
-			if (PlayerController(Instigator.Controller) != None)
-				PlayerController(Instigator.Controller).ClientPlaySound(Sound'AssaultSounds.HumanShip.HnShipFireReadyl01');
-			SetTimer(0.2,True);
-		}
+		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
+		bActive = false;
+		GotoState('');
+		return;
 	}
-	bActive = false;
-	GotoState('');
-	return;		
+	
+	Instigator.ReceiveLocalizedMessage(MessageClass, 7000, None, None, Class);
+	if (PlayerController(Instigator.Controller) != None)
+	PlayerController(Instigator.Controller).ClientPlaySound(Sound'AssaultSounds.HumanShip.HnShipFireReadyl01');
+	SetTimer(0.2,True);
 }
 
 static function string GetLocalString(optional int Switch, optional PlayerReplicationInfo RelatedPRI_1, optional PlayerReplicationInfo RelatedPRI_2)
