@@ -190,17 +190,6 @@ function RPGStatsInv GetStatsInvFor(Controller C, optional bool bMustBeOwner)
 	return None;
 }
 
-function bool HasThisItem(RPGPlayerDataObject Data, class DesiredClass)
-{
-	local int x;
-
-	for (x = 0; x < Data.Abilities.length ; x++)
-		if (Data.Abilities[x] == DesiredClass)
-			return true;
-
-	return false;
-}
-
 function bool IsSameTeam(Pawn P)
 {
 	// returns true for friendly monster or another player/bot on same team. 
@@ -226,18 +215,10 @@ function bool IsSameTeam(Pawn P)
 
 // *** functions regarding doing the initial generation of the weapon
 
-function int MaxPowersForThisPlayer(Pawn Other)
+function RPGPlayerDataObject GetDataObject(Pawn Other)
 {
 	local RPGPlayerDataObject Data;
 	local RPGStatsInv StatsInv;		// needed because HolderStatsInv not set yet
-	local int iLocalMaxPowers;
-	local bool bGotClass;
-
-	iLocalMaxPowers = MaxNumPowers;
-	if (iLocalMaxPowers <= 0)
-		iLocalMaxPowers = cMaxPowerTypes;	// limited to max we can have at one time
-
-	bGotClass = false;
 
 	if (Other != None && PlayerController(Other.Controller) != None)
 	{
@@ -245,85 +226,122 @@ function int MaxPowersForThisPlayer(Pawn Other)
     	if (StatsInv != None)
     	{
     		Data = StatsInv.DataObject;
-            
-            if (HasThisItem(Data, class'ClassWeaponsMaster'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersWeaponsMasters<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersWeaponsMasters;
-        	}
-        	else if (HasThisItem(Data, class'ClassEngineer'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersEngineers<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersEngineers;
-        	}
-        	else if (HasThisItem(Data, class'ClassAdrenalineMaster'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersAdrenalineMasters<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersAdrenalineMasters;
-        	}
-        	else if (HasThisItem(Data, class'ClassMonsterMaster'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersMonsterMasters<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersMonsterMasters;
-        	}
-        	else if (HasThisItem(Data, class'ClassGeneral'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersGeneral<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersGeneral;
-        	}
-        	else if (HasThisItem(Data, class'ClassClassicRPG'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersClassicRPG<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersClassicRPG;
-        	}
-        	else if (HasThisItem(Data, class'ClassNecromancer'))
-        	{
-        		bGotClass = true;
-                if (MaxPowersNecromancer<=iLocalMaxPowers)
-                    iLocalMaxPowers = MaxPowersNecromancer;
-        	}
         }
     }
     
-	if (!bGotClass)
-	{	// no class, so set to min
-        iLocalMaxPowers = min(MaxPowersWeaponsMasters,MaxPowersEngineers);
-        iLocalMaxPowers = min(iLocalMaxPowers,MaxPowersAdrenalineMasters);
-        iLocalMaxPowers = min(iLocalMaxPowers,MaxPowersMonsterMasters);
-        iLocalMaxPowers = min(iLocalMaxPowers,MaxPowersClassicRPG);
-        iLocalMaxPowers = min(iLocalMaxPowers,MaxPowersGeneral);
-        iLocalMaxPowers = min(iLocalMaxPowers,MaxPowersNecromancer);
- 		//Log("****DEKRPGWeapon MaxPowers - no class, max now:"$iLocalMaxPowers);
-	}
-	if (iLocalMaxPowers <= 0)
-		iLocalMaxPowers = cMaxPowerTypes;	// check again, in case a class has a negative value configured.
-
-	return iLocalMaxPowers;
+    return Data;
 }
 
-function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
+function int GetMinModifierAdjuster(RPGPlayerDataObject Data)
 {
-	local int iSumChance;
-	local int iReqdPowers;
-	local int iRandValue;
-	local int iCount;
-	local int iLocalMaxPowers;
-	local class<AddonPowerType> newType;
 	local int x;
-	local int q;
+
+	for (x = 0; x < Data.Abilities.length ; x++)
+		if (Data.Abilities[x] == class'AbilityHigherWeaponModifiers')
+			return Data.AbilityLevels[x];
+
+	return 0;
+}
+
+function int MaxPowersForThisPlayer(Pawn Other)
+{
+    // called from the pickup
+	local RPGPlayerDataObject Data;
+	local int x;
 	local bool ok;
+    local int LevelMagicWeapons;
+    local int MaxAddons;
+ 
+    ok = false;
+    MaxAddons = 0;
+    LevelMagicWeapons = 0;
+	for (x = 0; Data != None && x < Data.Abilities.length && !ok; x++)
+		if (Data.Abilities[x] == class'AbilityMagicWeapons')
+        {
+			LevelMagicWeapons = Data.AbilityLevels[x];
+            ok = true;
+        }
+
+    if (LevelMagicWeapons < class'AbilityMagicWeapons'.default.MagicWeaponLevels.Length)
+    {
+        MaxAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].MaxAddons; 
+    }    
+    
+    return MaxAddons;
+}
+
+function int GetNumberOfRequiredAddons(RPGPlayerDataObject Data)
+{
+	local int x;
+	local bool ok;
+    local int LevelMagicWeapons;
+    local int MaxAddons;
+    local int PercentChanceNormal;     
+    local int PercentChanceZeroAddons; 
+    local int PercentChanceOneAddon;   
+    local int PercentChanceTwoAddons;  
+    local int PercentChanceThreeAddons;
+    local int PercentChanceMoreAddons; 
+
+    ok = false;
+    LevelMagicWeapons = 0;
+    if (Data != None)
+    {
+    	for (x = 0; x < Data.Abilities.length && !ok; x++)
+    		if (Data.Abilities[x] == class'AbilityMagicWeapons')
+            {
+    			LevelMagicWeapons = Data.AbilityLevels[x];
+                ok = true;
+            }
+    }
+
+    if (LevelMagicWeapons < class'AbilityMagicWeapons'.default.MagicWeaponLevels.Length)
+    {
+        MaxAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].MaxAddons;     
+        PercentChanceNormal = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceNormal;     
+        PercentChanceZeroAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceZeroAddons; 
+        PercentChanceOneAddon = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceOneAddon;   
+        PercentChanceTwoAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceTwoAddons;  
+        PercentChanceThreeAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceThreeAddons;
+        PercentChanceMoreAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].PercentChanceMoreAddons; 
+    }
+    else
+        return -1;
+Log("***** DEKRPGWeapon checking - found AbilityMagicWeapons level" @ LevelMagicWeapons @ "giving" @ MaxAddons @ PercentChanceNormal @ PercentChanceZeroAddons @ PercentChanceOneAddon @ PercentChanceTwoAddons @ PercentChanceThreeAddons @ PercentChanceMoreAddons);
+    
+    x = Rand(PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons + PercentChanceMoreAddons);
+    if (x < PercentChanceNormal)
+ 	  return -1;
+
+    if (x < PercentChanceNormal + PercentChanceZeroAddons)
+        return 0;
+
+    if (x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon)
+        return 1;
+
+    if (x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons)
+        return 2;
+
+    if (x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons)
+        return 3;
+
+    if (MaxAddons > 3 && x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons + PercentChanceMoreAddons)
+        return Rand(MaxNumPowers - 3) + 4;
+
+    return 0;    // should never get here        
+}
+
+function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
+{
+	local int x;
+	local bool ok;
+    local int NumRequiredAddons;
+	local int q;
+	local int iSumChance;
+	local int iCount;
+	local class<AddonPowerType> newType;
 	local AddonPowerType NewPowerup;
 
-	if (Instigator != None)
-		iLocalMaxPowers = MaxPowersForThisPlayer(Instigator);
-	else
-		iLocalMaxPowers = MaxPowersForThisPlayer(Pawn(Owner));
 	NumPowerTypes = 0;
 	bIdentified = false;
 	if (sBaseName == "")
@@ -355,104 +373,114 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon)
 		}
 	}
 
-	CurMaxPowers = iLocalMaxPowers;	// for addonartifacts to check against
+	CurMaxPowers = MaxNumPowers;	// for addonartifacts to check against
 
-	// may need to reset weapon here!
+	if (bSetPowerTypes)
+        return;
+	
+    //now set what type of weapon it is
+    AIRatingBonus=0.040000;
+    bModifierSet = false;
+    
+    // find how many addons we need
+    NumRequiredAddons = GetNumberOfRequiredAddons(Data);
+Log("***** doing generate for" @ ModifiedWeapon @ "for player" @ Instigator @ "allowed" @ NumRequiredAddons @ "addons");
+    if (NumRequiredAddons == -1)
+    {
+        // tough luck, its a normal weapon
+        modifier = 0;
+        bModifierSet = true;
+        bSetPowerTypes = true;
+        return;
+    }
 
-	if (!bSetPowerTypes)
-	{
-	    //now set what type of weapon it is
-	    AIRatingBonus=0.040000;
-	    bModifierSet = false;
+    if (NumRequiredAddons == 0)
+    {
+        // no addons, but could still have a modifier
+        bSetPowerTypes = true;
+        return;
+    }
 
-	    if (Rand(100) < PerCentNormalWeapons)
+    // ok, add the addons    
+    iSumChance = 0;
+    for (q = 0; q < AvailableAddonPowerTypes.Length ; q++) 
+        iSumChance += AvailableAddonPowerTypes[q].GenerateChance; 
+
+    iCount = 0;
+    while ((NumPowerTypes < NumRequiredAddons) && (iCount<300))
+    {
+  		iCount++;
+	    newType = none;
+
+	    q = 0;
+	    while (q < AvailableAddonPowerTypes.Length && newType == none)
 	    {
-		  // tough luck, its a normal weapon
-		  modifier = 0;
-		  bModifierSet = true;
-		  bSetPowerTypes = true;
-		  return;
+            if (Rand(iSumChance) < AvailableAddonPowerTypes[q].GenerateChance)
+            {
+                // lets try this one
+                newType = AvailableAddonPowerTypes[q].PowerType;
+                
+                // now check it is ok on the weapon type and compatible with existing addons
+                ok = newType.static.AllowedFor(ModifiedWeapon);
+                for (x = 0; ok && x < NumPowerTypes ; x++)
+                {
+                    if (CurrentPowerTypes[x] != None)
+                    {
+                    	if (CurrentPowerTypes[x].CanCoexist(newType) == false)
+                    		ok = false;
+                    }
+                }
+                if (ok)
+                    AddPowerType(newType);	// increments NumPowerTypes
+                else
+                    newType = none;
+            }
+            q++;
 	    }
-
-	    // ok, lets see how many Powers we should give it
-	    iSumChance = ChanceZeroPower;
-	    if (iLocalMaxPowers >= 1)
-		  iSumChance += ChanceOnePower;
-	    if (iLocalMaxPowers >= 2)
-		  iSumChance += ChanceTwoPower;
-	    if (iLocalMaxPowers >= 3)
-		  iSumChance += ChanceMultiplePower;
-	    iReqdPowers = 0;
-	    iRandValue = Rand(iSumChance);
-	    if (iRandValue < ChanceZeroPower)
-		  iReqdPowers = 0;
-	    else if (iRandValue < (ChanceZeroPower+ChanceOnePower))
-		  iReqdPowers = 1;
-	    else if (iRandValue < (ChanceZeroPower+ChanceOnePower+ChanceTwoPower))
-		  iReqdPowers = 2;
-	    else 
-	    {
-  		    // multiple, but how many?
-  		    iRandValue = Rand(iLocalMaxPowers-2);
-  		    iReqdPowers = iRandValue + 3;
-	    }
-
-	    iSumChance = 0;
-	    for (q = 0; q < AvailableAddonPowerTypes.Length ; q++) 
-		  iSumChance += AvailableAddonPowerTypes[q].GenerateChance; 
-
-	    iCount = 0;
-	    while ((NumPowerTypes < iReqdPowers) && (iCount<200))
-	    {
-      		iCount++;
-  		    newType = none;
-  
-  		    q = 0;
-  		    while (q < AvailableAddonPowerTypes.Length && newType == none)
-  		    {
-  			   if (Rand(iSumChance) < AvailableAddonPowerTypes[q].GenerateChance)
-  			   {
-  				  // lets try this one
-  				  newType = AvailableAddonPowerTypes[q].PowerType;
-  				  ok = newType.static.AllowedFor(self.ModifiedWeapon);
-  				  for (x = 0; ok && x < NumPowerTypes ; x++)
-  				  {
-  					if (CurrentPowerTypes[x] != None)
-  					{
-  						if (CurrentPowerTypes[x].CanCoexist(newType) == false)
-  							ok = false;
-  					}
-  				  }
-  				  if (ok)
-  					AddPowerType(newType);	// increments NumPowerTypes
-  				  else
-  					newType = none;
-  			   }
-  			   q++;
-  		    }
-	    }
-	    bSetPowerTypes = true;
-	}
-
+    }
+    bSetPowerTypes = true;
 }
 
 function Generate(RPGWeapon ForcedWeapon)
 {
+	local RPGPlayerDataObject Data;
+    local int MinModifierRange;
+    local int MaxModifierRange;
+
 	local int Count;
 	local bool ok;
 	local int x;
 
 	Super.Generate(ForcedWeapon);
+
+	if (Instigator != None)
+		Data = GetDataObject(Instigator);
+	else
+		Data = GetDataObject(Pawn(Owner));
+    
+    if (Data != None)
+    {
+        MinModifierRange = MinModifier + GetMinModifierAdjuster(Data);
+        MaxModifierRange = Max(MinModifierRange, MaxModifier);
+    }
+    else
+    {
+        MinModifierRange = MinModifier;
+        MaxModifierRange = MaxModifier;
+    }
+    
 	if (!bSetPowerTypes)
 	{
-		AddInitialPowerTypes(ForcedWeapon);
+		AddInitialPowerTypes(ForcedWeapon, Data);
+    	bSetPowerTypes = true;
 	}
 	if ((ForcedWeapon == None) && !bModifierSet)
-	{
+	{             
+        Count = 0;
 		do
 		{
 			Count++;
-			Modifier = Rand(MaxModifier+1-MinModifier) + MinModifier;
+			Modifier = Rand(MaxModifierRange+1-MinModifierRange) + MinModifierRange;
 			ok = true;
 			for (x = 0; x < NumPowerTypes ; x++)
 				if (CurrentPowerTypes[x] != None)
@@ -460,11 +488,9 @@ function Generate(RPGWeapon ForcedWeapon)
 						ok = false;
 		} until (ok || Count > 200)
 		if (ok == false)
-			modifier = 0;
-		else
-			bModifierSet = true;
+			modifier = Max(MinModifierRange, 1);
+		bModifierSet = true;
 	}
-	bSetPowerTypes = true;
     
     SetShaderBasedOnAddons();
 }
@@ -538,7 +564,6 @@ simulated function ConstructItemName()
     local int y;
     local string newName;
     local bool GotMultiple;
-
 	if (Role == Role_Authority)
 	{
 		if (sBaseName == "")
@@ -1071,22 +1096,9 @@ defaultproperties
      NumPowerTypes=0
      PickupClass=Class'DEKRPGWeaponPickup'
 
-     MaxNumPowers=3
+     MaxNumPowers=4
      MinNumPowers=0
-     ChanceZeroPower=1
-     ChanceOnePower=5
-     ChanceTwoPower=8
-     ChanceMultiplePower=0
-     PerCentNormalWeapons=10.0
 
-     MaxPowersWeaponsMasters=2
-     MaxPowersEngineers=1
-     MaxPowersAdrenalineMasters=2
-     MaxPowersMonsterMasters=1
-     MaxPowersClassicRPG=1
-     MaxPowersGeneral=1
-     MaxPowersNecromancer=1
-     
      MaxNumPowersDroppable=2
      MaxNumPowersClonable=1
      ModifierLossPerPowerup=0
@@ -1095,5 +1107,4 @@ defaultproperties
      MinDamageFraction=0.1
 
      AllowWeaponSwitch=false
-
 }

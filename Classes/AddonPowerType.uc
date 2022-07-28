@@ -82,6 +82,9 @@ function AttachToWeapon( DEKRPGWeapon W )
 // Can this Power type work on this weapon
 static function bool AllowedFor(Weapon W)
 {
+	if (W == None)
+		return false;     // can't tell if ok or not
+
 	return true;
 }
 

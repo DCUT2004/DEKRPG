@@ -118,7 +118,6 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 
 	if(oldName == "")
 		return;
-
 	if (Other.Level != None && Other.Level.Game != None && Other.Level.Game.BaseMutator != None)
 	{
 		newName = Other.Level.Game.BaseMutator.GetInventoryClassOverride(oldName);
@@ -133,34 +132,19 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	while(newWeapon.isA('RPGWeapon'))
 		newWeapon = RPGWeapon(newWeapon).ModifiedWeapon;
 
-	if(AbilityLevel >= 4)
-		RPGWeaponClass = GetRandomWeaponModifier(WeaponClass, Other, RPGMut);
-	else
-		RPGWeaponClass = RPGMut.GetRandomWeaponModifier(WeaponClass, Other);
+	RPGWeaponClass = RPGMut.GetRandomWeaponModifier(WeaponClass, Other);
 
 	RPGWeapon = Other.spawn(RPGWeaponClass, Other,,, rot(0,0,0));
 	if(RPGWeapon == None)
+    {
 		return;
+    }
+    
     RPGWeapon.ModifiedWeapon = newWeapon;
 
 	RPGWeapon.Generate(None);
 	
 	//I'm checking the state of RPG Weapon a bunch because sometimes it becomes none mid method.
-	if(RPGWeapon == None)
-		return;
-
-	if(AbilityLevel >= 5)		// need better modifier
-	{
-		if (AbilityLevel > 5)
-		{
-			RPGWeapon.Modifier = RPGWeapon.MaxModifier;
-		}
-		else
-		{
-            RPGWeapon.Modifier = Rand(RPGWeapon.MaxModifier)  + 1;
-		}
-	}
-
 	if(RPGWeapon == None)
 		return;
 
@@ -188,21 +172,6 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	}
 }
 
-static function class<RPGWeapon> GetRandomWeaponModifier(class<Weapon> WeaponType, Pawn Other, MutUT2004RPG RPGMut)
-{
-	local int x, Chance;
-
-	Chance = Rand(RPGMut.TotalModifierChance);
-	for (x = 0; x < RPGMut.WeaponModifiers.Length; x++)
-	{
-		Chance -= RPGMut.WeaponModifiers[x].Chance;
-		if (Chance < 0 && RPGMut.WeaponModifiers[x].WeaponClass.static.AllowedFor(WeaponType, Other))
-			return RPGMut.WeaponModifiers[x].WeaponClass;
-	}
-
-	return class'RPGWeapon';
-}
-
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
 	if(!bOwnedByInstigator)
@@ -210,7 +179,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 
 	if(Damage > 0)
 	{
-		if (AbilityLevel > 5)   // extreme WM
+		if (AbilityLevel > 3)   // extreme WM
 		{
 			if (ClassIsChildOf(DamageType, class'WeaponDamageType'))
 				Damage *= default.WeaponDamage;
@@ -258,8 +227,8 @@ defaultproperties
      PlayerLevelReqd(5)=55
      PlayerLevelReqd(6)=55
      AbilityName="Loaded Weapons"
-     Description="When you spawn:|Level 1: You are granted a set of weapons with the default percentage chance for magic weapons.|Level 2: You are granted an additional set of weapons and all weapons with max ammo.|Level 3: You are granted super weapons (Invasion game types only).|Level 4: Magic weapons will be generated for all your weapons.|Level 5: You receive all positive magic weapons.|Level 6: All maxed weapons and increased weapon damage of 30%, and reduced ability to use adrenaline and artifacts. |You must be level 40 before you can buy level 2 and level 55 before you can buy level 3.|Cost (per level): 10,15,20,25,30..."
+     Description="When you spawn:|Level 1: You are granted a set of weapons with the default percentage chance for magic weapons.|Level 2: You are granted an additional set of weapons and all weapons with max ammo.|Level 3: You are granted super weapons (Invasion game types only).|Level 4: Increased weapon damage of 30%, and reduced ability to use adrenaline and artifacts. |You must be level 40 before you can buy level 2 and level 55 before you can buy level 3.|Cost (per level): 10,15,20,25,30..."
      StartingCost=10
      CostAddPerLevel=5
-     MaxLevel=6
+     MaxLevel=4
 }

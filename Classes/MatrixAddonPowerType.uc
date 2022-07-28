@@ -17,6 +17,9 @@ static function bool AllowedFor(Weapon W)
 		&& class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.default.FireModeClass[0].default.AmmoClass) )
 		return false;
         
+	if(instr(caps(string(W)), "MEGABLAST") > -1)
+		return false;		
+
     // not really sure this check should be in here, but simpler to keep rather than change
     If (W.Instigator == None)
         return false;

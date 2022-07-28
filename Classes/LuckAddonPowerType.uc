@@ -153,7 +153,10 @@ function class<Pickup> ChoosePickupClass()
 	{
 		PowerPickup = SelectWeaponPowerup();
 		if (PowerPickup != None)
+        {
 			Potentials[i++] = PowerPickup;
+
+        }
 	}
 	if (i == 0 || (TheWeapon.Instigator.Controller != None && TheWeapon.Instigator.Controller.Adrenaline < TheWeapon.Instigator.Controller.AdrenalineMax))
     {
