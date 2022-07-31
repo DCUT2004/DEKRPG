@@ -23,10 +23,7 @@ var EngineerPointsInv EInv;
 var MonsterPointsInv MInv;
 var SpecialistInv SpInv;
 var PlagueSpreader PInv;
-var MissionInv MissionInv;
-var Mission1Inv M1Inv;
-var Mission2Inv M2Inv;
-var Mission3Inv M3Inv;
+var MissionInvBETA MissionInv;
 var MissionMultiplayerHUDInv MMPI;
 
 var DruidAwarenessEnemyList EnemyList;
@@ -57,9 +54,6 @@ event NotifyLevelChange()
 	PInv = None;
 	GiveItemsInv = None;
 	MissionInv = None;
-	M1Inv = None;
-	M2Inv = None;
-	M3Inv = None;
 	MMPI = None;
 	
 	//close stats menu if it's open, and remove interaction
@@ -270,11 +264,11 @@ function FindPInv()
 function FindMissionInv()
 {
 	local Inventory Inv;
-	local MissionInv FoundMInv;
+	local MissionInvBETA FoundMInv;
 
 	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
 	{
-		FoundMInv = MissionInv(Inv);
+		FoundMInv = MissionInvBETA(Inv);
 		if (FoundMInv != None)
 		{
 			if (FoundMInv.Owner == ViewportOwner.Actor || FoundMInv.Owner == ViewportOwner.Actor.Pawn)
@@ -287,117 +281,12 @@ function FindMissionInv()
 			if (Inv.Inventory == Inv)
 			{
 				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'MissionInv', FoundMInv)
+				foreach ViewportOwner.Actor.DynamicActors(class'MissionInvBETA', FoundMInv)
 				{
 					if (FoundMInv.Owner == ViewportOwner.Actor || FoundMInv.Owner == ViewportOwner.Actor.Pawn)
 					{
 						MissionInv = FoundMInv;
 						Inv.Inventory = MissionInv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-function FindM1Inv()
-{
-	local Inventory Inv;
-	local Mission1Inv FoundM1Inv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundM1Inv = Mission1Inv(Inv);
-		if (FoundM1Inv != None)
-		{
-			if (FoundM1Inv.Owner == ViewportOwner.Actor || FoundM1Inv.Owner == ViewportOwner.Actor.Pawn)
-				M1Inv = FoundM1Inv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'Mission1Inv', FoundM1Inv)
-				{
-					if (FoundM1Inv.Owner == ViewportOwner.Actor || FoundM1Inv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						M1Inv = FoundM1Inv;
-						Inv.Inventory = M1Inv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-function FindM2Inv()
-{
-	local Inventory Inv;
-	local Mission2Inv FoundM2Inv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundM2Inv = Mission2Inv(Inv);
-		if (FoundM2Inv != None)
-		{
-			if (FoundM2Inv.Owner == ViewportOwner.Actor || FoundM2Inv.Owner == ViewportOwner.Actor.Pawn)
-				M2Inv = FoundM2Inv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'Mission2Inv', FoundM2Inv)
-				{
-					if (FoundM2Inv.Owner == ViewportOwner.Actor || FoundM2Inv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						M2Inv = FoundM2Inv;
-						Inv.Inventory = M2Inv;
-						break;
-					}
-				}
-				return;
-			}
-		}
-	}
-}
-
-function FindM3Inv()
-{
-	local Inventory Inv;
-	local Mission3Inv FoundM3Inv;
-
-	for (Inv = ViewportOwner.Actor.Inventory; Inv != None; Inv = Inv.Inventory)
-	{
-		FoundM3Inv = Mission3Inv(Inv);
-		if (FoundM3Inv != None)
-		{
-			if (FoundM3Inv.Owner == ViewportOwner.Actor || FoundM3Inv.Owner == ViewportOwner.Actor.Pawn)
-				M3Inv = FoundM3Inv;
-			return;
-		}
-		else
-		{
-			//atrocious hack for Jailbreak's bad code in JBTag (sets its Inventory property to itself)
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				foreach ViewportOwner.Actor.DynamicActors(class'Mission3Inv', FoundM3Inv)
-				{
-					if (FoundM3Inv.Owner == ViewportOwner.Actor || FoundM3Inv.Owner == ViewportOwner.Actor.Pawn)
-					{
-						M3Inv = FoundM3Inv;
-						Inv.Inventory = M3Inv;
 						break;
 					}
 				}
@@ -888,36 +777,6 @@ function PreRender(Canvas Canvas)
 			if( MissionInv.InteractionOwner != None )
 				MissionInv.InteractionOwner.MissionInv = None;
 			MissionInv.InteractionOwner = Self;
-		}
-	}
-	if (M1Inv == None)
-	{
-		FindM1Inv();
-		if (M1Inv != None)
-		{
-			if( M1Inv.InteractionOwner != None )
-				M1Inv.InteractionOwner.M1Inv = None;
-			M1Inv.InteractionOwner = Self;
-		}
-	}
-	if (M2Inv == None)
-	{
-		FindM2Inv();
-		if (M2Inv != None)
-		{
-			if( M2Inv.InteractionOwner != None )
-				M2Inv.InteractionOwner.M2Inv = None;
-			M2Inv.InteractionOwner = Self;
-		}
-	}
-	if (M3Inv == None)
-	{
-		FindM3Inv();
-		if (M3Inv != None)
-		{
-			if( M3Inv.InteractionOwner != None )
-				M3Inv.InteractionOwner.M3Inv = None;
-			M3Inv.InteractionOwner = Self;
 		}
 	}
 
@@ -1677,36 +1536,6 @@ function PostRender(Canvas Canvas)
 			MissionInv.InteractionOwner = Self;
 		}
 	}
-	if (M1Inv == None)
-	{
-		FindM1Inv();
-		if (M1Inv != None)
-		{
-			if( M1Inv.InteractionOwner != None )
-				M1Inv.InteractionOwner.M1Inv = None;
-			M1Inv.InteractionOwner = Self;
-		}
-	}
-	if (M2Inv == None)
-	{
-		FindM2Inv();
-		if (M2Inv != None)
-		{
-			if( M2Inv.InteractionOwner != None )
-				M2Inv.InteractionOwner.M2Inv = None;
-			M2Inv.InteractionOwner = Self;
-		}
-	}
-	if (M3Inv == None)
-	{
-		FindM3Inv();
-		if (M3Inv != None)
-		{
-			if( M3Inv.InteractionOwner != None )
-				M3Inv.InteractionOwner.M3Inv = None;
-			M3Inv.InteractionOwner = Self;
-		}
-	}
 	if (MMPI == None)
 	{
 		FindMMPI();
@@ -1733,12 +1562,12 @@ function PostRender(Canvas Canvas)
 		Canvas.Style = 2;
 		Canvas.DrawColor = WhiteColor;
 
-		pText = "Missions Completed: " $ MissionInv.MissionsCompleted;
+		pText = "Missions Completed: " $ MissionInv.NumMissionsCompleted;
 		Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 24.0);
 		Canvas.DrawText(pText);
 
 		//Now draw each individual mission's artifact, description, and name.
-		if (M1Inv != None && !M1Inv.Stopped)
+		if (MissionInv.Missions[0].MissionName != "")
 		{	
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1752,9 +1581,9 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 23.0);
-			Canvas.DrawText("1. " $ M1Inv.MissionName $ " " $ M1Inv.MissionCount $ "/" $ M1Inv.MissionGoal);
+			Canvas.DrawText("1. " $ MissionInv.Missions[0].MissionName $ " " $ MissionInv.Missions[0].MissionCount $ "/" $ MissionInv.Missions[0].MissionGoal);
 		}
-		if (M2Inv != None && !M2Inv.Stopped)
+		if (MissionInv.Missions[1].MissionName != "")
 		{
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1768,9 +1597,9 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 22.0);
-			Canvas.DrawText("2. " $ M2Inv.MissionName $ " " $ M2Inv.MissionCount $ "/" $ M2Inv.MissionGoal);
+			Canvas.DrawText("2. " $ MissionInv.Missions[1].MissionName $ " " $ MissionInv.Missions[1].MissionCount $ "/" $ MissionInv.Missions[1].MissionGoal);
 		}
-		if (M3Inv != None && !M3Inv.Stopped)
+		if (MissionInv.Missions[2].MissionName != "")
 		{
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1784,7 +1613,7 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 21.0);
-			Canvas.DrawText("3. " $ M3Inv.MissionName $ " " $ M3Inv.MissionCount $ "/" $ M3Inv.MissionGoal);
+			Canvas.DrawText("3. " $ MissionInv.Missions[2].MissionName $ " " $ MissionInv.Missions[2].MissionCount $ "/" $ MissionInv.Missions[2].MissionGoal);
 		}
 		if (MMPI != None && !MMPI.Stopped)
 		{

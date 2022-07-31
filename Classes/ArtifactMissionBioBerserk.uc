@@ -12,9 +12,38 @@ function Activate()
 	
 	if (MissionInv == None)
 		return;
-	if (!MissionInv.SetMission(ItemName, MissionGoal, XPReward, 1, Class'XWeapons.DamTypeBioGlob'))
+		
+
+	//Check if all missions slots are alaready active
+	if (MissionInv.IsAllMissionsActive())
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
+		bActive = false;
+		GotoState('');
+		return;				
+	}
+	
+	//Check if this mission is already active
+	if (MissionInv.IsMissionActive(ItemName))
+	{
+		Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
+		bActive = false;
+		GotoState('');
+		return;			
+	}
+	
+	//Check if this mission was already completed
+	if (MissionInv.IsMissionCompleted(ItemName))
+	{
+		Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
+		bActive = false;
+		GotoState('');
+		return;		
+	}
+	
+	if (!MissionInv.SetMission(ItemName, MissionGoal, XPReward, 1, Class'XWeapons.DamTypeBioGlob'))
+	{
+		Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
 		bActive = false;
 		GotoState('');
 		return;
@@ -29,7 +58,7 @@ function Activate()
 static function string GetLocalString(optional int Switch, optional PlayerReplicationInfo RelatedPRI_1, optional PlayerReplicationInfo RelatedPRI_2)
 {
 	if (Switch == 1000)
-		return "Cannot access mission.";
+		return "Could not start mission. Try again.";
 	else if (Switch == 2000)
 		return "You currently have too many active missions.";
 	else if (Switch == 3000)

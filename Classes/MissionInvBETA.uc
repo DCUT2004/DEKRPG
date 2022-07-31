@@ -16,8 +16,17 @@ struct Mission										//Struct representation of a mission
 	var Class<Actor> ObjectiveClass;				//What objective this mission requires (e.g. monsters for hunt missions, damage types for weapon missions)
 };
 var Mission Missions[NUM_MISSIONS];					//Array containing Mission structs, representing the player's currently active missions
-var int MissionsCompleted;							//Number of missions this player has completed
+var int NumMissionsCompleted;						//Number of missions this player has completed
+var Array < string > CompletedMissions;				//Array of missions that have been completed
 var RPGRules Rules;
+
+var transient DruidsRPGKeysInteraction InteractionOwner;
+
+replication											//Replicate to clients so HUD can be displayed
+{
+	reliable if (Role == ROLE_Authority)
+		NumMissionsCompleted, Missions;
+}
 
 simulated function PostBeginPlay()
 {
@@ -70,6 +79,44 @@ static final function MissionInvBETA GetMissionInv(Controller C)
 	return None;
 }
 
+final function bool IsAllMissionsActive()
+{
+	local int x, Count;
+	
+	Count = 0;
+	
+	for (x = 0; x < NUM_MISSIONS; x++)
+	{
+		if (Missions[x].MissionName != "")
+			Count++;
+	}
+	return Count == NUM_MISSIONS;
+}
+
+final function bool IsMissionActive(string MissionName)
+{
+	local int x;
+	
+	for (x = 0; x < NUM_MISSIONS; x++)
+	{
+		if (MissionName == Missions[x].MissionName)
+			return true;
+	}
+	return false;
+}
+
+final function bool IsMissionCompleted(string MissionName)
+{
+	local int x;
+	
+	for (x = 0; x < CompletedMissions.Length; x++)
+	{
+		if (MissionName == CompletedMissions[x])
+			return true;
+	}
+	return false;
+}
+
 function ResetAllMissions()
 {
 	local int x;
@@ -99,7 +146,7 @@ function bool SetMission(string MissionName, int MissionGoal, float XPReward, in
 	
 	for (x = 0; x < NUM_MISSIONS; x++)				//Find next available slot to set mission
 	{
-		if (Missions[x].MissionGoal == 0)
+		if (Missions[x].MissionName == "")
 		{
 			Missions[x].MissionName = MissionName;
 			Missions[x].MissionGoal = MissionGoal;
@@ -121,17 +168,47 @@ function TickMission(int MissionNumber)
 	Missions[MissionNumber].MissionCount += Missions[MissionNumber].TickAmount;
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
 	{
-		RewardXP(Missions[MissionNumber].XPReward);
-		ResetMission(MissionNumber);
+		CompleteMission(MissionNumber);
 	}
-	Log("Ticked mission. Count: " $Missions[MissionNumber].Missioncount);
-	Log("Mission goal: " $Missions[MissionNumber].MissionGoal);
+}
+
+function CompleteMission(int MissionNumber)
+{
+	local Pawn PawnOwner;
+	
+	if (Owner != None && Controller(Owner) != None)
+		PawnOwner = Controller(Owner).Pawn;
+	RewardXP(Missions[MissionNumber].XPReward);
+	CompletedMissions.Insert(0, 1);
+	CompletedMissions[0] = Missions[MissionNumber].MissionName;
+	NumMissionsCompleted = CompletedMissions.Length;
+	if (PawnOwner != None)
+	{
+		Level.Game.Broadcast(self, PawnOwner.PlayerReplicationInfo.PlayerName $ " achieved " $ Missions[MissionNumber].MissionName $ "!");
+		PawnOwner.PlaySound(Sound'DEKRPG999X.MissionSounds.MissionComplete1', SLOT_None, 400.0);
+	}
+	ResetMission(MissionNumber);
 }
 
 function RewardXP(float XPReward)
 {
-	if (Rules != None && Instigator != None)
-		Rules.ShareExperience(RPGStatsInv(Instigator.FindInventoryType(class'RPGStatsInv')), XPReward);
+	local Pawn PawnOwner;
+	
+	if (Owner != None && Controller(Owner) != None)
+		PawnOwner = Controller(Owner).Pawn;
+		
+	if (Rules != None && PawnOwner != None)
+		Rules.ShareExperience(RPGStatsInv(PawnOwner.FindInventoryType(class'RPGStatsInv')), XPReward);
+}
+
+simulated function Destroyed()
+{
+ 	if (InteractionOwner != None)
+ 	{
+ 		InteractionOwner.MissionInv = None;
+ 		InteractionOwner = None;
+ 	}
+	Super.Destroyed();
 }
 
 defaultproperties

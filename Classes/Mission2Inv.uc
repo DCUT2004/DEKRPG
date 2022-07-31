@@ -5,7 +5,7 @@ simulated function destroyed()
 {
  	if( InteractionOwner != None )
  	{
- 		InteractionOwner.M2Inv = None;
+ 		//InteractionOwner.M2Inv = None;
  		InteractionOwner = None;
  	}
 	super.destroyed();
