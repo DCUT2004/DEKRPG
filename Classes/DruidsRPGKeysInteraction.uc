@@ -1074,7 +1074,7 @@ function PostRender(Canvas Canvas)
 	local int iNumHealers;
 	local float XLSmall, YLSmall, MPBarX, MPBarY;
 	local DruidMonsterMasterArtifactMonsterSummon DMMAMS;
-	local ArtifactMission AM;
+	local ArtifactMissionBETA AM;
 	local ArtifactMissionCowCare AMCC;
 	local ArtifactMissionSharpShotFly AMSSF;
 	local ArtifactMissionZombieSlayer AMZS;
@@ -1731,7 +1731,7 @@ function PostRender(Canvas Canvas)
 			}
 		}
 	}
-	AM = ArtifactMission(ViewportOwner.Actor.Pawn.SelectedItem);
+	AM = ArtifactMissionBETA(ViewportOwner.Actor.Pawn.SelectedItem);
 	AMCC = ArtifactMissionCowCare(ViewportOwner.Actor.Pawn.SelectedItem);
 	AMSSF = ArtifactMissionSharpShotFly(ViewportOwner.Actor.Pawn.SelectedItem);
 	AMZS = ArtifactMissionZombieSlayer(ViewportOwner.Actor.Pawn.SelectedItem);
@@ -1958,7 +1958,7 @@ function PostRender(Canvas Canvas)
 				else
 					Canvas.DrawText(RewardText $ AMD.XPReward $ "XP, Letter U");	
 		}
-		else if (ClassIsChildOf(AM.Class, class'ArtifactMission'))
+		else if (ClassIsChildOf(AM.Class, class'ArtifactMissionBETA'))
 		{
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1982,17 +1982,17 @@ function PostRender(Canvas Canvas)
 			Canvas.DrawColor = WhiteColor;	
 			
 			Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-			if (AM.TeamMission)
-				Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
-			else if (!AM.TeamMission)
-			{
+			//if (AM.TeamMission)
+			//	Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
+			//else if (!AM.TeamMission)
+			//{
 				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
 					Canvas.DrawText(RewardText $ AM.XPReward*AM.LowLevelMultiplier $ "XP");
 				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
 					Canvas.DrawText(RewardText $ AM.XPReward*AM.MediumLevelMultiplier $ "XP");
 				else
 					Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
-			}
+			//}
 		}
 	}
 	AP = ArtifactPaladin(ViewportOwner.Actor.Pawn.SelectedItem);
