@@ -141,7 +141,7 @@ function ResetMission(int MissionNumber)
 }
 
 //Called when activating a mission artifact, which will supply the required parameters
-function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, out Array < Class < Actor > > ObjectiveClasses)
+function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, Array < Class < Actor > > ObjectiveClasses)
 {
 	local int x, y;
 	
