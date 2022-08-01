@@ -63,7 +63,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 		{
 			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
 			{
-				if (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y])
+				if (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y] || ClassIsChildOf(Killed.Pawn.Class, MissionInv.Missions[x].ObjectiveClasses[y]))
 				{
 					MissionInv.TickMission(x);
 					return;			

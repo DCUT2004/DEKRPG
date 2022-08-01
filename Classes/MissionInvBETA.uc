@@ -6,23 +6,23 @@ class MissionInvBETA extends Inventory;
 
 const NUM_MISSIONS = 3;
 
-struct Mission										//Struct representation of a mission
+struct Mission											//Struct representation of a mission
 {
 	var localized string MissionName;
 	var int MissionCount;
 	var int MissionGoal;
 	var int TickAmount;
 	var float XPReward;
-	var Array < Class < Actor > > ObjectiveClasses;	//What objectives this mission requires (e.g. monsters for hunt missions, damage types for weapon missions)
+	var Array < Class < Actor > > ObjectiveClasses;		//What objectives this mission requires (e.g. monsters for hunt missions, damage types for weapon missions)
 };
-var Mission Missions[NUM_MISSIONS];					//Array containing Mission structs, representing the player's currently active missions
-var int NumMissionsCompleted;						//Number of missions this player has completed
-var Array < string > CompletedMissions;				//Array of missions that have been completed
+var Mission Missions[NUM_MISSIONS];						//Array containing Mission structs, representing the player's currently active missions
+var int NumMissionsCompleted;							//Number of missions this player has completed
+var Array < string > CompletedMissions;					//Array of missions that have been completed
 var RPGRules Rules;
 
 var transient DruidsRPGKeysInteraction InteractionOwner;
 
-replication											//Replicate to clients so HUD can be displayed
+replication												//Replicate to clients so HUD can be displayed
 {
 	reliable if (Role == ROLE_Authority)
 		NumMissionsCompleted, Missions;
@@ -141,7 +141,7 @@ function ResetMission(int MissionNumber)
 }
 
 //Called when activating a mission artifact, which will supply the required parameters
-function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, Array < Class < Actor > > ObjectiveClasses)
+function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, out Array < Class < Actor > > ObjectiveClasses)
 {
 	local int x, y;
 	
