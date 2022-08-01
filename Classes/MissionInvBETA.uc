@@ -13,7 +13,7 @@ struct Mission										//Struct representation of a mission
 	var int MissionGoal;
 	var int TickAmount;
 	var float XPReward;
-	var Class<Actor> ObjectiveClass;				//What objective this mission requires (e.g. monsters for hunt missions, damage types for weapon missions)
+	var Array < Class < Actor > > ObjectiveClasses;	//What objectives this mission requires (e.g. monsters for hunt missions, damage types for weapon missions)
 };
 var Mission Missions[NUM_MISSIONS];					//Array containing Mission structs, representing the player's currently active missions
 var int NumMissionsCompleted;						//Number of missions this player has completed
@@ -136,13 +136,14 @@ function ResetMission(int MissionNumber)
 	Missions[MissionNumber].MissionGoal = 0;
 	Missions[MissionNumber].XPReward = 0.0;
 	Missions[MissionNumber].TickAmount = 0;
-	Missions[MissionNumber].ObjectiveClass = None;
+	if (Missions[MissionNumber].ObjectiveClasses.Length > 0)
+		Missions[MissionNumber].ObjectiveClasses.Length = 0;		//Clears the array
 }
 
 //Called when activating a mission artifact, which will supply the required parameters
-function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, Class<Actor> ObjectiveClass)
+function bool SetMission(string MissionName, int MissionGoal, float XPReward, int TickAmount, Array < Class < Actor > > ObjectiveClasses)
 {
-	local int x;
+	local int x, y;
 	
 	for (x = 0; x < NUM_MISSIONS; x++)				//Find next available slot to set mission
 	{
@@ -152,7 +153,9 @@ function bool SetMission(string MissionName, int MissionGoal, float XPReward, in
 			Missions[x].MissionGoal = MissionGoal;
 			Missions[x].XPReward = XPReward;
 			Missions[x].TickAmount = TickAmount;
-			Missions[x].ObjectiveClass = ObjectiveClass;
+			Missions[x].ObjectiveClasses.Length = ObjectiveClasses.Length;	//Inserts elements into the array, initialized with null values
+			for (y = 0; y < Missions[x].ObjectiveClasses.Length; y++)
+				Missions[x].ObjectiveClasses[y] = ObjectiveClasses[y];		//y is used to index both arrays, but there should never be an out of bounds exception
 			return true;
 		}
 	}

@@ -3,7 +3,7 @@ class MissionGameRules extends GameRules;
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
 	local MissionInvBETA MissionInv;						//Unfortunately, we're doing a check on the inventory list each time a player deals damage..
-	local int x;
+	local int x, y;
 	
 	if (instigatedBy == None || instigatedBy.Controller == None)
 		return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);	
@@ -20,10 +20,16 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		return  Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 	for (x = 0; x < MissionInv.NUM_MISSIONS; x++)
 	{
-		if (MissionInv.Missions[x].ObjectiveClass != None && MissionInv.Missions[x].ObjectiveClass == DamageType)
+		if (MissionInv.Missions[x].ObjectiveClasses.Length > 0)
 		{
-			MissionInv.TickMission(x);
-			return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
+			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
+			{
+				if (DamageType == MissionInv.Missions[x].ObjectiveClasses[y])
+				{
+					MissionInv.TickMission(x);
+					return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);					
+				}
+			}
 		}
 	}
 	
@@ -33,7 +39,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 function ScoreKill(Controller Killer, Controller Killed)
 {
 	local MissionInvBETA MissionInv;
-	local int x;
+	local int x, y;
 	
 	Super.ScoreKill(Killer, Killed);
 	
@@ -53,10 +59,16 @@ function ScoreKill(Controller Killer, Controller Killed)
 		return;
 	for(x = 0; x < MissionInv.NUM_MISSIONS; x++)
 	{
-		if (MissionInv.Missions[x].ObjectiveClass != None && MissionInv.Missions[x].ObjectiveClass == Killed.Pawn.Class)
+		if (MissionInv.Missions[x].ObjectiveClasses.Length > 0)
 		{
-			MissionInv.TickMission(x);
-			return;
+			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
+			{
+				if (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y])
+				{
+					MissionInv.TickMission(x);
+					return;			
+				}
+			}
 		}
 	}
 }
