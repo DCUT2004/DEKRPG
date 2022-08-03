@@ -83,7 +83,7 @@ simulated function DestroyEffects()
 
 defaultproperties
 {
-	 AdrenCost=3
+	 AdrenCost=2.5
 	 bModeExclusive=False
      FireRate=0.500000
 	 TraceRange=500.00000

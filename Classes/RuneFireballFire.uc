@@ -3,7 +3,7 @@ class RuneFireballFire extends RuneProjectileFire
 
 defaultproperties
 {
-	 AdrenCost=10
+	 AdrenCost=5
      //bModeExclusive=False
      bSplashDamage=True
      bSplashJump=True

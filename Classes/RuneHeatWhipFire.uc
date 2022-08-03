@@ -206,7 +206,7 @@ defaultproperties
 	 SearchHitRadius=150.0000
 	 bModeExclusive=False
      DamageType=Class'DEKRPG999X.DamTypeRuneHeatWhip'
-	 AdrenCost=10
+	 AdrenCost=7
 	 DamageScale=0.200000
 	 DamageMin=150
 	 DamageMax=350

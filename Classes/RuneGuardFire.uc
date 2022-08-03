@@ -31,7 +31,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 defaultproperties
 {
      ProjSpawnOffset=(X=150.000000,Y=0.0000,Z=0.000000)
-	 AdrenCost=10
+	 AdrenCost=7
      bModeExclusive=False
      FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
      FireForce="RocketLauncherFire"

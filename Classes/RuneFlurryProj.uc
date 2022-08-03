@@ -91,7 +91,7 @@ defaultproperties
      ImpactSounds(5)=Sound'WeaponSounds.BioRifle.BioRifleGoo1'
      Speed=3000.000000
      MaxSpeed=3000.000000
-     Damage=10.000000
+     Damage=15.000000
 	 bDynamicLight=True
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence

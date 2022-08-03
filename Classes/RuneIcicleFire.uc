@@ -5,7 +5,7 @@ class RuneIcicleFire extends RuneProjectileFire
 
 defaultproperties
 {
-	 AdrenCost=10
+	 AdrenCost=7
      //bModeExclusive=False
      bSplashDamage=True
      bSplashJump=True

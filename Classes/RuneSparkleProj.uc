@@ -86,14 +86,14 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 defaultproperties
 {
      MiniboltInterval=0.200000
-     MiniboltDamage=10
+     MiniboltDamage=14
      MiniboltRadius=600
      MiniboltClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
      MiniboltDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
      DischargeChance=40
      Speed=3000.000000
      MaxSpeed=3000.000000
-     Damage=33.000000
+     Damage=50.000000
      DamageRadius=60.000000
      MomentumTransfer=1000.000000
      MyDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'

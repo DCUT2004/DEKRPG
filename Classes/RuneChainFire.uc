@@ -256,7 +256,7 @@ function Timer()
 
 defaultproperties
 {
-	 AdrenCost=20.0000
+	 AdrenCost=10.0000
 	 TraceRange=3000.00000
 	 SearchRadius=300.00000
      BoltEmitterClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'

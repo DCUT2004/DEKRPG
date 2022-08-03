@@ -13,14 +13,6 @@ var config float ChanceTwoPower;
 var config float ChanceMultiplePower;
 var config float PerCentNormalWeapons;
 
-var config int MaxPowersWeaponsMasters;
-var config int MaxPowersEngineers;
-var config int MaxPowersAdrenalineMasters;
-var config int MaxPowersMonsterMasters;
-var config int MaxPowersClassicRPG;
-var config int MaxPowersGeneral;
-var config int MaxPowersNecromancer;
-
 var config int MaxNumPowersDroppable;
 var config int MaxNumPowersClonable;
 var config int ModifierLossPerPowerup;
@@ -266,7 +258,7 @@ function int MaxPowersForThisPlayer(Pawn Other)
     {
         MaxAddons = class'AbilityMagicWeapons'.default.MagicWeaponLevels[LevelMagicWeapons].MaxAddons; 
     }    
-    
+
     return MaxAddons;
 }
 
@@ -307,7 +299,6 @@ function int GetNumberOfRequiredAddons(RPGPlayerDataObject Data)
     }
     else
         return -1;
-Log("***** DEKRPGWeapon checking - found AbilityMagicWeapons level" @ LevelMagicWeapons @ "giving" @ MaxAddons @ PercentChanceNormal @ PercentChanceZeroAddons @ PercentChanceOneAddon @ PercentChanceTwoAddons @ PercentChanceThreeAddons @ PercentChanceMoreAddons);
     
     x = Rand(PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons + PercentChanceMoreAddons);
     if (x < PercentChanceNormal)
@@ -384,7 +375,6 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
     
     // find how many addons we need
     NumRequiredAddons = GetNumberOfRequiredAddons(Data);
-Log("***** doing generate for" @ ModifiedWeapon @ "for player" @ Instigator @ "allowed" @ NumRequiredAddons @ "addons");
     if (NumRequiredAddons == -1)
     {
         // tough luck, its a normal weapon
@@ -625,7 +615,7 @@ simulated function ConstructItemName()
 			ItemName = ItemName @ "*";
 	}
     
-    Log("***** DEKRPGWeapon log initial addons:" @ ItemName);
+Log("***** DEKRPGWeapon initial weapon state:" @ ItemName @ "for player" @ ModifiedWeapon.Instigator);
 	if (Role == Role_Authority)
 	{
 		if (ModifiedWeapon != None)

@@ -27,8 +27,8 @@ defaultproperties
      bModeExclusive=False
      DamageType=Class'DEKRPG999X.DamTypeRuneLaser'
 	 AdrenCost=1
-	 DamageMin=16
-	 DamageMax=18
+	 DamageMin=18
+	 DamageMax=22
      FireRate=0.2000000
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser09'
      BeamEffectClass=Class'DEKRPG999X.RuneLaserEffect'

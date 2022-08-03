@@ -59,7 +59,7 @@ defaultproperties
 	 AdrenCost=2
 	 FireSound=Sound'DEKRPG999X.TurretSounds.PlasmaTurretFire'
      FireForce="RocketLauncherFire"
-     FireRate=0.300000
+     FireRate=0.500000
      ProjectileClass=Class'DEKRPG999X.RuneFlurryProj'
      //Spread=1500.0000
      //SpreadStyle=SS_Random

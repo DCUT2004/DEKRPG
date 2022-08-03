@@ -78,7 +78,7 @@ defaultproperties
 	BlastDamage=100.0000
 	BlastRadius=400.0000
 	DamageType=Class'DEKRPG999X.DamTypeRuneIceBeam'
-	AdrenCost=15
+	AdrenCost=8
 	DamageMin=110
 	DamageMax=120
 	FireRate=2.00000000

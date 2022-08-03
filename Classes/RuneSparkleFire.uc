@@ -10,6 +10,6 @@ defaultproperties
      bRecommendSplashDamage=True
      FireSound=Sound'DEKRPG999X.TurretSounds.LightningTurretFire'
      FireForce="RocketLauncherFire"
-     FireRate=0.380000
+     FireRate=0.500000
      ProjectileClass=Class'DEKRPG999X.RuneSparkleProj'
 }
