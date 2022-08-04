@@ -1,7 +1,8 @@
 //Newer version of ArtifactMission. Once finished, this should replace ArtifactMission
 
 
-class ArtifactMissionBETA extends RPGArtifact;
+class ArtifactMissionBETA extends RPGArtifact
+	config(Missions);
 
 var config int LowLevelThreshold, MediumLevelThreshold;
 var config float LowLevelMultiplier, MediumLevelMultiplier;

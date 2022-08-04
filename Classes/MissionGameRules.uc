@@ -40,6 +40,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 {
 	local MissionInvBETA MissionInv;
 	local int x, y;
+	local Inventory FoundInventory;
 	
 	Super.ScoreKill(Killer, Killed);
 	
@@ -67,6 +68,15 @@ function ScoreKill(Controller Killer, Controller Killed)
 				{
 					MissionInv.TickMission(x);
 					return;			
+				}
+				if (ClassIsChildOf(MissionInv.Missions[x].ObjectiveClasses[y] , Class'Inventory'))
+				{
+					FoundInventory = Killed.Pawn.FindInventoryType(MissionInv.Missions[x].ObjectiveClasses[y]);
+					if (FoundInventory != None)
+					{
+						MissionInv.TickMission(x);
+						return;
+					}
 				}
 			}
 		}

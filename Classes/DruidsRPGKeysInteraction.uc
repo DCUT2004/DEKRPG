@@ -1075,13 +1075,6 @@ function PostRender(Canvas Canvas)
 	local float XLSmall, YLSmall, MPBarX, MPBarY;
 	local DruidMonsterMasterArtifactMonsterSummon DMMAMS;
 	local ArtifactMissionBETA AM;
-	local ArtifactMissionCowCare AMCC;
-	local ArtifactMissionSharpShotFly AMSSF;
-	local ArtifactMissionZombieSlayer AMZS;
-	local ArtifactMissionEmeraldShatter AMES;
-	local ArtifactMissionAngerManagement AMAM;
-	local ArtifactMissionPop AMP;
-	local ArtifactMissionDisarmer AMD;
 	local ArtifactPaladin AP;
 	local ArtifactGuardianHeal AGH;
 	local RPGClassInv RPGInv;
@@ -1732,268 +1725,40 @@ function PostRender(Canvas Canvas)
 		}
 	}
 	AM = ArtifactMissionBETA(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMCC = ArtifactMissionCowCare(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMSSF = ArtifactMissionSharpShotFly(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMZS = ArtifactMissionZombieSlayer(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMES = ArtifactMissionEmeraldShatter(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMAM = ArtifactMissionAngerManagement(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMP = ArtifactMissionPop(ViewportOwner.Actor.Pawn.SelectedItem);
-	AMD = ArtifactMissionDisarmer(ViewportOwner.Actor.Pawn.SelectedItem);
 	if (AM != None)
 	{
-		if (AMCC != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
+		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
+		Canvas.FontScaleY = Canvas.ClipY / 768.f;
 
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMCC.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMCC.XPReward*AM.LowLevelMultiplier $ "XP/Wave");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMCC.XPReward*AM.MediumLevelMultiplier $ "XP/Wave");
-				else
-					Canvas.DrawText(RewardText $ AMCC.XPReward $ "XP/Wave");	
-		}
-		else if (AMSSF != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
+		pText = "200";
+		Canvas.TextSize(pText, XL, YL);
 
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMSSF.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMSSF.XPReward*AM.LowLevelMultiplier $ "XP, Letter B");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMSSF.XPReward*AM.MediumLevelMultiplier $ "XP, Letter B");
-				else
-					Canvas.DrawText(RewardText $ AMSSF.XPReward $ "XP, Letter B");	
-		}
-		else if (AMZS != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
+		Canvas.FontScaleX *= 0.8; //make it smaller
+		Canvas.FontScaleY *= 0.8;
 
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMZS.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-						
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMZS.XPReward*AM.LowLevelMultiplier $ "XP, BONUS");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMZS.XPReward*AM.MediumLevelMultiplier $ "XP, BONUS");
-				else
-					Canvas.DrawText(RewardText $ AMZS.XPReward $ "XP, BONUS");	
-		}
-		else if (AMES != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
+		Canvas.Style = 2;
+		Canvas.DrawColor = WhiteColor;
 
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMES.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
+		Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
+		Canvas.DrawText(AM.Description);
 		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMES.XPReward*AM.LowLevelMultiplier $ "XP, Letter O");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMES.XPReward*AM.MediumLevelMultiplier $ "XP, Letter O");
-				else
-					Canvas.DrawText(RewardText $ AMES.XPReward $ "XP, Letter O");	
-		}
-		else if (AMAM != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
+		Canvas.FontScaleX *= 0.9; //make it smaller
+		Canvas.FontScaleY *= 0.9;
 
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMAM.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
+		Canvas.Style = 2;
+		Canvas.DrawColor = WhiteColor;	
 		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMAM.XPReward*AM.LowLevelMultiplier $ "XP, Letter N");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMAM.XPReward*AM.MediumLevelMultiplier $ "XP, Letter N");
-				else
-					Canvas.DrawText(RewardText $ AMAM.XPReward $ "XP, Letter N");	
-		}
-		else if (AMP != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
-
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMP.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMP.XPReward*AM.LowLevelMultiplier $ "XP, Letter S");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMP.XPReward*AM.MediumLevelMultiplier $ "XP, Letter S");
-				else
-					Canvas.DrawText(RewardText $ AMP.XPReward $ "XP, Letter S");	
-		}
-		else if (AMD != None)
-		{
-				Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-				Canvas.FontScaleY = Canvas.ClipY / 768.f;
-		
-				pText = "200";
-				Canvas.TextSize(pText, XL, YL);
-		
-				Canvas.FontScaleX *= 0.8; //make it smaller
-				Canvas.FontScaleY *= 0.8;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;
-
-				Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-				Canvas.DrawText(AMD.Description);
-				
-				Canvas.FontScaleX *= 0.9; //make it smaller
-				Canvas.FontScaleY *= 0.9;
-		
-				Canvas.Style = 2;
-				Canvas.DrawColor = WhiteColor;	
-				
-				Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AMD.XPReward*AM.LowLevelMultiplier $ "XP, Letter U");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AMD.XPReward*AM.MediumLevelMultiplier $ "XP, Letter U");
-				else
-					Canvas.DrawText(RewardText $ AMD.XPReward $ "XP, Letter U");	
-		}
-		else if (ClassIsChildOf(AM.Class, class'ArtifactMissionBETA'))
-		{
-			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
-			Canvas.FontScaleY = Canvas.ClipY / 768.f;
-	
-			pText = "200";
-			Canvas.TextSize(pText, XL, YL);
-	
-			Canvas.FontScaleX *= 0.8; //make it smaller
-			Canvas.FontScaleY *= 0.8;
-	
-			Canvas.Style = 2;
-			Canvas.DrawColor = WhiteColor;
-
-			Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
-			Canvas.DrawText(AM.Description);
-			
-			Canvas.FontScaleX *= 0.9; //make it smaller
-			Canvas.FontScaleY *= 0.9;
-	
-			Canvas.Style = 2;
-			Canvas.DrawColor = WhiteColor;	
-			
-			Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-			//if (AM.TeamMission)
-			//	Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
-			//else if (!AM.TeamMission)
-			//{
-				if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-					Canvas.DrawText(RewardText $ AM.XPReward*AM.LowLevelMultiplier $ "XP");
-				else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-					Canvas.DrawText(RewardText $ AM.XPReward*AM.MediumLevelMultiplier $ "XP");
-				else
-					Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
-			//}
-		}
+		Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
+		//if (AM.TeamMission)
+		//	Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
+		//else if (!AM.TeamMission)
+		//{
+			if (StatsInv.Data.Level <= AM.LowLevelThreshold)
+				Canvas.DrawText(RewardText $ AM.XPReward*AM.LowLevelMultiplier $ "XP");
+			else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
+				Canvas.DrawText(RewardText $ AM.XPReward*AM.MediumLevelMultiplier $ "XP");
+			else
+				Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
 	}
 	AP = ArtifactPaladin(ViewportOwner.Actor.Pawn.SelectedItem);
 	if (AP != None)
