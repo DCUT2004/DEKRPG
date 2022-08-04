@@ -25,11 +25,8 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local Pawn P;
 	local Actor A;
 	local IceInv IInv;
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
 	local SuperHeatInv SInv;
+	local MissionInvBETA MissionInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -72,32 +69,18 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     			A = P.spawn(class'HeatHitEffect', P,, P.Location, P.Rotation);
     			if (A != None)
     				A.RemoteRole = ROLE_SimulatedProxy;
-
-    			MiInv = MissionInv(TheWeapon.Instigator.FindInventoryType(class'MissionInv'));
-				if (TheWeapon.Instigator != None && TheWeapon.Instigator != P && MiInv != None && !MiInv.PyromancerComplete)
+					
+					
+				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{
-        			M1Inv = Mission1Inv(TheWeapon.Instigator.FindInventoryType(class'Mission1Inv'));
-        			M2Inv = Mission2Inv(TheWeapon.Instigator.FindInventoryType(class'Mission2Inv'));
-        			M3Inv = Mission3Inv(TheWeapon.Instigator.FindInventoryType(class'Mission3Inv'));
-    				if (M1Inv != None && !M1Inv.Stopped && M1Inv.PyromancerActive)
-    				{
-    					M1Inv.MissionCount++;
-    					if (TheWeapon.GetModifier() > 2)
-    						M1Inv.MissionCount++;
-    				}
-    				if (M2Inv != None && !M2Inv.Stopped && M2Inv.PyromancerActive)
-    				{
-    					M2Inv.MissionCount++;
-    					if (TheWeapon.GetModifier() > 2)
-    						M2Inv.MissionCount++;
-    				}
-    				if (M3Inv != None && !M3Inv.Stopped && M3Inv.PyromancerActive)
-    				{
-    					M3Inv.MissionCount++;
-    					if (TheWeapon.GetModifier() > 2)
-    						M3Inv.MissionCount++;
-    				}
-	            }
+					MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+					if (MissionInv == None)
+						return;
+					if (!MissionInv.IsMissionActive("Pyromancer"))
+						return;
+					if (TheWeapon.GetModifier() > 2)
+						MissionInv.TickMission(MissionInv.GetMissionIndex("Pyromancer"), 1);
+				}
         	}
         	else
         	{

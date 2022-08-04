@@ -286,36 +286,21 @@ function doHealed(int ShieldGiven, Pawn Victim)
 
 simulated function CheckMissionLifeMend(int ValidHealthGiven, Pawn Victim)
 {
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 	
-	MiInv = MissionInv(Instigator.FindInventoryType(class'MissionInv'));
-	M1Inv = Mission1Inv(Instigator.FindInventoryType(class'Mission1Inv'));
-	M2Inv = Mission2Inv(Instigator.FindInventoryType(class'Mission2Inv'));
-	M3Inv = Mission3Inv(Instigator.FindInventoryType(class'Mission3Inv'));
-	
-	if (ValidHealthGiven > 0)
-	{
-		if (Instigator != None && Instigator != Victim && MiInv != None && !MiInv.LifeMendComplete)
-		{
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.LifemendActive)
-			{
-				M1Inv.MissionCount += ValidHealthGiven;
-			}
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.LifemendActive)
-			{
-				M2Inv.MissionCount += ValidHealthGiven;
-			}
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.LifemendActive)
-			{
-				M3Inv.MissionCount += ValidHealthGiven;
-			}
-			else
-				return;
-		}
-	}
+	if (ValidHealthGiven <= 0)
+		return;
+
+	if (Instigator == None || Instigator.Controller == None || Instigator == Victim)
+		return;
+
+	MissionInv = class'MissionInvBETA'.static.GetMissionInv(Instigator.Controller);
+	if (MissionInv == None)
+		return;
+		
+	if (!MissionInv.IsMissionActive("Life Mend"))
+		return;
+	MissionInv.TickMission(MissionInv.GetMissionIndex("Life Mend"), ValidHealthGiven);
 }
 
 function AdjustTargetDamage(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)

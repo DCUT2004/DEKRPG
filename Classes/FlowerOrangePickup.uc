@@ -19,10 +19,7 @@ auto state Pickup
 	{
 		local Pawn P;
 		local FlowerAdrenInv Inv;
-		local Mission1Inv M1Inv;
-		local Mission2Inv M2Inv;
-		local Mission3Inv M3Inv;
-		local MissionInv MInv;
+		local MissionInvBETA MissionInv;
 
 		if (ValidTouch(Other))
 		{
@@ -44,19 +41,15 @@ auto state Pickup
 					AnnouncePickup(P);
 					Destroy();
 				}
-				MInv = MissionInv(P.FindInventoryType(class'MissionInv'));
-				M1Inv = Mission1Inv(P.FindInventoryType(class'Mission1Inv'));
-				M2Inv = Mission2Inv(P.FindInventoryType(class'Mission2Inv'));
-				M3Inv = Mission3Inv(P.FindInventoryType(class'Mission3Inv'));
-				
-				if (MInv != None)
+				if (P.Controller != None)
 				{
-					if (M1Inv != None && !M1Inv.Stopped && M1Inv.HerbamancerActive)
-						M1Inv.MissionCount++;
-					if (M2Inv != None && !M2Inv.Stopped && M2Inv.HerbamancerActive)
-						M2Inv.MissionCount++;
-					if (M3Inv != None && !M3Inv.Stopped && M3Inv.HerbamancerActive)
-						M3Inv.MissionCount++;
+					MissionInv = class'MissionInvBETA'.static.GetMissionInv(P.Controller);
+					if (MissionInv != None)
+					{
+						if (!MissionInv.IsMissionActive("Herbamancer"))
+							return;
+						MissionInv.TickMission(MissionInv.GetMissionIndex("Herbamancer"), 1);
+					}
 				}
 			}
 			else

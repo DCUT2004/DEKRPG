@@ -12,7 +12,6 @@ var Pawn PawnOwner;
 var Controller InstigatorController;
 var int Modifier;
 var config int MaxHeatDamage;
-var Pawn Doer;
 
 replication
 {

@@ -1,7 +1,8 @@
 class DecayInv extends Inventory
 	config(UT2004RPG);
 
-var MissionSoloInv MInv;
+var MissionInvBETA MissionInv;
+var bool bFoundMission;
 
 var Pawn PawnOwner;
 var Pawn ChainTarget;
@@ -59,6 +60,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 		bSoulMage = True;
 	else
 		bSoulMage = False;
+	bFoundMission = False;
 }
 
 simulated function Timer()
@@ -80,8 +82,10 @@ simulated function Timer()
 	
 	if (PawnOwner != None)
 	{
-		if (MInv == None)
-			MInv = MissionSoloInv(PawnOwner.FindInventoryType(class'MissionSoloInv'));	//Look for MissionInv here because it might not exist yet when GiveTo() is called
+		if (MissionInv == None && !bFoundMission && PawnOwner.Controller != None)
+			MissionInv = class'MissionInvBETA'.static.GetMissionInv(PawnOwner.Controller);;	//Look for MissionInv here because it might not exist yet when GiveTo() is called
+		if (MissionInv != None)
+			bFoundMission = True;
 		PInv = PhantomDeathGhostInv(PawnOwner.FindInventoryType(class'PhantomDeathGhostInv'));
 		V = PawnOwner.DrivenVehicle;
 		if (V != None)
@@ -324,8 +328,8 @@ simulated function Drain(Pawn P)
 		//Add health to Necromancer
 		PawnOwner.GiveHealth(DrainAmount*(AbilityLevel*HealthMultiplier), PawnOwner.HealthMax + DecayBonus);
 		
-		if (MInv != None && MInv.DraculaActive)
-			MInv.MissionCount += DrainAmount*(AbilityLevel*HealthMultiplier);
+		if (MissionInv != None && MissionInv.IsMissionActive("Dracula") )
+			MissionInv.TickMission(MissionInv.GetMissionIndex("Dracula"), DrainAmount*(AbilityLevel&HealthMultiplier));
 		
 		//Add MasterSoulSorcererInv for Master niche on Soul Sorcerers
 		MSInv = MasterSoulSorcererInv(P.FindInventoryType(class'MasterSoulSorcererInv'));

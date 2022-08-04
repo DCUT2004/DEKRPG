@@ -27,10 +27,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 {
 	local Pawn P;
 	local int localDamage;
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -47,28 +44,21 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		if(localDamage >= TheWeapon.Instigator.Health - RageMinimumHealth)
 			localDamage = TheWeapon.Instigator.Health - RageMinimumHealth;
 		if(localDamage > 0)
+		{
 			if(TheWeapon.Instigator.Controller == None || TheWeapon.Instigator.Controller.bGodMode == False)
 				TheWeapon.Instigator.Health -= localDamage; //ouch. Done this way to prevent damage reduction. It's dirty, but it works
+			if (TheWeapon.Instigator.Controller != None)
+			{
+				MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+				if (MissionInv == None)
+					return;
+				if (!MissionInv.IsMissionActive("Anger Management"))
+					return;
+				MissionInv.TickMission(MissionInv.GetMissionIndex("Anger Management"), localDamage);
+			}
+		}
 
-		MiInv = MissionInv(TheWeapon.Instigator.FindInventoryType(class'MissionInv'));
-		M1Inv = Mission1Inv(TheWeapon.Instigator.FindInventoryType(class'Mission1Inv'));
-		M2Inv = Mission2Inv(TheWeapon.Instigator.FindInventoryType(class'Mission2Inv'));
-		M3Inv = Mission3Inv(TheWeapon.Instigator.FindInventoryType(class'Mission3Inv'));
-    	if (P != None && P != TheWeapon.Instigator && MiInv != None && !MiInv.AngerManagementComplete)
-    	{
-    		if (M1Inv != None && !M1Inv.Stopped && M1Inv.AngerManagementActive)
-    		{
-    			M1Inv.MissionCount += localDamage;
-    		}
-    		if (M2Inv != None && !M2Inv.Stopped && M2Inv.AngerManagementActive)
-    		{
-    			M2Inv.MissionCount += localDamage;
-    		}
-    		if (M3Inv != None && !M3Inv.Stopped && M3Inv.AngerManagementActive)
-    		{
-    			M3Inv.MissionCount += localDamage;
-    		}
-    	}
+
 	}
 }
 

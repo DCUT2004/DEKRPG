@@ -9,7 +9,6 @@ var config float LowLevelMultiplier, MediumLevelMultiplier;
 var localized string Description;
 var config float XPReward;
 var config int MissionGoal;
-var config int TickAmount;
 var config Array < Class < Actor > > ObjectiveClasses;
 
 function BotConsider()
@@ -63,7 +62,7 @@ function Activate()
 	
 	AdjustRewardAndGoalValues(GetRPGLevel(Instigator));
 	
-	if (!MissionInv.SetMission(ItemName, MissionGoal, XPReward, TickAmount, ObjectiveClasses))
+	if (!MissionInv.SetMission(ItemName, MissionGoal, XPReward, ObjectiveClasses))
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 1, None, None, Class);
 		bActive = false;

@@ -20,32 +20,16 @@ function bool CheckReflect( Vector HitLocation, out Vector RefNormal, int Damage
 
 simulated function CheckDeflectMission()
 {
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 	
-	MiInv = MissionInv(TheWeapon.Instigator.FindInventoryType(class'MissionInv'));
-	
-	if (TheWeapon.Instigator != None && MiInv != None && !MiInv.DeflectorComplete)
-	{
-    	M1Inv = Mission1Inv(TheWeapon.Instigator.FindInventoryType(class'Mission1Inv'));
-    	M2Inv = Mission2Inv(TheWeapon.Instigator.FindInventoryType(class'Mission2Inv'));
-    	M3Inv = Mission3Inv(TheWeapon.Instigator.FindInventoryType(class'Mission3Inv'));
-        
-		if (M1Inv != None && !M1Inv.Stopped && M1Inv.DeflectorActive)
-		{
-			M1Inv.MissionCount++;
-		}
-		if (M2Inv != None && !M2Inv.Stopped && M2Inv.DeflectorActive)
-		{
-			M2Inv.MissionCount++;
-		}
-		if (M3Inv != None && !M3Inv.Stopped && M3Inv.DeflectorActive)
-		{
-			M3Inv.MissionCount++;
-		}
-	}
+	if (TheWeapon.Instigator == None || TheWeapon.Instigator.Controller == None)
+		return;
+	MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+	if (MissionInv == None)
+		return;
+	if (!MissionInv.IsMissionActive("Deflector"))
+		return;
+	MissionInv.TickMission(MissionInv.GetMissionIndex("Deflector"), 1);
 }
 
 defaultproperties

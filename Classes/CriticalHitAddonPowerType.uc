@@ -8,9 +8,7 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 {
 	local int Chance;
 	local Actor A;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local Mission3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 
 	Super.AdjustDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
 
@@ -38,23 +36,14 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 				A.RemoteRole = ROLE_SimulatedProxy;
 				A.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*Victim.TransientSoundVolume,,Victim.TransientSoundRadius);
 			}
-			if (TheWeapon.Instigator != None)
+			if (TheWeapon.Instigator.Controller != None)
 			{
-				M1Inv = Mission1Inv(TheWeapon.Instigator.FindInventoryType(class'Mission1Inv'));
-				M2Inv = Mission2Inv(TheWeapon.Instigator.FindInventoryType(class'Mission2Inv'));
-				M3Inv = Mission3Inv(TheWeapon.Instigator.FindInventoryType(class'Mission3Inv'));
-				if (M1Inv != None && !M1Inv.Stopped && M1Inv.GamblersLuckActive)
-				{
-					M1Inv.MissionCount += Damage;
-				}
-				if (M2Inv != None && !M2Inv.Stopped && M2Inv.GamblersLuckActive)
-				{
-					M2Inv.MissionCount += Damage;
-				}
-				if (M3Inv != None && !M3Inv.Stopped && M3Inv.GamblersLuckActive)
-				{
-					M3Inv.MissionCount += Damage;
-				}
+				MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+				if (MissionInv == None)
+					return;
+				if (!MissionInv.IsMissionActive("Gambler's Luck"))
+					return;
+				MissionInv.TickMission(MissionInv.GetMissionIndex("Gambler's Luck"), Damage);
 			}
 		}
 		else

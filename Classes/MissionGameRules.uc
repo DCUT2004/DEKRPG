@@ -26,7 +26,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 			{
 				if (DamageType == MissionInv.Missions[x].ObjectiveClasses[y])
 				{
-					MissionInv.TickMission(x);
+					MissionInv.TickMission(x, 1);
 					return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);					
 				}
 			}
@@ -66,7 +66,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 			{
 				if (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y] || ClassIsChildOf(Killed.Pawn.Class, MissionInv.Missions[x].ObjectiveClasses[y]))
 				{
-					MissionInv.TickMission(x);
+					MissionInv.TickMission(x, 1);
 					return;			
 				}
 				if (ClassIsChildOf(MissionInv.Missions[x].ObjectiveClasses[y] , Class'Inventory'))
@@ -74,7 +74,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 					FoundInventory = Killed.Pawn.FindInventoryType(MissionInv.Missions[x].ObjectiveClasses[y]);
 					if (FoundInventory != None)
 					{
-						MissionInv.TickMission(x);
+						MissionInv.TickMission(x, 1);
 						return;
 					}
 				}

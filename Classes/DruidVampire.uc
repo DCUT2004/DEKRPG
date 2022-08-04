@@ -16,9 +16,7 @@ static function LocalHandleDamage(int Damage, Pawn Injured, Pawn Instigator, out
 {
 	local float VampHealth;
 	local Pawn P;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local Mission3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 
 	if (!bOwnedByInstigator || DamageType == class'DamTypeRetaliation' || Injured == Instigator || Instigator == None)
 		return;
@@ -51,19 +49,16 @@ static function LocalHandleDamage(int Damage, Pawn Injured, Pawn Instigator, out
 	
 	if (P != None)
 	{
-		if (P.Health < P.HealthMax + default.AdjustableHealingDamage)
-		{
-			M1Inv = Mission1Inv(P.FindInventoryType(class'Mission1Inv'));
-			M2Inv = Mission2Inv(P.FindInventoryType(class'Mission2Inv'));
-			M3Inv = Mission3Inv(P.FindInventoryType(class'Mission3Inv'));
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.DraculaActive)
-				M1Inv.MissionCount += VampHealth;
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.DraculaActive)
-				M2Inv.MissionCount += VampHealth;
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.DraculaActive)
-				M3Inv.MissionCount += VampHealth;
-		}
 		P.GiveHealth(VampHealth, P.HealthMax + default.AdjustableHealingDamage);
+		if (P.Controller != None && P.Health < P.HealthMax + default.AdjustableHealingDamage)
+		{
+			MissionInv = class'MissionInvBETA'.static.GetMissionInv(P.Controller);
+			if (MissionInv == None)
+				return;
+			if (!MissionInv.IsMissionActive("Dracula"))
+				return;
+			MissionInv.TickMission(MissionInv.GetMissionIndex("Dracula"), VampHealth);
+		}
 	}
 }
 

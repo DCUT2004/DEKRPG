@@ -48,10 +48,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local Pawn P;
 	local Actor A;
  	local MagicShieldInv MInv;
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 //    local int x;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
@@ -93,26 +90,6 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	if (Chance >= iRandom)
 	{
 		//this is a vorpal hit. Frag them.
-    	MiInv = MissionInv(TheWeapon.Instigator.FindInventoryType(class'MissionInv'));
-    	M1Inv = Mission1Inv(TheWeapon.Instigator.FindInventoryType(class'Mission1Inv'));
-    	M2Inv = Mission2Inv(TheWeapon.Instigator.FindInventoryType(class'Mission2Inv'));
-    	M3Inv = Mission3Inv(TheWeapon.Instigator.FindInventoryType(class'Mission3Inv'));
-		if (TheWeapon.Instigator != None && TheWeapon.Instigator != Victim && MiInv != None && !MiInv.PopComplete)
-		{
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.PopActive)
-			{
-				M1Inv.MissionCount++;
-			}
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.PopActive)
-			{
-				M2Inv.MissionCount++;
-			}
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.PopActive)
-			{
-				M3Inv.MissionCount++;
-			}
-		}
-
 		//fire the sound
  		if (P != None)
 		{
@@ -130,6 +107,15 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 				A.RemoteRole = ROLE_SimulatedProxy;
 				A.PlaySound(sound'WeaponSounds.Misc.instagib_rifleshot',,2.5*Victim.TransientSoundVolume,,Victim.TransientSoundRadius);
 			}
+		}
+		if (TheWeapon.Instigator.Controller != None)
+		{
+			MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+			if (MissionInv == None)
+				return;
+			if (!MissionInv.IsMissionActive("Pop!"))
+				return;
+			MissionInv.TickMission(MissionInv.GetMissionIndex("Pop!"), 1);
 		}
 	}
 }

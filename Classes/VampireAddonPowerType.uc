@@ -12,9 +12,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local int HealthBonus;
 	local MagicShieldInv MInv;
 	local Actor A;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local Mission3Inv M3Inv;
+	local MissionInvBETA MissionInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -24,6 +22,9 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 	if (TheWeapon.IsSameTeam(P))
 		return;		// no vampire from hurting teammates
+		
+	if (TheWeapon.Instigator == None || TheWeapon.Instigator.Controller == None)
+		return;
 
 	MInv = MagicShieldInv(Pawn(Victim).FindInventoryType(class'MagicShieldInv'));
 	if (MInv == None)
@@ -39,19 +40,16 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     	if (HealthBonus > 0)
         {
     		TheWeapon.Instigator.GiveHealth(HealthBonus, TheWeapon.Instigator.HealthMax + 50);
-
-			M1Inv = Mission1Inv(P.FindInventoryType(class'Mission1Inv'));
-			M2Inv = Mission2Inv(P.FindInventoryType(class'Mission2Inv'));
-			M3Inv = Mission3Inv(P.FindInventoryType(class'Mission3Inv'));
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.DraculaActive)
-				M1Inv.MissionCount += HealthBonus;
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.DraculaActive)
-				M2Inv.MissionCount += HealthBonus;
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.DraculaActive)
-				M3Inv.MissionCount += HealthBonus;
             
             A = Spawn(Class'DEKEffectVampire',,,TheWeapon.Owner.Location,rotator(Normal(HitLocation - Location)));
             A.PlaySound(Sound'GeneralImpacts.Wet.Breakbone_04',,1.0 * TheWeapon.Owner.TransientSoundVolume,,TheWeapon.Owner.TransientSoundRadius);
+			
+			MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
+			if (MissionInv == None)
+				return;
+			if (!MissionInv.IsMissionActive("Dracula"))
+				return;
+			MissionInv.TickMission(MissionInv.GetMissionIndex("Dracula"), HealthBonus);
         }
     }
 }
