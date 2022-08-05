@@ -102,8 +102,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	local Inventory UTIL;
 	local Inventory DEKAVRIL;
 	local bool bok;
-    local Inventory W;
-    local int m;
 
 	if (Other.Role != ROLE_Authority || AbilityLevel < 2)
 		return;
@@ -149,25 +147,7 @@ if (Other.PlayerReplicationInfo != None)
                     else
                     {
                         // since the player might have LoadedWeapons/Runes, check and delete his existing copy of this weapon
-                        bok = false;
-                        m = 0;
-                        for (OInv = Other.Inventory; OInv != None && !bok; OInv = OInv.Inventory)
-                        {
-                        	if (OInv.Class == Holder.Weapon.Class)
-                        	{
-                        		W = OInv;
-                        		bok = true;
-                        	}
-                        	m++;
-                        	if (m > 1000)
-                        		bok = true;
-                        }
-                        if (W != None)
-                        {
-if (Other.PlayerReplicationInfo != None)                
-    Log("+++++++++++ Denial deleting existing" @ W.ItemName );
-                            Other.DeleteInventory(W);
-                        }
+                        class'DEKRPGWeapon'.static.DeleteExistingWeaponIfExists(Holder.Weapon, Other);
                     }
 							
 					Holder.Weapon.GiveTo(Other); //somehow it can be destroyed.
@@ -183,8 +163,6 @@ if (Other.PlayerReplicationInfo != None)
 						Holder.AmmoAmounts2 - Holder.Weapon.AmmoAmount(1), 
 						1
 					);
-if (Other.PlayerReplicationInfo != None)                
-    Log("+++++++++++ Denial" @ Holder.Weapon.ItemName @ "restored");
 				}
 				OldWeaponHolder.WeaponHolders.remove(0, 1);
 			}
