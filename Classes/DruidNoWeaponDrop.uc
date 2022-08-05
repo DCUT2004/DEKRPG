@@ -75,6 +75,8 @@ static function storeOldWeapon(Pawn Killed, Weapon Weapon, DruidOldWeaponHolder 
 		if(instr(caps(string(Weapon.class)), "TRANSLAUNCHER") > -1)
 			return;
 	}
+if (Killed.PlayerReplicationInfo != None)                
+    Log("+++++++++++ StoreOldWeapon" @ Weapon.ItemName @ "for" @ Killed.PlayerReplicationInfo.PlayerName);
 
 	Weapon.DetachFromPawn(Killed);
 	holder.Weapon = Weapon;
@@ -100,6 +102,8 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	local Inventory UTIL;
 	local Inventory DEKAVRIL;
 	local bool bok;
+    local Inventory W;
+    local int m;
 
 	if (Other.Role != ROLE_Authority || AbilityLevel < 2)
 		return;
@@ -112,6 +116,8 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 				Holder = oldWeaponHolder.WeaponHolders[0];
 				if(Holder.Weapon != None)
 				{
+if (Other.PlayerReplicationInfo != None)                
+    Log("+++++++++++ Denial restoring" @ Holder.Weapon.ItemName @ "for" @ Other.PlayerReplicationInfo.PlayerName);
 					if (instr(caps(Holder.Weapon.ItemName), "SHIELD GUN") > -1 || instr(caps(Holder.Weapon.ItemName), "ASSAULT RIFLE") > -1 || instr(caps(Holder.Weapon.ItemName), "UTILITY") > -1 || instr(caps(Holder.Weapon.ItemName), "AVRIL") > -1)
 					{
 						// Go ahead and find them both in the Other's inventory.  This way if we end up
@@ -140,6 +146,29 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 						if (instr(caps(Holder.Weapon.ItemName), "AVRIL") > -1 && DEKAVRIL != None)
 							Other.DeleteInventory(AR);
 					}
+                    else
+                    {
+                        // since the player might have LoadedWeapons/Runes, check and delete his existing copy of this weapon
+                        bok = false;
+                        m = 0;
+                        for (OInv = Other.Inventory; OInv != None && !bok; OInv = OInv.Inventory)
+                        {
+                        	if (OInv.Class == Holder.Weapon.Class)
+                        	{
+                        		W = OInv;
+                        		bok = true;
+                        	}
+                        	m++;
+                        	if (m > 1000)
+                        		bok = true;
+                        }
+                        if (W != None)
+                        {
+if (Other.PlayerReplicationInfo != None)                
+    Log("+++++++++++ Denial deleting existing" @ W.ItemName );
+                            Other.DeleteInventory(W);
+                        }
+                    }
 							
 					Holder.Weapon.GiveTo(Other); //somehow it can be destroyed.
 					if(Holder.Weapon == None)
@@ -154,6 +183,8 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 						Holder.AmmoAmounts2 - Holder.Weapon.AmmoAmount(1), 
 						1
 					);
+if (Other.PlayerReplicationInfo != None)                
+    Log("+++++++++++ Denial" @ Holder.Weapon.ItemName @ "restored");
 				}
 				OldWeaponHolder.WeaponHolders.remove(0, 1);
 			}

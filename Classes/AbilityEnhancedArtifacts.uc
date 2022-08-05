@@ -13,19 +13,16 @@ var config int AdrenDecreasePerLevel;
 
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityLoadedCraftsman')
 			if (Data.AbilityLevels[x] >= 3)
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+
+	return 0;
 }
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
@@ -65,114 +62,203 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	
 	if(AbilityLevel == 1)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev1DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev1DMMAdren);
-		DDM.CostPerSec = (Default.Lev1DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev1RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev1RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev1DMMAdren);
-		
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev1DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev1DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev1DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev1RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev1RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev1DMMAdren);
 	}
-	if(AbilityLevel == 2)
+	else if(AbilityLevel == 2)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev2DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev2DMMAdren);
-		DDM.CostPerSec = (Default.Lev2DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev2RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev2RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev2DMMAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev2DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev2DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev2DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev2RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev2RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev2DMMAdren);
 	}
-	if(AbilityLevel == 3)
+	else if(AbilityLevel == 3)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev3DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev3DMMAdren);
-		DDM.CostPerSec = (Default.Lev3DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev3RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev3RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev3DMMAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev3DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev3DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev3DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev3RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev3RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev3DMMAdren);
 	}
-	if(AbilityLevel == 4)
+	else if(AbilityLevel == 4)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev4DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev4DMMAdren);
-		DDM.CostPerSec = (Default.Lev4DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev4RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev4RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev4DMMAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev4DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev4DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev4DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev4RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev4RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev4DMMAdren);
 	}
-	if(AbilityLevel == 5)
+	else if(AbilityLevel == 5)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
 	}
-	if(AbilityLevel == 6)
+	else if(AbilityLevel == 6)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		ASI.CostPerSec = (Default.Lev1ASICostPerSec);
-		ASI.AdrenalineRequired = (Default.Lev1ASIAdren);
-		ASD.CostPerSec = (Default.Lev1ASDCostPerSec);
-		ASD.AdrenalineRequired = (Default.Lev1ASDAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (ASI != None)
+		{
+			ASI.CostPerSec = (Default.Lev1ASICostPerSec);
+			ASI.AdrenalineRequired = (Default.Lev1ASIAdren);
+		}
+		if (ASD != None)
+		{
+			ASD.CostPerSec = (Default.Lev1ASDCostPerSec);
+			ASD.AdrenalineRequired = (Default.Lev1ASDAdren);
+		}
 	}
-	if(AbilityLevel == 7)
+	else if(AbilityLevel == 7)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		ASI.CostPerSec = (Default.Lev2ASICostPerSec);
-		ASI.AdrenalineRequired = (Default.Lev2ASIAdren);
-		ASD.CostPerSec = (Default.Lev2ASDCostPerSec);
-		ASD.AdrenalineRequired = (Default.Lev2ASDAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (ASI != None)
+		{
+			ASI.CostPerSec = (Default.Lev2ASICostPerSec);
+			ASI.AdrenalineRequired = (Default.Lev2ASIAdren);
+		}
+		if (ASD != None)
+		{
+			ASD.CostPerSec = (Default.Lev2ASDCostPerSec);
+			ASD.AdrenalineRequired = (Default.Lev2ASDAdren);
+		}
 	}
-	if(AbilityLevel == 8)
+	else if(AbilityLevel == 8)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		ASI.CostPerSec = (Default.Lev3ASICostPerSec);
-		ASI.AdrenalineRequired = (Default.Lev3ASIAdren);
-		ASD.CostPerSec = (Default.Lev3ASDCostPerSec);
-		ASD.AdrenalineRequired = (Default.Lev3ASDAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (ASI != None)
+		{
+			ASI.CostPerSec = (Default.Lev3ASICostPerSec);
+			ASI.AdrenalineRequired = (Default.Lev3ASIAdren);
+		}
+		if (ASD != None)
+		{
+			ASD.CostPerSec = (Default.Lev3ASDCostPerSec);
+			ASD.AdrenalineRequired = (Default.Lev3ASDAdren);
+		}
 	}
-	if(AbilityLevel == 9)
+	else if(AbilityLevel == 9)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		ASI.CostPerSec = (Default.Lev4ASICostPerSec);
-		ASI.AdrenalineRequired = (Default.Lev4ASIAdren);
-		ASD.CostPerSec = (Default.Lev4ASDCostPerSec);
-		ASD.AdrenalineRequired = (Default.Lev4ASDAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (ASI != None)
+		{
+			ASI.CostPerSec = (Default.Lev4ASICostPerSec);
+			ASI.AdrenalineRequired = (Default.Lev4ASIAdren);
+		}
+		if (ASD != None)
+		{
+			ASD.CostPerSec = (Default.Lev4ASDCostPerSec);
+			ASD.AdrenalineRequired = (Default.Lev4ASDAdren);
+		}
 	}
-	if(AbilityLevel == 10)
+	else if(AbilityLevel == 10)
 	{
-		DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
-		DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		DDM.CostPerSec = (Default.Lev5DDMAdren);
-		ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
-		ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
-		ASI.CostPerSec = (Default.Lev5ASICostPerSec);
-		ASI.AdrenalineRequired = (Default.Lev5ASIAdren);
-		ASD.CostPerSec = (Default.Lev5ASDCostPerSec);
-		ASD.AdrenalineRequired = (Default.Lev5ASDAdren);
+		if (DAMMW != None)
+			DAMMW.AdrenalineRequired = (Default.Lev5DAMMWAdren);
+		if (DMM != None)
+			DMM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (DDM != None)
+			DDM.CostPerSec = (Default.Lev5DDMAdren);
+		if (ARI != None)
+			ARI.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARD != None)
+			ARD.AdrenalineRequired = (Default.Lev5RemoteAdren);
+		if (ARM != None)
+			ARM.AdrenalineRequired = (Default.Lev5DMMAdren);
+		if (ASI != None)
+		{
+			ASI.CostPerSec = (Default.Lev5ASICostPerSec);
+			ASI.AdrenalineRequired = (Default.Lev5ASIAdren);
+		}
+		if (ASD != None)
+		{
+			ASD.CostPerSec = (Default.Lev5ASDCostPerSec);
+			ASD.AdrenalineRequired = (Default.Lev5ASDAdren);
+		}
 	}
 }
 

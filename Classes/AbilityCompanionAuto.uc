@@ -13,8 +13,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	{
 		Drone.TurnOnDefense();
 	}
-	else
-		return;
 }
 
 static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)

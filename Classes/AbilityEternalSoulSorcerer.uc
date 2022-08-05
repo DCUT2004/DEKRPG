@@ -16,8 +16,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 		Inv.DecayBonus = (Inv.default.DecayBonus + (default.HealthBonusPerLevel*AbilityLevel));
 		Inv.HealthMultiplier = (Inv.default.HealthMultiplier + (default.HealthMultiplierPerLevel*AbilityLevel));
 	}
-	else
-		return;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)

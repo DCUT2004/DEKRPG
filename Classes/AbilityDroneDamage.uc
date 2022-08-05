@@ -5,18 +5,15 @@ var config float DamageMultiplier;
 
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityDroneOne' || Data.Abilities[x] == class'AbilityDroneTwo')
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+
+	return 0;
 }
 	
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)

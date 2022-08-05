@@ -15,8 +15,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		DroneOneInv.TargetRadius = (1+(AbilityLevel* default.TargetRadiusMultiplier));
 		DroneOneInv.giveTo(Other);
 	}
-	else
-		return;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)

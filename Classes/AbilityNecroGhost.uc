@@ -98,7 +98,6 @@ static function bool GenuinePreventDeath(Pawn Killed, Controller Killer, class<D
 	}
 	
 	Inv = PhantomGhostInv(Killed.FindInventoryType(class'PhantomGhostInv'));
-	PDInv = PhantomDeathGhostInv(Killed.FindInventoryType(class'PhantomDeathGhostInv'));
 	
 	if (Inv == None)
 	{
@@ -112,6 +111,7 @@ static function bool GenuinePreventDeath(Pawn Killed, Controller Killer, class<D
 		{
 			if (Killed.Level.Game.IsA('Invasion'))
 			{
+				PDInv = PhantomDeathGhostInv(Killed.FindInventoryType(class'PhantomDeathGhostInv'));
 				if (PDInv == None)
 				{
 					PDInv = Killed.spawn(class'PhantomDeathGhostInv', Killed,,, rot(0,0,0));

@@ -33,9 +33,9 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 		return;
 	if (bOwnedByInstigator)
 	{
-		Inv = AssassinInv(Instigator.FindInventoryType(class'AssassinInv'));
 		if ((DamageType == class'DamTypeSniperShot' || DamageType == class'DamTypeSniperHeadShot' || DamageType == class'DamTypeDEKRailGunShot' || DamageType == class'DamTypeDEKRailGunHeadShot' || DamageType == class'DamTypeShockBeam' || DamageType == class'DamTypeShockBall' || DamageType == class'DamTypeShockCombo' || DamageType == class'DamTypeClassicSniper' || DamageType == class'DamTypeClassicHeadShot' || DamageType == class'DamTypeCryoarithmetic') || ClassIsChildOf(DamageType, Class'DamTypeMercuryDirectHit'))
 		{
+    		Inv = AssassinInv(Instigator.FindInventoryType(class'AssassinInv'));
 			if (Inv != None && Inv.Target != None)
 			{
 				if (Injured == Inv.Target)

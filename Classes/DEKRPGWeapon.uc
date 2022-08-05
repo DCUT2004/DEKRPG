@@ -615,7 +615,9 @@ simulated function ConstructItemName()
 			ItemName = ItemName @ "*";
 	}
     
-Log("***** DEKRPGWeapon initial weapon state:" @ ItemName @ "for player" @ ModifiedWeapon.Instigator);
+    if (ModifiedWeapon.Instigator != None && ModifiedWeapon.Instigator.PlayerReplicationInfo != None)                
+        Log("***** DEKRPGWeapon weapon created:" @ ItemName @ "for player" @ ModifiedWeapon.Instigator.PlayerReplicationInfo.PlayerName);
+
 	if (Role == Role_Authority)
 	{
 		if (ModifiedWeapon != None)

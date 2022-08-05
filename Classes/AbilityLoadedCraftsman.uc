@@ -18,7 +18,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local CraftsmanInv Inv;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
-	Inv = CraftsmanInv(Other.FindInventoryType(class'CraftsmanInv'));
 
 	if(LoadedInv != None)
 	{
@@ -42,6 +41,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	else
 		LoadedInv.ProtectArtifacts = false;
 		
+	Inv = CraftsmanInv(Other.FindInventoryType(class'CraftsmanInv'));
 	if(Inv == None)
 	{
 		Inv = Other.spawn(class'CraftsmanInv');

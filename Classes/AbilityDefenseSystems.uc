@@ -9,17 +9,16 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 {
 	local DruidDefenseSentinelController DDSC;
 	local DruidDefenseSentinelControllerCrimbo DDSCC;
-	
-	DDSC = DruidDefenseSentinelController(Other.Controller);
-	DDSCC = DruidDefenseSentinelControllerCrimbo(Other.Controller);
-	
+		
 	if (DruidDefenseSentinel(Other) != None || DruidCeilingDefenseSentinel(Other) != None)
 	{
+		DDSC = DruidDefenseSentinelController(Other.Controller);
 		if (DDSC != None)
 			DDSC.TargetRadius *= (1 + (AbilityLevel * default.RangeMultiplier));
 	}
 	if (DruidDefenseSentinelCrimbo(Other) != None || DruidCeilingDefenseSentinelCrimbo(Other) != None)
 	{
+		DDSCC = DruidDefenseSentinelControllerCrimbo(Other.Controller);
 		if (DDSCC != None)
 			DDSCC.TargetRadius *= (1 + (AbilityLevel * default.RangeMultiplier));
 	}

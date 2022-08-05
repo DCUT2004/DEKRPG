@@ -12,22 +12,20 @@ static function PotentialDeathPending(Pawn Killed, Controller Killer, class<Dama
 	{
 		return;
 	}
-	else
+
+	PInv = PhantomGhostInv(Killed.FindInventoryType(class'PhantomGhostInv'));
+	if (PInv != None && !PInv.stopped)
+		return;
+		
+	Spirit = Killed.Controller.Spawn(class'LingeringSpirit', Killed.Controller,,Killed.Location, Killed.Rotation);
+	if (Spirit != None)
 	{
-		PInv = PhantomGhostInv(Killed.FindInventoryType(class'PhantomGhostInv'));
-		if (PInv != None && !PInv.stopped)
-			return;
-		Spirit = Killed.Controller.Spawn(class'LingeringSpirit', Killed.Controller,,Killed.Location, Killed.Rotation);
-		if (Spirit != None)
-		{
-			Spirit.Necromancer = Killed.Controller;
-			Spirit.StatsInv = RPGStatsInv(Killed.FindInventoryType(class'RPGStatsInv'));
-			Spirit.DrainMin *= (1 + (AbilityLevel*default.LevMultiplier));
-			Spirit.DrainMax *= (1 + (AbilityLevel*default.LevMultiplier));
-			Spirit.SpiritRadius *= (1 + (AbilityLevel*default.LevMultiplier));
-		}
+		Spirit.Necromancer = Killed.Controller;
+		Spirit.StatsInv = RPGStatsInv(Killed.FindInventoryType(class'RPGStatsInv'));
+		Spirit.DrainMin *= (1 + (AbilityLevel*default.LevMultiplier));
+		Spirit.DrainMax *= (1 + (AbilityLevel*default.LevMultiplier));
+		Spirit.SpiritRadius *= (1 + (AbilityLevel*default.LevMultiplier));
 	}
-	return;
 }
 
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)

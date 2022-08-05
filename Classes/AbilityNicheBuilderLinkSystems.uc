@@ -5,29 +5,24 @@ var config int Lev1HealShot,Lev2HealShot,Lev3HealShot,Lev4HealShot,Lev5HealShot,
 	
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityBaseSpecialist')
 			if (Data.AbilityLevels[x] >= 15)
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+	return 0;
 }
 
 static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 {
 	local DruidLinkSentinelController DLSC;
-	
-	DLSC = DruidLinkSentinelController(Other.Controller);
-	
+		
 	if (DruidLinkSentinel(Other) != None)
 	{
+		DLSC = DruidLinkSentinelController(Other.Controller);
 		if (DLSC != None)
 		{
 			if (AbilityLevel == 1)

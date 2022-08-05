@@ -3,19 +3,16 @@ class AbilityShamanHealer extends AbilityNiche
 	
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityDEKLoadedHealing')
 			if (Data.AbilityLevels[x] >= 8)
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+
+	return 0;
 }
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)

@@ -101,7 +101,7 @@ static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
 		W = Weapon;
 		
 	if (Pawn(Weapon.Owner) != None && Pawn(Weapon.Owner).Health > 0)
-	Inv = SpecialistInv(Pawn(Weapon.Owner).FindInventoryType(class'SpecialistInv'));
+		Inv = SpecialistInv(Pawn(Weapon.Owner).FindInventoryType(class'SpecialistInv'));
 
 	if(instr(caps(string(W)), "AVRIL") > -1)//hack for vinv avril
 		class'AbilityWeaponsProficiency'.static.GetNumKillsForWeapon(incPerc, class'INAVRiL', TeamPlayerReplicationInfo(Pawn(Weapon.Owner).PlayerReplicationInfo), y);

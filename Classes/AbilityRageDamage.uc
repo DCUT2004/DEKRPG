@@ -16,8 +16,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		Inv.giveTo(Other);
 		Inv.TheHealth = default.TheHealth;
 	}
-	if(Inv == None)
-		return; //get em next pass I guess?
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
@@ -33,8 +31,6 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 				//DamageToMultiply = default.MaxMultiplier;
 			Damage *= DamageToMultiply;
 		}
-		else
-			return;
 	}
 }
 

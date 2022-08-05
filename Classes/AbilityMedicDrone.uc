@@ -8,7 +8,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local ArtifactRemoteMedicDrone ARMD;
 	
 	Inv = MedicDroneInv(Other.FindInventoryType(class'MedicDroneInv'));
-	ARMD = ArtifactRemoteMedicDrone(Other.FindInventoryType(class'ArtifactRemoteMedicDrone'));
 	
 	if (Inv == None)
 	{
@@ -18,6 +17,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	else
 		return;
 		
+	ARMD = ArtifactRemoteMedicDrone(Other.FindInventoryType(class'ArtifactRemoteMedicDrone'));
 	if (ARMD == None)
 	{
 		ARMD = Other.spawn(class'ArtifactRemoteMedicDrone', Other,,, rot(0,0,0));

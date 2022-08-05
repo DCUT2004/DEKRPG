@@ -13,8 +13,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	{
 		Inv.bMaster = True;
 	}
-	else
-		return;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)

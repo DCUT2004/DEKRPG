@@ -34,12 +34,12 @@ simulated function Timer()
 	if (Seeking == None)
 	{
 		return;
-		Destroy();
-		if (RealSmokeTrail != None)
-		{
-			RealSmokeTrail.mRegen = false;
-			RealSmokeTrail.Destroy();
-		}
+		// Destroy();
+		// if (RealSmokeTrail != None)
+		// {
+		// 	RealSmokeTrail.mRegen = false;
+		// 	RealSmokeTrail.Destroy();
+		// }
 	}
 	ForceDir = Normal(Seeking.Location - Location);
 	

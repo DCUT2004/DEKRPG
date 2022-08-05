@@ -13,7 +13,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	if(GIInv != None)
 	{
 		GIInv.EngAwarenessLevel = AbilityLevel;
-		return;
 	}
 }
 

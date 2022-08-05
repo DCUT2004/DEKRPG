@@ -12,12 +12,10 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	local RPGStatsInv StatsInv;
 
 	Inv = MonsterPointsInv(Other.FindInventoryType(class'MonsterPointsInv'));
-	AHB = ArtifactHealingBlast(Other.FindInventoryType(class'ArtifactHealingBlast'));
-	ASH = ArtifactSphereHealing(Other.FindInventoryType(class'ArtifactSphereHealing'));
 	
 	if (Inv == None)
 		return;
-		
+
 	//Increase monster points
 	MonsterPointLevel = 0;
 	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
@@ -31,10 +29,12 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 		return;
 	Inv.TotalMonsterPoints = MonsterPointLevel + 5;
 	
-	
 	//Increase max monsters
 	Inv.MaxMonsters = Inv.default.MaxMonsters + 1;
 	
+	AHB = ArtifactHealingBlast(Other.FindInventoryType(class'ArtifactHealingBlast'));
+	ASH = ArtifactSphereHealing(Other.FindInventoryType(class'ArtifactSphereHealing'));
+		
 	if (AHB != None)
 		AHB.EnhanceArtifact(default.AdrenalineUsage);
 	if (ASH != None)

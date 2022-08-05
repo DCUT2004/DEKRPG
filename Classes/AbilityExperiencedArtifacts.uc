@@ -10,19 +10,16 @@ var config int Lev1RemoteMaxExp, Lev2RemoteMaxExp, Lev3RemoteMaxExp, Lev4RemoteM
 
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityLoadedCraftsman')
 			if (Data.AbilityLevels[x] >= 3)
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+
+	return 0;
 }
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
@@ -43,49 +40,78 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	
 	if(AbilityLevel == 1)
 	{
-		ASD.KillXPPerc = Default.Lev1DamageExp;
-		ASI.ExpPerDamage = Default.Lev1InvExp;
-		ARD.XPforUse = Default.Lev1RemoteExp;
-		ARI.XPforUse = Default.Lev1RemoteExp;
-		ARM.XPforUse = Default.Lev1RemoteMaxExp;
-		ARA.XPforUse = Default.Lev1RemoteMaxExp;
-		
+		if (ASD != None)
+			ASD.KillXPPerc = Default.Lev1DamageExp;
+		if (ASI != None)
+			ASI.ExpPerDamage = Default.Lev1InvExp;
+		if (ARD != None)
+			ARD.XPforUse = Default.Lev1RemoteExp;
+		if (ARI != None)
+			ARI.XPforUse = Default.Lev1RemoteExp;
+		if (ARM != None)
+			ARM.XPforUse = Default.Lev1RemoteMaxExp;
+		if (ARA != None)
+			ARA.XPforUse = Default.Lev1RemoteMaxExp;
 	}
-	if(AbilityLevel == 2)
+	else if(AbilityLevel == 2)
 	{
-		ASD.KillXPPerc = Default.Lev2DamageExp;
-		ASI.ExpPerDamage = Default.Lev2InvExp;
-		ARD.XPforUse = Default.Lev2RemoteExp;
-		ARI.XPforUse = Default.Lev2RemoteExp;
-		ARM.XPforUse = Default.Lev2RemoteMaxExp;
-		ARA.XPforUse = Default.Lev2RemoteMaxExp;
+		if (ASD != None)
+			ASD.KillXPPerc = Default.Lev2DamageExp;
+		if (ASI != None)
+			ASI.ExpPerDamage = Default.Lev2InvExp;
+		if (ARD != None)
+			ARD.XPforUse = Default.Lev2RemoteExp;
+		if (ARI != None)
+			ARI.XPforUse = Default.Lev2RemoteExp;
+		if (ARM != None)
+			ARM.XPforUse = Default.Lev2RemoteMaxExp;
+		if (ARA != None)
+			ARA.XPforUse = Default.Lev2RemoteMaxExp;
 	}
-	if(AbilityLevel == 3)
+	else if(AbilityLevel == 3)
 	{
-		ASD.KillXPPerc = Default.Lev3DamageExp;
-		ASI.ExpPerDamage = Default.Lev3InvExp;
-		ARD.XPforUse = Default.Lev3RemoteExp;
-		ARI.XPforUse = Default.Lev3RemoteExp;
-		ARM.XPforUse = Default.Lev3RemoteMaxExp;
-		ARA.XPforUse = Default.Lev3RemoteMaxExp;
+		if (ASD != None)
+			ASD.KillXPPerc = Default.Lev3DamageExp;
+		if (ASI != None)
+			ASI.ExpPerDamage = Default.Lev3InvExp;
+		if (ARD != None)
+			ARD.XPforUse = Default.Lev3RemoteExp;
+		if (ARI != None)
+			ARI.XPforUse = Default.Lev3RemoteExp;
+		if (ARM != None)
+			ARM.XPforUse = Default.Lev3RemoteMaxExp;
+		if (ARA != None)
+			ARA.XPforUse = Default.Lev3RemoteMaxExp;
 	}
-	if(AbilityLevel == 4)
+	else if(AbilityLevel == 4)
 	{
-		ASD.KillXPPerc = Default.Lev4DamageExp;
-		ASI.ExpPerDamage = Default.Lev4InvExp;
-		ARD.XPforUse = Default.Lev4RemoteExp;
-		ARI.XPforUse = Default.Lev4RemoteExp;
-		ARM.XPforUse = Default.Lev4RemoteMaxExp;
-		ARA.XPforUse = Default.Lev4RemoteMaxExp;
+		if (ASD != None)
+			ASD.KillXPPerc = Default.Lev4DamageExp;
+		if (ASI != None)
+			ASI.ExpPerDamage = Default.Lev4InvExp;
+		if (ARD != None)
+			ARD.XPforUse = Default.Lev4RemoteExp;
+		if (ARI != None)
+			ARI.XPforUse = Default.Lev4RemoteExp;
+		if (ARM != None)
+			ARM.XPforUse = Default.Lev4RemoteMaxExp;
+		if (ARA != None)
+			ARA.XPforUse = Default.Lev4RemoteMaxExp;
 	}
-	if(AbilityLevel == 5)
+	else if(AbilityLevel == 5)
 	{
-		ASD.KillXPPerc = Default.Lev5DamageExp;
-		ASI.ExpPerDamage = Default.Lev5InvExp;
-		ARD.XPforUse = Default.Lev5RemoteExp;
-		ARI.XPforUse = Default.Lev5RemoteExp;
-		ARM.XPforUse = Default.Lev5RemoteMaxExp;
-		ARA.XPforUse = Default.Lev5RemoteMaxExp;
+		if (ASD != None)
+			ASD.KillXPPerc = Default.Lev5DamageExp;
+		if (ASI != None)
+			ASI.ExpPerDamage = Default.Lev5InvExp;
+		if (ARD != None)
+			ARD.XPforUse = Default.Lev5RemoteExp;
+		if (ARI != None)
+			ARI.XPforUse = Default.Lev5RemoteExp;
+		if (ARM != None)
+			ARM.XPforUse = Default.Lev5RemoteMaxExp;
+		if (ARA != None)
+			ARA.XPforUse = Default.Lev5RemoteMaxExp;
 	}
 }
 

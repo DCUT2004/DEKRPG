@@ -19,13 +19,13 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	
 	if (AbilityLevel >= default.PoisonMageLevel)
 	{
-		PInv = PoisonShieldInv(Other.FindInventoryType(class'PoisonShieldInv'));
 		A = ArtifactMakePoisonInfinity(Other.FindInventoryType(class'ArtifactMakePoisonInfinity'));
 		if (A == None)
 		{
 			A = Other.Spawn(class'ArtifactMakePoisonInfinity');
 			A.GiveTo(Other);
 		}
+		PInv = PoisonShieldInv(Other.FindInventoryType(class'PoisonShieldInv'));
 		if (PInv == None)
 		{
 			PInv = Other.Spawn(class'PoisonShieldInv');

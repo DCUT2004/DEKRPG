@@ -45,12 +45,12 @@ simulated function PostBeginPlay()
 	{
         Trail.mRegen = false;
 	}
-	    Velocity = Speed * Vector(Rotation);
+	Velocity = Speed * Vector(Rotation);
 	//    RandSpin(25000);
-	    if (PhysicsVolume.bWaterVolume)
+	if (PhysicsVolume.bWaterVolume)
 		Velocity = 0.6*Velocity;
 
-	    if (Role == ROLE_Authority && Instigator != None)
+	if (Role == ROLE_Authority && Instigator != None)
 		Team = Instigator.GetTeamNum();
 
 	if ( Role==Role_Authority )
@@ -83,8 +83,8 @@ simulated function PostNetBeginPlay()
 
 simulated function Landed( vector HitNormal )
 {
-  if ( bMinePlanted )
-	Explode(Location,vector(rotation));//  HitWall( HitNormal, None );
+	if ( bMinePlanted )
+		Explode(Location,vector(rotation));//  HitWall( HitNormal, None );
 }
 
 simulated function ProcessTouch( actor Other, vector HitLocation )

@@ -3,19 +3,16 @@ class AbilityMedicAwareness extends CostRPGAbility
 
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
-	local bool ok;
 	local int x;
 
 	for (x = 0; x < Data.Abilities.length; x++)
 	{
 		if (Data.Abilities[x] == class'AbilityDEKLoadedHealing')
 			if (Data.AbilityLevels[x] > CurrentLevel)
-				ok = true;
+				return Super.Cost(Data, CurrentLevel);
 	}
-	if (!ok)
-		return 0;
-	else
-		return Super.Cost(Data, CurrentLevel);
+
+	return 0;
 }
 
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)

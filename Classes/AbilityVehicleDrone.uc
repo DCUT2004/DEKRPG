@@ -16,8 +16,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		Drone.ResupplyLevel = (AbilityLevel/2);
 		Drone.giveTo(Other);
 	}
-	else
-		return;
 }
 
 defaultproperties

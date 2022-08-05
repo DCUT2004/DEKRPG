@@ -77,28 +77,18 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 				{
 					Inv.AddKill(1);
 				}
-				else
-					return;
 			}
-			else if (Inv.DualWeaponOne == None && Inv.DualWeaponTwo == None)
-				return;
 		}
-		else
-			return;
 	}
-	else
-		return;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
 	if (bOwnedByInstigator)
 		return;
-	else
-	{
-		if (Damage > 0)
-			Damage *= (1 + (AbilityLevel * default.DamageMultiplier));
-	}
+
+	if (Damage > 0)
+		Damage *= (1 + (AbilityLevel * default.DamageMultiplier));
 }
 
 defaultproperties

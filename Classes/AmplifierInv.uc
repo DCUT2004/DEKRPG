@@ -28,7 +28,7 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	PawnOwner = Other;
 	
 	setTimer(1.0, true);
-	beginWeapon();
+	BeginWeapon();
 	
 	if (PlayerController(Pawn(Owner).Controller) != None)
 	{

@@ -60,33 +60,31 @@ static function Monster SummonMonster(class<Monster> ChosenMonster, Pawn Master)
 	{
 		return None;
 	}
-	else
-	{
-		if (M.Controller != None)
-			M.Controller.Destroy();
-		
-		FriendlyInv = M.spawn(class'FriendlyMonsterInv');
-		FriendlyInv.giveTO(M);
-		FriendlyInv.MasterPRI = Master.PlayerReplicationInfo;
-		FriendlyInv.MonsterPointsInv = MPInv;
 
-		if(FriendlyInv == None)
-		{
-			M.Died(None, class'DamageType', vect(0,0,0)); //whatever.
-			//M.Destroy();
-			return None;
-		}
-		
-		C = M.spawn(class'DEKFriendlyMonsterController',,, SpawnLocation, SpawnRotation);
-		C.Possess(M); //do not call InitializeSkill before this line.
-		C.SetMaster(Master.Controller);
-		if(C == None)
-		{
-			M.Died(None, class'DamageType', vect(0,0,0)); //whatever.
-			FriendlyInv.Destroy();
-			M.Destroy();
-			return None;
-		}
+	if (M.Controller != None)
+		M.Controller.Destroy();
+	
+	FriendlyInv = M.spawn(class'FriendlyMonsterInv');
+	FriendlyInv.giveTO(M);
+	FriendlyInv.MasterPRI = Master.PlayerReplicationInfo;
+	FriendlyInv.MonsterPointsInv = MPInv;
+
+	if(FriendlyInv == None)
+	{
+		M.Died(None, class'DamageType', vect(0,0,0)); //whatever.
+		//M.Destroy();
+		return None;
+	}
+	
+	C = M.spawn(class'DEKFriendlyMonsterController',,, SpawnLocation, SpawnRotation);
+	C.Possess(M); //do not call InitializeSkill before this line.
+	C.SetMaster(Master.Controller);
+	if(C == None)
+	{
+		M.Died(None, class'DamageType', vect(0,0,0)); //whatever.
+		FriendlyInv.Destroy();
+		M.Destroy();
+		return None;
 	}
 }
 

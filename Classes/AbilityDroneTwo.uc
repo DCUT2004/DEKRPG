@@ -15,8 +15,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		DroneTwoInv = Other.spawn(class'DroneTwoInv');		
 		DroneTwoInv.giveTo(Other);
 	}
-	else
-		return;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
