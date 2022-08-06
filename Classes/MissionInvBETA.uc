@@ -18,7 +18,6 @@ var Mission Missions[NUM_MISSIONS];						//Array containing Mission structs, rep
 var int NumMissionsCompleted;							//Number of missions this player has completed
 var Array < string > CompletedMissions;					//Array of missions that have been completed
 var RPGRules Rules;
-
 var transient DruidsRPGKeysInteraction InteractionOwner;
 
 replication												//Replicate to clients so HUD can be displayed
@@ -30,7 +29,6 @@ replication												//Replicate to clients so HUD can be displayed
 simulated function PostBeginPlay()
 {
 	Super.PostBeginPlay();
-	
 	CheckRPGRules();
 }
 
@@ -42,13 +40,11 @@ function CheckRPGRules()
 		return;		//try again later
 
 	for(G = Level.Game.GameRulesModifiers; G != None; G = G.NextGameRules)
-	{
 		if(G.isA('RPGRules'))
 		{
 			Rules = RPGRules(G);
 			break;
 		}
-	}
 
 	if(Rules == None)
 		Log("WARNING: Unable to find RPGRules in GameRules. EXP will not be properly awarded");
@@ -85,10 +81,8 @@ final function bool IsAllMissionsActive()
 	Count = 0;
 	
 	for (x = 0; x < NUM_MISSIONS; x++)
-	{
 		if (Missions[x].MissionName != "")
 			Count++;
-	}
 	return Count == NUM_MISSIONS;
 }
 
@@ -97,10 +91,8 @@ final function bool IsMissionActive(string MissionName)
 	local int x;
 	
 	for (x = 0; x < NUM_MISSIONS; x++)
-	{
 		if (MissionName == Missions[x].MissionName)
 			return true;
-	}
 	return false;
 }
 
@@ -109,10 +101,8 @@ final function int GetMissionIndex(string MissionName)
 	local int x;
 	
 	for (x = 0; x < NUM_MISSIONS; x++)
-	{
 		if (MissionName == Missions[x].MissionName)
 			return x;
-	}
 	return -1;
 }
 
@@ -121,10 +111,8 @@ final function bool IsMissionCompleted(string MissionName)
 	local int x;
 	
 	for (x = 0; x < CompletedMissions.Length; x++)
-	{
 		if (MissionName == CompletedMissions[x])
 			return true;
-	}
 	return false;
 }
 
@@ -133,9 +121,7 @@ function ResetAllMissions()
 	local int x;
 	
 	for (x = 0; x < NUM_MISSIONS; x++)
-	{
 		ResetMission(x);
-	}
 }
 
 function ResetMission(int MissionNumber)
@@ -179,9 +165,16 @@ function TickMission(int MissionNumber, int TickAmount)
 		return;
 	Missions[MissionNumber].MissionCount += TickAmount;
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
-	{
 		CompleteMission(MissionNumber);
-	}
+}
+
+function SetTick(int MissionNumber, int TickAmount)
+{
+	if (MissionNumber < 0 || MissionNumber >= NUM_MISSIONS)
+		return;
+	Missions[MissionNumber].MissionCount = TickAmount;
+	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
+		CompleteMission(MissionNumber);
 }
 
 function CompleteMission(int MissionNumber)
