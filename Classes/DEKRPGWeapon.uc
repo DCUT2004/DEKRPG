@@ -648,12 +648,57 @@ function bool HasThisAddon(class<AddonPowerType> requiredAddon)
 	return false;
 }
 
-// *** now the checks on what Power types are allowed where
+static function DeleteExistingWeaponIfExists(Weapon NewWeapon, Pawn Other)
+{
+    local Inventory W;
+    local int m;
+    local RPGWeapon NewRPGWeapon;
+	local Inventory OInv;
+	local bool bok;
+
+    bok = false;
+    m = 0;
+    NewRPGWeapon = RPGWeapon(NewWeapon);
+    
+    for (OInv = Other.Inventory; OInv != None && !bok; OInv = OInv.Inventory)
+    {
+    	if (OInv.Class == NewWeapon.Class)
+    	{
+            if (NewRPGWeapon != None && RPGWeapon(OInv) != None)
+            {
+                if (NewRPGWeapon.ModifiedWeapon.Class == RPGWeapon(OInv).ModifiedWeapon.Class)
+                {
+            		W = OInv;
+            		bok = true;
+               }
+            }
+            else if (NewRPGWeapon == None && RPGWeapon(OInv) == None)
+            {
+        		W = OInv;
+        		bok = true;
+            }
+     	}
+    	m++;
+    	if (m > 1000)
+    		bok = true;
+    }
+    if (W != None)
+    {
+if (Other.PlayerReplicationInfo != None)                
+Log("+++++++++++ Deleting existing" @ W.ItemName @ "class:" @ W.Class @ "DEKRPG?" @ DEKRPGWeapon(W) @ "for new item" @ NewWeapon.Class @ "DEKRPG?" @ DEKRPGWeapon(NewWeapon));
+        Other.DeleteInventory(W);
+    }
+}
+
+// *** now the checks on what Power Types are allowed where
 
 // return true to allow player to have w
 function bool AllowRPGWeapon(RPGWeapon w)
 {
-	return Super.AllowRPGWeapon(w);
+	if (Class == w.Class && ModifiedWeapon.Class == w.ModifiedWeapon.Class)
+		return false;
+
+	return true;
 }
 
 // check to see if can add the new Power type to the existing weapon
