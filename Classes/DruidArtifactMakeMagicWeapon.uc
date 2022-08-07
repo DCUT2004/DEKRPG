@@ -203,6 +203,7 @@ state Activated
 		local int x;
 		local LoadedInv LoadedInv;
 		local DualityInv DInv;
+        local Weapon newWeapon;
 
 		if(ActivatedOldWeapon == None)
 		{
@@ -301,6 +302,9 @@ state Activated
 			bActive = false;
 			return;
 		}
+        
+        newWeapon = spawn(OldWeaponClass, Instigator,,, rot(0,0,0));
+        RPGWeapon(Copy).ModifiedWeapon = newWeapon;
 
 		//try to generate a positive weapon.
 		for(x = 0; x < 50; x++)
@@ -310,7 +314,7 @@ state Activated
 				break;
 		}
 
-		RPGWeapon(Copy).SetModifiedWeapon(spawn(OldWeaponClass, Instigator,,, rot(0,0,0)), true);
+		RPGWeapon(Copy).SetModifiedWeapon(newWeapon, true);
 		DInv = DualityInv(Instigator.FindInventoryType(class'DualityInv'));
 		if (DInv != None)
 		{
