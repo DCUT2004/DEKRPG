@@ -1,13 +1,7 @@
-class ArtifactMissionTeamBalloonPop extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamBalloonPop extends ArtifactMissionTeam
+		config(Missions);
 
 #exec  AUDIO IMPORT NAME="MPSelect" FILE="Sounds\MPSelect.WAV" GROUP="MissionSounds"
-
-function PostBeginPlay()
-{
-	TeamMission = True;
-	Super.PostBeginPlay();
-}
 
 function Activate()
 {
@@ -71,9 +65,8 @@ defaultproperties
      XPReward=25
      MissionGoal=40
      TimeLimit=80
-     Description="(T)Pop the balloons!"
-     TeamMission=True
+     Description="Pop the balloons!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamBalloonPopPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.BalloonPop'
-     ItemName="Balloon Pop"
+     ItemName="Team Mission: Balloon Pop"
 }

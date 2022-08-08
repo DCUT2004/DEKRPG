@@ -2,7 +2,8 @@ class SuperHeatInv extends Inventory
 	config(UT2004RPG);
 	
 var RPGRules RPGRules;
-
+const WIZARDRY = "Wizardry";
+var MissionInvBETA MissionInv;
 var config float BasePercentage;
 var config float Curve;
 var config float AdrenLost;
@@ -23,10 +24,6 @@ replication
 	
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
 	local xPawn X;
 	local DEKRPGWeapon DW;
 	local MagicalWardProtectionInv MWInv;
@@ -76,27 +73,9 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
     			}
             }
 		}
-		
-		MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
-		M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
-		M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
-		M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
-		
-		if (MiInv != None && !MiInv.WizardryComplete)
-		{
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
-			{
-				M1Inv.MissionCount++;
-			}
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
-			{
-				M2Inv.MissionCount++;
-			}
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
-			{
-				M3Inv.MissionCount++;
-			}
-		}
+		MissionInv = Class'MissionInvBETA'.static.GetMissionInv(PawnOwner.Controller);
+		if (MissionInv != None && MissionInv.IsMissionActive(WIZARDRY))
+			MissionInv.TickMission(MissionInv.GetMissionIndex(WIZARDRY), 1);
 	
 		X = xPawn(PawnOwner);
 		FX = Spawn(class'SuperHeatFX', PawnOwner,, PawnOwner.Location);
@@ -207,6 +186,8 @@ function stopEffect()
 simulated function Destroyed()
 {
 	stopEffect();
+	if (MissionInv != None)
+		MissionInv.TickMission(MissionInv.GetMissionIndex(WIZARDRY), -1);
 	if (FX != None)
 	{
 		FX.Kill();

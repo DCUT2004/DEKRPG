@@ -1,5 +1,5 @@
-class ArtifactMissionTeamPortalBall extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamPortalBall extends ArtifactMissionTeam
+		config(Missions);
 		
 var config int XPPerScore;
 
@@ -88,9 +88,8 @@ defaultproperties
      XPReward=25
      MissionGoal=15
      TimeLimit=120
-     Description="(T)Shoot the ball into the portal!"
-     TeamMission=True
+     Description="Shoot the ball into the portal!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamPortalBallPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.PortalBall'
-     ItemName="Portal Ball"
+     ItemName="Team Mission: Portal Ball"
 }

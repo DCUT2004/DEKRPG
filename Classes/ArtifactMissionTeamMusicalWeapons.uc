@@ -1,5 +1,5 @@
-class ArtifactMissionTeamMusicalWeapons extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamMusicalWeapons extends ArtifactMissionTeam
+		config(Missions);
 
 #exec  AUDIO IMPORT NAME="MPSelect" FILE="Sounds\MPSelect.WAV" GROUP="MissionSounds"
 
@@ -73,9 +73,8 @@ defaultproperties
      XPReward=50
      MissionGoal=20
      TimeLimit=120
-     Description="(T)Make kills with the correct weapon."
-     TeamMission=True
+     Description="Make kills with the correct weapon."
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamMusicalWeaponsPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.MusicalWeapons'
-     ItemName="Musical Weapons"
+     ItemName="Team Mission: Musical Weapons"
 }

@@ -1,5 +1,5 @@
-class ArtifactMissionTeamTarydiumKeep extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamTarydiumKeep extends ArtifactMissionTeam
+		config(Missions);
 
 #exec  AUDIO IMPORT NAME="MPSelect" FILE="Sounds\MPSelect.WAV" GROUP="MissionSounds"
 
@@ -101,9 +101,8 @@ defaultproperties
      XPReward=50
      MissionGoal=120
      TimeLimit=130
-     Description="(T)Defend the tarydium crystals!"
-     TeamMission=True
+     Description="Defend the tarydium crystals!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamTarydiumKeepPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.TarydiumKeep'
-     ItemName="Tarydium Keep"
+     ItemName="Team Mission: Tarydium Keep"
 }

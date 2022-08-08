@@ -3,6 +3,8 @@
 //-----------------------------------------------------------
 class NullEntropyInv extends Inventory;
 
+const WIZARDRY = "Wizardry";
+var MissionInvBETA MissionInv;
 var Pawn PawnOwner;
 var Material ModifierOverlay;
 var int Modifier;
@@ -20,10 +22,6 @@ replication
 function GiveTo(Pawn Other, optional Pickup Pickup)
 {
 	local NecroInv NInv;
-	local MissionInv MiInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local MIssion3Inv M3Inv;
 	local DEKRPGWeapon DW;
 	local MagicalWardProtectionInv MWInv;
 	local ComboWardInv WardInv;
@@ -97,27 +95,9 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 			Destroy();
 			return;
 		}
-	
-		MiInv = MissionInv(PawnOwner.FindInventoryType(class'MissionInv'));
-		M1Inv = Mission1Inv(PawnOwner.FindInventoryType(class'Mission1Inv'));
-		M2Inv = Mission2Inv(PawnOwner.FindInventoryType(class'Mission2Inv'));
-		M3Inv = Mission3Inv(PawnOwner.FindInventoryType(class'Mission3Inv'));
-	
-		if (MiInv != None && !MiInv.WizardryComplete)
-		{
-			if (M1Inv != None && !M1Inv.Stopped && M1Inv.WizardryActive)
-			{
-				M1Inv.MissionCount++;
-			}
-			if (M2Inv != None && !M2Inv.Stopped && M2Inv.WizardryActive)
-			{
-				M2Inv.MissionCount++;
-			}
-			if (M3Inv != None && !M3Inv.Stopped && M3Inv.WizardryActive)
-			{
-				M3Inv.MissionCount++;
-			}
-		}
+		MissionInv = Class'MissionInvBETA'.static.GetMissionInv(PawnOwner.Controller);
+		if (MissionInv != None && MissionInv.IsMissionActive(WIZARDRY))
+			MissionInv.TickMission(MissionInv.GetMissionIndex(WIZARDRY), 1);
 		PawnOwner.PlaySound(NullEntropySound,,1.5 * PawnOwner.TransientSoundVolume,,PawnOwner.TransientSoundRadius);
 		PawnOwner.setOverlayMaterial(ModifierOverlay, LifeSpan, true);
 		if(PawnOwner.Controller != None && PlayerController(PawnOwner.Controller) != None)
@@ -145,6 +125,8 @@ simulated function destroyed()
 	disable('Tick');
 	if(PawnOwner != None && PawnOwner.Physics == PHYS_NONE)
 		PawnOwner.SetPhysics(PHYS_Falling);
+	if (MissionInv != None)
+		MissionInv.TickMission(MissionInv.GetMissionIndex(WIZARDRY), -1);
 	super.destroyed();
 }
 

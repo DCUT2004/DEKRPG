@@ -1,5 +1,9 @@
 class MissionGameRules extends GameRules;
 
+const ROOTED = "Rooted Stance";
+const SUPERMAN = "Superman";
+const SHARP_SHOT = "Sharp Shot Fly";
+
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
 	local MissionInvBETA MissionInv;						//Unfortunately, we're doing a check on the inventory list each time a player deals damage..
@@ -60,6 +64,12 @@ function ScoreKill(Controller Killer, Controller Killed)
 		return;
 	for(x = 0; x < MissionInv.NUM_MISSIONS; x++)
 	{
+		if (MissionInv.Missions[x].MissionName == ROOTED && VSize(Killer.Pawn.Velocity) ~= 0)
+			MissionInv.TickMission(x, 1);
+			
+		if (MissionInv.Missions[x].MissionName == SUPERMAN && (Killer.Pawn.Physics == PHYS_FALLING || Killer.Pawn.Physics == PHYS_FLYING ) )
+			MissionInv.TickMission(x, 1);
+			
 		if (MissionInv.Missions[x].ObjectiveClasses.Length > 0)
 		{
 			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)

@@ -1,5 +1,5 @@
-class ArtifactMissionTeamRingAndHold extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamRingAndHold extends ArtifactMissionTeam
+		config(Missions);
 
 #exec  AUDIO IMPORT NAME="MPSelect" FILE="Sounds\MPSelect.WAV" GROUP="MissionSounds"
 
@@ -130,9 +130,8 @@ defaultproperties
      XPReward=50
      MissionGoal=10
      TimeLimit=130
-     Description="(T)Hold position at each of three rings simultaneously!"
-     TeamMission=True
+     Description="Hold position at each of three rings simultaneously!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamRingAndHoldPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.RingAndHold'
-     ItemName="Ring and Hold"
+     ItemName="Team Mission: Ring and Hold"
 }

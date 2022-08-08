@@ -20,6 +20,8 @@ var Array < string > CompletedMissions;					//Array of missions that have been c
 var RPGRules Rules;
 var transient DruidsRPGKeysInteraction InteractionOwner;
 
+#exec  AUDIO IMPORT NAME="MissionComplete1" FILE="Sounds\MissionComplete1.WAV" GROUP="MissionSounds"
+
 replication												//Replicate to clients so HUD can be displayed
 {
 	reliable if (Role == ROLE_Authority)
@@ -164,6 +166,8 @@ function TickMission(int MissionNumber, int TickAmount)
 	if (MissionNumber < 0 || MissionNumber >= NUM_MISSIONS)
 		return;
 	Missions[MissionNumber].MissionCount += TickAmount;
+	if (Missions[MissionNumber].MissionCount < 0)		//In the event TickAmount is negative
+		Missions[MissionNumber].MissionCount = 0;
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
 		CompleteMission(MissionNumber);
 }
@@ -204,6 +208,18 @@ function RewardXP(float XPReward)
 		
 	if (Rules != None && PawnOwner != None)
 		Rules.ShareExperience(RPGStatsInv(PawnOwner.FindInventoryType(class'RPGStatsInv')), XPReward);
+}
+
+static function ExitMission(Pawn PawnOwner, int MissionNumber)
+{
+	local MissionInvBETA MissionInv;
+
+	if (PawnOwner == None || PawnOwner.Controller == None || MissionNumber < 0 || MissionNumber >= NUM_MISSIONS)
+		return;
+
+	MissionInv = class'MissionInvBETA'.static.GetMissionInv(PawnOwner.Controller);
+	if (MissionInv != None)
+		MissionInv.ResetMission(MissionNumber);
 }
 
 simulated function Destroyed()

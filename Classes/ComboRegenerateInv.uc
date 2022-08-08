@@ -1,7 +1,7 @@
 class ComboRegenerateInv extends ComboEffectInv
 	config(UT2004RPG);
-
-var MissionSoloInv MInv;
+const LIFEMEND = "Life Mend";
+var MissionInvBETA MissionInv;
 var config float MaxMultiplier;
 
 function GiveTo(Pawn Other, optional Pickup Pickup)
@@ -11,7 +11,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 	if (Other != None)
 	{
 		Other.ReceiveLocalizedMessage(MessageClass, Lifespan, None, None, Class);
-		MInv = MissionSoloInv(Other.FindInventoryType(class'MissionSoloInv'));
+		if (Other.Controller != None)
+			MissionInv = Class'MissionInvBETA'.static.GetMissionInv(Other.Controller);
 	}
 	Super.GiveTo(Other);
 }
@@ -20,24 +21,11 @@ function Timer()
 {
 	if (PawnOwner != None)
 	{
-		/*if(EffectxEmitter == None)
-		{
-			EffectxEmitter = PawnOwner.Spawn(EffectxEmitterClass, PawnOwner,,PawnOwner.Location);
-			if (EffectxEmitter != None)
-			{
-				EffectxEmitter.bHardAttach = True;
-				EffectxEmitter.SetBase(PawnOwner);
-				EffectxEmitter.mSizeRange[0] = (PawnOwner.CollisionRadius*0.3);
-				EffectxEmitter.mSizeRange[1] = (PawnOwner.CollisionRadius*0.3);
-			}
-		}*/
 		PawnOwner.GiveHealth(EffectMultiplier, PawnOwner.Health + EffectMultiplier);
 		if (PawnOwner.Health > PawnOwner.HealthMax*MaxMultiplier)
 			PawnOwner.Health = PawnOwner.HealthMax*MaxMultiplier;
-		if (MInv != None && MInv.LifeMendActive)
-		{
-			MInv.MissionCount += EffectMultiplier;
-		}
+		if (MissionInv != None && MissionInv.IsMissionActive(LIFEMEND))
+			MissionInv.TickMission(MissionInv.GetMissionIndex(LIFEMEND), 1);
 		if (PawnOwner.Controller != None && PlayerController(PawnOwner.Controller) != None)
 			PlayerController(PawnOwner.Controller).ClientPlaySound(Sound'PickupSounds.HealthPack');
 	}

@@ -1,5 +1,5 @@
-class ArtifactMissionTeamPowerParty extends ArtifactMission
-		config(UT2004RPG);
+class ArtifactMissionTeamPowerParty extends ArtifactMissionTeam
+		config(Missions);
 		
 var config int TitanWave1;
 var config int TitanWave2;
@@ -90,9 +90,8 @@ defaultproperties
      XPReward=50
      MissionGoal=5000
      TimeLimit=60
-     Description="(T)Do as much damage as a team."
-     TeamMission=True
+     Description="Do as much damage as a team."
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamPowerPartyPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.PowerParty'
-     ItemName="Power Party"
+     ItemName="Team Mission: Power Party"
 }

@@ -20,10 +20,6 @@ function ModifyPlayer(Pawn Other)
 {	// for the keys and subclasses
 	Local GiveItemsInv GIInv;
 	local MissionMultiplayerHUDInv MMPIHUD;
-	local MissionInv MInv;
-	local Mission1Inv M1Inv;
-	local Mission2Inv M2Inv;
-	local Mission3Inv M3Inv;
 
 	super.ModifyPlayer(Other);
 
@@ -36,30 +32,6 @@ function ModifyPlayer(Pawn Other)
 	{
 		MMPIHUD = Other.Spawn(class'MissionMultiplayerHUDInv');
 		MMPIHUD.GiveTo(Other);
-	}
-	MInv = MissionInv(Other.FindInventoryType(class'MissionInv'));
-	M1Inv = Mission1Inv(Other.FindInventoryType(class'Mission1Inv'));
-	M2Inv = Mission2Inv(Other.FindInventoryType(class'Mission2Inv'));
-	M3Inv = Mission3Inv(Other.FindInventoryType(class'Mission3Inv'));
-	if (MInv == None)
-	{
-		MInv = Other.Spawn(class'MissionInv');
-		MInv.GiveTo(Other);
-	}
-	if (M1Inv == None)
-	{
-		M1Inv = Other.Spawn(class'Mission1Inv');
-		M1Inv.GiveTo(Other);
-	}
-	if (M2Inv == None)
-	{
-		M2Inv = Other.Spawn(class'Mission2Inv');
-		M2Inv.GiveTo(Other);
-	}
-	if (M3Inv == None)
-	{
-		M3Inv = Other.Spawn(class'Mission3Inv');
-		M3Inv.GiveTo(Other);
 	}
 
 	//add the default items to their inventory..
