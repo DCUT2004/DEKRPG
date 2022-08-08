@@ -102,6 +102,8 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	RPGWeapon = Other.spawn(RPGWeaponClass, Other,,, rot(0,0,0));
 	if(RPGWeapon == None)
 		return;
+        
+    RPGWeapon.ModifiedWeapon = newWeapon;
 	RPGWeapon.Generate(None);
 	
 	//I'm checking the state of RPG Weapon a bunch because sometimes it becomes none mid method.
