@@ -107,5 +107,5 @@ defaultproperties
      Description="Find and return vials to the node for study!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamGenomeProjectPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.GenomeProject'
-     ItemName="Team Mission: Genome Project"
+     ItemName="Genome Project"
 }

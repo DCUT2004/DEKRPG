@@ -91,5 +91,5 @@ defaultproperties
      Description="Shoot the ball into the portal!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamPortalBallPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.PortalBall'
-     ItemName="Team Mission: Portal Ball"
+     ItemName="Portal Ball"
 }

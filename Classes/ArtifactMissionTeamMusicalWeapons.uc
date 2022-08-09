@@ -76,5 +76,5 @@ defaultproperties
      Description="Make kills with the correct weapon."
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamMusicalWeaponsPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.MusicalWeapons'
-     ItemName="Team Mission: Musical Weapons"
+     ItemName="Musical Weapons"
 }

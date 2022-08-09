@@ -68,5 +68,5 @@ defaultproperties
      Description="Pop the balloons!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamBalloonPopPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.BalloonPop'
-     ItemName="Team Mission: Balloon Pop"
+     ItemName="Balloon Pop"
 }

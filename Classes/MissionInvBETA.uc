@@ -20,12 +20,26 @@ var Array < string > CompletedMissions;					//Array of missions that have been c
 var RPGRules Rules;
 var transient DruidsRPGKeysInteraction InteractionOwner;
 
+var string MissionNameOne;
+var int MissionCountOne;
+var int MissionGoalOne;
+
+var string MissionNameTwo;
+var int MissionCountTwo;
+var int MissionGoalTwo;
+
+var string MissionNameThree;
+var int MissionCountThree;
+var int MissionGoalThree;
+
 #exec  AUDIO IMPORT NAME="MissionComplete1" FILE="Sounds\MissionComplete1.WAV" GROUP="MissionSounds"
 
 replication												//Replicate to clients so HUD can be displayed
 {
 	reliable if (Role == ROLE_Authority)
-		NumMissionsCompleted, Missions;
+		NumMissionsCompleted, MissionNameOne, MissionCountOne, MissionGoalOne,
+		MissionNameTwo, MissionCountTwo, MissionGoalTwo,
+		MissionNameThree, MissionCountThree, MissionGoalThree;
 }
 
 simulated function PostBeginPlay()
@@ -136,6 +150,31 @@ function ResetMission(int MissionNumber)
 	Missions[MissionNumber].XPReward = 0.0;
 	if (Missions[MissionNumber].ObjectiveClasses.Length > 0)
 		Missions[MissionNumber].ObjectiveClasses.Length = 0;		//Clears the array
+		
+	//Now for the replicated variables
+	ResetMissionReplication(MissionNumber);
+}
+
+function ResetMissionReplication(int MissionNumber)
+{
+	Switch (MissionNumber)
+	{
+		Case 0:
+			MissionNameOne = "";
+			MissionCountOne = 0;
+			MissionGoalOne = 0;
+			break;
+		Case 1:
+			MissionNameTwo = "";
+			MissionCountTwo = 0;
+			MissionGoalTwo = 0;
+			break;
+		Case 2:
+			MissionNameThree = "";
+			MissionCountThree = 0;
+			MissionGoalThree = 0;
+			break;
+	}
 }
 
 //Called when activating a mission artifact, which will supply the required parameters
@@ -153,10 +192,35 @@ function bool SetMission(string MissionName, int MissionGoal, float XPReward, Ar
 			Missions[x].ObjectiveClasses.Length = ObjectiveClasses.Length;	//Inserts elements into the array, initialized with null values
 			for (y = 0; y < Missions[x].ObjectiveClasses.Length; y++)
 				Missions[x].ObjectiveClasses[y] = ObjectiveClasses[y];		//y is used to index both arrays, but there should never be an out of bounds exception
+				
+			//Now for the replicated variables
+			SetMissionReplication(x, MissionName, MissionGoal);
 			return true;
 		}
 	}
 	return false;
+}
+
+function SetMissionReplication(int MissionNumber, string MissionName, int MissionGoal)
+{
+	Switch (MissionNumber)
+	{
+		Case 0:
+			MissionNameOne = MissionName;
+			MissionCountOne = 0;
+			MissionGoalOne = MissionGoal;
+			break;
+		Case 1:
+			MissionNameTwo = MissionName;
+			MissionCountTwo = 0;
+			MissionGoalTwo = MissionGoal;
+			break;
+		Case 2:
+			MissionNameThree = MissionName;
+			MissionCountThree = 0;
+			MissionGoalThree = MissionGoal;
+			break;
+	}
 }
 
 //Called by any number of events, such as dealing damage or upon kill
@@ -170,6 +234,8 @@ function TickMission(int MissionNumber, int TickAmount)
 		Missions[MissionNumber].MissionCount = 0;
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
 		CompleteMission(MissionNumber);
+	//Now for the replicated variables
+	UpdateTIckReplication(MissionNumber);
 }
 
 function SetTick(int MissionNumber, int TickAmount)
@@ -179,6 +245,24 @@ function SetTick(int MissionNumber, int TickAmount)
 	Missions[MissionNumber].MissionCount = TickAmount;
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
 		CompleteMission(MissionNumber);
+	//Now for the replicated variables
+	UpdateTickReplication(MissionNumber);
+}
+
+function UpdateTickReplication(int MissionNumber)
+{
+	Switch (MissionNumber)
+	{
+		Case 0:
+			MissionCountOne = Missions[MissionNumber].MissionCount;
+			break;
+		Case 1:
+			MissionCountTwo = Missions[MissionNumber].MissionCount;
+			break;
+		Case 2:
+			MissionCountThree = Missions[MissionNumber].MissionCount;
+			break;
+	}
 }
 
 function CompleteMission(int MissionNumber)

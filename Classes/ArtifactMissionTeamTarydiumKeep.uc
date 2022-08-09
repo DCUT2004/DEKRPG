@@ -104,5 +104,5 @@ defaultproperties
      Description="Defend the tarydium crystals!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamTarydiumKeepPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.TarydiumKeep'
-     ItemName="Team Mission: Tarydium Keep"
+     ItemName="Tarydium Keep"
 }

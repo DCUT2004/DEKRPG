@@ -133,5 +133,5 @@ defaultproperties
      Description="Hold position at each of three rings simultaneously!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamRingAndHoldPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.RingAndHold'
-     ItemName="Team Mission: Ring and Hold"
+     ItemName="Ring and Hold"
 }

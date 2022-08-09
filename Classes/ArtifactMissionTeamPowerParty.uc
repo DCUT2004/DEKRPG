@@ -93,5 +93,5 @@ defaultproperties
      Description="Do as much damage as a team."
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamPowerPartyPickup'
      IconMaterial=Texture'MissionsTex6.TeamMissions.PowerParty'
-     ItemName="Team Mission: Power Party"
+     ItemName="Power Party"
 }

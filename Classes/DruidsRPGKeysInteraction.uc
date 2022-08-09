@@ -1075,6 +1075,7 @@ function PostRender(Canvas Canvas)
 	local float XLSmall, YLSmall, MPBarX, MPBarY;
 	local DruidMonsterMasterArtifactMonsterSummon DMMAMS;
 	local ArtifactMissionBETA AM;
+	local ArtifactMissionTeam AMT;
 	local ArtifactPaladin AP;
 	local ArtifactGuardianHeal AGH;
 	local RPGClassInv RPGInv;
@@ -1560,7 +1561,7 @@ function PostRender(Canvas Canvas)
 		Canvas.DrawText(pText);
 
 		//Now draw each individual mission's artifact, description, and name.
-		if (MissionInv.Missions[0].MissionName != "")
+		if (MissionInv.MissionNameOne != "")
 		{	
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1574,9 +1575,9 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 23.0);
-			Canvas.DrawText("1. " $ MissionInv.Missions[0].MissionName $ " " $ MissionInv.Missions[0].MissionCount $ "/" $ MissionInv.Missions[0].MissionGoal);
+			Canvas.DrawText("1. " $ MissionInv.MissionNameOne $ " " $ MissionInv.MissionCountOne $ "/" $ MissionInv.MissionGoalOne);
 		}
-		if (MissionInv.Missions[1].MissionName != "")
+		if (MissionInv.MissionNameTwo != "")
 		{
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1590,9 +1591,9 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 22.0);
-			Canvas.DrawText("2. " $ MissionInv.Missions[1].MissionName $ " " $ MissionInv.Missions[1].MissionCount $ "/" $ MissionInv.Missions[1].MissionGoal);
+			Canvas.DrawText("2. " $ MissionInv.MissionNameTwo $ " " $ MissionInv.MissionCountTwo $ "/" $ MissionInv.MissionGoalTwo);
 		}
-		if (MissionInv.Missions[2].MissionName != "")
+		if (MissionInv.MissionNameThree != "")
 		{
 			Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 			Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1606,7 +1607,7 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			Canvas.DrawColor = WhiteColor;
 			Canvas.SetPos(10, Canvas.ClipY * 0.75 - YL * 21.0);
-			Canvas.DrawText("3. " $ MissionInv.Missions[2].MissionName $ " " $ MissionInv.Missions[2].MissionCount $ "/" $ MissionInv.Missions[2].MissionGoal);
+			Canvas.DrawText("3. " $ MissionInv.MissionNameThree $ " " $ MissionInv.MissionCountThree $ "/" $ MissionInv.MissionGoalThree);
 		}
 		if (MMPI != None && !MMPI.Stopped)
 		{
@@ -1618,15 +1619,15 @@ function PostRender(Canvas Canvas)
 			Canvas.Style = 2;
 			pText = "Team Mission:";
 			Canvas.DrawColor = WhiteColor;
-			Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 24.0);
+			Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 24.0);
 			Canvas.DrawText(pText);
 			
-			Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 23.0);
+			Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 23.0);
 			Canvas.DrawText(MMPI.MissionName);
 			
 			if (MMPI.PowerPartyActive)
 			{
-				Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 22.0);
+				Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 22.0);
 				Canvas.DrawText(MMPI.MissionCount $ "/" $ MMPI.MissionGoal);
 				
 				Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
@@ -1636,12 +1637,12 @@ function PostRender(Canvas Canvas)
 			{
 				Canvas.Style = 2;
 				Canvas.DrawColor = WhiteColor;
-				Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 22.0);
+				Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 22.0);
 				Canvas.DrawText(MMPI.MissionCount $ "/" $ MMPI.MissionGoal $ " Time: " $ MMPI.TimeRemaining);
 			}
 			if (MMPI.TarydiumKeepActive && MMPI.TC != None)
 			{
-				Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+				Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 				Canvas.DrawText("Tarydium HP: " $ MMPI.TC.Health);
 			}
 			if (MMPI.RingAndHoldActive)
@@ -1649,19 +1650,19 @@ function PostRender(Canvas Canvas)
 				if (MMPI.RRActive)
 				{
 					Canvas.DrawColor = RedColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Red Active");
 				}
 				if (MMPI.RBActive)
 				{
 					Canvas.DrawColor = BlueColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 20.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 20.0);
 					Canvas.DrawText("Blue Active");
 				}
 				if (MMPI.RGActive)
 				{
 					Canvas.DrawColor = YellowColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 19.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 19.0);
 					Canvas.DrawText("Gold Active");
 				}
 			}
@@ -1670,55 +1671,55 @@ function PostRender(Canvas Canvas)
 				if (MMPI.ActiveWeapon == class'DEKWeapons999X.INAVRiL')
 				{
 					Canvas.DrawColor = WhiteColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("AVRiL");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.BioRifle')
 				{
 					Canvas.DrawColor = GreenColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Bio Rifle");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.ShockRifle')
 				{
 					Canvas.DrawColor = PurpleColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Shock Rifle");
 				}
 				else if (MMPI.ActiveWeapon == class'UT2004RPG.RPGLinkGun')
 				{
 					Canvas.DrawColor = GreenColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Link Gun");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.Minigun')
 				{
 					Canvas.DrawColor = WhiteColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Minigun");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.FlakCannon')
 				{
 					Canvas.DrawColor = OrangeColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Flak Cannon");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.FlakCannon' || ClassIsChildOf(MMPI.ActiveWeapon, class'XWeapons.FlakCannon'))	//for PumpkinCannon
 				{
 					Canvas.DrawColor = OrangeColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Flak Cannon");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.RocketLauncher')
 				{
 					Canvas.DrawColor = RedColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Rocket Launcher");
 				}
 				else if (MMPI.ActiveWeapon == class'XWeapons.SniperRifle')
 				{
 					Canvas.DrawColor = BlueColor;
-					Canvas.SetPos(Canvas.ClipX - XL - 75.f, Canvas.ClipY * 0.75 - YL * 21.0);
+					Canvas.SetPos(Canvas.ClipX - XL - 70.f, Canvas.ClipY * 0.75 - YL * 21.0);
 					Canvas.DrawText("Lightning Gun");
 				}
 			}
@@ -1749,17 +1750,41 @@ function PostRender(Canvas Canvas)
 		Canvas.DrawColor = WhiteColor;	
 		
 		Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
-		//if (AM.TeamMission)
-		//	Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
-		//else if (!AM.TeamMission)
-		//{
-			if (StatsInv.Data.Level <= AM.LowLevelThreshold)
-				Canvas.DrawText(RewardText $ AM.XPReward*AM.LowLevelMultiplier $ "XP");
-			else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
-				Canvas.DrawText(RewardText $ AM.XPReward*AM.MediumLevelMultiplier $ "XP");
-			else
-				Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
+		if (StatsInv.Data.Level <= AM.LowLevelThreshold)
+			Canvas.DrawText(RewardText $ AM.XPReward*AM.LowLevelMultiplier $ "XP");
+		else if (StatsInv.Data.Level <= AM.MediumLevelThreshold)
+			Canvas.DrawText(RewardText $ AM.XPReward*AM.MediumLevelMultiplier $ "XP");
+		else
+			Canvas.DrawText(RewardText $ AM.XPReward $ "XP");
 	}
+	
+	AMT = ArtifactMissionTeam(ViewportOwner.Actor.Pawn.SelectedItem);
+	if (AMT != None)
+	{
+		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
+		Canvas.FontScaleY = Canvas.ClipY / 768.f;
+
+		pText = "200";
+		Canvas.TextSize(pText, XL, YL);
+
+		Canvas.FontScaleX *= 0.8; //make it smaller
+		Canvas.FontScaleY *= 0.8;
+
+		Canvas.Style = 2;
+		Canvas.DrawColor = WhiteColor;
+
+		Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
+		Canvas.DrawText(AMT.Description);
+		
+		Canvas.FontScaleX *= 0.9; //make it smaller
+		Canvas.FontScaleY *= 0.9;
+
+		Canvas.Style = 2;
+		Canvas.DrawColor = WhiteColor;	
+		
+		Canvas.SetPos(XL+11, Canvas.ClipY * 0.75 - YL * 3.0);
+	}
+	
 	AP = ArtifactPaladin(ViewportOwner.Actor.Pawn.SelectedItem);
 	if (AP != None)
 	{
