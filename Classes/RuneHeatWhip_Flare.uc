@@ -1,11 +1,10 @@
-class RuneHeatWhip_Flare extends Weapon
+class RuneHeatWhip_Flare extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneHeatWhipFire'
      FireModeClass(1)=Class'DEKRPG999X.RuneFlareFire'
-     bCanThrow=False
      HudColor=(R=201,G=22,B=115)
      InventoryGroup=7
      ItemName="Heat Whip / Flare"

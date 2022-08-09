@@ -1,11 +1,10 @@
-class RuneMegaBlast_PoisonBlast extends Weapon
+class RuneMegaBlast_PoisonBlast extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneMegaBlastFire'
      FireModeClass(1)=Class'DEKRPG999X.RunePoisonBlastFire'
-     bCanThrow=False
      HudColor=(R=255,G=255,B=0)
      InventoryGroup=0
      ItemName="MegaBlast / PoisonBlast"

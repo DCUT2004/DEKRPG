@@ -1,4 +1,4 @@
-class RuneFlurry_Magnet extends Weapon
+class RuneFlurry_Magnet extends RuneWeapon
 	CacheExempt;
 	
 var RuneMagnet Magnet;
@@ -14,7 +14,6 @@ defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneFlurryFire'
      FireModeClass(1)=Class'DEKRPG999X.RuneMagnetFire'
-     bCanThrow=False
      HudColor=(R=73,G=19,B=138)
      InventoryGroup=4
      ItemName="Flurry / Magnet"

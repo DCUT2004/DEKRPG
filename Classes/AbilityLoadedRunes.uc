@@ -47,6 +47,20 @@ static function bool OverridePickupQuery(Pawn Other, Pickup item, out byte bAllo
 	return false;
 }
 
+static function bool IsWeaponAcceptable(weapon ModifiedWeapon)
+{
+    if (ModifiedWeapon == None)
+        return false;
+        
+    if (instr(caps(ModifiedWeapon.ItemName), "ASSAULT RIFLE") > -1)
+        return true;
+        
+    if (instr(caps(ModifiedWeapon.ItemName), "SHIELD GUN") > -1)
+        return true;
+        
+    return false;
+}
+
 defaultproperties
 {
 	 AddAmount=10

@@ -1,11 +1,10 @@
-class RuneEnergySteal extends Weapon
+class RuneEnergySteal extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneEnergyStealLanceFire'
      FireModeClass(1)=Class'DEKRPG999X.RuneEnergyBallFire'
-     bCanThrow=False
      HudColor=(R=222,G=154,B=33)
      InventoryGroup=2
      ItemName="Energy Steal"

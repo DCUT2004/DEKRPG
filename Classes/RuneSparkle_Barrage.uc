@@ -1,11 +1,10 @@
-class RuneSparkle_Barrage extends Weapon
+class RuneSparkle_Barrage extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneSparkleFire'
      FireModeClass(1)=Class'DEKRPG999X.RuneBarrageFire'
-     bCanThrow=False
      HudColor=(R=125,G=98,B=189)
      InventoryGroup=5
      ItemName="Sparkle / Barrage"

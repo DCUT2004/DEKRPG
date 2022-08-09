@@ -615,8 +615,8 @@ simulated function ConstructItemName()
 			ItemName = ItemName @ "*";
 	}
     
-    if (ModifiedWeapon.Instigator != None && ModifiedWeapon.Instigator.PlayerReplicationInfo != None)                
-        Log("***** DEKRPGWeapon weapon created:" @ ItemName @ "for player" @ ModifiedWeapon.Instigator.PlayerReplicationInfo.PlayerName);
+    // if (ModifiedWeapon.Instigator != None && ModifiedWeapon.Instigator.PlayerReplicationInfo != None)                
+    //    Log("***** DEKRPGWeapon weapon created:" @ ItemName @ "for player" @ ModifiedWeapon.Instigator.PlayerReplicationInfo.PlayerName);
 
 	if (Role == Role_Authority)
 	{
@@ -682,12 +682,9 @@ static function DeleteExistingWeaponIfExists(Weapon NewWeapon, Pawn Other)
     	if (m > 1000)
     		bok = true;
     }
+    
     if (W != None)
-    {
-if (Other.PlayerReplicationInfo != None)                
-Log("+++++++++++ Deleting existing" @ W.ItemName @ "class:" @ W.Class @ "DEKRPG?" @ DEKRPGWeapon(W) @ "for new item" @ NewWeapon.Class @ "DEKRPG?" @ DEKRPGWeapon(NewWeapon));
         Other.DeleteInventory(W);
-    }
 }
 
 // *** now the checks on what Power Types are allowed where
@@ -792,10 +789,7 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 	if (!AllowWeaponSwitch)
 	{
 		if (!CheckCorrectDamage(ModifiedWeapon, DamageType))
-		{
-			// log("*****DEKRPGWeapon: Weapon changed, weapon"@sMyItemName@"does not support damagetype"@DamageType);
 			return;
-		}
 	}
 
 	// Ok, so now add on any extra damage we do
@@ -860,6 +854,40 @@ function float GetAIRating()
 			CurrentPowerTypes[x].GetAIRating(tempAIRating);
 
 	return tempAIRating;
+}
+
+function GiveTo(Pawn Other, optional Pickup Pickup)
+{
+    // extra check to make sure the player can receive this weapon
+    local RPGPlayerDataObject Data;  
+    local bool gotIt;
+    local int x;
+    local bool CanHaveWeapon;
+     
+    if (Other == None)
+        return;
+
+    If (RuneWeapon(ModifiedWeapon) == None)
+    {  
+        // RuneWeapons always acceptable      
+        Data = GetDataObject(Other);
+        gotIt = false;
+    	for (x = 0; Data != None && x < Data.Abilities.length && !gotIt; x++)
+    		if (Data.Abilities[x] == class'AbilityLoadedRunes')
+            {
+                gotIt = true;
+            }
+
+        if (gotIt)
+        {
+            CanHaveWeapon = class'AbilityLoadedRunes'.static.IsWeaponAcceptable(ModifiedWeapon);
+            // Log("########### DEKRPGWeapon GiveTo check weapon" @ ModifiedWeapon.ItemName @ "result:" @ CanHaveWeapon);
+            if (CanHaveWeapon == false)
+                return; // can't pick up non-rune weapons
+        }
+    }
+    
+    Super.GiveTo(Other, Pickup);
 }
 
 function GiveAmmo(int m, WeaponPickup WP, bool bJustSpawned)

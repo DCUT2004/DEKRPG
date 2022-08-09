@@ -1,11 +1,10 @@
-class RuneBeam_Chain extends Weapon
+class RuneBeam_Chain extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
 	FireModeClass(0)=Class'DEKRPG999X.RuneIceBeamFire'
 	FireModeClass(1)=Class'DEKRPG999X.RuneChainFire'
-	bCanThrow=False
     HudColor=(R=33,G=159,B=222)
 	InventoryGroup=9
 	ItemName="Ice Beam / Lightning Chain"

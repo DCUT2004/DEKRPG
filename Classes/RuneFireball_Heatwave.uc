@@ -1,11 +1,10 @@
-class RuneFireball_Heatwave extends Weapon
+class RuneFireball_Heatwave extends RuneWeapon
 	CacheExempt;
 
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneFireballFire'
      FireModeClass(1)=Class'DEKRPG999X.RuneHeatwaveFire'
-     bCanThrow=False
      HudColor=(R=222,G=93,B=33)
      InventoryGroup=8
      ItemName="Fireball / Heatwave"

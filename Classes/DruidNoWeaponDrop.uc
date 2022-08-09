@@ -75,8 +75,6 @@ static function storeOldWeapon(Pawn Killed, Weapon Weapon, DruidOldWeaponHolder 
 		if(instr(caps(string(Weapon.class)), "TRANSLAUNCHER") > -1)
 			return;
 	}
-if (Killed.PlayerReplicationInfo != None)                
-    Log("+++++++++++ StoreOldWeapon" @ Weapon.ItemName @ "for" @ Killed.PlayerReplicationInfo.PlayerName);
 
 	Weapon.DetachFromPawn(Killed);
 	holder.Weapon = Weapon;
@@ -114,8 +112,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 				Holder = oldWeaponHolder.WeaponHolders[0];
 				if(Holder.Weapon != None)
 				{
-if (Other.PlayerReplicationInfo != None)                
-    Log("+++++++++++ Denial restoring" @ Holder.Weapon.ItemName @ "for" @ Other.PlayerReplicationInfo.PlayerName);
 					if (instr(caps(Holder.Weapon.ItemName), "SHIELD GUN") > -1 || instr(caps(Holder.Weapon.ItemName), "ASSAULT RIFLE") > -1 || instr(caps(Holder.Weapon.ItemName), "UTILITY") > -1 || instr(caps(Holder.Weapon.ItemName), "AVRIL") > -1)
 					{
 						// Go ahead and find them both in the Other's inventory.  This way if we end up
