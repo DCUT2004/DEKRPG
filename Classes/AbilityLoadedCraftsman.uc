@@ -63,7 +63,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		for(x = 0; x < default.Level3Artifact.length; x++)
 			if (default.Level3Artifact[x] != None)
 				giveArtifact(other, default.Level3Artifact[x], AbilityLevel);
-				Other.Controller.Adrenaline = Other.Controller.AdrenalineMax;	// extreme starts maxed
+		Other.Controller.Adrenaline = Other.Controller.AdrenalineMax;	// extreme starts maxed
 		Enhance(Other, AbilityLevel);
 	}
 		
@@ -236,22 +236,18 @@ defaultproperties
      Level1Artifact(1)=Class'DEKRPG999X.DruidMaxModifier'
      Level1Artifact(2)=Class'DEKRPG999X.ArtifactPlusAddon'
      Level2Artifact(0)=Class'DEKRPG999X.DruidDoubleModifier'
-     Level2Artifact(1)=Class'DEKRPG999X.DruidPlusOneModifier'
      Level2Artifact(2)=Class'DEKRPG999X.ArtifactRemoteMax'
      Level2Artifact(3)=Class'DEKRPG999X.ArtifactRemoteDamage'
      Level2Artifact(4)=Class'DEKRPG999X.ArtifactRemoteInvulnerability'
      Level2Artifact(5)=Class'DEKRPG999X.ArtifactRemoteAmplifier'
      Level3Artifact(0)=Class'DEKRPG999X.ArtifactSphereInvulnerability'
      Level3Artifact(1)=Class'DEKRPG999X.ArtifactSphereDamage'
-     Level3Artifact(2)=Class'DEKRPG999X.ArtifactMakeInfinity'
-     Level3Artifact(3)=Class'DEKRPG999X.ArtifactMakeLucky'
-     Level3Artifact(4)=Class'DEKRPG999X.ArtifactMakeMatrix'
      AdrenDecreasePerLevel=50
      CostPerSecReduction=5
      SphereCostReduction=20
      ProtectionMultiplier=-0.100000
      AbilityName="Loaded Craftsman"
-     Description="Learn to craft magic weapons at a lower adrenaline cost, and support your allies with more efficient remote and sphere artifacts. When you spawn:|Level 1: You are granted the Magic Weapon Maker, Max Modifier, and Plus Addon artifacts.|Level 2: You are granted the Double Modifier and remote artifacts, and breakable artifacts are made unbreakable.|Level 3: You get the Sphere artifacts and Enchanter artifacts, and the adrenaline cost on all artifacts from this ability is reduced.|Each level of this ability decreases your damage reduction by 10%.|Note: You need Magic Vault if you are going to use the Enchanter artifacts. Cost (per level): 7,14,21"
+     Description="Learn to craft magic weapons at a lower adrenaline cost, and support your allies with more efficient remote and sphere artifacts. When you spawn:|Level 1: You are granted the Magic Weapon Maker, Max Modifier, and Plus Addon artifacts.|Level 2: You are granted the Double Modifier and remote artifacts, and breakable artifacts are made unbreakable.|Level 3: You get the Sphere artifacts artifacts, and the adrenaline cost on all artifacts from this ability is reduced.|Each level of this ability decreases your damage reduction by 10%.|Note: You need Magic Vault if you are going to use the Enchanter artifacts. Cost (per level): 7,14,21"
      StartingCost=7
      CostAddPerLevel=7
      MaxLevel=3
