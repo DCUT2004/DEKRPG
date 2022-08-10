@@ -10,6 +10,8 @@ simulated function SpawnEffects(Actor HitActor, Vector HitLocation, Vector HitNo
 	local Emitter myExplosion;
 
 	PC = Level.GetLocalPlayerController();
+    if (PC == None)
+        return;
 
 	if(!PC.BeyondViewDistance(HitLocation, MaxViewDistance))
     {
