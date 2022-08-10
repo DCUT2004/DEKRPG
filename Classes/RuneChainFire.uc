@@ -1,7 +1,7 @@
 class RuneChainFire extends RuneInstantFire
 	config(DEKWeapons);
 
-var class<Emitter> BoltEmitterClass;
+var class<xEmitter> BoltEmitterClass;
 var config float MaxStepRange;
 var config int FirstDamage;
 var config float MissedShotFraction;	//How much of FirstDamage to take off if not a direct hit
@@ -92,19 +92,15 @@ function StartChain(Actor Other, Vector HitLocation, Vector StartLocation, bool 
 	ChainPawn(Pawn(Other), HitLocation, (StartLocation + Instigator.Location)/2, 0);
 }
 
-function DrawLightningEffect(Vector HitLocation, Vector StartLocation)
+simulated function DrawLightningEffect(Vector HitLocation, Vector StartLocation)
 {
-	local Emitter Bolt;
+	local xEmitter Bolt;
 	
 	Bolt = spawn(BoltEmitterClass,,,StartLocation , rotator(HitLocation - StartLocation));
 	if (Bolt != None)
 	{
-		BeamEmitter(Bolt.Emitters[0]).BeamDistanceRange.Min = VSize(HitLocation - StartLocation);
-		BeamEmitter(Bolt.Emitters[0]).BeamDistanceRange.Max = VSize(HitLocation - StartLocation);
+		Bolt.mSpawnVecA = HitLocation;
 		Bolt.RemoteRole = Role_SimulatedProxy;
-		//Bolt.SpawnEffects(Victim, StartLocation, (HitLocation - StartLocation) * -1);
-		//Bolt.SetBase(self);
-		Bolt.RemoteRole = ROLE_SimulatedProxy;
 		Spawn(class'DEKLightningTurretProjSparks',,, HitLocation);
 	}
 }
@@ -259,7 +255,7 @@ defaultproperties
 	 AdrenCost=10.0000
 	 TraceRange=3000.00000
 	 SearchRadius=300.00000
-     BoltEmitterClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
+     BoltEmitterClass=Class'XEffects.LightningBolt'
      DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
      MaxStepRange=650.000000
      FirstDamage=180
