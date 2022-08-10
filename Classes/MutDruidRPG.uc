@@ -149,15 +149,12 @@ defaultproperties
      ArtifactKeyConfigs(26)=(Alias="SelectFireBall",ArtifactClass=Class'DEKRPG999X.ArtifactFireBall')
      ArtifactKeyConfigs(27)=(Alias="SelectRemoteBooster",ArtifactClass=Class'DEKRPG999X.ArtifactRemoteBooster')
      ArtifactKeyConfigs(28)=(Alias="SelectResurrect",ArtifactClass=Class'DEKRPG999X.ArtifactResurrect')
-     ArtifactKeyConfigs(29)=(Alias="SelectInfinity",ArtifactClass=Class'DEKRPG999X.ArtifactMakeInfinity')
-     ArtifactKeyConfigs(30)=(Alias="SelectLucky",ArtifactClass=Class'DEKRPG999X.ArtifactMakeLucky')
-     ArtifactKeyConfigs(31)=(Alias="SelectMagnet",ArtifactClass=Class'DEKRPG999X.ArtifactPriestMagnet')
-     ArtifactKeyConfigs(32)=(Alias="SelectMatrix",ArtifactClass=Class'DEKRPG999X.ArtifactMakeMatrix')
-     ArtifactKeyConfigs(33)=(Alias="SelectDecoy",ArtifactClass=Class'DEKRPG999X.ArtifactDecoy')
-     ArtifactKeyConfigs(34)=(Alias="SelectImmobilize",ArtifactClass=Class'DEKRPG999X.ArtifactImmobilize')
-     ArtifactKeyConfigs(35)=(Alias="SelectGlowStreak",ArtifactClass=Class'DEKRPG999X.ArtifactGlowStreak')
-     ArtifactKeyConfigs(36)=(Alias="SelectMeteor",ArtifactClass=Class'DEKRPG999X.ArtifactMeteorShower')
-     ArtifactKeyConfigs(37)=(Alias="SelectRemoteAmplifier",ArtifactClass=Class'DEKRPG999X.ArtifactRemoteAmplifier')
+     ArtifactKeyConfigs(29)=(Alias="SelectMagnet",ArtifactClass=Class'DEKRPG999X.ArtifactPriestMagnet')
+     ArtifactKeyConfigs(30)=(Alias="SelectDecoy",ArtifactClass=Class'DEKRPG999X.ArtifactDecoy')
+     ArtifactKeyConfigs(31)=(Alias="SelectImmobilize",ArtifactClass=Class'DEKRPG999X.ArtifactImmobilize')
+     ArtifactKeyConfigs(32)=(Alias="SelectGlowStreak",ArtifactClass=Class'DEKRPG999X.ArtifactGlowStreak')
+     ArtifactKeyConfigs(33)=(Alias="SelectMeteor",ArtifactClass=Class'DEKRPG999X.ArtifactMeteorShower')
+     ArtifactKeyConfigs(34)=(Alias="SelectRemoteAmplifier",ArtifactClass=Class'DEKRPG999X.ArtifactRemoteAmplifier')
      GroupName="DruidsRPG"
      FriendlyName="DEKRPG999X Druid's RPG Game Rules"
      Description="DEKRPG is an extension of DruidsRPG by Druid, Shantara and Szlat, and Mysterial's UT2004RPG. DEKRPG expands on abilities, artifacts, magic weapons, and adds an interactive mission system."
