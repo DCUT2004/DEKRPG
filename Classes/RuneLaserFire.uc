@@ -1,25 +1,30 @@
 class RuneLaserFire extends RuneInstantFire
 	config(DEKWeapons);
 
-var class<ONSTurretBeamEffect> BeamEffectClass;
+var class<ShockBeamEffect> BeamMissEffectClass, BeamHitEffectClass;
 
-simulated function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector HitNormal, int ReflectNum)
+function SpawnBeamEffect(Vector Start, Rotator Dir, Vector HitLocation, Vector HitNormal, int ReflectNum)
 {
-    local ONSTurretBeamEffect Beam;
-
-    if (Weapon != None)
-    {
-        Beam = Weapon.Spawn(BeamEffectClass,,, Start, Dir);
-		if (Beam != None)
-		{
-			Beam.RemoteRole = ROLE_SimulatedProxy;
-			BeamEmitter(Beam.Emitters[0]).BeamDistanceRange.Min = VSize(Start - HitLocation);
-			BeamEmitter(Beam.Emitters[0]).BeamDistanceRange.Max = VSize(Start - HitLocation);
-			BeamEmitter(Beam.Emitters[1]).BeamDistanceRange.Min = VSize(Start - HitLocation);
-			BeamEmitter(Beam.Emitters[1]).BeamDistanceRange.Max = VSize(Start - HitLocation);
-			Beam.SpawnEffects(HitLocation, HitNormal);
-		}
-    }
+	local Actor Other;
+    local ShockBeamEffect Beam;
+	local Vector TempHitLocation, TempHitNormal;
+	
+	if (Weapon == None || Instigator == None)
+		return;
+		
+	Other = Weapon.Trace(TempHitLocation, TempHitNormal, Start + TraceRange * Vector(Dir), Start, true);
+	
+	if (Other == None || Other != None && Pawn(Other) == None)
+		Beam = Weapon.Spawn(BeamMissEffectClass,,, Start, Dir);
+	else if (Other != None && Pawn(Other) != None )
+	{
+		if ( Pawn(Other).GetTeamNum() == Instigator.GetTeamNum() )
+			Beam = Weapon.Spawn(BeamMissEffectClass,,, Start, Dir);
+		else
+			Beam = Weapon.Spawn(BeamHitEffectClass,,, Start, Dir);
+	}
+	if (Beam != None && ReflectNum != 0) Beam.Instigator = None; // prevents client side repositioning of beam start
+		Beam.AimAt(HitLocation, HitNormal);
 }
 
 defaultproperties
@@ -31,8 +36,9 @@ defaultproperties
 	 DamageMax=22
      FireRate=0.2000000
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser09'
-     BeamEffectClass=Class'DEKRPG999X.RuneLaserEffect'
-     bReflective=False
+     BeamMissEffectClass=Class'XWeapons.SuperShockBeamEffect'
+	 BeamHitEffectClass=Class'DEKRPG999X.GreenBeamEmitter'
+     bReflective=True
      TraceRange=17000.000000
      Momentum=15000.000000
      Spread=0.030000
