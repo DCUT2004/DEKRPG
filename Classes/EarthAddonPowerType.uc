@@ -133,7 +133,7 @@ defaultproperties
     Flowers(2)=Class'DEKRPG999X.FlowerOrangePickup'
     Flowers(3)=Class'DEKRPG999X.FlowerYellowPickup'
 
-	PosName="Freezing"
+	PosName="Earth"
 	ZeroName=""
 	NegName=""
 	CanHaveZeroModifier=false
