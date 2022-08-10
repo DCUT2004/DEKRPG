@@ -80,6 +80,19 @@ replication
 		Stopped, MissionName, MissionCount, MissionGoal, MissionXP, MissionClock, TimeRemaining, Countdown, TimeLimit, RewardGranted, PowerPartyActive, TarydiumKeepActive, TC, TCHealth, BalloonPopActive, RingAndHoldActive, RRActive, RBActive, RGActive, GenomeProjectActive, MusicalWeaponsActive, PortalBallActive, ActiveWeapon;
 }
 
+static function MutMissionMultiplayer GetMutMissionMultiplayer(GameInfo G)
+{
+	local Mutator M;
+	local MutMissionMultiplayer MutTeamMission;
+
+	for (M = G.BaseMutator; M != None && MutTeamMIssion == None; M = M.NextMutator)
+	{
+		MutTeamMission = MutMissionMultiplayer(M);
+	}
+
+	return MutTeamMission;
+}
+
 //PostBeginPlay() initializes variables shortly before the game starts
 simulated function PostBeginPlay()
 {

@@ -3,6 +3,14 @@ class MissionGameRules extends GameRules;
 const ROOTED = "Rooted Stance";
 const SUPERMAN = "Superman";
 const SHARP_SHOT = "Sharp Shot Fly";
+var MutMissionMultiplayer TeamMissionsMut;
+
+simulated function PostBeginPlay()
+{
+	Super.PostBeginPlay();
+	
+	TeamMissionsMut = Class'MutMissionMultiplayer'.static.GetMutMissionMultiplayer(Level.Game);
+}
 
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
@@ -45,16 +53,28 @@ function ScoreKill(Controller Killer, Controller Killed)
 	local MissionInvBETA MissionInv;
 	local int x, y;
 	local Inventory FoundInventory;
+	local Weapon W;
 	
 	Super.ScoreKill(Killer, Killed);
 	
 	if (Killer == None || Killer.Pawn == None || Killed == None || Killed.Pawn == None)
 		return;
 
-	if (Killer.PlayerReplicationInfo != None && Killer.PlayerReplicationInfo.bBot)
-		return;
-
 	if (Killer.Pawn.IsA('Monster') && FriendlyMonsterInv(Killer.Pawn.FindInventoryType(Class'FriendlyMonsterInv')) == None)
+		return;
+		
+	//Check for Musical Weapons team mission
+	if (TeamMissionsMut != None && TeamMissionsMut.MusicalWeaponsActive && !TeamMissionsMut.Stopped)
+	{
+		W = Killer.Pawn.Weapon;
+		if (RPGWeapon(W) != None)
+			W = RPGWeapon(W).ModifiedWeapon;
+		if (W != None && ClassIsChildOf(W.Class, TeamMissionsMut.ActiveWeapon) )
+			TeamMissionsMut.UpdateCount(1);
+	}
+		
+	//Exclude bots past this point
+	if (Killer.PlayerReplicationInfo != None && Killer.PlayerReplicationInfo.bBot)
 		return;
 		
 	MissionInv = class'MissionInvBETA'.static.GetMissionInv(Killer);
