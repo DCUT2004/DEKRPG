@@ -307,12 +307,18 @@ static function ExitMission(Pawn PawnOwner, int MissionNumber)
 	if (MissionInv != None)
 	{
 		//Tell the server
-		MissionInv.ExitMissionServer(MissionNumber);
+		MissionInv.ExitMissionServer(PawnOwner, MissionNumber);
 	}
 }
 
-function ExitMissionServer(int MissionNumber)
+function ExitMissionServer(Pawn PawnOwner, int MissionNumber)
 {
+	local TimedMissionInv TimedMission;
+	
+	TimedMission = TimedMissionInv(PawnOwner.FindInventoryType(Class'TimedMissionInv'));
+	if (TimedMission != None && TimedMission.MissionName == Missions[MissionNumber].MissionName)
+		TimedMission.Destroy();
+		
 	ResetMission(MissionNumber);
 }
 
