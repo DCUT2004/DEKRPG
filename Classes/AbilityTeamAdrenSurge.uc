@@ -10,9 +10,7 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 		return;
 
 	if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
-	{
 		class'MutTeamAdrenaline'.static.AddPlayerTeamAdren( float(Killed.Pawn.GetPropertyText("ScoringValue")) * default.PercentPerLevel * AbilityLevel);
-	}
 }
 
 defaultproperties

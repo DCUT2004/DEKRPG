@@ -10,7 +10,6 @@ var () NumericWidget ComboCount;
 var() SpriteWidget TeamAdrenalineIcon;
 var() SpriteWidget TeamAdrenalineBackground;
 var() SpriteWidget TeamAdrenalineBackgroundDisc;
-var MutTeamAdrenaline MutTA;
 
 //Combo 
 var() SpriteWidget ComboIcon;
@@ -18,21 +17,6 @@ var() SpriteWidget ComboDisc;
 
 #EXEC OBJ LOAD FILE=InterfaceContent.utx
 #EXEC OBJ LOAD FILE=AS_FX_TX.utx
-
-simulated event PostBeginPlay()
-{
-	local Mutator M;
-	
-	Super.PostBeginPlay();
-
-	if (Level.Game != None)
-		for (M = Level.Game.BaseMutator; M != None; M = M.NextMutator)
-			if (MutTeamAdrenaline(M) != None)
-			{
-				MutTA = MutTeamAdrenaline(M);
-				break;
-			}
-}
 
 simulated function UpdatePrecacheMaterials()
 {
@@ -204,8 +188,8 @@ simulated function UpdateHud()
 		if (GInv != None)
 		{
 			ComboCount.Value = GInv.NumCombos;
-			PlayerTeamAdrenalineCount.Value = MutTA.GetPlayerTeamAdren();
-			MonsterTeamAdrenalineCount.Value = MutTA.GetMonsterTeamAdren();
+			PlayerTeamAdrenalineCount.Value = GInv.PlayerTeamAdrenaline;
+			MonsterTeamAdrenalineCount.Value = GInv.MonsterTeamAdrenaline;
 		}
 		else
 		{

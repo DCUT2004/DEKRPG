@@ -49,9 +49,11 @@ var Array<AbilityConfig> AbilityConfigs;
 
 var RPGStatsInv ClientStatsInv;		// set clientside by RPGMenus
 
-//Combos
+//Combos and team adrenaline
 var ComboAbilityInv Combo;		//Contains a linked list of ComboAbilityInv, and is iterated over by BBFF combo when executed
 var int NumCombos;				//Current number of combos held. Stored here, as combos should be saved when players respawn
+var MutTeamAdrenaline TeamAdrenalineMut;
+var int PlayerTeamAdrenaline, MonsterTeamAdrenaline;		//For replication to RPGHUDInvasion
 
 //Materials
 var bool bBoots;
@@ -83,7 +85,7 @@ replication
 	reliable if (Role == ROLE_Authority)
 		ClientReceiveKeys, ClientRemainingAbility, ClientRemoveAbilities, ClientReceiveSubClass, ClientReceiveSubClasses, ClientReceiveSubClassAbilities, ClientSetSubClass, ClientSetSubClassSizes, ClientDoReconnect, RemoveInteraction;
 	reliable if (Role == ROLE_Authority)
-		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos;
+		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
 	reliable if (Role == ROLE_Authority)
 		bBoots, bLumber, bTarydium, bSteel, bNaliFruit, bGloves, bLeather, bArmor, bVines, bEmbers, bArcticSuit, bMoss, bDust, bNanite, bPumice, bIcicle, bTranslator, bStarChart, bUranium, bHourglass, bMoonlitStone;
 }
@@ -118,10 +120,18 @@ static final function GiveItemsInv GetGiveItemsInv(Controller C)
 
 function PostBeginPlay()
 {
-//	if(Level.NetMode == NM_DedicatedServer || Level.NetMode == NM_ListenServer || Level.NetMode == NM_Standalone)
-//	setTimer(default.BuyClassInterval, true);
+	local Mutator M;
+	
+	for (M = Level.Game.BaseMutator; M != None; M = M.NextMutator)
+		if (M.IsA('MutTeamAdrenaline'))
+		{
+			TeamAdrenalineMut = MutTeamAdrenaline(M);
+			break;
+		}
+	
 	NumCombos = 0;
-	super.postBeginPlay();
+	SetTimer(1, True);
+	Super.postBeginPlay();
 }
 
 simulated function PostNetBeginPlay()
@@ -187,6 +197,14 @@ simulated function Tick(float deltaTime)
 				disable('Tick');
 		}
 	}
+}
+
+function Timer()
+{
+	if (TeamAdrenalineMut == None)
+		SetTimer(0, False);
+	PlayerTeamAdrenaline = TeamAdrenalineMut.default.PlayerTeamAdrenaline;
+	MonsterTeamAdrenaline = TeamAdrenalineMut.default.MonsterTeamAdrenaline;
 }
 
 //not done through the interaction master, because that requires a string with a package name.

@@ -1,3 +1,4 @@
+
 class MutTeamAdrenaline extends Mutator
 	config(UT2004RPG);
 	
@@ -30,12 +31,6 @@ struct ComboInfo
 };
 var config Array <ComboInfo> ComboData;
 var config Array < class < ComboEffectInv > > ComboClass;	//The full list of buffs and ailments available to monsters to use
-
-replication
-{
-	reliable if (Role == ROLE_Authority)
-		PlayerTeamAdrenaline, MonsterTeamAdrenaline;
-}
 
 simulated function PostBeginPlay()
 {
@@ -101,18 +96,6 @@ simulated function Timer()
 		GrantAllPlayersCombo();
 		bComboAddedForBossWave = true;
 	}
-}
-
-simulated function int GetPlayerTeamAdren()
-{
-	PlayerTeamAdrenaline = default.PlayerTeamAdrenaline;	//For RPGHUD, because default variables are not replicated...
-	return PlayerTeamAdrenaline;
-}
-
-simulated function int GetMonsterTeamAdren()
-{
-	MonsterTeamAdrenaline = default.MonsterTeamAdrenaline;	//For RPGHUD, because default variables are not replicated...
-	return MonsterTeamAdrenaline;
 }
 
 static function AddPlayerTeamAdren(float AdrenAmount)
@@ -255,7 +238,7 @@ simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsI
 	if (!bIsAM)		//Don't want to announce combos for all AMs
 		Level.Game.BroadCast(Self, "Combo given to " $ TargetController.PlayerReplicationInfo.PlayerName $ "!");
 	if (!bReward)	//If granting combo to player as a reward or as boss wave, don't take off team adren
-		default.PlayerTeamAdrenaline = 0.000000;
+		default.PlayerTeamAdrenaline = 0.00;
 	return true;
 }
 
@@ -297,7 +280,7 @@ function GrantMonsterCombo()
 		AnnounceCombo(RandIndex);
 	}
 	PlayMonsterComboSound();
-	default.MonsterTeamAdrenaline = 0.000000;
+	default.MonsterTeamAdrenaline = 0.00;
 }
 
 simulated function PlayMonsterComboSound()

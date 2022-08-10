@@ -1,3 +1,4 @@
+
 class TeamAdrenalineGameRules extends GameRules
 	config(UT2004RPG);
 
