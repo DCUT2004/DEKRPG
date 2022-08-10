@@ -40,6 +40,8 @@ replication												//Replicate to clients so HUD can be displayed
 		NumMissionsCompleted, MissionNameOne, MissionCountOne, MissionGoalOne,
 		MissionNameTwo, MissionCountTwo, MissionGoalTwo,
 		MissionNameThree, MissionCountThree, MissionGoalThree;
+	reliable if (Role < ROLE_Authority)
+		ExitMissionServer;
 }
 
 simulated function PostBeginPlay()
@@ -303,7 +305,15 @@ static function ExitMission(Pawn PawnOwner, int MissionNumber)
 
 	MissionInv = class'MissionInvBETA'.static.GetMissionInv(PawnOwner.Controller);
 	if (MissionInv != None)
-		MissionInv.ResetMission(MissionNumber);
+	{
+		//Tell the server
+		MissionInv.ExitMissionServer(MissionNumber);
+	}
+}
+
+function ExitMissionServer(int MissionNumber)
+{
+	ResetMission(MissionNumber);
 }
 
 simulated function Destroyed()

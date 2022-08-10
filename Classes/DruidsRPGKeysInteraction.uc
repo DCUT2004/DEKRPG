@@ -389,17 +389,17 @@ function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)
 		//now the missions stuff
 		else if (tmp ~= "ExitMissionOne" )
 		{
-			class'MissionInvBETA'.static.ExitMission(P, 1);
+			class'MissionInvBETA'.static.ExitMission(P, 0);
 			return true;
 		}
 		else if (tmp ~= "ExitMissionTwo" )
 		{
-			class'MissionInvBETA'.static.ExitMission(P, 2);
+			class'MissionInvBETA'.static.ExitMission(P, 1);
 			return true;
 		}
 		else if (tmp ~= "ExitMissionThree" )
 		{
-			class'MissionInvBETA'.static.ExitMission(P, 3);
+			class'MissionInvBETA'.static.ExitMission(P, 2);
 			return true;
 		}
 	}
