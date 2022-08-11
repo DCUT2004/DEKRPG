@@ -1,4 +1,4 @@
-class AbilityMaterialMediumRarity extends CostRPGAbility
+class AbilityMaterialMediumRarity extends AbilityMaterial
 	config(UT2004RPG)
 	abstract;
 
