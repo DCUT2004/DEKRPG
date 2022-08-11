@@ -2,7 +2,8 @@
 //This inventory item should be spawned and placed in the player's controller list of inventory items
 //We do not want this object getting destroyed on player death, that way stats like missions completed and rewards are saved
 
-class MissionInvBETA extends Inventory;
+class MissionInvBETA extends Inventory
+	config (Missions);
 
 const NUM_MISSIONS = 3;
 
@@ -31,6 +32,8 @@ var int MissionGoalTwo;
 var string MissionNameThree;
 var int MissionCountThree;
 var int MissionGoalThree;
+
+var config int MaterialChance, LowMaterialChance, MediumMaterialChance;
 
 #exec  AUDIO IMPORT NAME="MissionComplete1" FILE="Sounds\MissionComplete1.WAV" GROUP="MissionSounds"
 
@@ -281,6 +284,7 @@ function CompleteMission(int MissionNumber)
 	{
 		Level.Game.Broadcast(self, PawnOwner.PlayerReplicationInfo.PlayerName $ " achieved " $ Missions[MissionNumber].MissionName $ "!");
 		PawnOwner.PlaySound(Sound'DEKRPG999X.MissionSounds.MissionComplete1', SLOT_None, 400.0);
+		AddMaterial(PawnOwner);
 	}
 	ResetMission(MissionNumber);
 }
@@ -294,6 +298,32 @@ function RewardXP(float XPReward)
 		
 	if (Rules != None && PawnOwner != None)
 		Rules.ShareExperience(RPGStatsInv(PawnOwner.FindInventoryType(class'RPGStatsInv')), XPReward);
+}
+
+function AddMaterial(Pawn PawnOwner)
+{
+	local MutTeamAdrenaline MutTeamAdren;
+	local GiveItemsInv Inv;
+	local int MaterialRank;
+	
+	if (Rand(100) > MaterialChance )
+		return;
+
+	MutTeamAdren = class'MutTeamAdrenaline'.static.GetMutTeamAdrenaline(Level.Game);
+	if (MutTeamAdren == None)
+		return;
+		
+	Inv = class'GiveItemsInv'.static.GetGiveItemsInv(PawnOwner.Controller);
+	if (Inv == None)
+		return;
+		
+	MaterialRank = Rand(100);
+	if (MaterialRank <= LowMaterialChance)
+		Inv.AddMaterial(MutTeamAdren.LowMaterials[Rand(MutTeamAdren.LOW_MATERIALS_LENGTH)]);
+	else if (MaterialRank <= MediumMaterialChance)
+		Inv.AddMaterial(MutTeamAdren.MediumMaterials[Rand(MutTeamAdren.MED_MATERIALS_LENGTH)]);		
+	else
+		Inv.AddMaterial(MutTeamAdren.HighMaterials[Rand(MutTeamAdren.HIGH_MATERIALS_LENGTH)]);
 }
 
 static function ExitMission(Pawn PawnOwner, int MissionNumber)
@@ -334,4 +364,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
+	MaterialChance=37
+	LowMaterialChance=40
+	MediumMaterialChance=80
 }

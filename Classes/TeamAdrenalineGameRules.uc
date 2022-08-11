@@ -1,84 +1,11 @@
-
 class TeamAdrenalineGameRules extends GameRules
 	config(UT2004RPG);
 
 var Pawn TauntPawn;
-var config Array < Class < AbilityMaterial > > LowMaterials, MediumMaterials, HighMaterials;
-var config int MaterialKillChance, MaterialGameWinChance;	//The chance to unlock a material upon a kill or upon winning game
+
+var config int MaterialKillChance;	//The chance to unlock a material upon a kill
 var config int LowMaterialChance, MediumMaterialChance;
 var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
-
-function PostBeginPlay()
-{
-	SetTimer(1, true);
-	Super.PostBeginPlay();
-}
-
-function Timer()
-{
-	local Controller C;
-	local GiveItemsInv GInv;
-	local int MaterialRankChance;
-	
-	if (Level.Game.bGameEnded)
-	{
-		if (TeamInfo(Level.Game.GameReplicationInfo.Winner) != None)
-		{
-			for (C = Level.ControllerList; C != None; C = C.NextController)
-			{
-				if (C.PlayerReplicationInfo != None && C.PlayerReplicationInfo.Team == Level.Game.GameReplicationInfo.Winner)
-				{
-					if (Rand(100) <= MaterialGameWinChance)
-					{
-						GInv = class'GiveItemsInv'.static.GetGiveItemsInv(C);
-						if (GInv != None)
-						{
-							MaterialRankChance = Rand(100);
-							if (MaterialRankChance <= LowMaterialChance)
-							{
-								GInv.AddMaterial(LowMaterials[RandRange(0, LowMaterials.Length)]);
-							}
-							else if (MaterialRankChance <= MediumMaterialChance)
-							{
-								GInv.AddMaterial(MediumMaterials[RandRange(0, MediumMaterials.Length)]);
-							}
-							else
-							{
-								GInv.AddMaterial(HighMaterials[RandRange(0, HighMaterials.Length)]);
-							}
-						}
-					}
-				}
-			}
-		}
-		else if ( PlayerReplicationInfo(Level.Game.GameReplicationInfo.Winner) != None
-			  && Controller(PlayerReplicationInfo(Level.Game.GameReplicationInfo.Winner).Owner) != None )
-		{
-			if (Rand(100) <= MaterialGameWinChance)
-			{
-				GInv = class'GiveItemsInv'.static.GetGiveItemsInv(Controller(PlayerReplicationInfo(Level.Game.GameReplicationInfo.Winner).Owner));
-				if (GInv != None)
-				{
-					MaterialRankChance = Rand(100);
-					if (MaterialRankChance <= LowMaterialChance)
-					{
-						GInv.AddMaterial(LowMaterials[RandRange(0, LowMaterials.Length)]);
-					}
-					else if (MaterialRankChance <= MediumMaterialChance)
-					{
-						GInv.AddMaterial(MediumMaterials[RandRange(0, MediumMaterials.Length)]);
-					}
-					else
-					{
-						GInv.AddMaterial(HighMaterials[RandRange(0, HighMaterials.Length)]);
-					}
-				}
-			}
-		}
-		Level.Game.Broadcast(self, "Take the time now to purchase any materials before stats are permanently saved.");
-		SetTimer(0, False);
-	}
-}
 
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
@@ -235,14 +162,13 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 function ScoreKill(Controller Killer, Controller Killed)
 {
 	local int MaterialRankChance;
-	local int RandIndex;
 	local GiveItemsInv GInv;
 	local Monster M;
-	
+	local MutTeamAdrenaline MutTeamAdren;
 
 	if (Killer != None && Killed != None)
 	{
-		if (Killer.Pawn != None && Killer.Pawn.Health > 0 && Killed.Pawn != None && Killed.Pawn.IsA('Monster') && Killer.Pawn.GetTeamNum() != Killed.Pawn.GetTeamNum() && !Killed.Pawn.IsA('HealerNali') && !Killed.Pawn.IsA('MissionCow'))
+		if (Killer.Pawn != None && Killer.Pawn.Health > 0 && Killed.Pawn != None && Killer.Pawn.GetTeamNum() != Killed.Pawn.GetTeamNum() && !Killed.Pawn.IsA('HealerNali') && !Killed.Pawn.IsA('MissionCow'))
 		{
 			if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
 			{
@@ -252,31 +178,26 @@ function ScoreKill(Controller Killer, Controller Killed)
 			else
 				class'MutTeamAdrenaline'.static.AddPlayerTeamAdren(1);
 		}
-	}
-	
-	if (Killer != None && Killer.Pawn != None && Rand(100) <= MaterialKillChance)
-	{
-		MaterialRankChance = Rand(100);
-		GInv = class'GiveItemsInv'.static.GetGiveItemsInv(Killer);
-		if (GInv != None)
+		if (Rand(100) <= MaterialKillChance && Killed.Pawn.IsA('Monster'))		//Quick condition for materials, though not proper (i.e. monster kills a pet)
 		{
-			if (MaterialRankChance <= LowMaterialChance)
+			GInv = class'GiveItemsInv'.static.GetGiveItemsInv(Killer);
+			if (GInv != None)
 			{
-				RandIndex = RandRange(0, LowMaterials.Length);
-				GInv.AddMaterial(LowMaterials[RandIndex]);
-			}
-			else if (MaterialRankChance <= MediumMaterialChance)
-			{
-				RandIndex = RandRange(0, MediumMaterials.Length);
-				GInv.AddMaterial(MediumMaterials[RandIndex]);
-			}
-			else
-			{
-				RandIndex = RandRange(0, HighMaterials.Length);
-				GInv.AddMaterial(HighMaterials[RandIndex]);
+				MutTeamAdren = Class'MutTeamAdrenaline'.static.GetMutTeamAdrenaline(Level.Game);
+				if (MutTeamAdren != None)
+				{
+					MaterialRankChance = Rand(100);
+					if (MaterialRankChance <= LowMaterialChance)
+						GInv.AddMaterial(MutTeamAdren.LowMaterials[Rand(MutTeamAdren.LOW_MATERIALS_LENGTH)]);
+					else if (MaterialRankChance <= MediumMaterialChance)
+						GInv.AddMaterial(MutTeamAdren.MediumMaterials[Rand(MutTeamAdren.MED_MATERIALS_LENGTH)]);
+					else
+						GInv.AddMaterial(MutTeamAdren.HighMaterials[Rand(MutTeamAdren.HIGH_MATERIALS_LENGTH)]);
+				}
 			}
 		}
 	}
+	
 	Super.ScoreKill(Killer, Killed);
 }
 
@@ -284,23 +205,6 @@ defaultproperties
 {
 	MonsterScoreMultiplier=0.50000000
 	MaterialKillChance=1
-	MaterialGameWinChance=10
 	LowMaterialChance=80	//80% chance to get a low material
 	MediumMaterialChance=95	//15% chance to get a medium material, 5% for a high material
-	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
-	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
-	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'
-	LowMaterials(3)=Class'DEKRPG999X.AbilityMaterialSteel'
-	LowMaterials(4)=Class'DEKRPG999X.AbilityMaterialNaliFruit'
-	LowMaterials(5)=Class'DEKRPG999X.AbilityMaterialGloves'
-	MediumMaterials(0)=Class'DEKRPG999X.AbilityMaterialLeather'
-	MediumMaterials(1)=Class'DEKRPG999X.AbilityMaterialPlatedArmor'
-	MediumMaterials(2)=Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'
-	MediumMaterials(3)=Class'DEKRPG999X.AbilityMaterialEmbers'
-	MediumMaterials(4)=Class'DEKRPG999X.AbilityMaterialArcticSuit'
-	HighMaterials(0)=Class'DEKRPG999X.AbilityMaterialMoss'
-	HighMaterials(1)=Class'DEKRPG999X.AbilityMaterialDust'
-	HighMaterials(2)=Class'DEKRPG999X.AbilityMaterialNanite'
-	HighMaterials(3)=Class'DEKRPG999X.AbilityMaterialPumice'
-	HighMaterials(4)=Class'DEKRPG999X.AbilityMaterialIcicle'
 }

@@ -1,4 +1,3 @@
-
 class MutTeamAdrenaline extends Mutator
 	config(UT2004RPG);
 	
@@ -17,6 +16,15 @@ var config byte MaxCombosAM;			//Max number of combos allowed to be held for AMs
 var config int MinAdrenAmount;			//Minimum adrenaline amount to award on an event
 var config float MonsterAdrenPerHit;	//How much adren monster team should receive per hit to a player
 
+var bool bMaterialsRewarded;
+const LOW_MATERIALS_LENGTH = 6;
+const MED_MATERIALS_LENGTH = 5;
+const HIGH_MATERIALS_LENGTH = 5;
+var Class<AbilityMaterial> LowMaterials [LOW_MATERIALS_LENGTH];
+var Class<AbilityMaterial> MediumMaterials [MED_MATERIALS_LENGTH];
+var Class<AbilityMaterial> HighMaterials [HIGH_MATERIALS_LENGTH];
+var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
+
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
 
 struct ComboInfo
@@ -31,6 +39,17 @@ struct ComboInfo
 };
 var config Array <ComboInfo> ComboData;
 var config Array < class < ComboEffectInv > > ComboClass;	//The full list of buffs and ailments available to monsters to use
+
+static function MutTeamAdrenaline GetMutTeamAdrenaline(GameInfo G)
+{
+	local Mutator M;
+	local MutTeamAdrenaline MutTeamAdren;
+
+	for (M = G.BaseMutator; M != None && MutTeamAdren == None; M = M.NextMutator)
+		MutTeamAdren = MutTeamAdrenaline(M);
+
+	return MutTeamAdren;
+}
 
 simulated function PostBeginPlay()
 {
@@ -60,6 +79,7 @@ simulated function PostBeginPlay()
 		}
 	}
 	bComboAddedForBossWave = false;
+	bMaterialsRewarded = false;
 	Super.PostBeginPlay();
 }
 
@@ -96,6 +116,8 @@ simulated function Timer()
 		GrantAllPlayersCombo();
 		bComboAddedForBossWave = true;
 	}
+	if (Level.Game.bGameEnded && !bMaterialsRewarded)
+		RewardMaterials();
 }
 
 static function AddPlayerTeamAdren(float AdrenAmount)
@@ -283,6 +305,38 @@ function GrantMonsterCombo()
 	default.MonsterTeamAdrenaline = 0.00;
 }
 
+function RewardMaterials()
+{
+	local Controller C, NextC;
+	local GiveItemsInv GInv;
+	local int MaterialRank;
+	
+	C = Level.ControllerList;
+	
+	while (C != None)
+	{
+		NextC = C.NextController;
+		
+		if (C.PlayerReplicationInfo != None && C.PlayerReplicationInfo.Team == Level.Game.GameReplicationInfo.Winner && Rand(100) <= MaterialOnGameWonChance)
+		{
+			GInv = class'GiveItemsInv'.static.GetGiveItemsInv(C);
+			if (GInv != None)
+			{
+				MaterialRank = Rand(100);
+				if (MaterialRank <= LowMaterialChance)
+					GInv.AddMaterial(LowMaterials[Rand(LOW_MATERIALS_LENGTH)]);
+				else if (MaterialRank <= MediumMaterialChance)
+					GInv.AddMaterial(MediumMaterials[Rand(MED_MATERIALS_LENGTH)]);
+				else
+					GInv.AddMaterial(HighMaterials[Rand(HIGH_MATERIALS_LENGTH)]);
+			}
+		}
+		C = NextC;
+	}
+	bMaterialsRewarded = true;
+	Level.Game.Broadcast(self, "Take the time now to purchase any materials before stats are permanently saved.");
+}
+
 simulated function PlayMonsterComboSound()
 {
 	local Controller C;
@@ -308,6 +362,9 @@ defaultproperties
 	MinimumMonsters=5
 	PlayerTeamAdrenMax=100.000000000
 	MonsterTeamAdrenMax=100.00000000
+	MaterialOnGameWonChance=70
+	LowMaterialChance=80
+	MediumMaterialChance=95
 	ComboClass(0)=Class'DEKRPG999X.ComboAttackInv'
 	ComboClass(1)=Class'DEKRPG999X.ComboAttackInv'
 	ComboClass(2)=Class'DEKRPG999X.ComboDefenseInv'
@@ -328,6 +385,22 @@ defaultproperties
 	ComboData(7)=(LifeSpan=25,Multiplier=1.000000,bDispellable=True,bAll=True,bBuff=False)
 	ComboData(8)=(LifeSpan=25,Multiplier=30.000000,bDispellable=True,bAll=True,bBuff=False)
 	ComboData(9)=(LifeSpan=25,Multiplier=300.000000,bDispellable=True,bAll=True,bBuff=False)
+	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
+	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
+	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'
+	LowMaterials(3)=Class'DEKRPG999X.AbilityMaterialSteel'
+	LowMaterials(4)=Class'DEKRPG999X.AbilityMaterialNaliFruit'
+	LowMaterials(5)=Class'DEKRPG999X.AbilityMaterialGloves'
+	MediumMaterials(0)=Class'DEKRPG999X.AbilityMaterialLeather'
+	MediumMaterials(1)=Class'DEKRPG999X.AbilityMaterialPlatedArmor'
+	MediumMaterials(2)=Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'
+	MediumMaterials(3)=Class'DEKRPG999X.AbilityMaterialEmbers'
+	MediumMaterials(4)=Class'DEKRPG999X.AbilityMaterialArcticSuit'
+	HighMaterials(0)=Class'DEKRPG999X.AbilityMaterialMoss'
+	HighMaterials(1)=Class'DEKRPG999X.AbilityMaterialDust'
+	HighMaterials(2)=Class'DEKRPG999X.AbilityMaterialNanite'
+	HighMaterials(3)=Class'DEKRPG999X.AbilityMaterialPumice'
+	HighMaterials(4)=Class'DEKRPG999X.AbilityMaterialIcicle'
 	bAddToServerPackages=True
 	GroupName="TeamAdrenaline"
 	FriendlyName="Team Combos"
