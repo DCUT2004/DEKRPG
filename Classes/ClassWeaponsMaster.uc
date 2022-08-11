@@ -4,7 +4,7 @@ class ClassWeaponsMaster extends RPGClass
 
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	class'ClassWeaponsMaster'.static.AddLowLevelRegen(Other, 0);
+	class'ClassWeaponsMaster'.static.AddLowLevelRegen(Other, 5);
 	class'ClassWeaponsMaster'.static.AdrenMessage(Other, 1);
 	
 	Super(RPGClass).ModifyPawn(Other, AbilityLevel);

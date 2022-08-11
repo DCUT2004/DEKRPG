@@ -4,8 +4,7 @@ class ClassClassicRPG extends RPGClass
 
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	class'ClassWeaponsMaster'.static.AddLowLevelRegen(Other, 0);
-	class'ClassWeaponsMaster'.static.AdrenMessage(Other, 1);
+	class'ClassWeaponsMaster'.static.ModifyPawn(Other, AbilityLevel);
 	
 	Super(RPGClass).ModifyPawn(Other, AbilityLevel);
 }

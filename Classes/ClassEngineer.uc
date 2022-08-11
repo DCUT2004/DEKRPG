@@ -11,7 +11,6 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 
 	RegenIndex = -1;
 	class'ClassWeaponsMaster'.static.ModifyPawn(other, AbilityLevel); //give them the health regen.
-	class'ClassWeaponsMaster'.static.AdrenMessage(Other, 1);
 	
 	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
  	if (StatsInv != None && StatsInv.DataObject != None && StatsInv.DataObject.Level <= default.MediumLevel)

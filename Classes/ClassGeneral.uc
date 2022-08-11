@@ -5,7 +5,6 @@ class ClassGeneral extends RPGClass
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	class'ClassAdrenalineMaster'.static.ModifyPawn(Other, AbilityLevel); //gives them a bit of regen and drip
-	class'ClassWeaponsMaster'.static.AdrenMessage(Other, 1);
 	
 	Super(RPGClass).ModifyPawn(Other, AbilityLevel);
 }
