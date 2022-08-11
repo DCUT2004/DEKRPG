@@ -36,8 +36,8 @@ defaultproperties
 	 DamageMax=22
      FireRate=0.2000000
      FireSound=Sound'ONSVehicleSounds-S.LaserSounds.Laser09'
-     BeamMissEffectClass=Class'XWeapons.SuperShockBeamEffect'
-	 BeamHitEffectClass=Class'DEKRPG999X.GreenBeamEmitter'
+     BeamHitEffectClass=Class'XWeapons.SuperShockBeamEffect'
+	 BeamMissEffectClass=Class'DEKRPG999X.GreenBeamEmitter'
      bReflective=True
      TraceRange=17000.000000
      Momentum=15000.000000
