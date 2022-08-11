@@ -1,7 +1,8 @@
 class RuneChainFire extends RuneInstantFire
 	config(DEKWeapons);
-
-var class<xEmitter> BoltEmitterClass;
+	
+const BOLT_EMITTER_LENGTH = 7;
+var class<xEmitter> BoltEmitterClass[BOLT_EMITTER_LENGTH];
 var config float MaxStepRange;
 var config int FirstDamage;
 var config float MissedShotFraction;	//How much of FirstDamage to take off if not a direct hit
@@ -96,7 +97,7 @@ simulated function DrawLightningEffect(Vector HitLocation, Vector StartLocation)
 {
 	local xEmitter Bolt;
 	
-	Bolt = spawn(BoltEmitterClass,,,StartLocation , rotator(HitLocation - StartLocation));
+	Bolt = spawn(BoltEmitterClass[Rand(BOLT_EMITTER_LENGTH)],,,StartLocation , rotator(HitLocation - StartLocation));
 	if (Bolt != None)
 	{
 		Bolt.mSpawnVecA = HitLocation;
@@ -255,7 +256,13 @@ defaultproperties
 	 AdrenCost=10.0000
 	 TraceRange=3000.00000
 	 SearchRadius=300.00000
-     BoltEmitterClass=Class'XEffects.LightningBolt'
+     BoltEmitterClass(0)=Class'DEKRPG999X.RedBoltEmitter'
+     BoltEmitterClass(1)=Class'DEKRPG999X.BronzeBoltEmitter'
+     BoltEmitterClass(2)=Class'DEKRPG999X.GoldBoltEmitter'
+     BoltEmitterClass(3)=Class'DEKRPG999X.DefenseBoltEmitter'
+     BoltEmitterClass(4)=Class'DEKRPG999X.BlueBoltEmitter'
+     BoltEmitterClass(5)=Class'DEKRPG999X.PurpleBoltEmitter'
+     BoltEmitterClass(6)=Class'DEKRPG999X.WhiteBoltEmitter'
      DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
      MaxStepRange=650.000000
      FirstDamage=180
