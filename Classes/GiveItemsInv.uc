@@ -78,6 +78,10 @@ var bool bUranium;
 var bool bHourglass;
 var bool bMoonlitStone;
 
+//Letters
+var bool LetterB, LetterO, LetterN, LetterU, LetterS;
+
+
 replication
 {
 	reliable if (Role<ROLE_Authority)
@@ -88,6 +92,8 @@ replication
 		AwarenessLevel,MedicAwarenessLevel,EngAwarenessLevel, NumCombos, PlayerTeamAdrenaline, MonsterTeamAdrenaline;
 	reliable if (Role == ROLE_Authority)
 		bBoots, bLumber, bTarydium, bSteel, bNaliFruit, bGloves, bLeather, bArmor, bVines, bEmbers, bArcticSuit, bMoss, bDust, bNanite, bPumice, bIcicle, bTranslator, bStarChart, bUranium, bHourglass, bMoonlitStone;
+	reliable if (Role == ROLE_Authority)
+		LetterB, LetterO, LetterN, LetterU, LetterS;
 }
 
 
@@ -201,10 +207,21 @@ simulated function Tick(float deltaTime)
 
 function Timer()
 {
-	if (TeamAdrenalineMut == None)
-		SetTimer(0, False);
-	PlayerTeamAdrenaline = TeamAdrenalineMut.default.PlayerTeamAdrenaline;
-	MonsterTeamAdrenaline = TeamAdrenalineMut.default.MonsterTeamAdrenaline;
+	if (TeamAdrenalineMut != None)
+	{
+		PlayerTeamAdrenaline = TeamAdrenalineMut.default.PlayerTeamAdrenaline;
+		MonsterTeamAdrenaline = TeamAdrenalineMut.default.MonsterTeamAdrenaline;
+	}
+	if (!LetterB)
+		LetterB = class'MutBONUSLetters'.static.IsLetterBUnlocked();
+	if (!LetterO)
+		LetterO = class'MutBONUSLetters'.static.IsLetterOUnlocked();
+	if (!LetterN)
+		LetterN = class'MutBONUSLetters'.static.IsLetterNUnlocked();
+	if (!LetterU)
+		LetterU = class'MutBONUSLetters'.static.IsLetterUUnlocked();
+	if (!LetterS)
+		LetterS = class'MutBONUSLetters'.static.IsLetterSUnlocked();
 }
 
 //not done through the interaction master, because that requires a string with a package name.

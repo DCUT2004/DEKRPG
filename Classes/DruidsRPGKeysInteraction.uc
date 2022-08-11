@@ -2,7 +2,6 @@ class DruidsRPGKeysInteraction extends RPGInteraction
 		config(UT2004RPG);
 
 var GiveItemsInv GiveItemsInv;
-var MutBONUSLetters LettersMut;
 // Aliases for artifact switching placed in ArtifactKeyConfigs in the DruidsRPGKeyMut, and transfered via GiveItemsInv.
 struct ArtifactKeyConfig
 {
@@ -34,9 +33,6 @@ event Initialized()
 	BarVSize = HealthBarMaterial.MaterialVSize();
 	EnemyList = ViewportOwner.Actor.Spawn(class'DruidAwarenessEnemyList');
 	
-	if (ViewportOwner.Actor.Level.NetMode != NM_Client)
-		foreach ViewportOwner.Actor.DynamicActors(class'MutBONUSLetters', LettersMut)
-			break;
 	super.Initialized();
 }
 
@@ -1413,7 +1409,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
 	
-	if (Class'MutBONUSLetters'.static.IsLetterBUnlocked())
+	if (GiveItemsInv != None && GiveItemsInv.LetterB)
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1434,7 +1430,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (Class'MutBONUSLetters'.static.IsLetterOUnlocked())
+	if (GIveItemsInv != None && GiveItemsInv.LetterO)
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1455,7 +1451,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (Class'MutBONUSLetters'.static.IsLetterNUnlocked())
+	if (GIveItemsInv != None && GiveItemsInv.LetterN)
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1476,7 +1472,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (Class'MutBONUSLetters'.static.IsLetterUUnlocked())
+	if (GIveItemsInv != None && GiveItemsInv.LetterU)
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1497,7 +1493,7 @@ function PostRender(Canvas Canvas)
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;
 	}
-	if (Class'MutBONUSLetters'.static.IsLetterSUnlocked())
+	if (GIveItemsInv != None && GiveItemsInv.LetterS)
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
