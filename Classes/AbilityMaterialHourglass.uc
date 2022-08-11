@@ -1,4 +1,4 @@
-class AbilityMaterialHourglass extends AbilityMaterial
+class AbilityMaterialHourglass extends AbilityMaterialVeryHighRarity
 	config(UT2004RPG)
 	abstract;
 	

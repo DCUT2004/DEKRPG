@@ -9,6 +9,5 @@ class AbilityMaterial extends CostRPGAbility
 defaultproperties
 {
      AbilityName="Material"
-	 MinPlayerLevel=90
 	 StartingCost=3
 }

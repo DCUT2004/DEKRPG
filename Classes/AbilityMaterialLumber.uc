@@ -1,4 +1,4 @@
-class AbilityMaterialLumber extends AbilityMaterial
+class AbilityMaterialLumber extends AbilityMaterialLowRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -58,6 +58,6 @@ defaultproperties
 {
 	 LevMultiplier=0.0010000000000
      AbilityName="Lumber*"
-     Description="Good wood! Increases your cumulative air speed by 0.1% per level.||Rarity: Low*||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Good wood! Increases your cumulative air speed by 0.1% per level.||Rarity: Low*||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 60 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }

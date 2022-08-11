@@ -1,4 +1,4 @@
-class AbilityMaterialNaliFruit extends AbilityMaterial
+class AbilityMaterialNaliFruit extends AbilityMaterialLowRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -21,6 +21,6 @@ defaultproperties
 {
 	 ChancePerLevel=0.100000
      AbilityName="Nali Fruit*"
-     Description="Fruit grown on Na Pali and a favorite of the Nali. It is known to have healing effects. Increases your Lucky Strike chance by 1% every 10 levels.||Rarity: Low*||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Fruit grown on Na Pali and a favorite of the Nali. It is known to have healing effects. Increases your Lucky Strike chance by 1% every 10 levels.||Rarity: Low*||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 60 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }

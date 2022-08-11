@@ -1,4 +1,4 @@
-class AbilityMaterialNanite extends AbilityMaterial
+class AbilityMaterialNanite extends AbilityMaterialHighRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -17,6 +17,6 @@ defaultproperties
 {
 	 LevMultiplier=0.00100000
      AbilityName="Nanite Fragment***"
-     Description="A nanite piece of a tech monster. Increases your cumulative damage reduction against Tech monsters by 0.1% per level.||Rarity: High***||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="A nanite piece of a tech monster. Increases your cumulative damage reduction against Tech monsters by 0.1% per level.||Rarity: High***||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 80 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }

@@ -1,4 +1,4 @@
-class AbilityMaterialStarChart extends AbilityMaterial
+class AbilityMaterialStarChart extends AbilityMaterialVeryHighRarity
 	config(UT2004RPG)
 	abstract;
 	

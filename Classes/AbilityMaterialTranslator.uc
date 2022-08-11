@@ -1,4 +1,4 @@
-class AbilityMaterialTranslator extends AbilityMaterial
+class AbilityMaterialTranslator extends AbilityMaterialVeryHighRarity
 	config(UT2004RPG)
 	abstract;
 	

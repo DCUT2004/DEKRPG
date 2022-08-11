@@ -1,4 +1,4 @@
-class AbilityMaterialUranium extends AbilityMaterial
+class AbilityMaterialUranium extends AbilityMaterialVeryHighRarity
 	config(UT2004RPG)
 	abstract;
 	

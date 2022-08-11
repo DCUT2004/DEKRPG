@@ -1,4 +1,4 @@
-class AbilityMaterialPlatedArmor extends AbilityMaterial
+class AbilityMaterialPlatedArmor extends AbilityMaterialMediumRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -40,6 +40,6 @@ defaultproperties
 {
 	 LevMultiplier=0.001000000
      AbilityName="Plated Armor**"
-     Description="Protective armor that can endure boulders and rockets. Retaliates 0.1% per level of the damage dealt to you back to the enemy.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Protective armor that can endure boulders and rockets. Retaliates 0.1% per level of the damage dealt to you back to the enemy.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 70 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }

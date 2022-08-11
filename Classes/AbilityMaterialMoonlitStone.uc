@@ -1,4 +1,4 @@
-class AbilityMaterialMoonlitStone extends AbilityMaterial
+class AbilityMaterialMoonlitStone extends AbilityMaterialVeryHighRarity
 	config(UT2004RPG)
 	abstract;
 

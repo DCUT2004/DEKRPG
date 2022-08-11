@@ -1,4 +1,4 @@
-class AbilityMaterialHoneysuckleVine extends AbilityMaterial
+class AbilityMaterialHoneysuckleVine extends AbilityMaterialMediumRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -20,6 +20,6 @@ defaultproperties
 {
 	 LevMultiplier=0.2000000
      AbilityName="Honeysuckle Vines**"
-     Description="Beautiful and fragrant floral vines. Increases the duration of double damage pickups by 0.2 seconds per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Beautiful and fragrant floral vines. Increases the duration of double damage pickups by 0.2 seconds per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 70 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }

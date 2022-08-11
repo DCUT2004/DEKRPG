@@ -1,4 +1,4 @@
-class AbilityMaterialLeather extends AbilityMaterial
+class AbilityMaterialLeather extends AbilityMaterialMediumRarity
 	config(UT2004RPG)
 	abstract;
 	
@@ -61,6 +61,6 @@ defaultproperties
 {
 	 LevMultiplier=0.00200000
      AbilityName="Fine Leather**"
-     Description="Fine leather from many monsters. Increases your cumulative dodge speed 0.2% per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 90 to purchase this.||Cost (per level): 3"
+     Description="Fine leather from many monsters. Increases your cumulative dodge speed 0.2% per level.||Rarity: Medium**||This material can be found by making kills, completing solo and team missions, using Loot magic modifier, winning the game, or defeating bosses.||You must be level 70 to purchase this.||Cost (per level): 3"
 	 MaxLevel=50
 }
