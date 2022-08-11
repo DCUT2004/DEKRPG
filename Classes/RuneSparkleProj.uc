@@ -1,5 +1,8 @@
 class RuneSparkleProj extends DEKLightningTurretProj
 	config(DEKWeapons);
+    
+var class<WeaponDamageType> SparkleMiniboltDamageType;
+var class<WeaponDamageType> SparkleDamageType;
 
 simulated function Timer()
 {
@@ -57,7 +60,7 @@ simulated function Timer()
 			if ( Instigator == None || Instigator.Controller == None )
 				BestC.Pawn.SetDelayedDamageInstigatorController( InstigatorController );
 
-			BestC.Pawn.TakeDamage(MiniboltDamage, Instigator, BestC.Pawn.Location, Momentum, MiniboltDamageType);
+			BestC.Pawn.TakeDamage(MiniboltDamage, Instigator, BestC.Pawn.Location, Momentum, SparkleMiniboltDamageType);
 		}
 	}
 }
@@ -66,7 +69,7 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 {
 	if ( Role == ROLE_Authority )
 	{
-		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
+		HurtRadius(Damage, DamageRadius, SparkleDamageType, MomentumTransfer, HitLocation );
 	}
 
 	PlaySound(Sound'ONSBPSounds.ShieldActivate',,3.5*TransientSoundVolume);
@@ -89,12 +92,12 @@ defaultproperties
      MiniboltDamage=14
      MiniboltRadius=600
      MiniboltClass=Class'DEKRPG999X.DEKLightningTurretMinibolt'
-     MiniboltDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
+     SparkleMiniboltDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
      DischargeChance=40
      Speed=3000.000000
      MaxSpeed=3000.000000
      Damage=50.000000
      DamageRadius=60.000000
      MomentumTransfer=1000.000000
-     MyDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
+     SparkleDamageType=Class'DEKRPG999X.DamTypeRuneSparkle'
 }
