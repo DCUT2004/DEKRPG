@@ -34,7 +34,6 @@ var bool PortalBallActive;
 var config int MaterialChance;
 var config int LowMaterialChance;
 var config int MediumMaterialChance;
-var config Array < class < AbilityMaterial > > LowMaterial, MediumMaterial, HighMaterial;
 
 //BalloonPop Variables
 var config Array <class < MissionBalloon > > BalloonClass;
@@ -323,6 +322,7 @@ simulated function MissionComplete()
 	local GiveItemsInv GInv;
 	local int RandChance;
 	local int MaterialRankChance;
+	local MutTeamAdrenaline MutTeamAdren;
 	
 	//An important boolean to set here so that MissionComplete() does not get called repeatedly
 	RewardGranted = True;
@@ -332,6 +332,8 @@ simulated function MissionComplete()
 		Level.Game.Broadcast(self, "" $ MissionName $ ": +" $ (MissionCount*GenomeXPPerVial) $ " XP.");
 	else
 		Level.Game.Broadcast(self, "" $ MissionName $ " complete! +" $ MissionXP $ " XP.");
+		
+	MutTeamAdren = Class'MutTeamAdrenaline'.static.GetMutTeamAdrenaline(Level.Game);
 	
 	//Loop through all controllers and reward XP
 	//Certain missions will have their own way of rewarding XP rather than using a flat amount
@@ -372,17 +374,11 @@ simulated function MissionComplete()
 			{
 				MaterialRankChance = Rand(100);
 				if (MaterialRankChance <= LowMaterialChance)
-				{
-					GInv.AddMaterial(LowMaterial[RandRange(0, LowMaterial.Length)]);
-				}
+					GInv.AddMaterial(MutTeamAdren.LowMaterials[Rand(MutTeamAdren.LOW_MATERIALS_LENGTH)]);
 				else if (MaterialRankChance <= MediumMaterialChance)
-				{
-					GInv.AddMaterial(MediumMaterial[RandRange(0, MediumMaterial.Length)]);
-				}
+					GInv.AddMaterial(MutTeamAdren.MediumMaterials[Rand(MutTeamAdren.MED_MATERIALS_LENGTH)]);
 				else
-				{
-					GInv.AddMaterial(HighMaterial[RandRange(0, HighMaterial.Length)]);
-				}
+					GInv.AddMaterial(MutTeamAdren.HighMaterials[Rand(MutTeamAdren.HIGH_MATERIALS_LENGTH)]);
 			}
 		}
 		C = NextC;
@@ -515,25 +511,9 @@ defaultproperties
 	PortalBallClass(3)=Class'DEKRPG999X.MissionPortalBallPink'
 	PortalBallClass(4)=Class'DEKRPG999X.MissionPortalBallPurple'
 	PortalBallClass(5)=Class'DEKRPG999X.MissionPortalBallRed'
-	MaterialChance=5
-	LowMaterialChance=80
-	MediumMaterialChance=95
-	LowMaterial(0)=Class'DEKRPG999X.AbilityMaterialLumber'
-	LowMaterial(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
-	LowMaterial(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'
-	LowMaterial(3)=Class'DEKRPG999X.AbilityMaterialSteel'
-	LowMaterial(4)=Class'DEKRPG999X.AbilityMaterialNaliFruit'
-	LowMaterial(5)=Class'DEKRPG999X.AbilityMaterialGloves'
-	MediumMaterial(0)=Class'DEKRPG999X.AbilityMaterialLeather'
-	MediumMaterial(1)=Class'DEKRPG999X.AbilityMaterialPlatedArmor'
-	MediumMaterial(2)=Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'
-	MediumMaterial(3)=Class'DEKRPG999X.AbilityMaterialEmbers'
-	MediumMaterial(4)=Class'DEKRPG999X.AbilityMaterialArcticSuit'
-	HighMaterial(0)=Class'DEKRPG999X.AbilityMaterialMoss'
-	HighMaterial(1)=Class'DEKRPG999X.AbilityMaterialDust'
-	HighMaterial(2)=Class'DEKRPG999X.AbilityMaterialNanite'
-	HighMaterial(3)=Class'DEKRPG999X.AbilityMaterialPumice'
-	HighMaterial(4)=Class'DEKRPG999X.AbilityMaterialIcicle'
+	MaterialChance=45
+	LowMaterialChance=60
+	MediumMaterialChance=90
 	NumMaxBalls=2
 	bAddToServerPackages=True
 	GroupName="TeamMission"
