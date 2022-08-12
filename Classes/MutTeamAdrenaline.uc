@@ -286,14 +286,15 @@ function GrantMonsterCombo()
 				if (C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow'))
 				{
 					Inv = ComboInv(C.Pawn.FindInventoryType(class'ComboInv'));
-					if (Inv == None)
-						continue;
-					if (ComboData[RandIndex].bBuff)
-						Inv.AddBuff(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
-					else
+					if (Inv != None)
 					{
-						Inv.AddAilment(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
-						break;	//One monster will give all players the ailment. Break out of the controller loop here once that's finished and go to the next buff/ailment
+						if (ComboData[RandIndex].bBuff)
+							Inv.AddBuff(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
+						else
+						{
+							Inv.AddAilment(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
+							break;	//One monster will give all players the ailment. Break out of the controller loop here once that's finished and go to the next buff/ailment
+						}
 					}
 				}
 			}
