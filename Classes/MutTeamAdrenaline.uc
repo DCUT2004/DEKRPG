@@ -174,27 +174,27 @@ simulated function FindPlayer()
 				P = C.Pawn;
 
 			StatsInv = RPGStatsInv(P.FindInventoryType(Class'RPGStatsInv'));
-			if (StatsInv == None)
-				continue;
-			
-			//Check whether this player is AM or not
-			bIsAM = IsAdrenalineMaster(StatsInv);
-			
-			//Check if player has bought a combo ability. If no combo ability, don't bother
-			for (x = 0; x < StatsInv.Data.Abilities.Length; x++)
+			if (StatsInv != None)
 			{
-				//If player has a combo ability and is AM, give a combo. Non-AMs, add them to pool of players
-				if ( ClassIsChildOf(StatsInv.Data.Abilities[x] , Class'AbilityCombo' ) )
+				//Check whether this player is AM or not
+				bIsAM = IsAdrenalineMaster(StatsInv);
+				
+				//Check if player has bought a combo ability. If no combo ability, don't bother
+				for (x = 0; x < StatsInv.Data.Abilities.Length; x++)
 				{
-					if (bIsAM)
-						GrantPlayerCombo(C, class'GiveItemsInv'.static.GetGiveItemsInv(C), true, false);
-					else
+					//If player has a combo ability and is AM, give a combo. Non-AMs, add them to pool of players
+					if ( ClassIsChildOf(StatsInv.Data.Abilities[x] , Class'AbilityCombo' ) )
 					{
-						Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
-						Pawns[0] = P;	//Set the new element we just inserted to P
+						if (bIsAM)
+							GrantPlayerCombo(C, class'GiveItemsInv'.static.GetGiveItemsInv(C), true, false);
+						else
+						{
+							Pawns.Insert(0, 1);	//Insert 1 Pawn element at index 0, or the beginning of array. The array is dynamic and will move other elements around
+							Pawns[0] = P;	//Set the new element we just inserted to P
+						}
+						break;
 					}
-					break;
-				}
+				}			
 			}
 		}
 		C = NextC;
