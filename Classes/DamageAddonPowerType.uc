@@ -1,6 +1,17 @@
 class DamageAddonPowerType extends AddonPowerType
 	config(UT2004RPG);
 
+function bool CanCoexist( class<AddonPowerType> NewType )
+{
+	if (!Super.CanCoexist(NewType ))
+		return false;
+
+	if (NewType == class'RageAddonPowerType')      // would be too powerful
+		return false;
+
+	return true;
+}
+
 defaultproperties
 {
 	DamagePercent=8.0		// 10% in total

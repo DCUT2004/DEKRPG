@@ -74,6 +74,11 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 		return false;
 	if (NewType == class'ProtectionAddonPowerType')
 		return false;
+	if (NewType == class'DamageAddonPowerType')    // would be too strong
+		return false;
+	if (NewType == class'RageAddonPowerType')      // would be too powerful
+		return false;
+
 	return true;
 }
 
