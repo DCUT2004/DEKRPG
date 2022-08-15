@@ -19,7 +19,7 @@ defaultproperties
      MinAdrenalineMax=125
      AdrenalineMaxStep=25
      AbilityName="Magic Weapons"
-     Description="Have magic weapons. At each level, you get weapons with more magic addons.||You must spend 25 points in your Adrenaline Max stat for each level of this ability you want to purchase. |Cost (per level): 10"
+     Description="Have magic weapons. At each level, you get weapons with more magic addons.||You must spend 25 points in your Adrenaline Max stat for each level of this ability you want to purchase. |Cost (per level): 10,20,30"
      StartingCost=10
      CostAddPerLevel=10
      MaxLevel=4
