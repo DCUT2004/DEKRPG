@@ -18,6 +18,7 @@ var config int MaxNumPowersClonable;
 var config int ModifierLossPerPowerup;
 
 var config float DamagePercent;
+var config float BaseDamageAdjustmentPerPowerup;
 var config float MinDamageFraction;
 
 var config bool AllowWeaponSwitch;
@@ -314,10 +315,20 @@ function int GetNumberOfRequiredAddons(RPGPlayerDataObject Data)
         return 2;
 
     if (x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons)
-        return 3;
+    {
+        if (RuneWeapon(ModifiedWeapon) != None)
+            return 3;   // only allow 3 on Runes
+        else
+            return 2;
+    }
 
     if (MaxAddons > 3 && x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons + PercentChanceMoreAddons)
-        return Rand(MaxNumPowers - 3) + 4;
+    {
+        if (RuneWeapon(ModifiedWeapon) != None)
+            return Rand(MaxNumPowers - 3) + 4;   // only allow 3 or more on Runes
+        else
+            return 2;
+    }
 
     return 0;    // should never get here        
 }
@@ -795,8 +806,8 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 	// Ok, so now add on any extra damage we do
 	if (Damage > 0)
 	{
-		Damage = Max(1, Damage * (1.0 + ((DamagePercent/100.0) * GetModifier())));
-		Momentum = Momentum * (1.0 + ((DamagePercent/100.0) * GetModifier()));
+		Damage = Max(1, Damage * (1.0 + (((DamagePercent+(BaseDamageAdjustmentPerPowerup*NumPowerTypes))/100.0) * GetModifier())));
+		Momentum = Momentum * (1.0 + (((DamagePercent+(BaseDamageAdjustmentPerPowerup*NumPowerTypes))/100.0) * GetModifier()));
 	}
 
 	// loop through all attached Power types and adjust the damage based on bonuses (+3% etc)
@@ -1161,14 +1172,15 @@ defaultproperties
      NumPowerTypes=0
      PickupClass=Class'DEKRPGWeaponPickup'
 
-     MaxNumPowers=4
+     MaxNumPowers=3
      MinNumPowers=0
 
      MaxNumPowersDroppable=2
      MaxNumPowersClonable=1
      ModifierLossPerPowerup=0
 
-     DamagePercent=2.0
+     DamagePercent=3.0
+     BaseDamageAdjustmentPerPowerup=-1.0
      MinDamageFraction=0.1
 
      AllowWeaponSwitch=false
