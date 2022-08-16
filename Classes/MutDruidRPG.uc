@@ -20,6 +20,7 @@ function ModifyPlayer(Pawn Other)
 {	// for the keys and subclasses
 	Local GiveItemsInv GIInv;
 	local MissionMultiplayerHUDInv MMPIHUD;
+	local StatusEffectInventory StatusEffectInv;
 
 	super.ModifyPlayer(Other);
 
@@ -32,6 +33,13 @@ function ModifyPlayer(Pawn Other)
 	{
 		MMPIHUD = Other.Spawn(class'MissionMultiplayerHUDInv');
 		MMPIHUD.GiveTo(Other);
+	}
+	
+	StatusEffectInv = StatusEffectInventory(Other.FindInventoryType(class'StatusEffectInventory'));
+	if (StatusEffectInv == None)
+	{
+		StatusEffectInv = Other.Spawn(class'StatusEffectInventory');
+		StatusEffectInv.GiveTo(Other);
 	}
 
 	//add the default items to their inventory..
