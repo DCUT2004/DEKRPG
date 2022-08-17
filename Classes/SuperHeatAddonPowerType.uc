@@ -20,13 +20,14 @@ static function bool AllowedFor(Weapon W)
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
+	local StatusEffectInventory StatusInv;
 	local FireInv FInv;
 	local MagicShieldInv MInv;
 	local Pawn P;
 	local Actor A;
 	local IceInv IInv;
-	local SuperHeatInv SInv;
 	local MissionInvBETA MissionInv;
+	local int LocalModifier;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -49,28 +50,20 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 		if (MInv == None)
 		{
-    		SInv = SuperHeatInv(P.FindInventoryType(class'SuperHeatInv'));
-    		if (SInv == None)
-    		{
-    			SInv = spawn(class'SuperHeatInv', P,,, rot(0,0,0));
-    			SInv.Modifier = TheWeapon.GetModifier();
-    			SInv.LifeSpan = HeatLifespan;
-                SInv.RPGRules= TheWeapon.Rules;
-                
-    			IInv = IceInv(P.FindInventoryType(class'IceInv'));
-    			if (IInv != None)
-    			{
-        				// slightly longer burn effect
-        				SInv.Modifier += 1;
-        				SInv.LifeSpan += 1;
-    			}
-    			SInv.GiveTo(P);
-                
+			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			if (StatusInv == None)
+				return;
+			LocalModifier = TheWeapon.GetModifier();
+    		IInv = IceInv(P.FindInventoryType(class'IceInv'));
+			if (IInv != None)
+			{
     			A = P.spawn(class'HeatHitEffect', P,, P.Location, P.Rotation);
     			if (A != None)
     				A.RemoteRole = ROLE_SimulatedProxy;
-					
-					
+				LocalModifier += 1;
+			}
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Burn', -LocalModifier, HeatLifespan, True, False, TheWeapon.Instigator))
+			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{
 					MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
@@ -81,12 +74,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 					if (TheWeapon.GetModifier() > 2)
 						MissionInv.TickMission(MissionInv.GetMissionIndex("Pyromancer"), 1);
 				}
-        	}
-        	else
-        	{
-    			SInv.Modifier = TheWeapon.GetModifier();
-    			SInv.LifeSpan = HeatLifespan;
-        	}
+			}
         }
 	}
 }

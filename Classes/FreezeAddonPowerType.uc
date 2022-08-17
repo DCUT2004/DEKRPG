@@ -24,13 +24,13 @@ static function bool AllowedFor(Weapon W)
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
-	local FreezeInv FrInv;
+	local StatusEffectInventory StatusInv;
 	local MagicShieldInv MInv;
 	local Pawn P;
-	local Actor A;
 	local EarthInv EInv;
 	local MissionInvBETA MissionInv;
 	local IceInv IInv;
+	local int LocalModifier;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -53,28 +53,15 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 		if (MInv == None)
 		{
-    		//dont add to the time a pawn is already frozen. It just wouldn't be fair.
-    		FrInv = FreezeInv(P.FindInventoryType(class'FreezeInv'));
-    		if (FrInv == None)
-    		{
-    			FrInv = spawn(class'FreezeInv', P,,, rot(0,0,0));
-    			FrInv.Modifier = TheWeapon.GetModifier();
-    			FrInv.LifeSpan = TheWeapon.GetModifier();
-    			EInv = EarthInv(P.FindInventoryType(class'EarthInv'));
-    			if (EInv != None)
-    			{
-    				// slightly longer freeze effect
-        				FrInv.Modifier += 1;
-        				FrInv.LifeSpan += 1;
-    			}
-    			FrInv.GiveTo(P);
-    			A = P.spawn(class'IceSmoke', P,, P.Location, P.Rotation);
-    			if (A != None)
-    			{
-    				A.RemoteRole = ROLE_SimulatedProxy;
-    				A.PlaySound(FreezeSound,,2.5*Victim.TransientSoundVolume,,Victim.TransientSoundRadius);
-    			}
-
+			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			if (StatusInv == None)
+				return;
+			LocalModifier = TheWeapon.GetModifier();
+			EInv = EarthInv(P.FindInventoryType(Class'EarthInv'));
+			if (EInv != None)
+				LocalModifier += 1;
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, LocalModifier, true, false))
+			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{
 					MissionInv = class'MissionInvBETA'.static.GetMissionInv(TheWeapon.Instigator.Controller);
@@ -85,8 +72,8 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 					if (TheWeapon.GetModifier() > 2)
 						MissionInv.TickMission(MissionInv.GetMissionIndex("Frostmancer"), 1);
 				}
+			}
 	
-        	}
         }
 	}
 }

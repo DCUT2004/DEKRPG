@@ -8,13 +8,13 @@ class StatusEffectInventory extends Inventory
 	
 var Array < StatusEffect > StatusEffects;		//The pawn's currently applied status effects
 
-function AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd)
+function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int Lifespan, bool bDispellable, bool bStackable, optional Pawn Producer)
 {
 	local int x;
 	local StatusEffect Effect;
 	
 	if (EffectClass == None || ModifierToAdd == 0)
-		return;
+		return false;
 		
 	/* TODO:
 		Add a check for magical ward
@@ -27,16 +27,16 @@ function AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd)
 			if (StatusEffects[x].Modifier + ModifierToAdd == 0) 			//Will result in a zero modifier, i.e. no status effect, so stop here
 			{
 				StatusEffects[x].Destroy();
-				return;
+				return false;
 			}
 			if (StatusEffects[x].bStackable									//Is the effect stackable?
 				|| !StatusEffects[x].bStackable && 
 					(StatusEffects[x].Modifier > 0 && ModifierToAdd < 0 || StatusEffects[x].Modifier < 0 && ModifierToAdd > 0) )
 			{
 				StatusEffects[x].Modifier += ModifierToAdd;
-				//Should we also increase the lifespan if stacking on the effect?
+				StatusEffects[x].Lifespan += Lifespan;
 			}
-			return;
+			return true;
 		}
 	Effect = Instigator.Spawn(EffectClass, Instigator);
 	if (Effect != None)
@@ -44,8 +44,16 @@ function AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd)
 		StatusEffects.Insert(0, 1);
 		StatusEffects[0] = Effect;
 		Effect.StatusEffectInv = self;
+		Effect.Modifier = ModifierToAdd;
+		Effect.Lifespan = Lifespan;
+		Effect.bDispellable = bDispellable;
+		Effect.bStackable = bStackable;
+		if (Producer != None)
+			Effect.Producer = Producer;
 		Effect.StartEffect(Instigator);
+		return true;
 	}
+	return false;
 }
 
 //For safety, the StatusEffect's Destroyed() will handle the removal of itself from StatusEffects array
@@ -85,6 +93,15 @@ function DispelAllStatusEffects()
 	for (x = 0; x < StatusEffects.Length; x++)
 		if (StatusEffects[x].bDispellable)
 			StatusEffects[x].Destroy();	
+}
+
+function DiseplAllAilments()
+{
+	local int x;
+	
+	for (x = 0; x < StatusEffects.Length; x++)
+		if (StatusEffects[x].bDispellable && StatusEffects[x].Modifier < 0)
+			StatusEffects[x].Destroy();
 }
 
 defaultproperties

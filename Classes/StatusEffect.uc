@@ -12,6 +12,7 @@ class StatusEffect extends Actor
 	abstract
 	config(UT2004RPG);
 	
+var Pawn Producer;								//Who gave this status effect to this pawn?
 var config bool bDispellable;					//Whether this status effect can be removed before its Lifespan duration
 var config bool bStackable;						//If true, and Pawn already has a similar status effect, then new status effects will increase the Modifier and/or Lifespan
 var int Modifier;								//Intensity of this status effect. > 0 is a buff, < 0 is an ailment if applicable

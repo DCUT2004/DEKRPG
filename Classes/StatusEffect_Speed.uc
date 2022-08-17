@@ -10,11 +10,14 @@ simulated function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	SetTimer(0.5, true);
-	Lifespan = Modifier;
 }
 
 simulated function Timer()
 {
+	if (Instigator == None || Instigator.Health <= 0)
+		Destroy();
+	if (Modifier == 0)
+		Destroy();
 	if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
 		Destroy();
 	if(Instigator != None)
