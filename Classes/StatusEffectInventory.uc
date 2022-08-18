@@ -56,6 +56,26 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 	return false;
 }
 
+function bool FindStatusEffect(Class<StatusEffect> EffectClass)
+{
+	local int x;
+	
+	for (x = 0; x < StatusEffects.Length; x++)
+		if (StatusEffects[x].Class == EffectClass)
+			return true;
+	return false;
+}
+
+function int GetStatusEffectModifier(Class<StatusEffect> EffectClass)
+{
+	local int x;
+	
+	for (x = 0; x < StatusEffects.Length; x++)
+		if (StatusEffects[x].Class == EffectClass)
+			return StatusEffects[x].Modifier;
+	return 0;
+}
+
 //For safety, the StatusEffect's Destroyed() will handle the removal of itself from StatusEffects array
 //Here, we will simply call Destroy() on the StatusEffect
 function RemoveStatusEffect(Class<StatusEffect> EffectClass)

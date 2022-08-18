@@ -24,8 +24,7 @@ static function bool AllowedFor(Weapon W)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
 	local Pawn P;
-	Local KnockbackInv InvKnock;
-	Local Vector newLocation;
+	local StatusEffectInventory StatusInv;
 	local MagicShieldInv MInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
@@ -52,57 +51,15 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     if (Damage <= 0)
         return;
 
-	MInv = MagicShieldInv(Pawn(Victim).FindInventoryType(class'MagicShieldInv'));
+	MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 	if (MInv != None)
         return;
-    
-    if (P.FindInventoryType(class'KnockbackInv') == None)
-	{
-		InvKnock = spawn(class'KnockbackInv', P,,, rot(0,0,0));
-		if(InvKnock != None)
-		{
-			InvKnock.LifeSpan = Max(1,(TheWeapon.MaxModifier + 2) - TheWeapon.GetModifier());
-			InvKnock.Modifier = TheWeapon.GetModifier();
-			InvKnock.GiveTo(P);
-
-			// if they're not walking, falling, or hovering, 
-			// the momentum won't affect them correctly, so make them hover.
-			// this effect will end when the KnockbackInv expires.
-			if(P.Physics != PHYS_Walking && P.Physics != PHYS_Falling && P.Physics != PHYS_Hovering)
-				P.SetPhysics(PHYS_Hovering);
-			//I check the x,y, and z to see if this projectile has no momentum (some weapons have none)
-			if
-			( (Momentum.X == 0 && Momentum.Y == 0 && Momentum.Z == 0 )  || 
-				ClassIsChildOf(DamageType, class'DamTypeSniperShot') || 
-				ClassIsChildOf(DamageType, class'DamTypeClassicSniper') ||
-				ClassIsChildOf(DamageType, class'DamTypeLinkShaft') ||
-				ClassIsChildOf(DamageType, class'DamTypeONSAVRiLRocket') ||
-				instr(caps(string(DamageType)), "AVRIL") > -1 //hack for vinv avril
-			)
-			{
-				if(TheWeapon.Instigator == Victim)
-					 Momentum = TheWeapon.Instigator.Location - HitLocation;
-				else
-					 Momentum = TheWeapon.Instigator.Location - Victim.Location;
-				Momentum = Normal(Momentum);
-				Momentum *= -200;
-				// if they're walking, I need to bump them up 
-				// in the air a bit or they won't be knocked back 
-				// on no momentum weapons.
-				if(P.Physics == PHYS_Walking)
-				{
-					newLocation = P.Location;
-					newLocation.z += 10;
-					P.SetLocation(newLocation);
-				}
-			}
-			Momentum *= Max(2.0, Max(TheWeapon.GetModifier() * 0.5,(Damage * (KnockbackPercent/100.0)))); //kawham!
-			P.SetOverlayMaterial(PowerOverlay, 1.0, false);
-			if(PlayerController(P.Controller) != None)
-		 		PlayerController(P.Controller).ReceiveLocalizedMessage(class'KnockbackConditionMessage', 0);
-			P.PlaySound(KnockbackSound,,1.5 * Victim.TransientSoundVolume,,Victim.TransientSoundRadius);
-		}
-	}
+		
+	StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+	if (StatusInv == None)
+		return;
+		
+	StatusInv.AddStatusEffect(Class'StatusEffect_Momentum', -TheWeapon.GetModifier(), TheWeapon.GetModifier(), True, False);
 }
 
 function bool CanCoexist( class<AddonPowerType> NewType )
