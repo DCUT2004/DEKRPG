@@ -6,7 +6,13 @@
 class StatusEffectInventory extends Inventory
 	config (UT2004RPG);
 	
-var Array < StatusEffect > StatusEffects;		//The pawn's currently applied status effects
+var Array < StatusEffect > StatusEffects;			//The pawn's currently applied status effects
+
+//For constant-time access for StatusEffectGameRules
+var StatusEffect DamageBonus;
+var StatusEffect DamageReduction;
+var StatusEffect Momentum;
+var StatusEffect ChanceHit;
 
 function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int Lifespan, bool bDispellable, bool bStackable, optional Pawn Producer)
 {
@@ -51,6 +57,23 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 		if (Producer != None)
 			Effect.Producer = Producer;
 		Effect.StartEffect(Instigator);
+		
+		Switch (EffectClass)
+		{
+			Case Class'StatusEffect_DamageBonus':
+				DamageBonus = Effect;
+				break;
+			Case Class'StatusEffect_DamageReduction':
+				DamageReduction = Effect;
+				break;
+			Case Class'StatusEffect_Momentum':
+				Momentum = Effect;
+				break;
+			Case Class'StatusEffect_ChanceHit':
+				ChanceHit = Effect;
+				break;
+		}
+		
 		return true;
 	}
 	return false;
@@ -122,6 +145,12 @@ function DiseplAllAilments()
 	for (x = 0; x < StatusEffects.Length; x++)
 		if (StatusEffects[x].bDispellable && StatusEffects[x].Modifier < 0)
 			StatusEffects[x].Destroy();
+}
+
+simulated function Destroyed()
+{
+	Super.Destroyed();
+	RemoveAllStatusEffects();
 }
 
 defaultproperties

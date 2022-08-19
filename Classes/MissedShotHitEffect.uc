@@ -1,4 +1,4 @@
-class GamblerHitEffect extends Emitter;
+class MissedShotHitEffect extends Emitter;
 
 simulated function PostNetBeginPlay()
 {
@@ -29,8 +29,8 @@ defaultproperties
          UniformSize=True
          AutomaticInitialSpawning=False
          UseRandomSubdivision=True
-         ColorScale(1)=(RelativeTime=0.250000,Color=(B=252,G=3,R=194))
-         ColorScale(2)=(RelativeTime=0.500000,Color=(B=252,G=3,R=194))
+         ColorScale(1)=(RelativeTime=0.250000,Color=(B=252,G=11,R=3))
+         ColorScale(2)=(RelativeTime=0.500000,Color=(B=252,G=11,R=3))
          ColorScale(3)=(RelativeTime=1.000000)
          MaxParticles=1
          StartLocationOffset=(X=-2.000000)
@@ -45,7 +45,7 @@ defaultproperties
          TextureVSubdivisions=4
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG999X.GamblerHitEffect.SpriteEmitter22'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.MissedShotHitEffect.SpriteEmitter22'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter23
          UseDirectionAs=PTDU_Normal
@@ -57,8 +57,8 @@ defaultproperties
          UseRegularSizeScale=False
          UniformSize=True
          AutomaticInitialSpawning=False
-         ColorScale(0)=(Color=(B=252,G=3,R=194))
-         ColorScale(1)=(RelativeTime=0.800000,Color=(B=252,G=3,R=194))
+         ColorScale(0)=(Color=(B=252,G=11,R=3))
+         ColorScale(1)=(RelativeTime=0.800000,Color=(B=252,G=11,R=3))
          ColorScale(2)=(RelativeTime=1.000000)
          Opacity=0.800000
          MaxParticles=1
@@ -72,7 +72,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Weapons.PlasmaStar'
          LifetimeRange=(Min=0.200000,Max=0.200000)
      End Object
-     Emitters(1)=SpriteEmitter'DEKRPG999X.GamblerHitEffect.SpriteEmitter23'
+     Emitters(1)=SpriteEmitter'DEKRPG999X.MissedShotHitEffect.SpriteEmitter23'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter53
          UseDirectionAs=PTDU_Scale
@@ -81,8 +81,8 @@ defaultproperties
          SpinParticles=True
          UniformSize=True
          AutomaticInitialSpawning=False
-         ColorScale(0)=(Color=(B=252,G=3,R=194))
-         ColorScale(1)=(RelativeTime=0.700000,Color=(B=252,G=3,R=194))
+         ColorScale(0)=(Color=(B=252,G=11,R=3))
+         ColorScale(1)=(RelativeTime=0.700000,Color=(B=252,G=11,R=3))
          ColorScale(2)=(RelativeTime=1.000000)
          MaxParticles=1
          StartLocationOffset=(X=-4.000000)
@@ -93,7 +93,7 @@ defaultproperties
          Texture=Texture'EpicParticles.Flares.FlashFlare1'
          LifetimeRange=(Min=0.300000,Max=0.300000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG999X.GamblerHitEffect.SpriteEmitter53'
+     Emitters(2)=SpriteEmitter'DEKRPG999X.MissedShotHitEffect.SpriteEmitter53'
 
      AutoDestroy=True
      bNoDelete=False
