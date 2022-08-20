@@ -17,7 +17,7 @@ var config bool bDispellable;					//Whether this status effect can be removed be
 var config bool bStackable;						//If true, and Pawn already has a similar status effect, then new status effects will increase the Modifier and/or Lifespan
 var int Modifier;								//Intensity of this status effect. > 0 is a buff, < 0 is an ailment if applicable
 var config int MaxModifier;
-var bool bOnlyNegativeModifier;
+var bool bOnlyPositiveModifier, bOnlyNegativeModifier;
 var StatusEffectInventory StatusEffectInv;
 
 var Class<xEmitter> xEmitterAilmentFX, xEmitterBuffFX;		//xEmitter for Ailment and Buff
@@ -44,6 +44,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
+	bOnlyPositiveModifier=False
 	bOnlyNegativeModifier=False
 	DrawType=DT_None
 	AmbientGlow=0
