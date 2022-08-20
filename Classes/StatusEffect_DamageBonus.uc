@@ -52,6 +52,8 @@ function StopEffect(Pawn Target)
 
 defaultproperties
 {
+	StatusEffectName="Attack"
+	MaxModifier=10
 	xEmitterAilmentFX=Class'DEKRPG999X.ComboAttackDownEffect'
 	xEmitterBuffFX=Class'DEKRPG999X.ComboAttackUpEffect'
 }

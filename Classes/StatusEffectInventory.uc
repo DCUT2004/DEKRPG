@@ -14,10 +14,13 @@ var StatusEffect DamageReduction;
 var StatusEffect Momentum;
 var StatusEffect ChanceHit;
 
-function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int Lifespan, bool bDispellable, bool bStackable, optional Pawn Producer)
+var config int ParasiteHealAmount;
+
+function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int LifespanToAdd, bool bDispellable, bool bStackable, optional Pawn Producer)
 {
 	local int x;
 	local StatusEffect Effect;
+	local StatusEffect_Parasite Parasite;
 	
 	if (EffectClass == None || ModifierToAdd == 0)
 		return false;
@@ -40,7 +43,18 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 					(StatusEffects[x].Modifier > 0 && ModifierToAdd < 0 || StatusEffects[x].Modifier < 0 && ModifierToAdd > 0) )
 			{
 				StatusEffects[x].Modifier += ModifierToAdd;
-				StatusEffects[x].Lifespan += Lifespan;
+				if (StatusEffects[x].Modifier > 0 && StatusEffects[x].Modifier > StatusEffects[x].MaxModifier)
+					StatusEffects[x].Modifier = StatusEffects[x].MaxModifier;
+				else if (StatusEffects[x].Modifier < 0 && StatusEffects[x].Modifier < -(StatusEffects[x].MaxModifier))
+					StatusEffects[x].Modifier = -(StatusEffects[x].MaxModifier);
+				if (LifespanToAdd != 0)
+					StatusEffects[x].Lifespan += LifespanToAdd;
+				if (StatusEffects[x].IsA('StatusEffect_Parasite'))
+				{
+					Parasite = StatusEffect_Parasite(StatusEffects[x]);
+					if (Parasite != None)
+						Parasite.AddHealth(ParasiteHealAmount);
+				}
 			}
 			return true;
 		}
@@ -51,7 +65,7 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 		StatusEffects[0] = Effect;
 		Effect.StatusEffectInv = self;
 		Effect.Modifier = ModifierToAdd;
-		Effect.Lifespan = Lifespan;
+		Effect.Lifespan = LifespanToAdd;
 		Effect.bDispellable = bDispellable;
 		Effect.bStackable = bStackable;
 		if (Producer != None)
@@ -87,6 +101,16 @@ function bool FindStatusEffect(Class<StatusEffect> EffectClass)
 		if (StatusEffects[x].Class == EffectClass)
 			return true;
 	return false;
+}
+
+function StatusEffect GetStatusEffect(Class<StatusEffect> EffectClass)
+{
+	local int x;
+	
+	for (x = 0; x < StatusEffects.Length; x++)
+		if (StatusEffects[x].Class == EffectClass)
+			return StatusEffects[x];
+	return None;
 }
 
 function int GetStatusEffectModifier(Class<StatusEffect> EffectClass)
@@ -155,4 +179,5 @@ simulated function Destroyed()
 
 defaultproperties
 {
+	ParasiteHealAmount=100
 }

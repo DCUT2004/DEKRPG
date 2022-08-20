@@ -115,6 +115,9 @@ function StopEffect(Pawn Target)
 
 defaultproperties
 {
+	 MaxModifier=5
+	 StatusEffectName="Burn"
+	 bOnlyNegativeModifier=True
      BasePercentage=0.050000
      Curve=1.300000
      MaxBurnDamage=50

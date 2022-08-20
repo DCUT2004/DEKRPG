@@ -8,4 +8,6 @@ class StatusEffect_ChanceHit extends StatusEffect
 
 defaultproperties
 {
+	StatusEffectName="Critical Chance"
+	MaxModifier=7
 }

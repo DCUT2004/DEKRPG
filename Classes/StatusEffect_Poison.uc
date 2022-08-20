@@ -67,6 +67,9 @@ function StopEffect(Pawn Target)
 
 defaultproperties
 {
+	 MaxModifier=5
+	 StatusEffectName="Poison"
+	 bOnlyNegativeModifier=True
      BasePercentage=0.035000
      curve=1.300000
 }

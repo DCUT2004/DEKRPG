@@ -120,6 +120,9 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 	local int BestDamage;
 	local int HealthGiven;
 	local int localMaxHealth;
+	local StatusEffectInventory StatusInv;
+	local StatusEffect StatusEffect;
+	local StatusEffect_Parasite Parasite;
 
 	if (!class'OneDropRPGWeapon'.static.CheckCorrectDamage(ModifiedWeapon, DamageType))
 		return;
@@ -167,8 +170,28 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 					);
 				if(HardCoreInv(P.FindInventoryType(class'HardCoreInv')) != None && P != Instigator)
 					HealthGiven = 0;
-				if (ComboHealStopInv(P.FindInventoryType(class'ComboHealStopInv')) != None && P != Instigator)
-					HealthGiven = 0;
+				StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+				if (StatusInv != None)
+				{
+					StatusEffect = StatusInv.GetStatusEffect(Class'StatusEffect_Parasite');
+					if (StatusEffect != None)
+					{
+						Parasite = StatusEffect_Parasite(StatusEffect);
+						if (Parasite != None && Parasite.Health > 0)
+						{
+							if (Parasite.Health > HealthGiven)
+							{
+								Parasite.RemoveHealth(HealthGiven);
+								HealthGiven = 0;
+							}
+							else
+							{
+								Parasite.RemoveHealth(HealthGiven);
+								HealthGiven -= Parasite.Health;
+							}
+						}
+					}
+				}
 					
 				if(HealthGiven > 0)
 				{

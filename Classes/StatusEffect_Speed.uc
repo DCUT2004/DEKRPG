@@ -47,6 +47,8 @@ function StopEffect(Pawn Target)
 
 defaultproperties
 {
+	StatusEffectName="Speed"
+	MaxModifier=5
 	bStackable=False
 	bDispellable=True
 	xEmitterAilmentFX=Class'DEKRPG999X.IceSmoke'

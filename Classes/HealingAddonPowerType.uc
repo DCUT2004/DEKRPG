@@ -69,6 +69,9 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local XPawn xP;
 	local int HealthGiven;
 	local int localMaxHealth;
+	local StatusEffectInventory StatusInv;
+	local StatusEffect StatusEffect;
+	local StatusEffect_Parasite Parasite;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -104,8 +107,30 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 				
 			if(HardCoreInv(P.FindInventoryType(class'HardCoreInv')) != None && P != TheWeapon.Instigator)
 					HealthGiven = 0;
-			if (ComboHealStopInv(P.FindInventoryType(class'ComboHealStopInv')) != None && P != TheWeapon.Instigator)
-					HealthGiven = 0;
+
+			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			if (StatusInv != None)
+			{
+				StatusEffect = StatusInv.GetStatusEffect(Class'StatusEffect_Parasite');
+				if (StatusEffect != None)
+				{
+					Parasite = StatusEffect_Parasite(StatusEffect);
+					if (Parasite != None && Parasite.Health > 0)
+					{
+						if (Parasite.Health > HealthGiven)
+						{
+							Parasite.Health -= HealthGiven;
+							HealthGiven = 0;
+						}
+						else
+						{
+							HealthGiven -= Parasite.Health;
+							Parasite.Health = 0;
+						}
+					}
+				}
+			}
+
             if(HealthGiven > 0)
 			{
 				P.GiveHealth(HealthGiven, P.HealthMax + localMaxHealth);

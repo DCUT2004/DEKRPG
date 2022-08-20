@@ -8,4 +8,6 @@ class StatusEffect_Momentum extends StatusEffect
 
 defaultproperties
 {
+	StatusEffectName="Momentum"
+	MaxModifier=6
 }

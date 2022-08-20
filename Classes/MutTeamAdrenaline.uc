@@ -29,16 +29,12 @@ var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
 
 struct ComboInfo
 {
+	var Class<StatusEffect> EffectClass;
 	var int Lifespan;
-	var bool bBuff;
-	var float Multiplier;
 	var bool bDispellable;
-	var bool bAll;
-	var bool bMulti;
-	var bool bSingle;
+	var bool bStackable;
 };
-var config Array <ComboInfo> ComboData;
-var config Array < class < ComboEffectInv > > ComboClass;	//The full list of buffs and ailments available to monsters to use
+var config Array <ComboInfo> Combos;
 
 static function MutTeamAdrenaline GetMutTeamAdrenaline(GameInfo G)
 {
@@ -267,43 +263,88 @@ simulated function bool GrantPlayerCombo(Controller TargetController, GiveItemsI
 //Select random buffs and ailments and execute them for monster team
 function GrantMonsterCombo()
 {
-	local Controller C, NextC;
 	local int x;
-	local ComboInv Inv;
 	local int RandIndex;
+	local int Modifier, MaxModifier;
 	
 	Level.Game.BroadCast(Self, "Monster combo!");
 	
 	for (x = 0; x < NumMonsterCombos; x++)
 	{
-		RandIndex = Rand(ComboClass.Length);
-		C = Level.ControllerList;
-		while (C != None)
+		//First, randomly select a StatusEffect to apply
+		RandIndex = Rand(Combos.Length);
+		
+		//Next, determine what the Modifier of the StatusEffect will be
+		MaxModifier = Combos[RandIndex].EffectClass.default.MaxModifier;
+		Modifier = Rand(MaxModifier) + 1;
+		
+		//Will this be a buff to monsters (positive modifier) or an ailment to players (negative modifier)
+		if (Combos[RandIndex].EffectClass.default.bOnlyNegativeModifier)
+			Modifier = -(Modifier);
+		else
 		{
-			NextC = C.NextController;
-			if (C != None && C.Pawn != None && C.Pawn.Health > 0)
-			{
-				if (C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow'))
-				{
-					Inv = ComboInv(C.Pawn.FindInventoryType(class'ComboInv'));
-					if (Inv != None)
-					{
-						if (ComboData[RandIndex].bBuff)
-							Inv.AddBuff(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
-						else
-						{
-							Inv.AddAilment(C.Pawn, ComboData[RandIndex].bAll, ComboData[RandIndex].bMulti, ComboData[RandIndex].bSingle, ComboData[RandIndex].Lifespan, ComboClass[RandIndex], ComboData[RandIndex].Multiplier, ComboData[RandIndex].bDispellable);
-							break;	//One monster will give all players the ailment. Break out of the controller loop here once that's finished and go to the next buff/ailment
-						}
-					}
-				}
-			}
-			C = NextC;
+			if ( Rand(100) <= 49)
+				Modifier = -(Modifier);
 		}
-		AnnounceCombo(RandIndex);
+			
+		if (Modifier > 0)	//A buff - apply to monsters
+			ApplyMonsterBuff(RandIndex, Modifier);
+		else if (Modifier < 0) 	//An ailment - apply to players
+			ApplyPlayerAilment(RandIndex, Modifier);
+		AnnounceCombo(RandIndex, Modifier);
 	}
 	PlayMonsterComboSound();
 	default.MonsterTeamAdrenaline = 0.00;
+}
+
+function ApplyMonsterBuff(int RandIndex, int Modifier)
+{
+	local Controller C, NextC;
+	local StatusEffectInventory StatusInv;
+	
+	C = Level.ControllerList;
+	
+	while (C != None)
+	{
+		NextC = C.NextController;
+		
+		if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(Class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali'))
+		{
+			StatusInv = StatusEffectInventory(C.Pawn.FindInventoryType(Class'StatusEffectInventory'));
+			if (StatusInv != None)
+				StatusInv.AddStatusEffect(Combos[RandIndex].EffectClass, Modifier, Combos[RandIndex].Lifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+		}
+		
+		C = NextC;
+	}
+}
+
+function ApplyPlayerAilment(int RandIndex, int Modifier)
+{
+	local Controller C, NextC;
+	local Pawn RealP;
+	local StatusEffectInventory StatusInv;
+
+	C = Level.ControllerList;
+	
+	while (C != None)
+	{
+		NextC = C.NextController;
+		
+		if (C != None && C.Pawn != None && C.Pawn.Health > 0 &&
+			( !C.Pawn.IsA('Monster') || C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(Class'FriendlyMonsterInv')) != None) )
+		{
+			if (C.Pawn.IsA('Vehicle'))
+				RealP = Vehicle(C.Pawn).Driver;
+			else
+				RealP = C.Pawn;
+			StatusInv = StatusEffectInventory(RealP.FindInventoryType(Class'StatusEffectInventory'));
+			if (StatusInv != None)
+				StatusInv.AddStatusEffect(Combos[RandIndex].EffectClass, Modifier, Combos[RandIndex].Lifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+		}
+		
+		C = NextC;
+	}
 }
 
 function RewardMaterials()
@@ -347,9 +388,9 @@ simulated function PlayMonsterComboSound()
 			PlayerController(C).ClientPlaySound(Sound'DEKRPG999X.MonsterComboSound');
 }
 
-simulated function AnnounceCombo(int RandIndex)
+simulated function AnnounceCombo(int RandIndex, int Modifier)
 {
-	Level.Game.BroadCast(Self, ComboClass[RandIndex].default.ComboNameMessage $ ComboData[RandIndex].Multiplier $ " for " $ ComboData[RandIndex].Lifespan $ " seconds");
+	Level.Game.BroadCast(Self, Combos[RandIndex].EffectClass.default.StatusEffectName $ " " $ Modifier $ " for " $ Combos[RandIndex].Lifespan $ " seconds");
 }
 
 defaultproperties
@@ -366,26 +407,13 @@ defaultproperties
 	MaterialOnGameWonChance=70
 	LowMaterialChance=80
 	MediumMaterialChance=95
-	ComboClass(0)=Class'DEKRPG999X.ComboAttackInv'
-	ComboClass(1)=Class'DEKRPG999X.ComboAttackInv'
-	ComboClass(2)=Class'DEKRPG999X.ComboDefenseInv'
-	ComboClass(3)=Class'DEKRPG999X.ComboDefenseInv'
-	ComboClass(4)=Class'DEKRPG999X.ComboFreezeInv'
-	ComboClass(5)=Class'DEKRPG999X.ComboHeatInv'
-	ComboClass(6)=Class'DEKRPG999X.ComboRegenerateInv'
-	ComboClass(7)=Class'DEKRPG999X.ComboHealStopInv'
-	ComboClass(8)=Class'DEKRPG999X.ComboInaccuracyInv'
-	ComboClass(9)=Class'DEKRPG999X.ComboMisfortuneInv'
-	ComboData(0)=(LifeSpan=25,Multiplier=1.200000,bDispellable=True,bSingle=True,bBuff=True)
-	ComboData(1)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(2)=(LifeSpan=25,Multiplier=0.800000,bDispellable=True,bSingle=True,bBuff=True)
-	ComboData(3)=(LifeSpan=25,Multiplier=1.200000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(4)=(LifeSpan=25,Multiplier=4.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(5)=(LifeSpan=10,Multiplier=2.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(6)=(LifeSpan=25,Multiplier=10.000000,bDispellable=True,bSingle=True,bBuff=True)
-	ComboData(7)=(LifeSpan=25,Multiplier=1.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(8)=(LifeSpan=25,Multiplier=30.000000,bDispellable=True,bAll=True,bBuff=False)
-	ComboData(9)=(LifeSpan=25,Multiplier=300.000000,bDispellable=True,bAll=True,bBuff=False)
+	Combos(0)=(EffectClass=Class'StatusEffect_DamageBonus',Lifespan=30,bDispellable=True,bStackable=True)
+	Combos(1)=(EffectClass=Class'StatusEffect_DamageReduction',Lifespan=30,bDispellable=True,bStackable=True)
+	Combos(2)=(EffectClass=Class'StatusEffect_Burn',Lifespan=5,bDispellable=True,bStackable=False)
+	Combos(3)=(EffectClass=Class'StatusEffect_Speed',Lifespan=15,bDispellable=True,bStackable=False)
+	Combos(4)=(EffectClass=Class'StatusEffect_ChanceHit',Lifespan=20,bDispellable=True,bStackable=True)
+	Combos(5)=(EffectClass=Class'StatusEffect_Parasite',Lifespan=0,bDispellable=False,bStackable=True)
+	Combos(6)=(EffectClass=Class'StatusEffect_Momentum',Lifespan=30,bDispellable=True,bStackable=False)
 	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
 	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
 	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'
