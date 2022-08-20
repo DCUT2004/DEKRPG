@@ -279,9 +279,10 @@ function GrantMonsterCombo()
 		Modifier = Rand(MaxModifier) + 1;
 		
 		//Will this be a buff to monsters (positive modifier) or an ailment to players (negative modifier)
-		if (Combos[RandIndex].EffectClass.default.bOnlyNegativeModifier)
+		if (Combos[RandIndex].EffectClass.default.bOnlyNegativeModifier || Combos[RandIndex].EffectClass == Class'StatusEffect_AdrenRegen' || Combos[RandIndex].EffectClass == Class'StatusEffect_AmmoRegen')
 			Modifier = -(Modifier);
-		else
+		else if (Combos[RandIndex].EffectClass.default.bOnlyPositiveModifier){}
+		else	//Can be positive or negative - decide which
 		{
 			if ( Rand(100) <= 49)
 				Modifier = -(Modifier);
@@ -414,6 +415,10 @@ defaultproperties
 	Combos(4)=(EffectClass=Class'StatusEffect_ChanceHit',Lifespan=20,bDispellable=True,bStackable=True)
 	Combos(5)=(EffectClass=Class'StatusEffect_Parasite',Lifespan=0,bDispellable=False,bStackable=True)
 	Combos(6)=(EffectClass=Class'StatusEffect_Momentum',Lifespan=30,bDispellable=True,bStackable=False)
+	Combos(7)=(EffectClass=Class'StatusEffect_Misfortune',Lifespan=20,bDispellable=True,bStackable=True)
+	Combos(8)=(EffectClass=Class'StatusEffect_Regeneration',Lifespan=20,bDispellable=True,bStackable=True)
+	Combos(9)=(EffectClass=Class'StatusEffect_AdrenRegen',Lifespan=10,bDispellable=True,bStackable=False)
+	Combos(10)=(EffectClass=Class'StatusEffect_AmmoRegen',Lifespan=10,bDispellable=True,bStackable=False)
 	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
 	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
 	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'
