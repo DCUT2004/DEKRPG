@@ -1,4 +1,4 @@
-class DamTypeRuneHeatwave extends WeaponDamageType
+class DamTypeRuneHeatwave extends RuneDamageType
 	abstract;
 
 static function GetHitEffects(out class<xEmitter> HitEffects[4], int VictemHealth )

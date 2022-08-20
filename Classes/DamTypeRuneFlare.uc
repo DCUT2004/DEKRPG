@@ -1,4 +1,4 @@
-class DamTypeRuneFlare extends WeaponDamageType
+class DamTypeRuneFlare extends RuneDamageType
 	abstract;
 
 defaultproperties

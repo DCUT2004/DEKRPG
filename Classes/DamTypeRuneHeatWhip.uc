@@ -1,4 +1,4 @@
-class DamTypeRuneHeatWhip extends WeaponDamageType
+class DamTypeRuneHeatWhip extends RuneDamageType
 	abstract;
 
 defaultproperties

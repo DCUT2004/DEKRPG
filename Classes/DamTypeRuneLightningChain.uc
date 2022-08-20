@@ -1,4 +1,4 @@
-class DamTypeRuneLightningChain extends WeaponDamageType
+class DamTypeRuneLightningChain extends RuneDamageType
 	abstract;
 
 defaultproperties

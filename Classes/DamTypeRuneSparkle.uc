@@ -1,4 +1,4 @@
-class DamTypeRuneSparkle extends WeaponDamageType
+class DamTypeRuneSparkle extends RuneDamageType
 	abstract;
 
 defaultproperties

@@ -1,4 +1,4 @@
-class DamTypeRuneMagnet extends WeaponDamageType
+class DamTypeRuneMagnet extends RuneDamageType
 	abstract;
 
 defaultproperties

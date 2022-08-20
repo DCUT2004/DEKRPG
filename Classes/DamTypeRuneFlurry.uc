@@ -1,4 +1,4 @@
-class DamTypeRuneFlurry extends WeaponDamageType
+class DamTypeRuneFlurry extends RuneDamageType
 	abstract;
 
 defaultproperties

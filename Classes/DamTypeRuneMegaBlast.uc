@@ -1,4 +1,4 @@
-class DamTypeRuneMegaBlast extends WeaponDamageType
+class DamTypeRuneMegaBlast extends RuneDamageType
 	abstract;
 
 defaultproperties

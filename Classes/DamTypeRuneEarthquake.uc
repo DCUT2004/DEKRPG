@@ -1,4 +1,4 @@
-class DamTypeRuneEarthquake extends WeaponDamageType
+class DamTypeRuneEarthquake extends RuneDamageType
 	abstract;
 
 defaultproperties
