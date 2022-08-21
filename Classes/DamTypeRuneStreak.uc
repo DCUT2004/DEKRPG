@@ -1,4 +1,4 @@
-class DamTypeRuneStreak extends WeaponDamageType
+class DamTypeRuneStreak extends RuneDamageType
 	abstract;
 
 defaultproperties

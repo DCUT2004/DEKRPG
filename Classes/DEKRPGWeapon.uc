@@ -867,40 +867,6 @@ function float GetAIRating()
 	return tempAIRating;
 }
 
-function GiveTo(Pawn Other, optional Pickup Pickup)
-{
-    // extra check to make sure the player can receive this weapon
-    local RPGPlayerDataObject Data;  
-    local bool gotIt;
-    local int x;
-    local bool CanHaveWeapon;
-     
-    if (Other == None)
-        return;
-
-    If (RuneWeapon(ModifiedWeapon) == None)
-    {  
-        // RuneWeapons always acceptable      
-        Data = GetDataObject(Other);
-        gotIt = false;
-    	for (x = 0; Data != None && x < Data.Abilities.length && !gotIt; x++)
-    		if (Data.Abilities[x] == class'AbilityLoadedRunes')
-            {
-                gotIt = true;
-            }
-
-        if (gotIt)
-        {
-            CanHaveWeapon = class'AbilityLoadedRunes'.static.IsWeaponAcceptable(ModifiedWeapon);
-            // Log("########### DEKRPGWeapon GiveTo check weapon" @ ModifiedWeapon.ItemName @ "result:" @ CanHaveWeapon);
-            if (CanHaveWeapon == false)
-                return; // can't pick up non-rune weapons
-        }
-    }
-    
-    Super.GiveTo(Other, Pickup);
-}
-
 function GiveAmmo(int m, WeaponPickup WP, bool bJustSpawned)
 {
 	local int x;

@@ -1,4 +1,4 @@
-class DamTypeRuneBlizzard extends WeaponDamageType
+class DamTypeRuneBlizzard extends RuneDamageType
 	abstract;
 
 defaultproperties

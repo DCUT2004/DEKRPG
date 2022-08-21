@@ -1,4 +1,4 @@
-class DamTypeRuneIceBeam extends WeaponDamageType
+class DamTypeRuneIceBeam extends RuneDamageType
 	abstract;
 
 defaultproperties

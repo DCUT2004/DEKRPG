@@ -1,4 +1,4 @@
-class DamTypeRuneEnergySteal extends WeaponDamageType
+class DamTypeRuneEnergySteal extends RuneDamageType
 	abstract;
 
 defaultproperties

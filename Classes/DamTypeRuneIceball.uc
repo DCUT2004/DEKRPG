@@ -1,4 +1,4 @@
-class DamTypeRuneIceball extends WeaponDamageType
+class DamTypeRuneIceball extends RuneDamageType
 	abstract;
 
 defaultproperties
