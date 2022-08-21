@@ -7,11 +7,6 @@ var int WaveNum;
 var int WaveBonus;
 var config float ReplenishAdrenPercent;
 
-function bool HasActiveArtifact()
-{
-	return class'ActiveArtifactInv'.static.hasActiveArtifact(Instigator);
-}
-
 function Timer()
 {
 	local Controller C;
@@ -37,13 +32,10 @@ function Timer()
 	if (C == None)
 		return;
 
-	if ( !Instigator.InCurrentCombo() && (bAlwaysGive || !HasActiveArtifact()))
-	{
-		if (DInv != None && PInv != None)
-			C.AwardAdrenaline(0);
-		else
-			C.AwardAdrenaline(RegenAmount);
-	}
+	if (DInv != None && PInv != None)
+		C.AwardAdrenaline(0);
+	else
+		C.AwardAdrenaline(RegenAmount);
 
 	// now check to see if in invasion and between waves. In which case get end of wave bonus.
 	if (Level.Game.IsA('Invasion') && Invasion(Level.Game).WaveNum != WaveNum)

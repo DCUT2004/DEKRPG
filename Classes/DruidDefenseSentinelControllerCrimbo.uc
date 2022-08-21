@@ -161,7 +161,7 @@ function DoHealing()
 							NumHelped += (DefPawn.HealthHealingLevel * 3);  // score triple for health;
 					}
 					else    // try adding adrenaline
-					if (DefPawn.AdrenalineHealingLevel > 0 && C.Adrenaline < C.AdrenalineMax && !RealP.InCurrentCombo() && !class'ActiveArtifactInv'.static.hasActiveArtifact(RealP))
+					if (DefPawn.AdrenalineHealingLevel > 0 && C.Adrenaline < C.AdrenalineMax)
 					{
 					    // can add some adrenaline
 						C.AwardAdrenaline((DefPawn.AdrenalineHealingAmount * DefPawn.AdrenalineHealingLevel * C.AdrenalineMax)/100.0);
