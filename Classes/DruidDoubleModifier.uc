@@ -172,7 +172,7 @@ function DropFrom(vector StartLocation)
 
 defaultproperties
 {
-     CostPerSec=10
+     CostPerSec=13
      IconMaterial=TexPanner'XGameShaders.PlayerShaders.PlayerTransPanRed'
      ItemName="Double Magic Modifier"
 }

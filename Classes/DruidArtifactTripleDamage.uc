@@ -81,6 +81,6 @@ defaultproperties
 {
      Invalid(0)=Class'DEKRPG999X.RageAddonPowerType'
      Invalid(1)=Class'DEKRPG999X.VorpalAddonPowerType'
-     CostPerSec=10
+     CostPerSec=13
      PickupClass=Class'DEKRPG999X.DruidArtifactTripleDamagePickup'
 }
