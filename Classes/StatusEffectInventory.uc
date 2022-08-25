@@ -16,14 +16,17 @@ var StatusEffect ChanceHit;
 
 var config int ParasiteHealAmount;
 
-function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int LifespanToAdd, bool bDispellable, bool bStackable, optional Pawn Producer)
+//Add a status effect to this Pawn
+//If Pawn already has a similar status effect, check if the status effect can be stackable
+//Return instances of newly added status effects
+function StatusEffect AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd, int LifespanToAdd, bool bDispellable, bool bStackable, optional Pawn Producer)
 {
 	local int x;
 	local StatusEffect Effect;
 	local StatusEffect_Parasite Parasite;
 	
 	if (EffectClass == None || ModifierToAdd == 0)
-		return false;
+		return None;
 		
 	/* TODO:
 		Add a check for magical ward
@@ -36,7 +39,7 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 			if (StatusEffects[x].Modifier + ModifierToAdd == 0) 			//Will result in a zero modifier, i.e. no status effect, so stop here
 			{
 				StatusEffects[x].Destroy();
-				return false;
+				return None;
 			}
 			if (StatusEffects[x].bStackable									//Is the effect stackable?
 				|| !StatusEffects[x].bStackable && 
@@ -56,7 +59,7 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 						Parasite.AddHealth(ParasiteHealAmount);
 				}
 			}
-			return true;
+			return None;	//Return None here, because we only want this function to return newly added StatusEffects. Proper use for finding current StatusEffects is GetStatusEffect()
 		}
 	Effect = Instigator.Spawn(EffectClass, Instigator);
 	if (Effect != None)
@@ -88,12 +91,12 @@ function bool AddStatusEffect(Class<StatusEffect> EffectClass, int ModifierToAdd
 				break;
 		}
 		
-		return true;
+		return Effect;
 	}
-	return false;
+	return None;
 }
 
-function bool FindStatusEffect(Class<StatusEffect> EffectClass)
+function bool HasStatusEffect(Class<StatusEffect> EffectClass)
 {
 	local int x;
 	

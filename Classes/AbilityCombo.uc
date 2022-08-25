@@ -9,11 +9,10 @@ struct MaterialsStruct
 };
 
 var Array < MaterialsStruct > Materials;								//Required materials to buy this combo
-
-var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;	//How strong the effect of this combo is
+var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;
 var config int BaseDamage, DamageStep, DamageAddPerStep;				//How much damage this combo does, if applicable
-var config float BaseLifespan, LifespanStep, LifespanAddPerStep;		//How long this combo will last
-var config bool Dispellable, All, Single;								//How many targets this combo will affect
+var config float BaseLifespan, LifespanAddPerStep, LifespanStep;											//How long this combo will last
+var config bool All, Single, Dispellable, Stackable;
 var byte ComboType;														//0 = Buff, 1 = Ailment, 2 = Offensive, 3 = Special
 var config int SameTypeLimits[4];										//Specifies how many combos of the same type can be allowed, for each type (same indexing as ComboType)
 var config int AMSameTypeLimits[4];										//Same as above, but specifically for AM class

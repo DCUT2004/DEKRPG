@@ -16,6 +16,7 @@ function StartEffect(Pawn Target)
 
 function Timer()
 {
+	local StatusEffect_AdrenMax StatusAdrenMax;
 	if (Instigator == None || Instigator.Health <= 0 || Instigator.Controller == None || Modifier == 0)
 		Destroy();
 		
@@ -23,7 +24,27 @@ function Timer()
 		Destroy();
 	
 	if (Modifier > 0)
-		Instigator.Controller.AwardAdrenaline(Modifier);
+	{
+		if (Instigator.Controller.Adrenaline + Modifier > Instigator.Controller.AdrenalineMax)
+		{
+			if (StatusEffectInv != None)
+			{
+				StatusAdrenMax = StatusEffect_AdrenMax(StatusEffectInv.GetStatusEffect(Class'StatusEffect_AdrenMax'));
+				if (StatusAdrenMax != None)		//This person currently has boosted Adren. We still want to heal the adren, but not change the original max amount
+					Instigator.Controller.AdrenalineMax += Modifier;
+				else
+				{
+					StatusAdrenMax = StatusEffect_AdrenMax(StatusEffectInv.AddStatusEffect(Class'StatusEffect_AdrenMax', 1, 0, False, False, Instigator));
+					if (StatusAdrenMax != None)
+					{
+						StatusAdrenMax.OriginalMaxAdren = Instigator.Controller.AdrenalineMax;
+						Instigator.Controller.AdrenalineMax += Modifier; 
+					}
+				}
+			}
+		}
+		Instigator.Controller.Adrenaline += Modifier;
+	}
 	else
 		Instigator.Controller.Adrenaline += Modifier;		//Modifier is negative
 		

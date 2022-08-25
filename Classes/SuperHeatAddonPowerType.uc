@@ -62,7 +62,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     				A.RemoteRole = ROLE_SimulatedProxy;
 				LocalModifier += 1;
 			}
-			if (StatusInv.AddStatusEffect(Class'StatusEffect_Burn', -LocalModifier, HeatLifespan, True, False, TheWeapon.Instigator))
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Burn', -LocalModifier, HeatLifespan, True, False, TheWeapon.Instigator)  != None)
 			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{

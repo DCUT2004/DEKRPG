@@ -46,7 +46,10 @@ function Timer()
 function StopEffect(Pawn Target)
 {
 	if (FX != None)
+	{
+		FX.Kill();
 		FX.Destroy();
+	}
 }
 
 defaultproperties

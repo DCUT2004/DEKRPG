@@ -60,7 +60,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 			EInv = EarthInv(P.FindInventoryType(Class'EarthInv'));
 			if (EInv != None)
 				LocalModifier += 1;
-			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, LocalModifier, true, false))
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, LocalModifier, true, false) != None )
 			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{

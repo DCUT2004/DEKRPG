@@ -4,34 +4,29 @@ class AbilityComboBuffAdrenHeal extends AbilityComboBuff
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityAdrenHealInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityAdrenHealInv(Other.FindInventoryType(class'ComboAbilityAdrenHealInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityAdrenHealInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.EffectMultiplier = default.MultiplierStep*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-			Inv.ComboLifespan = default.BaseLifespan;
-		}
-	}
+
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddCombo(Class'StatusEffect_AdrenRegen', AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties
 {
-	AbilityName="Buff: Adren Heal"
-	Description="Caster and all allies receive 20 adrenaline per level. Healing over the max adrenaline is added as temporary max adrenaline, up to double the amount of the caster's original max adrenaline.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Honeysuckle Vine, 10 Burning Embers||Level 6: 20 Honeysuckle Vine, 20 Burning Embers||Level 7: 30 Honeysuckle Vine, 30 Burning Embers||Level 8: 40 Honeysuckle Vine, 40 Burning Embers, 10 Cosmic Dust||Level 9: 45 Honeysuckle Vine, 45 Burning Embers, 25 Cosmic Dust||Level 10: 50 Honeysuckle Vine, 50 Burning Embers, 50 Cosmic Dust||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	AbilityName="Buff: Adren Regen"
+	Description="Caster and all allies receive 1 adrenaline per second per level for 25 seconds. Adrenaline regenerated over the max amount is added as temporary max adrenaline, up to +100 beyond the current max.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Gloves and Tarydium Shards you wish to purchase. Additionally:||Level 5: 10 Honeysuckle Vine, 10 Burning Embers||Level 6: 20 Honeysuckle Vine, 20 Burning Embers||Level 7: 30 Honeysuckle Vine, 30 Burning Embers||Level 8: 40 Honeysuckle Vine, 40 Burning Embers, 10 Cosmic Dust||Level 9: 45 Honeysuckle Vine, 45 Burning Embers, 25 Cosmic Dust||Level 10: 50 Honeysuckle Vine, 50 Burning Embers, 50 Cosmic Dust||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=25.0000
 	MultiplierStep=20.00000
 	BaseLifespan=25.000
 	Dispellable=True
+	Stackable=True
 	All=True
 	Single=False
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialTarydiumShards',Class'DEKRPG999X.AbilityMaterialGloves'),RequiredMaterialLevels=(5,5))

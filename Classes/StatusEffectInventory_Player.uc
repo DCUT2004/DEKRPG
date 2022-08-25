@@ -1,5 +1,5 @@
 /*
-* StatusEffectInventory_Player is spawned on a Player through MutDruidsRPG
+* StatusEffectInventory_Player is spawned on a Player through RPGClass
 * It manages a Pawn's currently applied Status Effects, and properly adds or removes them
 * Additionally, it holds an array for the Player's purchased Combos
 */
@@ -44,6 +44,7 @@ function ExecuteCombos()
 	local Controller C, NextC;
 	local StatusEffectInventory StatusInv;
 	
+	Log("Executing combo. Length of Combos is " $ Combos.Length);
 	
 	for (x = 0; x < Combos.Length; x++)
 	{

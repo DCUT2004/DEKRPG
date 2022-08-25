@@ -4,35 +4,30 @@ class AbilityComboAilmentBlind extends AbilityComboAilment
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityBlindInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityBlindInv(Other.FindInventoryType(class'ComboAbilityBlindInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityBlindInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.EffectMultiplier = default.BaseMultiplier*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-			Inv.ComboLifespan = default.BaseLifespan;
-		}
-	}
+
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddCombo(Class'StatusEffect_ChanceHit', -AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties
 {
 	AbilityName="Ailment: Blind"
-	Description="All targets receive Blind for 25 seconds. Blinded targets have a 3.5% chance per level to have their damage reduced to 1 on each hit. If a similar ailment is applied, the effect is stacked.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Nali Fruit and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Nanite Fragment||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Nanite Fragment||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Nanite Fragment||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	Description="All targets receive Blind for 25 seconds. Damage dealt by Blinded targets have a 5% chance per level to be reduced to 1. If a similar ailment is applied, the effect is stacked.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Nali Fruit and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Leather, 10 Arctic Suit||Level 6: 20 Fine Leather, 20 Arctic Suit||Level 7: 30 Fine Leather, 30 Arctic Suit||Level 8: 40 Fine Leather, 40 Arctic Suit, 10 Nanite Fragment||Level 9: 45 Fine Leather, 45 Arctic Suit, 25 Nanite Fragment||Level 10: 50 Fine Leather, 50 Arctic Suit, 50 Nanite Fragment||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=3.5000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000
 	BaseLifespan=25.000
 	Dispellable=True
+	Stackable=True
 	All=True
 	Single=False
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLumber',Class'DEKRPG999X.AbilityMaterialNaliFruit'),RequiredMaterialLevels=(5,5))

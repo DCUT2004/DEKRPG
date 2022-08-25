@@ -27,19 +27,11 @@ function ModifyPlayer(Pawn Other)
 {	// for the keys and subclasses
 	Local GiveItemsInv GIInv;
 	local MissionMultiplayerHUDInv MMPIHUD;
-	local StatusEffectInventory_Player StatusEffectInv;
 
 	super.ModifyPlayer(Other);
 
 	if (Other == None || Other.Controller == None || !Other.Controller.IsA('PlayerController'))
 		return;
-		
-	StatusEffectInv = StatusEffectInventory_Player(Other.FindInventoryType(class'StatusEffectInventory_Player'));
-	if (StatusEffectInv == None)
-	{
-		StatusEffectInv = Other.Spawn(class'StatusEffectInventory_Player');
-		StatusEffectInv.GiveTo(Other);
-	}
 		
 	MMPIHUD = MissionMultiplayerHUDInv(Other.FindInventoryType(class'MissionMultiplayerHUDInv'));
 	
