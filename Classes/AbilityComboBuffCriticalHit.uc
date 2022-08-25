@@ -4,35 +4,30 @@ class AbilityComboBuffCriticalHit extends AbilityComboBuff
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityCriticalHitInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityCriticalHitInv(Other.FindInventoryType(class'ComboAbilityCriticalHitInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityCriticalHitInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.EffectMultiplier = default.BaseMultiplier*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-			Inv.ComboLifespan = default.BaseLifespan;
-		}
-	}
+
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddCombo(Class'StatusEffect_ChanceHit', AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties
 {
 	AbilityName="Buff: Critical Hit"
-	Description="The caster and all allies receive Critical Hit for 25 seconds, which provides a 3.5% chance per level to deal double damage on each hit. A purple flash and sound indicates a critical hit.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Tarydium Shard and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Honeysuckle Vine, 10 Burning Embers||Level 6: 20 Fine Honeysuckle Vine, 20 Burning Embers||Level 7: 30 Fine Honeysuckle Vine, 30 Burning Embers||Level 8: 40 Fine Honeysuckle Vine, 40 Burning Embers, 10 Cosmic Dust||Level 9: 45 Fine Honeysuckle Vine, 45 Burning Embers, 25 Cosmic Dust||Level 10: 50 Fine Honeysuckle Vine, 50 Burning Embers, 50 Cosmic Dust||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
+	Description="The caster and all allies receive Critical Hit for 25 seconds, which provides a 5% chance per level to deal double damage on each hit. A purple flash and sound indicates a critical hit.||Non-AMs can only have one type of Ailment at a time, AMs can have two.||REQUIRED MATERIALS (for non-AMs):|You need 5 times the ability level of Tarydium Shard and Lumber you wish to purchase. Additionally:||Level 5: 10 Fine Honeysuckle Vine, 10 Burning Embers||Level 6: 20 Fine Honeysuckle Vine, 20 Burning Embers||Level 7: 30 Fine Honeysuckle Vine, 30 Burning Embers||Level 8: 40 Fine Honeysuckle Vine, 40 Burning Embers, 10 Cosmic Dust||Level 9: 45 Fine Honeysuckle Vine, 45 Burning Embers, 25 Cosmic Dust||Level 10: 50 Fine Honeysuckle Vine, 50 Burning Embers, 50 Cosmic Dust||Cost(per level): 3, 6, 9...||NOTE: Use the combo BBFF(back back forward forward) with 100 adrenaline to activate this combo."
 	BaseMultiplier=3.500000
 	MultiplierAddPerStep=25.000000
 	MultiplierStep=1.00000
 	BaseLifespan=25.000
 	Dispellable=True
+	Stackable=True
 	All=True
 	Single=False
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialLumber',Class'DEKRPG999X.AbilityMaterialTarydiumShards'),RequiredMaterialLevels=(5,5))

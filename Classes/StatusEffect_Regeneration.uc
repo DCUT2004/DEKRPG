@@ -2,6 +2,7 @@ class StatusEffect_Regeneration extends StatusEffect
 	config(UT2004RPG);
 	
 var xEmitter FX;
+var config int AdditionalHealthMax;
 
 function StartEffect(Pawn Target)
 {
@@ -19,9 +20,9 @@ function Timer()
 	if (Instigator != None)
 	{
 		if (Instigator.IsA('Monster'))
-			Instigator.GiveHealth(Modifier*2, Instigator.Healthmax);
+			Instigator.GiveHealth(Modifier*2, Instigator.HealthMax + AdditionalHealthMax);
 		else
-			Instigator.GiveHealth(Modifier, Instigator.Healthmax);
+			Instigator.GiveHealth(Modifier, Instigator.HealthMax + AdditionalHealthMax);
 	}
 	if (Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
 		PlayerController(Instigator.Controller).ClientPlaySound(Sound'PickupSounds.HealthPack');
@@ -36,6 +37,7 @@ function StopEffect(Pawn Target)
 
 defaultproperties
 {
+	AdditionalHealthMax=100
 	StatusEffectName="Regeneration"
 	MaxModifier=10
 	xEmitterBuffFX=Class'XEffects.RegenCrosses'
