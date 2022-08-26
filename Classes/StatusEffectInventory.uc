@@ -23,14 +23,21 @@ function StatusEffect AddStatusEffect(Class<StatusEffect> EffectClass, int Modif
 {
 	local int x;
 	local StatusEffect Effect;
+	local StatusEffect_MagicalWard Ward;
 	local StatusEffect_Parasite Parasite;
 	
 	if (EffectClass == None || ModifierToAdd == 0)
 		return None;
-		
-	/* TODO:
-		Add a check for magical ward
-	*/
+	
+	if (ModifierToAdd < 0)
+	{
+		Ward = StatusEffect_MagicalWard(GetStatusEffect(Class'StatusEffect_MagicalWard'));
+		if (Ward != None && Rand(100) <= Ward.Modifier * Ward.WardChancePerModifier)
+		{
+			Ward.PlayWardEffect();
+			return None;
+		}
+	}
 	
 	//See if we already have this status effect
 	for (x = 0; x < StatusEffects.Length; x++)

@@ -419,6 +419,7 @@ defaultproperties
 	Combos(8)=(EffectClass=Class'StatusEffect_Regeneration',Lifespan=20,bDispellable=True,bStackable=True)
 	Combos(9)=(EffectClass=Class'StatusEffect_AdrenRegen',Lifespan=10,bDispellable=True,bStackable=False)
 	Combos(10)=(EffectClass=Class'StatusEffect_AmmoRegen',Lifespan=10,bDispellable=True,bStackable=False)
+	Combos(11)=(EffectClass=Class'StatusEffect_MagicalWard',Lifespan=25,bDispellable=True,bStackable=True)
 	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
 	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
 	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'

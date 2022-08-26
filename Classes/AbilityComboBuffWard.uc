@@ -4,24 +4,18 @@ class AbilityComboBuffWard extends AbilityComboBuff
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityWardInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityWardInv(Other.FindInventoryType(class'ComboAbilityWardInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityWardInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.EffectMultiplier = default.BaseMultiplier*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-			Inv.ComboLifespan = default.BaseLifespan;
-		}
-	}
+
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddCombo(Class'StatusEffect_MagicalWard', AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties
@@ -33,6 +27,7 @@ defaultproperties
 	MultiplierStep=1.00000
 	BaseLifespan=25.000
 	Dispellable=True
+	Stackable=True
 	All=True
 	Single=False
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialGloves',Class'DEKRPG999X.AbilityMaterialCombatBoots'),RequiredMaterialLevels=(5,5))

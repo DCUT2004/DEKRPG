@@ -19,6 +19,6 @@ defaultproperties
      Emitters(0)=MeshEmitter'DEKRPG999X.GenomeProjectNodeFX.MeshEmitter0'
 
      bNoDelete=False
-     RemoteRole=ROLE_DumbProxy
+     RemoteRole=ROLE_SimulatedProxy
      AmbientGlow=254
 }
