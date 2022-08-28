@@ -4,23 +4,17 @@ class AbilityComboOffensePurifyingStrike extends AbilityComboOffense
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityPurifyingStrikeInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityPurifyingStrikeInv(Other.FindInventoryType(class'ComboAbilityPurifyingStrikeInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityPurifyingStrikeInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.ComboDamage = default.BaseMultiplier*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-		}
-	}
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddAttackCombo(Class'OffenseCombo_PurifyingStrike', default.NumTargets, default.NumHits, AbilityLevel*default.DamagePerHit, Class'DamTypeCombo', default.TimeBetweenHits);
 }
 
 defaultproperties
@@ -30,6 +24,10 @@ defaultproperties
 	BaseMultiplier=20.000000
 	All=True
 	Single=False
+	NumTargets=0
+	NumHits=1
+	DamagePerHit=20
+	TimeBetweenHits=1
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(5,5))
 	Materials(1)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(10,10))
 	Materials(2)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialArcticSuit'),RequiredMaterialLevels=(15,15))

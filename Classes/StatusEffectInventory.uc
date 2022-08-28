@@ -172,7 +172,16 @@ function DispelAllStatusEffects()
 			StatusEffects[x].Destroy();	
 }
 
-function DiseplAllAilments()
+function DispelBuffs()
+{
+	local int x;
+	
+	for (x = 0; x < StatusEffects.Length; x++)
+		if (StatusEffects[x].bDispellable && StatusEffects[x].Modifier > 0)
+			StatusEffects[x].Destroy();	
+}
+
+function DispelAilments()
 {
 	local int x;
 	

@@ -4,25 +4,17 @@ class AbilityComboOffenseStab extends AbilityComboOffense
 	
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ComboAbilityStabInv Inv;
+	local StatusEffectInventory_Player StatusInv;
+	
+	if (Other == None)
+		return;
 
-	if (Other != None)
-	{
-		Inv = ComboAbilityStabInv(Other.FindInventoryType(class'ComboAbilityStabInv'));
-		if (Inv == None)
-		{
-			Inv = Other.Spawn(class'ComboAbilityStabInv');
-			Inv.GiveTo(Other);
-		}
-		if (Inv != None)
-		{
-			Inv.ComboDamage = default.BaseMultiplier;
-			Inv.ComboLifespan = default.BaseLifespan;
-			Inv.EffectMultiplier = default.MultiplierStep*AbilityLevel;
-			Inv.bAll = default.All;
-			Inv.bSingle = default.Single;
-		}
-	}
+	StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+	
+	if (StatusInv == None)
+		return;
+
+	StatusInv.AddAttackCombo(Class'OffenseCombo_Stab', default.NumTargets, default.NumHits, AbilityLevel*default.DamagePerHit, Class'DamTypeCombo', default.TimeBetweenHits);
 }
 
 defaultproperties
@@ -34,6 +26,10 @@ defaultproperties
 	BaseLifespan=10.000000000
 	All=True
 	Single=False
+	NumTargets=0
+	NumHits=10
+	DamagePerHit=2
+	TimeBetweenHits=1
 	Materials(0)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(5,5))
 	Materials(1)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(10,10))
 	Materials(2)=(RequiredMaterials=(Class'DEKRPG999X.AbilityMaterialPlatedArmor',Class'DEKRPG999X.AbilityMaterialHoneysuckleVine'),RequiredMaterialLevels=(15,15))
