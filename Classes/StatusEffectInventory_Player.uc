@@ -9,7 +9,7 @@ class StatusEffectInventory_Player extends StatusEffectInventory
 	
 struct StatusCombo
 {
-	var Class<StatusEffect> EffectClass;
+	var string StatusEffectName;
 	var int Modifier;
 	var int Lifespan;
 	var bool bDispellable;
@@ -29,18 +29,18 @@ struct AttackingCombo
 var AttackingCombo AttackCombo;
 
 //Called by the ComboAbility purchased by player
-function AddCombo(Class<StatusEffect> EffectClass, int Modifier, int LifespanToAdd, bool bDispellable, bool bStackable)
+function AddCombo(string StatusEffectName, int Modifier, int LifespanToAdd, bool bDispellable, bool bStackable)
 {
 	local int x;
 	
 	for (x = 0; x < Combos.Length; x++)
 	{
-		if (Combos[x].EffectClass == EffectClass)	//In the event ModifyPawn() of abilities get called multiple times while a player is alive
+		if (Combos[x].StatusEffectName == StatusEffectName)	//In the event ModifyPawn() of abilities get called multiple times while a player is alive
 			return;
 	}
 	
 	Combos.Insert(0, 1);
-	Combos[0].EffectClass = EffectClass;
+	Combos[0].StatusEffectName = StatusEffectName;
 	Combos[0].Modifier = Modifier;
 	Combos[0].Lifespan = LifespanToAdd;
 	Combos[0].bDispellable = bDispellable;
@@ -63,7 +63,7 @@ function ExecuteCombos()
 {
 	local int x;
 	local Controller C, NextC;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	local OffenseCombo AttackComboInst;
 	
 	if (Instigator == None || Instigator.Controller == None || Instigator.Health <= 0)
@@ -82,9 +82,9 @@ function ExecuteCombos()
 					|| ( Combos[x].Modifier < 0 && C.Pawn.GetTeamNum() != Instigator.GetTeamNum() )
 				)
 				{
-					StatusInv = StatusEffectInventory(C.Pawn.FindInventoryType(Class'StatusEffectInventory'));
+					StatusInv = StatusEffectManager(C.Pawn.FindInventoryType(Class'StatusEffectManager'));
 					if (StatusInv != None)
-						StatusInv.AddStatusEffect(Combos[x].EffectClass, Combos[x].Modifier, Combos[x].Lifespan, Combos[x].bDispellable, Combos[x].bStackable, Instigator);
+						StatusInv.AddStatusEffect(Combos[x].StatusEffectName, Combos[x].Modifier, Combos[x].Lifespan, Combos[x].bDispellable, Combos[x].bStackable, Instigator);
 				}
 			}
 			

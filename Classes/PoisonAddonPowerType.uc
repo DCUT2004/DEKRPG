@@ -19,7 +19,7 @@ static function bool AllowedFor(Weapon W)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
 	local MagicShieldInv MInv;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	local Pawn P;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
@@ -44,10 +44,10 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
             MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
     		if (MInv == None)
     		{
-				StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+				StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
 				if (StatusInv == None)
 					return;
-				StatusInv.AddStatusEffect(Class'StatusEffect_Poison', -TheWeapon.GetModifier(), PoisonLifespan, True, False, TheWeapon.Instigator);
+				StatusInv.AddStatusEffect(Class'StatusEffect_Poison'.static.GetName(), -TheWeapon.GetModifier(), PoisonLifespan, True, False, TheWeapon.Instigator);
             }
 		}
 	}

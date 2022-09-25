@@ -24,7 +24,7 @@ static function bool AllowedFor(Weapon W)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
 	local Pawn P;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	local MagicShieldInv MInv;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
@@ -55,11 +55,11 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	if (MInv != None)
         return;
 		
-	StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+	StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
 	if (StatusInv == None)
 		return;
 		
-	StatusInv.AddStatusEffect(Class'StatusEffect_Momentum', -TheWeapon.GetModifier(), TheWeapon.GetModifier(), True, False);
+	StatusInv.AddStatusEffect(Class'StatusEffect_Momentum'.static.GetName(), -TheWeapon.GetModifier(), TheWeapon.GetModifier(), True, False);
 }
 
 function bool CanCoexist( class<AddonPowerType> NewType )

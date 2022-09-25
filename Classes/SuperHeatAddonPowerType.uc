@@ -20,7 +20,7 @@ static function bool AllowedFor(Weapon W)
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	local FireInv FInv;
 	local MagicShieldInv MInv;
 	local Pawn P;
@@ -50,7 +50,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 		if (MInv == None)
 		{
-			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv == None)
 				return;
 			LocalModifier = TheWeapon.GetModifier();
@@ -62,7 +62,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     				A.RemoteRole = ROLE_SimulatedProxy;
 				LocalModifier += 1;
 			}
-			if (StatusInv.AddStatusEffect(Class'StatusEffect_Burn', -LocalModifier, HeatLifespan, True, False, TheWeapon.Instigator)  != None)
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Burn'.static.GetName(), -LocalModifier, HeatLifespan, True, False, TheWeapon.Instigator))
 			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{

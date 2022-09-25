@@ -24,7 +24,7 @@ static function bool AllowedFor(Weapon W)
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType)
 {
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	local MagicShieldInv MInv;
 	local Pawn P;
 	local EarthInv EInv;
@@ -53,14 +53,14 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 		if (MInv == None)
 		{
-			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv == None)
 				return;
 			LocalModifier = TheWeapon.GetModifier();
 			EInv = EarthInv(P.FindInventoryType(Class'EarthInv'));
 			if (EInv != None)
 				LocalModifier += 1;
-			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, LocalModifier, true, false) != None )
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed'.static.GetName(), -LocalModifier, LocalModifier, true, false))
 			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{

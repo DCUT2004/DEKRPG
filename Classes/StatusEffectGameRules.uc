@@ -11,45 +11,50 @@ var Material KnockbackOverlay;
 
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
-	local StatusEffectInventory InstigatorStatusInv, InjuredStatusInv;
+	local int StatusIndex;
+	local StatusEffectManager InstigatorStatusInv, InjuredStatusInv;
 	
 	if (InstigatedBy != None)
-		InstigatorStatusInv = StatusEffectInventory(InstigatedBy.FindInventoryType(Class'StatusEffectInventory'));
+		InstigatorStatusInv = StatusEffectManager(InstigatedBy.FindInventoryType(Class'StatusEffectManager'));
 	if (Injured != None)
-		InjuredStatusInv = StatusEffectInventory(Injured.FindInventoryType(Class'StatusEffectInventory'));
+		InjuredStatusInv = StatusEffectManager(Injured.FindInventoryType(Class'StatusEffectManager'));
 	
 	
 	//Adjust damage if Instigator has StatusEffect_DamageBonus
-	if (InstigatorStatusInv != None && InstigatorStatusInv.DamageBonus != None && InstigatorStatusInv.DamageBonus.Modifier != 0)
+	StatusIndex = InstigatorStatusInv.GetStatusEffectIndex(class'StatusEffect_DamageBonus'.static.GetName());
+	if (InstigatorStatusInv != None && StatusIndex >= 0 && InstigatorStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 	{
-		Damage *= 1 + (InstigatorStatusInv.DamageBonus.Modifier * DamagePercentPerModifier);
+		Damage *= 1 + (InstigatorStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
 		if (Damage <= 0)
 			Damage = 1;
 	}
 	
 	//Adjust damage if Injured has StatusEffect_DamageReduction
-	if (InjuredStatusInv != None && InjuredStatusInv.DamageReduction != None && InjuredStatusInv.DamageReduction.Modifier != 0)
+	StatusIndex = InjuredStatusInv.GetStatusEffectIndex(class'StatusEffect_DamageReduction'.static.GetName());
+	if (InjuredStatusInv != None && StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 	{
-		Damage *= 1 + (-InjuredStatusInv.DamageReduction.Modifier * DamagePercentPerModifier);
+		Damage *= 1 + (-InjuredStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
 		if (Damage <= 0)
 			Damage = 1;
 	}
 	
 	//Adjust momentum if Injured has StatusEffect_Momentum
-	if (InjuredStatusInv != None && InjuredStatusInv.Momentum != None && InjuredStatusInv.Momentum.Modifier != 0)
+	StatusIndex = InjuredStatusInv.GetStatusEffectIndex(class'StatusEffect_Momentum'.static.GetName());
+	if (InjuredStatusInv != None && StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 	{
-		if (InjuredStatusInv.Momentum.Modifier < 0)
-			AddMomentum(-InjuredStatusInv.Momentum.Modifier, Damage, Injured, InstigatedBy, HitLocation, Momentum, DamageType);
-		else if (InjuredStatusInv.Momentum.Modifier > 0)
-			ReduceMomentum(InjuredStatusInv.Momentum.Modifier, Damage, Momentum);
+		if (InjuredStatusInv.StatusEffects[StatusIndex].Modifier < 0)
+			AddMomentum(-InjuredStatusInv.StatusEffects[StatusIndex].Modifier, Damage, Injured, InstigatedBy, HitLocation, Momentum, DamageType);
+		else if (InjuredStatusInv.StatusEffects[StatusIndex].Modifier > 0)
+			ReduceMomentum(InjuredStatusInv.StatusEffects[StatusIndex].Modifier, Damage, Momentum);
 	}
 	
 	//Adjust damage if Instigator has ChanceHit
-	if (InstigatorStatusInv != None && InstigatorStatusInv.ChanceHit != None && InstigatorStatusInv.ChanceHit.Modifier != 0)
+	StatusIndex = InstigatorStatusInv.GetStatusEffectIndex(class'StatusEffect_ChanceHit'.static.GetName());
+	if (InstigatorStatusInv != None && StatusIndex >= 0 && InstigatorStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 	{
-		if (Rand(100) <= abs(InstigatorStatusInv.ChanceHit.Modifier)*ChanceHitPerModifier)
+		if (Rand(100) <= abs(InstigatorStatusInv.StatusEffects[StatusIndex].Modifier)*ChanceHitPerModifier)
 		{
-			if (InstigatorStatusInv.ChanceHit.Modifier > 0)
+			if (InstigatorStatusInv.StatusEffects[StatusIndex].Modifier > 0)
 			{
 				Damage *= 2;
 				InstigatedBy.Spawn(Class'GamblerHitEffect',,,InstigatedBy.Location);
@@ -57,7 +62,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 				Injured.Spawn(Class'GamblerHitEffect',,,Injured.Location);
 				Injured.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*Injured.TransientSoundVolume,,Injured.TransientSoundRadius);
 			}
-			else if (InstigatorStatusInv.ChanceHit.Modifier < 0)
+			else if (InstigatorStatusInv.StatusEffects[StatusIndex].Modifier < 0)
 			{
 				Damage = 1;
 				InstigatedBy.Spawn(Class'MissedShotHitEffect',,,InstigatedBy.Location);

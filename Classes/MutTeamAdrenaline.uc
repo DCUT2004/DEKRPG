@@ -29,12 +29,13 @@ var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
 
 struct ComboInfo
 {
-	var Class<StatusEffect> EffectClass;
-	var int Lifespan;
+	var class<StatusEffectData> StatusEffectClass;
+	var int StatusLifespan;
 	var bool bDispellable;
 	var bool bStackable;
 };
-var config Array <ComboInfo> Combos;
+
+var config Array < ComboInfo > Combos;
 
 static function MutTeamAdrenaline GetMutTeamAdrenaline(GameInfo G)
 {
@@ -275,13 +276,13 @@ function GrantMonsterCombo()
 		RandIndex = Rand(Combos.Length);
 		
 		//Next, determine what the Modifier of the StatusEffect will be
-		MaxModifier = Combos[RandIndex].EffectClass.default.MaxModifier;
+		MaxModifier = Combos[RandIndex].StatusEffectClass.default.MaxModifier;
 		Modifier = Rand(MaxModifier) + 1;
 		
 		//Will this be a buff to monsters (positive modifier) or an ailment to players (negative modifier)
-		if (Combos[RandIndex].EffectClass.default.bOnlyNegativeModifier || Combos[RandIndex].EffectClass == Class'StatusEffect_AdrenRegen' || Combos[RandIndex].EffectClass == Class'StatusEffect_AmmoRegen')
+		if (Combos[RandIndex].StatusEffectClass.default.bOnlyNegativeModifier || Combos[RandIndex].StatusEffectClass == Class'StatusEffect_AdrenRegen' || Combos[RandIndex].StatusEffectClass == Class'StatusEffect_AmmoRegen')
 			Modifier = -(Modifier);
-		else if (Combos[RandIndex].EffectClass.default.bOnlyPositiveModifier){}
+		else if (Combos[RandIndex].StatusEffectClass.default.bOnlyPositiveModifier){}
 		else	//Can be positive or negative - decide which
 		{
 			if ( Rand(100) <= 49)
@@ -301,7 +302,7 @@ function GrantMonsterCombo()
 function ApplyMonsterBuff(int RandIndex, int Modifier)
 {
 	local Controller C, NextC;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	
 	C = Level.ControllerList;
 	
@@ -311,9 +312,9 @@ function ApplyMonsterBuff(int RandIndex, int Modifier)
 		
 		if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(Class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali'))
 		{
-			StatusInv = StatusEffectInventory(C.Pawn.FindInventoryType(Class'StatusEffectInventory'));
+			StatusInv = StatusEffectManager(C.Pawn.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
-				StatusInv.AddStatusEffect(Combos[RandIndex].EffectClass, Modifier, Combos[RandIndex].Lifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass.default.StatusEffectName, Modifier, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
 		
 		C = NextC;
@@ -324,7 +325,7 @@ function ApplyPlayerAilment(int RandIndex, int Modifier)
 {
 	local Controller C, NextC;
 	local Pawn RealP;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 
 	C = Level.ControllerList;
 	
@@ -339,9 +340,9 @@ function ApplyPlayerAilment(int RandIndex, int Modifier)
 				RealP = Vehicle(C.Pawn).Driver;
 			else
 				RealP = C.Pawn;
-			StatusInv = StatusEffectInventory(RealP.FindInventoryType(Class'StatusEffectInventory'));
+			StatusInv = StatusEffectManager(RealP.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
-				StatusInv.AddStatusEffect(Combos[RandIndex].EffectClass, Modifier, Combos[RandIndex].Lifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass.default.StatusEffectName, Modifier, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
 		
 		C = NextC;
@@ -391,7 +392,7 @@ simulated function PlayMonsterComboSound()
 
 simulated function AnnounceCombo(int RandIndex, int Modifier)
 {
-	Level.Game.BroadCast(Self, Combos[RandIndex].EffectClass.default.StatusEffectName $ " " $ Modifier $ " for " $ Combos[RandIndex].Lifespan $ " seconds");
+	Level.Game.BroadCast(Self, Combos[RandIndex].StatusEffectClass.default.StatusEffectName $ " " $ Modifier $ " for " $ Combos[RandIndex].StatusLifespan $ " seconds");
 }
 
 defaultproperties
@@ -408,18 +409,18 @@ defaultproperties
 	MaterialOnGameWonChance=70
 	LowMaterialChance=80
 	MediumMaterialChance=95
-	Combos(0)=(EffectClass=Class'StatusEffect_DamageBonus',Lifespan=30,bDispellable=True,bStackable=True)
-	Combos(1)=(EffectClass=Class'StatusEffect_DamageReduction',Lifespan=30,bDispellable=True,bStackable=True)
-	Combos(2)=(EffectClass=Class'StatusEffect_Burn',Lifespan=5,bDispellable=True,bStackable=False)
-	Combos(3)=(EffectClass=Class'StatusEffect_Speed',Lifespan=15,bDispellable=True,bStackable=False)
-	Combos(4)=(EffectClass=Class'StatusEffect_ChanceHit',Lifespan=20,bDispellable=True,bStackable=True)
-	Combos(5)=(EffectClass=Class'StatusEffect_Parasite',Lifespan=0,bDispellable=False,bStackable=True)
-	Combos(6)=(EffectClass=Class'StatusEffect_Momentum',Lifespan=30,bDispellable=True,bStackable=False)
-	Combos(7)=(EffectClass=Class'StatusEffect_Misfortune',Lifespan=20,bDispellable=True,bStackable=True)
-	Combos(8)=(EffectClass=Class'StatusEffect_Regeneration',Lifespan=20,bDispellable=True,bStackable=True)
-	Combos(9)=(EffectClass=Class'StatusEffect_AdrenRegen',Lifespan=10,bDispellable=True,bStackable=False)
-	Combos(10)=(EffectClass=Class'StatusEffect_AmmoRegen',Lifespan=10,bDispellable=True,bStackable=False)
-	Combos(11)=(EffectClass=Class'StatusEffect_MagicalWard',Lifespan=25,bDispellable=True,bStackable=True)
+	Combos(0)=(StatusEffectClass=Class'StatusEffect_DamageBonus',StatusLifespan=30,bDispellable=True,bStackable=True)
+	Combos(1)=(StatusEffectClass=Class'StatusEffect_DamageReduction',StatusLifespan=30,bDispellable=True,bStackable=True)
+	Combos(2)=(StatusEffectClass=Class'StatusEffect_Burn',StatusLifespan=5,bDispellable=True,bStackable=False)
+	Combos(3)=(StatusEffectClass=Class'StatusEffect_Speed',StatusLifespan=15,bDispellable=True,bStackable=False)
+	Combos(4)=(StatusEffectClass=Class'StatusEffect_ChanceHit',StatusLifespan=20,bDispellable=True,bStackable=True)
+	Combos(5)=(StatusEffectClass=Class'StatusEffect_Parasite',StatusLifespan=0,bDispellable=False,bStackable=True)
+	Combos(6)=(StatusEffectClass=Class'StatusEffect_Momentum',StatusLifespan=30,bDispellable=True,bStackable=False)
+	Combos(7)=(StatusEffectClass=Class'StatusEffect_Misfortune',StatusLifespan=20,bDispellable=True,bStackable=True)
+	Combos(8)=(StatusEffectClass=Class'StatusEffect_Regeneration',StatusLifespan=20,bDispellable=True,bStackable=True)
+	Combos(9)=(StatusEffectClass=Class'StatusEffect_AdrenRegen',StatusLifespan=10,bDispellable=True,bStackable=False)
+	Combos(10)=(StatusEffectClass=Class'StatusEffect_AmmoRegen',StatusLifespan=10,bDispellable=True,bStackable=False)
+	Combos(11)=(StatusEffectClass=Class'StatusEffect_MagicalWard',StatusLifespan=25,bDispellable=True,bStackable=True)
 	LowMaterials(0)=Class'DEKRPG999X.AbilityMaterialLumber'
 	LowMaterials(1)=Class'DEKRPG999X.AbilityMaterialCombatBoots'
 	LowMaterials(2)=Class'DEKRPG999X.AbilityMaterialTarydiumShards'

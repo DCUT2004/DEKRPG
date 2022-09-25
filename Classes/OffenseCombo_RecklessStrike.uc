@@ -9,7 +9,7 @@ var config bool bDefenseStackable;
 function DoDamage(Pawn Target)
 {
 	local Actor FX;
-	local StatusEffectInventory StatusInv;
+	local StatusEffectManager StatusInv;
 	
 	if (Target == None || Target.Health <= 0 || Target.Controller == None)
 		return;
@@ -22,10 +22,10 @@ function DoDamage(Pawn Target)
 	
 	if (Instigator == None)
 		return;
-	StatusInv = StatusEffectInventory(Instigator.FindInventoryType(Class'StatusEffectInventory'));
+	StatusInv = StatusEffectManager(Instigator.FindInventoryType(Class'StatusEffectManager'));
 	if (StatusInv == None)
 		return;
-	StatusInv.AddStatusEffect(Class'StatusEffect_DamageReduction', DefenseModifier, DefenseLifespan, bDefenseDispellable, bDefenseStackable);
+	StatusInv.AddStatusEffect(Class'StatusEffect_DamageReduction'.static.GetName(), DefenseModifier, DefenseLifespan, bDefenseDispellable, bDefenseStackable);
 }
 
 defaultproperties

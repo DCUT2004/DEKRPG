@@ -70,8 +70,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	local int HealthGiven;
 	local int localMaxHealth;
 	local StatusEffectInventory StatusInv;
-	local StatusEffect StatusEffect;
-	local StatusEffect_Parasite Parasite;
+	local int ParasiteIndex;
 
 	Super.DoPowerEffect(Damage, Victim, HitLocation, Momentum, DamageType);
 
@@ -111,21 +110,20 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
 			if (StatusInv != None)
 			{
-				StatusEffect = StatusInv.GetStatusEffect(Class'StatusEffect_Parasite');
-				if (StatusEffect != None)
+				ParasiteIndex = StatusInv.GetStatusEffectIndex(class'StatusEffect_Parasite'.static.GetName());
+				if (ParasiteIndex >= 0)
 				{
-					Parasite = StatusEffect_Parasite(StatusEffect);
-					if (Parasite != None && Parasite.Health > 0)
+					if (StatusInv.ParasiteHealth > 0)
 					{
-						if (Parasite.Health > HealthGiven)
+						if (StatusInv.ParasiteHealth > HealthGiven)
 						{
-							Parasite.Health -= HealthGiven;
+							StatusInv.RemoveParasiteHealth(HealthGiven);
 							HealthGiven = 0;
 						}
 						else
 						{
-							HealthGiven -= Parasite.Health;
-							Parasite.Health = 0;
+							HealthGiven -= StatusInv.ParasiteHealth;
+							StatusInv.ParasiteHealth = 0;
 						}
 					}
 				}

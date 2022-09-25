@@ -3,11 +3,11 @@
 * Negative Modifier = Knockback
 */
 
-class StatusEffect_Momentum extends StatusEffect
+class StatusEffect_Momentum extends StatusEffectData
 	config(UT2004RPG);
 
 defaultproperties
 {
-	StatusEffectName="Momentum"
+	StatusEffectName="Mmntm"
 	MaxModifier=6
 }
