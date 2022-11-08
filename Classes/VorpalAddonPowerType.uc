@@ -38,6 +38,12 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(string(W)), "MEGABLAST") > -1)
 		return false;		
 
+	if(instr(caps(W), "HEATWHIP") > -1)
+		return true;
+
+	if(instr(caps(W), "CHAIN") > -1)
+		return true;
+
 	return false;
 }
 
@@ -122,7 +128,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 defaultproperties
 {
-	VorpalPercent=1.0
+	VorpalPercent=2.0
 	PosName="Vorpal"
 	ZeroName=""
 	NegName=""
