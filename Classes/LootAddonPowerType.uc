@@ -19,7 +19,7 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(string(W)), "MEGABLAST") > -1)
 		return false;		
 
-	return false;
+	return true;
 }
 
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
