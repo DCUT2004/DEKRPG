@@ -47,7 +47,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 				StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
 				if (StatusInv == None)
 					return;
-				StatusInv.AddStatusEffect(Class'StatusEffect_Poison', -TheWeapon.GetModifier(), PoisonLifespan, True, False, TheWeapon.Instigator);
+				StatusInv.AddStatusEffect(Class'StatusEffect_Poison', -TheWeapon.GetModifier()*PerformanceIncrease, PoisonLifespan*PerformanceIncrease, True, False, TheWeapon.Instigator);
             }
 		}
 	}

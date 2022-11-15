@@ -105,9 +105,9 @@ function Activate()
 
 	if (Instigator != None)
 	{
-		if(Instigator.Controller.Adrenaline < (AdrenalineRequired*AdrenalineUsage))
+		if(Instigator.Controller.Adrenaline < AdrenalineRequired)
 		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);
+			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
 			bActive = false;
 			GotoState('');
 			return;
@@ -146,13 +146,13 @@ function Activate()
 		{
 			HBC.MaxHealing = MaxHealing;
 			HBC.MinHealing = MinHealing;
-			HBC.HealingRadius = HealingRadius;
-			HBC.ChargeTime = ChargeTime*AdrenalineUsage;
+			HBC.HealingRadius = HealingRadius*PerformanceIncrease;
+			HBC.ChargeTime = ChargeTime;
 			HBC.RPGRules = Rules;
 			HBC.EXPMultiplier = EXPMultiplier;
 			HBC.MaxHealth = MaxHealth;
 
-			Instigator.Controller.Adrenaline -= AdrenalineRequired*AdrenalineUsage;
+			Instigator.Controller.Adrenaline -= AdrenalineRequired;
 			if (Instigator.Controller.Adrenaline < 0)
 				Instigator.Controller.Adrenaline = 0;
 		}

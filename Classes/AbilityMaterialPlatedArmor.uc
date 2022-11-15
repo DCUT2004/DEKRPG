@@ -33,7 +33,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 
 	//finally check if we killed it. May happen if we have a DD or triple running
 	if (Instigator == None || Instigator.Health <= 0 )
-		class'ArtifactLightningBeam'.static.AddArtifactKill(Injured, class'WeaponRetaliate');
+		class'EnhancedRPGArtifact'.static.AddArtifactKill(Injured, class'WeaponRetaliate');
 }
 
 defaultproperties

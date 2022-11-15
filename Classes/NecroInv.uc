@@ -147,7 +147,7 @@ function SendBackToGrave()
 		{
 			ARLocal = ArtifactResurrect(C.Pawn.FindInventoryType(class'ArtifactResurrect'));
 			if (ARLocal != None)
-				ARLocal.SetRecoveryTime(ARLocal.TimeBetweenUses*ARLocal.AdrenalineUsage);
+				ARLocal.SetRecoveryTime(ARLocal.TimeBetweenUses);
 		}
 		C = C.NextController;
 	}

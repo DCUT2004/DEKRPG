@@ -264,8 +264,8 @@ defaultproperties
      BoltEmitterClass(5)=Class'DEKRPG999X.PurpleBoltEmitter'
      BoltEmitterClass(6)=Class'DEKRPG999X.WhiteBoltEmitter'
      DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
-     MaxStepRange=650.000000
-     FirstDamage=180
+     MaxStepRange=600.000000
+     FirstDamage=160
 	 MissedShotFraction=0.600000
      StepDamageFraction=0.700000
      MaxSteps=3

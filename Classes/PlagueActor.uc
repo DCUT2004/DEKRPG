@@ -65,7 +65,7 @@ simulated function Explode()
 
 				//now see if we killed it
 				if (C == None || C.Pawn == None || C.Pawn.Health <= 0 )
-					class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponPlague');	// assume killed
+					class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponPlague');	// assume killed
 			}
 			C = NextC;
 		}

@@ -42,7 +42,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 	if (P != None && Damage > P.Health)	//A kill
 	{
-		FlowerChance = default.EarthFlowerChance  * TheWeapon.GetModifier();
+		FlowerChance = default.EarthFlowerChance  * TheWeapon.GetModifier() *PerformanceIncrease;
 		if (FlowerChance > default.MaxFlowerChance)
 			FlowerChance = default.MaxFlowerChance;
 		if (Rand(99) <= FlowerChance)

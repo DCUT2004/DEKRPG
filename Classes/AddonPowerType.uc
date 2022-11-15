@@ -19,6 +19,7 @@ var string NegName;			// name to give with a negative modifier
 var float AIBonus;			// increase in AI rating to be given to this weapon due to powerup
 var Material PowerOverlay;		// what shader to use if this is the only Power type
 var class<AddonPowerPickup> ThisPickupClass;	// Pickup class that gives this Power type
+var float PerformanceIncrease;  // performance increase for this powertype
 
 var config float DamagePercent;		// extra damage bonus for this particular Power type
 var config float DamageBonusAgainstEarthMonsters;	// extra damage bonus against Earth monsters
@@ -144,6 +145,12 @@ function AddDamageBonus(out int Damage, int OriginalDamage, Actor Victim, vector
 // AdjustDamage - change the damage done here. Healing sets to zero here. Piercing chooses best of damage or original
 function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType);
 
+// EnhancePerformance adapt the benefit as set from the subclass
+function EnhancePerformance(float PerfIncrease)
+{
+	PerformanceIncrease = PerfIncrease;
+}
+
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
 function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType);
 
@@ -190,5 +197,6 @@ defaultproperties
 	Physics=PHYS_None
 	bReplicateMovement=false
 	ThisPickupClass=None
+    PerformanceIncrease=1.0
 }
 

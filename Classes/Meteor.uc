@@ -130,7 +130,7 @@ simulated function HurtRadius( float DamageAmount, float DamageRadius, class<Dam
 			if (VictimPawn)
 			{
 				if (Victims == None || Pawn(Victims) == None || Pawn(Victims).Health <= 0 )
-					class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponMeteor');	// assume killed
+					class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponMeteor');	// assume killed
 			}
 			if (Victims != None)
 			{
@@ -166,7 +166,7 @@ simulated function HurtRadius( float DamageAmount, float DamageRadius, class<Dam
 		if (VictimPawn)
 		{
 			if (Victims == None || Pawn(Victims) == None || Pawn(Victims).Health <= 0 )
-				class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponMeteor');	// assume killed
+				class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponMeteor');	// assume killed
 		}
 		if (Victims != None)
 		{

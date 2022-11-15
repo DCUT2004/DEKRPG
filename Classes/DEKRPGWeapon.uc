@@ -248,6 +248,8 @@ function int MaxPowersForThisPlayer(Pawn Other)
     ok = false;
     MaxAddons = 0;
     LevelMagicWeapons = 0;
+    
+	Data = GetDataObject(Other);
 	for (x = 0; Data != None && x < Data.Abilities.length && !ok; x++)
 		if (Data.Abilities[x] == class'AbilityMagicWeapons')
         {
@@ -315,22 +317,19 @@ function int GetNumberOfRequiredAddons(RPGPlayerDataObject Data)
         return 2;
 
     if (x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons)
-    {
-        if (RuneWeapon(ModifiedWeapon) != None)
-            return 3;   // only allow 3 on Runes
-        else
-            return 2;
-    }
+        return 3;
 
     if (MaxAddons > 3 && x < PercentChanceNormal + PercentChanceZeroAddons + PercentChanceOneAddon + PercentChanceTwoAddons + PercentChanceThreeAddons + PercentChanceMoreAddons)
     {
-        if (RuneWeapon(ModifiedWeapon) != None)
-            return Rand(MaxNumPowers - 3) + 4;   // only allow 3 or more on Runes
-        else
-            return 2;
+        return Rand(MaxNumPowers - 3) + 4;   // only allow 3 or more on Runes
     }
 
     return 0;    // should never get here        
+}
+
+function int GetValueForCurMaxPowers()
+{
+    return MaxNumPowers;    // Change to a different number if want different maxes for different weapon types
 }
 
 function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
@@ -375,7 +374,7 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
 		}
 	}
 
-	CurMaxPowers = MaxNumPowers;	// for addonartifacts to check against
+	CurMaxPowers = GetValueForCurMaxPowers();	// for AddonPowerArtifact to check against.
 
 	if (bSetPowerTypes)
         return;
@@ -401,6 +400,9 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
         bSetPowerTypes = true;
         return;
     }
+    
+    if (NumRequiredAddons > CurMaxPowers)
+        NumRequiredAddons = CurMaxPowers;
 
     // ok, add the addons    
     iSumChance = 0;
@@ -432,7 +434,7 @@ function AddInitialPowerTypes(RPGWeapon ForcedWeapon, RPGPlayerDataObject Data)
                     }
                 }
                 if (ok)
-                    AddPowerType(newType);	// increments NumPowerTypes
+                    AddPowerType(newType, 1.0);	// increments NumPowerTypes
                 else
                     newType = none;
             }
@@ -725,12 +727,13 @@ function bool CanAddPowerType(class<AddonPowerType> NewType)
 	return true;
 }
 
-simulated function AddPowerType(class<AddonPowerType> NewClass)
+simulated function AddPowerType(class<AddonPowerType> NewClass, float PerformanceIncrease)
 {
 	// add the Power type to the weapon
 	local AddonPowerType NewType;
 
 	NewType = spawn(NewClass,instigator);
+    NewType.EnhancePerformance(PerformanceIncrease);
 	NewType.AttachToWeapon(self);
 	CurrentPowerTypes[NumPowerTypes] = NewType;
 	NumPowerTypes++;  

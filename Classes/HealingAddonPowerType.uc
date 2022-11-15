@@ -101,7 +101,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 		if ( P == TheWeapon.Instigator || (P.GetTeam() == TheWeapon.Instigator.GetTeam() && TheWeapon.Instigator.GetTeam() != None) )
 		{
-			HealthGiven = Max(1, Damage * ((HealingPercent/100.0) * TheWeapon.GetModifier()));
+			HealthGiven = Max(1, Damage * ((HealingPercent/100.0) * TheWeapon.GetModifier() *PerformanceIncrease));
 			
 			HealthGiven = Min((P.HealthMax + localMaxHealth) - P.Health, HealthGiven );
 				

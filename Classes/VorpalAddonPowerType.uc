@@ -90,7 +90,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     if (P.HealthMax > 5000)      // cheap and cheerful don't instagib a Boss
         return;
     
-    Chance = int(10*(VorpalPercent * TheWeapon.GetModifier()) +0.01);
+    Chance = int(10*(VorpalPercent * TheWeapon.GetModifier() *PerformanceIncrease) +0.01);
 	iRandom = rand(999);
 
 	if (Chance >= iRandom)

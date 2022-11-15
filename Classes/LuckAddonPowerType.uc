@@ -60,7 +60,7 @@ simulated event WeaponTick(float dt)
 			P.bDropped = true;
 			P.GotoState('Sleeping');
 
-			NextEffectTime = (Rand(15) + LuckCheckTime) / max(1,TheWeapon.GetModifier());
+			NextEffectTime = (Rand(15) + LuckCheckTime) / (PerformanceIncrease * max(1,TheWeapon.GetModifier()));
 		}
 	}
 }
@@ -103,12 +103,17 @@ function class<Pickup> ChoosePickupClass()
 	local class<Pickup> AmmoPickupClass;
 	local class<AddonPowerPickup> PowerPickup;
 	local int i, Count;
+    local bool AddedSomethingUseful;
+    local float AdjustmentFactor;
 
+    AddedSomethingUseful = false;
 	if (TheWeapon.Instigator.Health < TheWeapon.Instigator.HealthMax)
 	{
 		Potentials[i++] = class'LuckyHealthPack';
 		Potentials[i++] = class'LuckyHealthPack';
+		Potentials[i++] = class'LuckyHealthPack';
 		Potentials[i++] = class'MiniHealthPack';
+        AddedSomethingUseful = true;
 	}
 	else
 	{
@@ -117,10 +122,16 @@ function class<Pickup> ChoosePickupClass()
 			Potentials[i++] = class'MiniHealthPack';
 			Potentials[i++] = class'LuckyHealthPack';
 			Potentials[i++] = class'MiniHealthPack';
+            AddedSomethingUseful = true;
 		}
-		if (TheWeapon.Instigator.ShieldStrength < TheWeapon.Instigator.GetShieldStrengthMax())
-			Potentials[i++] = class'ShieldPack';
 	}
+    
+	if (TheWeapon.Instigator.ShieldStrength < TheWeapon.Instigator.GetShieldStrengthMax())
+    {
+		Potentials[i++] = class'ShieldPack';
+        AddedSomethingUseful = true;
+    }
+    
 	for (Inv = TheWeapon.Instigator.Inventory; Inv != None; Inv = Inv.Inventory)
 	{
 		W = Weapon(Inv);
@@ -130,13 +141,19 @@ function class<Pickup> ChoosePickupClass()
 			{
 				AmmoPickupClass = W.AmmoPickupClass(0);
 				if (AmmoPickupClass != None)
+                {
 					Potentials[i++] = AmmoPickupClass;
+                    AddedSomethingUseful = true;
+                }
 			}
 			else if (W.NeedAmmo(1))
 			{
 				AmmoPickupClass = W.AmmoPickupClass(1);
 				if (AmmoPickupClass != None)
+                {
 					Potentials[i++] = AmmoPickupClass;
+                    AddedSomethingUseful = true;
+                }
 			}
 		}
 		Count++;
@@ -144,37 +161,62 @@ function class<Pickup> ChoosePickupClass()
 			break;
 	}
     
-	if (FRand() < 0.012 * TheWeapon.GetModifier())
-		Potentials[i++] = class'UDamagePack';
-	if (FRand() < 0.012 * TheWeapon.GetModifier())
-		Potentials[i++] = class'ArtifactLetterBPickup';
-        
-	if ((ChanceLuckPowerups>0) && (FRand() < (ChanceLuckPowerups * TheWeapon.GetModifier())) )
+	if (TheWeapon.Instigator.Controller != None && TheWeapon.Instigator.Controller.Adrenaline < TheWeapon.Instigator.Controller.AdrenalineMax)
+    {
+		Potentials[i++] = class'DruidAdrenalinePickup';
+    	Potentials[i++] = class'AdrenalinePickup';
+    	Potentials[i++] = class'LuckyAdrenalinePickup';
+    	Potentials[i++] = class'LuckyAdrenalinePickup';
+        AddedSomethingUseful = true;
+    }
+
+    // if we have added something useful to the player, let's not then add too much junk     
+    if (AddedSomethingUseful)
+    {
+        AdjustmentFactor = 0.8;
+    }
+    else
+    {
+        AdjustmentFactor = 2.5;
+    }
+            
+	if (FRand() < (ChanceLuckPowerups * PerformanceIncrease * TheWeapon.GetModifier() * AdjustmentFactor) )
 	{
 		PowerPickup = SelectWeaponPowerup();
 		if (PowerPickup != None)
         {
 			Potentials[i++] = PowerPickup;
-
         }
 	}
-	if (i == 0 || (TheWeapon.Instigator.Controller != None && TheWeapon.Instigator.Controller.Adrenaline < TheWeapon.Instigator.Controller.AdrenalineMax))
-    {
-		Potentials[i++] = class'DruidAdrenalinePickup';
-    	Potentials[i++] = class'AdrenalinePickup';
-    	Potentials[i++] = class'AdrenalinePickup';
-    	Potentials[i++] = class'LuckyAdrenalinePickup';
-    	Potentials[i++] = class'LuckyAdrenalinePickup';
+    
+	if (FRand() < 0.003 * TheWeapon.GetModifier() * AdjustmentFactor)
+		Potentials[i++] = class'ArtifactLetterBPickup';
+	if (FRand() < 0.003 * TheWeapon.GetModifier() * AdjustmentFactor)
+		Potentials[i++] = class'ArtifactLetterOPickup';
+	if (FRand() < 0.003 * TheWeapon.GetModifier() * AdjustmentFactor)
+		Potentials[i++] = class'ArtifactLetterNPickup';
+	if (FRand() < 0.003 * TheWeapon.GetModifier() * AdjustmentFactor)
+		Potentials[i++] = class'ArtifactLetterUPickup';
+	if (FRand() < 0.003 * TheWeapon.GetModifier() * AdjustmentFactor)
+		Potentials[i++] = class'ArtifactLetterSPickup';
+
+	if (FRand() < 0.06 * TheWeapon.GetModifier() * AdjustmentFactor * PerformanceIncrease)
+		Potentials[i++] = class'UDamagePack';
+	if (FRand() < 0.1 * TheWeapon.GetModifier() * AdjustmentFactor)
+	   Potentials[i++] = class'ArtifactPlusAddonPickup';
+	if (FRand() < 0.08 * TheWeapon.GetModifier() * AdjustmentFactor)
+	   Potentials[i++] = class'DruidArtifactMakeMagicWeaponPickup';
+	if (FRand() < 0.08 * TheWeapon.GetModifier() * AdjustmentFactor)
+	   Potentials[i++] = class'DruidArtifactTripleDamagePickup';
+	if (FRand() < 0.1 * TheWeapon.GetModifier() * AdjustmentFactor)
+	   Potentials[i++] = class'DruidEnhancedArtifactMonsterSummonPickup';	
+
+    if (i == 0)
+    { 
+        // add something just to make sure we have something
+        Potentials[i++] = class'AdrenalinePickup';
+    	Potentials[i++] = class'LuckyHealthPack';
     }
-
-	Potentials[i++] = class'ArtifactPlusAddonPickup';
-	Potentials[i++] = class'DruidArtifactMakeMagicWeaponPickup';
-	Potentials[i++] = class'DruidArtifactTripleDamagePickup';
-	Potentials[i++] = class'DruidEnhancedArtifactMonsterSummonPickup';	
-
-    // and some others just to make the numbers up
-    Potentials[i++] = class'AdrenalinePickup';
-	Potentials[i++] = class'LuckyHealthPack';
 
 	return Potentials[Rand(i)];
 }
@@ -193,7 +235,7 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 defaultproperties
 {
 	LuckCheckTime=25
-	ChanceLuckPowerups=0.02
+	ChanceLuckPowerups=0.025
 	NextEffectTime=20
 	PosName="Luck"
 	ZeroName="Luck"

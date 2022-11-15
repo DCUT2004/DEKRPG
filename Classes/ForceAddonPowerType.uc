@@ -32,9 +32,9 @@ simulated event WeaponTick(float dt)
 		foreach TheWeapon.Instigator.CollidingActors(class'Projectile', Proj, 200)
 			if (Proj.Instigator == TheWeapon.Instigator && Proj.Speed == Proj.default.Speed && Proj.MaxSpeed == Proj.default.MaxSpeed)
 			{
-				Proj.Speed *= 1.0 + ForceIncrease * TheWeapon.GetModifier();
-				Proj.MaxSpeed *= 1.0 + ForceIncrease * TheWeapon.GetModifier();
-				Proj.Velocity *= 1.0 + ForceIncrease * TheWeapon.GetModifier();
+				Proj.Speed *= 1.0 + ForceIncrease * TheWeapon.GetModifier()*PerformanceIncrease;
+				Proj.MaxSpeed *= 1.0 + ForceIncrease * TheWeapon.GetModifier()*PerformanceIncrease;
+				Proj.Velocity *= 1.0 + ForceIncrease * TheWeapon.GetModifier()*PerformanceIncrease;
 				if (Level.NetMode != NM_Standalone)
 				{
 					PSC = spawn(class'ProjectileSpeedChanger',,,Proj.Location, Proj.Rotation);

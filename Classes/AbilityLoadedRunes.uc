@@ -6,8 +6,6 @@ var config float NonRuneDamage;
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
-    local int newDamage;
-    
 	if(!bOwnedByInstigator)
 		return;
 
@@ -16,11 +14,9 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
         if (ClassIsChildOf(DamageType, class'RuneDamageType') == false)
         {
             // not a rune so decrease damage
-            newDamage = Damage * default.NonRuneDamage;
-    		if (newDamage == 0)
-    			newDamage = 1;
-            Log("=============== AbilityLoadedRunes adjusting damage from" @ Damage @ "to" @ newDamage @ "for damageType" @ DamageType);
-            Damage = newDamage;
+            Damage *= default.NonRuneDamage;
+    		if (Damage == 0)
+    			Damage = 1;
         }
 	}
 }

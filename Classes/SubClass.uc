@@ -135,7 +135,6 @@ defaultproperties
      AbilityConfigs(27)=(AvailableAbility=Class'DEKRPG999X.DEKLoadedAVRiL',MaxLevels=(0,2,0,0,0,1,0,2,2,2,2,0,0,0,0,0,0,2,2,2,0,0,0,0,2,0,0))
      AbilityConfigs(28)=(AvailableAbility=Class'DEKRPG999X.DEKLoadedWarrior',MaxLevels=(0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
      AbilityConfigs(29)=(AvailableAbility=Class'DEKRPG999X.DruidArtifactLoaded',MaxLevels=(0,0,4,0,0,2,0,0,0,0,0,5,0,0,0,0,0,3,0,0,3,3,0,0,0,0,0))
-     AbilityConfigs(30)=(AvailableAbility=Class'DEKRPG999X.AbilityLoadedCraftsman',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0))
      AbilityConfigs(31)=(AvailableAbility=Class'DEKRPG999X.DruidLoaded',MaxLevels=(0,5,0,0,0,0,0,6,5,5,3,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0))
      AbilityConfigs(32)=(AvailableAbility=Class'DEKRPG999X.AbilityHybridWeapons',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0))
      AbilityConfigs(33)=(AvailableAbility=Class'DEKRPG999X.AbilityHybridWeaponsEM',MaxLevels=(0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0))

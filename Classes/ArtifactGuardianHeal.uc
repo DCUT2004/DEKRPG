@@ -108,7 +108,7 @@ function Activate()
 				Inv.GuardianController = Instigator.Controller;
 				Inv.Rules = Rules;
 				Inv.HealthThreshold = HealthThreshold;
-				Inv.HealingRadius = HealingRadius;
+				Inv.HealingRadius = HealingRadius*PerformanceIncrease;
 				Inv.ChargeTime = ChargeTime;
 				Inv.EXPMultiplier = EXPMultiplier;
 				Inv.HealthMaxPlus = HealthMaxPlus;

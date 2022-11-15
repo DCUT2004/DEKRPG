@@ -35,7 +35,7 @@ function Activate()
 		return;	// really corrupt
 	}
 	
-	if (LastUsedTime + (TimeBetweenUses*AdrenalineUsage) > Instigator.Level.TimeSeconds)
+	if (LastUsedTime + TimeBetweenUses > Instigator.Level.TimeSeconds)
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 5000, None, None, Class);
 		bActive = false;

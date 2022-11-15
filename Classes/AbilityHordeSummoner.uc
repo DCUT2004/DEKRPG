@@ -36,9 +36,9 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	ASH = ArtifactSphereHealing(Other.FindInventoryType(class'ArtifactSphereHealing'));
 		
 	if (AHB != None)
-		AHB.EnhanceArtifact(default.AdrenalineUsage);
+		AHB.EnhanceAdrenalineRequired(default.AdrenalineUsage * AHB.default.AdrenalineRequired);
 	if (ASH != None)
-		ASH.EnhanceArtifact(default.AdrenalineUsage);
+		ASH.EnhanceAdrenalineRequired(default.AdrenalineUsage * ASH.default.AdrenalineRequired);
 
 }
 

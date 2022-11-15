@@ -57,18 +57,6 @@ simulated function PostBeginPlay()
 simulated function Timer()
 {
 	local float dist;
-	local ArtifactRemoteMedicDrone ARMD;
-	
-	ARMD = ArtifactRemoteMedicDrone(DroneMaster.FindInventoryType(class'ArtifactRemoteMedicDrone'));
-	if (ARMD != None)
-	{
-		if (ARMD.bDroneTargetSet)
-			DroneTarget = ARMD.DroneTarget; //If there is a target set with the artifact, tell the Drone to follow it.
-		else
-			DroneTarget = DroneMaster; //Otherwise if no target set, follow the master spawner.
-		if (DroneMaster != None && DroneTarget == None) //If sometime the target dies or leaves, return the Drone to the master spawner.
-			DroneTarget = DroneMaster;
-	}
 	
 	if (DroneTarget == None || DroneTarget.Health <= 0) //Same as above.
 		DroneTarget = DroneMaster;

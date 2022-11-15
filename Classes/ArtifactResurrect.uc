@@ -65,7 +65,7 @@ function BotConsider()
 	
 	bPlayerOut = False;
 	
-	if (Instigator != None && Instigator.Controller != None && Instigator.Controller.Adrenaline < AdrenalineRequired*AdrenalineUsage)
+	if (Instigator != None && Instigator.Controller != None && Instigator.Controller.Adrenaline < AdrenalineRequired)
 		return;
 	
 	if (Instigator != None && Instigator.Health > 0 && Instigator.Controller != None && NoArtifactsActive() && !bActive)
@@ -93,15 +93,15 @@ function activate()
 	
 	if ((Instigator != None) && (Instigator.Controller != None))
 	{
-		if (Instigator.Controller.Adrenaline < (AdrenalineRequired * AdrenalineUsage))
+		if (Instigator.Controller.Adrenaline < AdrenalineRequired)
 		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);
+			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
 			bActive = false;
 			GotoState('');
 			return;
 		}
 		
-		if (LastUsedTime  + (TimeBetweenUses*AdrenalineUsage) > Instigator.Level.TimeSeconds)
+		if (LastUsedTime  + TimeBetweenUses > Instigator.Level.TimeSeconds)
 		{
 			Instigator.ReceiveLocalizedMessage(MessageClass, 5000, None, None, Class);
 			bActive = false;
@@ -223,7 +223,7 @@ function bool RevivePlayer(Controller player)
 
 	//Take off health and adrenaline.
 	Instigator.Health -= (SacrificePerc * Instigator.Health);
-	Instigator.Controller.Adrenaline -= (AdrenalineRequired*AdrenalineUsage);
+	Instigator.Controller.Adrenaline -= AdrenalineRequired;
 	if (Instigator.Controller.Adrenaline < 0)
 		Instigator.Controller.Adrenaline = 0;
 	
@@ -242,7 +242,7 @@ function bool RevivePlayer(Controller player)
 		{
 			AR = ArtifactResurrect(C.Pawn.FindInventoryType(class'ArtifactResurrect'));
 			if (AR != None)
-				AR.SetRecoveryTime(TimeBetweenUses*AdrenalineUsage);
+				AR.SetRecoveryTime(TimeBetweenUses);
 		}
 		C = C.NextController;
 	}
@@ -294,7 +294,7 @@ function Zombify(Controller Revenant)
 	{
 		Inv = spawn(class'NecroInv', Revenant.Pawn,,, rot(0,0,0));
 		Inv.NecromancerController = Instigator.Controller;
-		Inv.LifeSpan = RevenantLifeSpan;
+		Inv.LifeSpan = RevenantLifeSpan*PerformanceIncrease;
 		Inv.XPMultiplier = XPMultiplier;
 		Inv.GiveTo(Revenant.Pawn);
 		if (PInv != None)

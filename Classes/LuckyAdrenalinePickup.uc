@@ -9,7 +9,7 @@ class LuckyAdrenalinePickup extends AdrenalinePickup;
 
 defaultproperties
 {
-     AdrenalineAmount=7.000000
+     AdrenalineAmount=10.000000
      PickupMessage="Lucky Adrenaline "
      Skins(0)=Texture'DEKRPGTexturesMaster209B.Skins.DG-MultiAdrenalineD'
      Skins(1)=TexPanner'XGameTextures.SuperPickups.AdrenalineInnerP'

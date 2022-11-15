@@ -2,24 +2,73 @@ class DruidArtifactLoaded extends RPGDeathAbility
 	config(UT2004RPG) 
 	abstract;
 
-var config Array< class<RPGArtifact> > Level1Artifact;
-var config Array< class<RPGArtifact> > Level2Artifact;
-var config Array< class<RPGArtifact> > Level3Artifact;
-var config Array< class<RPGArtifact> > Level4Artifact;
-var config Array< class<RPGArtifact> > Level5Artifact;
+struct ArtifactConfig
+{
+	var int Level;
+	var string SubClass;
+	var class<RPGArtifact> Artifact;
+	var float Cost;
+    var float PerformanceIncrease;
+};
+var config Array<ArtifactConfig> ArtifactConfigs;
 
-var config float WeaponDamage;
-var config float AdrenalineDamage;
-var config float AdrenalineUsage;
-var config float WizardUsage;
-var config float PowerUsage;
+static function string GetSubClassName(RPGPlayerDataObject.RPGPlayerData Data)
+{
+	local int curSubClasslevel;
+    local string curSubClass;
+	local class<RPGClass> curClass;
+	local int y;
+
+	// first find class and subclass
+    curSubClasslevel = -1;
+    curSubClass = "";
+	curClass = None;
+    
+	// first lets find the class
+	for (y = 0; y < Data.Abilities.length; y++)
+    {
+		if (ClassIsChildOf(Data.Abilities[y], class'RPGClass'))
+		{
+			// found the class
+			curClass = class<RPGClass>(Data.Abilities[y]);
+		}
+		else
+		if (ClassIsChildOf(Data.Abilities[y], class'SubClass'))
+		{
+			//found the subclass
+			curSubClassLevel = Data.AbilityLevels[y];
+		}
+    }
+	
+	// ok now check the subclass text
+	if (curClass == None)
+    {
+        if (class'SubClass'.default.SubClasses.length > 0)
+		  curSubClass = class'SubClass'.default.SubClasses[0];		// for no class
+    }
+	else
+	{
+		if (curSubClassLevel < 0)
+		{
+			// if got a class but no sub class, the abilities are configured under the class ability name
+			curSubClass = curClass.default.AbilityName;								
+		}
+        else
+        {
+            if (class'SubClass'.default.SubClasses.length >= curSubClassLevel)
+    		  curSubClass = class'SubClass'.default.SubClasses[curSubClassLevel];
+        }
+	}
+
+    return curSubClass;
+}
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local int x;
 	local LoadedInv LoadedInv;
-	local bool Enhance;
 	local RPGStatsInv StatsInv;
+    local string SubClassName;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 
@@ -39,60 +88,37 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 	LoadedInv.bGotLoadedArtifacts = true;
 	LoadedInv.LAAbilityLevel = AbilityLevel;
-
+    
 	if(AbilityLevel >= 2)
 		LoadedInv.ProtectArtifacts = true;
 	else
 		LoadedInv.ProtectArtifacts = false;
 		
-	if(AbilityLevel > 4)
-		Enhance = true;
-	else
-		Enhance = false;
+	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+    SubClassName = GetSubClassName(StatsInv.Data);
+    
+    if (SubClassName == "")
+        return;
 
-	for(x = 0; x < default.Level1Artifact.length; x++)
-		if (default.Level1Artifact[x] != None)
-			giveArtifact(other, default.Level1Artifact[x], Enhance);
+	for(x = 0; x < default.ArtifactConfigs.length; x++)
+        if (default.ArtifactConfigs[x].Level <= AbilityLevel && 
+            (default.ArtifactConfigs[x].SubClass == "" || default.ArtifactConfigs[x].SubClass == SubClassName))
+			 giveArtifact(other, default.ArtifactConfigs[x].Artifact, default.ArtifactConfigs[x].Cost, default.ArtifactConfigs[x].PerformanceIncrease);
 
-	if(AbilityLevel > 1)
-		for(x = 0; x < default.Level2Artifact.length; x++)
-			if (default.Level2Artifact[x] != None)
-				giveArtifact(other, default.Level2Artifact[x], Enhance);
-
-	if(AbilityLevel > 2)
-		for(x = 0; x < default.Level3Artifact.length; x++)
-			if (default.Level3Artifact[x] != None)
-				giveArtifact(other, default.Level3Artifact[x], Enhance);
-
-	if(AbilityLevel > 3)
-		for(x = 0; x < default.Level4Artifact.length; x++)
-			if (default.Level4Artifact[x] != None)
-				giveArtifact(other, default.Level4Artifact[x], Enhance);
-
-	if(AbilityLevel > 4)
-	{
-		for(x = 0; x < default.Level5Artifact.length; x++)
-			if (default.Level5Artifact[x] != None)
-				giveArtifact(other, default.Level5Artifact[x], Enhance);
-		Other.Controller.Adrenaline = Other.Controller.AdrenalineMax;	// extreme starts maxed
-	}
-		
 	if(AbilityLevel >= 2)
 	{
 		// now check if we get the other hybrid artifacts
-		StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
-
 		for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
 		{
 			if (StatsInv.Data.Abilities[x] == class'AbilityShieldHealing')
 			{
 			    // give them the shieldblast
-			    giveArtifact(other, class'ArtifactShieldBlast', Enhance);
+			    giveArtifact(other, class'ArtifactShieldBlast', class'ArtifactShieldBlast'.default.AdrenalineRequired, 1.0);
 			}
-			if (StatsInv.Data.Abilities[x] == class'AbilityLoadedHealing' && StatsInv.Data.AbilityLevels[x] >= 2)
+			if (StatsInv.Data.Abilities[x] == class'AbilityDEKLoadedHealing' && StatsInv.Data.AbilityLevels[x] >= 2)
 			{
 			    // give them the healingblast
-			    giveArtifact(other, class'ArtifactHealingBlast', Enhance);
+			    giveArtifact(other, class'ArtifactHealingBlast', class'ArtifactHealingBlast'.default.AdrenalineRequired, 1.0);
 			}
 		}
 	}
@@ -103,10 +129,9 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		Other.NextItem();
 }
 
-static function giveArtifact(Pawn other, class<RPGArtifact> ArtifactClass, bool Enhance)
+static function giveArtifact(Pawn other, class<RPGArtifact> ArtifactClass, float Cost, float PerformanceIncrease)
 {
 	local RPGArtifact Artifact;
-	local ExtremeAMInv Inv;
 
 	if(Other.IsA('Monster'))
 		return;
@@ -115,16 +140,12 @@ static function giveArtifact(Pawn other, class<RPGArtifact> ArtifactClass, bool 
 		
 	Artifact = Other.spawn(ArtifactClass, Other,,, rot(0,0,0));
 	Artifact.giveTo(Other);
-	
-	if (Enhance)
-	{
-		Inv = ExtremeAMInv(Other.FindInventoryType(class'ExtremeAMInv'));
-		if (Inv == None)
-		{
-			Inv = Other.spawn(class'ExtremeAMInv', Other);
-			Inv.GiveTo(Other);
-		}
-	}
+    
+ 	if (ClassIsChildOf(Artifact.Class, class'EnhancedRPGArtifact'))
+    {
+        EnhancedRPGArtifact(Artifact).EnhanceAdrenalineRequired(Cost);
+        EnhancedRPGArtifact(Artifact).EnhancePerformance(PerformanceIncrease);
+    }
 }
 
 static function GenuineDeath(Pawn Killed, Controller Killer, class<DamageType> DamageType, vector HitLocation, int AbilityLevel)
@@ -157,19 +178,6 @@ static function GenuineDeath(Pawn Killed, Controller Killer, class<DamageType> D
 	return;
 }
 
-static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
-{
-	if(!bOwnedByInstigator)
-		return;
-	if(Damage > 0 && AbilityLevel > 4)
-	{
-		if (ClassIsChildOf(DamageType, class'WeaponDamageType') || ClassIsChildOf(DamageType, class'VehicleDamageType'))
-			Damage *= default.WeaponDamage;
-		else
-			Damage *= default.AdrenalineDamage;
-	}
-}
-
 static function bool OverridePickupQuery(Pawn Other, Pickup item, out byte bAllowPickup, int AbilityLevel)
 {
 	if (ClassIsChildOf(item.InventoryType, class'EnhancedRPGArtifact'))
@@ -185,37 +193,8 @@ static function bool OverridePickupQuery(Pawn Other, Pickup item, out byte bAllo
 
 defaultproperties
 {
-     Level1Artifact(0)=Class'DEKRPG999X.DruidArtifactFlight'
-     Level1Artifact(1)=Class'DEKRPG999X.DruidArtifactTeleport'
-     Level1Artifact(2)=Class'DEKRPG999X.DruidArtifactSpider'
-     Level1Artifact(3)=Class'DEKRPG999X.DruidArtifactMakeMagicWeapon'
-     Level1Artifact(4)=Class'UT2004RPG.ArtifactInvulnerability'
-     Level1Artifact(5)=Class'DEKRPG999X.ArtifactPlusAddon'
-     Level2Artifact(0)=Class'DEKRPG999X.DruidArtifactTripleDamage'
-     Level2Artifact(1)=Class'DEKRPG999X.DruidMaxModifier'
-     Level2Artifact(2)=Class'DEKRPG999X.ArtifactFireBall'
-     Level2Artifact(3)=Class'DEKRPG999X.ArtifactRemoteDamage'
-     Level2Artifact(4)=Class'DEKRPG999X.ArtifactRemoteInvulnerability'
-     Level2Artifact(5)=Class'DEKRPG999X.ArtifactRemoteMax'
-     Level3Artifact(0)=Class'DEKRPG999X.DruidArtifactLightningRod'
-     Level3Artifact(1)=Class'DEKRPG999X.DruidDoubleModifier'
-     Level3Artifact(2)=Class'DEKRPG999X.DruidPlusOneModifier'
-     Level3Artifact(3)=Class'DEKRPG999X.ArtifactMegaBlast'
-     Level3Artifact(4)=Class'DEKRPG999X.ArtifactPoisonBlast'
-     Level4Artifact(0)=Class'DEKRPG999X.ArtifactLightningBolt'
-     Level4Artifact(1)=Class'DEKRPG999X.ArtifactLightningBeam'
-     Level4Artifact(2)=Class'DEKRPG999X.ArtifactChainLightning'
-     Level4Artifact(3)=Class'DEKRPG999X.ArtifactRepulsion'
-     Level4Artifact(4)=Class'DEKRPG999X.ArtifactSphereInvulnerability'
-     Level4Artifact(5)=Class'DEKRPG999X.ArtifactSphereDamage'
-     WeaponDamage=0.500000
-     AdrenalineDamage=2.000000
-     AdrenalineUsage=0.500000
-     WizardUsage=0.250000
-     PowerUsage=2.000000
      AbilityName="Loaded Artifacts"
-     Description="NOTE: This class is a work in progress. Visit us at discord.gg/8yEYsNc5ym to learn more about future updates and provide suggestions.||When you spawn:|Level 1: You are granted all slow drain artifacts, a magic weapon maker and the invulnerability globe.|Level 2: You are granted the triple damage, max modifier, and lightning rod, and breakable artifacts are made unbreakable.|Level 3: You get remote artifacts.|Level 4: You get sphere artifacts.|Extreme level 5 reduces adrenaline and increases damage used in artifact attacks.|Cost (per level): 3,7,11,14,17"
-     StartingCost=3
-     CostAddPerLevel=4
-     MaxLevel=5
+     Description="NOTE: This class is a work in progress. Visit us at discord.gg/8yEYsNc5ym to learn more about future updates and provide suggestions.||When you spawn:|Level 1: You are granted some artifacts.|Level 2: You are granted more artifacts, and breakable artifacts are made unbreakable.|Level 3: You get additional artifacts based on your subclass.|Cost (per level): 8,8,8"
+     StartingCost=8
+     MaxLevel=3
 }

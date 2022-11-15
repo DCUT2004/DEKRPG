@@ -94,7 +94,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 					return; //get em next pass I guess?
 
 				if (AbilityLevel >= 4)
-					AHB.EnhanceArtifact(default.AdrenalineUsage);
+					AHB.EnhanceAdrenalineRequired(default.AdrenalineUsage * AHB.default.AdrenalineRequired);
 				AHB.giveTo(Other);
 				// I'm guessing that NextItem is here to ensure players don't start with
 				// no item selected.  So the if should stop wierd artifact scrambles.
@@ -109,7 +109,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 					return; //get em next pass I guess?
 
 				if (AbilityLevel >= 4)
-					ASpH.EnhanceArtifact(default.AdrenalineUsage);
+					ASpH.EnhanceAdrenalineRequired(default.AdrenalineUsage * ASpH.default.AdrenalinePerSecond);
 				ASpH.giveTo(Other);
 				// I'm guessing that NextItem is here to ensure players don't start with
 				// no item selected.  So the if should stop wierd artifact scrambles.

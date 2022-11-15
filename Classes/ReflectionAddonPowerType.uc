@@ -8,7 +8,7 @@ function bool CheckReflect( Vector HitLocation, out Vector RefNormal, int Damage
 	if(Damage > 0)
 	{
 		RefNormal=normal(HitLocation-Location);
-		if(rand(100) < int((ReflectionLevelFactor^float(TheWeapon.GetModifier()))*ReflectionBasePercent))
+		if(rand(100) < int((ReflectionLevelFactor^float(TheWeapon.GetModifier()))*ReflectionBasePercent*PerformanceIncrease))
 		{
 			TheWeapon.Instigator.SetOverlayMaterial(PowerOverlay, 1.0, false);
             CheckDeflectMission();

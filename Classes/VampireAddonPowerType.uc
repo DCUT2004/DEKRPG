@@ -33,7 +33,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     		HealthBonus = P.Health;
     	else
     		HealthBonus = Damage;
-    	HealthBonus *= (VampirePercent/100.0) * float(TheWeapon.GetModifier());
+    	HealthBonus *= (VampirePercent/100.0) * TheWeapon.GetModifier() * PerformanceIncrease;
     	if (HealthBonus == 0 && Damage>0)
     		HealthBonus = 1;
     

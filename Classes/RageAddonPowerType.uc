@@ -40,7 +40,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 	if (Damage > 0)
 	{
-		localDamage = Max(1, RageDamageReturn * Damage);
+		localDamage = Max(1, RageDamageReturn * Damage * 2.0/(1.0 + PerformanceIncrease));
 		if(localDamage >= TheWeapon.Instigator.Health - RageMinimumHealth)
 			localDamage = TheWeapon.Instigator.Health - RageMinimumHealth;
 		if(localDamage > 0)
