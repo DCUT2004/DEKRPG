@@ -15,7 +15,7 @@ function AdjustDamage(out int Damage, int OriginalDamage, Actor Victim, vector H
 	if (Damage <= 0)
         return;
     
-    Chance = TheWeapon.GetModifier()*ChancePerModifier;
+    Chance = TheWeapon.GetModifier()*ChancePerModifier*PerformanceIncrease;
  
  	if(TheWeapon.Instigator != None && Victim != None && Victim.IsA('Pawn'))
 	{

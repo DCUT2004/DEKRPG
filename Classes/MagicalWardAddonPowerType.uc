@@ -19,6 +19,11 @@ function AdjustPlayerDamage(out int Damage, Pawn InstigatedBy, Vector HitLocatio
 	}
 }
 
+function EnhancePerformance(float PerfIncrease)
+{
+	ChanceToWardPerModifier *= PerfIncrease;
+}
+
 function bool CanCoexist( class<AddonPowerType> NewType )
 {
 	if (!Super.CanCoexist(NewType ))

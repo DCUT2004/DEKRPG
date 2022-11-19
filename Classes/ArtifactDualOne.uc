@@ -26,7 +26,7 @@ function Activate()
 	
 	if (Instigator != None && Instigator.Health > 0)
 	{
-		if (LastUsedTime + (TimeBetweenUses*AdrenalineUsage) > Instigator.Level.TimeSeconds)
+		if (LastUsedTime + TimeBetweenUses > Instigator.Level.TimeSeconds)
 		{
 			Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
 			bActive = false;

@@ -1,9 +1,8 @@
-class DruidArtifactMakeMagicWeapon extends RPGArtifact;
+class DruidArtifactMakeMagicWeapon extends EnhancedRPGArtifact;
 
 var MutUT2004RPG RPGMut;
 var float AdrenalineUsed;
 var() Sound BrokenSound;
-var int AdrenalineRequired;
 var int AbilityLevel;
 var Weapon ActivatedOldWeapon;
 

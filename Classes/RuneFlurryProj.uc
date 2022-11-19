@@ -35,7 +35,7 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
 			if (NumBounces > 0)
 				Other.TakeDamage(Damage*NumBounces, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 		}
-		A = Spawn(Class'ONSPlasmaHitPurple', , , HitLocation);
+		A = Spawn(Class'RunePlasmaHitPurple', , , HitLocation);
 		if (A != None)
 			A.RemoteRole = ROLE_SimulatedProxy;
         Destroy();
@@ -91,7 +91,7 @@ defaultproperties
      ImpactSounds(5)=Sound'WeaponSounds.BioRifle.BioRifleGoo1'
      Speed=3000.000000
      MaxSpeed=3000.000000
-     Damage=15.000000
+     Damage=20.000000
 	 bDynamicLight=True
      LightType=LT_Steady
      LightEffect=LE_QuadraticNonIncidence

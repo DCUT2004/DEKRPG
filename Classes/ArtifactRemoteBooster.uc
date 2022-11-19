@@ -1,8 +1,7 @@
-class ArtifactRemoteBooster extends RPGArtifact
+class ArtifactRemoteBooster extends EnhancedRPGArtifact
 		config(UT2004RPG);
 
 var class<xEmitter> HitEmitterClass;
-var config int AdrenalineRequired;
 var config float MaxRange;
 var config int RegenAmount;
 var config int RegenTime;
@@ -112,7 +111,7 @@ function Activate()
 			{
 				Inv.Rules = Rules;
 				Inv.ExpMultiplier = ExpMultiplier;
-				Inv.RegenAmount = RegenAmount;
+				Inv.RegenAmount = RegenAmount*PerformanceIncrease;
 				Inv.RegenTime = RegenTime;
 				Inv.HealthMaxPlus = HealthMaxPlus;
 				Inv.InvPlayerController = Instigator.Controller;

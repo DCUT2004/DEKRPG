@@ -1,9 +1,8 @@
-class DruidMaxModifier extends RPGArtifact;
+class DruidMaxModifier extends EnhancedRPGArtifact;
 
 var Pawn RealInstigator;
 var RPGWeapon Weapon;
 var bool needsIdentify;
-var int AdrenalineRequired;
 var int AbilityLevel;
 
 function BotConsider()
@@ -24,6 +23,11 @@ function PostBeginPlay()
 {
 	super.PostBeginPlay();
 	disable('Tick');
+}
+
+function EnhancePerformance(float PerfIncrease)
+{
+	AdrenalineRequired *= 2.0 / (PerformanceIncrease + 1.0); 
 }
 
 function Activate()

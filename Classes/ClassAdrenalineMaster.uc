@@ -60,6 +60,6 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 defaultproperties
 {
      AbilityName="Class: Adrenaline Master"
-     Description="Adrenaline Masters convert adrenaline into attacks and defensive boosts via artifacts, such as Ice Beam, Meteor Shower, Invulnerability Sphere, and Damage Sphere. This class excels at magic weapon enhancements and relies on a form of adrenaline shield to survive. This class is ideal for players who like challenging, tactical play.||At level 90, Adrenaline Masters can branch off into various subclasses such as Extreme and Craftsman.||You can not be more than one class at any time. You must purchase a class first before purchasing any ability or stats."
+     Description="Adrenaline Masters convert adrenaline into attacks and defensive boosts via artifacts, such as Ice Beam, Meteor Shower, Invulnerability Sphere, and Damage Sphere. This class excels at magic weapon enhancements and relies on a form of adrenaline shield to survive. This class is ideal for players who like challenging, tactical play.||At level 90, Adrenaline Masters can branch off into various subclasses.||You can not be more than one class at any time. You must purchase a class first before purchasing any ability or stats."
      BotChance=7
 }

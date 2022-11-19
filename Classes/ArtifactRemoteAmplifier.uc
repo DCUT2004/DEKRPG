@@ -53,7 +53,6 @@ function Activate()
 	local xEmitter HitEmitter;
 	local Actor A;
 	local AmplifierInv Inv;
-	local CraftsmanInv CInv;
 	
 	Super(EnhancedRPGArtifact).Activate();
 
@@ -97,15 +96,6 @@ function Activate()
 		{
 			// ok, lets do the work
 			
-			CInv = CraftsmanInv(HitPawn.FindInventoryType(class'CraftsmanInv'));
-			if (CInv != None)
-			{   
-				Instigator.ReceiveLocalizedMessage(MessageClass, 5000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return;
-			}
-			
 			Inv = AmplifierInv(HitPawn.FindInventoryType(class'AmplifierInv'));
 			if (Inv != None)
 			{   // already got one
@@ -117,7 +107,7 @@ function Activate()
 			else
 			{
 				Inv = spawn(class'AmplifierInv', HitPawn,,, rot(0,0,0));
-				Inv.Countdown = AmplifierLifespan;
+				Inv.Countdown = AmplifierLifespan*PerformanceIncrease;
 				Inv.AmplifierPlayerController = Instigator.Controller;
 				Inv.GiveTo(HitPawn);
 				
@@ -181,8 +171,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 		return "Cannot use this artifact inside a vehicle.";
 	else if (Switch == 4000)
 		return "This person's magic is already amplified.";
-	else if (Switch == 5000)
-		return "Cannot amplify another Craftsman.";
 	else
 		return "At least" @ switch @ "adrenaline is required to use this artifact";
 }

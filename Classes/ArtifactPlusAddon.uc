@@ -1,4 +1,4 @@
-class ArtifactPlusAddon extends RPGArtifact;
+class ArtifactPlusAddon extends EnhancedRPGArtifact;
 
 var config int ModifierPlusValue;
 var config int LimitOverMaximum;
@@ -126,6 +126,7 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
+     AdrenalineRequired=20
      ModifierPlusValue=1
      LimitOverMaximum=1
      CostPerSec=1

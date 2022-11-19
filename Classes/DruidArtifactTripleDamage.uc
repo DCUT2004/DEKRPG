@@ -1,7 +1,8 @@
-class DruidArtifactTripleDamage extends ArtifactTripleDamage
+class DruidArtifactTripleDamage extends EnhancedRPGArtifact
 	config(UT2004RPG);
 
 var config Array< class<AddonPowerType> > Invalid;
+var Weapon LastWeapon;
 
 function BotConsider()
 {
@@ -19,14 +20,28 @@ function BotConsider()
 		Activate();
 }
 
+function bool HandlePickupQuery(Pickup Item)
+{
+	if (Super.HandlePickupQuery(Item))
+		return true;
+	if (UDamagePack(Item) != None && bActive)
+		Activate();
+
+	return false;
+}
+
+function EnhanceAdrenalineRequired(float AdRequired)
+{
+	CostPerSec = AdRequired;               // Timed artifacts may want to overwrite CostPerSec
+}
+
+function EnhancePerformance(float PerfIncrease)
+{
+	CostPerSec *= 2.0 / (PerformanceIncrease + 1.0);       
+}
+
 function Activate()
 {
-	if (class'DruidDoubleModifier'.static.HasDoubleModifierRunning(Instigator))
-		return; // cant run doublemagicmodifier with triple
-
-	if (class'DruidDoubleModifier'.static.HasRodRunning(Instigator))
-		return; // cant run rod with triple
-
 	if (!bActive && Instigator.HasUDamage())
 		return;
 
@@ -35,6 +50,43 @@ function Activate()
 
 state Activated
 {
+	function BeginState()
+	{
+		local Vehicle V;
+
+		Instigator.DamageScaling *= 1.5;
+		V = Vehicle(Instigator);
+		if (V != None && V.Driver != None)
+		{
+			V.Driver.EnableUDamage(1000000.f);
+		}
+		else
+		{
+			Instigator.EnableUDamage(1000000.f);
+		}
+		bActive = true;
+	}
+
+	function EndState()
+	{
+		local Vehicle V;
+
+		if (Instigator != None)
+		{
+			Instigator.DamageScaling /= 1.5;
+			V = Vehicle(Instigator);
+			if (V != None && V.Driver != None)
+			{
+				V.Driver.DisableUDamage();
+			}
+			else
+			{
+				Instigator.DisableUDamage();
+			}
+		}
+		bActive = false;
+	}
+    
 	function Tick(float deltatime)
 	{
 		local int i;
@@ -83,4 +135,6 @@ defaultproperties
      Invalid(1)=Class'DEKRPG999X.VorpalAddonPowerType'
      CostPerSec=13
      PickupClass=Class'DEKRPG999X.DruidArtifactTripleDamagePickup'
+     IconMaterial=Texture'UTRPGTextures.Icons.TripleDamageIcon'
+     ItemName="Triple Damage"
 }

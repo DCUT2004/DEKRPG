@@ -1,45 +1,16 @@
 class EnhancedRPGArtifact extends RPGArtifact
 		abstract;
 
-var config float AdrenalineUsage, ExtremeUsage, WizardUsage, PowerUsage;				// set to 0.5 means only uses half adrenaline
-var config float TimeUsage;
+var config int AdrenalineRequired;      // is the Adrenaline required to run an instant effect artifact 
 var config float TimeBetweenUses;		// the time required between uses of this artifact
 var float LastUsedTime;					// time this artifact was last used
 var float RecoveryTime;					// time this artifact can be used again. Clientside only.
-var config int AdrenalineRequired;
+var float PerformanceIncrease;          // used to increase the performance of an artifact
 
 replication
 {
 	reliable if (Role == ROLE_Authority)
 		SetClientRecoveryTime;
-}
-
-function Activate()
-{
-	local WizardInv WInv;
-	local ExtremeAMInv EInv;
-	local PowerAMInv PInv;
-	
-	WInv = WizardInv(Instigator.FindInventoryType(class'WizardInv'));
-	EInv = ExtremeAMInv(Instigator.FindInventoryType(class'ExtremeAMInv'));
-	PInv = PowerAMInv(Instigator.FindInventoryType(class'PowerAMInv'));
-
-	if (WInv != None)
-	{
-		AdrenalineUsage = WizardUsage;
-		TimeUsage = WizardUsage;
-	}
-	else if (PInv != None)	//increase adren cost, but don't increase time between uses
-	{
-		AdrenalineUsage = PowerUsage;
-		TimeUsage = ExtremeUsage;
-	}
-	else if (EInv != None && WInv == None && PInv == None)
-	{
-		AdrenalineUsage = ExtremeUsage;
-		TimeUsage = ExtremeUsage;
-	}
-	Super.Activate();
 }
 
 function SetRecoveryTime(float RecoveryPeriod)
@@ -65,9 +36,14 @@ simulated function int GetRecoveryTime()
 		return 0;
 }
 
-function EnhanceArtifact(float Adusage)
+function EnhanceAdrenalineRequired(float AdRequired)
 {
-	AdrenalineUsage = AdUsage;
+	AdrenalineRequired = AdRequired;               // by default set the instant effect cost. Timed artifacts may want to overwrite CostPerSec
+}
+
+function EnhancePerformance(float PerfIncrease)
+{
+	PerformanceIncrease = PerfIncrease;
 }
 
 simulated function Tick(float deltaTime)
@@ -86,6 +62,67 @@ simulated function Tick(float deltaTime)
 	}
 }
 
+static function AddArtifactKill(Pawn P,class<Weapon> W)
+{
+	local int i;
+	local TeamPlayerReplicationInfo TPPI;
+	local TeamPlayerReplicationInfo.WeaponStats NewWeaponStats;
+
+	// When you kill someone, it calls AddWeaponKill. Unfortunately this checks the damage type is from a weapon.
+	// so lightning rod/beam/bolt etc do not get kills logged. So bodge in as weapon kills so show on stats
+	if (P == None || W == None)
+		return;
+
+  // not sure if I need the next two lines. I don't think so. Assault seems to also give a list of weapon kills
+  //      if (!P.Level.Game.IsA('Invasion'))
+  //		return;
+
+	TPPI = TeamPlayerReplicationInfo(P.PlayerReplicationInfo);
+	if (TPPI == None)
+		return;
+
+	for ( i=0; i<TPPI.WeaponStatsArray.Length && i<200; i++ )
+	{
+		if ( TPPI.WeaponStatsArray[i].WeaponClass == W )
+		{
+			TPPI.WeaponStatsArray[i].Kills++;
+			return;
+		}
+	}
+
+	NewWeaponStats.WeaponClass = W;
+	NewWeaponStats.Kills = 1;
+	TPPI.WeaponStatsArray[TPPI.WeaponStatsArray.Length] = NewWeaponStats;
+}
+
+static function bool HasTripleRunning(Pawn P)
+{
+	Local DruidArtifactTripleDamage trip;
+	
+	if (P == None)
+	    return false;
+
+	trip = DruidArtifactTripleDamage(P.FindInventoryType(class'DruidArtifactTripleDamage'));
+	if(trip != None && trip.bActive)
+		return true;
+
+	return false;
+}
+
+static function bool HasRodRunning(Pawn P)
+{
+	Local DruidArtifactLightningRod rod;
+
+	if (P == None)
+	    return false;
+
+	rod = DruidArtifactLightningRod(P.FindInventoryType(class'DruidArtifactLightningRod'));
+	if(rod != None && rod.bActive)
+		return true;
+
+	return false;
+}
+
 static function string GetLocalString(optional int Switch, optional PlayerReplicationInfo RelatedPRI_1, optional PlayerReplicationInfo RelatedPRI_2)
 {
 	if (Switch == 1000)
@@ -98,9 +135,5 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     AdrenalineUsage=1.000000
-     ExtremeUsage=0.500000
-     WizardUsage=0.250000
-     PowerUsage=1.250000
-     TimeUsage=1.000000
+	PerformanceIncrease=1.0
 }

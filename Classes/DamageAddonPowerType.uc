@@ -12,6 +12,11 @@ function bool CanCoexist( class<AddonPowerType> NewType )
 	return true;
 }
 
+function EnhancePerformance(float PerfIncrease)
+{
+	DamagePercent *= PerfIncrease;
+}
+
 defaultproperties
 {
 	DamagePercent=8.0		// 10% in total

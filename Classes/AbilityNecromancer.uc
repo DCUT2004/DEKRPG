@@ -11,7 +11,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local LoadedInv LoadedInv;
 	local ArtifactResurrect AR;
-	//local ArtifactRemotePhantom AP; //************ REMEMBER TO REMOVE THIS BEFORE PUTTING LIVE ON SERVER ***************** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 
@@ -42,15 +41,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	}
 	EnhanceResurrect(Other, AbilityLevel, AR);
 	
-	//AP = ArtifactRemotePhantom(Other.FindInventoryType(class'ArtifactRemotePhantom'));
-	//if (AP == None)
-	//{
-	//	AP = Other.spawn(class'ArtifactRemotePhantom', Other,,, rot(0,0,0));
-	//	if(AP == None)
-	//		return; //get em next pass I guess?
-	//	AP.giveTo(Other);
-	//}
-
 	if(Other.SelectedItem == None)
 		Other.NextItem();
 }

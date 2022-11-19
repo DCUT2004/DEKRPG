@@ -227,7 +227,7 @@ function GiveExplodingDamage(Pawn Target, float DamageAmount, float DamageRadius
 			if (D == None || D.Health <= 0)
 				if (PawnOwner != None  && bScoreThis)		// have to check in case of retaliation
 				{
-					class'ArtifactLightningBeam'.static.AddArtifactKill(PawnOwner,class'WeaponExplosive');
+					class'EnhancedRPGArtifact'.static.AddArtifactKill(PawnOwner,class'WeaponExplosive');
 				}
 		}
 	}
@@ -236,7 +236,7 @@ function GiveExplodingDamage(Pawn Target, float DamageAmount, float DamageRadius
 		if (Target == None || Target.Health <= 0)
 			if (PawnOwner != None && bScoreThis)
 			{
-				class'ArtifactLightningBeam'.static.AddArtifactKill(PawnOwner,class'WeaponExplosive');
+				class'EnhancedRPGArtifact'.static.AddArtifactKill(PawnOwner,class'WeaponExplosive');
 			}
 	}
 }

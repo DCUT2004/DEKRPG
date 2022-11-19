@@ -21,7 +21,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		AdrenalineBonus = P.Health;
 	else
 		AdrenalineBonus = Damage;
-	AdrenalineBonus *= (EnergyPercent/100.0) * TheWeapon.GetModifier();
+	AdrenalineBonus *= (EnergyPercent/100.0) * TheWeapon.GetModifier() * PerformanceIncrease;
 
 	MInv = MagicShieldInv(Pawn(Victim).FindInventoryType(class'MagicShieldInv'));
 	if (MInv == None)

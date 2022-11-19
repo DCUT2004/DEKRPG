@@ -1,8 +1,7 @@
-class ArtifactRemoteMax extends RPGArtifact
+class ArtifactRemoteMax extends EnhancedRPGArtifact
 		config(UT2004RPG);
 
 var class<xEmitter> HitEmitterClass;
-var config int AdrenalineRequired;
 var config float MaxRange;
 var config int XPforUse;
 var config bool bWeaponDroppable;	// can set it so maxed weapons are not droppable

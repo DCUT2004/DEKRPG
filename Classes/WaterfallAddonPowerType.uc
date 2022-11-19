@@ -10,7 +10,7 @@ simulated event WeaponTick(float dt)
 	if (NextEffectTime <= 0)
 	{
         if (TheWeapon.GetModifier() > 0)
-            Pawn(TheWeapon.Owner).GiveHealth(TheWeapon.GetModifier(), Pawn(TheWeapon.Owner).HealthMax);
+            Pawn(TheWeapon.Owner).GiveHealth(TheWeapon.GetModifier() *PerformanceIncrease, Pawn(TheWeapon.Owner).HealthMax);
 		NextEffectTime = WaterfallCheckTime;
 	}
 }

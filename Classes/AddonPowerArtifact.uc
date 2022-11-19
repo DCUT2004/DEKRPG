@@ -1,4 +1,4 @@
-class AddonPowerArtifact extends RPGArtifact
+class AddonPowerArtifact extends EnhancedRPGArtifact
 	abstract;
 
 var class<AddonPowerType> ThisPowerType;
@@ -16,6 +16,12 @@ function bool CanUseArtifact()
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 3000, None, None, Class);
 		return false;	// can't use in a vehicle
+	}
+
+	if (Instigator.Controller == None || Instigator.Controller.Adrenaline < AdrenalineRequired)
+	{
+		Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
+		return false;	// can't afford
 	}
 
 	CurWeapon = DEKRPGWeapon(Instigator.Weapon);
@@ -37,7 +43,7 @@ function bool CanUseArtifact()
 		Instigator.ReceiveLocalizedMessage(MessageClass, 1200, None, None, Class);
 		return false;	// if meaningless on negative modifier
 	}
-	if (CurWeapon.NumPowerTypes >= CurWeapon.CurMaxPowers || (RuneWeapon(CurWeapon.ModifiedWeapon) == None && CurWeapon.NumPowerTypes >= 2))
+	if (CurWeapon.NumPowerTypes >= CurWeapon.CurMaxPowers)
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
 		return false;	// already at maximum number of Powers
@@ -76,7 +82,6 @@ function Activate()
 	if (Instigator == None)
 		return;
 
-
 	if (!CanUseArtifact())
 	{
 		bActive = false;
@@ -86,9 +91,13 @@ function Activate()
 
 	// do it
 	CurWeapon = DEKRPGWeapon(Instigator.Weapon);
-	CurWeapon.AddPowerType(ThisPowerType);
+	CurWeapon.AddPowerType(ThisPowerType, PerformanceIncrease);
 	CurWeapon.ConstructItemName();
 	CurWeapon.DoDelayedIdentify();
+
+	Instigator.Controller.Adrenaline -= AdrenalineRequired;
+	if (Instigator.Controller.Adrenaline < 0)
+		Instigator.Controller.Adrenaline = 0;
 
 	// now get rid of it
 	bActive = false;
@@ -112,12 +121,15 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 		return "Your current weapon already has this powerup";
 	else if (Switch == 4000)
 		return "The powerup was rejected by your current weapon";
-	else
+    else if (Switch > 0)
+		return switch @ "Adrenaline is required to use this artifact";
+    else
 		return "Cannot use this artifact";
 }
 
 defaultproperties
 {
+     AdrenalineRequired=30
      CostPerSec=1
      MinActivationTime=0.000001
      IconMaterial=FinalBlend'EpicParticles.Shaders.IonFallFinal'

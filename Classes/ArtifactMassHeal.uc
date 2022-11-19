@@ -64,9 +64,9 @@ function Activate()
 		return;	// really corrupt
 	}
 	
-	if (Instigator.Controller.Adrenaline < AdrenalineRequired*AdrenalineUsage)
+	if (Instigator.Controller.Adrenaline < AdrenalineRequired)
 	{
-		Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);	
+		Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);	
 		bActive = false;
 		GotoState('');
 		return;
@@ -196,7 +196,7 @@ function ProvideHealing()
 				Inv1 = Spawn(class'DruidHealthRegenInv', Controller1.Pawn);
 				Inv1.Rules = Rules;
 				Inv1.ExpMultiplier = ExpMultiplier;
-				Inv1.RegenAmount = RegenAmount;
+				Inv1.RegenAmount = RegenAmount*PerformanceIncrease;
 				Inv1.RegenTime = RegenTime;
 				Inv1.HealthMaxPlus = HealthMaxPlus;
 				Inv1.InvPlayerController = Instigator.Controller;
@@ -215,7 +215,7 @@ function ProvideHealing()
 				Inv2 = Spawn(class'DruidHealthRegenInv', Controller2.Pawn);
 				Inv2.Rules = Rules;
 				Inv2.ExpMultiplier = ExpMultiplier;
-				Inv2.RegenAmount = RegenAmount;
+				Inv2.RegenAmount = RegenAmount*PerformanceIncrease;
 				Inv2.RegenTime = RegenTime;
 				Inv2.HealthMaxPlus = HealthMaxPlus;
 				Inv2.InvPlayerController = Instigator.Controller;
@@ -234,7 +234,7 @@ function ProvideHealing()
 				Inv3 = Spawn(class'DruidHealthRegenInv', Controller3.Pawn);
 				Inv3.Rules = Rules;
 				Inv3.ExpMultiplier = ExpMultiplier;
-				Inv3.RegenAmount = RegenAmount;
+				Inv3.RegenAmount = RegenAmount*PerformanceIncrease;
 				Inv3.RegenTime = RegenTime;
 				Inv3.HealthMaxPlus = HealthMaxPlus;
 				Inv3.InvPlayerController = Instigator.Controller;
@@ -243,8 +243,8 @@ function ProvideHealing()
 			}
 		}
 	}
-	SetRecoveryTime(TimeBetweenUses*TimeUsage);
-	Instigator.Controller.Adrenaline -= AdrenalineRequired*AdrenalineUsage;
+	SetRecoveryTime(TimeBetweenUses);
+	Instigator.Controller.Adrenaline -= AdrenalineRequired;
 	if (Instigator.Controller.Adrenaline < 0)
 		Instigator.Controller.Adrenaline = 0;
 	

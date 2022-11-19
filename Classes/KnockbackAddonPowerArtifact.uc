@@ -4,6 +4,7 @@ class KnockbackAddonPowerArtifact extends AddonPowerArtifact;
 
 defaultproperties
 {
+     AdrenalineRequired=20
      PickupClass=Class'KnockbackAddonPowerPickup'
      ThisPowerType=Class'KnockbackAddonPowerType'
      ItemName="Knockback Addon Power"

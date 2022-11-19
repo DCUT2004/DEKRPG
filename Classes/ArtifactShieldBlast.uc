@@ -1,8 +1,7 @@
-class ArtifactShieldBlast extends RPGArtifact
+class ArtifactShieldBlast extends EnhancedRPGArtifact
 		config(UT2004RPG);
 
 var config int BlastDistance;
-var config int AdrenalineRequired;
 var config float ChargeTime;
 var config float MaxHealing;
 var config float MinHealing;
@@ -144,7 +143,7 @@ function Activate()
 		{
 			SBC.MaxHealing = MaxHealing;
 			SBC.MinHealing = MinHealing;
-			SBC.HealingRadius = HealingRadius;
+			SBC.HealingRadius = HealingRadius*PerformanceIncrease;
 			SBC.ChargeTime = ChargeTime;
 			SBC.RPGRules = Rules;
 			SBC.EXPMultiplier = EXPMultiplier;

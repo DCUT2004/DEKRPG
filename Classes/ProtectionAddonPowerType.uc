@@ -10,7 +10,7 @@ function AdjustPlayerDamage(out int Damage, Pawn InstigatedBy, Vector HitLocatio
 {
 	local Actor A;
 
-	Damage = Max(1, Damage * (1.0 - ((ProtectionPercent/100.0) *  TheWeapon.GetModifier())));
+	Damage = Max(1, Damage * (1.0 - ((ProtectionPercent/100.0) *  TheWeapon.GetModifier() *PerformanceIncrease)));
 
 	if (InstigatedBy != None && TheWeapon.Instigator != None && Damage > 0 && TheWeapon.GetModifier() > 0 && InstigatedBy.Controller != None && !InstigatedBy.Controller.SameTeamAs(TheWeapon.Instigator.Controller) && InstigatedBy != TheWeapon.Instigator )
 	{

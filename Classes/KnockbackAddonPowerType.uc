@@ -59,7 +59,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	if (StatusInv == None)
 		return;
 		
-	StatusInv.AddStatusEffect(Class'StatusEffect_Momentum'.static.GetName(), -TheWeapon.GetModifier(), TheWeapon.GetModifier(), True, False);
+	StatusInv.AddStatusEffect(Class'StatusEffect_Momentum', -TheWeapon.GetModifier() *PerformanceIncrease, TheWeapon.GetModifier()*PerformanceIncrease, True, False);
 }
 
 function bool CanCoexist( class<AddonPowerType> NewType )

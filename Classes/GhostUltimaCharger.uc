@@ -78,7 +78,7 @@ function DoDamage(float Radius)
 				if (gotPawn && Instigator != None)
 				{
 					if(Victims == None || Pawn(Victims) == None || Pawn(Victims).Health <= 0 )
-						class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponUltima');	// assume killed. Could be ghosting, but this is only for the F3 stats
+						class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponUltima');	// assume killed. Could be ghosting, but this is only for the F3 stats
 				}
 	
 			}

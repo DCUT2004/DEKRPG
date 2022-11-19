@@ -1,8 +1,7 @@
-class ArtifactRemoteDamage extends RPGArtifact
+class ArtifactRemoteDamage extends EnhancedRPGArtifact
 		config(UT2004RPG);
 
 var class<xEmitter> HitEmitterClass;
-var config int AdrenalineRequired;
 var config float MaxRange;
 var config int DamageRunTime;
 var config int XPforUse;
@@ -55,7 +54,6 @@ function Activate()
 	local xEmitter HitEmitter;
 	local Actor A;
 	local DamageInv DInv;
-	local CraftsmanInv CInv;
 
 	if ((Instigator != None) && (Instigator.Controller != None))
 	{
@@ -103,14 +101,6 @@ function Activate()
 				GotoState('');
 				return;	// didn't hit a person we can give extra damage to
 			}
-			CInv = CraftsmanInv(HitPawn.FindInventoryType(class'CraftsmanInv'));
-			if (CInv != None)
-			{   // already got one
-				Instigator.ReceiveLocalizedMessage(MessageClass, 5000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return;	// Can't remote-boost a Craftsman
-			}
 			// now do the work
 			// udamage is false so can't already have this set yet
 			DInv = DamageInv(HitPawn.FindInventoryType(class'DamageInv'));
@@ -121,7 +111,7 @@ function Activate()
 				DInv.Rules = Rules;
 				DInv.KillXPPerc = KillXPPerc;
 				DInv.DamagePlayerController = Instigator.Controller;
-				DInv.EstimatedRunTime = DamageRunTime;
+				DInv.EstimatedRunTime = DamageRunTime*PerformanceIncrease;
 				DInv.GiveTo(HitPawn);
 			}
 
@@ -187,8 +177,6 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 		return "Cannot use this artifact inside a vehicle.";
 	else if (Switch == 4000)
 		return "That person cannot accept the powerup.";
-	else if (Switch == 5000)
-		return "Cannot remote-boost a Craftsman.";
 	else
 		return "At least" @ switch @ "adrenaline is required to use this artifact";
 }

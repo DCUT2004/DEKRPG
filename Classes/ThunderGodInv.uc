@@ -73,7 +73,7 @@ function Timer()
 				//now see if we killed it
 				if (C == None || C.Pawn == None || C.Pawn.Health <= 0 )
 					if ( P != None)
-						class'ArtifactLightningBeam'.static.AddArtifactKill(P, class'WeaponRod');	// assume killed
+						class'EnhancedRPGArtifact'.static.AddArtifactKill(P, class'WeaponRod');	// assume killed
 			}
 		}
 		C = NextC;

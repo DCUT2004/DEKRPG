@@ -37,9 +37,9 @@ function Activate()
 
 	if (Instigator != None)
 	{
-		if(Instigator.Controller.Adrenaline < (AdrenalineRequired*AdrenalineUsage))
+		if(Instigator.Controller.Adrenaline < AdrenalineRequired)
 		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);
+			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
 			bActive = false;
 			GotoState('');
 			return;
@@ -68,13 +68,13 @@ function Activate()
 		PBC = Instigator.spawn(class'PoisonBlastCharger', Instigator.Controller,,BlastLocation);
 		if(PBC != None)
 		{
-			PBC.MaxDrain = MaxDrain;
-			PBC.MinDrain = MinDrain;
+			PBC.MaxDrain = MaxDrain*PerformanceIncrease;
+			PBC.MinDrain = MinDrain*PerformanceIncrease;
 			PBC.DamageRadius = DamageRadius;
-			PBC.ChargeTime = ChargeTime*AdrenalineUsage;
+			PBC.ChargeTime = ChargeTime;
 			PBC.DrainTime = DrainTime;
 
-			Instigator.Controller.Adrenaline -= AdrenalineRequired*AdrenalineUsage;
+			Instigator.Controller.Adrenaline -= AdrenalineRequired;
 			if (Instigator.Controller.Adrenaline < 0)
 				Instigator.Controller.Adrenaline = 0;
 		}

@@ -73,18 +73,27 @@ function PreBeginPlay()
 simulated function PostBeginPlay()
 {
 
-	CostPerSec = AdrenalinePerSecond*AdrenalineUsage;
+	CostPerSec = AdrenalinePerSecond;
 
 	super.PostBeginPlay();
 
 	CheckRPGRules();
 }
 
-function EnhanceArtifact(float Adusage)
+function EnhanceAdrenalineRequired(float AdRequired)
 {
-	Super.EnhanceArtifact(AdUsage);
-	
-	CostPerSec = AdrenalinePerSecond * AdrenalineUsage;
+	CostPerSec = AdRequired;               // Timed artifacts may want to overwrite CostPerSec
+}
+
+function EnhancePerformance(float PerfIncrease)
+{
+	if (PerfIncrease > 1.1)
+	   EffectRadius=1100;
+    else if (PerfIncrease < 0.9)
+	   EffectRadius=700;
+    else
+	   EffectRadius=900;
+        
 }
 
 function CheckRPGRules()
@@ -247,9 +256,9 @@ state Activated
 
 		if ((Instigator != None) && (Instigator.Controller != None))
 		{
-			if(Instigator.Controller.Adrenaline < (AdrenalineRequired*AdrenalineUsage))
+			if(Instigator.Controller.Adrenaline < AdrenalineRequired)
 			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);
+				Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
 				bActive = false;
 				GotoState('');
 				return;

@@ -88,11 +88,11 @@ simulated function Destroyed()
 
 defaultproperties
 {
-	Damage=10
+	Damage=4
 	DamageInterval=0.15000
 	DamageRadius=100
 	MagnetEffectClass=Class'DEKWeapons999X.UpgradeShockRifleBlackHoleEffect'
-    AttractionRadius=900.000000
+    AttractionRadius=800.000000
     AttractionStrength=150000.000000
 	Lifespan=0.00000
 	DrawType=DT_None

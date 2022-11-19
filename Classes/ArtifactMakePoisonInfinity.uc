@@ -24,8 +24,8 @@ function constructionFinished(RPGWeapon result)
         thisWeapon.NumPowerTypes--;
     }        
     
-    thisWeapon.AddPowerType(class'InfinityAddonPowerType'); 
-    thisWeapon.AddPowerType(class'PoisonAddonPowerType'); 
+    thisWeapon.AddPowerType(class'InfinityAddonPowerType', 1.0); 
+    thisWeapon.AddPowerType(class'PoisonAddonPowerType', 1.0); 
     thisWeapon.Modifier = Min(1,thisWeapon.Modifier);
     thisWeapon.ConstructItemName();
     thisWeapon.Identify();

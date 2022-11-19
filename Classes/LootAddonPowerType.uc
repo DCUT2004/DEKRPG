@@ -19,7 +19,7 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(string(W)), "MEGABLAST") > -1)
 		return false;		
 
-	return false;
+	return true;
 }
 
 // DoPowerEffect - use the damage here (e.g. energy vampire etc)
@@ -43,9 +43,9 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		if (Inv == None)
 		{
 			Inv = spawn(class'LootInv', P,,, rot(0,0,0));
-			Inv.LetterDropChance = (TheWeapon.GetModifier() * 0.8);
-			Inv.ArtifactDropChance = TheWeapon.GetModifier() * 1.3;
-			Inv.GemDropChance = TheWeapon.GetModifier() * 1.8;
+			Inv.LetterDropChance = (TheWeapon.GetModifier() * 0.5 * PerformanceIncrease);
+			Inv.ArtifactDropChance = TheWeapon.GetModifier() * 1.3 * PerformanceIncrease;
+			Inv.GemDropChance = TheWeapon.GetModifier() * 2.0 * PerformanceIncrease;
 			Inv.GiveTo(P);
 		}
 		
@@ -62,7 +62,7 @@ function AddMaterial()
 	local int MaterialRankChance;
 	local int RandIndex;
 	
-	if (Rand(100) <= MaterialChanceModifier * TheWeapon.GetModifier())
+	if (Rand(100) <= MaterialChanceModifier * TheWeapon.GetModifier() * PerformanceIncrease)
 	{
 		GInv = class'GiveItemsInv'.static.GetGiveItemsInv(TheWeapon.Instigator.Controller);
 		if (GInv != None)

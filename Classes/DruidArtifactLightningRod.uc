@@ -39,11 +39,6 @@ function CheckRPGRules()
 		Log("WARNING: Unable to find RPGRules in GameRules. EXP will not be properly awarded");
 }
 
-function EnhanceArtifact(float Adusage)
-{
-	AdrenalineUsage = (AdUsage + 2.0)/3.0;	// getting double from the rod would be too much. So only step one third the way.
-}
-
 function BotConsider()
 {
 	if (bActive && (Instigator.Controller.Enemy == None || !Instigator.Controller.CanSee(Instigator.Controller.Enemy)))
@@ -64,12 +59,15 @@ function BotConsider()
 	}
 }
 
-function Activate()
+function EnhanceAdrenalineRequired(float AdRequired)
 {
-	Super(EnhancedRPGArtifact).Activate();
-	
-	if (class'DruidDoubleModifier'.static.HasTripleRunning(Instigator))
-		return; // cant run with triple
+    if (AdRequired < 1.0)
+	   CostPerHit = AdRequired;               // adrenaline usage is the CostPerHit. A value over 1 means poor configuration
+}
+
+function EnhancePerformance(float PerfIncrease)
+{
+	CostPerHit *= 2.0 / (PerformanceIncrease + 1.0);       
 }
 
 state Activated
@@ -96,7 +94,7 @@ state Activated
 		If (Instigator.HasUDamage())
 		{
 			UDamageAdjust = 2;				                	// assume double damage. If it is the triple, and not invasion, then they do more damage but use more adrenaline
-			if (class'DruidDoubleModifier'.static.HasTripleRunning(Instigator))     // not allowed to get triple bonus
+			if (class'EnhancedRPGArtifact'.static.HasTripleRunning(Instigator))     // not allowed to get triple bonus
 			{
 			    RunningTriple = true;                           // shouldn't be - but just in case
 			}
@@ -124,12 +122,12 @@ state Activated
 				// notincreasing the max damage as that would drain too fast.
 				DamageDealt = max(min(C.Pawn.HealthMax * HealthMultiplier, MaxDamagePerHit), MinDamagePerHit);
 				
-				lCost = (DamageDealt * CostPerHit) * AdrenalineUsage;
+				lCost = (DamageDealt * CostPerHit);
 				
 				if(lCost < 1)
 					lCost = 1;
 				
-				if(lCost < Instigator.Controller.Adrenaline)
+				if (lCost < Instigator.Controller.Adrenaline)
 				{
 					// now check if we have a udamage running, and want to limit damage and grant extra xp (since RPG doesn't do it for superweapon damage
 					if (UDamageAdjust > 1)
@@ -168,14 +166,14 @@ state Activated
 					if ( Instigator != None && Instigator.Controller != None)
 					{
 						C.Pawn.TakeDamage(DamageDealt, Instigator, C.Pawn.Location, vect(0,0,0), class'DamTypeEnhLightningRod');
-						Instigator.Controller.Adrenaline -=lCost;
+						Instigator.Controller.Adrenaline -= lCost;
 						if (Instigator.Controller.Adrenaline < 0)
 							Instigator.Controller.Adrenaline = 0;
 
 						//now see if we killed it
 						if (C == None || C.Pawn == None || C.Pawn.Health <= 0 )
 							if ( Instigator != None)
-								class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponRod');	// assume killed
+								class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponRod');	// assume killed
 
 					}
 				}

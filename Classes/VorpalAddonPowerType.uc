@@ -38,6 +38,12 @@ static function bool AllowedFor(Weapon W)
 	if(instr(caps(string(W)), "MEGABLAST") > -1)
 		return false;		
 
+	if(instr(caps(W), "HEATWHIP") > -1)
+		return true;
+
+	if(instr(caps(W), "CHAIN") > -1)
+		return true;
+
 	return false;
 }
 
@@ -84,7 +90,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
     if (P.HealthMax > 5000)      // cheap and cheerful don't instagib a Boss
         return;
     
-    Chance = int(10*(VorpalPercent * TheWeapon.GetModifier()) +0.01);
+    Chance = int(10*(VorpalPercent * TheWeapon.GetModifier() *PerformanceIncrease) +0.01);
 	iRandom = rand(999);
 
 	if (Chance >= iRandom)
@@ -122,7 +128,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 
 defaultproperties
 {
-	VorpalPercent=1.0
+	VorpalPercent=2.0
 	PosName="Vorpal"
 	ZeroName=""
 	NegName=""

@@ -41,7 +41,7 @@ function DoDamage(float BlastDamage,float Radius)
 
 			//now see if we killed it
 			if (C == None || C.Pawn == None || C.Pawn.Health <= 0 )
-				class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponMegaBlast');	// assume killed
+				class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponMegaBlast');	// assume killed
 		}
 		C = NextC;
 	}

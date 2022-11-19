@@ -38,7 +38,7 @@ simulated function HurtRadius(float DamageAmount, float DamageRadius, class<Dama
 			if (VictimPawn)
 			{
 				if (Victims == None || Pawn(Victims) == None || Pawn(Victims).Health <= 0 )
-					class'ArtifactLightningBeam'.static.AddArtifactKill(Instigator, class'WeaponMagnet');	// assume killed
+					class'EnhancedRPGArtifact'.static.AddArtifactKill(Instigator, class'WeaponMagnet');	// assume killed
 			}
 		}
 	}
