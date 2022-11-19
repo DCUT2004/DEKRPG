@@ -8,8 +8,7 @@
 * This class should never be instantiated.
 */
 
-class StatusEffectData extends Object
-	abstract
+class StatusEffectData extends Actor
 	config(UT2004RPG);
 	
 var string StatusEffectName;
@@ -35,4 +34,11 @@ defaultproperties
 {
 	bOnlyNegativeModifier=False
 	bOnlyPositiveModifier=False
+	bOnlyRelevantToOwner=true
+	DrawType=DT_None
+	AmbientGlow=0
+	bOnlyOwnerSee=true
+	bHidden=true
+	Physics=PHYS_None
+	bReplicateMovement=false
 }

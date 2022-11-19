@@ -6,7 +6,6 @@
 */
 
 class StatusEffectManager extends Inventory
-	abstract
 	config (UT2004RPG);
 	
 var Array < StatusEffectData > StatusEffects;			//The pawn's currently applied status effects
