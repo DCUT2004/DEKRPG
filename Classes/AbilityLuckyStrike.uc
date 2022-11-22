@@ -4,7 +4,7 @@ class AbilityLuckyStrike extends CostRPGAbility
 	abstract;
 	
 var config int MaxHealthForLetter, MaxAdrenForLetter;
-var config int LetterSChance, ScoringValueForS;
+var config int LetterSChance, ScoringValueForS, ScoringValueForPowerUp, PowerUpChance;
 var config int ChancePerLevel;
 
 static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKiller, int AbilityLevel)
@@ -16,6 +16,41 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 		return;
 		
 	LuckyStrike(Killer, Killed, bOwnedByKiller, AbilityLevel, default.ChancePerLevel);
+}
+
+static function SelectWeaponPowerup(Controller Killer, Controller Killed, Monster M)
+{
+	local int iSumChance;
+    local int value;
+    local int sum;
+	local int q;
+	local class<AddonPowerType> PowerType;
+
+	if (M.ScoringValue < default.ScoringValueForPowerUp)
+	{
+		DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactPlusAddonPickup', None, 1);
+        return;
+    }
+       
+	iSumChance = 0;
+	for (q = 0; q < class'DEKRPGWeapon'.default.AvailableAddonPowerTypes.Length ; q++) 
+		iSumChance += class'DEKRPGWeapon'.default.AvailableAddonPowerTypes[q].LuckChance;
+        
+    value = Rand(iSumChance * 2);
+    sum = 0;
+
+	for (q = 0; q < class'DEKRPGWeapon'.default.AvailableAddonPowerTypes.Length ; q++)
+    { 
+        sum += class'DEKRPGWeapon'.default.AvailableAddonPowerTypes[q].LuckChance;
+		if (value < sum)
+		{
+			PowerType = class'DEKRPGWeapon'.default.AvailableAddonPowerTypes[q].PowerType;
+            DropPickups(Killed, Killer, PowerType.default.ThisPickupClass, None, 1);
+			return;
+		}
+    }
+
+	DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactPlusAddonPickup', None, 1);
 }
 
 static function LuckyStrike(Controller Killer, Controller Killed, bool bOwnedByKiller, int AbilityLevel, float Chance)
@@ -53,6 +88,11 @@ static function LuckyStrike(Controller Killer, Controller Killed, bool bOwnedByK
 		{
 			DropPickups(Killed, Killer, class'DEKRPG999X.ArtifactLetterBPickup', None, 1);
 			return;
+		}
+		if (default.PowerUpChance >= rand(99))
+		{
+            SelectWeaponPowerup(Killer, Killed, M);
+            return;
 		}
 		if (M.ScoringValue >= default.ScoringValueForS)
 		{
@@ -145,7 +185,9 @@ defaultproperties
      MaxHealthForLetter=100
      MaxAdrenForLetter=50
      LetterSChance=50
+     PowerUpChance=10
      ScoringValueForS=11
+     ScoringValueForPowerUp=7
      PlayerLevelReqd(1)=61
      AbilityName="Lucky Strike"
      Description="This ability provides a chance of dropping experience gems, BONUS letters, or even summoning friendly Nali, all upon killing a monster.||Monsters can drop experience gems. Blue gems are worth 5 XP, green 10 XP, purple 15 XP, and gold 25 XP.||Monsters can also drop letters. Spell BONUS to unlock wave 17. There are different conditions for each letter.||Killing a monster can also spawn a Nali, which will grant you health, adrenaline, shield, and even experience gems and letters.||Each level of this ability increases the drop or Nali summon chance by 1%. This ability is granted to players levels 60 and under as a freebie. You must be level 61 before you can buy this ability.||Cost (per level): 5,10,15,20,25,30,35,40,45,50"
