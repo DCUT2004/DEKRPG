@@ -9,5 +9,8 @@ class StatusEffect_Momentum extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Mmntm"
+	StatusLifespan=5
+	bDispellable=True
+	bStackable=False
 	MaxModifier=6
 }

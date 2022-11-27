@@ -4,6 +4,9 @@ class StatusEffect_Burn extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Brn"
-	 MaxModifier=5
-	 bOnlyNegativeModifier=True
+	StatusLifespan=5
+	bDispellable=True
+	bStackable=False
+	MaxModifier=5
+	bOnlyNegativeModifier=True
 }

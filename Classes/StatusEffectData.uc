@@ -8,7 +8,7 @@
 * This class should never be instantiated.
 */
 
-class StatusEffectData extends Actor
+class StatusEffectData extends Object
 	config(UT2004RPG);
 	
 var string StatusEffectName;
@@ -30,15 +30,33 @@ static function int GetMaxModifier()
 	return default.MaxModifier;
 }
 
+static function int GetStatusLifespan()
+{
+	return default.StatusLifespan;
+}
+
+static function bool IsDispellable()
+{
+	return default.bDispellable;
+}
+
+static function bool IsStackable()
+{
+	return default.bStackable;
+}
+
+static function bool IsOnlyPositive()
+{
+	return default.bOnlyPositiveModifier;
+}
+
+static function bool IsOnlyNegative()
+{
+	return default.bOnlyNegativeModifier;
+}
+
 defaultproperties
 {
 	bOnlyNegativeModifier=False
 	bOnlyPositiveModifier=False
-	bOnlyRelevantToOwner=true
-	DrawType=DT_None
-	AmbientGlow=0
-	bOnlyOwnerSee=true
-	bHidden=true
-	Physics=PHYS_None
-	bReplicateMovement=false
 }

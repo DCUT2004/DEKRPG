@@ -25,7 +25,7 @@ function DoDamage(Pawn Target)
 	StatusInv = StatusEffectManager(Instigator.FindInventoryType(Class'StatusEffectManager'));
 	if (StatusInv == None)
 		return;
-	StatusInv.AddStatusEffect(Class'StatusEffect_DamageReduction'.static.GetName(), DefenseModifier, DefenseLifespan, bDefenseDispellable, bDefenseStackable);
+	StatusInv.AddStatusEffect(Class'StatusEffect_DamageReduction', DefenseModifier, True, DefenseLifespan, bDefenseDispellable, bDefenseStackable);
 }
 
 defaultproperties

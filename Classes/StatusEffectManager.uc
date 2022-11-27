@@ -7,8 +7,20 @@
 
 class StatusEffectManager extends Inventory
 	config (UT2004RPG);
-	
-var Array < StatusEffectData > StatusEffects;			//The pawn's currently applied status effects
+
+struct StatusEffect
+{
+	var string StatusEffectName;
+	var Pawn Producer;								//Who gave this status effect to this pawn?
+	var int Modifier;								//Intensity of this status effect. > 0 is a buff, < 0 is an ailment
+	var config int MaxModifier;
+	var int StatusLifespan;							//How long this StatusEffect lasts
+	var bool bDispellable;							//Whether this status effect can be removed before its Lifespan duration
+	var bool bStackable;							//If true, the Modifier will fluctuate when new status effects are given
+	var bool bOnlyPositiveModifier, bOnlyNegativeModifier;
+};
+
+var Array < StatusEffect > StatusEffects;
 
 simulated function PostBeginPlay()
 {
@@ -27,7 +39,7 @@ function Timer()
 	for (x = 0; x < StatusEffects.Length; x++)
 	{
 		if (StatusEffects[x].Modifier == 0)
-			RemoveStatusEffect(StatusEffects[x].StatusEffectName);
+			RemoveStatusEffect(x);
 		else
 		{
 			OnTimerDoEffect(x);
@@ -48,24 +60,24 @@ function OnRemoveDoEffect(int EffectIndx);
 
 //Adds a status effect
 //Returns True for new status effects, not previously existing ones that were stacked on
-function bool AddStatusEffect(string StatusEffectName, int Modifier, int StatusLifespan, bool bDispellable, bool bStackable, optional Pawn Producer)
+function bool AddStatusEffect(Class<StatusEffectData> StatusEffectClass, int Modifier, optional bool Override, optional int StatusLifespan, optional bool bDispellable, optional bool bStackable, optional Pawn Producer)
 {
 	local int x;
 	
-	if (StatusEffectName == "" || Modifier == 0 || Modifier < 0 && CheckMagicalWard())
+	if (StatusEffectClass == None || Modifier == 0 || Modifier < 0 && CheckMagicalWard())
 		return False;
-	
+
 	//Before adding a status effect, check to see if this pawn already has one and whether it is stackable
 	for (x = 0; x < StatusEffects.Length; x++)
 	{
-		if (StatusEffects[x].StatusEffectName == StatusEffectName)
+		if (StatusEffects[x].StatusEffectName == StatusEffectClass.static.GetName())	//How we uniquely identify a status effect
 		{
 			if (StatusEffects[x].bStackable)
 			{
 				//Stop if we'll get a 0 Modifier
 				if (StatusEffects[x].Modifier + Modifier == 0)
 				{
-					RemoveStatusEffect(StatusEffects[x].StatusEffectName);
+					RemoveStatusEffect(x);
 					return False;
 				}
 					
@@ -73,10 +85,10 @@ function bool AddStatusEffect(string StatusEffectName, int Modifier, int StatusL
 				StatusEffects[x].Modifier += Modifier;
 				
 				//Adjust for MaxModifier if over the limit
-				if (StatusEffects[x].Modifier > 0 && StatusEffects[x].Modifier > StatusEffects[x].MaxModifier)
-					StatusEffects[x].Modifier = StatusEffects[x].MaxModifier;
-				if (StatusEffects[x].Modifier < 0 && StatusEffects[x].Modifier < -(StatusEffects[x].MaxModifier))
-					StatusEffects[x].Modifier = -StatusEffects[x].MaxModifier;
+				if (StatusEffects[x].Modifier > 0 && StatusEffects[x].Modifier > StatusEffectClass.static.GetMaxModifier())
+					StatusEffects[x].Modifier = StatusEffectClass.static.GetMaxModifier();
+				if (StatusEffects[x].Modifier < 0 && StatusEffects[x].Modifier < -(StatusEffectClass.static.GetMaxModifier()))
+					StatusEffects[x].Modifier = -StatusEffectClass.static.GetMaxModifier();
 					
 				OnAddDoEffect(x, true);
 			}
@@ -87,12 +99,24 @@ function bool AddStatusEffect(string StatusEffectName, int Modifier, int StatusL
 	
 	//Pawn does not have this StatusEffect. Add it
 	StatusEffects.Insert(0, 1);
-	StatusEffects[0].StatusEffectName = StatusEffectName;
+	StatusEffects[0].StatusEffectName = StatusEffectClass.static.GetName();
 	StatusEffects[0].Modifier = Modifier;
-	StatusEffects[0].StatusLifespan = StatusLifespan;
-	StatusEffects[0].bDispellable = bDispellable;
-	StatusEffects[0].bStackable = bStackable;
-	StatusEffects[0].Producer = Producer;
+	//For the remaining values, we use the default values of StatusEffectClass
+	//Otherwise, use the provided values in the parameter
+	if (Override)
+	{
+		StatusEffects[0].StatusLifespan = StatusLifespan;
+		StatusEffects[0].bDispellable = bDispellable;
+		StatusEffects[0].bStackable = bStackable;
+	}
+	else	//Use defaut values in class
+	{
+		StatusEffects[0].StatusLifespan = StatusEffectClass.static.GetStatusLifespan();
+		StatusEffects[0].bDispellable = StatusEffectClass.static.IsDispellable();
+		StatusEffects[0].bStackable = StatusEffectClass.static.IsStackable();
+	}
+	if (Producer != None)
+		StatusEffects[0].Producer = Producer;
 	OnAddDoEffect(0, false);
 	return True;
 }
@@ -107,7 +131,7 @@ function bool HasStatusEffect(string StatusEffectName)
 	return false;
 }
 
-function int GetStatusEffectIndex(string StatusEffectName)
+function int GetIndex(string StatusEffectName)
 {
 	local int x;
 	
@@ -124,16 +148,10 @@ function bool CheckMagicalWard();
 function OnAddDoEffect(int EffectIndx, bool bOnStack);
 
 //Remove a particular status effect, w/o regard to dispellable status
-function RemoveStatusEffect(String StatusEffectName)
+function RemoveStatusEffect(int index)
 {
-	local int x;
-	
-	for (x = 0; x < StatusEffects.Length; x++)
-		if (StatusEffects[x].StatusEffectName == StatusEffectName)
-		{
-			OnRemoveDoEffect(x);
-			StatusEffects.Remove(x, 1);
-		}
+	OnRemoveDoEffect(index);
+	StatusEffects.Remove(index, 1);
 }
 
 //Remove all status effects w/o regard to dispellable status

@@ -61,7 +61,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 			if (EInv != None)
 				LocalModifier += 1;
             LocalModifier *= PerformanceIncrease;
-			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, LocalModifier, true, false) != None )
+			if (StatusInv.AddStatusEffect(Class'StatusEffect_Speed', -LocalModifier, True, LocalModifier, true, false))
 			{
 				if (TheWeapon.Instigator != None && TheWeapon.Instigator.Controller != None)
 				{

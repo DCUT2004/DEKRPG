@@ -10,4 +10,7 @@ defaultproperties
 {
 	StatusEffectName="Spd"
 	MaxModifier=5
+	StatusLifespan=5
+	bDispellable=True
+	bStackable=False
 }

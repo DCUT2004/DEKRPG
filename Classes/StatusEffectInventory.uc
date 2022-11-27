@@ -138,7 +138,7 @@ function OnAddDoEffect(int EffectIndx, bool bOnStack)
 			break;
 		Case Class'StatusEffect_Speed'.static.GetName():
 			if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
-				RemoveStatusEffect(Class'StatusEffect_Speed'.static.GetName());
+				RemoveStatusEffect(EffectIndx);
 			class'AbilityIncreasedProtection'.static.quickfoot(10 * StatusEffects[EffectIndx].Modifier, Instigator);
 			if (StatusEffects[EffectIndx].Modifier < 0)
 				Instigator.PlaySound(FreezeSound,,2.5*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
@@ -258,6 +258,9 @@ function OnTimerDoEffect(int EffectIndx)
 		Case Class'StatusEffect_Burn'.static.GetName():
 			DoEffect_DamageOverTime(EffectIndx);
 			break;
+		Case Class'StatusEffect_Poison'.static.GetName():
+			DoEffect_DamageoverTime(EffectIndx);
+			break;
 		Case Class'StatusEffect_DamageBonus'.static.GetName():
 			DoEffect_DamageBonus(EffectIndx);
 			break;
@@ -283,7 +286,7 @@ function DoEffect_AdrenRegen(int EffectIndx)
 		
 	if (StatusEffects[EffectIndx].Modifier > 0 && Instigator.Controller.Adrenaline + StatusEffects[EffectIndx].Modifier > Instigator.Controller.AdrenalineMax )
 	{
-		if (AddStatusEffect(class'StatusEffect_AdrenMax'.static.GetName(), 1, 0, False, False))
+		if (AddStatusEffect(class'StatusEffect_AdrenMax', 1, False));
 			OriginalMaxAdren = Instigator.Controller.AdrenalineMax;
 		Instigator.Controller.AdrenalineMax += StatusEffects[EffectIndx].Modifier;
 	}
@@ -353,6 +356,7 @@ function DoEffect_AmmoRegen(int EffectIndx)
 	}
 }
 
+//Poison, Burn, etc.
 function DoEffect_DamageOverTime(int EffectIndx)
 {
 	local int DamageAmount;
@@ -366,7 +370,7 @@ function DoEffect_DamageOverTime(int EffectIndx)
 		DamageAmount = DoTMaxAmount;
 	if(DamageAmount > 0)
 	{
-		if(Instigator.Controller != None && Instigator.Controller.bGodMode == False
+		if(Instigator != None && Instigator.Controller != None && Instigator.Controller.bGodMode == False
 			&& InvulnerabilityInv(Instigator.FindInventoryType(class'InvulnerabilityInv')) == None)
 		{
 			if (Instigator.Health <= DamageAmount)
@@ -381,6 +385,8 @@ function DoEffect_DamageOverTime(int EffectIndx)
 				// and add the damage as healable
 				class'StatusEffectInventory'.static.AddHealableDamage(DamageAmount, Instigator);
 			}
+			if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Poison'.static.GetName())
+				Instigator.Spawn(Class'GoopSmoke');
 		}
 	}
 }
@@ -434,7 +440,7 @@ function DoEffect_Misfortune(int EffectIndx)
 	
 	if (StatusEffects[EffectIndx].Modifier >= 0)
 	{
-		RemoveStatusEffect(class'StatusEffect_Misfortune'.static.GetName());
+		RemoveStatusEffect(EffectIndx);
 		return;
 	}
 
@@ -487,11 +493,11 @@ function AddParasiteHealth(int Amount)
 	ParasiteHealth = Min(ParasiteHealthMax, ParasiteHealth+Amount);
 }
 
-function RemoveParasiteHealth(int Amount)
+function RemoveParasiteHealth(int Amount, int Index)
 {
 	ParasiteHealth = Max(0, ParasiteHealth-Amount);
 	if (ParasiteHealth <= 0)
-		RemoveStatusEffect(class'StatusEffect_Parasite'.static.GetName());
+		RemoveStatusEffect(Index);
 }
 
 function DoEffect_Regen(int EffectIndx)
@@ -507,7 +513,7 @@ function DoEffect_Regen(int EffectIndx)
 function DoEffect_Speed(int EffectIndx)
 {
 	if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
-		RemoveStatusEffect(class'StatusEffect_Speed'.static.GetName());
+		RemoveStatusEffect(EffectIndx);
 	if (StatusEffects[EffectIndx].Modifier < 0)
 		Instigator.Spawn(FreezexEmitterClass, Instigator,, Instigator.Location, Instigator.Rotation);
 }
@@ -526,8 +532,8 @@ defaultproperties
 	AttackxEmitterClassBuff=Class'DEKRPG999X.ComboAttackUpEffect'
 	AttackxEmitterClassAilment=Class'DEKRPG999X.ComboAttackDownEffect'
 	
-	DefenseEmitterClassBuff=Class'DEKRPG999X.ComboDefenseDownEffect'
-	DefenseEmitterClassAilment=Class'DEKRPG999X.ComboDefenseUpEffect'
+	DefenseEmitterClassBuff=Class'DEKRPG999X.ComboDefenseUpEffect'
+	DefenseEmitterClassAilment=Class'DEKRPG999X.ComboDefenseDownEffect'
 	
 	MisfortuneMaxModifierPickups=1		//Modifier must be 1 to destroy pickups
 	MisfortuneMaxModifierWeapons=2		//Modifier must be 2 to destroy pickups and weapons; 3 to destroy all the above and artifacts

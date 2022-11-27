@@ -110,14 +110,14 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
 			if (StatusInv != None)
 			{
-				ParasiteIndex = StatusInv.GetStatusEffectIndex(class'StatusEffect_Parasite'.static.GetName());
+				ParasiteIndex = StatusInv.GetIndex(class'StatusEffect_Parasite'.static.GetName());
 				if (ParasiteIndex >= 0)
 				{
 					if (StatusInv.ParasiteHealth > 0)
 					{
 						if (StatusInv.ParasiteHealth > HealthGiven)
 						{
-							StatusInv.RemoveParasiteHealth(HealthGiven);
+							StatusInv.RemoveParasiteHealth(HealthGiven, ParasiteIndex);
 							HealthGiven = 0;
 						}
 						else

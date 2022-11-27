@@ -314,7 +314,7 @@ function ApplyMonsterBuff(int RandIndex, int Modifier)
 		{
 			StatusInv = StatusEffectManager(C.Pawn.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
-				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass.default.StatusEffectName, Modifier, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass, Modifier, True, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
 		
 		C = NextC;
@@ -342,7 +342,7 @@ function ApplyPlayerAilment(int RandIndex, int Modifier)
 				RealP = C.Pawn;
 			StatusInv = StatusEffectManager(RealP.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
-				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass.default.StatusEffectName, Modifier, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
+				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass, Modifier, True, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
 		
 		C = NextC;

@@ -4,6 +4,9 @@ class StatusEffect_Poison extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Psn"
-	 MaxModifier=5
-	 bOnlyNegativeModifier=True
+	MaxModifier=5
+	StatusLifespan=4
+	bDispellable=True
+	bStackable=False
+	bOnlyNegativeModifier=True
 }

@@ -15,7 +15,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	if (StatusInv == None)
 		return;
 
-	StatusInv.AddCombo(Class'StatusEffect_MagicalWard'.static.GetName(), AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
+	StatusInv.AddCombo(Class'StatusEffect_MagicalWard', AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties

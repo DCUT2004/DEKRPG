@@ -15,7 +15,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	if (StatusInv == None)
 		return;
 
-	StatusInv.AddCombo(Class'StatusEffect_AdrenRegen'.static.GetName(), AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
+	StatusInv.AddCombo(Class'StatusEffect_AdrenRegen', AbilityLevel, default.BaseLifespan, default.Dispellable, default.Stackable);
 }
 
 defaultproperties
