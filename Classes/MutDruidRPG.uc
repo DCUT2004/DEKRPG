@@ -27,7 +27,6 @@ function ModifyPlayer(Pawn Other)
 {	// for the keys and subclasses
 	Local GiveItemsInv GIInv;
 	local MissionMultiplayerHUDInv MMPIHUD;
-	local StatusEffectInventory StatusInv;
 
 	super.ModifyPlayer(Other);
 
@@ -62,16 +61,6 @@ function ModifyPlayer(Pawn Other)
 	GIInv.InitializeKeyArray();
 	GIInv.InitializeSubClasses(Other);
 	GIInv.InitializeMaterials();
-
-	//Add StatusInv for players
-	//Monsters will spawn their own StatusInv in DEKMonster
-	if (!Other.IsA('Monster')){
-		StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
-		if (StatusInv != None)
-			return;
-		StatusInv = Spawn(class'StatusEffectInventory_Player', Other);
-		StatusInv.GiveTo(Other);
-	}
 }
 
 function Tick(float deltaTime)

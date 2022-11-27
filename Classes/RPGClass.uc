@@ -204,6 +204,7 @@ static function bool PreventSever(Pawn Killed, name boneName, int Damage, class<
 static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local RPGClassInv RPGInv;
+	local StatusEffectInventory StatusInv;
 
 	if (Other != None)
 	{
@@ -216,13 +217,12 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 		}
 		
 		//StatusEffectInventory is added on the player here, since it will then exist for the Player when Combo abilities call ModifyPawn()
-		/*StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
+		StatusInv = StatusEffectInventory_Player(Other.FindInventoryType(Class'StatusEffectInventory_Player'));
 		if (StatusInv == None)
 		{
 			StatusInv = Other.Spawn(Class'StatusEffectInventory_Player');
 			StatusInv.GiveTo(Other);
 		}
-		*/
 	}
 }
 
