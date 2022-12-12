@@ -55,6 +55,7 @@ function Activate()
 	Local Controller C;
 	Local Controller NextC;
     Local RPGWeapon Weapon;
+    Local int NumberIncreased;
 
 	if (Instigator != None && Instigator.Controller != None)
 	{
@@ -75,7 +76,8 @@ function Activate()
 			return;	// can't use in a vehicle
 		}
 
-        // set all payer weapons plus one if possible
+        // set all player weapons plus one if possible
+        NumberIncreased = 0;
     	C = Level.ControllerList;
     	while (C != None)
     	{
@@ -99,14 +101,13 @@ function Activate()
                         }
                     	else
                     	{
-                            Log("***** PlusOne increasing" @ Weapon @ "from" @ Weapon.Modifier @ "to be +1 for" @C.Pawn.PlayerReplicationInfo.PlayerName);
+                            NumberIncreased++;
                             Weapon.Modifier += ModifierPlusValue;
                             Weapon.ConstructItemName();
                             if (DEKRPGWeapon(Weapon) != None)
                                 DEKRPGWeapon(Weapon).DoDelayedIdentify();
                             else
                                 Weapon.bIdentified = false;
-                            Log("***** Weapon is now" @ Weapon @ "with modifier" @ Weapon.Modifier);
                             PlayerController(C).ReceiveLocalizedMessage(class'PlusOneConditionMessage', 0, Instigator.PlayerReplicationInfo);
                     	}
                     }
@@ -121,9 +122,9 @@ function Activate()
 			Instigator.Controller.Adrenaline = 0;
 
 		// ok, lets see if the initiator gets any xp
-		if ((XPforUse > 0) && (Rules != None))
+		if ((XPforUse > 0) && (Rules != None) && (NumberIncreased > 1))     // no xp for increasing own weapon
 		{
-			Rules.ShareExperience(RPGStatsInv(Instigator.FindInventoryType(class'RPGStatsInv')), XPforUse);
+			Rules.ShareExperience(RPGStatsInv(Instigator.FindInventoryType(class'RPGStatsInv')), XPforUse * (NumberIncreased -1));
 		}
 	}
 	else
@@ -170,7 +171,7 @@ defaultproperties
 {
      CostPerSec=1
      AdrenalineRequired=250
-     XPforUse=20
+     XPforUse=10
      ModifierPlusValue=1
      LimitOverMaximum=1
      MinActivationTime=0.000001
