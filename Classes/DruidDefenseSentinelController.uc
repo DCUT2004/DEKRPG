@@ -109,7 +109,7 @@ function DoHealing()
 				if (LoopP != None && LoopP.isA('Vehicle'))
 					RealP = Vehicle(LoopP).Driver;
 
-				if (RealP != None && XPawn(RealP) != None && HardCoreInv(RealP.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(RealP.FindInventoryType(class'ComboHealStopInv')) == None)  // only interested in health/shields/ammo/adren for player pawns
+				if (RealP != None && XPawn(RealP) != None && HardCoreInv(RealP.FindInventoryType(class'HardCoreInv')) == None)  // only interested in health/shields/ammo/adren for player pawns
 		        {
 					//first check shield healing
 					if (DefPawn.ShieldHealingLevel > 0 && RealP.GetShieldStrength() < RealP.GetShieldStrengthMax())

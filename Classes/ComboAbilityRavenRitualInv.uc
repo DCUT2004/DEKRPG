@@ -1,4 +1,5 @@
 //The combo that the player has purchased
+//Deprecated - remove and resolve any references
 class ComboAbilityRavenRitualInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
@@ -46,8 +47,8 @@ function Timer()
 			SetTimer(0, False);
 			return;
 		}
-		if (Combo != None)
-			Combo.ComboDamage(ComboDamage, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
+		//if (Combo != None)
+		//	Combo.ComboDamage(ComboDamage, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
 		if (Pawn(Owner).Controller != None && PlayerController(Pawn(Owner).Controller) != None)
 			PlayerController(Pawn(Owner).Controller).ClientPlaySound(Sound'ONSVehicleSounds-S.LaserSounds.Laser17');
 		A = Spawn(Class'ONSPlasmaHitPurple', Pawn(Owner), , Pawn(Owner).Location);

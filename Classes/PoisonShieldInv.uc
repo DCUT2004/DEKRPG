@@ -9,8 +9,8 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 
 simulated function Timer()
 {
-	local DruidPoisonInv DPInv;
-	local PoisonInv PInv;
+	local StatusEffectManager StatusManager;
+	
 	if (Instigator == None)
 	{
 		Destroy();
@@ -24,13 +24,11 @@ simulated function Timer()
 	}
 	else
 	{
-		DPInv = DruidPoisonInv(Instigator.FindInventoryType(class'DruidPoisonInv'));
-		PInv = PoisonInv(Instigator.FindInventoryType(class'PoisonInv'));
-		
-		if (DPInv != None)
-			DPInv.Destroy();
-		if (PInv != None)
-			PInv.Destroy();
+		StatusManager = Class'StatusEffectManager'.static.GetStatusEffectmanager(Instigator);
+		if (StatusManager != None)
+		{
+			StatusManager.RemoveStatusEffect(StatusManager.GetIndex(Class'StatusEffect_Poison'));
+		}
 	}
 }
 

@@ -28,6 +28,43 @@ simulated function PostBeginPlay()
 	SetTimer(1, True);
 }
 
+static final function StatusEffectManager GetStatusEffectManager(Pawn P)
+{
+	local StatusEffectManager StatusInventory;
+
+	if (P == None)
+		return None;
+	
+	StatusInventory = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
+	return StatusInventory;
+}
+
+static function AddHealableDamage(int Damage, Pawn Injured)
+{
+	Local HealableDamageInv Inv;
+
+	if(Injured == None || Injured.Controller == None || Injured.Health <= 0 || Damage < 1)
+		return; // Not EXP Healable
+
+	if(Injured.isA('Monster') && !Injured.Controller.isA('DEKFriendlyMonsterController'))
+		return; 	// No tracking for not friendly monsters.
+
+	Inv = HealableDamageInv(Injured.FindInventoryType(class'HealableDamageInv'));
+	if(Inv == None)
+	{
+		Inv = Injured.spawn(class'HealableDamageInv');
+		Inv.giveTo(Injured);
+	}
+
+	if(Inv == None)
+	    return;
+
+	Inv.Damage += Damage;
+
+	if(Inv.Damage > Injured.HealthMax + Class'HealableDamageGameRules'.default.MaxHealthBonus)
+		Inv.Damage = Injured.HealthMax + Class'HealableDamageGameRules'.default.MaxHealthBonus;
+}
+
 //Timer will manage each StatusEffect's lifespan
 function Timer()
 {
@@ -131,12 +168,13 @@ function bool HasStatusEffect(string StatusEffectName)
 	return false;
 }
 
-function int GetIndex(string StatusEffectName)
+function int GetIndex(Class<StatusEffectData> StatusEffectClass)
 {
 	local int x;
-	
+	if (StatusEffectClass == None)
+		return -1;
 	for (x = 0; x < StatusEffects.Length; x++)
-		if (StatusEffects[x].StatusEffectName == StatusEffectName)
+		if (StatusEffects[x].StatusEffectName == StatusEffectClass.static.GetName())
 			return x;
 	return -1;
 }
@@ -150,6 +188,8 @@ function OnAddDoEffect(int EffectIndx, bool bOnStack);
 //Remove a particular status effect, w/o regard to dispellable status
 function RemoveStatusEffect(int index)
 {
+	if (index < 0 || index >= StatusEffects.Length)
+		return;
 	OnRemoveDoEffect(index);
 	StatusEffects.Remove(index, 1);
 }

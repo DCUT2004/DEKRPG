@@ -1,4 +1,4 @@
-//The combo that the player has purchased
+//Deprecated - remove and resolve any references
 class ComboAbilityBeastsRevengeInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
@@ -15,8 +15,8 @@ function DoEffect()
 	if (Owner != None && Pawn(Owner) != None && Pawn(Owner).Controller != None)
 	{
 		//Give defense
-		if (Combo != None)
-			Combo.AddBuff(Pawn(Owner), False, False, True, ComboLifespan, class'ComboDefenseInv', 0.850000, bDispellable);
+		//if (Combo != None)
+		//	Combo.AddBuff(Pawn(Owner), False, False, True, ComboLifespan, class'ComboDefenseInv', 0.850000, bDispellable);
 		SetTimer(ComboLifespan, False);
 		if (Pawn(Owner).PlayerReplicationInfo != None)
 			Level.Game.Broadcast(self, Pawn(Owner).PlayerReplicationInfo.PlayerName $ " casted Beast's Revenge!");
@@ -34,9 +34,9 @@ function Timer()
 	
 	if (Pawn(Owner) != None)
 	{
-		if (AccumulatedDamage > 0)
-			if (Combo != None)
-				Combo.ComboDamage(AccumulatedDamage*EffectMultiplier, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
+		//if (AccumulatedDamage > 0)
+		//	if (Combo != None)
+		//		Combo.ComboDamage(AccumulatedDamage*EffectMultiplier, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
 		AccumulatedDamage = 0;
 		if (xPawn(Pawn(Owner)) != None)
 			xPawn(Pawn(Owner)).SetInvisibility(0.0);

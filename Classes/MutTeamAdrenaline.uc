@@ -80,22 +80,6 @@ simulated function PostBeginPlay()
 	Super.PostBeginPlay();
 }
 
-simulated function ModifyPlayer(Pawn Other)
-{
-	local ComboInv Combo;
-	
-	if (Other != None)
-	{
-		Combo = ComboInv(Other.FindInventoryType(class'ComboInv'));
-		if (Combo == None)
-		{
-			Combo = Other.Spawn(class'ComboInv');
-			Combo.GiveTo(Other);
-		}
-	}
-	Super.ModifyPlayer(Other);
-}
-
 simulated function Timer()
 {
 	//Handle player team and monster team adrenaline

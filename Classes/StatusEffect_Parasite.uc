@@ -5,5 +5,8 @@ defaultproperties
 {
 	StatusEffectName="Prste"
 	MaxModifier=10
+	StatusLifespan=0
 	bOnlyNegativeModifier=True
+	bDispellable=False
+	bStackable=False
 }

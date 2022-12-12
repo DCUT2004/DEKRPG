@@ -11,8 +11,12 @@ var Material KnockbackOverlay;
 
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
+	local Controller C, NextC;
 	local int StatusIndex;
 	local StatusEffectManager InstigatorStatusInv, InjuredStatusInv;
+	local ComboAbilityTeleStealthInv TeleStealth;
+	local ComboAbilityBeastsRevengeInv BeastsRevenge;
+	local ComboAbilityHealingStrikeInv HealStrike;
 	
 	if (InstigatedBy != None)
 		InstigatorStatusInv = StatusEffectManager(InstigatedBy.FindInventoryType(Class'StatusEffectManager'));
@@ -23,7 +27,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	//Adjust damage if Instigator has StatusEffect_DamageBonus
 	if (InstigatorStatusInv != None)
 	{
-		StatusIndex = InstigatorStatusInv.GetIndex(class'StatusEffect_DamageBonus'.static.GetName());
+		StatusIndex = InstigatorStatusInv.GetIndex(class'StatusEffect_DamageBonus');
 		if (StatusIndex >= 0 && InstigatorStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 		{
 			Damage *= 1 + (InstigatorStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
@@ -31,11 +35,17 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 				Damage = 1;
 		}
 	}
+
+	//If the injured has BeastsRevenge, accumulate his damage
+	//We do this here, before defense buffs/ailments are applied, so the defense buff from Beasts Revenge does not negate the effect
+	BeastsRevenge = ComboAbilityBeastsRevengeInv(injured.FindInventoryType(Class'ComboAbilityBeastsRevengeInv'));
+	if (BeastsRevenge != None)
+		BeastsRevenge.AccumulatedDamage += Damage;	
 	
 	if (InjuredStatusInv != None)
 	{
 		//Adjust damage if Injured has StatusEffect_DamageReduction
-		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_DamageReduction'.static.GetName());
+		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_DamageReduction');
 		if (StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 		{
 			Damage *= 1 + (-InjuredStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
@@ -44,7 +54,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		}
 
 		//Adjust momentum if Injured has StatusEffect_Momentum
-		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_Momentum'.static.GetName());
+		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_Momentum');
 		if (InjuredStatusInv != None && StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 		{
 			if (InjuredStatusInv.StatusEffects[StatusIndex].Modifier < 0)
@@ -57,7 +67,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	//Adjust damage if Instigator has ChanceHit
 	if (InstigatorStatusInv != None)
 	{
-		StatusIndex = InstigatorStatusInv.GetIndex(class'StatusEffect_ChanceHit'.static.GetName());
+		StatusIndex = InstigatorStatusInv.GetIndex(class'StatusEffect_ChanceHit');
 		if (StatusIndex >= 0 && InstigatorStatusInv.StatusEffects[StatusIndex].Modifier != 0)
 		{
 			if (Rand(100) <= abs(InstigatorStatusInv.StatusEffects[StatusIndex].Modifier)*ChanceHitPerModifier)
@@ -81,6 +91,28 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 			}
 		}
 	}
+
+	//If the instigator used Healing Strike, heal the instigator and his allies
+	if (DamageType == class'DamTypeHealingStrike' && instigatedBy != None && instigatedBy.Health > 0)
+	{
+		HealStrike = ComboAbilityHealingStrikeInv(instigatedBy.FindInventoryType(Class'ComboAbilityHealingStrikeInv'));
+		if (HealStrike != None)
+		{
+			C = Level.ControllerList;
+			while (C != None)
+			{
+				NextC = C.NextController;
+				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() == instigatedBy.GetTeamNum())
+					C.Pawn.GiveHealth(HealStrike.EffectMultiplier*Damage, C.Pawn.HealthMax);
+				C = NextC;
+			}
+		}
+	}
+
+	//If the instigator has TeleStealth, accumulate his damage
+	TeleStealth = ComboAbilityTeleStealthInv(instigatedBy.FindInventoryType(Class'ComboAbilityTeleStealthInv'));
+	if (TeleStealth != None)
+		TeleStealth.AccumulatedDamage += Damage;
 	
 	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 }

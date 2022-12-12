@@ -210,12 +210,6 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 		Super.NewAdjustTargetDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
 		return;
 	}
-	
-	if (ComboHealStopInv(P.FindInventoryType(class'ComboHealStopInv')) != None)
-	{
-		Super.NewAdjustTargetDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
-		return;
-	}	
 
 	// ok, we have the linkshaft hitting someone
 	BestDamage = Max(Damage, OriginalDamage);

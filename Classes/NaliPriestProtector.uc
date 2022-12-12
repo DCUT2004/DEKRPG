@@ -6,17 +6,9 @@ var TeamAdrenalineGameRules TARules;
 simulated function PostBeginPlay()
 {
 	local GameRules G;
-	local ComboInv Combo;
 	
 	Instigator = self;
 	SummonedMonster = True;
-	
-	Combo = ComboInv(Instigator.FindInventoryType(class'ComboInv'));
-	if (Combo == None)
-	{
-		Combo = Instigator.Spawn(class'ComboInv');
-		Combo.GiveTo(Instigator);
-	}
 	
 	for(G = Level.Game.GameRulesModifiers; G != None; G = G.NextGameRules)
 	{
@@ -104,13 +96,6 @@ function Died(Controller Killer, class<DamageType> damageType, vector HitLocatio
 	}
 	else
 		Super.Died(Killer, damageType, HitLocation);
-}
-
-simulated function Destroyed()
-{
-	if (TARules != None && TARules.TauntPawn == Self)
-		TARules.TauntPawn = None;
-	Super.Destroyed();
 }
 
 defaultproperties

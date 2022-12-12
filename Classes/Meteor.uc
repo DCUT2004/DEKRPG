@@ -3,6 +3,7 @@ class Meteor extends Projectile;
 var FireBall FireBallEffect;
 var	xEmitter SmokeTrail;
 var config int BaseChance;
+var config int BurnModifier;
 
 simulated event PreBeginPlay()
 {
@@ -183,8 +184,7 @@ function NullInBlast(float Radius)
 	local float damageScale, pawndist;
 	local vector pawndir;
 	local Controller C, NextC;
-	Local SuperHeatInv Inv;
-	local MagicShieldInv MInv;
+	local StatusEffectManager StatusManager;
 
 	// freezes anything not a null warlord. Any side.
 	C = Level.ControllerList;
@@ -197,30 +197,25 @@ function NullInBlast(float Radius)
 			C = NextC;
 			break;
 		}
-		MInv = MagicShieldInv(C.Pawn.FindInventoryType(class'MagicShieldInv'));
 		if ( C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && !C.SameTeamAs(InstigatorController)
-		     && VSize(C.Pawn.Location - Location) < Radius && FastTrace(C.Pawn.Location, Location) && MInv == None )
+		     && VSize(C.Pawn.Location - Location) < Radius && FastTrace(C.Pawn.Location, Location) )
 		{
 			pawndir = C.Pawn.Location - Location;
 			pawndist = FMax(1,VSize(pawndir));
 			damageScale = 1 - FMax(0,pawndist/Radius);
 
-			if(!C.Pawn.isA('Vehicle') && class'DEKRPGWeapon'.static.NullCanTriggerPhysics(C.Pawn) && (C.Pawn.FindInventoryType(class'SuperHeatInv') == None))
+			if(!C.Pawn.isA('Vehicle') && class'DEKRPGWeapon'.static.NullCanTriggerPhysics(C.Pawn))
 			{
 				if(C.Pawn == None)
 				{
 					C = NextC;
 					break;
 				}
-				if(rand(99) <= BaseChance)
+				if(rand(100) <= BaseChance)
 				{
-					Inv = spawn(class'SuperHeatInv', C.Pawn,,, rot(0,0,0));
-					if(Inv != None)
-					{
-						Inv.LifeSpan = 4;	
-						Inv.Modifier = 3;
-						Inv.GiveTo(C.Pawn);
-					}
+					StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(C.Pawn);
+					if (StatusManager != None)
+						StatusManager.AddStatusEffect(Class'StatusEffect_Burn', -(abs(BurnModifier)));
 				}
 			}
 			if(C.Pawn == None)
@@ -258,6 +253,7 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
 defaultproperties
 {
+	 BurnModifier=3
      BaseChance=80
      MaxSpeed=0.000000
      bSwitchToZeroCollision=True

@@ -99,7 +99,7 @@ function Activate()
 
 		HitPawn = Pawn(AHit);
 		if ( HitPawn != Instigator && HitPawn.Health > 0 && HitPawn.Controller.SameTeamAs(Instigator.Controller)
-		     && VSize(HitPawn.Location - StartTrace) < MaxRange && Vehicle(HitPawn) == None && HardCoreInv(HitPawn.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(HitPawn.FindInventoryType(class'ComboHealStopInv')) == None )
+		     && VSize(HitPawn.Location - StartTrace) < MaxRange && Vehicle(HitPawn) == None && HardCoreInv(HitPawn.FindInventoryType(class'HardCoreInv')) == None )
 		{
 			// ok, lets do the work. Give the guy a booster.
 			// see what our max is, and what xp we get

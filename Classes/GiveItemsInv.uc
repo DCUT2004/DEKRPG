@@ -50,7 +50,6 @@ var Array<AbilityConfig> AbilityConfigs;
 var RPGStatsInv ClientStatsInv;		// set clientside by RPGMenus
 
 //Combos and team adrenaline
-var ComboAbilityInv Combo;		//Contains a linked list of ComboAbilityInv, and is iterated over by BBFF combo when executed
 var int NumCombos;				//Current number of combos held. Stored here, as combos should be saved when players respawn
 var MutTeamAdrenaline TeamAdrenalineMut;
 var int PlayerTeamAdrenaline, MonsterTeamAdrenaline;		//For replication to RPGHUDInvasion

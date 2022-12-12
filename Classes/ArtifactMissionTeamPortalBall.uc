@@ -86,7 +86,7 @@ defaultproperties
 {
      XPPerScore=5
      XPReward=25
-     MissionGoal=15
+     MissionGoal=3
      TimeLimit=120
      Description="Shoot the ball into the portal!"
      PickupClass=Class'DEKRPG999X.ArtifactMissionTeamPortalBallPickup'

@@ -43,7 +43,7 @@ simulated function Timer()
 				{
 				    if (RPGRules != None)
 						RPGRules.AwardEXPForDamage(Instigator.Controller, RPGStatsInv(Instigator.FindInventoryType(class'RPGStatsInv')), PawnOwner, HealthDrained);
-					class'DruidPoisonInv'.static.AddHealableDamage(HealthDrained, PawnOwner);
+					class'StatusEffectManager'.static.AddHealableDamage(HealthDrained, PawnOwner);
 				}
 			}
 		}

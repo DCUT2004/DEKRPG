@@ -5,9 +5,7 @@ static function bool GenuinePreventDeath(Pawn Killed, Controller Killer, class<D
 {
 	local DruidGhostInv Inv;
 	local Vehicle V;
-
-	Local NullEntropyInv NInv;
-	Local KnockbackInv KInv;
+	local StatusEffectManager StatusManager;
 	Local DamageInv DInv;
 	Local InvulnerabilityInv IInv;
 	Local NecroInv NEInv;
@@ -63,19 +61,9 @@ static function bool GenuinePreventDeath(Pawn Killed, Controller Killer, class<D
 		return false;
 
 // ULTIMA REMOVED.  Shouldn't be needed in RPGDeathAbility.
-	
-	KInv = KnockbackInv(Killed.FindInventoryType(class'KnockbackInv'));
-	if(KInv != None)
-	{
-		KInv.PawnOwner = None;
-		KInv.Destroy();
-	}
-	NInv = NullEntropyInv(Killed.FindInventoryType(class'NullEntropyInv'));
-	if(NInv != None)
-	{
-		NInv.PawnOwner = None;
-		NInv.Destroy();
-	}	
+	StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Killed);
+	if (StatusManager != None)
+		StatusManager.RemoveAllStatusEffects();	
 	DInv = DamageInv(Killed.FindInventoryType(class'DamageInv'));
 	if(DInv != None)
 	{

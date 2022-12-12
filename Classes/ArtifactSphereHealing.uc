@@ -142,7 +142,7 @@ function HealTeam(vector CoreLocation)
 	{
 		// loop round finding all players on same team
 		if ( C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && C.SameTeamAs(Instigator.Controller)
-		     && VSize(C.Pawn.Location - CoreLocation) < EffectRadius && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && PhantomDeathGhostInv(C.Pawn.FindInventoryType(class'PhantomDeathGhostInv')) == None && ComboHealStopInv(C.Pawn.FindInventoryType(class'ComboHealStopInv')) == None )
+		     && VSize(C.Pawn.Location - CoreLocation) < EffectRadius && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && PhantomDeathGhostInv(C.Pawn.FindInventoryType(class'PhantomDeathGhostInv')) == None)
 		{
 
 			P = C.Pawn;

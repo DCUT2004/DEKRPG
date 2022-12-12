@@ -42,7 +42,7 @@ function DoHealing(float Radius)
 			if (P != None && Instigator != None 
 					&& P.GetTeam() == Instigator.GetTeam() && Instigator.GetTeam() != None)
 			{
-				if(HardCoreInv(P.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(P.FindInventoryType(class'ComboHealStopInv')) == None )
+				if(HardCoreInv(P.FindInventoryType(class'HardCoreInv')) == None)
 				{
 					localMaxHealth = MaxHealth;
 	

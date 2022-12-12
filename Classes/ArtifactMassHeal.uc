@@ -113,7 +113,7 @@ function GetController1()
 		// loop round finding strongest enemy to attack
 		if ( C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && C.SameTeamAs(Instigator.Controller)
 			&& DruidHealthRegenInv(C.Pawn.FindInventoryType(class'DruidHealthRegenInv')) == None
-			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(C.Pawn.FindInventoryType(class'ComboHealStopInv')) == None && C != Controller2 && C != Controller3)
+			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && C != Controller2 && C != Controller3)
 		{
 			if (C.Pawn.Health < LeastHealth)
 			{
@@ -139,7 +139,7 @@ function GetController2()
 		// loop round finding strongest enemy to attack
 		if ( C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && C.SameTeamAs(Instigator.Controller)
 			&& DruidHealthRegenInv(C.Pawn.FindInventoryType(class'DruidHealthRegenInv')) == None
-			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(C.Pawn.FindInventoryType(class'ComboHealStopInv')) == None && C != Controller1 && C != Controller3)
+			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && C != Controller1 && C != Controller3)
 		{
 			if (C.Pawn.Health < LeastHealth)
 			{
@@ -165,7 +165,7 @@ function GetController3()
 		// loop round finding strongest enemy to attack
 		if ( C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && C.SameTeamAs(Instigator.Controller)
 			&& DruidHealthRegenInv(C.Pawn.FindInventoryType(class'DruidHealthRegenInv')) == None
-			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && ComboHealStopInv(C.Pawn.FindInventoryType(class'ComboHealStopInv')) == None && C != Controller1 && C != Controller2)
+			&& !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None && C != Controller1 && C != Controller2)
 		{
 			if (C.Pawn.Health < LeastHealth)
 			{

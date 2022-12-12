@@ -99,7 +99,7 @@ function AddDamageBonus(out int Damage, int OriginalDamage, Actor Victim, vector
 	local Pawn P;
 	local EarthInv EInv;
 	local IceInv IInv;
-	local SuperHeatInv SInv;
+	local FireInv FInv;
 
 	if (Damage <= 0)
 		return;
@@ -133,8 +133,8 @@ function AddDamageBonus(out int Damage, int OriginalDamage, Actor Victim, vector
 
 	if (DamageBonusAgainstFireMonsters != 0.0)
 	{
-		SInv = SuperHeatInv(P.FindInventoryType(class'SuperHeatInv'));
-		if (SInv != None)
+		FInv = FireInv(P.FindInventoryType(class'FireInv'));
+		if (FInv != None)
 		{
 			Damage *= (1.0 + DamageBonusAgainstFireMonsters * TheWeapon.GetModifier());
 			Momentum *= 1.0 + DamageBonusAgainstFireMonsters * TheWeapon.GetModifier();

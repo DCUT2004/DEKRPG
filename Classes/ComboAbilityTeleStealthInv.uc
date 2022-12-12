@@ -1,4 +1,4 @@
-//The combo that the player has purchased
+//Deprecated - remove and resolve any references
 class ComboAbilityTeleStealthInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
@@ -78,11 +78,13 @@ function giveInvisibilityInv(Pawn Other)
 //Give the Pawn 100% chance to ward ailments
 function giveWard(Pawn Other)
 {
-	if (Combo != None)
+/* 	if (Combo != None)
 	{
 		Combo.AddBuff(Pawn(Owner), bAll, False, bSingle, ComboLifespan, class'ComboWardInv', 100, bDispellable);
 	}
+*/
 }
+
 
 //Timer is called one second before this inventory item is destroyed
 //Deal damage to a single target based on the amount of damage we've dealt while we were invisible
@@ -93,8 +95,8 @@ function Timer()
 	if (Pawn(Owner) != None)
 	{
 		if (AccumulatedDamage > 0)
-			if (Combo != None)
-				Combo.ComboDamage(AccumulatedDamage*EffectMultiplier, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
+			//if (Combo != None)
+			//	Combo.ComboDamage(AccumulatedDamage*EffectMultiplier, bAll, False, bSingle, ComboDamageType,  class'RocketExplosion', True);
 		AccumulatedDamage = 0;
 		if (xPawn(Pawn(Owner)) != None)
 			xPawn(Pawn(Owner)).SetInvisibility(0.0);

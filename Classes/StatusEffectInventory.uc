@@ -4,6 +4,8 @@
 * Status Effects that modify damage are handled separately in StatusEffectGameRules
 */
 
+#exec  AUDIO IMPORT NAME="Ward" FILE="Sounds\Ward.WAV" GROUP="ComboSounds"
+
 class StatusEffectInventory extends StatusEffectManager
 	config(UT2004RPG);
 
@@ -143,6 +145,12 @@ function OnAddDoEffect(int EffectIndx, bool bOnStack)
 			if (StatusEffects[EffectIndx].Modifier < 0)
 				Instigator.PlaySound(FreezeSound,,2.5*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
 			break;
+		Case Class'StatusEffect_NullEntropy'.static.GetName():
+			if (!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
+				RemoveStatusEffect(EffectIndx);
+			if (StatusEffects[EffectIndx].Modifier < 0)
+				Instigator.setPhysics(PHYS_NONE);
+			break;
 	}
 }
 
@@ -151,6 +159,14 @@ function SpawnEmitter(Class<Actor> EmitterClass, int EffectIndx)
 	local Actor A;
 	local Emitter E;
 	local xEmitter X;
+	local int y;
+
+	//We only want to spawn one instance of an emitter for a status effect
+	//Check to see if we have one already
+
+	for (y = 0; y < Emitters.Length; y++)
+		if (Emitters[y].Class == EmitterClass)
+			return;
 	
 	A = Spawn(EmitterClass, Instigator,, Instigator.Location);
 	if (A == None)
@@ -181,8 +197,12 @@ function SpawnEmitter(Class<Actor> EmitterClass, int EffectIndx)
 
 function DestroyEmitter(int Indx)
 {
+	local Emitter E;
 	if (Indx < 0 || Indx >= Emitters.Length)
 		return;
+	E = Emitter(Emitters[Indx]);
+	if (E != None)
+		E.Kill();
 	Emitters[Indx].Destroy();
 	Emitters.Remove(Indx, 1);
 }
@@ -237,6 +257,10 @@ function OnRemoveDoEffect(int EffectIndx)
 			break;
 		Case Class'StatusEffect_Speed'.static.GetName():
 			class'AbilityIncreasedProtection'.static.quickfoot(0, Instigator);
+			break;
+		Case Class'StatusEffect_NullEntropy'.static.GetName():
+			if(Instigator != None && Instigator.Physics == PHYS_NONE)
+				Instigator.SetPhysics(PHYS_Falling);
 			break;
 	}
 }
@@ -385,8 +409,19 @@ function DoEffect_DamageOverTime(int EffectIndx)
 				// and add the damage as healable
 				class'StatusEffectInventory'.static.AddHealableDamage(DamageAmount, Instigator);
 			}
-			if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Poison'.static.GetName())
+			if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Burn'.static.GetName())
+			{
+				if (Level.NetMode != NM_DedicatedServer && Instigator != None)
+					if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
+						PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'SuperHeatConditionMessage', 0);
+			}
+			else if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Poison'.static.GetName())
+			{
 				Instigator.Spawn(Class'GoopSmoke');
+				if (Level.NetMode != NM_DedicatedServer && Instigator != None)
+					if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
+						PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'PoisonBlastConditionMessage', 0);
+			}
 		}
 	}
 }
@@ -516,6 +551,9 @@ function DoEffect_Speed(int EffectIndx)
 		RemoveStatusEffect(EffectIndx);
 	if (StatusEffects[EffectIndx].Modifier < 0)
 		Instigator.Spawn(FreezexEmitterClass, Instigator,, Instigator.Location, Instigator.Rotation);
+	if (Level.NetMode != NM_DedicatedServer && Instigator != None)
+		if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
+			PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'FreezeConditionMessage', 0);
 }
 
 defaultproperties

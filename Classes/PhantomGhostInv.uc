@@ -73,14 +73,9 @@ simulated function SwitchOffInvulnerability()
 
 simulated function Timer()
 {
-	Local NullEntropyInv NInv;
-	Local KnockbackInv KInv;
+	local StatusEffectManager StatusManager;
 	Local DamageInv DInv;
 	Local InvulnerabilityInv IInv;
-	local FreezeInv FInv;
-	local DruidPoisonInv DPInv;
-	local PoisonInv PoInv;
-	local SuperHeatInv HInv;
 	Local Vehicle Vehicle;
 	local PlagueInv PlInv;
 	
@@ -121,43 +116,13 @@ simulated function Timer()
 			if (PawnOwner != None)
 			{	
 				PawnOwner.GiveHealth(RegenAmount, PawnOwner.HealthMax);
+
+				StatusManager = Class'StatusEffectManager'.static.GetStatusEffectmanager(PawnOwner);
+				if (StatusManager != None)
+				{
+					StatusManager.RemoveAllStatusEffects();
+				}
 				
-				KInv = KnockbackInv(PawnOwner.FindInventoryType(class'KnockbackInv'));
-				if(KInv != None)
-				{
-					KInv.PawnOwner = None;
-					KInv.Destroy();
-				}
-				NInv = NullEntropyInv(PawnOwner.FindInventoryType(class'NullEntropyInv'));
-				if(NInv != None)
-				{
-					NInv.PawnOwner = None;
-					NInv.Destroy();
-				}
-				FInv = FreezeInv(PawnOwner.FindInventoryType(class'FreezeInv'));
-				if(FInv != None)
-				{
-					FInv.PawnOwner = None;
-					FInv.Destroy();
-				}
-				DPInv = DruidPoisonInv(PawnOwner.FindInventoryType(class'DruidPoisonInv'));
-				if(DPInv != None)
-				{
-					DPInv.PawnOwner = None;
-					DPInv.Destroy();
-				}
-				PoInv = PoisonInv(PawnOwner.FindInventoryType(class'PoisonInv'));
-				if(PoInv != None)
-				{
-					PoInv.PawnOwner = None;
-					PoInv.Destroy();
-				}
-				HInv = SuperHeatInv(PawnOwner.FindInventoryType(class'SuperHeatInv'));
-				if(HInv != None)
-				{
-					HInv.PawnOwner = None;
-					HInv.Destroy();
-				}	
 				DInv = DamageInv(PawnOwner.FindInventoryType(class'DamageInv'));
 				if(DInv != None)
 				{

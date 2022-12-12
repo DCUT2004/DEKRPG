@@ -1,7 +1,8 @@
+//Deprecated - remove and resolve any references
 class ComboAbilityHealingStrikeInv extends ComboAbilityInv
 	config(UT2004RPG);
 	
-function DoEffect()
+/*function DoEffect()
 {
 	if (Owner != None && Pawn(Owner) != None)
 	{
@@ -11,6 +12,7 @@ function DoEffect()
 		}
 	}
 }
+*/
 
 defaultproperties
 {

@@ -5,23 +5,6 @@ var Pawn Master;
 var float HealthMultiplier;
 var config int BiteDamage;
 
-simulated function PostBeginPlay()
-{
-	local ComboInv ComboInv;
-	
-	Super.PostBeginPlay();
-	
-	if (Instigator != None)
-	{
-		ComboInv = ComboInv(Instigator.FindInventoryType(class'ComboInv'));
-		if (ComboInv == None)
-		{
-			ComboInv = Instigator.Spawn(class'ComboInv');
-			ComboInv.GiveTo(Instigator);
-		}
-	}
-}
-
 function RangedAttack(Actor A)
 {
 	if ( VSize(A.Location - Location) < MeleeRange + CollisionRadius + A.CollisionRadius )
