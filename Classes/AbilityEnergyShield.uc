@@ -95,7 +95,8 @@ defaultproperties
      HealthLimit=5
      HealthBonus=1.000000
      AbilityName="Energy Shield"
-     Description="Uses adrenaline as a shield. Cost (per level): 15."
-     StartingCost=15
+     Description="Uses adrenaline as a shield. Cost (per level): 10,20,..."
+     StartingCost=10
+     CostAddPerLevel=10
      MaxLevel=4
 }
