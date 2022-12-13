@@ -5,6 +5,16 @@ var config int MaterialKillChance;	//The chance to unlock a material upon a kill
 var config int LowMaterialChance, MediumMaterialChance;
 var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
 
+function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
+{
+	
+	//Add to monster team adrenaline on each hit
+	if (injured != None && instigatedBy != None)
+		if (instigatedBy.IsA('Monster') && !injured.IsA('Monster') && !injured.IsA('DruidBlock') && injured.GetTeamNum() != instigatedBy.GetTeamNum())
+			class'MutTeamAdrenaline'.static.AddMonsterTeamAdren();
+	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
+}
+
 function ScoreKill(Controller Killer, Controller Killed)
 {
 	local int MaterialRankChance;
