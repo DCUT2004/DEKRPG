@@ -376,7 +376,7 @@ simulated function PlayMonsterComboSound()
 
 simulated function AnnounceCombo(int RandIndex, int Modifier)
 {
-	Level.Game.BroadCast(Self, Combos[RandIndex].StatusEffectClass.default.StatusEffectName $ " " $ Modifier $ " for " $ Combos[RandIndex].StatusLifespan $ " seconds");
+	Level.Game.BroadCast(Self, Combos[RandIndex].StatusEffectClass.static.GetFriendlyName() $ " " $ Modifier $ " for " $ Combos[RandIndex].StatusLifespan $ " seconds");
 }
 
 defaultproperties

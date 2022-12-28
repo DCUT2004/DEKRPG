@@ -4,5 +4,6 @@ class StatusEffect_DamageBonus extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Attk"
+	FriendlyName="Attack"
 	MaxModifier=10
 }

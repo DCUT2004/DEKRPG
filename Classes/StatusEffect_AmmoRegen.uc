@@ -4,5 +4,6 @@ class StatusEffect_AmmoRegen extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="AmoRgn"
+	FriendlyName="Resupply"
 	MaxModifier=5
 }

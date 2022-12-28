@@ -4,6 +4,7 @@ class StatusEffect_NullEntropy extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Nul"
+	FriendlyName="Null Entropy"
 	StatusLifespan=3
 	bDispellable=True
 	bStackable=False

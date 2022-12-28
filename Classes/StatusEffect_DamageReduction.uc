@@ -4,5 +4,6 @@ class StatusEffect_DamageReduction extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Dfnse"
+	FriendlyName="Defense"
 	MaxModifier=10
 }

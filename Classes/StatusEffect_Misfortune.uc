@@ -5,6 +5,7 @@ class StatusEffect_Misfortune extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Msftne"
+	FriendlyName="Misfortune"
 	 MaxModifier=3
 	 bOnlyNegativeModifier=True
 }

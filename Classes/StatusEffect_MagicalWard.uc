@@ -4,6 +4,7 @@ class StatusEffect_MagicalWard extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Wrd"
+	FriendlyName="Magical Ward"
 	bOnlyPositiveModifier=True
 	MaxModifier=10
 }

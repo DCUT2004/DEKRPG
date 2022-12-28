@@ -9,6 +9,7 @@ class StatusEffect_Speed extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Spd"
+	FriendlyName="Speed"
 	MaxModifier=5
 	StatusLifespan=5
 	bDispellable=True

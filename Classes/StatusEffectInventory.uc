@@ -36,6 +36,7 @@ var int ParasiteHealth;
 var int ParasiteHealthMax;
 var config int StartingParasiteHealth;
 var config int ParasiteHealthAddPerModifier;
+var config float ParasiteHealthPercentSteal;
 
 //Regen variables
 var config int RegenAdditionalHealthMax;
@@ -150,6 +151,9 @@ function OnAddDoEffect(int EffectIndx, bool bOnStack)
 				RemoveStatusEffect(EffectIndx);
 			if (StatusEffects[EffectIndx].Modifier < 0)
 				Instigator.setPhysics(PHYS_NONE);
+			break;
+		Case Class'StatusEffect_Parasite'.static.GetName():
+			DoEffect_Parasite(EffectIndx);
 			break;
 	}
 }
@@ -525,14 +529,18 @@ function SetParasiteHealthMax(int EffectIndx)
 
 function AddParasiteHealth(int Amount)
 {
-	ParasiteHealth = Min(ParasiteHealthMax, ParasiteHealth+Amount);
+	ParasiteHealth = Min(ParasiteHealthMax, ParasiteHealth+abs(Amount));
 }
 
-function RemoveParasiteHealth(int Amount, int Index)
+function int RemoveParasiteHealth(int Amount, int Index)
 {
-	ParasiteHealth = Max(0, ParasiteHealth-Amount);
+	local int ParasiteStealAmount;
+
+	ParasiteStealAmount = Amount*ParasiteHealthPercentSteal;
+	ParasiteHealth -= ParasiteStealAmount;
 	if (ParasiteHealth <= 0)
 		RemoveStatusEffect(Index);
+	return Max(0, Amount - ParasiteStealAmount);
 }
 
 function DoEffect_Regen(int EffectIndx)
@@ -575,11 +583,14 @@ defaultproperties
 	
 	MisfortuneMaxModifierPickups=1		//Modifier must be 1 to destroy pickups
 	MisfortuneMaxModifierWeapons=2		//Modifier must be 2 to destroy pickups and weapons; 3 to destroy all the above and artifacts
+	MisfortuneEmitterClass=Class'DEKRPG999X.MisfortuneEffect'
 	
 	StartingParasiteHealth=200					//Parasite starting health
 	ParasiteHealthAddPerModifier=50		//If a player already has a Parasite, and the same effect gets applied (i.e. stacked), how much health per modifier to add to parasite
+	ParasiteHealthPercentSteal=0.500	//When a player is healed and has a parasite, how much % of the healing is stolen
 	
 	RegenAdditionalHealthMax=100		//Regen buff will heal beyond max health by this amount
+	RegenxEmitterClass=Class'XEffects.RegenCrosses'
 	
 	FreezexEmitterClass=Class'DEKRPG999X.IceSmoke'
 	FreezeSound=Sound'Slaughtersounds.Machinery.Heavy_End'

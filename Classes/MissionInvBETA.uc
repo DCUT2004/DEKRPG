@@ -240,7 +240,7 @@ function TickMission(int MissionNumber, int TickAmount)
 	if (Missions[MissionNumber].MissionCount >= Missions[MissionNumber].MissionGoal)
 		CompleteMission(MissionNumber);
 	//Now for the replicated variables
-	UpdateTIckReplication(MissionNumber);
+	UpdateTickReplication(MissionNumber);
 }
 
 function SetTick(int MissionNumber, int TickAmount)

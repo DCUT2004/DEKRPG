@@ -4,6 +4,7 @@ class StatusEffect_AdrenMax extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="AdrMax"
+	FriendlyName="Adren Max"
 	bOnlyPositiveModifier=True
 	StatusLifespan=0
 	bDispellable=False

@@ -23,13 +23,14 @@ function Activate()
 			GotoState('');
 			return;
 		}
-		if (Invasion(Level.Game) == None)
+		/*if (Invasion(Level.Game) == None)
 		{
 			Destroy();
 			bActive = false;
 			GotoState('');
 			return;		
 		}
+		*/
 		
 		if (MMPI != None && MMPI.stopped && !MMPI.BalloonPopActive)
 		{

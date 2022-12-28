@@ -4,5 +4,6 @@ class StatusEffect_AdrenRegen extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="AdrRgn"
+	FriendlyName="Adren Drip"
 	MaxModifier=5
 }

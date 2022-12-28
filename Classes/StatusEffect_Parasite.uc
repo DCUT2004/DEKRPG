@@ -4,9 +4,10 @@ class StatusEffect_Parasite extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Prste"
+	FriendlyName="Parasite"
 	MaxModifier=10
 	StatusLifespan=0
 	bOnlyNegativeModifier=True
 	bDispellable=False
-	bStackable=False
+	bStackable=True
 }

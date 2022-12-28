@@ -9,5 +9,6 @@ class StatusEffect_ChanceHit extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="ChncHt"
+	FriendlyName="Critical Hit"
 	MaxModifier=7
 }

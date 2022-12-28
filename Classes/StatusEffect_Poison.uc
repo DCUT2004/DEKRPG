@@ -4,6 +4,7 @@ class StatusEffect_Poison extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Psn"
+	FriendlyName="Poison"
 	MaxModifier=5
 	StatusLifespan=4
 	bDispellable=True

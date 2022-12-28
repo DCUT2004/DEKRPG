@@ -4,6 +4,7 @@ class StatusEffect_Regeneration extends StatusEffectData
 defaultproperties
 {
 	StatusEffectName="Rgn"
+	FriendlyName="Regeneration"
 	MaxModifier=10
 	bOnlyPositiveModifier=True
 }

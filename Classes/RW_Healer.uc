@@ -174,22 +174,8 @@ function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim,
 				if (StatusInv != None)
 				{
 					ParasiteIndex = StatusInv.GetIndex(class'StatusEffect_Parasite');
-					if (ParasiteIndex >= 0)
-					{
-						if (StatusInv.ParasiteHealth > 0)
-						{
-							if (StatusInv.ParasiteHealth > HealthGiven)
-							{
-								StatusInv.RemoveParasiteHealth(HealthGiven, ParasiteIndex);
-								HealthGiven = 0;
-							}
-							else
-							{
-								HealthGiven -= StatusInv.ParasiteHealth;
-								StatusInv.ParasiteHealth = 0;
-							}
-						}
-					}
+					if (HealthGiven > 0 && ParasiteIndex >= 0 && StatusInv.ParasiteHealth > 0)
+						HealthGiven = StatusInv.RemoveParasiteHealth(HealthGiven, ParasiteIndex);
 				}
 					
 				if(HealthGiven > 0)
