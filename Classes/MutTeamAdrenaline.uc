@@ -25,6 +25,8 @@ var Class<AbilityMaterial> MediumMaterials [MED_MATERIALS_LENGTH];
 var Class<AbilityMaterial> HighMaterials [HIGH_MATERIALS_LENGTH];
 var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
 
+var Altar NecrisAltar, LiandriAltar, IzanagiAltar;
+
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
 
 struct ComboInfo
@@ -52,6 +54,8 @@ simulated function PostBeginPlay()
 {
 	local TeamAdrenalineGameRules G;
 	local Mutator M;
+	local int NumAltars, NumNavPoints, NavIndex, Counter;
+	local NavigationPoint N;
 	
 	if (Level.Game != None)
 	{
@@ -77,6 +81,33 @@ simulated function PostBeginPlay()
 	}
 	bComboAddedForBossWave = false;
 	bMaterialsRewarded = false;
+	
+	//Spawn Altars
+	NumAltars = 0;
+	Counter = 0;
+	NumNavPoints = 0;
+	for (N = Level.NavigationPointList; N != None; N = N.NextNavigationPoint)
+		NumNavPoints++;
+	while ( (NecrisAltar == None || LiandriAltar == None || IzanagiAltar == None) && Counter < 100)
+	{
+		NavIndex = Rand(NumNavPoints) + 1;
+		for ( N=Level.NavigationPointList; N!=None; N=N.NextNavigationPoint )
+		{
+			NavIndex--;
+			if (NavIndex == 0)
+			{
+				if (NecrisAltar == None)
+					NecrisAltar = Spawn(Class'Altar_Necris',,, N.Location);
+				else if (LiandriAltar == None)
+					LiandriAltar = Spawn(Class'Altar_Liandri',,, N.Location);
+				else if (IzanagiAltar == None)
+					IzanagiAltar = Spawn(Class'Altar_Izanagi',,, N.Location);
+			}
+		}
+		if (IzanagiAltar != None)
+			break;
+		Counter++;	//Safety measure
+	}
 	Super.PostBeginPlay();
 }
 
