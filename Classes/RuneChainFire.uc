@@ -255,7 +255,7 @@ defaultproperties
 {
 	 AdrenCost=10.0000
 	 TraceRange=3000.00000
-	 SearchRadius=250.00000
+	 SearchRadius=5.00000
      BoltEmitterClass(0)=Class'DEKRPG999X.RedBoltEmitter'
      BoltEmitterClass(1)=Class'DEKRPG999X.BronzeBoltEmitter'
      BoltEmitterClass(2)=Class'DEKRPG999X.GoldBoltEmitter'
@@ -264,7 +264,7 @@ defaultproperties
      BoltEmitterClass(5)=Class'DEKRPG999X.PurpleBoltEmitter'
      BoltEmitterClass(6)=Class'DEKRPG999X.WhiteBoltEmitter'
      DamageType=Class'DEKRPG999X.DamTypeRuneLightningChain'
-     MaxStepRange=500.000000
+     MaxStepRange=300.000000
      FirstDamage=150
 	 MissedShotFraction=0.600000
      StepDamageFraction=0.700000

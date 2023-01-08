@@ -55,5 +55,5 @@ defaultproperties
 	bCollideActors=True
 	bCollideWorld=True
 	Mass=2000.000000
-	Lifespan=8.0000
+	Lifespan=10.0000
 }
