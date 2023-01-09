@@ -25,7 +25,7 @@ defaultproperties
      MaxLevel=4
      MagicWeaponLevels(0)=(MaxAddons=1,PercentChanceNormal=60,PercentChanceZeroAddons=10,PercentChanceOneAddon=30,PercentChanceTwoAddons=0,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
      MagicWeaponLevels(1)=(MaxAddons=1,PercentChanceNormal=20,PercentChanceZeroAddons=20,PercentChanceOneAddon=60,PercentChanceTwoAddons=0,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
-     MagicWeaponLevels(2)=(MaxAddons=2,PercentChanceNormal=10,PercentChanceZeroAddons=10,PercentChanceOneAddon=30,PercentChanceTwoAddons=50,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
-     MagicWeaponLevels(3)=(MaxAddons=3,PercentChanceNormal=0,PercentChanceZeroAddons=10,PercentChanceOneAddon=20,PercentChanceTwoAddons=30,PercentChanceThreeAddons=40,PercentChanceMoreAddons=0)
-     MagicWeaponLevels(4)=(MaxAddons=4,PercentChanceNormal=0,PercentChanceZeroAddons=0,PercentChanceOneAddon=10,PercentChanceTwoAddons=25,PercentChanceThreeAddons=30,PercentChanceMoreAddons=35)
+     MagicWeaponLevels(2)=(MaxAddons=2,PercentChanceNormal=10,PercentChanceZeroAddons=10,PercentChanceOneAddon=80,PercentChanceTwoAddons=0,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
+     MagicWeaponLevels(3)=(MaxAddons=3,PercentChanceNormal=0,PercentChanceZeroAddons=10,PercentChanceOneAddon=90,PercentChanceTwoAddons=0,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
+     MagicWeaponLevels(4)=(MaxAddons=4,PercentChanceNormal=0,PercentChanceZeroAddons=5,PercentChanceOneAddon=95,PercentChanceTwoAddons=0,PercentChanceThreeAddons=0,PercentChanceMoreAddons=0)
 }

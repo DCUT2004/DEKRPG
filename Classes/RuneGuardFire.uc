@@ -35,5 +35,5 @@ defaultproperties
      bModeExclusive=False
      FireSound=SoundGroup'WeaponSounds.RocketLauncher.RocketLauncherFire'
      FireForce="RocketLauncherFire"
-     FireRate=9.000000
+     FireRate=11.000000
 }
