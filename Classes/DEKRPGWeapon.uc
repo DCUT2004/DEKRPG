@@ -7,11 +7,6 @@ class DEKRPGWeapon extends RPGWeapon
 
 var config int MaxNumPowers;
 var config int MinNumPowers;
-var config float ChanceZeroPower;
-var config float ChanceOnePower;
-var config float ChanceTwoPower;
-var config float ChanceMultiplePower;
-var config float PerCentNormalWeapons;
 
 var config int MaxNumPowersDroppable;
 var config int MaxNumPowersClonable;
@@ -477,6 +472,7 @@ function Generate(RPGWeapon ForcedWeapon)
 		AddInitialPowerTypes(ForcedWeapon, Data);
     	bSetPowerTypes = true;
 	}
+    
 	if ((ForcedWeapon == None) && !bModifierSet)
 	{             
         Count = 0;

@@ -356,4 +356,5 @@ defaultproperties
      PrefixPos="Engineer "
      PrefixNeg="Engineer "
      bCanThrow=False
+     bCanHaveZeroModifier=True
 }
