@@ -27,6 +27,42 @@ struct AttackingCombo
 	var int TimeBetweenHits;
 };
 var AttackingCombo AttackCombo;
+var bool HasGeode;
+var int DepositCounter;
+
+simulated function PostBeginPlay()
+{
+	Super.PostBeginPlay();
+	SetTimer(1, True);
+	DepositCounter = 0;
+}
+
+function Timer()
+{
+	local Altar Altar;
+	
+	if (Instigator == None || Instigator.Controller == None)
+		return;
+	
+	foreach Instigator.TouchingActors(Class'Altar', Altar)	//Use TouchingActors - much faster
+	{
+		if (Altar != None)
+		{
+			if (PlayerController(Instigator.Controller) != None)
+				PlayerController(Instigator.Controller).ReceiveLocalizedMessage(Altar.AltarMessageClass, Altar.NumGeodes);
+			if (Altar.NumGeodes < Altar.MaxGeodes && HasGeode)
+			{
+				DepositCounter++;
+				if (DepositCounter >= Altar.DepositThreshold)
+				{
+					Altar.NumGeodes++;
+					HasGeode = False;
+					DepositCounter = 0;
+				}
+			}
+		}
+	}
+}
 
 //Called by the ComboAbility purchased by player
 function AddCombo(Class<StatusEffectData> StatusEffectClass, int Modifier, int LifespanToAdd, bool bDispellable, bool bStackable)

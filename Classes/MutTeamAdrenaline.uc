@@ -3,6 +3,7 @@ class MutTeamAdrenaline extends Mutator
 	
 var Invasion Invasion;
 var MutWaveRandomizer WaveRandomizer;
+var TeamAdrenalineGameRules TeamAdrenGameRule;
 var config float PlayerTeamAdrenMax, MonsterTeamAdrenMax;
 var float PlayerTeamAdrenaline, MonsterTeamAdrenaline;
 var config int NumMonsterCombos;		//The number of buffs and ailments the monster team can apply
@@ -26,6 +27,7 @@ var Class<AbilityMaterial> HighMaterials [HIGH_MATERIALS_LENGTH];
 var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
 
 var Altar NecrisAltar, LiandriAltar, IzanagiAltar;
+var config byte MaxGeodes;				//Max number of Geodes held by all Altars
 
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
 
@@ -54,8 +56,6 @@ simulated function PostBeginPlay()
 {
 	local TeamAdrenalineGameRules G;
 	local Mutator M;
-	local int NumAltars, NumNavPoints, NavIndex, Counter;
-	local NavigationPoint N;
 	
 	if (Level.Game != None)
 	{
@@ -74,20 +74,30 @@ simulated function PostBeginPlay()
 				Level.Game.GameRulesModifiers = G;
 			else    
 				Level.Game.GameRulesModifiers.AddGameRules(G);
+			TeamAdrenGameRule = G;
 			default.PlayerTeamAdrenaline = 0.000000;
 			default.MonsterTeamAdrenaline = 0.000000;
+			SpawnAltars();
 			SetTimer(10, True);
 		}
 	}
 	bComboAddedForBossWave = false;
 	bMaterialsRewarded = false;
+
+	Super.PostBeginPlay();
+}
+
+function SpawnAltars()
+{
+	local int NumNavPoints, NavIndex, Counter;
+	local NavigationPoint N;
 	
-	//Spawn Altars
-	NumAltars = 0;
 	Counter = 0;
 	NumNavPoints = 0;
+	
 	for (N = Level.NavigationPointList; N != None; N = N.NextNavigationPoint)
 		NumNavPoints++;
+	
 	while ( (NecrisAltar == None || LiandriAltar == None || IzanagiAltar == None) && Counter < 100)
 	{
 		NavIndex = Rand(NumNavPoints) + 1;
@@ -99,16 +109,29 @@ simulated function PostBeginPlay()
 				if (NecrisAltar == None)
 					NecrisAltar = Spawn(Class'Altar_Necris',,, N.Location);
 				else if (LiandriAltar == None)
+				{
+					if (VSize(N.Location - NecrisAltar.Location) < NecrisAltar.CollisionRadius*2 + 35.0)
+					{
+						Counter++;
+						break;
+					}
 					LiandriAltar = Spawn(Class'Altar_Liandri',,, N.Location);
+				}
 				else if (IzanagiAltar == None)
+				{
+					if (VSize(N.Location - NecrisAltar.Location) < NecrisAltar.CollisionRadius*2 + 35.0 || VSize(N.Location - LiandriAltar.Location) < LiandriAltar.CollisionRadius*2 + 35.0)
+					{
+						Counter++;
+						break;
+					}
 					IzanagiAltar = Spawn(Class'Altar_Izanagi',,, N.Location);
+				}
 			}
 		}
 		if (IzanagiAltar != None)
 			break;
 		Counter++;	//Safety measure
 	}
-	Super.PostBeginPlay();
 }
 
 simulated function Timer()
@@ -130,6 +153,10 @@ simulated function Timer()
 	}
 	if (Level.Game.bGameEnded && !bMaterialsRewarded)
 		RewardMaterials();
+
+	if (TeamAdrenGameRule != None && TeamAdrenGameRule.GeodeChance > 0)
+		if (NecrisAltar != None && LiandriAltar != None && IzanagiAltar != None && NecrisAltar.NumGeodes + LiandriAltar.NumGeodes + IzanagiAltar.NumGeodes >= MaxGeodes)
+			TeamAdrenGameRule.GeodeChance = -1;
 }
 
 static function AddPlayerTeamAdren(float AdrenAmount)
@@ -452,6 +479,7 @@ defaultproperties
 	HighMaterials(2)=Class'DEKRPG999X.AbilityMaterialNanite'
 	HighMaterials(3)=Class'DEKRPG999X.AbilityMaterialPumice'
 	HighMaterials(4)=Class'DEKRPG999X.AbilityMaterialIcicle'
+	MaxGeodes=6
 	bAddToServerPackages=True
 	GroupName="TeamAdrenaline"
 	FriendlyName="Team Combos"

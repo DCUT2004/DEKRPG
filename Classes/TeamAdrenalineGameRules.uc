@@ -4,6 +4,7 @@ class TeamAdrenalineGameRules extends GameRules
 var config int MaterialKillChance;	//The chance to unlock a material upon a kill
 var config int LowMaterialChance, MediumMaterialChance;
 var config float MonsterScoreMultiplier;	//% of the monster's scoring value to add as adrenaline
+var config int GeodeChance;
 
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
@@ -52,13 +53,63 @@ function ScoreKill(Controller Killer, Controller Killed)
 				}
 			}
 		}
+		if (Rand(100) <= GeodeChance && Killed.Pawn.IsA('Monster'))
+			DropPickups(Killed, Killer, Class'GeodePickup', None, 1);
 	}
 	
 	Super.ScoreKill(Killer, Killed);
 }
 
+static function DropPickups(Controller Killed, Controller Killer, class<Pickup> PickupType, Inventory Inv, int Num)
+{
+    local Pickup pickupObj;
+	local vector tossdir, X, Y, Z;
+    local int i;
+
+    for(i=0; i < Num; i++)
+    {
+        // This chain of events based on the way that weapon pickups are dropped when a pawn dies
+	    // See Pawn.Died()
+
+    	// Find out which direction the new pickup should be thrown
+
+    	// Get a vector indicating direction the dying pawn was looking
+
+        tossdir = Vector(Killed.Pawn.GetViewRotation());
+
+    	// Adding coordinates to the directional vector
+
+        tossdir = tossdir *	((Killed.Pawn.Velocity Dot tossdir) + 100) + Vect(0,0,200);
+
+        // Change the velocity a bit for multiple drops
+
+        tossdir.X += i*Rand(200);
+        tossdir.Y += i*Rand(200);
+        tossdir.Z += i*Rand(200);
+
+
+    	Killed.Pawn.GetAxes(Killed.Pawn.Rotation, X,Y,Z);
+
+	    // Set the pickup's location to a realistic position outside of the dying pawn's collision cylinder
+
+        pickupObj = Killer.spawn(PickupType,,,(Killed.Pawn.Location + 0.8 * Killed.Pawn.CollisionRadius * X + -0.5 * Killed.Pawn.CollisionRadius * Y),);
+
+        if(pickupObj == None)
+        {
+            Log("Pinata2k4 spawn failure");
+            return;
+        }
+
+		// Now apply the throwing velocity to the position of the pickup
+	    pickupObj.velocity = tossdir;
+
+        pickupObj.InitDroppedPickupFor(Inv);
+    }
+}
+
 defaultproperties
 {
+	GeodeChance=50
 	MonsterScoreMultiplier=0.50000000
 	MaterialKillChance=1
 	LowMaterialChance=80	//80% chance to get a low material

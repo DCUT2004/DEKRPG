@@ -5,7 +5,7 @@ var localized string Message;
 static function string GetString(optional int Switch, optional PlayerReplicationInfo RelatedPRI_1,
 				 optional PlayerReplicationInfo RelatedPRI_2, optional Object OptionalObject)
 {
-	return default.Message;
+	return default.Message $ " : " $ Switch $ "/3 Geodes";
 }
 
 defaultproperties
@@ -17,4 +17,5 @@ defaultproperties
      bFadeMessage=True
      DrawColor=(B=40,G=215,R=45)
      PosY=0.800000
+	 Lifetime=2
 }
