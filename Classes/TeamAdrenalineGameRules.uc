@@ -109,7 +109,7 @@ static function DropPickups(Controller Killed, Controller Killer, class<Pickup> 
 
 defaultproperties
 {
-	GeodeChance=50
+	GeodeChance=50		//Test value, lower once finished
 	MonsterScoreMultiplier=0.50000000
 	MaterialKillChance=1
 	LowMaterialChance=80	//80% chance to get a low material
