@@ -33,6 +33,8 @@ struct PPHRecord
     var float AverageXPGained;
 };
 var config Array<PPHRecord> SubclassPPHValues;
+var config int NumGamesWon;
+var config Array<int> NumGamesLost;
 
 function ModifyPlayer(Pawn Other)
 {
@@ -224,9 +226,15 @@ function Timer()
 						iNumPlayers++;
 			    }
 		        if (Level.Game.GameReplicationInfo.Winner == TeamGame(Level.Game).Teams[0])
+                {
 		    		Log(">>>> End game, Invasion Won, number of players:" $ iNumPlayers);
+                    StoreSubclassPPHWinLose(True, 0);
+                }
 		        else
+                {
 		    		Log(">>>> End game, Invasion lost, wave:" $ (Invasion(Level.Game).WaveNum+1) @ "number of players:" $ iNumPlayers);
+                    StoreSubclassPPHWinLose(False, Invasion(Level.Game).WaveNum+1);
+                }
 			}
 		    else
 	    		Log(">>>> End game, type:" $ Level.Game);
@@ -408,6 +416,17 @@ function StoreSubclassPPHValue(string Subclass, int Level, int PPH, int XPGained
     
     // didn't find the record so lets log
     Log(">>>> In StoreSubClassPPHValue, record wasn't found for subclass" @ Subclass @ "LevelGroup" @ LevelGroup);     
+}
+
+function StoreSubclassPPHWinLose(bool Won, int WaveNum)
+{
+    if (Won)
+        NumGamesWon += 1;
+    else
+    {
+        if (WaveNum < NumGamesLost.Length)
+            NumGamesLost[WaveNum] += 1;
+    }
 }
 
 function NotifyLogout(Controller Exiting)
