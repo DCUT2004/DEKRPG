@@ -1,4 +1,5 @@
-class MutRPGHUD extends Mutator;
+class MutRPGHUD extends Mutator
+config(SubclassPPH);
 
 // server side array for replicating xp etc
 struct InitialXPValues
@@ -23,6 +24,15 @@ var Array<InitialXPValues> InitialXPs;
 var bool bLoggedEndStats;
 var bool bGameDone;
 
+struct PPHRecord
+{
+    var string Subclass;
+    var int LevelGroup;
+    var int NumberOfRecords;
+    var float AveragePPH;
+    var float AverageXPGained;
+};
+var config Array<PPHRecord> SubclassPPHValues;
 
 function ModifyPlayer(Pawn Other)
 {
@@ -226,6 +236,7 @@ function Timer()
 				LogDetailsForPlayer(x, "End Map");
 		    }
 			bLoggedEndStats = true;
+            SaveConfig();
 			return;
 		}
 		else
@@ -365,6 +376,38 @@ function LogDetailsForPlayer(int x, string sLogReason)
 	else
 		SClass = InitialXPs[x].SubClass;
     Log(">>>> PlayerScore:" $ sLogReason @ "PlayerName:" $ InitialXPs[x].PlayerName @ "Level:" $ InitialXPs[x].Level  @ "Score:" $ iScore @ "PPH:" $ iPPH @ "XP Gained:" $ InitialXPs[x].XPGained @ "Class:" $ PClass @ "SubClass:" $ SClass @ "Time:" $ iDuration @ "Gametype:" $ Level.Game @ "Map:" $ Level.Title);
+
+    if (SClass == "None")    
+        StoreSubclassPPHValue(PClass, InitialXPs[x].Level, iPPH, InitialXPs[x].XPGained);
+    else
+        StoreSubclassPPHValue(SClass, InitialXPs[x].Level, iPPH, InitialXPs[x].XPGained);
+}
+
+function StoreSubclassPPHValue(string Subclass, int Level, int PPH, int XPGained)
+{
+    local int LevelGroup;
+    local float NewAverage;
+    local int x;
+ 
+    LevelGroup =  Level - (Level % 10);
+    If (LevelGroup > 500)
+        LevelGroup = 500;
+    for (x=0; x < SubclassPPHValues.Length; x++)
+    {
+		if (SubclassPPHValues[x].Subclass == Subclass && SubclassPPHValues[x].LevelGroup == LevelGroup)
+        {
+            NewAverage = ((SubclassPPHValues[x].AveragePPH * SubclassPPHValues[x].NumberOfRecords) + PPH)/(SubclassPPHValues[x].NumberOfRecords + 1);
+            SubclassPPHValues[x].AveragePPH = newAverage;    
+            NewAverage = ((SubclassPPHValues[x].AverageXPGained * SubclassPPHValues[x].NumberOfRecords) + XPGained)/(SubclassPPHValues[x].NumberOfRecords + 1);
+            SubclassPPHValues[x].AverageXPGained = newAverage;  
+            SubclassPPHValues[x].NumberOfRecords += 1;
+            
+            return;  
+        }
+    }
+    
+    // didn't find the record so lets log
+    Log(">>>> In StoreSubClassPPHValue, record wasn't found for subclass" @ Subclass @ "LevelGroup" @ LevelGroup);     
 }
 
 function NotifyLogout(Controller Exiting)
