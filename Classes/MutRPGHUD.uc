@@ -35,6 +35,8 @@ struct PPHRecord
 var config Array<PPHRecord> SubclassPPHValues;
 var config int NumGamesWon;
 var config Array<int> NumGamesLost;
+var config int NumBossWavesPlayed;
+var config int NumBunnyWavesPlayed;
 
 function ModifyPlayer(Pawn Other)
 {
@@ -212,6 +214,8 @@ function Timer()
 	local string PlayerName;
 	local RPGStatsInv StatsInv;
 	local int iNumPlayers;
+	local Mutator m;
+	local MutWaveRandomizer Randomizer;
 
 	if (Level.Game.bGameEnded && !bLoggedEndStats)
 	{
@@ -234,6 +238,21 @@ function Timer()
                 {
 		    		Log(">>>> End game, Invasion lost, wave:" $ (Invasion(Level.Game).WaveNum+1) @ "number of players:" $ iNumPlayers);
                     StoreSubclassPPHWinLose(False, Invasion(Level.Game).WaveNum+1);
+                }
+                
+                // now see if we ran the boss or bunny waves
+        		for (m = Level.Game.BaseMutator; m != None; m = m.NextMutator)
+        			if (MutWaveRandomizer(m) != None)
+        			{
+        				Randomizer = MutWaveRandomizer(m);
+        				break;
+        			}
+                if (Randomizer != None)
+                {
+                    if (Randomizer.BossWaveInitialized)
+                        NumBossWavesPlayed += 1;
+                    if (Randomizer.BunnyWaveInitialized)
+                        NumBunnyWavesPlayed += 1;
                 }
 			}
 		    else
