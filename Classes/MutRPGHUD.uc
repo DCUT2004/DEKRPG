@@ -24,6 +24,12 @@ var Array<InitialXPValues> InitialXPs;
 var bool bLoggedEndStats;
 var bool bGameDone;
 
+var config bool DoLogging;
+var config int NumBossWavesPlayed;
+var config int NumBunnyWavesPlayed;
+var config int NumGamesWon;
+var config Array<int> NumGamesLost;
+
 struct PPHRecord
 {
     var string Subclass;
@@ -33,10 +39,21 @@ struct PPHRecord
     var float AverageXPGained;
 };
 var config Array<PPHRecord> SubclassPPHValues;
-var config int NumGamesWon;
-var config Array<int> NumGamesLost;
-var config int NumBossWavesPlayed;
-var config int NumBunnyWavesPlayed;
+
+struct GameLog
+{
+    var string Time;
+    var bool GameWon;
+    var int FinalWave;
+    var int NumberOfPlayers;
+    var int SumPlayerLevels;
+    var string PlayerDetails;        
+};
+var config Array<GameLog> GameLogs;
+
+var string PlayerDetailsTemp;
+var int NumberOfPlayersTemp;
+var int SumPlayerLevelsTemp;
 
 function ModifyPlayer(Pawn Other)
 {
@@ -254,16 +271,24 @@ function Timer()
                     if (Randomizer.BunnyWaveInitialized)
                         NumBunnyWavesPlayed += 1;
                 }
+                
+                PlayerDetailsTemp = "";
+                NumberOfPlayersTemp = 0;
+                SumPlayerLevelsTemp = 0;
+    		    for (x=0; x < InitialXPs.Length; x++)
+    		    {
+    				LogDetailsForPlayer(x, "End Map");
+    		    }
+                StoreSubclassPPHGameLog(Level.Game.GameReplicationInfo.Winner == TeamGame(Level.Game).Teams[0], Invasion(Level.Game).WaveNum+1);
+                               
+                if (DoLogging == true)
+                    SaveConfig();
 			}
 		    else
 	    		Log(">>>> End game, type:" $ Level.Game);
 	    	
-		    for (x=0; x < InitialXPs.Length; x++)
-		    {
-				LogDetailsForPlayer(x, "End Map");
-		    }
 			bLoggedEndStats = true;
-            SaveConfig();
+            
 			return;
 		}
 		else
@@ -415,6 +440,16 @@ function StoreSubclassPPHValue(string Subclass, int Level, int PPH, int XPGained
     local int LevelGroup;
     local float NewAverage;
     local int x;
+    
+    if (DoLogging == false)
+        return;
+
+    if (PlayerDetailsTemp == "")
+        PlayerDetailsTemp = Subclass @ Level;
+    else        
+        PlayerDetailsTemp = PlayerDetailsTemp $ ", " @ Subclass @ Level;
+    NumberOfPlayersTemp += 1;
+    SumPlayerLevelsTemp += Level;
  
     LevelGroup =  Level - (Level % 10);
     If (LevelGroup > 500)
@@ -446,6 +481,39 @@ function StoreSubclassPPHWinLose(bool Won, int WaveNum)
         if (WaveNum < NumGamesLost.Length)
             NumGamesLost[WaveNum] += 1;
     }
+}
+
+function StoreSubclassPPHGameLog(bool Won, int WaveNum)
+{
+    // first roll the log
+    local int x;
+    local string xDay;
+    local string xMonth;
+    local string xYear;
+    local string xHour;
+    local string xMinute;
+    
+    for (x=GameLogs.Length -1; x>0; x--)
+    {
+        GameLogs[x].Time = GameLogs[x-1].Time;    
+        GameLogs[x].GameWon = GameLogs[x-1].GameWon;    
+        GameLogs[x].FinalWave = GameLogs[x-1].FinalWave;    
+        GameLogs[x].NumberOfPlayers = GameLogs[x-1].NumberOfPlayers;    
+        GameLogs[x].SumPlayerLevels = GameLogs[x-1].SumPlayerLevels;    
+        GameLogs[x].PlayerDetails = GameLogs[x-1].PlayerDetails;    
+    }
+    
+    xDay = right("00" $ Level.Day, 2);
+    xMonth = right("00" $ Level.Month, 2);
+    xYear = right("0000" $ Level.Year, 4);
+    xHour = right("00" $ Level.Hour, 2);
+    xMinute = right("00" $ Level.Minute, 2);
+    GameLogs[0].Time = xMonth $ "/" $ xDay $ "/" $ xYear $ " " $ xHour $ ":" $ xMinute;
+    GameLogs[0].GameWon = Won;
+    GameLogs[0].FinalWave = WaveNum;
+    GameLogs[0].NumberOfPlayers = NumberOfPlayersTemp;
+    GameLogs[0].SumPlayerLevels = SumPlayerLevelsTemp;
+    GameLogs[0].PlayerDetails = PlayerDetailsTemp;
 }
 
 function NotifyLogout(Controller Exiting)
