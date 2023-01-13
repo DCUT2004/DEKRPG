@@ -43,7 +43,7 @@ function bool CanUseArtifact()
 		Instigator.ReceiveLocalizedMessage(MessageClass, 1200, None, None, Class);
 		return false;	// if meaningless on negative modifier
 	}
-	if (CurWeapon.NumPowerTypes >= CurWeapon.CurMaxPowers)
+	if (CurWeapon.NumPowerTypes >= CurWeapon.MaxPowersForThisPlayer(Instigator))
 	{
 		Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
 		return false;	// already at maximum number of Powers

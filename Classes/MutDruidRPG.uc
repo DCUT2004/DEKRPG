@@ -1,6 +1,7 @@
 class MutDruidRPG extends Mutator
 	config(UT2004RPG);
 
+var MutUT2004RPG RPGMut;
 var RPGRules rules;
 var config class<RPGDamageGameRules> DamageRules;
 
@@ -21,6 +22,74 @@ function PostBeginPlay()
 		Level.Game.GameRulesModifiers = G;
 	else    
 		Level.Game.GameRulesModifiers.AddGameRules(G);
+        
+	RPGMut = class'MutUT2004RPG'.static.GetRPGMutator(Level.Game);
+}
+
+function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
+{
+	local DEKRPGWeaponPickup p;
+
+	if (Other == None)
+	{
+		return true;
+	}
+
+    // update the Weapon Pickups - everything else is handled in MutUT2004RPG
+	// don't affect the translocator because it breaks bots
+	// don't affect Weapons of Evil's Sentinel Deployer because it doesn't work at all
+	if (Other.IsA('WeaponPickup') && !Other.IsA('TransPickup') && !Other.IsA('DEKRPGWeaponPickup')
+		&& !Other.IsA('SentinelDeployerPickup') )
+	{
+		p = DEKRPGWeaponPickup(ReplaceWithActor(Other, "DEKRPG999X.DEKRPGWeaponPickup"));
+		if (p != None)
+		{
+            if (RPGMut != None)
+                p.RPGMut = RPGMut;
+			p.FindPickupBase();
+			p.GetPropertiesFrom(class<WeaponPickup>(Other.Class));
+		}
+		return false;
+	}
+
+	return true;
+}
+
+//Replace an actor and then return the new actor
+function Actor ReplaceWithActor(actor Other, string aClassName)
+{
+	local Actor A;
+	local class<Actor> aClass;
+
+	if ( aClassName == "" )
+		return None;
+
+	aClass = class<Actor>(DynamicLoadObject(aClassName, class'Class'));
+	if ( aClass != None )
+		A = Spawn(aClass,Other.Owner,Other.tag,Other.Location, Other.Rotation);
+	if ( Other.IsA('Pickup') )
+	{
+		if ( Pickup(Other).MyMarker != None )
+		{
+			Pickup(Other).MyMarker.markedItem = Pickup(A);
+			if ( Pickup(A) != None )
+			{
+				Pickup(A).MyMarker = Pickup(Other).MyMarker;
+				A.SetLocation(A.Location
+					+ (A.CollisionHeight - Other.CollisionHeight) * vect(0,0,1));
+			}
+			Pickup(Other).MyMarker = None;
+		}
+		else if ( A.IsA('Pickup') )
+			Pickup(A).Respawntime = 0.0;
+	}
+	if ( A != None )
+	{
+		A.event = Other.event;
+		A.tag = Other.tag;
+		return A;
+	}
+	return None;
 }
 
 function ModifyPlayer(Pawn Other)
