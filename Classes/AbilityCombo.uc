@@ -9,13 +9,27 @@ struct MaterialsStruct
 };
 
 var Array < MaterialsStruct > Materials;								//Required materials to buy this combo
-var config float BaseMultiplier, MultiplierAddPerStep, MultiplierStep;
-var config int BaseDamage, DamageStep, DamageAddPerStep;				//How much damage this combo does, if applicable
-var config float BaseLifespan, LifespanAddPerStep, LifespanStep;											//How long this combo will last
-var config bool All, Single, Dispellable, Stackable;
-var byte ComboType;														//0 = Buff, 1 = Ailment, 2 = Offensive, 3 = Special
-var config int SameTypeLimits[4];										//Specifies how many combos of the same type can be allowed, for each type (same indexing as ComboType)
-var config int AMSameTypeLimits[4];										//Same as above, but specifically for AM class
+var Class<Altar> AltarClass;
+var byte NumGeodesRequired;
+
+enum EffectRange
+{
+	RANGE_Single,		//Targets a single enemy
+	RANGE_Near,			//Targets all enemies near player
+	RANGE_All			//Targets all enemies in level
+};
+
+struct StatusCombo
+{
+	var Class<StatusEffectData> StatusEffectClass;
+	var int Modifier;
+	var int StatusLifespan;
+	var bool bDispellable;
+	var bool bStackable;
+	var EffectRange Range;
+};
+
+var Array <StatusCombo> Combos;
 
 static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel)
 {
@@ -23,15 +37,10 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	local int y;
 	local int ab;
 	local int threshold;
-	local int MatchingComboCount;
 	local class <AbilityCombo> ComboClass;
 	local bool bIsAM;
 	
 	if (Data == None)
-		return 0;
-		
-	//Safety check, since ComboType will be used to index a fixed array
-	if (default.ComboType < 0 || default.ComboType > 3)
 		return 0;
 	
 	// check the stats
@@ -59,9 +68,11 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	// check if already maxed
 	if (CurrentLevel >= default.MaxLevel)
 		return 0;
-		
-	// check that this player does not have more of the same type of combo allowed (e.g. 2 Buffs, cannot buy a 3rd Buff)
-	// first, check if we are an AM
+
+	if (default.AltarClass == None || default.NumGeodesRequired <= 0)
+		return 0;
+
+	//check if we are an AM
 	bIsAM = false;
 	for (ab = 0; ab < Data.Abilities.Length; ab++)
 	{
@@ -71,26 +82,10 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 			break;
 		}
 	}
-	
-	MatchingComboCount = 0;
-	for (ab = 0; ab < Data.Abilities.Length; ab++)
-	{
-		if (ClassIsChildOf(Data.Abilities[ab], class'AbilityCombo') && CurrentLevel == 0)
-		{
-			ComboClass = Class<AbilityCombo>(Data.Abilities[ab]);
-			if (ComboClass.default.ComboType == default.ComboType)	//Player has a combo of the same type
-			{
-				MatchingComboCount++;
-				if ( !bIsAM && MatchingComboCount >= default.SameTypeLimits[default.ComboType]
-					|| bIsAM && MatchingComboCount >= default.AMSameTypeLimits[default.ComboType] )	//Player already has reached the max allowed number of combos of this type
-					return 0;
-			}
-		}
-	}
 				
 	// check for required materials, only for non-AM classes
 	// However, if it is a special combo, materials are required no matter the class
-	if (!bIsAM || bIsAM && default.ComboType == 3)
+	if (!bIsAM)
 	{
 		for (ab = 0; ab < default.Materials.length; ab++)
 		{
@@ -130,15 +125,102 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 		return default.LevelCost[CurrentLevel+1];
 }
 
+static function bool CanApplyStatusEffect(int Modifier, Pawn Instigator, Pawn Target)
+{
+	return Modifier > 0 && Target.GetTeamNum() == Instigator.GetTeamNum()
+						|| Modifier < 0 && Target.GetTeamNum() != Instigator.GetTeamNum();
+}
+
+static function ExecuteCombos(Pawn Instigator, Altar Altar)
+{
+	local int x;
+	local Controller C, NextC;
+	local StatusEffectManager StatusManager;
+	local Pawn Target;
+	local int Modifier;
+	local int HighestHealth;
+
+	if (Instigator == None)
+		return;
+
+	for (x = 0; x < default.Combos.Length; x++)
+	{
+		Modifier = default.Combos[x].Modifier;
+		if (default.Combos[x].Range == RANGE_Single)
+		{
+			if (Modifier > 0)		//Buff - apply only to this player
+			{
+				StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Instigator);
+				if (StatusManager != None)
+					StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
+			}
+			else if (Modifier < 0)	//Ailment - search for enemy w/ highest health and apply
+			{
+				C = Instigator.Level.ControllerList;
+				HighestHealth = 0;
+				while (C != None)
+				{
+					NextC = C.NextController;
+					if (C != None && C.Pawn != None && C.Pawn.Health > HighestHealth)
+					{
+						Target = C.Pawn;
+						HighestHealth = C.Pawn.Health;
+					}
+					C = NextC;
+				}
+				if (Target != None)
+				{
+					StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Target);
+					if (StatusManager != None)
+						StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
+				}
+			}
+		}
+		else if (default.Combos[x].Range == RANGE_Near)
+		{
+			//Search for enemies and allies nearby activated Altar
+			if (Altar != None)
+			{
+				foreach Altar.TouchingActors(Class'Pawn', Target)
+				{
+					if (Target != None && Target.Health > 0 && CanApplyStatusEffect(Modifier, Instigator, Target))
+					{
+						if (Target.IsA('Vehicle') && Vehicle(Target).Driver != None)
+							Target = Vehicle(Target).Driver;
+						StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Target);
+						if (StatusManager != None)
+							StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
+					}
+				}
+			}
+
+		}
+		else if (default.Combos[x].Range == Range_All)
+		{
+			//Search for all enemies and allies
+			C = Instigator.Level.ControllerList;
+			while (C != None)
+			{
+				NextC = C.NextController;
+				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && CanApplyStatusEffect(Modifier, Instigator, C.Pawn))
+				{
+					Target = C.Pawn;
+					if (C.Pawn.IsA('Vehicle') && Vehicle(C.Pawn).Driver != None)
+						Target = Vehicle(C.Pawn).Driver;
+					StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Target);
+					if (StatusManager != None)
+						StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
+				}
+				C = NextC;
+			}
+		}
+	}
+}
+
 defaultproperties
 {
-	SameTypeLimits(0)=1
-	SameTypeLimits(1)=1
-	SameTypeLimits(2)=1
-	SameTypeLimits(3)=1
-	AMSameTypeLimits(0)=2
-	AMSameTypeLimits(1)=2
-	AMSameTypeLimits(2)=1
-	AMSameTypeLimits(3)=1
 	AbilityName="Combo Ability"
+	MaxLevel=5
+	StartingCost=5
+	CostAddPerLevel=5
 }

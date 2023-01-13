@@ -9,6 +9,8 @@ class StatusEffectInventory_Player extends StatusEffectInventory
 	
 struct StatusCombo
 {
+	var Class<Altar> AltarClass;
+	var byte NumGeodesRequired;
 	var Class<StatusEffectData> StatusEffectClass;
 	var int Modifier;
 	var int Lifespan;
@@ -40,6 +42,8 @@ simulated function PostBeginPlay()
 function Timer()
 {
 	local Altar Altar;
+
+	Super.Timer();
 	
 	if (Instigator == None || Instigator.Controller == None)
 		return;
@@ -95,7 +99,7 @@ function AddAttackCombo(Class<OffenseCombo> OffenseClass, int NumTargets, int Nu
 }
 
 //Called by DEKComboSpecial when player executes combo with BBFF
-function ExecuteCombos()
+function bool ExecuteCombos()
 {
 	local int x;
 	local Controller C, NextC;
@@ -103,7 +107,7 @@ function ExecuteCombos()
 	local OffenseCombo AttackComboInst;
 	
 	if (Instigator == None || Instigator.Controller == None || Instigator.Health <= 0)
-		return;
+		return False;
 	
 	for (x = 0; x < Combos.Length; x++)
 	{
@@ -111,7 +115,6 @@ function ExecuteCombos()
 		while (C != None)
 		{
 			NextC = C.NextController;
-			
 			if (C != None && C.Pawn != None && C.Pawn.Health > 0)
 			{
 				if ( (Combos[x].Modifier > 0 && C.Pawn.GetTeamNum() == Instigator.GetTeamNum() )
@@ -128,17 +131,20 @@ function ExecuteCombos()
 		}
 	}
 	
-	if (AttackCombo.OffenseClass == None)
-		return;
-	AttackComboInst = Instigator.Spawn(AttackCombo.OffenseClass, Instigator);
-	if (AttackComboInst == None)
-		return;
-	AttackComboInst.NumTargets = AttackCombo.NumTargets;
-	AttackComboInst.NumHits = AttackCombo.NumHits;
-	AttackComboInst.DamagePerHit = AttackCombo.DamagePerHit;
-	AttackComboInst.DamageType = AttackCombo.DamageType;
-	AttackComboInst.TimeBetweenHits = AttackCombo.TimeBetweenHits;
-	AttackComboInst.StartDamage();
+	if (AttackCombo.OffenseClass != None)
+	{
+		AttackComboInst = Instigator.Spawn(AttackCombo.OffenseClass, Instigator);
+		if (AttackComboInst != None)
+		{
+			AttackComboInst.NumTargets = AttackCombo.NumTargets;
+			AttackComboInst.NumHits = AttackCombo.NumHits;
+			AttackComboInst.DamagePerHit = AttackCombo.DamagePerHit;
+			AttackComboInst.DamageType = AttackCombo.DamageType;
+			AttackComboInst.TimeBetweenHits = AttackCombo.TimeBetweenHits;
+			AttackComboInst.StartDamage();
+		}
+	}
+	return True;
 }
 
 function DoOffensiveCombo()
