@@ -1,4 +1,4 @@
-class Altar_LiandriMessage extends LocalMessage;
+class Altar_FireMessage extends LocalMessage;
 
 var localized string Message;
 
@@ -10,7 +10,7 @@ static function string GetString(optional int Switch, optional PlayerReplication
 
 defaultproperties
 {
-     Message="Liandri Altar"
+     Message="Fire Altar"
 	 StackMode=SM_Down
      bIsUnique=True
      bIsConsoleMessage=False

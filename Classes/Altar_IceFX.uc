@@ -1,4 +1,4 @@
-class Altar_NecrisFX extends Emitter;
+class Altar_IceFX extends Emitter;
 
 defaultproperties
 {
@@ -31,7 +31,7 @@ defaultproperties
          Texture=Texture'AW-2004Particles.Energy.BandFlash'
          LifetimeRange=(Min=0.500000,Max=1.000000)
      End Object
-     Emitters(0)=SpriteEmitter'DEKRPG999X.Altar_NecrisFX.SpriteEmitter4'
+     Emitters(0)=SpriteEmitter'DEKRPG999X.Altar_IceFX.SpriteEmitter4'
 
      Begin Object Class=MeshEmitter Name=MeshEmitter0
          StaticMesh=StaticMesh'AW-2004Particles.Shapes.NodeHealRing'
@@ -48,7 +48,7 @@ defaultproperties
          StartSpinRange=(X=(Max=10.000000),Y=(Max=10.000000))
          StartSizeRange=(X=(Min=0.600000,Max=0.600000),Y=(Min=0.600000,Max=0.600000),Z=(Min=0.600000,Max=0.600000))
      End Object
-     Emitters(1)=MeshEmitter'DEKRPG999X.Altar_NecrisFX.MeshEmitter0'
+     Emitters(1)=MeshEmitter'DEKRPG999X.Altar_IceFX.MeshEmitter0'
 
      Begin Object Class=SpriteEmitter Name=SpriteEmitter5
          UseColorScale=True
@@ -74,7 +74,7 @@ defaultproperties
          VelocityScale(0)=(RelativeVelocity=(X=1.000000,Y=1.000000,Z=1.000000))
          VelocityScale(1)=(RelativeTime=1.000000)
      End Object
-     Emitters(2)=SpriteEmitter'DEKRPG999X.Altar_NecrisFX.SpriteEmitter5'
+     Emitters(2)=SpriteEmitter'DEKRPG999X.Altar_IceFX.SpriteEmitter5'
 
      bNoDelete=False
      RemoteRole=ROLE_SimulatedProxy

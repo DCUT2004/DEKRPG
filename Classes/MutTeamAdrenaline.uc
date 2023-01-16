@@ -26,7 +26,7 @@ var Class<AbilityMaterial> MediumMaterials [MED_MATERIALS_LENGTH];
 var Class<AbilityMaterial> HighMaterials [HIGH_MATERIALS_LENGTH];
 var config int MaterialOnGameWonChance, LowMaterialChance, MediumMaterialChance;
 
-var Altar NecrisAltar, LiandriAltar, IzanagiAltar;
+var Altar IceAltar, FireAltar, EarthAltar;
 var config byte MaxGeodes;				//Max number of Geodes held by all Altars
 
 #exec  AUDIO IMPORT NAME="MonsterComboSound" FILE="Sounds\MonsterComboSound.WAV" GROUP="ComboSounds"
@@ -98,7 +98,7 @@ function SpawnAltars()
 	for (N = Level.NavigationPointList; N != None; N = N.NextNavigationPoint)
 		NumNavPoints++;
 	
-	while ( (NecrisAltar == None || LiandriAltar == None || IzanagiAltar == None) && Counter < 100)
+	while ( (IceAltar == None || FireAltar == None || EarthAltar == None) && Counter < 100)
 	{
 		NavIndex = Rand(NumNavPoints) + 1;
 		for ( N=Level.NavigationPointList; N!=None; N=N.NextNavigationPoint )
@@ -106,29 +106,29 @@ function SpawnAltars()
 			NavIndex--;
 			if (NavIndex == 0)
 			{
-				if (NecrisAltar == None)
-					NecrisAltar = Spawn(Class'Altar_Necris',,, N.Location);
-				else if (LiandriAltar == None)
+				if (IceAltar == None)
+					IceAltar = Spawn(Class'Altar_Ice',,, N.Location);
+				else if (FireAltar == None)
 				{
-					if (VSize(N.Location - NecrisAltar.Location) < NecrisAltar.CollisionRadius*2 + 35.0)
+					if (VSize(N.Location - IceAltar.Location) < IceAltar.CollisionRadius*2 + 35.0)
 					{
 						Counter++;
 						break;
 					}
-					LiandriAltar = Spawn(Class'Altar_Liandri',,, N.Location);
+					FireAltar = Spawn(Class'Altar_Fire',,, N.Location);
 				}
-				else if (IzanagiAltar == None)
+				else if (EarthAltar == None)
 				{
-					if (VSize(N.Location - NecrisAltar.Location) < NecrisAltar.CollisionRadius*2 + 35.0 || VSize(N.Location - LiandriAltar.Location) < LiandriAltar.CollisionRadius*2 + 35.0)
+					if (VSize(N.Location - IceAltar.Location) < IceAltar.CollisionRadius*2 + 35.0 || VSize(N.Location - FireAltar.Location) < FireAltar.CollisionRadius*2 + 35.0)
 					{
 						Counter++;
 						break;
 					}
-					IzanagiAltar = Spawn(Class'Altar_Izanagi',,, N.Location);
+					EarthAltar = Spawn(Class'Altar_Earth',,, N.Location);
 				}
 			}
 		}
-		if (IzanagiAltar != None)
+		if (EarthAltar != None)
 			break;
 		Counter++;	//Safety measure
 	}
@@ -155,7 +155,7 @@ simulated function Timer()
 		RewardMaterials();
 
 	if (TeamAdrenGameRule != None && TeamAdrenGameRule.GeodeChance > 0)
-		if (NecrisAltar != None && LiandriAltar != None && IzanagiAltar != None && NecrisAltar.NumGeodes + LiandriAltar.NumGeodes + IzanagiAltar.NumGeodes >= MaxGeodes)
+		if (IceAltar != None && FireAltar != None && EarthAltar != None && IceAltar.NumGeodes + FireAltar.NumGeodes + EarthAltar.NumGeodes >= MaxGeodes)
 			TeamAdrenGameRule.GeodeChance = -1;
 }
 

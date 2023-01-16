@@ -1,4 +1,4 @@
-class Altar_NecrisMessage extends LocalMessage;
+class Altar_EarthMessage extends LocalMessage;
 
 var localized string Message;
 
@@ -10,12 +10,12 @@ static function string GetString(optional int Switch, optional PlayerReplication
 
 defaultproperties
 {
-     Message="Necris Altar"
+     Message="Earth Altar"
 	 StackMode=SM_Down
      bIsUnique=True
      bIsConsoleMessage=False
      bFadeMessage=True
-     DrawColor=(R=0,B=255,G=128)
+     DrawColor=(B=40,G=215,R=45)
      PosY=0.800000
 	 Lifetime=2
 }

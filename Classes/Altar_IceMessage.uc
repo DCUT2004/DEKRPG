@@ -1,4 +1,4 @@
-class Altar_IzanagiMessage extends LocalMessage;
+class Altar_IceMessage extends LocalMessage;
 
 var localized string Message;
 
@@ -10,12 +10,12 @@ static function string GetString(optional int Switch, optional PlayerReplication
 
 defaultproperties
 {
-     Message="Izanagi Altar"
+     Message="Ice Altar"
 	 StackMode=SM_Down
      bIsUnique=True
      bIsConsoleMessage=False
      bFadeMessage=True
-     DrawColor=(B=40,G=215,R=45)
+     DrawColor=(R=0,B=255,G=128)
      PosY=0.800000
 	 Lifetime=2
 }

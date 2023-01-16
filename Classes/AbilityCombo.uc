@@ -28,8 +28,19 @@ struct StatusCombo
 	var bool bStackable;
 	var EffectRange Range;
 };
-
 var Array <StatusCombo> Combos;
+
+struct DamageStruct
+{
+	var EffectRange DamageRange;
+	var int NumHits;
+	var int DamagePerLevel;
+	var Class<DamageType> DamageType;
+	var float TimeBetweenHits;
+};
+var DamageStruct AttackCombo;
+var int ComboDamage;
+var Sound ComboSound;
 
 static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel)
 {
@@ -37,7 +48,6 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 	local int y;
 	local int ab;
 	local int threshold;
-	local class <AbilityCombo> ComboClass;
 	local bool bIsAM;
 	
 	if (Data == None)
@@ -125,6 +135,11 @@ static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel
 		return default.LevelCost[CurrentLevel+1];
 }
 
+static function ModifyPawn(Pawn Other, int AbilityLevel)
+{
+	default.ComboDamage = AbilityLevel * default.AttackCombo.DamagePerLevel;
+}
+
 static function bool CanApplyStatusEffect(int Modifier, Pawn Instigator, Pawn Target)
 {
 	return Modifier > 0 && Target.GetTeamNum() == Instigator.GetTeamNum()
@@ -139,6 +154,7 @@ static function ExecuteCombos(Pawn Instigator, Altar Altar)
 	local Pawn Target;
 	local int Modifier;
 	local int HighestHealth;
+	local OffenseCombo OffenseCombo;
 
 	if (Instigator == None)
 		return;
@@ -187,7 +203,7 @@ static function ExecuteCombos(Pawn Instigator, Altar Altar)
 					{
 						if (Target.IsA('Vehicle') && Vehicle(Target).Driver != None)
 							Target = Vehicle(Target).Driver;
-						StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Target);
+						StatusManager = Class'DEKRPG999X.StatusEffectManager'.static.GetStatusEffectManager(Target);
 						if (StatusManager != None)
 							StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
 					}
@@ -207,7 +223,7 @@ static function ExecuteCombos(Pawn Instigator, Altar Altar)
 					Target = C.Pawn;
 					if (C.Pawn.IsA('Vehicle') && Vehicle(C.Pawn).Driver != None)
 						Target = Vehicle(C.Pawn).Driver;
-					StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(Target);
+					StatusManager = Class'DEKRPG999X.StatusEffectManager'.static.GetStatusEffectManager(Target);
 					if (StatusManager != None)
 						StatusManager.AddStatusEffect(default.Combos[x].StatusEffectClass, Modifier, True, default.Combos[x].StatusLifespan, default.Combos[x].bDispellable, default.Combos[x].bStackable);
 				}
@@ -215,6 +231,25 @@ static function ExecuteCombos(Pawn Instigator, Altar Altar)
 			}
 		}
 	}
+	OffenseCombo = Instigator.Spawn(Class'DEKRPG999X.OffenseCombo', Instigator);
+	if (OffenseCombo != None)
+	{
+		OffenseCombo.Altar = Altar;
+		OffenseCombo.NumHits = default.AttackCombo.NumHits;
+		Log("ComboDamage is " $default.ComboDamage);
+		OffenseCombo.DamageAmount = default.ComboDamage;
+		OffenseCombo.DamageType = default.AttackCombo.DamageType;
+		OffenseCombo.TimeBetweenHits = default.AttackCombo.TimeBetweenHits;
+		if (default.AttackCombo.DamageRange == RANGE_Single)
+			OffenseCombo.DamageRange = RANGE_Single;		//Must be assigned directly
+		else if (default.AttackCombo.DamageRange == RANGE_Near)
+			OffenseCombo.DamageRange = RANGE_Near;
+		else if (default.AttackCombo.DamageRange == RANGE_All)
+			OffenseCombo.DamageRange = RANGE_All;
+		OffenseCombo.StartDamage();
+	}
+
+	Altar.PlaySound(default.ComboSound, , Instigator.TransientSoundVolume * 4, , Instigator.TransientSoundRadius*2);
 }
 
 defaultproperties
@@ -223,4 +258,5 @@ defaultproperties
 	MaxLevel=5
 	StartingCost=5
 	CostAddPerLevel=5
+	AttackCombo=(DamageRange=RANGE_Single,NumHits=1,DamagePerLevel=1,DamageType=Class'DamTypeCombo',TimeBetweenHits=1)
 }
