@@ -16,6 +16,7 @@ function Activate()
 	local Vehicle V;
 	local DualityInv Inv;
 	local Weapon W;
+    local class<weapon> WClass;
 
 	if ((Instigator == None) || (Instigator.Controller == None))
 	{
@@ -43,13 +44,16 @@ function Activate()
 			return;	// can't use in a vehicle
 		}
 		Inv = DualityInv(Instigator.FindInventoryType(class'DualityInv'));
+        
 		if (RPGWeapon(Instigator.Weapon) != None)
 			W = RPGWeapon(Instigator.Weapon).ModifiedWeapon;
 		else
 			W = Instigator.Weapon;
+        WClass = W.Class;
+            
 		if (Inv != None)
 		{
-			if (W == Inv.DualWeaponOne || W == Inv.DualWeaponTwo)
+			if (WClass == Inv.DualWeaponOne || WClass == Inv.DualWeaponTwo)
 			{
 				Instigator.ReceiveLocalizedMessage(MessageClass, 3000, None, None, Class);
 				bActive = false;
@@ -58,7 +62,7 @@ function Activate()
 			}
 			if (Inv.DualWeaponOne == None)
 			{
-				Inv.DualWeaponOne = W;
+				Inv.DualWeaponOne = WClass;
 				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
 				SetTimer(0.2, True);
 			}

@@ -1357,7 +1357,7 @@ function PostRender(Canvas Canvas)
 			SpInv.InteractionOwner = Self;
 		}
 	}
-	if (SpInv != None && SPInv.SelectedWeapon != None)
+	if (SpInv != None && (SPInv.SelectedSpecialistWeapon != None || SPInv.SelectedSkillWeapon != None))
 	{
 		Canvas.FontScaleX = Canvas.ClipX / 1024.f;
 		Canvas.FontScaleY = Canvas.ClipY / 768.f;
@@ -1371,8 +1371,14 @@ function PostRender(Canvas Canvas)
 		Canvas.Style = 2;
 		Canvas.DrawColor = WhiteColor;
 
+        if (SPInv.SelectedSpecialistWeapon != None && SPInv.SelectedSkillWeapon != None)
+            pText =  "Specialized/Skill weapons: " $ SpInv.SelectedSpecialistWeapon.default.ItemName $ "/" $ SPInv.SelectedSkillWeapon.default.ItemName;
+        else if (SPInv.SelectedSpecialistWeapon != None)
+            pText = "Specialized Weapon: " $ SpInv.SelectedSpecialistWeapon.default.ItemName;
+        else
+            pText = "Skilled Weapon: " $ SpInv.SelectedSkillWeapon.default.ItemName;
 		Canvas.SetPos(XL+500, Canvas.ClipY * 0.87 - YL * 0.5);
-		Canvas.DrawText("Specialized Weapon: " $ SpInv.SelectedWeapon.ItemName);
+		Canvas.DrawText(pText);
 		
 		Canvas.FontScaleX = Canvas.default.FontScaleX;
 		Canvas.FontScaleY = Canvas.default.FontScaleY;

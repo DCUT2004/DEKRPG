@@ -1,4 +1,4 @@
-class AbilityGunsmithProficiency extends AbilityNiche
+class AbilityGunsmithProficiency extends CostRPGAbility
 	config(UT2004RPG) 
 	abstract;
 	
@@ -229,10 +229,8 @@ defaultproperties
      L8MaxMines=11
      L9MaxMines=12
      L10MaxMines=13
-     ExcludingAbilities(0)=Class'DEKRPG999X.AbilitySpecialistProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG999X.AbilityDualityProficiency'
-     AbilityName="Niche: Gunsmith"
-     Description="Once you make 20 kills with a weapon, that weapon receives an upgrade such as in larger explosions, longer projectile lifespans, and so on.|You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
+     AbilityName="Gunsmith Proficiency"
+     Description="Once you make 20 kills with a weapon, that weapon receives an upgrade such as in larger explosions, longer projectile lifespans, and so on.|Cost (per level): 10."
      StartingCost=10
      MaxLevel=20
 }

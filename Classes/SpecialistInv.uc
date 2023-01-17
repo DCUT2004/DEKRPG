@@ -1,7 +1,8 @@
 class SpecialistInv extends Inventory;
 
 var Pawn PawnOwner;
-var Weapon SelectedWeapon;
+var class<weapon> SelectedSpecialistWeapon;
+var class<weapon> SelectedSkillWeapon;
 
 var transient DruidsRPGKeysInteraction InteractionOwner;
 
@@ -10,7 +11,7 @@ replication
 	reliable if (bNetInitial && Role == ROLE_Authority)
 		PawnOwner;
 	reliable if (Role == ROLE_Authority)
-		SelectedWeapon;
+		SelectedSkillWeapon,SelectedSpecialistWeapon;
 }
 
 function GiveTo(Pawn Other, optional Pickup Pickup)

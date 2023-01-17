@@ -28,7 +28,9 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 	{
 		// Damage done by us. The higher distScale, the closer we are, so the more damage
 		damageScale = default.MinDamageBonus + (distscale * (default.MaxDamageBonus - default.MinDamageBonus));
-		Damage *= (1 + (AbilityLevel * damageScale));
+        DamageToMultiply = AbilityLevel * damageScale;
+		Damage *= (1 + DamageToMultiply);
+        // Log("+++ Berserker Outgoing damage increased by" @ DamageToMultiply);
 	}
 	else
 	{
@@ -38,6 +40,7 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 		if (DamageToMultiply > default.MaxDamageInflicted)
 			DamageToMultiply = default.MaxDamageInflicted;
 		Damage *= (1 + DamageToMultiply);
+        // Log("+++ Berserker Incoming damage increased by" @ DamageToMultiply);
 	}
 }
 

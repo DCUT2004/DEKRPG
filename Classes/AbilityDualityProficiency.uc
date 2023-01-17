@@ -23,9 +23,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	{
 		Inv = Other.spawn(class'DualityInv');		
 		Inv.giveTo(Other);
-		Inv.AbilityLevel = y;
-		Inv.LevMultiplier = class'AbilityWeaponsProficiency'.static.GetLevMultiplier();
-		Inv.MaxIncrease = class'AbilityWeaponsProficiency'.static.GetMaxIncrease();
 	}
 	
 	if (Inv!= None)
@@ -57,23 +54,27 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 {
 	local DualityInv Inv;
 	local Weapon W;
+    local class<weapon> WClass;
 	
 	if ( Killed == Killer || Killed == None || Killer == None || Killed.Level == None || Killed.Level.Game == None)
 		return;
 	
 	if (Killer != None && Killer.Pawn != None && Killer.Pawn.Health > 0)
 		Inv = DualityInv(Killer.Pawn.FindInventoryType(class'DualityInv'));
+        
 	if (RPGWeapon(Killer.Pawn.Weapon) != None)
 		W = RPGWeapon(Killer.Pawn.Weapon).ModifiedWeapon;
 	else
 		W = Killer.Pawn.Weapon;
+    WClass = W.Class;
+        
 	if (bOwnedByKiller)
 	{
 		if (Inv != None)
 		{
 			if (Inv.DualWeaponOne != None || Inv.DualWeaponTwo != None)
 			{
-				if (W == Inv.DualWeaponOne || W == Inv.DualWeaponTwo)
+				if (WClass == Inv.DualWeaponOne || WClass == Inv.DualWeaponTwo)
 				{
 					Inv.AddKill(1);
 				}
@@ -95,7 +96,6 @@ defaultproperties
 {
      DamageMultiplier=0.250000
      ExcludingAbilities(0)=Class'DEKRPG999X.AbilitySpecialistProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG999X.AbilityGunsmithProficiency'
      RequiredAbilities(0)=Class'DEKRPG999X.AbilityWeaponsProficiency'
      AbilityName="Niche: Duality"
      Description="You are granted the Duality artifacts. Use the artifact to select two weapons. Making kills with either weapons will increase the proficiency bonus for both weapons. If you die, your proficiency bonus will save and can be reapplied to two new weapons after respawning.|In exchange, the proficiency bonus will not apply to other weapons, and your damage reduction is lowered.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost: 50."

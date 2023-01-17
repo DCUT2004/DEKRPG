@@ -201,7 +201,6 @@ state Activated
 		local class<Weapon> OldWeaponClass;
 		local int x;
 		local LoadedInv LoadedInv;
-		local DualityInv DInv;
         local Weapon newWeapon;
 
 		if(ActivatedOldWeapon == None)
@@ -314,24 +313,7 @@ state Activated
 		}
 
 		RPGWeapon(Copy).SetModifiedWeapon(newWeapon, true);
-		DInv = DualityInv(Instigator.FindInventoryType(class'DualityInv'));
-		if (DInv != None)
-		{
-			if (RPGWeapon(ActivatedOldWeapon) != None)
-			{
-				if (DInv.DualWeaponOne != None && DInv.DualWeaponOne == RPGWeapon(ActivatedOldWeapon).ModifiedWeapon)
-					DInv.DualWeaponOne = RPGWeapon(Copy).ModifiedWeapon;
-				if (DInv.DualWeaponTwo != None && DInv.DualWeaponTwo == RPGWeapon(ActivatedOldWeapon).ModifiedWeapon)
-					DInv.DualWeaponTwo = RPGWeapon(Copy).ModifiedWeapon;
-			}
-			else
-			{
-				if (DInv.DualWeaponOne != None && DInv.DualWeaponOne == ActivatedOldWeapon)
-					DInv.DualWeaponOne = RPGWeapon(Copy).ModifiedWeapon;
-				if (DInv.DualWeaponTwo != None && DInv.DualWeaponTwo == ActivatedOldWeapon)
-					DInv.DualWeaponTwo = RPGWeapon(Copy).ModifiedWeapon;
-			}
-		}
+
 		//stupid hack for speedy weapons since I can't seem to get them to work with DetachFromPawn correctly. :P
 		ActivatedOldWeapon.DetachFromPawn(Instigator);
 		if(ActivatedOldWeapon.isA('RPGWeapon'))

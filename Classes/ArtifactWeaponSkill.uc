@@ -1,4 +1,4 @@
-class ArtifactDualTwo extends EnhancedRPGArtifact;
+class ArtifactWeaponSkill extends EnhancedRPGArtifact;
 
 function BotConsider()
 {
@@ -14,7 +14,7 @@ function PostBeginPlay()
 function Activate()
 {
 	local Vehicle V;
-	local DualityInv Inv;
+	local SpecialistInv Inv;
 	local Weapon W;
     local class<weapon> WClass;
 
@@ -43,33 +43,28 @@ function Activate()
 			GotoState('');
 			return;	// can't use in a vehicle
 		}
-		Inv = DualityInv(Instigator.FindInventoryType(class'DualityInv'));
+		Inv = SpecialistInv(Instigator.FindInventoryType(class'SpecialistInv'));
         
 		if (RPGWeapon(Instigator.Weapon) != None)
 			W = RPGWeapon(Instigator.Weapon).ModifiedWeapon;
 		else
 			W = Instigator.Weapon;
-        WClass = W.Class;    
+        WClass = W.Class;
             
 		if (Inv != None)
 		{
-			if (WClass == Inv.DualWeaponOne || WClass == Inv.DualWeaponTwo)
+			if (Inv.SelectedSkillWeapon == None)
 			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 3000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return;
-			}
-			if (Inv.DualWeaponTwo == None)
-			{
-				Inv.DualWeaponTwo = WClass;
+				Inv.SelectedSkillWeapon = WClass;
 				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
 				SetTimer(0.2, True);
 			}
 			else
 			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 5000, None, None, Class);
-				SetTimer(0.2, True);
+				Instigator.ReceiveLocalizedMessage(MessageClass, 3000, None, None, Class);
+				bActive = false;
+				GotoState('');
+				return;
 			}
 		}
 		else	//something wrong
@@ -99,18 +94,16 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 	else if (Switch == 2000)
 		return "Cannot use this artifact inside a vehicle";
 	else if (Switch == 3000)
-		return "This weapon has already been selected in a dual combination";
+		return "A weapon has already been selected to be skilled at";
 	else if (Switch == 4000)
-		return "Dual weapon set";
-	else if (Switch == 5000)
-		return "A dual weapon for this slot has already been selected";
-	else if (Switch == 6000)
-		return "You have already selected your dual weapons";
+		return "You have chosen to be skilled in this weapon";
+	else
+		return "Cannot use this artifact";
 }
 
 defaultproperties
 {
      MinActivationTime=0.000001
-     IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.2'
-     ItemName="Set Dual Weapon 2"
+     IconMaterial=Texture'HUDContent.Reticles.DomRing'
+     ItemName="Weapon Skill"
 }

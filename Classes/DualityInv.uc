@@ -1,11 +1,8 @@
 class DualityInv extends Inventory;
 
 var Pawn PawnOwner;
-var Weapon DualWeaponOne, DualWeaponTwo;
+var class<weapon> DualWeaponOne, DualWeaponTwo;
 var int DualityKills;
-var float IncPerc, LevMultiplier;
-var int AbilityLevel;
-var float MaxIncrease;
 var DualityInvHolder Holder;
 
 replication
@@ -41,23 +38,14 @@ function GiveTo(Pawn Other, optional Pickup Pickup)
 simulated function AddKill(int Kills)
 {
 	DualityKills += Kills;
-	GetIncPerc();
 }
 
-function float GetIncPerc()
-{
-	if ((DualityKills * (AbilityLevel * LevMultiplier)) > MaxIncrease)
-		return MaxIncrease;
-	else
-		return (DualityKills * (AbilityLevel * LevMultiplier));	
-}
-
-static function Weapon GetDualWeaponOne()
+static function class<weapon> GetDualWeaponOne()
 {
 	return default.DualWeaponOne;
 }
 
-static function Weapon GetDualWeaponTwo()
+static function class<weapon> GetDualWeaponTwo()
 {
 	return default.DualWeaponTwo;
 }
@@ -85,7 +73,6 @@ simulated function destroyed()
 
 defaultproperties
 {
-     MaxIncrease=1.250000
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True
      bReplicateInstigator=True

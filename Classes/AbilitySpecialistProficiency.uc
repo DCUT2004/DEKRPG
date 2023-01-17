@@ -2,14 +2,13 @@ class AbilitySpecialistProficiency extends AbilityNiche
 	config(UT2004RPG) 
 	abstract;
 	
-var config float DamageMultiplier;
-var config int AdrenMultiplier;
+var config float SelectedDamageMultiplier;
+var config float UnselectedDamageMultiplier;
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local ArtifactSpecialize AS;
 	local SpecialistInv Inv;
-	local AdrenMaxModifierInv AInv;
 	
 	if (Other != None)
 	{
@@ -26,16 +25,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 			Inv.giveTo(Other);
 		}
 		if(Other.SelectedItem == None)
-			Other.NextItem();
-		
-		AInv = AdrenMaxModifierInv(Other.FindInventoryType(Class'AdrenMaxModifierInv'));
-		if (AInv == None)
-		{
-			AInv = Other.Spawn(Class'AdrenMaxModifierInv');
-			AInv.Multiplier = abs((AbilityLevel*default.AdrenMultiplier)-1);
-			AInv.GiveTo(Other);			
-		}
-		
+			Other.NextItem();	
 	}
 }
 
@@ -43,7 +33,8 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 {
 	local SpecialistInv Inv;
 	local Weapon W;
-	local float incPerc;
+    local class<weapon> WClass;
+    local float DamageChange;
 	
 	if (!bOwnedByInstigator)
 		return;
@@ -53,86 +44,38 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
 			W = RPGWeapon(Instigator.Weapon).ModifiedWeapon;
 		else
 			W = Instigator.Weapon;
+        WClass = W.Class;
+            
 		Inv = SpecialistInv(Instigator.FindInventoryType(class'SpecialistInv'));
 		if (Inv != None)
 		{
-			if (Inv.SelectedWeapon != None)
+			if (Inv.SelectedSpecialistWeapon != None)
 			{
-				if (Inv.SelectedWeapon == W)
+				if (Inv.SelectedSpecialistWeapon == WClass)
 				{
-					if (!class'AbilityWeaponsProficiency'.static.KillsMaxed(incPerc))
-					{
-						if ((class'AbilityWeaponsProficiency'.static.GetIncPerc(incPerc) + (AbilityLevel*default.DamageMultiplier)) < class'AbilityWeaponsProficiency'.static.GetMaxIncrease())
-							Damage *= 1 + (AbilityLevel*default.DamageMultiplier);	//WP damage + Specialist damage < than max, continue to supply additional damage
-						else if (class'AbilityWeaponsProficiency'.static.GetIncPerc(incPerc) + (AbilityLevel*default.DamageMultiplier) >= class'AbilityWeaponsProficiency'.static.GetMaxIncrease() && class'AbilityWeaponsProficiency'.static.GetMaxIncrease() > class'AbilityWeaponsProficiency'.static.GetIncPerc(incPerc))
-							Damage *= (1 + (class'AbilityWeaponsProficiency'.static.GetMaxIncrease() - class'AbilityWeaponsProficiency'.static.GetIncPerc(incPerc)));	//WP damage + Specialist damage >= max, supply only the differential damage
-					}
-					else
-						return;		//weapon prof cap maxed, don't supply any damage
+                    DamageChange = AbilityLevel * default.SelectedDamageMultiplier;
+					Damage *= (1 + DamageChange);	
+                    // Log("+++ SpecialistProficiency Damage changed by" @ DamageChange @ "for selected weapon" @ W @ "for ability level" @ AbilityLevel);
+				}
+				else
+				{
+                    DamageChange = AbilityLevel * default.UnselectedDamageMultiplier;
+					Damage *= (1 + DamageChange);	
+                    // Log("+++ SpecialistProficiency Damage changed by" @ DamageChange @ "for unselected weapon" @ W @ "for ability level" @ AbilityLevel @ "selected weapon is" @ Inv.SelectedSpecialistWeapon);
 				}
 			}
 		}
 	}
 }
 
-static function ModifyWeapon(Weapon Weapon, int AbilityLevel)
-{
-	local float incPerc;
-	local int intPerc, SpecialistIntPerc;
-	local Weapon W;
-	local SpecialistInv Inv;
-	local int x, y;
-	local RPGStatsInv StatsInv;
-	
-	if (Weapon == None || Weapon.Owner == None || Pawn(Weapon.Owner) == None || Pawn(Weapon.Owner).PlayerReplicationInfo == None || PlayerController(Pawn(Weapon.Owner).Controller) == None)
-		return;
-	if (Weapon.Role != ROLE_Authority)
-		return;
-		
-	StatsInv = RPGStatsInv(Pawn(Weapon.Owner).FindInventoryType(class'RPGStatsInv'));
-
-	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
-		if (StatsInv.Data.Abilities[x] == class'AbilityWeaponsProficiency')
-			y = StatsInv.Data.AbilityLevels[x];
-		
-	if (RPGWeapon(Weapon) != None)
-		W = RPGWeapon(Weapon).ModifiedWeapon;
-	else
-		W = Weapon;
-		
-	if (Pawn(Weapon.Owner) != None && Pawn(Weapon.Owner).Health > 0)
-		Inv = SpecialistInv(Pawn(Weapon.Owner).FindInventoryType(class'SpecialistInv'));
-
-	if(instr(caps(string(W)), "AVRIL") > -1)//hack for vinv avril
-		class'AbilityWeaponsProficiency'.static.GetNumKillsForWeapon(incPerc, class'INAVRiL', TeamPlayerReplicationInfo(Pawn(Weapon.Owner).PlayerReplicationInfo), y);
-	else
-		class'AbilityWeaponsProficiency'.static.GetNumKillsForWeapon(incPerc, W.Class, TeamPlayerReplicationInfo(Pawn(Weapon.Owner).PlayerReplicationInfo), y);
-			
-	intPerc = 100 * incPerc;
-	SpecialistIntPerc = (100 * incPerc)+(100 * AbilityLevel * default.DamageMultiplier);
-	if (SpecialistIntPerc > (class'AbilityWeaponsProficiency'.static.GetMaxIncrease()*100))
-		SpecialistIntPerc = (class'AbilityWeaponsProficiency'.static.GetMaxIncrease()*100);
-	if (Inv != None)
-	{
-		if (Inv.SelectedWeapon == W)
-		{
-			PlayerController(Pawn(Weapon.Owner).Controller).ReceiveLocalizedMessage(Class'ProficiencyMessage', SpecialistIntPerc,,,W);
-		}
-		else if (Inv.SelectedWeapon != W)
-			PlayerController(Pawn(Weapon.Owner).Controller).ReceiveLocalizedMessage(Class'ProficiencyMessage', intPerc,,,W);
-	}
-	else
-		PlayerController(Pawn(Weapon.Owner).Controller).ReceiveLocalizedMessage(Class'ProficiencyMessage', intPerc,,,W);
-}
-
 defaultproperties
 {
-     AdrenMultiplier=0.030000
+     SelectedDamageMultiplier=0.05
+     UnselectedDamageMultiplier=-0.05
      ExcludingAbilities(0)=Class'DEKRPG999X.AbilityDualityProficiency'
-     ExcludingAbilities(1)=Class'DEKRPG999X.AbilityGunsmithProficiency'
      RequiredAbilities(0)=Class'DEKRPG999X.AbilityWeaponsProficiency'
      AbilityName="Niche: Specialist"
-     Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, your max adrenaline is reduced by 3% per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
+     Description="You are granted the Weapon Specialize artifact. Use this artifact to select one weapon to specialize in. This weapon receives an extra 5% damage bonus per level, and will stack with weapons proficiency. In exchange, the damage from other weapons is reduced by 5% per level.|You must have Weapons Proficiency before purchasing this ability. You must be level 180 to buy a niche. You can not be in more than one niche at a time.|Cost (per level): 10."
      StartingCost=10
      MaxLevel=20
 }

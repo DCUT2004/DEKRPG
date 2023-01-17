@@ -7,9 +7,6 @@ var config Array< String > Weapons;
 var config Array< String > ONSWeapons;
 var config Array< String > SuperWeapons;
 
-var config float WeaponDamage;
-var config float AdrenalineDamage;
-
 static function bool AbilityIsAllowed(GameInfo Game, MutUT2004RPG RPGMut)
 {
 	if(RPGMut.WeaponModifierChance == 0)
@@ -172,54 +169,8 @@ static function giveWeapon(Pawn Other, String oldName, int AbilityLevel, MutUT20
 	}
 }
 
-static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
-{
-	if(!bOwnedByInstigator)
-		return;
-
-	if(Damage > 0)
-	{
-		if (AbilityLevel > 3)   // extreme WM
-		{
-			if (ClassIsChildOf(DamageType, class'WeaponDamageType'))
-				Damage *= default.WeaponDamage;
-			else if (!ClassIsChildOf(DamageType, class'VehicleDamageType'))
-				Damage *= default.AdrenalineDamage;
-		}
-	}
-}
-
-//static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKiller, int AbilityLevel)
-//{
-//	local float AdValue;
-//	
-//	if (AbilityLevel <= 5 || Killer == None || Killed == None)
-//		return;
-//		
-//	if (!bOwnedByKiller)
-//		return;
-//
-//	if (Killed.Pawn != None && Killed.Pawn.IsA('Monster'))
-//	{
-//	    // the player will have just got 'ScoringValue' worth of adrenaline. Let's take some of it back
-//	    AdValue = float(Killed.Pawn.GetPropertyText("ScoringValue"));
-//	    AdValue *= (1 - default.AdrenalineDamage);
-//		if (Killer.Adrenaline > AdValue)
-//		{
-//			Killer.Adrenaline -= AdValue;
-//		}
-//		else
-//		{
-//			// not enough - have to just zero
-//			Killer.Adrenaline = 0;
-//		}
-//	}
-//}
-
 defaultproperties
 {
-     WeaponDamage=1.200000
-     AdrenalineDamage=0.500000
      PlayerLevelReqd(1)=1
      PlayerLevelReqd(2)=40
      PlayerLevelReqd(3)=55
@@ -227,8 +178,8 @@ defaultproperties
      PlayerLevelReqd(5)=55
      PlayerLevelReqd(6)=55
      AbilityName="Loaded Weapons"
-     Description="When you spawn:|Level 1: You are granted a set of weapons with the default percentage chance for magic weapons.|Level 2: You are granted an additional set of weapons and all weapons with max ammo.|Level 3: You are granted super weapons (Invasion game types only).|Level 4: Increased weapon damage of 30%, and reduced ability to use adrenaline and artifacts. |You must be level 40 before you can buy level 2 and level 55 before you can buy level 3.|Cost (per level): 10,15,20,25,30..."
+     Description="When you spawn:|Level 1: You are granted a set of weapons with the default percentage chance for magic weapons.|Level 2: You are granted an additional set of weapons and all weapons with max ammo.|Level 3: You are granted super weapons (Invasion game types only).|You must be level 40 before you can buy level 2 and level 55 before you can buy level 3.|Cost (per level): 10,15,20"
      StartingCost=10
      CostAddPerLevel=5
-     MaxLevel=4
+     MaxLevel=3
 }

@@ -6,7 +6,5 @@ class AbilityHybridWeapons extends DruidLoaded
 
 defaultproperties
 {
-     WeaponDamage=1.000000
-     AdrenalineDamage=1.000000
      AbilityName="Hybrid Weapons"
 }

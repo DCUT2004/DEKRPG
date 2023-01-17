@@ -16,6 +16,7 @@ function Activate()
 	local Vehicle V;
 	local SpecialistInv Inv;
 	local Weapon W;
+    local class<weapon> WClass;
 
 	if ((Instigator == None) || (Instigator.Controller == None))
 	{
@@ -43,15 +44,18 @@ function Activate()
 			return;	// can't use in a vehicle
 		}
 		Inv = SpecialistInv(Instigator.FindInventoryType(class'SpecialistInv'));
+        
 		if (RPGWeapon(Instigator.Weapon) != None)
 			W = RPGWeapon(Instigator.Weapon).ModifiedWeapon;
 		else
 			W = Instigator.Weapon;
+        WClass = W.Class;
+            
 		if (Inv != None)
 		{
-			if (Inv.SelectedWeapon == None)
+			if (Inv.SelectedSpecialistWeapon == None)
 			{
-				Inv.SelectedWeapon = W;
+				Inv.SelectedSpecialistWeapon = WClass;
 				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
 				SetTimer(0.2, True);
 			}
