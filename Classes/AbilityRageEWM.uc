@@ -59,7 +59,6 @@ static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKil
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
 {
 	local float DamageToMultiply;
-	local float OldDamageToMultiply;
 
 	if (!bOwnedByInstigator)
     {
@@ -74,12 +73,11 @@ static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out 
     {
     	if (Damage > 0)
     	{
-            OldDamageToMultiply = ((AbilityLevel / Instigator.Health) * 15) +1;
     		DamageToMultiply = ((AbilityLevel * default.DamageAdjustmentFactor)/ Instigator.Health)  +1;
     		if (DamageToMultiply > default.MaxDamageIncrease)
     			DamageToMultiply = default.MaxDamageIncrease;
     		Damage *= DamageToMultiply;
-            // Log("+++ RageEWM Damage increased by" @ DamageToMultiply @ "(old was" @ OldDamageToMultiply $ ")" @ "for ability level" @ AbilityLevel @ "with Health" @ Instigator.Health);
+            // Log("+++ RageEWM Damage increased by" @ DamageToMultiply @ "for ability level" @ AbilityLevel @ "with Health" @ Instigator.Health);
     	}
     }
 }
