@@ -5,8 +5,8 @@ class RPGClass extends RPGDeathAbility
 var config int LowLevel;
 var config int MediumLevel;
 var config float MaxXPperHit;
-var config float LowLevelDmgReduction, ResurrectionWeaponDamageMultiplier, ResurrectionSuperWeaponDamageMultiplier;
-var config float MedLevelDmgReduction;
+var config float ResurrectionWeaponDamageMultiplier, ResurrectionSuperWeaponDamageMultiplier;
+var config int DamageReductionMaxLevel;
 
 static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 {
@@ -66,7 +66,7 @@ static function bool PrePreventDeath(Pawn Killed, Controller Killer, class<Damag
 		    {
 		        XPGained = fmin(fmax(3.0, Killed.Health*IInv.ExpPerDamage),default.MaxXPperHit); // between 3 and 10 xp for preventing death
 		        IInv.Rules.ShareExperience(RPGStatsInv(IInv.InvPlayerController.Pawn.FindInventoryType(class'RPGStatsInv')), XPGained);
-		        Log("******* Player:" $ IInv.InvPlayerController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
+		        // Log("******* Player:" $ IInv.InvPlayerController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
 			}
 		}
 		return true;
@@ -86,7 +86,7 @@ static function bool PrePreventDeath(Pawn Killed, Controller Killer, class<Damag
 		    {
 		        XPGained = fmin(fmax(3.0, Killed.Health*PInv.ExpPerDamage),default.MaxXPperHit); // between 3 and 10 xp for preventing death
 		        PInv.Rules.ShareExperience(RPGStatsInv(PInv.GuardianController.Pawn.FindInventoryType(class'RPGStatsInv')), XPGained);
-		        Log("******* Player:" $ PInv.GuardianController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
+		        // Log("******* Player:" $ PInv.GuardianController.Pawn @ "is getting" @ XPGained @ "xp for preventing death to" @ Killed @ "Damagetype:" $ DamageType);
 			}
 		}
 		PInv.Counter = 0;
@@ -257,7 +257,7 @@ static simulated function ScoreKill(Controller Killer, Controller Killed, bool b
         return; // nothing we can do
 		
 	MC = DEKFriendlyMonsterController(Killed);
-		
+    
 	if (Killer != None && !Killer.Pawn.IsA('Monster') && Killer.Pawn.HasUDamage())
 	{
 		DInv = DamageInv(Killer.Pawn.FindInventoryType(class'DamageInv'));
@@ -317,7 +317,8 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
 	Local MissionPortalBall Ball;
 	local NecroInv NInv;
 	local float VampireDamage;
-	local RPGStatsInv StatsInv;
+    local float DamageReduction;
+    local RPGStatsInv StatsInv;
 
 	if(Damage > 0 && bOwnedByInstigator)
 	{
@@ -369,12 +370,10 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
 		{
 			//Reduce damage for low level players
 			StatsInv = RPGStatsInv(Injured.FindInventoryType(class'RPGStatsInv'));
-			if (StatsInv != None && StatsInv.DataObject.Level <= default.MediumLevel)
+			if (StatsInv != None && StatsInv.DataObject != None && StatsInv.DataObject.Level < default.DamageReductionMaxLevel)
 			{
-				if(StatsInv.DataObject.Level <= default.LowLevel)
-					Damage *= (1 - default.LowLevelDmgReduction);
-				else
-					Damage *= (1 - default.MedLevelDmgReduction);
+                DamageReduction = (default.DamageReductionMaxLevel - StatsInv.DataObject.Level)/100.0f;
+				Damage *= (1 - DamageReduction);
 			}
 			
 			//Reduce damage for players with Invulnerability Inv
@@ -413,11 +412,10 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
 
 defaultproperties
 {
-     LowLevel=20
-     MediumLevel=40
+     LowLevel=30
+     MediumLevel=60
      MaxXPperHit=10.000000
-     LowLevelDmgReduction=0.500000
-	 MedLevelDmgReduction=0.150000
+     DamageReductionMaxLevel=75
      ResurrectionWeaponDamageMultiplier=0.650000
      ResurrectionSuperWeaponDamageMultiplier=0.450000
      StartingCost=1
