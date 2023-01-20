@@ -283,6 +283,7 @@ function Timer()
                                
                 if (DoLogging == true)
                     SaveConfig();
+                StoreBackupOfPlayerData();
 			}
 		    else
 	    		Log(">>>> End game, type:" $ Level.Game);
@@ -514,6 +515,46 @@ function StoreSubclassPPHGameLog(bool Won, int WaveNum)
     GameLogs[0].NumberOfPlayers = NumberOfPlayersTemp;
     GameLogs[0].SumPlayerLevels = SumPlayerLevelsTemp;
     GameLogs[0].PlayerDetails = PlayerDetailsTemp;
+}
+
+function StoreBackupOfPlayerData()
+{
+	local Controller C;
+	local Inventory Inv;
+    local RPGPlayerDataObject DataObject;
+    local PlayerDataBackup BackupObject;
+
+    local string xDay;
+    local string xMonth;
+    local string xYear;
+    local string xHour;
+    local string xMinute;
+    local string CurrentDateStr;
+
+    xDay = right("00" $ Level.Day, 2);
+    xMonth = right("00" $ Level.Month, 2);
+    xYear = right("0000" $ Level.Year, 4);
+    xHour = right("00" $ Level.Hour, 2);
+    xMinute = right("00" $ Level.Minute, 2);
+    CurrentDateStr = xMonth $ "/" $ xDay $ "/" $ xYear $ " " $ xHour $ ":" $ xMinute;
+
+	// take a copy of the RPGPlayerDataObject data to do a backup save
+	for (C = Level.ControllerList; C != None; C = C.NextController)
+		if (C.bIsPlayer)
+			for (Inv = C.Inventory; Inv != None; Inv = Inv.Inventory)
+				if (Inv.IsA('RPGStatsInv'))
+				{
+				    DataObject = RPGStatsInv(Inv).DataObject;
+                    If (DataObject != None && DataObject.OwnerID != "Bot")
+                    {
+                        BackupObject = new(None, string(DataObject.Name)) class'PlayerDataBackup';
+                        if (BackupObject != None)
+                        {
+                            BackupObject.CopyDataFrom(DataObject, CurrentDateStr);
+                            BackupObject.SaveConfig();
+                        }
+                    }
+				}
 }
 
 function NotifyLogout(Controller Exiting)
