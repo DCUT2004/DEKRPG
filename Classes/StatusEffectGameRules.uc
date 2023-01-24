@@ -17,11 +17,14 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local ComboAbilityTeleStealthInv TeleStealth;
 	local ComboAbilityBeastsRevengeInv BeastsRevenge;
 	local ComboAbilityHealingStrikeInv HealStrike;
+
+	if (InstigatedBy != None && Injured != None && InstigatedBy.GetTeamNum() == Injured.GetTeamNum())
+		return super.NetDamage(OriginalDamage, Damage, Injured, InstigatedBy, HitLocation, Momentum, DamageType);
 	
 	if (InstigatedBy != None)
-		InstigatorStatusInv = StatusEffectManager(InstigatedBy.FindInventoryType(Class'StatusEffectManager'));
+		InstigatorStatusInv = class'StatusEffectManager'.static.GetStatusEffectManager(InstigatedBy);
 	if (Injured != None)
-		InjuredStatusInv = StatusEffectManager(Injured.FindInventoryType(Class'StatusEffectManager'));
+		InjuredStatusInv = class'StatusEffectManager'.static.GetStatusEffectManager(Injured);
 	
 	
 	//Adjust damage if Instigator has StatusEffect_DamageBonus
