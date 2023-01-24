@@ -4,6 +4,12 @@ class RuneGuard extends Actor;
 
 var Pawn PawnOwner;
 
+simulated function PostBeginPlay()
+{
+	Super.PostBeginPlay();
+	SetTimer(0.2, True);
+}
+
 simulated function Touch(Actor Other)
 {
 	local Projectile P;
@@ -38,7 +44,20 @@ simulated function Touch(Actor Other)
 simulated function Tick(float DeltaTime)
 {
 	Super.Tick(DeltaTime);
-	SetRotation(Rotator(Location - PawnOwner.Location));
+    
+	if (Instigator == None || Instigator.Controller == None)
+		Destroy();
+    else    
+        if (PawnOwner == None)
+            Destroy();
+        // else
+    	   // SetRotation(Rotator(Location - PawnOwner.Location));
+}
+
+simulated function Timer()
+{
+	if (Instigator == None || Instigator.Controller == None)
+		Destroy();
 }
 
 defaultproperties
@@ -55,5 +74,5 @@ defaultproperties
 	bCollideActors=True
 	bCollideWorld=True
 	Mass=2000.000000
-	Lifespan=10.0000
+	Lifespan=0.0000
 }

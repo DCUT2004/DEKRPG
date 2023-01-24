@@ -1,6 +1,15 @@
 class RuneLaser_Guard extends RuneWeapon
 	CacheExempt;
 
+var RuneGuard Guard;
+
+simulated function Destroyed()
+{
+	Super.Destroyed();
+	if (Guard != None)
+		Guard.Destroy();
+}
+
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.RuneLaserFire'
