@@ -104,8 +104,8 @@ function bool CheckMagicalWard()
 		if (StatusEffects[x].StatusEffectName == Class'StatusEffect_MagicalWard'.static.GetName() )
 			if (Rand(100) <= StatusEffects[x].Modifier*WardChancePerModifier)
 			{
-				if (Instigator != None && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
-					PlayerController(Instigator.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
+				if (OwningPawn != None && OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
+					PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'DEKRPG999X.ComboSounds.Ward');
 				return true;
 			}
 			
@@ -140,17 +140,17 @@ function OnAddDoEffect(int EffectIndx, bool bOnStack)
 			SpawnEmitter(RegenxEmitterClass, EffectIndx);
 			break;
 		Case Class'StatusEffect_Speed'.static.GetName():
-			if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
+			if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(OwningPawn))
 				RemoveStatusEffect(EffectIndx);
-			class'AbilityIncreasedProtection'.static.quickfoot(10 * StatusEffects[EffectIndx].Modifier, Instigator);
+			class'AbilityIncreasedProtection'.static.quickfoot(10 * StatusEffects[EffectIndx].Modifier, OwningPawn);
 			if (StatusEffects[EffectIndx].Modifier < 0)
-				Instigator.PlaySound(FreezeSound,,2.5*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
+				OwningPawn.PlaySound(FreezeSound,,2.5*OwningPawn.TransientSoundVolume,,OwningPawn.TransientSoundRadius);
 			break;
 		Case Class'StatusEffect_NullEntropy'.static.GetName():
-			if (!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
+			if (!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(OwningPawn))
 				RemoveStatusEffect(EffectIndx);
 			if (StatusEffects[EffectIndx].Modifier < 0)
-				Instigator.setPhysics(PHYS_NONE);
+				OwningPawn.setPhysics(PHYS_NONE);
 			break;
 		Case Class'StatusEffect_Parasite'.static.GetName():
 			DoEffect_Parasite(EffectIndx);
@@ -172,12 +172,12 @@ function SpawnEmitter(Class<Actor> EmitterClass, int EffectIndx)
 		if (Emitters[y].Class == EmitterClass)
 			return;
 	
-	A = Spawn(EmitterClass, Instigator,, Instigator.Location);
+	A = Spawn(EmitterClass, OwningPawn,, OwningPawn.Location);
 	if (A == None)
 		return;
 
 	A.bHardAttach = True;
-	A.SetBase(Instigator);
+	A.SetBase(OwningPawn);
 	Emitters.Insert(0, 1);
 	Emitters[0] = A;
 	
@@ -194,8 +194,8 @@ function SpawnEmitter(Class<Actor> EmitterClass, int EffectIndx)
 	}
 	else if (EmitterClass == AttackxEmitterClassBuff || EmitterClass == AttackxEmitterClassAilment)
 	{
-		X.mSizeRange[0] = Instigator.CollisionRadius * 0.05;
-		X.mSizeRange[1] =1.571 * Instigator.CollisionRadius * 0.05;	
+		X.mSizeRange[0] = OwningPawn.CollisionRadius * 0.05;
+		X.mSizeRange[1] =1.571 * OwningPawn.CollisionRadius * 0.05;	
 	}
 }
 
@@ -260,11 +260,11 @@ function OnRemoveDoEffect(int EffectIndx)
 				}
 			break;
 		Case Class'StatusEffect_Speed'.static.GetName():
-			class'AbilityIncreasedProtection'.static.quickfoot(0, Instigator);
+			class'AbilityIncreasedProtection'.static.quickfoot(0, OwningPawn);
 			break;
 		Case Class'StatusEffect_NullEntropy'.static.GetName():
-			if(Instigator != None && Instigator.Physics == PHYS_NONE)
-				Instigator.SetPhysics(PHYS_Falling);
+			if(OwningPawn != None && OwningPawn.Physics == PHYS_NONE)
+				OwningPawn.SetPhysics(PHYS_Falling);
 			break;
 	}
 }
@@ -309,25 +309,28 @@ function OnTimerDoEffect(int EffectIndx)
 
 function DoEffect_AdrenRegen(int EffectIndx)
 {
-	if (Instigator.IsA('Monster'))		//Monsters have no use for adrenaline
+	if (OwningPawn.IsA('Monster'))		//Monsters have no use for adrenaline
+		return;
+
+	if (OwningPawn.Controller == None)
 		return;
 		
-	if (StatusEffects[EffectIndx].Modifier > 0 && Instigator.Controller.Adrenaline + StatusEffects[EffectIndx].Modifier > Instigator.Controller.AdrenalineMax )
+	if (StatusEffects[EffectIndx].Modifier > 0 && OwningPawn.Controller.Adrenaline + StatusEffects[EffectIndx].Modifier > OwningPawn.Controller.AdrenalineMax )
 	{
 		if (AddStatusEffect(class'StatusEffect_AdrenMax', 1, False));
-			OriginalMaxAdren = Instigator.Controller.AdrenalineMax;
-		Instigator.Controller.AdrenalineMax += StatusEffects[EffectIndx].Modifier;
+			OriginalMaxAdren = OwningPawn.Controller.AdrenalineMax;
+		OwningPawn.Controller.AdrenalineMax += StatusEffects[EffectIndx].Modifier;
 	}
-	Instigator.Controller.Adrenaline += StatusEffects[EffectIndx].Modifier;
+	OwningPawn.Controller.Adrenaline += StatusEffects[EffectIndx].Modifier;
 		
-	if (Instigator.Controller.Adrenaline < 0)
-		Instigator.Controller.Adrenaline = 0;
+	if (OwningPawn.Controller.Adrenaline < 0)
+		OwningPawn.Controller.Adrenaline = 0;
 
-	if (PlayerController(Instigator.Controller) != None)
+	if (PlayerController(OwningPawn.Controller) != None)
 		if (StatusEffects[EffectIndx].Modifier > 0)
-			PlayerController(Instigator.Controller).ClientPlaySound(Sound'PickupSounds.AdrenelinPickup');
+			PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'PickupSounds.AdrenelinPickup');
 		else
-			PlayerController(Instigator.Controller).ClientPlaySound(Sound'ONSVehicleSounds-S.PowerNode.PwrNodeStartBuild03');
+			PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'ONSVehicleSounds-S.PowerNode.PwrNodeStartBuild03');
 }
 
 //AdrenMax is added when the pawn has AdrenRegen and regens beyond their MaxAdrenaline
@@ -335,13 +338,15 @@ function DoEffect_AdrenRegen(int EffectIndx)
 //AdrenMax is added as a separate status effect, since we want Pawns to keep their temp max adren even when their AdrenRegen effect is over
 function DoEffect_AdrenMax(int EffectIndx)
 {
-	if (Instigator.Controller.Adrenaline > OriginalMaxAdren + MaxAdrenMaxIncrease)	//In case combos increase the max adren cap to a high amount, this will limit the max according to MaxMultiplier
-		Instigator.Controller.Adrenaline = OriginalMaxAdren + MaxAdrenMaxIncrease;
-	if (Instigator.Controller.Adrenaline < Instigator.Controller.AdrenalineMax)	//Continously reset the max adrenaline when the player consumes/loses adrenaline
-		Instigator.Controller.AdrenalineMax = Instigator.Controller.Adrenaline;
-	if (Instigator.Controller.Adrenaline < OriginalMaxAdren)	//When the current adrenaline falls below the original starting max adren amount, we no longer need this effect
+	if (OwningPawn.Controller == None)
+		return;
+	if (OwningPawn.Controller.Adrenaline > OriginalMaxAdren + MaxAdrenMaxIncrease)	//In case combos increase the max adren cap to a high amount, this will limit the max according to MaxMultiplier
+		OwningPawn.Controller.Adrenaline = OriginalMaxAdren + MaxAdrenMaxIncrease;
+	if (OwningPawn.Controller.Adrenaline < OwningPawn.Controller.AdrenalineMax)	//Continously reset the max adrenaline when the player consumes/loses adrenaline
+		OwningPawn.Controller.AdrenalineMax = OwningPawn.Controller.Adrenaline;
+	if (OwningPawn.Controller.Adrenaline < OriginalMaxAdren)	//When the current adrenaline falls below the original starting max adren amount, we no longer need this effect
 	{
-		Instigator.Controller.AdrenalineMax = OriginalMaxAdren;
+		OwningPawn.Controller.AdrenalineMax = OriginalMaxAdren;
 		StatusEffects.Remove(EffectIndx, 1);
 	}
 }
@@ -351,7 +356,7 @@ function DoEffect_AmmoRegen(int EffectIndx)
 	local Weapon W;
 	local int Modifier;
 	
-	W = Instigator.Weapon;
+	W = OwningPawn.Weapon;
 	
 	if (W == None || W.IsA('RuneWeapon') || W.IsA('NecromancerBloodWeapon') || W.IsA('NecromancerSoulWeapon') || W.IsA('NecromancerWeapon') )
 		return;
@@ -375,12 +380,12 @@ function DoEffect_AmmoRegen(int EffectIndx)
 		}
 	}
 	
-	if (PlayerController(Instigator.Controller) != None)
+	if (OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
 	{
 		if (Modifier > 0)
-			PlayerController(Instigator.Controller).ClientPlaySound(Sound'WeaponSounds.BaseGunTech.BReload9');
+			PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'WeaponSounds.BaseGunTech.BReload9');
 		else if (Modifier < 0)
-			PlayerController(Instigator.Controller).ClientPlaySound(Sound'MenuSounds.MS_Edit');
+			PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'MenuSounds.MS_Edit');
 	}
 }
 
@@ -393,38 +398,38 @@ function DoEffect_DamageOverTime(int EffectIndx)
 	if (StatusEffects[EffectIndx].Modifier > 0)		//This is an ailment only
 		StatusEffects.Remove(EffectIndx, 1);
 		
-	DamageAmount = int(float(Instigator.Health) * (DoTCurve **(abs(StatusEffects[EffectIndx].Modifier)-1)*DoTBasePercentage));
+	DamageAmount = int(float(OwningPawn.Health) * (DoTCurve **(abs(StatusEffects[EffectIndx].Modifier)-1)*DoTBasePercentage));
 	if (DamageAmount > DoTMaxAmount)
 		DamageAmount = DoTMaxAmount;
 	if(DamageAmount > 0)
 	{
-		if(Instigator != None && Instigator.Controller != None && Instigator.Controller.bGodMode == False
-			&& InvulnerabilityInv(Instigator.FindInventoryType(class'InvulnerabilityInv')) == None)
+		if(OwningPawn != None && OwningPawn.Controller != None && OwningPawn.Controller.bGodMode == False
+			&& InvulnerabilityInv(OwningPawn.FindInventoryType(class'InvulnerabilityInv')) == None)
 		{
-			if (Instigator.Health <= DamageAmount)
-				DamageAmount = Instigator.Health -1;
-			Instigator.Health -= DamageAmount;
+			if (OwningPawn.Health <= DamageAmount)
+				DamageAmount = OwningPawn.Health -1;
+			OwningPawn.Health -= DamageAmount;
 			
 			Producer = StatusEffects[EffectIndx].Producer;
-			if(Producer != None && Producer.Controller != None && Instigator != Producer) //exp only for harming others.
+			if(Producer != None && Producer.Controller != None && OwningPawn != Producer) //exp only for harming others.
 			{
 				if (Rules != None)
-					Rules.AwardEXPForDamage(Producer.Controller, RPGStatsInv(Producer.FindInventoryType(class'RPGStatsInv')), Instigator, DamageAmount);
+					Rules.AwardEXPForDamage(Producer.Controller, RPGStatsInv(Producer.FindInventoryType(class'RPGStatsInv')), OwningPawn, DamageAmount);
 				// and add the damage as healable
-				class'StatusEffectInventory'.static.AddHealableDamage(DamageAmount, Instigator);
+				class'StatusEffectInventory'.static.AddHealableDamage(DamageAmount, OwningPawn);
 			}
 			if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Burn'.static.GetName())
 			{
-				if (Level.NetMode != NM_DedicatedServer && Instigator != None)
-					if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
-						PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'SuperHeatConditionMessage', 0);
+				if (Level.NetMode != NM_DedicatedServer && OwningPawn != None)
+					if (OwningPawn.IsLocallyControlled() && OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
+						PlayerController(OwningPawn.Controller).ReceiveLocalizedMessage(class'SuperHeatConditionMessage', 0);
 			}
 			else if (StatusEffects[EffectIndx].StatusEffectName == Class'StatusEffect_Poison'.static.GetName())
 			{
-				Instigator.Spawn(Class'GoopSmoke');
-				if (Level.NetMode != NM_DedicatedServer && Instigator != None)
-					if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
-						PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'PoisonBlastConditionMessage', 0);
+				OwningPawn.Spawn(Class'GoopSmoke');
+				if (Level.NetMode != NM_DedicatedServer && OwningPawn != None)
+					if (OwningPawn.IsLocallyControlled() && OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
+						PlayerController(OwningPawn.Controller).ReceiveLocalizedMessage(class'PoisonBlastConditionMessage', 0);
 			}
 		}
 	}
@@ -483,7 +488,7 @@ function DoEffect_Misfortune(int EffectIndx)
 		return;
 	}
 
-	foreach Instigator.CollidingActors(class'Pickup', P, MisfortuneRadius)
+	foreach OwningPawn.CollidingActors(class'Pickup', P, MisfortuneRadius)
 	if ( P.ReadyToPickup(0) && WeaponLocker(P) == None )
 	{
 		if (-StatusEffects[EffectIndx].Modifier >= -MisfortuneMaxModifierPickups && P.IsA('AdrenalinePickup') || ClassIsChildOf(P.Class, Class'TournamentHealth') || ClassIsChildOf(P.Class, Class'ShieldPickup') )
@@ -493,7 +498,7 @@ function DoEffect_Misfortune(int EffectIndx)
 		else if ( P.IsA('AdrenalinePickup') || ClassIsChildOf(P.Class, Class'TournamentHealth') || ClassIsChildOf(P.Class, Class'ShieldPickup') || P.IsA('WeaponPickup') || P.IsA('UDamagePack') || P.IsA('RPGArtifactPickup'))
 			DestroyPickup(P);
 	}
-	Instigator.ReceiveLocalizedMessage(class'MisfortuneMessage');
+	OwningPawn.ReceiveLocalizedMessage(class'MisfortuneMessage');
 }
 
 function DestroyPickup(Pickup P)
@@ -524,7 +529,7 @@ function DoEffect_Parasite(int EffectIndx)
 
 function SetParasiteHealthMax(int EffectIndx)
 {
-	ParasiteHealthMax = (abs(StatusEffects[EffectIndx].Modifier) + 3 )/10.0 * Instigator.HealthMax;
+	ParasiteHealthMax = (abs(StatusEffects[EffectIndx].Modifier) + 3 )/10.0 * OwningPawn.HealthMax;
 }
 
 function AddParasiteHealth(int Amount)
@@ -545,23 +550,23 @@ function int RemoveParasiteHealth(int Amount, int Index)
 
 function DoEffect_Regen(int EffectIndx)
 {
-	if (Instigator.IsA('Monster'))
-		Instigator.GiveHealth(StatusEffects[EffectIndx].Modifier*2, Instigator.HealthMax + RegenAdditionalHealthMax);
+	if (OwningPawn.IsA('Monster'))
+		OwningPawn.GiveHealth(StatusEffects[EffectIndx].Modifier*2, OwningPawn.HealthMax + RegenAdditionalHealthMax);
 	else
-		Instigator.GiveHealth(StatusEffects[EffectIndx].Modifier, Instigator.HealthMax + RegenAdditionalHealthMax);
-	if (PlayerController(Instigator.Controller) != None)
-		PlayerController(Instigator.Controller).ClientPlaySound(Sound'PickupSounds.HealthPack');
+		OwningPawn.GiveHealth(StatusEffects[EffectIndx].Modifier, OwningPawn.HealthMax + RegenAdditionalHealthMax);
+	if (OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
+		PlayerController(OwningPawn.Controller).ClientPlaySound(Sound'PickupSounds.HealthPack');
 }
 
 function DoEffect_Speed(int EffectIndx)
 {
-	if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(Instigator))
+	if(!class'DEKRPGWeapon'.static.NullCanTriggerPhysics(OwningPawn))
 		RemoveStatusEffect(EffectIndx);
 	if (StatusEffects[EffectIndx].Modifier < 0)
-		Instigator.Spawn(FreezexEmitterClass, Instigator,, Instigator.Location, Instigator.Rotation);
-	if (Level.NetMode != NM_DedicatedServer && Instigator != None)
-		if (Instigator.IsLocallyControlled() && Instigator.Controller != None && PlayerController(Instigator.Controller) != None)
-			PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'FreezeConditionMessage', 0);
+		OwningPawn.Spawn(FreezexEmitterClass, OwningPawn,, OwningPawn.Location, OwningPawn.Rotation);
+	if (Level.NetMode != NM_DedicatedServer && OwningPawn != None)
+		if (OwningPawn.IsLocallyControlled() && OwningPawn.Controller != None && PlayerController(OwningPawn.Controller) != None)
+			PlayerController(OwningPawn.Controller).ReceiveLocalizedMessage(class'FreezeConditionMessage', 0);
 }
 
 defaultproperties

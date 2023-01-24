@@ -21,6 +21,7 @@ struct StatusEffect
 };
 
 var Array < StatusEffect > StatusEffects;
+var Pawn OwningPawn;
 
 simulated function PostBeginPlay()
 {
@@ -30,12 +31,24 @@ simulated function PostBeginPlay()
 
 static final function StatusEffectManager GetStatusEffectManager(Pawn P)
 {
+	local Pawn Target;
+
 	local StatusEffectManager StatusInventory;
 
 	if (P == None)
 		return None;
 	
-	StatusInventory = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
+	if (P.IsA('Vehicle'))
+	{
+		if (Vehicle(P).Driver != None)
+			Target = Vehicle(P).Driver;
+		else
+			return None;
+	}
+	else
+		Target = P;
+	
+	StatusInventory = StatusEffectManager(Target.FindInventoryType(Class'StatusEffectManager'));
 	return StatusInventory;
 }
 
@@ -70,8 +83,13 @@ function Timer()
 {
 	local int x;
 	
-	if (Instigator == None || Instigator.Health <= 0 || Instigator.Controller == None)
+	if (Instigator == None || Instigator.Health <= 0)
 		Destroy();
+	
+	if (Instigator.IsA('Vehicle'))
+		OwningPawn = Vehicle(Instigator).Driver;
+	else
+		OwningPawn = Instigator;
 	
 	for (x = 0; x < StatusEffects.Length; x++)
 	{
