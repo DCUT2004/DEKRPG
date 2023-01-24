@@ -599,4 +599,6 @@ defaultproperties
 	
 	FreezexEmitterClass=Class'DEKRPG999X.IceSmoke'
 	FreezeSound=Sound'Slaughtersounds.Machinery.Heavy_End'
+
+	MisfortuneRadius=400.00
 }
