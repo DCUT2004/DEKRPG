@@ -36,7 +36,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		{
 			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
 			{
-				if (DamageType == MissionInv.Missions[x].ObjectiveClasses[y])
+				if (DamageType == MissionInv.Missions[x].ObjectiveClasses[y] && Injured != None && Injured.Health > 0 && Injured.GetTeamNum() != InstigatedBy.GetTeamNum())
 				{
 					MissionInv.TickMission(x, 1);
 					return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);					
@@ -44,6 +44,9 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 			}
 		}
 	}
+
+	if (TeamMissionsMut != None && TeamMissionsMut.PowerPartyActive)
+		TeamMissionsMut.UpdateCount(Damage);
 	
 	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 }
@@ -94,7 +97,7 @@ function ScoreKill(Controller Killer, Controller Killed)
 		{
 			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
 			{
-				if (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y] || ClassIsChildOf(Killed.Pawn.Class, MissionInv.Missions[x].ObjectiveClasses[y]))
+				if (Killed.Pawn.GetTeamNum() != Killer.Pawn.GetTeamNum() && (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y] || ClassIsChildOf(Killed.Pawn.Class, MissionInv.Missions[x].ObjectiveClasses[y])))
 				{
 					MissionInv.TickMission(x, 1);
 					return;			
