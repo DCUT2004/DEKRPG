@@ -364,6 +364,7 @@ simulated function Timer()
 					BestP.Damage *= DamageMultiplier;
 				if (BestP.IsA('SMPTitanBigRock'))
 				{
+					BestP.SetDrawScale(4.5);
 					BestP.TakeDamage(10, PlayerSpawner.Pawn, BestP.Location, Vect(0,0,0), class'DamageType');
 				}
 				if (BestP.Damage < MinimumDamage)
