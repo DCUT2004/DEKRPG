@@ -80,30 +80,37 @@ function Timer()
 
           if (C != None && C.Pawn != None && C.Pawn != Instigator && C.Pawn.Health > 0 && C.Pawn.Health < C.Pawn.HealthMax + HealthMaxBonus && Instigator.Health > Instigator.HealthMax && C.Pawn.GetTeamNum() == Instigator.GetTeamNum() && !C.Pawn.IsA('Monster') && HardCoreInv(C.Pawn.FindInventoryType(class'HardCoreInv')) == None)
           {
-               if (C.Pawn.IsA('Vehicle') && Vehicle(C.Pawn).Driver != None)
-                    P = Vehicle(C.Pawn).Driver;
+               P = None;
+               if (C.Pawn.IsA('Vehicle'))    //Cannot combine subsequent if statement here, since else will cause Instigator in a vehicle to be healed
+               {
+                    if (Vehicle(C.Pawn).Driver != None && Vehicle(C.Pawn).Driver != Instigator)
+                         P = Vehicle(C.Pawn).Driver;
+               }
                else
                     P = C.Pawn;
-               HealthGiven =
-                    Min
-                    (
-                         (P.HealthMax + HealthMaxBonus) - P.Health,
-                         RegenAmountPerPlayer
-                    );
-               
-               if(HealthGiven > 0)
+               if (P != None)
                {
-                    P.GiveHealth(HealthGiven, P.HealthMax + HealthMaxBonus);
-                    P.SetOverlayMaterial(EffectOverlay, 0.5, false);
-                    doHealed(HealthGiven, P);	// no exp for healing pets
-
-                    if(PlayerController(C) != None)	
+                    HealthGiven =
+                         Min
+                         (
+                              (P.HealthMax + HealthMaxBonus) - P.Health,
+                              RegenAmountPerPlayer
+                         );
+                    
+                    if(HealthGiven > 0)
                     {
-                         PlayerController(C).ReceiveLocalizedMessage(class'HealedConditionMessage', 0, Instigator.PlayerReplicationInfo);
-               
-                         P.PlaySound(sound'PickupSounds.HealthPack',, 2 * P.TransientSoundVolume,, 1.5 * P.TransientSoundRadius);
+                         P.GiveHealth(HealthGiven, P.HealthMax + HealthMaxBonus);
+                         P.SetOverlayMaterial(EffectOverlay, 0.5, false);
+                         doHealed(HealthGiven, P);	// no exp for healing pets
+
+                         if(PlayerController(C) != None)	
+                         {
+                              PlayerController(C).ReceiveLocalizedMessage(class'HealedConditionMessage', 0);
+                    
+                              P.PlaySound(sound'PickupSounds.HealthPack',, 2 * P.TransientSoundVolume,, 1.5 * P.TransientSoundRadius);
+                         }
+                         Instigator.Health -= HealthGiven;
                     }
-                    Instigator.Health -= HealthGiven;
                }
           }
 
@@ -150,7 +157,7 @@ defaultproperties
 {
      RegenRate=2
      RegenAmountPerPlayer=10
-     HealthMaxBonus=200
+     HealthMaxBonus=100
      EffectOverlay=Shader'UTRPGTextures2.Overlays.PulseBlueShader1'
      bOnlyRelevantToOwner=False
      bAlwaysRelevant=True

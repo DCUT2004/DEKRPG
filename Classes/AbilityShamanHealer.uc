@@ -34,7 +34,7 @@ defaultproperties
 {
      ExcludingAbilities(0)=Class'DEKRPG999X.AbilityGuardianHealer'
      AbilityName="Niche: Shaman"
-     Description="Sacrifices 10 health per teammate every 2 seconds for all teammates, as long as your health is beyond max. Each teammate continues to heal with this ability to +200 beyond their max health.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
+     Description="Sacrifices 10 health per teammate every 2 seconds for all teammates, as long as your health is beyond max. Each teammate continues to heal with this ability to +100 beyond their max health.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50
      MaxLevel=1
 }
