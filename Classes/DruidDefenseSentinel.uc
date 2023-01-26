@@ -37,7 +37,7 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector Momentum, class<DamageType> DamageType)
 {
      //Do not allow Titans to crush sentinels - more than likely spawned/teleported on top
-     if (EventIntigator != None && EventInstigator.IsA('SMPTitan') && DamageType == Class'Crushed')
+     if (EventInstigator != None && EventInstigator.IsA('SMPTitan') && DamageType == Class'Crushed')
           return;
      Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
 }
