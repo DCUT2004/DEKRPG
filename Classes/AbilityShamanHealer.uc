@@ -17,20 +17,16 @@ static simulated function int Cost(RPGPlayerDataObject Data, int CurrentLevel)
 
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
-	local ArtifactMassHeal AMH;
+	local ShamanInv Inv;
 
-	AMH = ArtifactMassHeal(Other.FindInventoryType(class'ArtifactMassHeal'));
-	
-	if(AMH == None)
+	if (Other.IsA('Monster'))
+		return;
+
+	Inv = ShamanInv(Other.FindInventoryType(Class'ShamanInv'));
+	if (Inv == None)
 	{
-		AMH = Other.spawn(class'ArtifactMassHeal', Other,,, rot(0,0,0));
-		if(AMH== None)
-			return; //get em next pass I guess?
-		AMH.giveTo(Other);
-		// I'm guessing that NextItem is here to ensure players don't start with
-		// no item selected.  So the if should stop wierd artifact scrambles.
-		if(Other.SelectedItem == None)
-			Other.NextItem();
+		Inv = Other.Spawn(Class'ShamanInv');
+		Inv.GiveTo(Other);
 	}
 }
 
@@ -38,7 +34,7 @@ defaultproperties
 {
      ExcludingAbilities(0)=Class'DEKRPG999X.AbilityGuardianHealer'
      AbilityName="Niche: Shaman"
-     Description="Use the Sacrificial Heal artifact to heal up to three teammates with the lowest health. You will lose health equivalent to the healing amount received by your teammates.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
+     Description="Sacrifices 10 health per teammate every 2 seconds for all teammates, as long as your health is beyond max. Each teammate continues to heal with this ability to +200 beyond their max health.|You must be level 180 and have at least level 8 of Loaded Healing before buying this niche. You can not be in more than one niche at a time.||Cost(per level): 50"
      StartingCost=50
      MaxLevel=1
 }
