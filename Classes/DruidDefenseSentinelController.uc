@@ -361,7 +361,10 @@ simulated function Timer()
 			else
 			{
 				if (BestP.Damage >= BestP.default.Damage)
+				{
 					BestP.Damage *= DamageMultiplier;
+					BestP.MomentumTransfer *= DamageMultiplier;
+				}
 				if (BestP.IsA('SMPTitanBigRock'))
 				{
 					BestP.SetDrawScale(4.5);

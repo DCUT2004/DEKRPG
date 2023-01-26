@@ -34,6 +34,14 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 	super(ASTurret).Explode( HitLocation, Vect(0,0,1) ); // Overriding Explosion direction
 }
 
+function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector Momentum, class<DamageType> DamageType)
+{
+     //Do not allow Titans to crush sentinels - more than likely spawned/teleported on top
+     if (EventIntigator != None && EventInstigator.IsA('SMPTitan') && DamageType == Class'Crushed')
+          return;
+     Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
+}
+
 defaultproperties
 {
      HealthHealingAmount=1.000000
