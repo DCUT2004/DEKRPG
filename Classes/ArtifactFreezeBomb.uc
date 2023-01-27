@@ -35,9 +35,9 @@ function Activate()
 
 	if (Instigator != None)
 	{
-		if(Instigator.Controller.Adrenaline < AdrenalineRequired*AdrenalineUsage)
+		if(Instigator.Controller.Adrenaline < AdrenalineRequired)
 		{
-			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired*AdrenalineUsage, None, None, Class);
+			Instigator.ReceiveLocalizedMessage(MessageClass, AdrenalineRequired, None, None, Class);
 			bActive = false;
 			GotoState('');
 			return;
@@ -67,10 +67,10 @@ function Activate()
 		if(FBC != None)
 		{
 			FBC.MaxFreezeTime = MaxFreezeTime;
-			FBC.FreezeRadius = FreezeRadius;
-			FBC.ChargeTime = ChargeTime*AdrenalineUsage;
+			FBC.FreezeRadius = FreezeRadius*PerformanceIncrease;
+			FBC.ChargeTime = ChargeTime;
 
-			Instigator.Controller.Adrenaline -= AdrenalineRequired*AdrenalineUsage;
+			Instigator.Controller.Adrenaline -= AdrenalineRequired;
 			if (Instigator.Controller.Adrenaline < 0)
 				Instigator.Controller.Adrenaline = 0;
 		}
@@ -109,7 +109,7 @@ defaultproperties
      ChargeTime=2.000000
      MaxFreezeTime=15.000000
      FreezeRadius=2000.000000
-     AdrenalineRequired=75
+     AdrenalineRequired=50
      CostPerSec=1
      MinActivationTime=0.000001
      PickupClass=Class'DEKRPG999X.ArtifactFreezeBombPickup'
