@@ -3,6 +3,7 @@ class ArtifactMakeSuperHealer extends DruidArtifactMakeMagicWeapon;
 var int MaxHealth;
 var float EXPMultiplier;
 var float HealingDamage;
+var float DispelChance;
 
 function BotConsider()
 {

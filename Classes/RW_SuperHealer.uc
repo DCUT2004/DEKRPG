@@ -47,6 +47,35 @@ static function bool AllowedFor(class<Weapon> Weapon, Pawn Other)
 	return true;
 }
 
+function NewAdjustTargetDamage(out int Damage, int OriginalDamage, Actor Victim, vector HitLocation, out vector Momentum, class<DamageType> DamageType)
+{
+	local StatusEffectManager StatusManager;
+	local Pawn P;
+
+	Super.NewAdjustTargetDamage(Damage, OriginalDamage, Victim, HitLocation, Momentum, DamageType);
+
+	if (Instigator == None)
+		return;
+
+	if(AMSH == None)
+		AMSH = ArtifactMakeSuperHealer(Instigator.FindInventoryType(class'ArtifactMakeSuperHealer'));
+	
+	if (AMSH != None && FRand() <= Damage / 100.0 + AMSH.DispelChance)
+	{
+		P = Pawn(Victim);
+		if (P == None)
+			return;
+		if (P.GetTeamNum() == Instigator.GetTeamNum())
+		{
+			StatusManager = Class'StatusEffectManager'.static.GetStatusEffectManager(P);
+			if (StatusManager == None)
+				return;
+			StatusManager.DispelAilment();
+		}
+	}
+
+}
+
 simulated function bool CanThrow()
 {
 	return false;

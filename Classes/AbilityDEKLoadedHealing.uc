@@ -19,6 +19,8 @@ var config float Lev2HealingDamage;
 var config float Lev3HealingDamage;
 var config float AdrenalineUsage;
 
+var config float DispelChancePerLevel;
+
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local ArtifactMakeSuperHealer AMSH;
@@ -143,6 +145,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	{
 		AMSH.HealingDamage = default.Lev3HealingDamage;
 		AMSH.MaxHealth = Default.Lev8Cap;
+		AMSH.DispelChance = (AbilityLevel - 7) * default.DispelChancePerLevel;
 		APB = ArtifactPoisonBlast(Other.FindInventoryType(class'ArtifactPoisonBlast'));
 		if(APB == None)
 		{
@@ -214,12 +217,13 @@ defaultproperties
      Lev8Cap=160
      Lev9Cap=180
      Lev10Cap=200
+	 DispelChancePerLevel=0.05
      WeaponDamage=0.500000
      Lev2HealingDamage=2.000000
      Lev3HealingDamage=3.000000
      AdrenalineUsage=0.500000
      AbilityName="Loaded Medic"
-     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker.|Each level of Loaded Healing thereafter allows you to use the Medic Gun to heal teammates +20 beyond their max health. |Level 5 grants you the Healing Sphere and Healing Blast artifacts, and your healing output is doubled.|Level 8, for the Healer subclass, triples your healing output and reduces adrenaline for healing artifacts, but also reduces damage on your medic weapon.|Level 10 grants the Remote Booster artifact.|Cost (per level): 7"
+     Description="Gives you bonuses towards healing.|Level 1 gives you a Medic Weapon Maker.|Each level of Loaded Healing thereafter allows you to use the Medic Gun to heal teammates +20 beyond their max health. |Level 5 grants you the Healing Sphere and Healing Blast artifacts, and your healing output is doubled.|Level 8, for the Healer subclass, triples your healing output and reduces adrenaline for healing artifacts, but also reduces damage on your medic weapon. Additionally, the medic weapon can cleanse status ailments on yourself and teammates.|Level 10 grants the Remote Booster artifact.|Cost (per level): 7"
      StartingCost=7
      BotChance=7
      MaxLevel=10

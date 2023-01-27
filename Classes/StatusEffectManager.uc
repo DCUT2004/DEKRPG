@@ -23,6 +23,8 @@ struct StatusEffect
 var Array < StatusEffect > StatusEffects;
 var Pawn OwningPawn;
 
+#exec  AUDIO IMPORT NAME="CleanseAilmentSound" FILE="Sounds\CleanseAilment.WAV" GROUP="Combosounds"
+
 simulated function PostBeginPlay()
 {
 	Super.PostBeginPlay();
@@ -235,17 +237,46 @@ function DispelBuffs()
 		}
 }
 
-//Remove any dispellable status ailments on this pawn
+//Remove all dispellable status ailments on this pawn
 function DispelAilments()
 {
 	local int x;
+	local bool bFoundAilment;
+
+	bFoundAilment = False;
 	
 	for (x = 0; x < StatusEffects.Length; x++)
 		if (StatusEffects[x].Modifier < 0 && StatusEffects[x].bDispellable)
 		{
 			OnRemoveDoEffect(x);
 			StatusEffects.Remove(x, 1);
+			bFoundAilment = true;
 		}
+	
+	if (bFoundAilment)
+		PlayCleanseEffect();
+}
+
+//Removes the first found dispellable status ailment on this Pawn
+function DispelAilment()
+{
+	local int x;
+	for (x = 0; x < StatusEffects.Length; x++)
+	{
+		if (StatusEffects[x].Modifier < 0 && StatusEffects[x].bDispellable)
+		{
+			OnRemoveDoEffect(x);
+			StatusEffects.Remove(x, 1);
+			PlayCleanseEffect();
+			break;
+		}
+	}
+}
+
+function PlayCleanseEffect()
+{
+	Instigator.PlaySound(Sound'DEKRPG999X.ComboSounds.CleanseAilmentSound',, 4 * Instigator.TransientSoundVolume, True, 2.0 * Instigator.TransientSoundRadius);
+	Instigator.Spawn(class'CleanseAilmentFX',,,Instigator.Location);
 }
 
 simulated function Destroyed()
