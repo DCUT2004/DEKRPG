@@ -36,7 +36,7 @@ defaultproperties
      SuperWeapons(0)="DEKRPG999X.RuneMegaBlast_PoisonBlast"
      NonRuneDamage=0.900000
      AbilityName="Loaded Runes"
-     Description="NOTE: This class is a work in progress. Visit us on Discord at discord.gg/8yEYsNc5ym to learn more about future updates and provide suggestions.||Runes are weapons that consume adrenaline instead of ammo.||You can still use normal weapons, but their damage is slightly reduced.||When you spawn:|Level 1: You are granted a set of runes with the default percentage chance for magic modifiers.|Level 2: You are granted an additional set of runes.|Level 3: You are granted super runes.|Cost (per level): 10,15,20"
+     Description="NOTE: This class is a work in progress. Visit us on Discord at discord.gg/y8RffrWHTy to learn more about future updates and provide suggestions.||Runes are weapons that consume adrenaline instead of ammo.||You can still use normal weapons, but their damage is slightly reduced.||When you spawn:|Level 1: You are granted a set of runes with the default percentage chance for magic modifiers.|Level 2: You are granted an additional set of runes.|Level 3: You are granted super runes.|Cost (per level): 10,15,20"
      StartingCost=10
      CostAddPerLevel=5
      MaxLevel=3
