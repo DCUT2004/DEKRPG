@@ -19,13 +19,15 @@ struct CurrentXPValues
 var Array<CurrentXPValues> CurrentXPs;
 var bool XPsUpdated;
 var bool HardCoreUpdated;
+var int NumMonsters;
 
 var float SumDelta;
+var float NumMonsterTickTime;
 
 replication
 {
 	reliable if (Role == ROLE_Authority)
-		ClientReceiveXP;
+		ClientReceiveXP,ClientReceiveMonsterCount;
 }
 
 simulated function PostNetBeginPlay()
@@ -40,14 +42,6 @@ simulated function Tick(float deltaTime)
 {
 	local Mutator m;
 
-	SumDelta += deltaTime;
-	if (SumDelta < 15)
-		return;
-
-	// time to try again
-	while (SumDelta >= 15)
-		SumDelta -= 15;
-
 	//only replicate xp for invasion at the moment
 	if ( Level.Game == None )
 		return;
@@ -57,7 +51,21 @@ simulated function Tick(float deltaTime)
 		disable('Tick');
 		return;
 	}
-    
+
+    NumMonsterTickTime += deltaTime;
+	if (NumMonsterTickTime > 1)
+    {
+        ClientReceiveMonsterCount(Invasion(Level.Game).NumMonsters);
+        NumMonsterTickTime = 0;
+    }
+        
+	SumDelta += deltaTime;
+	if (SumDelta < 15)
+		return;
+
+	// time to try again
+	SumDelta = 0;
+
 	if (HUDMut == None)
 	{
 		for (m = Level.Game.BaseMutator; m != None; m = m.NextMutator)
@@ -121,6 +129,15 @@ simulated function ClientReceiveXP(int index, string PlayerName, int XPGained, i
 			HardCoreUpdated = true;		// for awareness abilities
 			//Log(" *** ClientHudInv got scores. Index:" $ index @ "player:" $ PlayerName @ "xpgained:" $ XPGained @ "Time:" $ Level.TimeSeconds);
 		}
+	}
+}
+
+simulated function ClientReceiveMonsterCount(int MonsterCount)
+{
+	if(Level.NetMode != NM_DedicatedServer)
+	{
+        NumMonsters = MonsterCount;
+		// Log(" *** ClientHudInv got NumMonsters:" $ MonsterCount @ "Time:" $ Level.TimeSeconds);
 	}
 }
 

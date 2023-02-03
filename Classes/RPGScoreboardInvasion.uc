@@ -3,6 +3,7 @@ class RPGScoreBoardInvasion extends ScoreBoardInvasion;
 var ClientHudInv myClient;
 var color AMOrangeColor, WMPurpleColor, MMBlueColor, GenGreenColor, WarBrownColor, NecroRedColor, SubClassColor;
 var int iClientCheckCount;
+var int NumMonsters;
 
 // client side copy
 struct CopyXPValue
@@ -157,6 +158,8 @@ simulated event UpdateScoreBoard(Canvas Canvas)
 		}
 		myClient.XPsUpdated = false;
 	 }
+    if  (myClient != None)
+        NumMonsters = myClient.NumMonsters;
 	OwnerPRI = PlayerController(Owner).PlayerReplicationInfo;
 	PlayerCount = 0;
 	for (i=0; i<GRI.PRIArray.Length; i++)
@@ -332,6 +335,8 @@ simulated event UpdateScoreBoard(Canvas Canvas)
 			Canvas.SetPos(NameXPos, (PlayerBoxSizeY + BoxSpaceY)*i + BoxTextOffsetY);
 			Canvas.DrawText(playername[i],true);
 		}
+	Canvas.SetPos(NameXPos, (PlayerBoxSizeY + BoxSpaceY)*i + BoxTextOffsetY);
+	Canvas.DrawText("Active Monsters:" @ NumMonsters,true);
 	if ( bNameFontReduction )
 		Canvas.Font = GetSmallerFontFor(Canvas,FontReduction);
 
