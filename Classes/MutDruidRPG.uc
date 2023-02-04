@@ -15,15 +15,7 @@ var config Array<ArtifactKeyConfig> ArtifactKeyConfigs;
 
 function PostBeginPlay()
 {
-	local GameRules G;
-	
 	Enable('Tick');
-	G = Spawn(class'StatusEffectGameRules');
-	if ( Level.Game.GameRulesModifiers == None )
-		Level.Game.GameRulesModifiers = G;
-	else    
-		Level.Game.GameRulesModifiers.AddGameRules(G);
-        
 	RPGMut = class'MutUT2004RPG'.static.GetRPGMutator(Level.Game);
 	Level.Game.DefaultPlayerClassName = DEK_PAWN_CLASS;
 }
