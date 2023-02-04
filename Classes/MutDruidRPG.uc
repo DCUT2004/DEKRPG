@@ -4,6 +4,7 @@ class MutDruidRPG extends Mutator
 var MutUT2004RPG RPGMut;
 var RPGRules rules;
 var config class<RPGDamageGameRules> DamageRules;
+const DEK_PAWN_CLASS = "DEKRPG999X.DEKPawn";
 
 struct ArtifactKeyConfig
 {
@@ -24,6 +25,7 @@ function PostBeginPlay()
 		Level.Game.GameRulesModifiers.AddGameRules(G);
         
 	RPGMut = class'MutUT2004RPG'.static.GetRPGMutator(Level.Game);
+	Level.Game.DefaultPlayerClassName = DEK_PAWN_CLASS;
 }
 
 function bool CheckReplacement(Actor Other, out byte bSuperRelevant)
