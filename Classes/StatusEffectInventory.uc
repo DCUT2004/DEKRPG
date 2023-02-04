@@ -11,6 +11,8 @@ class StatusEffectInventory extends StatusEffectManager
 
 var RPGRules Rules;
 
+var config float DamagePercentPerModifier;
+
 //Adren
 var int OriginalMaxAdren;
 var config int MaxAdrenMaxIncrease;
@@ -43,6 +45,11 @@ var config int RegenAdditionalHealthMax;
 
 //Freeze variables
 var Sound FreezeSound;
+
+static function float GetDamagePercentPerModifier()
+{
+	return default.DamagePercentPerModifier;
+}
 
 simulated function PostBeginPlay()
 {
@@ -571,6 +578,8 @@ function DoEffect_Speed(int EffectIndx)
 
 defaultproperties
 {
+	DamagePercentPerModifier=0.02000
+	
     DoTBasePercentage=0.050000
 	DoTCurve=1.300000
 	DoTMaxAmount=100.000

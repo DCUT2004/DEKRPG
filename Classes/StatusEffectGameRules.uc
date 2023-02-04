@@ -1,7 +1,5 @@
 class StatusEffectGameRules extends GameRules
 	config(UT2004RPG);
-	
-var config float DamagePercentPerModifier;
 
 var config int ChanceHitPerModifier;
 
@@ -25,19 +23,6 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		InstigatorStatusInv = class'StatusEffectManager'.static.GetStatusEffectManager(InstigatedBy);
 	if (Injured != None)
 		InjuredStatusInv = class'StatusEffectManager'.static.GetStatusEffectManager(Injured);
-	
-	
-	//Adjust damage if Instigator has StatusEffect_DamageBonus
-	if (InstigatorStatusInv != None)
-	{
-		StatusIndex = InstigatorStatusInv.GetIndex(class'StatusEffect_DamageBonus');
-		if (StatusIndex >= 0 && InstigatorStatusInv.StatusEffects[StatusIndex].Modifier != 0)
-		{
-			Damage *= 1 + (InstigatorStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
-			if (Damage <= 0)
-				Damage = 1;
-		}
-	}
 
 	//If the injured has BeastsRevenge, accumulate his damage
 	//We do this here, before defense buffs/ailments are applied, so the defense buff from Beasts Revenge does not negate the effect
@@ -47,15 +32,6 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	
 	if (InjuredStatusInv != None)
 	{
-		//Adjust damage if Injured has StatusEffect_DamageReduction
-		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_DamageReduction');
-		if (StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
-		{
-			Damage *= 1 + (-InjuredStatusInv.StatusEffects[StatusIndex].Modifier * DamagePercentPerModifier);
-			if (Damage <= 0)
-				Damage = 1;
-		}
-
 		//Adjust momentum if Injured has StatusEffect_Momentum
 		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_Momentum');
 		if (InjuredStatusInv != None && StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
@@ -163,7 +139,6 @@ function ReduceMomentum(int Modifier, int Damage, OUT Vector Momentum)
 
 defaultproperties
 {
-	DamagePercentPerModifier=0.02000
 	ChanceHitPerModifier=5
 	KnockbackPercent=6.0
 	KnockbackSound=Sound'WeaponSounds.Misc.ballgun_launch'

@@ -14,6 +14,39 @@ simulated function PostBeginPlay()
 	}
 }
 
+function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector Momentum, class<DamageType> DamageType)
+{
+	local DEKPawn Other;
+	local int StatusIndex;
+
+	Other = DEKPawn(EventInstigator);
+
+	//Adjust damage if EventInstigator has StatusEffect_DamageBonus
+	if (Other != None && Other.StatusManager != None)
+	{
+		StatusIndex = Other.StatusManager.GetIndex(class'StatusEffect_DamageBonus');
+		if (StatusIndex >= 0 && Other.StatusManager.StatusEffects[StatusIndex].Modifier != 0)
+		{
+			Damage *= 1 + (Other.StatusManager.StatusEffects[StatusIndex].Modifier * class'StatusEffectInventory'.static.GetDamagePercentPerModifier());
+			if (Damage <= 0)
+				Damage = 1;
+		}
+	}
+
+	//Adjust damage if this Pawn has StatusEffect_DamageReduction
+	if (Instigator != None && StatusManager != None)
+	{
+		StatusIndex = StatusManager.GetIndex(class'StatusEffect_DamageReduction');
+		if (StatusIndex >= 0 && StatusManager.StatusEffects[StatusIndex].Modifier != 0)
+		{
+			Damage *= 1 + (-StatusManager.StatusEffects[StatusIndex].Modifier * class'StatusEffectInventory'.static.GetDamagePercentPerModifier());
+			if (Damage <= 0)
+				Damage = 1;
+		}
+	}
+	Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
+}
+
 defaultproperties
 {
 }
