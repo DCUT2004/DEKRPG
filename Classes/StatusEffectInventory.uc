@@ -46,6 +46,12 @@ var config int RegenAdditionalHealthMax;
 //Freeze variables
 var Sound FreezeSound;
 
+//Knockback variables
+
+var config float KnockbackPercent;
+var Sound KnockbackSound;
+var Material KnockbackOverlay;
+
 static function float GetDamagePercentPerModifier()
 {
 	return default.DamagePercentPerModifier;
@@ -576,10 +582,51 @@ function DoEffect_Speed(int EffectIndx)
 			PlayerController(OwningPawn.Controller).ReceiveLocalizedMessage(class'FreezeConditionMessage', 0);
 }
 
+static function AddMomentum(int Modifier, int Damage, Pawn Injured, Pawn InstigatedBy, Vector HitLocation, OUT Vector Momentum, Class<DamageType> DamageType)
+{
+	local Vector NewLocation;
+	
+	if
+	( (Momentum.X == 0 && Momentum.Y == 0 && Momentum.Z == 0 )  || 
+		ClassIsChildOf(DamageType, class'DamTypeSniperShot') || 
+		ClassIsChildOf(DamageType, class'DamTypeClassicSniper') ||
+		ClassIsChildOf(DamageType, class'DamTypeLinkShaft') ||
+		ClassIsChildOf(DamageType, class'DamTypeONSAVRiLRocket') ||
+		instr(caps(string(DamageType)), "AVRIL") > -1 //hack for vinv avril
+	)
+	{
+		if(Injured == InstigatedBy)
+			 Momentum = Injured.Location - HitLocation;
+		else
+			 Momentum = InstigatedBy.Location - Injured.Location;
+		Momentum = Normal(Momentum);
+		Momentum *= -200;
+		// if they're walking, I need to bump them up 
+		// in the air a bit or they won't be knocked back 
+		// on no momentum weapons.
+		if(Injured.Physics == PHYS_Walking)
+		{
+			NewLocation = Injured.Location;
+			NewLocation.z += 10;
+			Injured.SetLocation(NewLocation);
+		}
+	}
+	Injured.SetOverlayMaterial(default.KnockbackOverlay, 1.0, false);
+	if(PlayerController(Injured.Controller) != None)
+		PlayerController(Injured.Controller).ReceiveLocalizedMessage(class'KnockbackConditionMessage', 0);
+	Injured.PlaySound(default.KnockbackSound,,1.5 * Injured.TransientSoundVolume,,Injured.TransientSoundRadius);
+	Momentum *= Max(2.0, Max(Modifier * 0.5,(Damage * (default.KnockbackPercent/100.0))));
+}
+
+static function ReduceMomentum(int Modifier, int Damage, OUT Vector Momentum)
+{
+	Momentum /= Max(2.0, Max(Modifier * 0.5,(Damage * (default.KnockbackPercent/100.0))));
+}
+
 defaultproperties
 {
 	DamagePercentPerModifier=0.02000
-	
+
     DoTBasePercentage=0.050000
 	DoTCurve=1.300000
 	DoTMaxAmount=100.000
@@ -610,4 +657,8 @@ defaultproperties
 	FreezeSound=Sound'Slaughtersounds.Machinery.Heavy_End'
 
 	MisfortuneRadius=400.00
+
+	KnockbackPercent=6.0
+	KnockbackSound=Sound'WeaponSounds.Misc.ballgun_launch'
+	KnockbackOverlay=FinalBlend'AWTroff.Shaders.TroffBackRedFinal'
 }

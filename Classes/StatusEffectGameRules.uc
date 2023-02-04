@@ -3,10 +3,6 @@ class StatusEffectGameRules extends GameRules
 
 var config int ChanceHitPerModifier;
 
-var config float KnockbackPercent;
-var Sound KnockbackSound;
-var Material KnockbackOverlay;
-
 function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn instigatedBy, vector HitLocation, out vector Momentum, class<DamageType> DamageType )
 {
 	local Controller C, NextC;
@@ -29,19 +25,6 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	BeastsRevenge = ComboAbilityBeastsRevengeInv(injured.FindInventoryType(Class'ComboAbilityBeastsRevengeInv'));
 	if (BeastsRevenge != None)
 		BeastsRevenge.AccumulatedDamage += Damage;	
-	
-	if (InjuredStatusInv != None)
-	{
-		//Adjust momentum if Injured has StatusEffect_Momentum
-		StatusIndex = InjuredStatusInv.GetIndex(class'StatusEffect_Momentum');
-		if (InjuredStatusInv != None && StatusIndex >= 0 && InjuredStatusInv.StatusEffects[StatusIndex].Modifier != 0)
-		{
-			if (InjuredStatusInv.StatusEffects[StatusIndex].Modifier < 0)
-				AddMomentum(-InjuredStatusInv.StatusEffects[StatusIndex].Modifier, Damage, Injured, InstigatedBy, HitLocation, Momentum, DamageType);
-			else if (InjuredStatusInv.StatusEffects[StatusIndex].Modifier > 0)
-				ReduceMomentum(InjuredStatusInv.StatusEffects[StatusIndex].Modifier, Damage, Momentum);
-		}
-	}
 	
 	//Adjust damage if Instigator has ChanceHit
 	if (InstigatorStatusInv != None)
@@ -96,51 +79,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 }
 
-function AddMomentum(int Modifier, int Damage, Pawn Injured, Pawn InstigatedBy, Vector HitLocation, OUT Vector Momentum, Class<DamageType> DamageType)
-{
-	local Vector NewLocation;
-	
-	if
-	( (Momentum.X == 0 && Momentum.Y == 0 && Momentum.Z == 0 )  || 
-		ClassIsChildOf(DamageType, class'DamTypeSniperShot') || 
-		ClassIsChildOf(DamageType, class'DamTypeClassicSniper') ||
-		ClassIsChildOf(DamageType, class'DamTypeLinkShaft') ||
-		ClassIsChildOf(DamageType, class'DamTypeONSAVRiLRocket') ||
-		instr(caps(string(DamageType)), "AVRIL") > -1 //hack for vinv avril
-	)
-	{
-		if(Injured == Instigator)
-			 Momentum = Injured.Location - HitLocation;
-		else
-			 Momentum = InstigatedBy.Location - Injured.Location;
-		Momentum = Normal(Momentum);
-		Momentum *= -200;
-		// if they're walking, I need to bump them up 
-		// in the air a bit or they won't be knocked back 
-		// on no momentum weapons.
-		if(Injured.Physics == PHYS_Walking)
-		{
-			NewLocation = Injured.Location;
-			NewLocation.z += 10;
-			Injured.SetLocation(NewLocation);
-		}
-	}
-	Injured.SetOverlayMaterial(KnockbackOverlay, 1.0, false);
-	if(PlayerController(Injured.Controller) != None)
-		PlayerController(Injured.Controller).ReceiveLocalizedMessage(class'KnockbackConditionMessage', 0);
-	Injured.PlaySound(KnockbackSound,,1.5 * Injured.TransientSoundVolume,,Injured.TransientSoundRadius);
-	Momentum *= Max(2.0, Max(Modifier * 0.5,(Damage * (KnockbackPercent/100.0))));
-}
-
-function ReduceMomentum(int Modifier, int Damage, OUT Vector Momentum)
-{
-	Momentum /= Max(2.0, Max(Modifier * 0.5,(Damage * (KnockbackPercent/100.0))));
-}
-
 defaultproperties
 {
 	ChanceHitPerModifier=5
-	KnockbackPercent=6.0
-	KnockbackSound=Sound'WeaponSounds.Misc.ballgun_launch'
-	KnockbackOverlay=FinalBlend'AWTroff.Shaders.TroffBackRedFinal'
 }

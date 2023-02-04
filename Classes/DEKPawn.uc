@@ -43,6 +43,16 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 			if (Damage <= 0)
 				Damage = 1;
 		}
+
+		//Adjust momentum if this Pawn has StatusEffect_Momentum
+		StatusIndex = StatusManager.GetIndex(class'StatusEffect_Momentum');
+		if (StatusIndex >= 0 && StatusManager.StatusEffects[StatusIndex].Modifier != 0)
+		{
+			if (StatusManager.StatusEffects[StatusIndex].Modifier < 0)
+				class'StatusEffectInventory'.static.AddMomentum(-StatusManager.StatusEffects[StatusIndex].Modifier, Damage, Instigator, EventInstigator, HitLocation, Momentum, DamageType);
+			else if (StatusManager.StatusEffects[StatusIndex].Modifier > 0)
+				class'StatusEffectInventory'.static.ReduceMomentum(StatusManager.StatusEffects[StatusIndex].Modifier, Damage, Momentum);
+		}
 	}
 	Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
 }
