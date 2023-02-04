@@ -13,6 +13,8 @@ var RPGRules Rules;
 
 var config float DamagePercentPerModifier;
 
+var config int ChanceHitPerModifier;
+
 //Adren
 var int OriginalMaxAdren;
 var config int MaxAdrenMaxIncrease;
@@ -56,6 +58,12 @@ static function float GetDamagePercentPerModifier()
 {
 	return default.DamagePercentPerModifier;
 }
+
+static function float GetChanceHitPerModifier()
+{
+	return default.ChanceHitPerModifier;
+}
+
 
 simulated function PostBeginPlay()
 {
@@ -626,6 +634,8 @@ static function ReduceMomentum(int Modifier, int Damage, OUT Vector Momentum)
 defaultproperties
 {
 	DamagePercentPerModifier=0.02000
+
+	ChanceHitPerModifier=5
 
     DoTBasePercentage=0.050000
 	DoTCurve=1.300000

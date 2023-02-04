@@ -54,6 +54,34 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 				class'StatusEffectInventory'.static.ReduceMomentum(StatusManager.StatusEffects[StatusIndex].Modifier, Damage, Momentum);
 		}
 	}
+
+	//Adjust damage if EventInstigator has ChanceHit
+	if (Other != None && Other.StatusManager != None)
+	{
+		StatusIndex = Other.StatusManager.GetIndex(class'StatusEffect_ChanceHit');
+		if (StatusIndex >= 0 && Other.StatusManager.StatusEffects[StatusIndex].Modifier != 0)
+		{
+			if (Rand(100) <= abs(Other.StatusManager.StatusEffects[StatusIndex].Modifier)*class'StatusEffectInventory'.static.GetChanceHitPerModifier())
+			{
+				if (Other.StatusManager.StatusEffects[StatusIndex].Modifier > 0)
+				{
+					Damage *= 2;
+					Other.Spawn(Class'GamblerHitEffect',,,Other.Location);
+					Other.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*Other.TransientSoundVolume,,Other.TransientSoundRadius);
+					Instigator.Spawn(Class'GamblerHitEffect',,,Instigator.Location);
+					Instigator.PlaySound(sound'GeneralImpacts.Wet.Breakbone_01',,1.1*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
+				}
+				else if (Other.StatusManager.StatusEffects[StatusIndex].Modifier < 0)
+				{
+					Damage = 1;
+					Other.Spawn(Class'MissedShotHitEffect',,,Other.Location);
+					//Other.PlaySound(sound'2K4MenuSounds.Generic.msfxFade',,1.1*Other.TransientSoundVolume,,Other.TransientSoundRadius);
+					Instigator.Spawn(Class'MissedShotHitEffect',,,Instigator.Location);
+					//Instigator.PlaySound(Sound'2K4MenuSounds.Generic.msfxFade',,1.1*Instigator.TransientSoundVolume,,Instigator.TransientSoundRadius);
+				}
+			}
+		}
+	}
 	Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
 }
 
