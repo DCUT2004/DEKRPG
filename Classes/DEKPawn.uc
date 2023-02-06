@@ -24,7 +24,10 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 {
 	local StatusEffectInventory EventInstigatorStatusManager;
 
-	EventInstigatorStatusManager = StatusEffectInventory(EventInstigator.FindInventoryType(Class'StatusEffectInventory'));
+	if (DEKPawn(EventInstigator) != None)
+		EventInstigatorStatusManager = DEKPawn(EventInstigator).StatusManager;
+	else
+		EventInstigatorStatusManager = StatusEffectInventory(EventInstigator.FindInventoryType(Class'StatusEffectInventory'));
 	Damage = class'StatusEffectDamageRules'.static.HandleDamage(Damage, EventInstigator, EventInstigatorStatusManager, Instigator, StatusManager, HitLocation, Momentum, DamageType);
 	Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
 }
