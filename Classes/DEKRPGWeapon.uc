@@ -49,7 +49,7 @@ replication
 	reliable if (Role == ROLE_Authority)
 		CurrentPowerTypes, bSetPowerTypes, sBaseName, sMyItemName, CurMaxPowers, NumPowerTypes;
 	reliable if (Role < ROLE_Authority)
-		AddPowerType;
+		AddPowerType, RemoveFirstPowerType;
 }
 
 // *** startup functions
@@ -494,13 +494,17 @@ function Generate(RPGWeapon ForcedWeapon)
     SetShaderBasedOnAddons();
 }
 
-function SetShaderBasedOnAddons()
+simulated function SetShaderBasedOnAddons()
 {
     local AddonPowerType firstPowerType;
     local bool singleType;
 	local int x;
 
-	if (NumPowerTypes == 1)
+	if (NumPowerTypes == 0)
+	{
+		ModifierOverlay = None;
+	}
+	else if (NumPowerTypes == 1)
 	{
 		CurrentPowerTypes[0].SetShader();
 	}
@@ -546,6 +550,18 @@ static function bool AllowedFor(class<Weapon> Weapon, Pawn Other)
 }
 
 // *** identification functions
+
+function Identify()
+{
+	if (Modifier == 0 && !bCanHaveZeroModifier)
+		return;
+
+	bIdentified = true;
+	ConstructItemName();
+	if (Instigator != None && PlayerController(Instigator.Controller) != None)
+		PlayerController(Instigator.Controller).ReceiveLocalizedMessage(class'IdentifyMessage', 0,,, self);
+	SetOverlayMaterial(ModifierOverlay, -1, true);
+}
 
 simulated function DoDelayedIdentify()
 {
@@ -734,6 +750,26 @@ simulated function AddPowerType(class<AddonPowerType> NewClass, float Performanc
 	CurrentPowerTypes[NumPowerTypes] = NewType;
 	NumPowerTypes++;  
     
+    SetShaderBasedOnAddons();
+                
+	bIdentified = false;		// cause regeneration of ItemName
+}
+
+simulated function RemoveFirstPowerType()
+{
+	// take the first Power type off the weapon
+    local int x;
+    
+    if (NumPowerTypes == 0)
+        return; // none to remove
+    
+    for (x=0; x< NumPowerTypes-1; x++)
+    {
+        CurrentPowerTypes[x] = CurrentPowerTypes[x+1];
+    }   
+    CurrentPowerTypes[NumPowerTypes-1] = None;
+    NumPowerTypes--;
+
     SetShaderBasedOnAddons();
                 
 	bIdentified = false;		// cause regeneration of ItemName

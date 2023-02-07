@@ -14,6 +14,17 @@ struct MagicWeaponLevel
 };
 var config array<MagicWeaponLevel> MagicWeaponLevels;	// complete list of config;
 
+static function ModifyPawn(Pawn Other, int AbilityLevel)
+{
+    // give them the artifact for removing weapon addons
+    class'DruidArtifactloaded'.static.giveArtifact(other, class'ArtifactRemoveAddon', class'ArtifactRemoveAddon'.default.AdrenalineRequired, 1.0);
+
+    // I'm guessing that NextItem is here to ensure players don't start with
+    // no item selected.  So the if should stop wierd artifact scrambles.
+	if(Other.SelectedItem == None)
+		Other.NextItem();
+}
+
 defaultproperties
 {
      MinAdrenalineMax=125
