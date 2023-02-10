@@ -24,12 +24,18 @@ function ModifyPlayer(Pawn Other)
 
 	MissionInv = class'MissionInvBETA'.static.GetMissionInv(Other.Controller);
 	if (MissionInv != None)
+	{
+		if (DEKPawn(Other) != None )
+			DEKPawn(Other).MissionInv = MissionInv;
 		return;
+	}
 	MissionInv = Spawn(class'MissionInvBETA', Other);
 	MissionInv.Inventory = Other.Controller.Inventory;
 	Other.Controller.Inventory = MissionInv;
 	MissionInv.SetOwner(Other.Controller);
-}
+	if (DEKPawn(Other) != None)
+		DEKPawn(Other).MissionInv = MissionInv;
+ }
 
 defaultproperties
 {

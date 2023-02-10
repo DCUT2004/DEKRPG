@@ -17,7 +17,7 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 	local MissionInvBETA MissionInv;						//Unfortunately, we're doing a check on the inventory list each time a player deals damage..
 	local int x, y;
 	
-	if (instigatedBy == None || instigatedBy.Controller == None)
+	if (instigatedBy == None || instigatedBy.Controller == None || DEKPawn(InstigatedBy) == None)
 		return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);	
 	
 	if (instigatedBy.PlayerReplicationInfo != None && instigatedBy.PlayerReplicationInfo.bBot)
@@ -27,9 +27,12 @@ function int NetDamage( int OriginalDamage, int Damage, pawn injured, pawn insti
 		return Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
 		
 	
-	MissionInv = class'MissionInvBETA'.static.GetMissionInv(instigatedBy.Controller);
+	MissionInv = DEKPawn(InstigatedBy).MissionInv;
+	if (MissionInv == None)
+		MissionInv = Class'MissionInvBETA'.static.GetMissionInv(InstigatedBy.Controller);
 	if (MissionInv == None)
 		return  Super.NetDamage(OriginalDamage, Damage, injured, instigatedBy, HitLocation, Momentum, DamageType);
+
 	for (x = 0; x < MissionInv.NUM_MISSIONS; x++)
 	{
 		if (MissionInv.Missions[x].ObjectiveClasses.Length > 0)

@@ -7,6 +7,7 @@ Adjusts damage for StatusEffects through StatusEffectDamageRules.HandleDamage()
 class DEKPawn extends xPawn;
 
 var StatusEffectInventory StatusManager;
+var MissionInvBETA MissionInv;
 
 simulated function PostBeginPlay()
 {
