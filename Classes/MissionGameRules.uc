@@ -101,18 +101,12 @@ function ScoreKill(Controller Killer, Controller Killed)
 			for (y = 0; y < MissionInv.Missions[x].ObjectiveClasses.Length; y++)
 			{
 				if (Killed.Pawn.GetTeamNum() != Killer.Pawn.GetTeamNum() && (Killed.Pawn.Class == MissionInv.Missions[x].ObjectiveClasses[y] || ClassIsChildOf(Killed.Pawn.Class, MissionInv.Missions[x].ObjectiveClasses[y])))
-				{
-					MissionInv.TickMission(x, 1);
-					return;			
-				}
+					MissionInv.TickMission(x, 1);	
 				if (ClassIsChildOf(MissionInv.Missions[x].ObjectiveClasses[y] , Class'Inventory'))
 				{
 					FoundInventory = Killed.Pawn.FindInventoryType(MissionInv.Missions[x].ObjectiveClasses[y]);
 					if (FoundInventory != None)
-					{
 						MissionInv.TickMission(x, 1);
-						return;
-					}
 				}
 			}
 		}
