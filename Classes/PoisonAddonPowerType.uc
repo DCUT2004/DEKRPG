@@ -44,7 +44,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
             MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
     		if (MInv == None)
     		{
-				StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
+				StatusInv = StatusEffectInventory(Class'StatusEffectManager'.static.GetStatusEffectManager(P));
 				if (StatusInv == None)
 					return;
 				StatusInv.AddStatusEffect(Class'StatusEffect_Poison', -TheWeapon.GetModifier()*PerformanceIncrease, True, PoisonLifespan*PerformanceIncrease, True, False, TheWeapon.Instigator);

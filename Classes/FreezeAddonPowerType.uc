@@ -53,7 +53,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 		MInv = MagicShieldInv(P.FindInventoryType(class'MagicShieldInv'));
 		if (MInv == None)
 		{
-			StatusInv = StatusEffectInventory(P.FindInventoryType(Class'StatusEffectInventory'));
+			StatusInv = StatusEffectInventory(Class'StatusEffectManager'.static.GetStatusEffectManager(P));
 			if (StatusInv == None)
 				return;
 			LocalModifier = TheWeapon.GetModifier();

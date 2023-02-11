@@ -25,10 +25,7 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 {
 	local StatusEffectInventory EventInstigatorStatusManager;
 
-	if (DEKPawn(EventInstigator) != None)
-		EventInstigatorStatusManager = DEKPawn(EventInstigator).StatusManager;
-	else if (EventInstigator.Controller != None && DCMonsterController(EventInstigator.Controller) != None)
-		EventInstigatorStatusManager = DCMonsterController(EventInstigator.Controller).StatusManager;
+	EventInstigatorStatusManager = StatusEffectInventory(Class'StatusEffectManager'.static.GetStatusEffectManager(EventInstigator));
 	Damage = class'StatusEffectDamageRules'.static.HandleDamage(Damage, EventInstigator, EventInstigatorStatusManager, Instigator, StatusManager, HitLocation, Momentum, DamageType);
 	Super.TakeDamage(Damage, EventInstigator, HitLocation, Momentum, DamageType);
 }

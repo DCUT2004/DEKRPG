@@ -49,7 +49,14 @@ static final function StatusEffectManager GetStatusEffectManager(Pawn P)
 	}
 	else
 		Target = P;
-	
+
+	if (Target == None)
+		return None;
+
+	if (DEKPawn(Target) != None)
+		return DEKPawn(Target).StatusManager;
+	if (Target.Controller != None && DCMonsterController(Target.Controller) != None && DCMonsterController(Target.Controller).StatusManager != None)
+		return DCMonsterController(Target.Controller).StatusManager;
 	StatusInventory = StatusEffectManager(Target.FindInventoryType(Class'StatusEffectManager'));
 	return StatusInventory;
 }
