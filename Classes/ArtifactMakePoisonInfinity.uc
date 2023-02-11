@@ -28,6 +28,7 @@ function constructionFinished(RPGWeapon result)
     thisWeapon.AddPowerType(class'PoisonAddonPowerType', 1.0); 
     thisWeapon.Modifier = Min(1,thisWeapon.Modifier);
     thisWeapon.ConstructItemName();
+	thisWeapon.ModifierOverlay = Class'PoisonAddonPowerType'.default.PowerOverlay;
     thisWeapon.Identify();
 }
 
