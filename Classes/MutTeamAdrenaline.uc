@@ -296,7 +296,10 @@ function ApplyMonsterBuff(int RandIndex, int Modifier)
 		
 		if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.IsA('Monster') && FriendlyMonsterInv(C.Pawn.FindInventoryType(Class'FriendlyMonsterInv')) == None && !C.Pawn.IsA('HealerNali'))
 		{
-			StatusInv = StatusEffectManager(C.Pawn.FindInventoryType(Class'StatusEffectManager'));
+			if (DCMonsterController(C) != None)
+				StatusInv = DCMonsterController(C).StatusManager;
+			else
+				StatusInv = StatusEffectManager(C.Pawn.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
 				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass, Modifier, True, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
@@ -324,7 +327,10 @@ function ApplyPlayerAilment(int RandIndex, int Modifier)
 				RealP = Vehicle(C.Pawn).Driver;
 			else
 				RealP = C.Pawn;
-			StatusInv = StatusEffectManager(RealP.FindInventoryType(Class'StatusEffectManager'));
+			if (DEKPawn(RealP) != None)
+				StatusInv = DEKPawn(RealP).StatusManager;
+			else
+				StatusInv = StatusEffectManager(RealP.FindInventoryType(Class'StatusEffectManager'));
 			if (StatusInv != None)
 				StatusInv.AddStatusEffect(Combos[RandIndex].StatusEffectClass, Modifier, True, Combos[RandIndex].StatusLifespan, Combos[RandIndex].bDispellable, Combos[RandIndex].bStackable);
 		}
