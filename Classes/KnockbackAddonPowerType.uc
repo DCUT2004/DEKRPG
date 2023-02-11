@@ -55,7 +55,7 @@ function DoPowerEffect(out int Damage, Actor Victim, Vector HitLocation, out Vec
 	if (MInv != None)
         return;
 		
-	StatusInv = StatusEffectManager(P.FindInventoryType(Class'StatusEffectManager'));
+	StatusInv = StatusEffectInventory(Class'StatusEffectManager'.static.GetStatusEffectManager(P));
 	if (StatusInv == None)
 		return;
 		
