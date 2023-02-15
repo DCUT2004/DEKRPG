@@ -28,7 +28,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		{
 			if (LoadedInv.LESAbilityLevel == AbilityLevel)
 				return;
-			StartLevel = AbilityLevel; //only giving artifacts for this level.
+			StartLevel = LoadedInv.LESAbilityLevel + 1; //only giving artifacts for this level.
 		}
 	}
 	else
@@ -59,7 +59,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		}
 	}
 
-	if (Default.SentinelConfigs.length > 0)
+	if (Default.SentinelConfigs.length > 0 && StartLevel == 0)
 	{
 		Artifact = Other.spawn(class'ArtifactKillAllSentinels', Other,,, rot(0,0,0));
 		Artifact.GiveTo(Other);

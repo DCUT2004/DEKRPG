@@ -28,7 +28,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		{
 			if (LoadedInv.LENAbilityLevel == AbilityLevel)
 				return;
-			StartLevel = AbilityLevel; //only giving artifacts for this level.
+			StartLevel = LoadedInv.LENAbilityLevel + 1; //only giving artifacts for this level.
 		}
 	}
 	else
@@ -59,7 +59,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		}
 	}
 
-	if (Default.NodeConfigs.length > 0)
+	if (Default.NodeConfigs.length > 0 && StartLevel == 0)
 	{
 		Artifact = Other.spawn(class'ArtifactKillAllNodes', Other,,, rot(0,0,0));
 		Artifact.GiveTo(Other);

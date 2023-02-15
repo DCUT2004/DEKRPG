@@ -31,7 +31,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		{
 			if (LoadedInv.LEVAbilityLevel == AbilityLevel)
 				return;
-			StartLevel = AbilityLevel; //only giving artifacts for this level.
+			StartLevel = LoadedInv.LEVAbilityLevel+1; //only giving artifacts for this level.
 		}
 	}
 	else
@@ -75,7 +75,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	}
 
 	// ok,lets add the kill artifacts
-	if (bAddVehicles && Default.VehicleConfigs.length > 0)
+	if (bAddVehicles && Default.VehicleConfigs.length > 0 && StartLevel == 0)
 	{
 		Artifact = Other.spawn(class'ArtifactKillAllVehicles', Other,,, rot(0,0,0));
 		Artifact.GiveTo(Other);

@@ -28,7 +28,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		{
 			if (LoadedInv.LETAbilityLevel == AbilityLevel)
 				return;
-			StartLevel = AbilityLevel; //only giving artifacts for this level.
+			StartLevel = LoadedInv.LETAbilityLevel + 1; //only giving artifacts for this level.
 		}
 	}
 	else
@@ -59,7 +59,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		}
 	}
 
-	if (Default.TurretConfigs.length > 0)
+	if (Default.TurretConfigs.length > 0 && StartLevel == 0)
 	{
 		Artifact = Other.spawn(class'ArtifactKillAllTurrets', Other,,, rot(0,0,0));
 		Artifact.GiveTo(Other);
