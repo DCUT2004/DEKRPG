@@ -38,6 +38,8 @@ simulated event PostBeginPlay()
 	}
 			
 	// now ASVehicle calls SetCollision(true,true) which sets bCollideActors and bBlockActors. We just want to collide actors and block nothing
+	SetPhysics( PHYS_None );
+	SetCollision(false, false, false);    
 	SetCollision(true,false,false);
 }
 
@@ -125,14 +127,46 @@ simulated function Destroyed()
 simulated event touch (Actor Other)
 {
 	local pawn P;
+    local Projectile proj;
 	local Controller C;
 	local Controller PC;
 	local int DamageToDo;
-	
+	local SyncDestroy SyncObj;
+
+Log("++++ Energy wall: touch event on" @ Other);	
 	super.touch(Other);
 	
 	if (Role < ROLE_Authority)
 		return;			// dont try to do anything clientside
+
+	PC = DruidEnergyWallController(Controller).PlayerSpawner;
+    
+    proj =Projectile(Other);
+    if (proj != None)
+    {
+		if ((proj.InstigatorController != None &&
+				((TeamGame(Level.Game) != None && !proj.InstigatorController.SameTeamAs(PC))	// not same team
+				  || (TeamGame(Level.Game) == None && proj.InstigatorController != PC))))	// or just not me
+        {
+            // destroy the projectile
+            Log("++++ Energy wall: destroying projectile" @ Other @ "since it is on the wrong side");	  
+			//Tell the clients
+			if(Level.NetMode == NM_DedicatedServer && proj.Instigator != None)
+			{
+                Log("++++ Energy wall: creating SyncDestroy for" @ proj);	  
+				SyncObj = proj.Instigator.Spawn(class'SyncDestroy');
+				SyncObj.Proj = proj;
+				SyncObj.ProjLifespan = 0.05;
+			}
+			proj.Lifespan = 0.05;
+        }
+        else
+        {
+            Log("++++ Energy wall: ignoring" @ Other @ "since it is on the same side");	  
+        }
+        
+        return;
+    }
 		
 	P = Pawn(Other);
 	if (P == None || P.Health <= 0)
@@ -141,7 +175,6 @@ simulated event touch (Actor Other)
 	// let's hit them for damage
 	if ( Controller == None || DruidEnergyWallController(Controller) == None || DruidEnergyWallController(Controller).PlayerSpawner == None  || DruidEnergyWallController(Controller).PlayerSpawner.Pawn == None)
 		return; 
-	PC = DruidEnergyWallController(Controller).PlayerSpawner;
 	
 	if (P == PC.Pawn )
 		return;		// is spawner
@@ -153,6 +186,7 @@ simulated event touch (Actor Other)
 	if (TeamGame(Level.Game) != None && C.SameTeamAs(PC)) 	// on same team
 		return;
 		
+Log("++++ Energy wall: other" @ Other @ P @ "doing damage");	
 	// now scale the damage as to how big the touched item is. The bigger it is, the more of the field it will disrupt. Clamp betwenn 20 and 200.
 	DamageToDo = DamagePerHit * DamageAdjust * ( 1.0 + (P.HealthMax - 100.0)/200.0);
 	DamageToDo = min(max(DamageToDo, MinDamage * DamageAdjust),MaxDamage * DamageAdjust);
@@ -201,11 +235,12 @@ defaultproperties
 	healthMax=2000
 	Mass=1000.0
 	bMovable=false
-	bCollideActors=true
+    bCollideWorld=false
+	bCollideActors=false
 	bBlockActors=false
 	bBlockPlayers=false
 	bBlockKarma=false
-	bProjTarget=true
+	bProjTarget=false
 	bBlockZeroExtentTraces=true
 	bBlockNonZeroExtentTraces=true
 	bNetInitialRotation=true
@@ -215,7 +250,6 @@ defaultproperties
 	NetUpdateFrequency=4
 	ControllerClass=None
 	bAlwaysRelevant=false	
-    bCollideWorld=false
  	bNonHumanControl=true
 	AutoTurretControllerClass=None
 	DamageAdjust=1.0

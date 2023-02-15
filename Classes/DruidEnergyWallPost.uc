@@ -21,8 +21,6 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 				wall.TakeDamage(Damage/wall.DamageFraction, instigatedBy, hitlocation, momentum, damageType) ;  // since direct hit on post, need to do whole of damage to wall
 			// else if Damagefraction <=0 then do not pass on damage.
 		}
-		else
-			wall.TakeDamage(Damage, instigatedBy, hitlocation, momentum, damageType) ;  
 	}
 }
 

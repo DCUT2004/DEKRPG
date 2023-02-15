@@ -445,6 +445,45 @@ simulated function ModeTick(float dt)
     bDoHit = false;
 }
 
+function bool IsLinkable(Actor Other)
+{
+    local Pawn P;
+    local LinkGun LG;
+    local LinkFire LF;
+    local int sanity;
+
+    if ( Other.IsA('Pawn') && (Other.bProjTarget || DruidEnergyWall(Other) != None) )
+    {
+        P = Pawn(Other);
+        if ( P.Weapon == None || !P.Weapon.IsA('LinkGun') )
+		{
+			if ( Vehicle(P) != None )
+				return P.TeamLink( Instigator.GetTeamNum() );
+
+            return false;
+		}
+
+        // pro-actively prevent link cycles from happening
+        LG = LinkGun(P.Weapon);
+        LF = LinkFire(LG.GetFireMode(1));
+        while ( LF != None && LF.LockedPawn != None && LF.LockedPawn != P && sanity < 32 )
+        {
+            if ( LF.LockedPawn == Instigator )
+                return false;
+
+            LG = LinkGun(LF.LockedPawn.Weapon);
+            if ( LG == None )
+                break;
+            LF = LinkFire(LG.GetFireMode(1));
+            sanity++;
+        }
+
+        return ( Level.Game.bTeamGame && P.GetTeamNum() == Instigator.GetTeamNum() );
+    }
+
+    return false;
+}
+
 defaultproperties
 {
      Damage=35

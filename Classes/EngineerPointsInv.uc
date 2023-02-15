@@ -3,37 +3,41 @@ class EngineerPointsInv extends Inventory
 
 //this class is the summoning nexus for all things that can be summoned by Engineers in DruidsRPG
 
+// values set by abilities
+var int TotalSentinelPoints;
+var int TotalTurretPoints;
+var int TotalVehiclePoints;
+var int TotalBuildingPoints;
+var int TotalNodePoints;
+
+var int MaxSentinels;
+var int MaxTurrets;
+var int MaxVehicles;
+var int MaxBuildings;
+var int MaxNodes;
+
+// for keeping track of what we ahve summoned
 var array<Pawn> SummonedSentinels;
 var array<int> SummonedSentinelPoints;
-var int TotalSentinelPoints;
 var int UsedSentinelPoints;
 
 var array<Pawn> SummonedTurrets;
 var array<int> SummonedTurretPoints;
-var int TotalTurretPoints;
 var int UsedTurretPoints;
 
 var array<Pawn> SummonedVehicles;
 var array<int> SummonedVehiclePoints;
-var int TotalVehiclePoints;
 var int UsedVehiclePoints;
 
 var array<Pawn> SummonedBuildings;
 var array<int> SummonedBuildingPoints;
-var int TotalBuildingPoints;
 var int UsedBuildingPoints;
 
-var transient DruidsRPGKeysInteraction InteractionOwner;
+var array<Pawn> SummonedNodes;
+var array<int> SummonedNodePoints;
+var int UsedNodePoints;
 
-struct ItemAvailability
-{
-	Var int Number;
-	var int Level;
-};
-var config Array<ItemAvailability> SentinelAvailability;
-var config Array<ItemAvailability> VehicleAvailability;
-var config Array<ItemAvailability> TurretAvailability;
-var config Array<ItemAvailability> BuildingAvailability;
+var transient DruidsRPGKeysInteraction InteractionOwner;
 
 var localized string NotEnoughPointsMessage;
 var localized string UnableToSpawnMessage;
@@ -42,7 +46,6 @@ var localized string NotAtLevel;
 var localized string TooManyExtra;
 
 var int PlayerLevel;
-var float SentinelDamageAdjust;		// set by AbilityLoadedEngineer
 var float FastBuildPercent;		// the actual percent of the recovery time to use
 
 //client side only
@@ -54,7 +57,7 @@ var float RecoveryTime;
 replication
 {
 	reliable if (bNetOwner && bNetDirty && Role == ROLE_Authority)
-		TotalSentinelPoints, UsedSentinelPoints, TotalTurretPoints, UsedTurretPoints, 
+		TotalSentinelPoints, UsedSentinelPoints, TotalTurretPoints, UsedTurretPoints, TotalNodePoints, UsedNodePoints, 
 		TotalVehiclePoints, UsedVehiclePoints, TotalBuildingPoints, UsedBuildingPoints, PlayerLevel;
 	reliable if (Role == ROLE_Authority)
 		SetClientRecoveryTime;
@@ -139,51 +142,51 @@ function Vector FindCeiling(Vector BeaconLocation)
 
 simulated function bool AllowedAnotherSentinel()
 {
-	local int i;
+    if (SummonedSentinels.length < MaxSentinels)
+        return true;
 
-	for(i=0;i<SentinelAvailability.length;i++)
-		if (PlayerLevel >= SentinelAvailability[i].Level && SummonedSentinels.length < SentinelAvailability[i].Number)
-			return true;	// required level less than we have, and number greater than the number we have
 	return false;
 }
 
 simulated function bool AllowedAnotherVehicle()
 {
-	local int i;
+    if (SummonedVehicles.length < MaxVehicles)
+        return true;
 
-	for(i=0;i<VehicleAvailability.length;i++)
-		if (PlayerLevel >= VehicleAvailability[i].Level && SummonedVehicles.length < VehicleAvailability[i].Number)
-			return true;	// required level less than we have, and number greater than the number we have
 	return false;
 }
 
 simulated function bool AllowedAnotherTurret()
 {
-	local int i;
+    if (SummonedTurrets.length < MaxTurrets)
+        return true;
 
-	for(i=0;i<TurretAvailability.length;i++)
-		if (PlayerLevel >= TurretAvailability[i].Level && SummonedTurrets.length < TurretAvailability[i].Number)
-			return true;	// required level less than we have, and number greater than the number we have
 	return false;
 }
 
 simulated function bool AllowedAnotherBuilding()
 {
-	local int i;
+    if (SummonedBuildings.length < MaxBuildings)
+        return true;
 
-	for(i=0;i<BuildingAvailability.length;i++)
-		if (PlayerLevel >= BuildingAvailability[i].Level && SummonedBuildings.length < BuildingAvailability[i].Number)
-			return true;	// required level less than we have, and number greater than the number we have
+	return false;
+}
+
+simulated function bool AllowedAnotherNode()
+{
+    // TODO - check for total number of map nodes
+    
+    if (SummonedNodes.length < MaxNodes)
+        return true;
+
 	return false;
 }
 
 simulated function bool AllowedMoreBuildings(int numReqd)
 {
-	local int i;
+    if (SummonedBuildings.length + numReqd < MaxBuildings)    // blocks often get spawned in groups
+        return true;
 
-	for(i=0;i<BuildingAvailability.length;i++)
-		if (PlayerLevel >= BuildingAvailability[i].Level && (SummonedBuildings.length+numReqd) <= BuildingAvailability[i].Number)
-			return true;	// required level less than we have, and number greater than the number we have
 	return false;
 }
 
@@ -233,6 +236,54 @@ function ASTurret SummonRotatedSentinel(class<Pawn> ChosenSentinel, int Sentinel
 	SummonedSentinelPoints[SummonedSentinelPoints.length] = SentinelPoints;
 
 	return S;
+}
+
+function ASTurret SummonBaseNode(class<Pawn> ChosenNode, int NodePoints, Pawn P, Vector SpawnLocation)
+{
+	local rotator SpawnRotation;
+
+	SpawnRotation = getSpawnRotator(SpawnLocation);
+
+	return SummonRotatedNode(ChosenNode, NodePoints, P, SpawnLocation, SpawnRotation);
+}
+
+function ASTurret SummonRotatedNode(class<Pawn> ChosenNode, int NodePoints, Pawn P, Vector SpawnLocation, rotator SpawnRotation)
+{
+	Local ASTurret node;
+
+	if(TotalNodePoints - UsedNodePoints < NodePoints)
+	{
+		P.ReceiveLocalizedMessage(MessageClass, 2, None, None, Class);
+		return None;
+	}
+
+	if(!AllowedAnotherNode())
+	{
+		if (SummonedNodes.length == 0)
+			P.ReceiveLocalizedMessage(MessageClass, 5, None, None, Class);
+		else
+			P.ReceiveLocalizedMessage(MessageClass, 4, None, None, Class);
+		return None;
+	}
+
+	node = ASTurret(spawn(ChosenNode,,, SpawnLocation, SpawnRotation));
+	if (node == None)
+	{
+		P.ReceiveLocalizedMessage(MessageClass, 3, None, None, Class);
+		return None;
+	}
+
+	node.SetTeamNum(P.GetTeamNum());
+	if (node.Controller != None)
+		node.Controller.Destroy();
+	node.bAutoTurret=true;
+	node.bNonHumanControl=true;
+
+	UsedNodePoints += NodePoints;
+	SummonedNodes[SummonedNodes.length] = node;
+	SummonedNodePoints[SummonedNodePoints.length] = NodePoints;
+
+	return node;
 }
 
 function DruidEnergyWall SummonEnergyWall(class<DruidEnergyWall> ChosenEWall, int SentinelPoints, Pawn P, vector SpawnLocation, vector P1Loc, vector P2Loc)
@@ -288,7 +339,7 @@ function DruidEnergyWall SummonEnergyWall(class<DruidEnergyWall> ChosenEWall, in
 	// ok, got 2 posts so spawn the wall between
 	SpawnRotation = getSpawnRotator(SpawnLocation);
 	SpawnLocation = (P1Loc+P2Loc)/2;
-	//SpawnLocation.z -= 22;
+    SpawnLocation.z -= 22;
 
 	E = spawn(ChosenEWall,P,,SpawnLocation,SpawnRotation);	// position halfway between the posts
 	if (E == None)
@@ -601,6 +652,22 @@ function Timer()
 			i--;
 		}
 	}
+	for(i = 0; i < SummonedNodes.length; i++)
+	{
+		if(SummonedNodes[i] == None || SummonedNodes[i].health <= 0)
+		{
+			UsedNodePoints -= SummonedNodePoints[i];
+			if(UsedNodePoints < 0)
+			{
+				Warn("Node Points less than zero!");
+				UsedNodePoints = 0; //just an emergency checkertrap in case something interesting happens
+			}
+			SummonedNodes.remove(i, 1);
+			SummonedNodePoints.remove(i, 1);
+			i--;
+		}
+	}
+
 
 	// now also check if player level has changed
 	if (Role == ROLE_Authority && Instigator != None)
@@ -1049,10 +1116,40 @@ function KillFirstSentinel()
 	if(UsedSentinelPoints < 0)
 	{
 		Warn("Sentinel Points less than zero!");
-		UsedTurretPoints = 0; //just an emergency checkertrap in case something interesting happens
+		UsedSentinelPoints = 0; //just an emergency checkertrap in case something interesting happens
 	}
 	SummonedSentinels.remove(0, 1);
 	SummonedSentinelPoints.remove(0, 1);
+}
+
+function KillAllNodes()
+{
+	local int i;
+	
+	for(i = 0; i < 100 && SummonedNodes.length > 0; i++)
+		KillFirstNode();
+}
+
+function KillFirstNode()
+{
+	if(SummonedNodes.length == 0)
+		return; //nothing to kill
+	if(SummonedNodes[0] != None)
+	{
+		if (Vehicle(SummonedNodes[0]) != None && Vehicle(SummonedNodes[0]).Driver != None)
+			Vehicle(SummonedNodes[0]).EjectDriver();
+		SummonedNodes[0].Health = 0;
+		SummonedNodes[0].LifeSpan = 0.1 * SummonedNodes.length; //so the server will do it in it's own time and not all at once...
+	}		
+		
+	UsedNodePoints -= SummonedNodePoints[0];
+	if(UsedNodePoints < 0)
+	{
+		Warn("Node Points less than zero!");
+		UsedNodePoints = 0; //just an emergency checkertrap in case something interesting happens
+	}
+	SummonedNodes.remove(0, 1);
+	SummonedNodePoints.remove(0, 1);
 }
 
 function KillAllTurrets()
@@ -1196,43 +1293,11 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 
 defaultproperties
 {
-     SentinelAvailability(0)=(Number=1,Level=15)
-     SentinelAvailability(1)=(Number=2,Level=70)
-     SentinelAvailability(2)=(Number=3,Level=120)
-     SentinelAvailability(3)=(Number=4,Level=150)
-     VehicleAvailability(0)=(Number=1,Level=20)
-     VehicleAvailability(1)=(Number=2,Level=40)
-     TurretAvailability(0)=(Number=1,Level=30)
-     TurretAvailability(1)=(Number=2,Level=50)
-     TurretAvailability(2)=(Number=3,Level=100)
-     TurretAvailability(3)=(Number=4,Level=150)
-     TurretAvailability(4)=(Number=5,Level=200)
-     BuildingAvailability(0)=(Number=1,Level=4)
-     BuildingAvailability(1)=(Number=2,Level=10)
-     BuildingAvailability(2)=(Number=3,Level=15)
-     BuildingAvailability(3)=(Number=4,Level=20)
-     BuildingAvailability(4)=(Number=5,Level=25)
-     BuildingAvailability(5)=(Number=6,Level=30)
-     BuildingAvailability(6)=(Number=7,Level=35)
-     BuildingAvailability(7)=(Number=8,Level=40)
-     BuildingAvailability(8)=(Number=9,Level=45)
-     BuildingAvailability(9)=(Number=10,Level=50)
-     BuildingAvailability(10)=(Number=11,Level=55)
-     BuildingAvailability(11)=(Number=12,Level=60)
-     BuildingAvailability(12)=(Number=13,Level=70)
-     BuildingAvailability(13)=(Number=14,Level=80)
-     BuildingAvailability(14)=(Number=15,Level=90)
-     BuildingAvailability(15)=(Number=16,Level=100)
-     BuildingAvailability(16)=(Number=17,Level=110)
-     BuildingAvailability(17)=(Number=18,Level=120)
-     BuildingAvailability(18)=(Number=19,Level=130)
-     BuildingAvailability(19)=(Number=20,Level=140)
      NotEnoughPointsMessage="Insufficent points available to summon this."
      UnableToSpawnMessage="Unable to spawn."
      TooManyToSpawnMessage="You have summoned too many of these. You must kill one before you can summon another one."
      NotAtLevel="You need to be a higher level to spawn one of these"
      TooManyExtra="You cannot spawn this many extra items"
-     SentinelDamageAdjust=1.000000
      FastBuildPercent=1.000000
      MessageClass=Class'UnrealGame.StringMessagePlus'
 }
