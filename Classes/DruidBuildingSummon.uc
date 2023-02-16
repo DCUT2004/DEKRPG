@@ -1,8 +1,14 @@
 class DruidBuildingSummon extends Summonifact
 	config(UT2004RPG);
     
-var int WoodBlocksMaxCHB;
-var int GraniteBlocksMaxCHB;  
+struct MaterialConfig
+{
+    var int MinHealthBonusLevel;
+	var Class<DruidBlock> NormalBlock;
+	var Class<DruidBlock> SmallBlock;
+	var Class<DruidBlock> HugeBlock;
+};
+var config Array<MaterialConfig> MaterialConfigs;
 
 function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 {
@@ -15,16 +21,9 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local rotator SpawnRotation;
 	local DruidExplosive NewExpl;
     local int AmountCHB;
-    local int Material; // 0 Wood, 1 Granite, 2 Metal
     local class<DruidBlock> ThisBlock;
 
     AmountCHB = class'AbilityConstructionHealthBonus'.static.GetLevelConstructionHealthBonus(P);
-    if (AmountCHB <= WoodBlocksMaxCHB)
-	  Material = 0;
-    else if (AmountCHB <= GraniteBlocksMaxCHB)
-	  Material = 1;
-    else
-	  Material = 2;
           
 	if (ClassIsChildOf(SummonItem,class'DruidBlock'))
 	{	// its a block
@@ -39,7 +38,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 		}
 		SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
         
-        ThisBlock = GetBlockToSpawn(class<DruidBlock>(SummonItem), Material);
+        ThisBlock = GetBlockToSpawn(class<DruidBlock>(SummonItem), AmountCHB);
 		NewBlock = epi.SummonBlock(ThisBlock, Points, P, SpawnLoc, SpawnRotation);
           
 		if (NewBlock == None)
@@ -101,7 +100,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 				break;
 			}
 
-            ThisBlock = GetBlockToSpawn(class<DruidBlock>(class<DruidMultiBlock>(SummonItem).default.Blocks[i].BlockType), Material);
+            ThisBlock = GetBlockToSpawn(class<DruidBlock>(class<DruidMultiBlock>(SummonItem).default.Blocks[i].BlockType), AmountCHB);
 			NewBlock = epi.SummonBlock(ThisBlock, PointsEach+PointsLeft, P, 
 				BlockLoc,SpawnRotation);	
 			PointsLeft = 0;
@@ -168,52 +167,57 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	return true;
 }
 
-function class<DruidBlock> GetBlockToSpawn(class<DruidBlock> Block, int Material)
+function class<DruidBlock> GetBlockToSpawn(class<DruidBlock> Block, int CHBLevel)
 {
+    local class<DruidBlock> ChosenBlock;
+    local int FoundLevel;
+    local int i;
+    
+    FoundLevel = -1;
     if (ClassIsChildOf(Block, class'DruidSmallBlock'))
     {
-		switch (Material) 
-		{
-		case 0:
-			return class'DruidWoodSmallBlock';
-			break;
-		case 1:
-			return class'DruidSmallBlock';
-			break;
-		case 2:
-			return class'DruidMetalSmallBlock';
-			break;
+    	for(i = 0; i < Default.MaterialConfigs.length; i++)
+    	{
+            if (Default.MaterialConfigs[i].MinHealthBonusLevel <= CHBLevel && Default.MaterialConfigs[i].MinHealthBonusLevel > FoundLevel)
+            {
+                 FoundLevel = Default.MaterialConfigs[i].MinHealthBonusLevel;
+                 ChosenBlock =  Default.MaterialConfigs[i].SmallBlock;
+            }
 		}
+        if (i < 0)
+            return class'DruidSmallBlock'; 
+        else
+            return ChosenBlock;
     }
     else if (ClassIsChildOf(Block, class'DruidHugeBlock'))
     {
-		switch (Material) 
-		{
-		case 0:
-			return class'DruidWoodHugeBlock';
-			break;
-		case 1:
-			return class'DruidHugeBlock';
-			break;
-		case 2:
-			return class'DruidMetalHugeBlock';
-			break;
+    	for(i = 0; i < Default.MaterialConfigs.length; i++)
+    	{
+            if (Default.MaterialConfigs[i].MinHealthBonusLevel <= CHBLevel && Default.MaterialConfigs[i].MinHealthBonusLevel > FoundLevel)
+            {
+                 FoundLevel = Default.MaterialConfigs[i].MinHealthBonusLevel;
+                 ChosenBlock =  Default.MaterialConfigs[i].HugeBlock;
+            }
 		}
+        if (i < 0)
+            return class'DruidHugeBlock'; 
+        else
+            return ChosenBlock;
     }
     else
     {
-		switch (Material) 
-		{
-		case 0:
-			return class'DruidWoodBlock';
-			break;
-		case 1:
-			return class'DruidBlock';
-			break;
-		case 2:
-			return class'DruidMetalBlock';
-			break;
+    	for(i = 0; i < Default.MaterialConfigs.length; i++)
+    	{
+            if (Default.MaterialConfigs[i].MinHealthBonusLevel <= CHBLevel && Default.MaterialConfigs[i].MinHealthBonusLevel > FoundLevel)
+            {
+                 FoundLevel = Default.MaterialConfigs[i].MinHealthBonusLevel;
+                 ChosenBlock =  Default.MaterialConfigs[i].NormalBlock;
+            }
 		}
+        if (i < 0)
+            return class'DruidBlock'; 
+        else
+            return ChosenBlock;
     }
     
 	return class'DruidBlock';                // should never get here
@@ -228,6 +232,8 @@ defaultproperties
 {
      IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.SummonBlockIcon'
      ItemName=""
-     WoodBlocksMaxCHB=5
-     GraniteBlocksMaxCHB=7
+     MaterialConfigs(0)=(MinHealthBonusLevel=0,NormalBlock=Class'DEKRPG999X.DruidWoodBlock',SmallBlock=Class'DEKRPG999X.DruidWoodSmallBlock',HugeBlock=Class'DEKRPG999X.DruidWoodHugeBlock')
+     MaterialConfigs(1)=(MinHealthBonusLevel=5,NormalBlock=Class'DEKRPG999X.DruidBlock',SmallBlock=Class'DEKRPG999X.DruidSmallBlock',HugeBlock=Class'DEKRPG999X.DruidHugeBlock')
+     MaterialConfigs(2)=(MinHealthBonusLevel=7,NormalBlock=Class'DEKRPG999X.DruidMetalBlock',SmallBlock=Class'DEKRPG999X.DruidMetalSmallBlock',HugeBlock=Class'DEKRPG999X.DruidMetalHugeBlock')
+     MaterialConfigs(3)=(MinHealthBonusLevel=9,NormalBlock=Class'DEKRPG999X.DruidForceBlock',SmallBlock=Class'DEKRPG999X.DruidForceSmallBlock',HugeBlock=Class'DEKRPG999X.DruidForceHugeBlock')
 }     
