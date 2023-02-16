@@ -1,4 +1,4 @@
-class LessHugeBlock extends DruidBlock;
+class DruidHugeBlock extends DruidBlock;
 
 defaultproperties
 {

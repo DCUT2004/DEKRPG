@@ -11,6 +11,27 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 	Other.SuperHealthMax += Other.SuperHealthMax * (Default.HealthBonus * AbilityLevel);
 }
 
+static function int GetLevelConstructionHealthBonus(Pawn Other)
+{
+	local RPGStatsInv StatsInv;
+    local int x;
+    
+	StatsInv = RPGStatsInv(Other.FindInventoryType(Class'RPGStatsInv'));
+    if (StatsInv == None)
+        return 0;
+
+	for (x = 0; StatsInv != None && x < StatsInv.Data.Abilities.length; x++)
+	{
+		if (StatsInv.Data.Abilities[x] == Class'AbilityConstructionHealthBonus')
+		{
+			return StatsInv.Data.AbilityLevels[x];
+			break;
+		}
+	}
+    
+    return 0;
+}
+
 defaultproperties
 {
      HealthBonus=0.200000

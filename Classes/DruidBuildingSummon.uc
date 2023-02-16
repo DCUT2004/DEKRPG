@@ -1,5 +1,8 @@
 class DruidBuildingSummon extends Summonifact
 	config(UT2004RPG);
+    
+var int WoodBlocksMaxCHB;
+var int GraniteBlocksMaxCHB;  
 
 function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 {
@@ -11,7 +14,18 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local int PointsLeft, PointsEach;
 	local rotator SpawnRotation;
 	local DruidExplosive NewExpl;
+    local int AmountCHB;
+    local int Material; // 0 Wood, 1 Granite, 2 Metal
+    local class<DruidBlock> ThisBlock;
 
+    AmountCHB = class'AbilityConstructionHealthBonus'.static.GetLevelConstructionHealthBonus(P);
+    if (AmountCHB <= WoodBlocksMaxCHB)
+	  Material = 0;
+    else if (AmountCHB <= GraniteBlocksMaxCHB)
+	  Material = 1;
+    else
+	  Material = 2;
+          
 	if (ClassIsChildOf(SummonItem,class'DruidBlock'))
 	{	// its a block
 		SpawnLoc = Beacon.Location;	
@@ -24,7 +38,10 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			return false;
 		}
 		SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-		NewBlock = epi.SummonBlock(SummonItem, Points, P, SpawnLoc, SpawnRotation);
+        
+        ThisBlock = GetBlockToSpawn(class<DruidBlock>(SummonItem), Material);
+		NewBlock = epi.SummonBlock(ThisBlock, Points, P, SpawnLoc, SpawnRotation);
+          
 		if (NewBlock == None)
 			return false;
 
@@ -84,7 +101,8 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 				break;
 			}
 
-			NewBlock = epi.SummonBlock(class<DruidMultiBlock>(SummonItem).default.Blocks[i].BlockType, PointsEach+PointsLeft, P, 
+            ThisBlock = GetBlockToSpawn(class<DruidBlock>(class<DruidMultiBlock>(SummonItem).default.Blocks[i].BlockType), Material);
+			NewBlock = epi.SummonBlock(ThisBlock, PointsEach+PointsLeft, P, 
 				BlockLoc,SpawnRotation);	
 			PointsLeft = 0;
 			if (NewBlock != None)
@@ -150,6 +168,57 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	return true;
 }
 
+function class<DruidBlock> GetBlockToSpawn(class<DruidBlock> Block, int Material)
+{
+    if (ClassIsChildOf(Block, class'DruidSmallBlock'))
+    {
+		switch (Material) 
+		{
+		case 0:
+			return class'DruidWoodSmallBlock';
+			break;
+		case 1:
+			return class'DruidSmallBlock';
+			break;
+		case 2:
+			return class'DruidMetalSmallBlock';
+			break;
+		}
+    }
+    else if (ClassIsChildOf(Block, class'DruidHugeBlock'))
+    {
+		switch (Material) 
+		{
+		case 0:
+			return class'DruidWoodHugeBlock';
+			break;
+		case 1:
+			return class'DruidHugeBlock';
+			break;
+		case 2:
+			return class'DruidMetalHugeBlock';
+			break;
+		}
+    }
+    else
+    {
+		switch (Material) 
+		{
+		case 0:
+			return class'DruidWoodBlock';
+			break;
+		case 1:
+			return class'DruidBlock';
+			break;
+		case 2:
+			return class'DruidMetalBlock';
+			break;
+		}
+    }
+    
+	return class'DruidBlock';                // should never get here
+}
+
 function BotConsider()
 {
 	return;		// bots do not summon blocks or walls
@@ -159,4 +228,6 @@ defaultproperties
 {
      IconMaterial=Texture'DEKRPGTexturesMaster209B.Artifacts.SummonBlockIcon'
      ItemName=""
-}
+     WoodBlocksMaxCHB=5
+     GraniteBlocksMaxCHB=7
+}     

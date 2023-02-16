@@ -35,7 +35,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	{
 		LoadedInv = Other.spawn(class'LoadedInv');
 		LoadedInv.giveTo(Other);
-		StartLevel = 0; 	//give all artifacts up to this level.
+		StartLevel = 1; 	//give all artifacts up to this level.
 	}
 
 	if(LoadedInv == None)
@@ -60,7 +60,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	}
 
     // TODO make sure these kill ones are clustered
-	if (Default.BuildingConfigs.length > 0 && StartLevel == 0)
+	if (Default.BuildingConfigs.length > 0 && StartLevel <= 1)
 	{
 		Artifact = Other.spawn(class'ArtifactKillAllBuildings', Other,,, rot(0,0,0));
 		Artifact.GiveTo(Other);
@@ -75,7 +75,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
      AbilityName="Base Builder"
-     Description="Build a base for others. At each level, you can summon better items.||You need to have a level six times the ability level you wish to purchase. |Cost (per level): 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17..."
+     Description="Build a base for others. At each level, you can summon better items.||Cost (per level): 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17..."
      StartingCost=3
      CostAddPerLevel=1
      MaxLevel=20

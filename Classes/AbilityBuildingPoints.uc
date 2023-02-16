@@ -20,6 +20,8 @@ static simulated function ModifyPawn(Pawn Other, int AbilityLevel)
 	}
     
 	Inv.TotalBuildingPoints = AbilityLevel;
+   	Inv.MaxBuildings = AbilityLevel;    // a bit of a fudge, but we don't want a separate 20 level MaxBuildings ability
+
 }
 
 defaultproperties
