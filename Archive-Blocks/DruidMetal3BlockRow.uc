@@ -1,4 +1,4 @@
-class DruidMetalSingleRow extends DruidMultiBlock;
+class DruidMetal3BlockRow extends DruidMultiBlock;
 
 defaultproperties
 {

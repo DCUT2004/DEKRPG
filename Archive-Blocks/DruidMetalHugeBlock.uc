@@ -1,4 +1,4 @@
-class DruidCinderHugeBlock extends DruidCinderBlock;
+class DruidMetalHugeBlock extends DruidMetalBlock;
 
 defaultproperties
 {

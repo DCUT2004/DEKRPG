@@ -1,4 +1,4 @@
-class DruidWoodLongSingleRow extends DruidMultiBlock;
+class DruidWood5BlockRow extends DruidMultiBlock;
 
 defaultproperties
 {

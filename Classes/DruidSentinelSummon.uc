@@ -13,6 +13,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local DEKDamageSentinelController DASC;
 	local DEKExplosivesSentinelController DESC;
 	local DruidLinkSentinelController DLSC;
+	local NodeController NC;
 	local DEKBeamSentinelController DEKBSC;
 	local DEKAutoMachinegunController DEKAMGC;
 	local DEKSniperSentinelController DSSC;
@@ -395,7 +396,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	}
 
 	bGotSpace = CheckSpace(SpawnLoc,150,180);
-	if (ClassIsChildOf(SummonItem,class'DruidSentinel') || ClassIsChildOf(SummonItem,class'DEKMercurySentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinel') || ClassIsChildOf(SummonItem,class'DruidLightningSentinel') || ClassIsChildOf(SummonItem,class'DruidLinkSentinel') || ClassIsChildOf(SummonItem,class'DEKBeamSentinel') || ClassIsChildOf(SummonItem,class'DEKAutoMachinegun') || ClassIsChildOf(SummonItem,class'DEKDamageSentinel') || ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo') || ClassIsChildOf(SummonItem,class'DEKRocketSentinel') || ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel') || ClassIsChildOf(SummonItem,class'DEKSniperSentinel') || ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
+	if (ClassIsChildOf(SummonItem,class'DruidSentinel') || ClassIsChildOf(SummonItem,class'DEKMercurySentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinel') || ClassIsChildOf(SummonItem,class'DruidLightningSentinel') || ClassIsChildOf(SummonItem,class'DruidLinkSentinel')  || ClassIsChildOf(SummonItem,class'Node') || ClassIsChildOf(SummonItem,class'DEKBeamSentinel') || ClassIsChildOf(SummonItem,class'DEKAutoMachinegun') || ClassIsChildOf(SummonItem,class'DEKDamageSentinel') || ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo') || ClassIsChildOf(SummonItem,class'DEKRocketSentinel') || ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel') || ClassIsChildOf(SummonItem,class'DEKSniperSentinel') || ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
 	{
 		// need to check if ceiling variant is required
 		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);	// its a ceiling sentinel - special case.
@@ -463,7 +464,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DSC.SetPlayerSpawner(Instigator.Controller);
 				DSC.Possess(NewSentinel);
-				DSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -486,7 +486,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DSC.SetPlayerSpawner(Instigator.Controller);
 				DSC.Possess(NewSentinel);
-				DSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -509,7 +508,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DMC.SetPlayerSpawner(Instigator.Controller);
 				DMC.Possess(NewSentinel);
-				DMC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -532,7 +530,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DMC.SetPlayerSpawner(Instigator.Controller);
 				DMC.Possess(NewSentinel);
-				DMC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -555,7 +552,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DHSC.SetPlayerSpawner(Instigator.Controller);
 				DHSC.Possess(NewSentinel);
-				DHSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -578,7 +574,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DHSC.SetPlayerSpawner(Instigator.Controller);
 				DHSC.Possess(NewSentinel);
-				DHSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -601,7 +596,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DSSC.SetPlayerSpawner(Instigator.Controller);
 				DSSC.Possess(NewSentinel);
-				DSSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -624,7 +618,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DSSC.SetPlayerSpawner(Instigator.Controller);
 				DSSC.Possess(NewSentinel);
-				DSSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -647,7 +640,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DRSC.SetPlayerSpawner(Instigator.Controller);
 				DRSC.Possess(NewSentinel);
-				DRSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -670,7 +662,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DRSC.SetPlayerSpawner(Instigator.Controller);
 				DRSC.Possess(NewSentinel);
-				DRSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -691,7 +682,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DEKBSC = spawn(class'DEKBeamSentinelController');
 			if ( DEKBSC != None )
 			{
-				DEKBSC.DamageAdjust = epi.SentinelDamageAdjust;
 				DEKBSC.SetPlayerSpawner(Instigator.Controller);
 				DEKBSC.Possess(NewSentinel);
 
@@ -716,7 +706,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DEKBSC.SetPlayerSpawner(Instigator.Controller);
 				DEKBSC.Possess(NewSentinel);
-				DEKBSC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -739,7 +728,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DLC.SetPlayerSpawner(Instigator.Controller);
 				DLC.Possess(NewSentinel);
-				DLC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -762,7 +750,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			{
 				DLC.SetPlayerSpawner(Instigator.Controller);
 				DLC.Possess(NewSentinel);
-				DLC.DamageAdjust = epi.SentinelDamageAdjust;
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -783,7 +770,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DDC = spawn(class'DruidDefenseSentinelController');
 			if ( DDC != None )
 			{
-				DDC.DamageAdjust = epi.SentinelDamageAdjust;
 				DDC.SetPlayerSpawner(Instigator.Controller);
 				DDC.Possess(NewSentinel);
 
@@ -806,7 +792,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DDC = spawn(class'DruidDefenseSentinelController');
 			if ( DDC != None )
 			{
-				DDC.DamageAdjust = epi.SentinelDamageAdjust;
 				DDC.SetPlayerSpawner(Instigator.Controller);
 				DDC.Possess(NewSentinel);
 
@@ -829,7 +814,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DASC = spawn(class'DEKDamageSentinelController');
 			if ( DASC != None )
 			{
-				DASC.DamageAdjust = epi.SentinelDamageAdjust;
 				DASC.SetPlayerSpawner(Instigator.Controller);
 				DASC.Possess(NewSentinel);
 
@@ -852,7 +836,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DASC = spawn(class'DEKDamageSentinelController');
 			if ( DASC != None )
 			{
-				DASC.DamageAdjust = epi.SentinelDamageAdjust;
 				DASC.SetPlayerSpawner(Instigator.Controller);
 				DASC.Possess(NewSentinel);
 
@@ -875,7 +858,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DESC = spawn(class'DEKExplosivesSentinelController');
 			if ( DESC != None )
 			{
-				DESC.DamageAdjust = epi.SentinelDamageAdjust;
 				DESC.SetPlayerSpawner(Instigator.Controller);
 				DESC.Possess(NewSentinel);
 
@@ -898,7 +880,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DESC = spawn(class'DEKExplosivesSentinelController');
 			if ( DESC != None )
 			{
-				DESC.DamageAdjust = epi.SentinelDamageAdjust;
 				DESC.SetPlayerSpawner(Instigator.Controller);
 				DESC.Possess(NewSentinel);
 
@@ -921,7 +902,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DDCC = spawn(class'DruidDefenseSentinelControllerCrimbo');
 			if ( DDCC != None )
 			{
-				DDCC.DamageAdjust = epi.SentinelDamageAdjust;
 				DDCC.SetPlayerSpawner(Instigator.Controller);
 				DDCC.Possess(NewSentinel);
 
@@ -944,7 +924,6 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DDCC = spawn(class'DruidDefenseSentinelControllerCrimbo');
 			if ( DDCC != None )
 			{
-				DDCC.DamageAdjust = epi.SentinelDamageAdjust;
 				DDCC.SetPlayerSpawner(Instigator.Controller);
 				DDCC.Possess(NewSentinel);
 
@@ -978,9 +957,41 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			DLSC = spawn(class'DruidLinkSentinelController');
 			if ( DLSC != None )
 			{
-				//DLSC.DamageAdjust = epi.SentinelDamageAdjust;
 				DLSC.SetPlayerSpawner(Instigator.Controller);
 				DLSC.Possess(NewSentinel);
+
+				// now allow player to get xp bonus
+				ApplyStatsToConstruction(NewSentinel,Instigator);
+			}
+		}
+	}
+	else if (RealSummonItem == class'Node')
+	{	// its a node
+		if (bOnCeiling)
+		{
+			SpawnLoc.z -= 70;		// leave on ceiling
+			SpawnRotation.Yaw = 0;
+			SpawnRotation.Roll = 32768;          // upside down
+			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
+		}
+		else
+		{
+			SpawnLoc.z += 67;		// lift just off ground, and then base steps back a bit
+			SpawnRotation.Yaw = 32768;
+			NewSentinel =  epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
+		}
+		if (NewSentinel == None)
+			return false;
+		SetStartHealth(NewSentinel);
+
+		// let's add the sentinel controller
+		if ( Role == Role_Authority )
+		{
+			NC = spawn(class'NodeController');
+			if ( NC != None )
+			{
+				NC.SetPlayerSpawner(Instigator.Controller);
+				NC.Possess(NewSentinel);
 
 				// now allow player to get xp bonus
 				ApplyStatsToConstruction(NewSentinel,Instigator);
@@ -1078,7 +1089,6 @@ function bool SpawnEnergyWall(TranslocatorBeacon Beacon, Pawn P, EngineerPointsI
 	if (NewEnergyWall == None)
 		return false;
 	SetStartHealth(NewEnergyWall);
-	NewEnergyWall.DamageAdjust = epi.SentinelDamageAdjust;
 	
 	// now lets add the controller
 	if ( Role == Role_Authority )

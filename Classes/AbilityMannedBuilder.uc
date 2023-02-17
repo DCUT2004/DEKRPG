@@ -7,7 +7,6 @@ var config int Level1MaxPoints, Level2MaxPoints, Level3MaxPoints, Level4MaxPoint
 static function ModifyPawn(Pawn Other, int AbilityLevel)
 {
 	local EngineerPointsInv Inv;
-	local int i;
 	
 	Inv = EngineerPointsInv(Other.FindInventoryType(class'EngineerPointsInv'));
 	if (Inv != None)
@@ -37,10 +36,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		if (Inv.TotalTurretPoints > default.Level5MaxPoints)
 			Inv.TotalTurretPoints = default.LEvel5MaxPoints;
 	}
-	for (i = 0; i < Inv.TurretAvailability.length; i++)
-	{
-		Inv.TurretAvailability[i].Number = 3;
-	}
+	Inv.MaxTurrets += AbilityLevel;
 }
 
 static function HandleDamage(out int Damage, Pawn Injured, Pawn Instigator, out vector Momentum, class<DamageType> DamageType, bool bOwnedByInstigator, int AbilityLevel)
