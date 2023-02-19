@@ -23,7 +23,7 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     TargetRange=600.000000
+     TargetRange=1000.000000
      DefaultWeaponClassName="DEKHellfireSentinelWeapon"
      VehicleProjSpawnOffset=(X=122.500000)
      VehicleNameString="Hellfire Sentinel"

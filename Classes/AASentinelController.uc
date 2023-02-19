@@ -1,11 +1,10 @@
-class DEKHellfireSentinelController extends DruidSentinelController;
+class AASentinelController extends DruidSentinelController;
 
 function bool IsTargetRelevant( Pawn Target )
 {
-    // only target non-flying objects
 	if ( (Target != None) && (Target.Controller != None) 
 		&& (Target.Health > 0) && (VSize(Target.Location-Pawn.Location) < Pawn.SightRadius*1.25)
-        && (Target.Physics != PHYS_Flying) 
+        && (Target.Physics == PHYS_Flying) 
 		&& (((TeamGame(Level.Game) != None) && !SameTeamAs(Target.Controller))
 		|| ((TeamGame(Level.Game) == None) && (Target.Owner != PlayerSpawner))))
 		return true;
@@ -34,7 +33,7 @@ function Tick(float DeltaTime)
 
 			if (C != None && C.Pawn != None && Pawn != None && C.Pawn != Pawn && C.Pawn != PlayerSpawner.Pawn && C.Pawn.Health > 0
 		 	&& VSize(C.Pawn.Location - Pawn.Location) < ((default.TargetRange)*DamageAdjust) && FastTrace(C.Pawn.Location, Pawn.Location) && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !C.Pawn.IsA('MissionBalloon') 
-		 	&& (C.Pawn.Physics != PHYS_Flying) 
+		 	&& (C.Pawn.Physics == PHYS_Flying) 
 			   && ((TeamGame(Level.Game) != None && !C.SameTeamAs(PlayerSpawner)) 	// on a different team
 				|| (TeamGame(Level.Game) == None && C.Pawn.Owner != PlayerSpawner)))		// or just not me
 			{
@@ -47,6 +46,6 @@ function Tick(float DeltaTime)
 
 defaultproperties
 {
-     AttractRange=1000
-     TargetRange=1000
+     AttractRange=3000
+     TargetRange=3000
 }

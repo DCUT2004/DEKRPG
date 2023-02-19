@@ -306,7 +306,8 @@ function Timer()
 			  && DruidLightningSentinelController(C) == None && DruidEnergyWallController(C) == None && DEKAutoMachinegunController(C) == None
 			  && DEKAutoSniperController(C) == None && DEKBeamSentinelController(C) == None && DEKDamageSentinelController(C) == None
 			  && DEKExplosivesSentinelController(C) == None && DEKHellfireSentinelController(C) == None && DEKMachineGunSentinelController(C) == None
-			  && DEKMercuryController(C) == None && DEKRocketSentinelController(C) == None && DEKSniperSentinelController(C) == None)	// not a sentinel
+			  && DEKMercuryController(C) == None && DEKRocketSentinelController(C) == None && DEKSniperSentinelController(C) == None
+              && AASentinelController(C) == None)	// not a sentinel
 		{
 		    StatsInv = GetStatsInvFor(C, false);
 		 	if (StatsInv != None && StatsInv.DataObject != None)

@@ -12,6 +12,7 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 	local DEKMachineGunSentinelController DMGSC;
 	local DEKHellfireSentinelController DHSC;
 	local DEKSniperSentinelController DSSC;
+    local AASentinelController AASC;
 	
 	DSC = DruidSentinelController(Other.Controller);
 	DRSC = DEKRocketSentinelController(Other.Controller);
@@ -19,6 +20,7 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 	DMGSC = DEKMachineGunSentinelController(Other.Controller);
 	DHSC = DEKHellfireSentinelController(Other.Controller);
 	DSSC = DEKSniperSentinelController(Other.Controller);
+    AASC = AASentinelController(Other.Controller);
 	
 	if (DruidSentinel(Other) != None || DruidCeilingSentinel(Other) != None)
 	{
@@ -49,6 +51,11 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 	{
 		if (DSSC != None)
 			DSSC.TargetRange *= (1 + (AbilityLevel * default.RangeMultiplier));
+	}
+	if (AASentinel(Other) != None)
+	{
+		if (AASC != None)
+			AASC.TargetRange *= (1 + (AbilityLevel * default.RangeMultiplier));
 	}
 }
 

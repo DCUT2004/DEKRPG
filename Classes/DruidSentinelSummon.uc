@@ -23,6 +23,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local AutoGunController AGC;
 	local DEKAutoSniperController ASC;
 	local DEKAutoMercuryController AMC;
+    local AASentinelController AASC;
 	local Vector SpawnLoc,SpawnLocCeiling;
 	local bool bGotSpace;
 	local class<Pawn> RealSummonItem;
@@ -385,6 +386,66 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 		{
 			AMC.SetPlayerSpawner(Instigator.Controller);
 			AMC.Possess(NewSentinel);
+		}
+
+		SetStartHealth(NewSentinel);
+
+		// now allow player to get xp bonus
+		ApplyStatsToConstruction(NewSentinel,Instigator);
+
+		return true;
+	}
+
+    if (RealSummonItem == class'AASentinel')
+    {
+		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
+		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
+		{
+		    // closer to ceiling so spawn there
+			bOnCeiling = true;
+			SpawnLoc = SpawnLocCeiling;
+			SpawnLoc.z -= 36;		// just below ceiling
+			if (!CheckSpace(SpawnLoc,80,-100))
+			{
+				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
+				bActive = false;
+				GotoState('');
+				return false;
+			}
+
+			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
+			SpawnRotation.Roll = 32768;          // upside down
+			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
+		}
+		else
+		{
+			if (SpawnLoc == vect(0,0,0))
+			{
+				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
+				bActive = false;
+				GotoState('');
+				return false;
+			}
+			SpawnLoc.z += 36;		// lift just off ground
+			if (!CheckSpace(SpawnLoc,80,100))
+			{
+				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
+				bActive = false;
+				GotoState('');
+				return false;
+			}
+
+			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
+		}
+
+		if (NewSentinel == None)
+			return false;
+
+		AASC = spawn(class'AASentinelController');
+		if ( AASC != None )
+		{
+			AASC.SetPlayerSpawner(Instigator.Controller);
+			AASC.Possess(NewSentinel);
 		}
 
 		SetStartHealth(NewSentinel);
