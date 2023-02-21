@@ -32,7 +32,7 @@ function Tick(float DeltaTime)
 			NextC = C.NextController;
 
 			if (C != None && C.Pawn != None && Pawn != None && C.Pawn != Pawn && C.Pawn != PlayerSpawner.Pawn && C.Pawn.Health > 0
-		 	&& VSize(C.Pawn.Location - Pawn.Location) < ((default.TargetRange)*DamageAdjust) && FastTrace(C.Pawn.Location, Pawn.Location) && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !C.Pawn.IsA('MissionBalloon') 
+		 	&& VSize(C.Pawn.Location - Pawn.Location) < (default.TargetRange) && FastTrace(C.Pawn.Location, Pawn.Location) && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !C.Pawn.IsA('MissionBalloon') 
 		 	&& (C.Pawn.Physics == PHYS_Flying) 
 			   && ((TeamGame(Level.Game) != None && !C.SameTeamAs(PlayerSpawner)) 	// on a different team
 				|| (TeamGame(Level.Game) == None && C.Pawn.Owner != PlayerSpawner)))		// or just not me

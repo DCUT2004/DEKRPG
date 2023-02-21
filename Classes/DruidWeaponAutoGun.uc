@@ -1,4 +1,4 @@
-class DruidWeaponAutoGun extends Weapon_Sentinel
+class DruidWeaponAutoGun extends BaseWeaponSentinel
     config(user)
     HideDropDown
 	CacheExempt;

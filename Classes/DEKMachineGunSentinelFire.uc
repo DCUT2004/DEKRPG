@@ -1,4 +1,4 @@
-class DEKMachineGunSentinelFire extends InstantFire;
+class DEKMachineGunSentinelFire extends BaseInstantFire;
 
 function DoFireEffect()
 {

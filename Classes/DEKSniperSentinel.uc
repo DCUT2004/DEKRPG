@@ -1,6 +1,4 @@
-class DEKSniperSentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DEKSniperSentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {

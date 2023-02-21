@@ -1,4 +1,4 @@
-class DruidLinkSentinel extends ASTurret;
+class DruidLinkSentinel extends BaseTurretSentinel;
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
 simulated event PostNetBeginPlay()

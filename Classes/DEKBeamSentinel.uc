@@ -1,4 +1,4 @@
-class DEKBeamSentinel extends ASVehicle_Sentinel_Floor;
+class DEKBeamSentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {

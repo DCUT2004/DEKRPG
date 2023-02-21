@@ -3,1086 +3,233 @@ class DruidSentinelSummon extends Summonifact
 
 function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 {
-	Local ASTurret NewSentinel;
-	local DruidSentinelController DSC;
-	local DEKMercuryController DMC;	
-	local DruidBaseSentinelController DBSC;
-	local DruidLightningSentinelController DLC;
-	local DruidDefenseSentinelController DDC;
-	local DruidDefenseSentinelControllerCrimbo DDCC;
-	local DEKDamageSentinelController DASC;
-	local DEKExplosivesSentinelController DESC;
-	local DruidLinkSentinelController DLSC;
-	local NodeController NC;
-	local DEKBeamSentinelController DEKBSC;
-	local DEKAutoMachinegunController DEKAMGC;
-	local DEKSniperSentinelController DSSC;
-	local DEKHellfireSentinelController DHSC;
-	local DEKRocketSentinelController DRSC;
-	local DEKMachineGunSentinelController DMGSC;
-	local AutoGunController AGC;
-	local DEKAutoSniperController ASC;
-	local DEKAutoMercuryController AMC;
-    local AASentinelController AASC;
 	local Vector SpawnLoc,SpawnLocCeiling;
-	local bool bGotSpace;
-	local class<Pawn> RealSummonItem;
-	local rotator SpawnRotation;
 	local bool bOnCeiling;
 
 	if (ClassIsChildOf(SummonItem,class'DruidEnergyWall'))
 		return SpawnEnergyWall(Beacon, P, epi);
 
-	RealSummonItem = SummonItem;
 	SpawnLoc = epi.GetSpawnHeight(Beacon.Location);	// look at the floor
 	bOnCeiling = false;
-    if (RealSummonItem == class'AutoGun')
+	SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
+	if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
+	{
+	    // closer to ceiling so spawn there
+		bOnCeiling = true;
+		SpawnLoc = SpawnLocCeiling;
+    }
+     
+    if (SpawnLoc == vect(0,0,0))
     {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
+    	Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
+    	bActive = false;
+    	GotoState('');
+    	return false;
+    }
 
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		AGC = spawn(class'AutoGunController');
-		if ( AGC != None )
-		{
-			AGC.SetPlayerSpawner(Instigator.Controller);
-			AGC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-	
-    if (RealSummonItem == class'DEKMachineGunSentinel')
+    // sentinels sometimes have a completely different ceiling mesh that is drawn inverted, otherwise it is the same model as the floor version (perhaps with a different swivel) that needs inverting
+    switch (SummonItem) 
     {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		DMGSC = spawn(class'DEKMachineGunSentinelController');
-		if ( DMGSC != None )
-		{
-			DMGSC.SetPlayerSpawner(Instigator.Controller);
-			DMGSC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-	
-    if (RealSummonItem == class'DEKSniperSentinel')
-    {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		DSSC = spawn(class'DEKSniperSentinelController');
-		if ( DSSC != None )
-		{
-			DSSC.SetPlayerSpawner(Instigator.Controller);
-			DSSC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-
-    if (RealSummonItem == class'DEKAutoMachinegun')
-    {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		DEKAMGC = spawn(class'DEKAutoMachinegunController');
-		if ( DEKAMGC != None )
-		{
-			DEKAMGC.SetPlayerSpawner(Instigator.Controller);
-			DEKAMGC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-	
-    if (RealSummonItem == class'DEKAutoSniper')
-    {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		ASC = spawn(class'DEKAutoSniperController');
-		if ( ASC != None )
-		{
-			ASC.SetPlayerSpawner(Instigator.Controller);
-			ASC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-	
-    if (RealSummonItem == class'DEKAutoMercury')
-    {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		AMC = spawn(class'DEKAutoMercuryController');
-		if ( AMC != None )
-		{
-			AMC.SetPlayerSpawner(Instigator.Controller);
-			AMC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-
-    if (RealSummonItem == class'AASentinel')
-    {
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);		// see if can go on ceiling instead.
-		if (SpawnLocCeiling != vect(0,0,0) && (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-		    // closer to ceiling so spawn there
-			bOnCeiling = true;
-			SpawnLoc = SpawnLocCeiling;
-			SpawnLoc.z -= 36;		// just below ceiling
-			if (!CheckSpace(SpawnLoc,80,-100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			if (SpawnLoc == vect(0,0,0))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-			SpawnLoc.z += 36;		// lift just off ground
-			if (!CheckSpace(SpawnLoc,80,100))
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
-
-			NewSentinel = epi.SummonBaseSentinel(SummonItem, Points, P, SpawnLoc);
-		}
-
-		if (NewSentinel == None)
-			return false;
-
-		AASC = spawn(class'AASentinelController');
-		if ( AASC != None )
-		{
-			AASC.SetPlayerSpawner(Instigator.Controller);
-			AASC.Possess(NewSentinel);
-		}
-
-		SetStartHealth(NewSentinel);
-
-		// now allow player to get xp bonus
-		ApplyStatsToConstruction(NewSentinel,Instigator);
-
-		return true;
-	}
-
-	bGotSpace = CheckSpace(SpawnLoc,150,180);
-	if (ClassIsChildOf(SummonItem,class'DruidSentinel') || ClassIsChildOf(SummonItem,class'DEKMercurySentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinel') || ClassIsChildOf(SummonItem,class'DruidLightningSentinel') || ClassIsChildOf(SummonItem,class'DruidLinkSentinel')  || ClassIsChildOf(SummonItem,class'Node') || ClassIsChildOf(SummonItem,class'DEKBeamSentinel') || ClassIsChildOf(SummonItem,class'DEKAutoMachinegun') || ClassIsChildOf(SummonItem,class'DEKDamageSentinel') || ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel') || ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo') || ClassIsChildOf(SummonItem,class'DEKRocketSentinel') || ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel') || ClassIsChildOf(SummonItem,class'DEKSniperSentinel') || ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
-	{
-		// need to check if ceiling variant is required
-		SpawnLocCeiling = epi.FindCeiling(Beacon.Location);	// its a ceiling sentinel - special case.
-		if (SpawnLocCeiling != vect(0,0,0) 
-			&& (SpawnLoc == vect(0,0,0) || VSize(SpawnLocCeiling - Beacon.Location) < VSize(SpawnLoc - Beacon.Location)))
-		{
-			// its the ceiling one we want
-			bOnCeiling = true;
-			if (ClassIsChildOf(SummonItem,class'DruidSentinel'))
-				RealSummonItem = class'DruidCeilingSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKMercurySentinel')) 
-				RealSummonItem = class'DEKCeilingMercurySentinel';	
-			else if (ClassIsChildOf(SummonItem,class'DruidDefenseSentinel'))
-				RealSummonItem = class'DruidCeilingDefenseSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKDamageSentinel'))
-				RealSummonItem = class'DEKCeilingDamageSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKExplosivesSentinel'))
-				RealSummonItem = class'DEKCeilingExplosivesSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DruidLightningSentinel'))
-				RealSummonItem = class'DruidCeilingLightningSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKBeamSentinel'))
-				RealSummonItem = class'DEKCeilingBeamSentinel';	
-			else if (ClassIsChildOf(SummonItem,class'DruidDefenseSentinelCrimbo'))
-				RealSummonItem = class'DruidCeilingDefenseSentinelCrimbo';
-			else if (ClassIsChildOf(SummonItem,class'DEKRocketSentinel'))
-				RealSummonItem = class'DEKCeilingRocketSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKMachineGunSentinel'))
-				RealSummonItem = class'DEKCeilingMachineGunSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKSniperSentinel'))
-				RealSummonItem = class'DEKCeilingSniperSentinel';
-			else if (ClassIsChildOf(SummonItem,class'DEKHellfireSentinel'))
-				RealSummonItem = class'DEKCeilingHellfireSentinel';
-			SpawnLoc = SpawnLocCeiling;
-			bGotSpace = CheckSpace(SpawnLoc,120,-160);
-		}
-	}
-	if (SpawnLoc == vect(0,0,0))
-	{
-		Instigator.ReceiveLocalizedMessage(MessageClass, 4000, None, None, Class);
-		bActive = false;
-		GotoState('');
-		return false;
-	}
-	if (!bGotSpace)
-	{
-		Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
-		bActive = false;
-		GotoState('');
-		return false;
-	}
-
-	if (RealSummonItem == class'DruidSentinel')
-	{
-		SpawnLoc.z += 78;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DSC = spawn(class'DruidSentinelController');
-			if ( DSC != None )
-			{
-				DSC.SetPlayerSpawner(Instigator.Controller);
-				DSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidCeilingSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DSC = spawn(class'DruidSentinelController');
-			if ( DSC != None )
-			{
-				DSC.SetPlayerSpawner(Instigator.Controller);
-				DSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKMercurySentinel')
-	{
-		SpawnLoc.z += 78;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DMC = spawn(class'DEKMercuryController');
-			if ( DMC != None )
-			{
-				DMC.SetPlayerSpawner(Instigator.Controller);
-				DMC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-    else if (RealSummonItem == class'DEKCeilingMercurySentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DMC = spawn(class'DEKMercuryController');
-			if ( DMC != None )
-			{
-				DMC.SetPlayerSpawner(Instigator.Controller);
-				DMC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKHellfireSentinel')
-	{
-		SpawnLoc.z += 78;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DHSC = spawn(class'DEKHellfireSentinelController');
-			if ( DHSC != None )
-			{
-				DHSC.SetPlayerSpawner(Instigator.Controller);
-				DHSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-    else if (RealSummonItem == class'DEKCeilingHellfireSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DHSC = spawn(class'DEKHellfireSentinelController');
-			if ( DHSC != None )
-			{
-				DHSC.SetPlayerSpawner(Instigator.Controller);
-				DHSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKSniperSentinel')
-	{
-		SpawnLoc.z += 28;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DSSC = spawn(class'DEKSniperSentinelController');
-			if ( DSSC != None )
-			{
-				DSSC.SetPlayerSpawner(Instigator.Controller);
-				DSSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-    else if (RealSummonItem == class'DEKCeilingSniperSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DSSC = spawn(class'DEKSniperSentinelController');
-			if ( DSSC != None )
-			{
-				DSSC.SetPlayerSpawner(Instigator.Controller);
-				DSSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKRocketSentinel')
-	{
-		SpawnLoc.z += 78;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DRSC = spawn(class'DEKRocketSentinelController');
-			if ( DRSC != None )
-			{
-				DRSC.SetPlayerSpawner(Instigator.Controller);
-				DRSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKCeilingRocketSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DRSC = spawn(class'DEKRocketSentinelController');
-			if ( DRSC != None )
-			{
-				DRSC.SetPlayerSpawner(Instigator.Controller);
-				DRSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKBeamSentinel')
-	{
-		SpawnLoc.z += 78;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DEKBSC = spawn(class'DEKBeamSentinelController');
-			if ( DEKBSC != None )
-			{
-				DEKBSC.SetPlayerSpawner(Instigator.Controller);
-				DEKBSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKCeilingBeamSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DEKBSC = spawn(class'DEKBeamSentinelController');
-			if ( DEKBSC != None )
-			{
-				DEKBSC.SetPlayerSpawner(Instigator.Controller);
-				DEKBSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidLightningSentinel')
-	{	// its a lightning sentinel
-		SpawnLoc.z += 30;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DLC = spawn(class'DruidLightningSentinelController');
-			if ( DLC != None )
-			{
-				DLC.SetPlayerSpawner(Instigator.Controller);
-				DLC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidCeilingLightningSentinel')
-	{	// its a ceiling lightning sentinel
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DLC = spawn(class'DruidLightningSentinelController');
-			if ( DLC != None )
-			{
-				DLC.SetPlayerSpawner(Instigator.Controller);
-				DLC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidCeilingDefenseSentinel')
-	{	// its a ceiling defense sentinel
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DDC = spawn(class'DruidDefenseSentinelController');
-			if ( DDC != None )
-			{
-				DDC.SetPlayerSpawner(Instigator.Controller);
-				DDC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidDefenseSentinel')
-	{	// its a defense sentinel
-		SpawnLoc.z += 30;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DDC = spawn(class'DruidDefenseSentinelController');
-			if ( DDC != None )
-			{
-				DDC.SetPlayerSpawner(Instigator.Controller);
-				DDC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKCeilingDamageSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DASC = spawn(class'DEKDamageSentinelController');
-			if ( DASC != None )
-			{
-				DASC.SetPlayerSpawner(Instigator.Controller);
-				DASC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class 'DEKDamageSentinel')
-	{
-		SpawnLoc.z += 30;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DASC = spawn(class'DEKDamageSentinelController');
-			if ( DASC != None )
-			{
-				DASC.SetPlayerSpawner(Instigator.Controller);
-				DASC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKCeilingExplosivesSentinel')
-	{
-		SpawnLoc.z -= 80;		// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DESC = spawn(class'DEKExplosivesSentinelController');
-			if ( DESC != None )
-			{
-				DESC.SetPlayerSpawner(Instigator.Controller);
-				DESC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DEKExplosivesSentinel')
-	{	// its a defense sentinel
-		SpawnLoc.z += 30;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DESC = spawn(class'DEKExplosivesSentinelController');
-			if ( DESC != None )
-			{
-				DESC.SetPlayerSpawner(Instigator.Controller);
-				DESC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidDefenseSentinelCrimbo')
-	{	// its a defense sentinel
-		SpawnLoc.z += 30;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DDCC = spawn(class'DruidDefenseSentinelControllerCrimbo');
-			if ( DDCC != None )
-			{
-				DDCC.SetPlayerSpawner(Instigator.Controller);
-				DDCC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidCeilingDefenseSentinelCrimbo')
-	{	// its a ceiling defense sentinel
-		SpawnLoc.z -= 80;	// leave on ceiling
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DDCC = spawn(class'DruidDefenseSentinelControllerCrimbo');
-			if ( DDCC != None )
-			{
-				DDCC.SetPlayerSpawner(Instigator.Controller);
-				DDCC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'DruidLinkSentinel')
-	{	// its a link sentinel
+    case class'AutoGun':
 		if (bOnCeiling)
-		{
-			SpawnLoc.z -= 70;		// leave on ceiling
-			SpawnRotation.Yaw = 0;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			SpawnLoc.z += 67;		// lift just off ground, and then base steps back a bit
-			SpawnRotation.Yaw = 32768;
-			NewSentinel =  epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
-
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DLSC = spawn(class'DruidLinkSentinelController');
-			if ( DLSC != None )
-			{
-				DLSC.SetPlayerSpawner(Instigator.Controller);
-				DLSC.Possess(NewSentinel);
-
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else if (RealSummonItem == class'Node')
-	{	// its a node
+            return CreateSentinel(class'AutoGun',-36,80,-100,class'AutoGunController',32768, Points, P, SpawnLoc, epi);  
+        else
+            return CreateSentinel(class'AutoGun',36,80,100,class'AutoGunController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKMachineGunSentinel':
 		if (bOnCeiling)
-		{
-			SpawnLoc.z -= 70;		// leave on ceiling
-			SpawnRotation.Yaw = 0;
-			SpawnRotation.Roll = 32768;          // upside down
-			NewSentinel = epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		else
-		{
-			SpawnLoc.z += 67;		// lift just off ground, and then base steps back a bit
-			SpawnRotation.Yaw = 32768;
-			NewSentinel =  epi.SummonRotatedSentinel(SummonItem, Points, P, SpawnLoc,SpawnRotation);
-		}
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
+            return CreateSentinel(class'DEKCeilingMachineGunSentinel',-36,80,-100,class'DEKMachineGunSentinelController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKMachineGunSentinel',36,80,100,class'DEKMachineGunSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKSniperSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingSniperSentinel',-36,80,-100,class'DEKSniperSentinelController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKSniperSentinel',36,80,100,class'DEKSniperSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DruidSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidCeilingSentinel',-80,120,-160,class'DruidSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidSentinel',78,150,180,class'DruidSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKMercurySentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingMercurySentinel',-80,120,-160,class'DEKMercuryController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKMercurySentinel',78,150,180,class'DEKMercuryController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKHellfireSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingHellfireSentinel',-80,120,-160,class'DEKHellfireSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKHellfireSentinel',78,150,180,class'DEKHellfireSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKRocketSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingRocketSentinel',-80,120,-160,class'DEKRocketSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKRocketSentinel',78,150,180,class'DEKRocketSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKBeamSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingBeamSentinel',-80,120,-160,class'DEKBeamSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKBeamSentinel',78,150,180,class'DEKBeamSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DruidLightningSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidCeilingLightningSentinel',-80,120,-160,class'DruidLightningSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidLightningSentinel',30,150,180,class'DruidLightningSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DruidDefenseSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidCeilingDefenseSentinel',-80,120,-160,class'DruidDefenseSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidDefenseSentinel',30,150,180,class'DruidDefenseSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DruidDefenseSentinelCrimbo':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidCeilingDefenseSentinelCrimbo',-80,120,-160,class'DruidDefenseSentinelControllerCrimbo',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidDefenseSentinelCrimbo',30,150,180,class'DruidDefenseSentinelControllerCrimbo',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKDamageSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingDamageSentinel',-80,120,-160,class'DEKDamageSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKDamageSentinel',30,150,180,class'DEKDamageSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKExplosivesSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKCeilingExplosivesSentinel',-80,120,-160,class'DEKExplosivesSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKExplosivesSentinel',30,150,180,class'DEKDamageSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'AASentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'AACeilingSentinel',-80,80,-100,class'AASentinelController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'AASentinel',28,80,100,class'AASentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKAutoMachinegun':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKAutoMachinegun',-36,80,-100,class'DEKAutoMachinegunController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKAutoMachinegun',36,80,100,class'DEKAutoMachinegunController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKAutoSniper':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKAutoSniper',-36,80,-100,class'DEKAutoSniperController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKAutoSniper',36,80,100,class'DEKAutoSniperController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DEKAutoMercury':
+		if (bOnCeiling)
+            return CreateSentinel(class'DEKAutoMercury',-36,80,-100,class'DEKAutoMercuryController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DEKAutoMercury',36,80,100,class'DEKAutoMercuryController',0, Points, P, SpawnLoc, epi);
+    	break;
+    case class'DruidLinkSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidLinkSentinel',-70,120,-160,class'DruidLinkSentinelController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidLinkSentinel',67,150,180,class'DruidLinkSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    Default:
+    	Log("DruidSentinelSummon invalid SummonItem used" @ SummonItem);
+		if (bOnCeiling)
+            return CreateSentinel(SummonItem,-80,80,-100,class'DruidBaseSentinelController',32768, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(SummonItem,28,80,100,class'DruidBaseSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
+    }
+    
+ 	return true;
+}
 
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			NC = spawn(class'NodeController');
-			if ( NC != None )
-			{
-				NC.SetPlayerSpawner(Instigator.Controller);
-				NC.Possess(NewSentinel);
+function bool  CreateSentinel(class<Pawn> SentinelClass,int SpawnHeightOffset,int hSize,int vSize,class<Controller> ControllerClass,int roll,int Points,Pawn P,Vector SpawnLoc, EngineerPointsInv epi)
+{
+	Local ASTurret NewSentinel;
+	local rotator SpawnRotation;
+    local Controller SentinelController;
 
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	}
-	else
-	{	// its some other kind of sentinel
-		SpawnLoc.z += 60;		// lift just off ground
-		NewSentinel = epi.SummonBaseSentinel(RealSummonItem, Points, P, SpawnLoc);
-		if (NewSentinel == None)
-			return false;
-		SetStartHealth(NewSentinel);
+    // Log("++++++ calling CreateSentinel for class" @ SentinelClass @ "controller" @ ControllerClass);
 
-		// let's add the sentinel controller
-		if ( Role == Role_Authority )
-		{
-			DBSC = spawn(class'DruidBaseSentinelController');
-			if ( DBSC != None )
-			{
-				DBSC.SetPlayerSpawner(Instigator.Controller);
-				DBSC.Possess(NewSentinel);
+    SpawnLoc.z += SpawnHeightOffset;		// just off the floor or just below ceiling
+    if (!CheckSpace(SpawnLoc,hSize,vSize))
+    {
+    	Instigator.ReceiveLocalizedMessage(MessageClass, 6000, None, None, Class);
+    	bActive = false;
+    	GotoState('');
+    	return false;
+    }
 
-				// now allow player to get xp bonus
-				ApplyStatsToConstruction(NewSentinel,Instigator);
-			}
-		}
-	} 
-
-	return true;
+    if (roll != 0)
+    {
+        SpawnRotation.Yaw = rotator(SpawnLoc - Instigator.Location).Yaw;
+        SpawnRotation.Roll = roll;          // upside down
+        NewSentinel = epi.SummonRotatedSentinel(SentinelClass, Points, P, SpawnLoc, SpawnRotation);
+    } 
+    else
+    {
+		NewSentinel = epi.SummonBaseSentinel(SentinelClass, Points, P, SpawnLoc);
+    }   
+                
+    if (NewSentinel == None)
+    	return false;
+    
+    SentinelController = spawn(ControllerClass);
+    if ( DruidSentinelController(SentinelController) != None )
+    {
+    	DruidSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidSentinelController(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( DruidDefenseSentinelController(SentinelController) != None )
+    {
+    	DruidDefenseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidDefenseSentinelController(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( DruidDefenseSentinelControllerCrimbo(SentinelController) != None )
+    {
+    	DruidDefenseSentinelControllerCrimbo(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidDefenseSentinelControllerCrimbo(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( DruidLightningSentinelController(SentinelController) != None )
+    {
+    	DruidLightningSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidLightningSentinelController(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( AutoGunController(SentinelController) != None )
+    {
+    	AutoGunController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	AutoGunController(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( DruidBaseSentinelController(SentinelController) != None )
+    {
+    	DruidBaseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidBaseSentinelController(SentinelController).Possess(NewSentinel);
+    }
+    else
+    if ( DruidLinkSentinelController(SentinelController) != None )
+    {
+    	DruidLinkSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    	DruidLinkSentinelController(SentinelController).Possess(NewSentinel);
+    }
+   
+    SetStartHealth(NewSentinel);
+    
+    // now allow player to get xp bonus
+    ApplyStatsToConstruction(NewSentinel,Instigator);
+    
+    return true;          
 }
 
 function bool SpawnEnergyWall(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)

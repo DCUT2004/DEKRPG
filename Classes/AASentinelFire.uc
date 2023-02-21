@@ -12,10 +12,11 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 		return None;
 
 	p.Damage *= DamageAtten;
+    p.Damage = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Instigator, p.Damage);
+    // Log("+++++ AASentinelFire Damage now" @ p.Damage @ "default is" @ p.Default.Damage);	
 	
 	if (Instigator != None && Instigator.Controller != None && AASentinelController(Instigator.Controller) != None)
 	{
-		p.Damage *= AASentinelController(Instigator.Controller).DamageAdjust;		// set by LoadedEngineer
         if (AARocketProjectile(p) != None)
         {
             AARocketProjectile(p).HomingTarget = AASentinelController(Instigator.Controller).Enemy;

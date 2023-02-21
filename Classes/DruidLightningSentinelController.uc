@@ -10,8 +10,6 @@ var config int MaxDamagePerHit;
 var config int MinDamagePerHit;
 var config float TargetRadius;
 
-var float DamageAdjust;		// set by AbilityLoadedEngineer 
-
 function SetPlayerSpawner(Controller PlayerC)
 {
 	PlayerSpawner = PlayerC;
@@ -61,9 +59,10 @@ function Timer()
 			dist = FMax(1,VSize(dir));
 			damageScale = 1 - FMax(0,dist/TargetRadius);
 
-			DamageDealt = C.Pawn.HealthMax * DamageAdjust * ((damageScale * (MaxHealthMultiplier-MinHealthMultiplier)) + MinHealthMultiplier);
-			DamageDealt = max(MinDamagePerHit * DamageAdjust, DamageDealt);
-			DamageDealt = min(MaxDamagePerHit * DamageAdjust, DamageDealt);
+			DamageDealt = C.Pawn.HealthMax * ((damageScale * (MaxHealthMultiplier-MinHealthMultiplier)) + MinHealthMultiplier);
+			DamageDealt = max(MinDamagePerHit, DamageDealt);
+			DamageDealt = min(MaxDamagePerHit, DamageDealt);
+            DamageDealt = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Pawn, DamageDealt);
 			C.Pawn.TakeDamage(DamageDealt, Pawn, C.Pawn.Location, vect(0,0,0), class'DamTypeLightningSent');
 
 			if (C != None && C.Pawn != None && Pawn != None)
@@ -93,6 +92,12 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     TargetRadius *= (1 + PercentRangeIncreasePerLevel);
+     // Log("+++++ DruidlightningSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius);
+}
+
 defaultproperties
 {
      HitEmitterClass=Class'XEffects.LightningBolt'
@@ -101,5 +106,4 @@ defaultproperties
      MaxDamagePerHit=30
      MinDamagePerHit=3
      TargetRadius=1200.000000
-     DamageAdjust=1.000000
 }

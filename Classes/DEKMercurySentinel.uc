@@ -1,6 +1,4 @@
-class DEKMercurySentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DEKMercurySentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {

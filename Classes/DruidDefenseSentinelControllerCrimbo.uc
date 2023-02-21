@@ -384,6 +384,13 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     TargetRadius *= (1 + PercentRangeIncreasePerLevel);
+     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);
+     // Log("+++++ DruidDefenseSentinelControllerCrimbo LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
+}
+
 defaultproperties
 {
      TimeBetweenShots=0.600000

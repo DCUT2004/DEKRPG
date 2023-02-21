@@ -1,6 +1,4 @@
-class DruidSentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DruidSentinel extends BaseFloorSentinel;
 
 #exec OBJ LOAD FILE=..\Sounds\AnnouncerAssault.uax
 

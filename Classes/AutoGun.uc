@@ -1,4 +1,4 @@
-class AutoGun extends ASTurret;
+class AutoGun extends BaseTurretSentinel;
 
 static function StaticPrecache(LevelInfo L)
 {

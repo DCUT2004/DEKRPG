@@ -417,6 +417,13 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     TargetRadius *= (1 + PercentRangeIncreasePerLevel);
+     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);      // this wont currently do anything as the timer is already set.
+     // Log("+++++ DruidDefenseSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
+}
+
 defaultproperties
 {
      TimeBetweenShots=2.000000

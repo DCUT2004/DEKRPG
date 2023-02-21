@@ -12,6 +12,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 		return None;
 
 	p.Damage *= DamageAtten;
+    p.Damage = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Instigator, p.Damage);
+    // Log("+++++ FM_DruidAutoGun_Fire Damage now" @ p.Damage @ "default is" @ p.Default.Damage);	
 	
 	return p;
 }

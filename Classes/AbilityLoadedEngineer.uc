@@ -83,6 +83,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local bool bGotTrans;
 	local EngTransLauncher ETrans;
 	local RW_EngineerLink EGun;
+    local ArtifactUpgrade AU;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv == None)
@@ -113,6 +114,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		ETrans = Other.spawn(class'EngTransLauncher', Other,,, rot(0,0,0));
 		if (ETrans != None)
 			ETrans.GiveTo(Other);
+	}
+
+	AU = ArtifactUpgrade(Other.FindInventoryType(class'ArtifactUpgrade'));
+	if(AU == None)
+	{
+		AU = Other.spawn(class'ArtifactUpgrade', Other,,, rot(0,0,0));
+		if(AU == None)
+			return; //get em next pass I guess?
+
+		AU.GiveTo(Other);
+		if(Other.SelectedItem == None)
+			Other.NextItem();
 	}
 
 	// Now let's give the EngineerLinkGun

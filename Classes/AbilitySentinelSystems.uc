@@ -52,7 +52,7 @@ static simulated function ModifyConstruction(Pawn Other, int AbilityLevel)
 		if (DSSC != None)
 			DSSC.TargetRange *= (1 + (AbilityLevel * default.RangeMultiplier));
 	}
-	if (AASentinel(Other) != None)
+	if (AASentinel(Other) != None || AACeilingSentinel(Other) != None)
 	{
 		if (AASC != None)
 			AASC.TargetRange *= (1 + (AbilityLevel * default.RangeMultiplier));

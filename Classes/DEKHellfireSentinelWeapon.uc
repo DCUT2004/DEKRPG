@@ -1,4 +1,4 @@
-class DEKHellfireSentinelWeapon extends Weapon_Sentinel
+class DEKHellfireSentinelWeapon extends BaseWeaponSentinel
     config(user)
     HideDropDown
 	CacheExempt;

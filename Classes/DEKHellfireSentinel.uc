@@ -1,6 +1,4 @@
-class DEKHellfireSentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DEKHellfireSentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {

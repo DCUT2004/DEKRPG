@@ -114,6 +114,13 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     // TODO
+     AttractRange *= (1 + PercentRangeIncreasePerLevel);
+     TargetRange *= (1 + PercentRangeIncreasePerLevel);
+}
+
 defaultproperties
 {
      AttractRange=1000

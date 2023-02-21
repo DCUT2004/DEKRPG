@@ -1,6 +1,10 @@
 class Node extends ASTurret;
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
+var int NodeLevel;
+var int MaxNodeLevel;
+var float PercentHealthIncreasePerLevel;
+
 simulated event PostNetBeginPlay()
 {
 	// Static (non rotating) base
@@ -39,8 +43,25 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 	super(ASTurret).Explode( HitLocation, Vect(0,0,1) ); // Overriding Explosion direction
 }
 
+function LevelUp()
+{
+    if (NodeLevel == MaxNodeLevel)
+        return;
+        
+    NodeLevel += 1;
+    HealthMax = default.HealthMax * (1 + (PercentHealthIncreasePerLevel * NodeLevel));
+    
+    if (Controller != None && NodeController(Controller) != None)
+    {
+        NodeController(Controller).LevelUp(NodeLevel);
+    }
+}
+
 defaultproperties
 {
+     NodeLevel=0
+     MaxNodeLevel=5
+     PercentHealthIncreasePerLevel=0.1
      TurretBaseClass=Class'DEKRPG999X.DruidLinkSentinelBase'
      TurretSwivelClass=Class'DEKRPG999X.DruidLinkSentinelSwivel'
      VehicleNameString="Node"

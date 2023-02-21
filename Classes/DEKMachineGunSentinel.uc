@@ -1,6 +1,4 @@
-class DEKMachineGunSentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DEKMachineGunSentinel extends BaseFloorSentinel;
 
 static function StaticPrecache(LevelInfo L)
 {

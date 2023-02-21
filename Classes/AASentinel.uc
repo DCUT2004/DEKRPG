@@ -1,6 +1,4 @@
-class AASentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class AASentinel extends BaseFloorSentinel;
 
 static function StaticPrecache(LevelInfo L)
 {
@@ -63,4 +61,5 @@ defaultproperties
      HealthMax=400.000000
      Health=400
      DrawScale=0.250000
+     Skins(0)=Texture'CicadaTex.ONS_Cic_Plate'
 }

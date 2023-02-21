@@ -1,4 +1,4 @@
-class DEKBeamSentinelWeapon extends Weapon_Sentinel;
+class DEKBeamSentinelWeapon extends BaseWeaponSentinel;
 
 defaultproperties
 {

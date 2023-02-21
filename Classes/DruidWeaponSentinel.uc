@@ -1,4 +1,4 @@
-class DruidWeaponSentinel extends Weapon_Sentinel
+class DruidWeaponSentinel extends BaseWeaponSentinel
     config(user)
     HideDropDown
 	CacheExempt;
