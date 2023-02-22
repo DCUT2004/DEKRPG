@@ -184,44 +184,44 @@ function bool  CreateSentinel(class<Pawn> SentinelClass,int SpawnHeightOffset,in
     SentinelController = spawn(ControllerClass);
     if ( DruidSentinelController(SentinelController) != None )
     {
-    	DruidSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( DruidDefenseSentinelController(SentinelController) != None )
     {
-    	DruidDefenseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidDefenseSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidDefenseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( DruidDefenseSentinelControllerCrimbo(SentinelController) != None )
     {
-    	DruidDefenseSentinelControllerCrimbo(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidDefenseSentinelControllerCrimbo(SentinelController).Possess(NewSentinel);
+    	DruidDefenseSentinelControllerCrimbo(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( DruidLightningSentinelController(SentinelController) != None )
     {
-    	DruidLightningSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidLightningSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidLightningSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( AutoGunController(SentinelController) != None )
     {
-    	AutoGunController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	AutoGunController(SentinelController).Possess(NewSentinel);
+    	AutoGunController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( DruidBaseSentinelController(SentinelController) != None )
     {
-    	DruidBaseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidBaseSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidBaseSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( DruidLinkSentinelController(SentinelController) != None )
     {
-    	DruidLinkSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     	DruidLinkSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidLinkSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
    
     SetStartHealth(NewSentinel);

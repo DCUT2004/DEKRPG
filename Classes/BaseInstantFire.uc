@@ -34,7 +34,7 @@ function DoTrace(Vector Start, Rotator Dir)
                 Damage = Damage * DamageAtten;
                 
                 Damage = UpdateDamageDueToLevel(Instigator, Damage);
-                Log("+++++" @ DamageType @ "Damage now" @ Damage);	
+                // Log("+++++" @ DamageType @ "Damage now" @ Damage);	
 
 				// Update hit effect except for pawns (blood) other than vehicles.
                	if ( Other.IsA('Vehicle') || (!Other.IsA('Pawn') && !Other.IsA('HitScanBlockingVolume')) )

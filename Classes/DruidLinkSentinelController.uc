@@ -40,6 +40,9 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.RemoteRole = ROLE_None;
 		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
 
+		// adjust the fire rate according to weapon speed
+		if (StatsInv != None)
+			TimeBetweenShots = (default.TimeBetweenShots * 100)/(100 + StatsInv.Data.WeaponSpeed);
 	}
 	SetTimer(TimeBetweenShots, true);
 }

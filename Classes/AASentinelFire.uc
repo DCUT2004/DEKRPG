@@ -30,5 +30,5 @@ defaultproperties
 {
      TeamProjectileClasses(0)=Class'DEKRPG999X.AARocketProjectile'
      TeamProjectileClasses(1)=Class'DEKRPG999X.AARocketProjectile'
-     FireRate=0.500000
+     FireRate=0.600000
 }
