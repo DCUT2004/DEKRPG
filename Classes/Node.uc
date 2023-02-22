@@ -49,7 +49,7 @@ function LevelUp()
         return;
         
     NodeLevel += 1;
-    HealthMax = default.HealthMax * (1 + (PercentHealthIncreasePerLevel * NodeLevel));
+    HealthMax += default.HealthMax * PercentHealthIncreasePerLevel;
     
     if (Controller != None && NodeController(Controller) != None)
     {

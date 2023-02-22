@@ -13,7 +13,7 @@ function LevelUp()
         return;
         
     SentinelLevel += 1;
-    HealthMax = default.HealthMax * (1 + (PercentHealthIncreasePerLevel * SentinelLevel));
+    HealthMax += default.HealthMax * PercentHealthIncreasePerLevel;
     // Log("+++++ BaseTurretSentinel setting HealthMax for" @ VehicleNameString @ "to" @ HealthMax @ "default is" @ default.HealthMax);    
     
     if (Controller != None && DruidSentinelController(Controller) != None)

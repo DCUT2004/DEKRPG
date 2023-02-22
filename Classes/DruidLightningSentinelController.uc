@@ -3,6 +3,8 @@ class DruidLightningSentinelController extends Controller
 
 var Controller PlayerSpawner;
 var class<xEmitter> HitEmitterClass;
+var RPGStatsInv StatsInv;
+var float TimeBetweenShots;
 
 var config float MaxHealthMultiplier;
 var config float MinHealthMultiplier;
@@ -22,13 +24,13 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.bBot = true;
 		PlayerReplicationInfo.Team = PlayerSpawner.PlayerReplicationInfo.Team;
 		PlayerReplicationInfo.RemoteRole = ROLE_None;
-	}
-}
 
-function PostBeginPlay()
-{
-	SetTimer(1.0, true);
-	Super.PostBeginPlay();
+		// adjust the fire rate according to weapon speed
+		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
+		if (StatsInv != None)
+			TimeBetweenShots = (default.TimeBetweenShots * 100)/(100 + StatsInv.Data.WeaponSpeed);
+	}
+	SetTimer(TimeBetweenShots, true);
 }
 
 function Timer()
@@ -95,7 +97,9 @@ simulated function Destroyed()
 function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
 {
      TargetRadius *= (1 + PercentRangeIncreasePerLevel);
-     // Log("+++++ DruidlightningSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius);
+     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);    
+     SetTimer(TimeBetweenShots, true);
+     // Log("+++++ DruidlightningSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
 }
 
 defaultproperties
@@ -106,4 +110,5 @@ defaultproperties
      MaxDamagePerHit=30
      MinDamagePerHit=3
      TargetRadius=1200.000000
+     TimeBetweenShots=1.0
 }

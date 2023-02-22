@@ -15,10 +15,9 @@ function LevelUp()
         return;
         
     SentinelLevel += 1;
-    TargetRange = default.TargetRange * (1 + (PercentRangeIncreasePerLevel * SentinelLevel));
-    HealthMax = default.HealthMax * (1 + (PercentHealthIncreasePerLevel * SentinelLevel));
+    TargetRange += default.TargetRange * PercentRangeIncreasePerLevel;
+    HealthMax += default.HealthMax * PercentHealthIncreasePerLevel;
     // Log("+++++ BaseCeilingSentinel setting HealthMax for" @ VehicleNameString @ "to" @ HealthMax @ "default is" @ default.HealthMax);    
-
 
     if (Controller != None && DruidSentinelController(Controller) != None)
     {

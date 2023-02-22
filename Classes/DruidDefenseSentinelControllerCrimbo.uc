@@ -388,6 +388,7 @@ function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncre
 {
      TargetRadius *= (1 + PercentRangeIncreasePerLevel);
      TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);
+     SetTimer(TimeBetweenShots, true);
      // Log("+++++ DruidDefenseSentinelControllerCrimbo LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
 }
 
