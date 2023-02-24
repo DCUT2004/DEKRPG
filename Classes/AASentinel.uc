@@ -61,5 +61,4 @@ defaultproperties
      HealthMax=400.000000
      Health=400
      DrawScale=0.250000
-     Skins(0)=Texture'CicadaTex.ONS_Cic_Plate'
 }

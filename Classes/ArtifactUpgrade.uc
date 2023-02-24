@@ -49,9 +49,10 @@ function Activate()
 
 		// See if we hit something.
        	AHit = Trace(HitLocation, HitNormal, BeamEndLocation, StartTrace, true);
-		if ((AHit == None) || (Pawn(AHit) == None) || (Pawn(AHit).Controller == None))
+		if ((AHit == None) || (Pawn(AHit) == None) || ((Pawn(AHit).Controller == None) && BaseBallTurret(AHit) == None))
 		{
 			// missed. 
+            // Log("++++++ Upgrade Artifact didn't hit the right thing 1" @ HitPawn);
 			Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
 			bActive = false;
 			GotoState('');
@@ -59,8 +60,9 @@ function Activate()
 		}
 
 		HitPawn = Pawn(AHit);
-		if ( HitPawn != Instigator && HitPawn.Health > 0 && HitPawn.Controller.SameTeamAs(Instigator.Controller)
-		     && VSize(HitPawn.Location - StartTrace) < MaxRange)
+		if ( HitPawn != Instigator && HitPawn.Health > 0 
+            && ((HitPawn.Controller != None && HitPawn.Controller.SameTeamAs(Instigator.Controller))  || (BaseBallTurret(HitPawn) != None && HitPawn.GetTeamNum() == Instigator.GetTeamNum() && Instigator.GetTeamNum() != 255 ) )
+		    && VSize(HitPawn.Location - StartTrace) < MaxRange)
 		{
 			// ok, lets do the work. Give the sentinel/turret a levelup.
 			if (BaseFloorSentinel(HitPawn) != None)
@@ -110,12 +112,25 @@ function Activate()
                 }
                 Node(HitPawn).LevelUp();
             }
+            else	
+			if (BaseBallTurret(HitPawn) != None)
+            {
+                if (BaseBallTurret(HitPawn).TurretLevel >= BaseBallTurret(HitPawn).default.MaxTurretLevel)
+                {
+        			Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
+        			bActive = false;
+        			GotoState('');
+        			return;	// already maxed
+                }
+                BaseBallTurret(HitPawn).LevelUp();
+            }
             else
             {
+                // Log("++++++ Upgrade Artifact didn't hit the right thing 2" @ HitPawn);
     			Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
     			bActive = false;
     			GotoState('');
-    			return;	// can't use in a vehicle
+    			return;	// aim it
             }
 
 			// take off adrenaline, and add xp
@@ -145,6 +160,7 @@ function Activate()
         }
         else
         {
+            // Log("++++++ Upgrade Artifact didn't hit the right thing 3" @ HitPawn);
 			Instigator.ReceiveLocalizedMessage(MessageClass, 1000, None, None, Class);
 			bActive = false;
 			GotoState('');

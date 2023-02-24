@@ -33,6 +33,10 @@ function byte BestMode()
 	return 1;
 }
 
+function DoReflectEffect(int Drain)
+{
+}
+
 defaultproperties
 {
      FireModeClass(0)=Class'DEKRPG999X.FM_DruidBallTurret_Fire'

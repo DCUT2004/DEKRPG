@@ -13,7 +13,7 @@ replication
 
 simulated function bool ClientFunction()
 {
-            Log("++++ SyncDestroy ClientFunction call from Energy wall: setting lifespan for" @ Proj @ "to" @ ProjLifeSpan);	  
+    // Log("++++ SyncDestroy ClientFunction call from Energy wall: setting lifespan for" @ Proj @ "to" @ ProjLifeSpan);	  
 	if(Proj != None)
 	{
 		Proj.Lifespan = ProjLifespan;

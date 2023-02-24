@@ -9,6 +9,12 @@ var float PercentHealthIncreasePerLevel;
 
 var config float TargetRange;
 
+replication
+{
+	reliable if (Role == ROLE_Authority)
+		SentinelLevel;
+}
+
 function LevelUp()
 {
     if (SentinelLevel == MaxSentinelLevel)
@@ -35,8 +41,8 @@ defaultproperties
 {
      SentinelLevel=0
      MaxSentinelLevel=5
-     PercentDamageIncreasePerLevel=0.1
-     PercentFireRateIncreasePerLevel=0.1
+     PercentDamageIncreasePerLevel=0.08
+     PercentFireRateIncreasePerLevel=0.08
      PercentRangeIncreasePerLevel=0.1
      PercentHealthIncreasePerLevel=0.1
      TargetRange=1500.000000

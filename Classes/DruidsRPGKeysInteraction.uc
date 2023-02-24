@@ -921,26 +921,29 @@ function PreRender(Canvas Canvas)
 			}
 			else
 			{
-				// Make the white bar
-				BarLoc.Y += BarVSize*FMin(0.15 * XScale, 0.40);		// position under the medic health bar if any
-				Canvas.SetPos(BarLoc.X, BarLoc.Y);
-				Canvas.DrawColor = class'HUD'.default.WhiteColor;
-				if(CurShield >= ShieldMax)
-				{	// want bright yellow as the shield is full
-					Canvas.DrawColor.A = 255;
-					Canvas.DrawColor.B = 0;
-					Canvas.DrawColor.G = 255;
-					Canvas.DrawColor.R = 255;
-				}
-				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
-				Canvas.DrawColor.A = 255;
-				Canvas.DrawColor.B = 0;
-		
-				// want an orange color, with less red as it gets healthier
-				Canvas.DrawColor.R = 128;
-				Canvas.DrawColor.G = Clamp(Int(128*CurShield/ShieldMax), 0, 255);
-				Canvas.SetPos(BarLoc.X+(BarUSize*XScale*((CurShield/ShieldMax)/2)), BarLoc.Y );
-				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale*(1.00 - (CurShield/ShieldMax)), BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+                if (Vehicle(P) == None)
+                {
+    				// Make the white bar
+    				BarLoc.Y += BarVSize*FMin(0.15 * XScale, 0.40);		// position under the medic health bar if any
+    				Canvas.SetPos(BarLoc.X, BarLoc.Y);
+    				Canvas.DrawColor = class'HUD'.default.WhiteColor;
+    				if(CurShield >= ShieldMax)
+    				{	// want bright yellow as the shield is full
+    					Canvas.DrawColor.A = 255;
+    					Canvas.DrawColor.B = 0;
+    					Canvas.DrawColor.G = 255;
+    					Canvas.DrawColor.R = 255;
+    				}
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+    				Canvas.DrawColor.A = 255;
+    				Canvas.DrawColor.B = 0;
+    		
+    				// want an orange color, with less red as it gets healthier
+    				Canvas.DrawColor.R = 128;
+    				Canvas.DrawColor.G = Clamp(Int(128*CurShield/ShieldMax), 0, 255);
+    				Canvas.SetPos(BarLoc.X+(BarUSize*XScale*((CurShield/ShieldMax)/2)), BarLoc.Y );
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale*(1.00 - (CurShield/ShieldMax)), BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+                }
 			}
 		}
 	}
@@ -1075,6 +1078,11 @@ function PostRender(Canvas Canvas)
 	local ArtifactPaladin AP;
 	local ArtifactGuardianHeal AGH;
 	local RPGClassInv RPGInv;
+	local int i;
+    local vector BarLoc, CameraLocation, X, Y, Z;
+	local rotator CameraRotation;
+	local float Dist, XScale, YScale, ScreenX;
+    local int PawnLevel;
 	
 	if ( ViewportOwner == None || ViewportOwner.Actor == None || ViewportOwner.Actor.Pawn == None || ViewportOwner.Actor.Pawn.Health <= 0
 	     || (ViewportOwner.Actor.myHud != None && ViewportOwner.Actor.myHud.bShowScoreBoard)
@@ -1823,6 +1831,67 @@ function PostRender(Canvas Canvas)
 		Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);
 		Canvas.DrawText("Guarding: " $ AGH.TargetPlayer.PlayerReplicationInfo.PlayerName);		
 	}
+
+	if (GiveItemsInv.EngAwarenessLevel > 0 && EnemyList != None)
+	{
+        // can't do this in PreRender because it screws up the scoreboard and stats
+	   Canvas.GetCameraLocation(CameraLocation, CameraRotation);
+		for (i = 0; i < EnemyList.TeamPawns.length; i++)
+		{
+			P = EnemyList.TeamPawns[i];
+			if (P == None || P.Health <= 0 || (xPawn(P) != None && xPawn(P).bInvis))
+				continue;
+			if (Normal(P.Location - CameraLocation) dot vector(CameraRotation) < 0)
+				continue;
+			ScreenX = Canvas.WorldToScreen(P.Location).X;
+			if (ScreenX < 0 || ScreenX > Canvas.ClipX)
+				continue;
+	 		Dist = VSize(P.Location - CameraLocation);
+	 		if (Dist > ViewportOwner.Actor.TeamBeaconMaxDist * FClamp(0.04 * P.CollisionRadius, 1.0, 3.0))
+	 			continue;
+			if (!P.FastTrace(P.Location + P.CollisionHeight * vect(0,0,1), ViewportOwner.Actor.Pawn.Location + ViewportOwner.Actor.Pawn.EyeHeight * vect(0,0,1)))
+				continue;
+	
+			GetAxes(rotator(P.Location - CameraLocation), X, Y, Z);
+    		BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) - P.CollisionRadius * Y);
+
+			XScale = (Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) + P.CollisionRadius * Y).X - BarLoc.X) / BarUSize;
+			YScale = FMin(0.15 * XScale, 0.25);
+	
+	 		Canvas.Style = 1;
+            
+            // draw the sentinel/turret/node level
+            PawnLevel = -1;
+            if (BaseCeilingSentinel(P) != None)
+                PawnLevel = BaseCeilingSentinel(P).SentinelLevel;
+            else
+            if (BaseFloorSentinel(P) != None)
+                PawnLevel = BaseFloorSentinel(P).SentinelLevel;
+            else            
+            if (BaseTurretSentinel(P) != None)
+                PawnLevel = BaseTurretSentinel(P).SentinelLevel;                    
+            else            
+            if (Node(P) != None)
+                PawnLevel = Node(P).NodeLevel;                    
+            else            
+            if (BaseBallTurret(P) != None)
+                PawnLevel = BaseBallTurret(P).TurretLevel;                    
+            if (PawnLevel >= 0)
+            {
+            	if (TextFont != None)
+            		Canvas.Font = TextFont;
+    			Canvas.DrawColor = WhiteColor;
+		        Canvas.Style = 2;
+    			Canvas.FontScaleX = Canvas.default.FontScaleX * 2;
+    			Canvas.FontScaleY = Canvas.default.FontScaleY * 2;
+                ptext = Left("**********",PawnLevel+1);
+        		Canvas.TextSize(ptext, XL, YL);
+        		Canvas.SetPos(BarLoc.X - (XL * 0.5), BarLoc.Y);
+    			Canvas.DrawText(ptext);
+            }
+		}
+	}
+
 	super.PostRender(Canvas);
 }
 
