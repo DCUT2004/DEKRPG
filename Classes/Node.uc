@@ -1,9 +1,11 @@
-class Node extends ASTurret;
+class Node extends ASTurret
+    config(UT2004RPG);
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
 var int NodeLevel;
 var int MaxNodeLevel;
 var float PercentHealthIncreasePerLevel;
+var config float MinimumSpawnRadius;
 
 simulated event PostNetBeginPlay()
 {
@@ -24,6 +26,11 @@ simulated event PostNetBeginPlay()
 	}
 
 	super(ASVehicle).PostNetBeginPlay();
+}
+
+static function float GetMinimumSpawnRadius()
+{
+    return default.MinimumSpawnRadius;
 }
 
 function AddDefaultInventory()
@@ -59,6 +66,7 @@ function LevelUp()
 
 defaultproperties
 {
+     MinimumSpawnRadius=1000.00
      NodeLevel=0
      MaxNodeLevel=5
      PercentHealthIncreasePerLevel=0.1

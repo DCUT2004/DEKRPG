@@ -241,6 +241,8 @@ static function string GetLocalString(optional int Switch, optional PlayerReplic
 		return "You cannot spawn another item yet. Please wait.";
 	if (Switch == 6000)
 		return "There is not enough room around the spawn location.";
+	if (Switch == 7000)
+		return "This Node is too close to another Node.";
 	return default.Points@"points are required to use this artifact";
 }
 

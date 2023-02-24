@@ -10,6 +10,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local class<Pawn> RealSummonItem;
 	local rotator SpawnRotation;
 	local bool bOnCeiling;
+	local Node OtherNode;
 
 	RealSummonItem = SummonItem;
 	SpawnLoc = epi.GetSpawnHeight(Beacon.Location);	// look at the floor
@@ -49,6 +50,16 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 
 	if (RealSummonItem == class'Node')
 	{	// its a node
+		foreach DynamicActors( Class'Node', OtherNode )
+		{
+			if (OtherNode != None && VSize(OtherNode.Location - SpawnLoc) < OtherNode.GetMinimumSpawnRadius())
+			{
+				Instigator.ReceiveLocalizedMessage(MessageClass, 7000, None, None, Class);
+				bActive = false;
+				GotoState('');
+				return false;
+			}
+		}
 		if (bOnCeiling)
 		{
 			SpawnLoc.z -= 70;		// leave on ceiling
