@@ -5,7 +5,6 @@ class Node extends ASTurret
 var int NodeLevel;
 var int MaxNodeLevel;
 var float PercentHealthIncreasePerLevel;
-var config float MinimumSpawnRadius;
 
 simulated event PostNetBeginPlay()
 {
@@ -26,11 +25,6 @@ simulated event PostNetBeginPlay()
 	}
 
 	super(ASVehicle).PostNetBeginPlay();
-}
-
-static function float GetMinimumSpawnRadius()
-{
-    return default.MinimumSpawnRadius;
 }
 
 function AddDefaultInventory()
@@ -64,9 +58,14 @@ function LevelUp()
     }
 }
 
+simulated function Destroyed()
+{
+    Super.Destroyed();
+    class'NodeNetwork'.static.RemoveNode(Self);
+}
+
 defaultproperties
 {
-     MinimumSpawnRadius=1000.00
      NodeLevel=0
      MaxNodeLevel=5
      PercentHealthIncreasePerLevel=0.1

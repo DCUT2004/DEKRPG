@@ -3,14 +3,13 @@ class DruidNodeSummon extends Summonifact
 
 function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 {
-	Local ASTurret NewNode;
+	Local Node NewNode;
 	local NodeController NC;
 	local Vector SpawnLoc,SpawnLocCeiling;
 	local bool bGotSpace;
 	local class<Pawn> RealSummonItem;
 	local rotator SpawnRotation;
 	local bool bOnCeiling;
-	local Node OtherNode;
 
 	RealSummonItem = SummonItem;
 	SpawnLoc = epi.GetSpawnHeight(Beacon.Location);	// look at the floor
@@ -50,28 +49,26 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 
 	if (RealSummonItem == class'Node')
 	{	// its a node
-		foreach DynamicActors( Class'Node', OtherNode )
+
+		if (!class'NodeNetwork'.static.CanSpawnNode(SpawnLoc))
 		{
-			if (OtherNode != None && VSize(OtherNode.Location - SpawnLoc) < OtherNode.GetMinimumSpawnRadius())
-			{
-				Instigator.ReceiveLocalizedMessage(MessageClass, 7000, None, None, Class);
-				bActive = false;
-				GotoState('');
-				return false;
-			}
+			Instigator.ReceiveLocalizedMessage(MessageClass, 7000, None, None, Class);
+			bActive = false;
+			GotoState('');
+			return false;
 		}
 		if (bOnCeiling)
 		{
 			SpawnLoc.z -= 70;		// leave on ceiling
 			SpawnRotation.Yaw = 0;
 			SpawnRotation.Roll = 32768;          // upside down
-			NewNode = epi.SummonRotatedNode(SummonItem, Points, P, SpawnLoc,SpawnRotation);
+			NewNode = Node(epi.SummonRotatedNode(SummonItem, Points, P, SpawnLoc,SpawnRotation));
 		}
 		else
 		{
 			SpawnLoc.z += 67;		// lift just off ground, and then base steps back a bit
 			SpawnRotation.Yaw = 32768;
-			NewNode =  epi.SummonRotatedNode(SummonItem, Points, P, SpawnLoc,SpawnRotation);
+			NewNode =  Node(epi.SummonRotatedNode(SummonItem, Points, P, SpawnLoc,SpawnRotation));
 		}
 		if (NewNode == None)
 			return false;
@@ -90,6 +87,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 				ApplyStatsToConstruction(NewNode,Instigator);
 			}
 		}
+		Class'NodeNetwork'.static.InsertNode(NewNode);
 	}
 
 	return true;
