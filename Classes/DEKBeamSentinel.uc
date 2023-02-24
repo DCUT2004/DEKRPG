@@ -1,4 +1,4 @@
-class DEKBeamSentinel extends ASVehicle_Sentinel_Floor;
+class DEKBeamSentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {
@@ -23,7 +23,7 @@ defaultproperties
 {
      TurretBaseClass=Class'DEKRPG999X.DEKBeamSentinelBase'
      TurretSwivelClass=Class'DEKRPG999X.DEKBeamSentinelSwivel'
-     DefaultWeaponClassName="DEKWeaponBeamSentinelWeapon"
+     DefaultWeaponClassName="DEKBeamSentinelWeapon"
      VehicleNameString="Beam Sentinel"
      bNoTeamBeacon=False
      Skins(0)=Combiner'DEKRPGTexturesMaster209B.Skins.BeamFloorTurret'

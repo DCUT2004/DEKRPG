@@ -1,4 +1,4 @@
-class DEKMercurySentinelWeapon extends Weapon_Sentinel;
+class DEKMercurySentinelWeapon extends BaseWeaponSentinel;
 
 defaultproperties
 {

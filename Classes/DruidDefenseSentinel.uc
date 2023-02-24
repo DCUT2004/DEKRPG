@@ -1,4 +1,4 @@
-class DruidDefenseSentinel extends ASTurret;
+class DruidDefenseSentinel extends BaseTurretSentinel;
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
 var int ShieldHealingLevel;

@@ -97,7 +97,8 @@ simulated function Timer()
 	foreach DynamicActors(class'Pawn', P)
 	{
 		// team mates go on TeamPawns. Opposite team go on Enemies
-		if (P != PlayerOwner.Pawn && P != PlayerDriver && Vehicle(P) == None && !P.IsA('DruidBlock') && !P.IsA('DruidExplosive') && !P.IsA('EnergyWall') && !P.IsA('RedeemerWarhead') && !P.IsA('TarydiumCrystal') && !P.IsA('MissionPortalBall') && !P.IsA('MissionBalloon'))
+		if (P != PlayerOwner.Pawn && P != PlayerDriver && !P.IsA('DruidBlock') && !P.IsA('DruidExplosive') && !P.IsA('EnergyWall') && !P.IsA('RedeemerWarhead') && !P.IsA('TarydiumCrystal') && !P.IsA('MissionPortalBall') && !P.IsA('MissionBalloon')
+         && (Vehicle(P) == None || BaseCeilingSentinel(P) != None || BaseFloorSentinel(P) != None || BaseTurretSentinel(P) != None || Node(P) != None || BaseBallTurret(P) != None))
 		{
 			// we have a valid pawn. Now is it good or bad?
 			if (P.Isa('Monster'))
@@ -152,6 +153,7 @@ simulated function Timer()
 			   	{
 			   		// same team
 					TeamPawns[TeamPawns.length] = P;
+                    
 					// ok, now let's sort out the HardCore
 					HardCorePawns[HardCorePawns.length] = 0;		// default off
 					if (xPawn(P) != None && xPawn(P).PlayerReplicationInfo != None)

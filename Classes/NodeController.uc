@@ -141,6 +141,11 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(int NodeLevel)
+{
+     // TODO
+}
+
 defaultproperties
 {
      CheckRadius=700.000000

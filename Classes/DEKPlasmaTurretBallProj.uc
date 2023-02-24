@@ -65,80 +65,69 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 	local int i;
     local int DriverLevel;
     local Controller C;
-	local Actor Other;
+    local float DamageBonusFromLinkers;
 
-	if ( Instigator != None && (Other == Instigator) )
-		return;
-
-    if (Other == Owner) return;
-
-	if ( !Other.IsA('Projectile') || Other.bProjTarget )
+	if ( Role == ROLE_Authority )
 	{
-		if ( Role == ROLE_Authority )
+		// find the current dataobject
+		if (DEKPlasmaTurret(Instigator) != None && DEKPlasmaTurret(Instigator).Driver != None)
 		{
-			if ( Instigator == None || Instigator.Controller == None )
-				Other.SetDelayedDamageInstigatorController( InstigatorController );
-
-			// find the current dataobject
-			if (DEKPlasmaTurret(Instigator) != None && DEKPlasmaTurret(Instigator).Driver != None)
+			StatsInv = RPGStatsInv(DEKPlasmaTurret(Instigator).Driver.FindInventoryType(class'RPGStatsInv'));
+			if (StatsInv != None && StatsInv.DataObject != None)
 			{
-				StatsInv = RPGStatsInv(DEKPlasmaTurret(Instigator).Driver.FindInventoryType(class'RPGStatsInv'));
-				if (StatsInv != None && StatsInv.DataObject != None)
-				{
-					old_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-					DriverLevel = StatsInv.DataObject.Level;
+				old_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
+				DriverLevel = StatsInv.DataObject.Level;
 
-					if (Level.TimeSeconds > DEKPlasmaTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKPlasmaTurret(Instigator).NumHealers > 0)
-					{
-						Damage = Damage * class'RW_EngineerLink'.static.DamageIncreasedByLinkers(DEKPlasmaTurret(Instigator).NumHealers);
-						DamageRadius = DamageRadius * class'RW_EngineerLink'.static.DamageIncreasedByLinkers(DEKPlasmaTurret(Instigator).NumHealers);
-					}
+				if (Level.TimeSeconds > DEKPlasmaTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKPlasmaTurret(Instigator).NumHealers > 0)
+				{
+                    DamageBonusFromLinkers = class'RW_EngineerLink'.static.DamageIncreasedByLinkers(DEKPlasmaTurret(Instigator).NumHealers);
+					Damage = Damage * DamageBonusFromLinkers;
+					DamageRadius = DamageRadius * DamageBonusFromLinkers;
 				}
 			}
+		}
 
-			//Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
-			HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
+		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-			if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-			{
-				cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-				xp_diff = cur_xp - old_xp;
-				if (xp_diff > 0 && DEKPlasmaTurret(Instigator).NumHealers > 0)
+		if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
+		{
+			cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
+			xp_diff = cur_xp - old_xp;
+			if (xp_diff > 0 && DEKPlasmaTurret(Instigator).NumHealers > 0)
 //				if (xp_diff > 0 && Level.TimeSeconds > DEKPlasmaTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKPlasmaTurret(Instigator).NumHealers > 0)
+			{
+				// split the xp amongst the healers
+				xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKPlasmaTurret(Instigator).Healers.length);
+				xp_given_away = 0;
+
+				for(i = 0; i < DEKPlasmaTurret(Instigator).Healers.length; i++)
 				{
-					// split the xp amongst the healers
-					xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKPlasmaTurret(Instigator).Healers.length);
-					xp_given_away = 0;
-
-					for(i = 0; i < DEKPlasmaTurret(Instigator).Healers.length; i++)
+					if (DEKPlasmaTurret(Instigator).Healers[i].Pawn != None && DEKPlasmaTurret(Instigator).Healers[i].Pawn.Health >0)
 					{
-						if (DEKPlasmaTurret(Instigator).Healers[i].Pawn != None && DEKPlasmaTurret(Instigator).Healers[i].Pawn.Health >0)
-						{
-						    C = DEKPlasmaTurret(Instigator).Healers[i];
-						    if (DruidLinkSentinelController(C) != None)
-								HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-						    else
-								HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-							if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKPlasmaTurret(Instigator).RPGMut, DEKPlasmaTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-							xp_given_away += xp_each;
-						}
+					    C = DEKPlasmaTurret(Instigator).Healers[i];
+					    if (DruidLinkSentinelController(C) != None)
+							HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
+					    else
+							HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
+						if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
+							HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKPlasmaTurret(Instigator).RPGMut, DEKPlasmaTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
+						xp_given_away += xp_each;
 					}
-					// now adjust the turret operator
-					if (xp_given_away > 0)
-					{
-						StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-						while (StatsInv.DataObject.ExperienceFraction < 0)
-						{
-							StatsInv.DataObject.ExperienceFraction += 1.0;
-							StatsInv.DataObject.Experience -= 1;
-						}
-					}
-
-
 				}
-				// DEKPlasmaTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
+				// now adjust the turret operator
+				if (xp_given_away > 0)
+				{
+					StatsInv.DataObject.ExperienceFraction -= xp_given_away;
+					while (StatsInv.DataObject.ExperienceFraction < 0)
+					{
+						StatsInv.DataObject.ExperienceFraction += 1.0;
+						StatsInv.DataObject.Experience -= 1;
+					}
+				}
+
+
 			}
+			// DEKPlasmaTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
 		}
 	}
 	Destroy();

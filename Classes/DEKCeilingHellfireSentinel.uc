@@ -1,4 +1,4 @@
-class DEKCeilingHellfireSentinel extends ASVehicle_Sentinel_Ceiling;
+class DEKCeilingHellfireSentinel extends BaseCeilingSentinel;
 
 simulated function PostBeginPlay()
 {
@@ -9,6 +9,7 @@ simulated function PostBeginPlay()
 
 defaultproperties
 {
+     TargetRange=1000.000000
      DefaultWeaponClassName="DEKWBHellfireSentinelWeapon"
      VehicleProjSpawnOffset=(X=150.000000)
      VehicleNameString="Hellfire Sentinel"

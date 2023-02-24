@@ -1,4 +1,4 @@
-class DEKDamageSentinel extends ASTurret;
+class DEKDamageSentinel extends BaseTurretSentinel;
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
 var int ResupplyLevel;

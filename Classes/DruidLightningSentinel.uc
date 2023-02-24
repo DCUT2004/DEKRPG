@@ -1,4 +1,4 @@
-class DruidLightningSentinel extends ASTurret;
+class DruidLightningSentinel extends BaseTurretSentinel;
 #exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
 
 function AddDefaultInventory()

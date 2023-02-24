@@ -28,11 +28,11 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 		return None;
 
 	p.Damage *= DamageAtten;
-	
-	if (Instigator != None && Instigator.Controller != None && DEKHellfireSentinelController(Instigator.Controller) != None)
-	{
-		p.Damage *= DEKHellfireSentinelController(Instigator.Controller).DamageAdjust;		// set by LoadedEngineer
-	}
+    if (DEKHellfireSentinelProj(p) != None)
+    {
+        DEKHellfireSentinelProj(p).DamageIncreaseDueToLevel = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Instigator, 1.0) - 1.0;
+        // Log("+++++ DEKHellfireSentinelFire Damage increase is now" @ DEKHellfireSentinelProj(p).DamageIncreaseDueToLevel);	
+    }
 	
 	return p;
 }

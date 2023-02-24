@@ -133,7 +133,7 @@ simulated event touch (Actor Other)
 	local int DamageToDo;
 	local SyncDestroy SyncObj;
 
-Log("++++ Energy wall: touch event on" @ Other);	
+    // Log("++++ Energy wall: touch event on" @ Other);	
 	super.touch(Other);
 	
 	if (Role < ROLE_Authority)
@@ -149,11 +149,11 @@ Log("++++ Energy wall: touch event on" @ Other);
 				  || (TeamGame(Level.Game) == None && proj.InstigatorController != PC))))	// or just not me
         {
             // destroy the projectile
-            Log("++++ Energy wall: destroying projectile" @ Other @ "since it is on the wrong side");	  
+            // Log("++++ Energy wall: destroying projectile" @ Other @ "since it is on the wrong side");	  
 			//Tell the clients
 			if(Level.NetMode == NM_DedicatedServer && proj.Instigator != None)
 			{
-                Log("++++ Energy wall: creating SyncDestroy for" @ proj);	  
+                // Log("++++ Energy wall: creating SyncDestroy for" @ proj);	  
 				SyncObj = proj.Instigator.Spawn(class'SyncDestroy');
 				SyncObj.Proj = proj;
 				SyncObj.ProjLifespan = 0.05;
@@ -162,7 +162,7 @@ Log("++++ Energy wall: touch event on" @ Other);
         }
         else
         {
-            Log("++++ Energy wall: ignoring" @ Other @ "since it is on the same side");	  
+            // Log("++++ Energy wall: ignoring" @ Other @ "since it is on the same side");	  
         }
         
         return;
@@ -186,7 +186,7 @@ Log("++++ Energy wall: touch event on" @ Other);
 	if (TeamGame(Level.Game) != None && C.SameTeamAs(PC)) 	// on same team
 		return;
 		
-Log("++++ Energy wall: other" @ Other @ P @ "doing damage");	
+    // Log("++++ Energy wall: other" @ Other @ P @ "doing damage");	
 	// now scale the damage as to how big the touched item is. The bigger it is, the more of the field it will disrupt. Clamp betwenn 20 and 200.
 	DamageToDo = DamagePerHit * DamageAdjust * ( 1.0 + (P.HealthMax - 100.0)/200.0);
 	DamageToDo = min(max(DamageToDo, MinDamage * DamageAdjust),MaxDamage * DamageAdjust);

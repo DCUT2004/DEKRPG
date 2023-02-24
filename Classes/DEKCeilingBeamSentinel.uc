@@ -1,4 +1,4 @@
-class DEKCeilingBeamSentinel extends ASVehicle_Sentinel_Ceiling;
+class DEKCeilingBeamSentinel extends BaseCeilingSentinel;
 
 simulated function PostBeginPlay()
 {

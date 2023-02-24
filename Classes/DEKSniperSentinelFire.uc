@@ -1,4 +1,4 @@
-class DEKSniperSentinelFire extends InstantFire;
+class DEKSniperSentinelFire extends BaseInstantFire;
 
 var() class<DEKSniperSentinelTracer> BeamEffectClass;
 var() Vector ProjSpawnOffset;

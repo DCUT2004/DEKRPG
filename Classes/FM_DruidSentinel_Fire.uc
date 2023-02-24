@@ -12,11 +12,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 		return None;
 
 	p.Damage *= DamageAtten;
-	
-	if (Instigator != None && Instigator.Controller != None && DruidSentinelController(Instigator.Controller) != None)
-	{
-		p.Damage *= DruidSentinelController(Instigator.Controller).DamageAdjust;		// set by LoadedEngineer
-	}
+    p.Damage = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Instigator, p.Damage);
+    // Log("+++++ FM_DruidSentinel_Fire Damage now" @ p.Damage @ "default is" @ p.Default.Damage);	
 	
 	return p;
 }

@@ -40,6 +40,9 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.RemoteRole = ROLE_None;
 		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
 
+		// adjust the fire rate according to weapon speed
+		if (StatsInv != None)
+			TimeBetweenShots = (default.TimeBetweenShots * 100)/(100 + StatsInv.Data.WeaponSpeed);
 	}
 	SetTimer(TimeBetweenShots, true);
 }
@@ -101,7 +104,7 @@ simulated function Destroyed()
 
 defaultproperties
 {
-     TimeBetweenShots=0.250000
+     TimeBetweenShots=0.300000
      LinkRadius=700.000000
      VehicleHealPerShot=20.000000
      TurretLinkEmitterClass=Class'DEKRPG999X.DruidLinkSentinelBeamEffect'

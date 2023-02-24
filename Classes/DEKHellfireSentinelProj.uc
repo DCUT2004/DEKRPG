@@ -2,6 +2,7 @@ class DEKHellfireSentinelProj extends Projectile;
 
 var class<Projectile> ChildProjectileClass;
 var float SpreadFactor;
+var float DamageIncreaseDueToLevel;
 
 simulated function PostBeginPlay()
 {
@@ -42,7 +43,9 @@ simulated function Timer()
                 Child.Velocity.X += RandRange(0.3, 1.0) * Mag * i * SpreadFactor;
                 Child.Velocity.Y += RandRange(0.3, 1.0) * Mag * j * SpreadFactor;
                 Child.Velocity.Z = Child.Velocity.Z + SpreadFactor * (FRand() - 0.5);
+                Child.Damage *= (1 + DamageIncreaseDueToLevel);
                 Child.InstigatorController = InstigatorController;
+                // Log("+++++ DEKHellfireSentinelProj Child Damage increased to" @ Child.Damage @ "default is" @ Child.Default.Damage);	
             }
         }
     }

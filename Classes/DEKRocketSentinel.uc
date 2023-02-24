@@ -1,6 +1,4 @@
-class DEKRocketSentinel extends ASVehicle_Sentinel_Floor;
-
-var config float TargetRange;
+class DEKRocketSentinel extends BaseFloorSentinel;
 
 simulated event PostBeginPlay()
 {

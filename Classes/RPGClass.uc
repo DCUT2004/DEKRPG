@@ -342,6 +342,13 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
 					}
 				}
 			}
+            
+            // check turrets for increased damage
+            if (BaseBallTurret(Instigator) != None)
+            {
+                Damage *= 1 + (BaseBallTurret(Instigator).TurretLevel * BaseBallTurret(Instigator).PercentDamageIncreasePerLevel);
+                // Log("++++ RPGClass handledamage Instigator is BaseBallturret with Level" @ BaseBallTurret(Instigator).TurretLevel @ "per level increase" @ BaseBallTurret(Instigator).PercentDamageIncreasePerLevel @ "new damage:" @ Damage @ "for type:" @ DamageType @ "NumHealers:" @ BaseBallTurret(Instigator).NumHealers);
+            }
 		}
 		if (ClassIsChildOf(Injured.Class, class'MissionPortalBall'))
 		{

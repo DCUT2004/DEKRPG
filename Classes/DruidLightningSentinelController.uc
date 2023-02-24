@@ -3,14 +3,14 @@ class DruidLightningSentinelController extends Controller
 
 var Controller PlayerSpawner;
 var class<xEmitter> HitEmitterClass;
+var RPGStatsInv StatsInv;
+var float TimeBetweenShots;
 
 var config float MaxHealthMultiplier;
 var config float MinHealthMultiplier;
 var config int MaxDamagePerHit;
 var config int MinDamagePerHit;
 var config float TargetRadius;
-
-var float DamageAdjust;		// set by AbilityLoadedEngineer 
 
 function SetPlayerSpawner(Controller PlayerC)
 {
@@ -24,13 +24,13 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.bBot = true;
 		PlayerReplicationInfo.Team = PlayerSpawner.PlayerReplicationInfo.Team;
 		PlayerReplicationInfo.RemoteRole = ROLE_None;
-	}
-}
 
-function PostBeginPlay()
-{
-	SetTimer(1.0, true);
-	Super.PostBeginPlay();
+		// adjust the fire rate according to weapon speed
+		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
+		if (StatsInv != None)
+			TimeBetweenShots = (default.TimeBetweenShots * 100)/(100 + StatsInv.Data.WeaponSpeed);
+	}
+	SetTimer(TimeBetweenShots, true);
 }
 
 function Timer()
@@ -61,9 +61,10 @@ function Timer()
 			dist = FMax(1,VSize(dir));
 			damageScale = 1 - FMax(0,dist/TargetRadius);
 
-			DamageDealt = C.Pawn.HealthMax * DamageAdjust * ((damageScale * (MaxHealthMultiplier-MinHealthMultiplier)) + MinHealthMultiplier);
-			DamageDealt = max(MinDamagePerHit * DamageAdjust, DamageDealt);
-			DamageDealt = min(MaxDamagePerHit * DamageAdjust, DamageDealt);
+			DamageDealt = C.Pawn.HealthMax * ((damageScale * (MaxHealthMultiplier-MinHealthMultiplier)) + MinHealthMultiplier);
+			DamageDealt = max(MinDamagePerHit, DamageDealt);
+			DamageDealt = min(MaxDamagePerHit, DamageDealt);
+            DamageDealt = class'BaseInstantFire'.static.UpdateDamageDueToLevel(Pawn, DamageDealt);
 			C.Pawn.TakeDamage(DamageDealt, Pawn, C.Pawn.Location, vect(0,0,0), class'DamTypeLightningSent');
 
 			if (C != None && C.Pawn != None && Pawn != None)
@@ -93,6 +94,14 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     TargetRadius *= (1 + PercentRangeIncreasePerLevel);
+     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);    
+     SetTimer(TimeBetweenShots, true);
+     // Log("+++++ DruidlightningSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
+}
+
 defaultproperties
 {
      HitEmitterClass=Class'XEffects.LightningBolt'
@@ -101,5 +110,5 @@ defaultproperties
      MaxDamagePerHit=30
      MinDamagePerHit=3
      TargetRadius=1200.000000
-     DamageAdjust=1.000000
+     TimeBetweenShots=1.0
 }

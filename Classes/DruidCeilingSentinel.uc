@@ -1,6 +1,4 @@
-class DruidCeilingSentinel extends ASVehicle_Sentinel_Ceiling;
-
-var config float TargetRange;
+class DruidCeilingSentinel extends BaseCeilingSentinel;
 
 simulated function PostBeginPlay()
 {

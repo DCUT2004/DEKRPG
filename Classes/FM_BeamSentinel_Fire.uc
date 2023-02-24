@@ -1,4 +1,4 @@
-class FM_BeamSentinel_Fire extends InstantFire;
+class FM_BeamSentinel_Fire extends BaseInstantFire;
 
 var() class<ONSChargeBeamEffect> BeamEffectClass;
 

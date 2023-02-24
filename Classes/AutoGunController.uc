@@ -2,6 +2,7 @@ class AutoGunController extends SentinelController;
 
 var Controller PlayerSpawner;
 var float TimeSinceCheck;
+var RPGStatsInv StatsInv;
 
 var config int AttractRange;
 var config int TargetRange;
@@ -23,6 +24,14 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.bBot = false;
 		PlayerReplicationInfo.Team = PlayerSpawner.PlayerReplicationInfo.Team;
 //		PlayerReplicationInfo.RemoteRole = ROLE_None;
+
+		// adjust the fire rate according to weapon speed
+        if (Pawn != None && Pawn.Weapon != None && BaseWeaponSentinel(Pawn.Weapon) != None)
+        {
+     		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
+    		if (StatsInv != None)
+    			BaseWeaponSentinel(Pawn.Weapon).IncorporatePlayerWeaponSpeed(StatsInv.Data.WeaponSpeed);
+       }
 	}
 }
 
@@ -112,6 +121,13 @@ simulated function Destroyed()
 		PlayerReplicationInfo.Destroy();
 
 	Super.Destroyed();
+}
+
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     // TODO
+     AttractRange *= (1 + PercentRangeIncreasePerLevel);
+     TargetRange *= (1 + PercentRangeIncreasePerLevel);
 }
 
 defaultproperties

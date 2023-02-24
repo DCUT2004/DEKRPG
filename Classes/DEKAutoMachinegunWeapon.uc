@@ -1,4 +1,4 @@
-class DEKAutoMachinegunWeapon extends Weapon_Sentinel
+class DEKAutoMachinegunWeapon extends BaseWeaponSentinel
     config(user)
     HideDropDown
 	CacheExempt;

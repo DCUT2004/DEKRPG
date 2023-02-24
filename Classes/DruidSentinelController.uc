@@ -2,11 +2,10 @@ class DruidSentinelController extends ASSentinelController;
 
 var Controller PlayerSpawner;
 var float TimeSinceCheck;
+var RPGStatsInv StatsInv;
 
 var config int AttractRange;
 var config int TargetRange;
-
-var float DamageAdjust;		// set by AbilityLoadedEngineer 
 
 function SetPlayerSpawner(Controller PlayerC)
 {
@@ -20,7 +19,23 @@ function SetPlayerSpawner(Controller PlayerC)
 		PlayerReplicationInfo.bBot = false;
 		PlayerReplicationInfo.Team = PlayerSpawner.PlayerReplicationInfo.Team;
 //		PlayerReplicationInfo.RemoteRole = ROLE_None;
+
+		// adjust the fire rate according to weapon speed
+        if (Pawn != None && Pawn.Weapon != None && BaseWeaponSentinel(Pawn.Weapon) != None)
+        {
+     		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
+    		if (StatsInv != None)
+    			BaseWeaponSentinel(Pawn.Weapon).IncorporatePlayerWeaponSpeed(StatsInv.Data.WeaponSpeed);
+       }
 	}
+}
+
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     // TODO
+     AttractRange *= (1 + PercentRangeIncreasePerLevel);
+     TargetRange *= (1 + PercentRangeIncreasePerLevel);
+     // Log("+++++ DruidSentinelController LevelUp called for" @ Pawn.Class);
 }
 
 function bool IsTargetRelevant( Pawn Target )
@@ -56,7 +71,7 @@ function Tick(float DeltaTime)
 			NextC = C.NextController;
 
 			if (C != None && C.Pawn != None && Pawn != None && C.Pawn != Pawn && C.Pawn != PlayerSpawner.Pawn && C.Pawn.Health > 0
-		 	&& VSize(C.Pawn.Location - Pawn.Location) < ((default.TargetRange)*DamageAdjust) && FastTrace(C.Pawn.Location, Pawn.Location) && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !C.Pawn.IsA('MissionBalloon') 
+		 	&& VSize(C.Pawn.Location - Pawn.Location) < TargetRange && FastTrace(C.Pawn.Location, Pawn.Location) && !C.Pawn.IsA('HealerNali') && !C.Pawn.IsA('MissionCow') && !C.Pawn.IsA('MissionBalloon') 
 			   && ((TeamGame(Level.Game) != None && !C.SameTeamAs(PlayerSpawner)) 	// on a different team
 				|| (TeamGame(Level.Game) == None && C.Pawn.Owner != PlayerSpawner)))		// or just not me
 			{
@@ -84,5 +99,4 @@ defaultproperties
 {
      AttractRange=1200
      TargetRange=1200
-     DamageAdjust=1.000000
 }
