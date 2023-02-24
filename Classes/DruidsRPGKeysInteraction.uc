@@ -1081,7 +1081,7 @@ function PostRender(Canvas Canvas)
 	local int i;
     local vector BarLoc, CameraLocation, X, Y, Z;
 	local rotator CameraRotation;
-	local float Dist, XScale, YScale, ScreenX;
+	local float Dist, ScreenX;
     local int PawnLevel;
 	
 	if ( ViewportOwner == None || ViewportOwner.Actor == None || ViewportOwner.Actor.Pawn == None || ViewportOwner.Actor.Pawn.Health <= 0
@@ -1835,7 +1835,14 @@ function PostRender(Canvas Canvas)
 	if (GiveItemsInv.EngAwarenessLevel > 0 && EnemyList != None)
 	{
         // can't do this in PreRender because it screws up the scoreboard and stats
-	   Canvas.GetCameraLocation(CameraLocation, CameraRotation);
+	    Canvas.GetCameraLocation(CameraLocation, CameraRotation);
+    	if (TextFont != None)
+    		Canvas.Font = TextFont;
+        Canvas.Style = 2;
+		Canvas.DrawColor = WhiteColor;
+		Canvas.FontScaleX = Canvas.default.FontScaleX * 2;
+		Canvas.FontScaleY = Canvas.default.FontScaleY * 2;
+       
 		for (i = 0; i < EnemyList.TeamPawns.length; i++)
 		{
 			P = EnemyList.TeamPawns[i];
@@ -1852,14 +1859,6 @@ function PostRender(Canvas Canvas)
 			if (!P.FastTrace(P.Location + P.CollisionHeight * vect(0,0,1), ViewportOwner.Actor.Pawn.Location + ViewportOwner.Actor.Pawn.EyeHeight * vect(0,0,1)))
 				continue;
 	
-			GetAxes(rotator(P.Location - CameraLocation), X, Y, Z);
-    		BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) - P.CollisionRadius * Y);
-
-			XScale = (Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) + P.CollisionRadius * Y).X - BarLoc.X) / BarUSize;
-			YScale = FMin(0.15 * XScale, 0.25);
-	
-	 		Canvas.Style = 1;
-            
             // draw the sentinel/turret/node level
             PawnLevel = -1;
             if (BaseCeilingSentinel(P) != None)
@@ -1878,12 +1877,9 @@ function PostRender(Canvas Canvas)
                 PawnLevel = BaseBallTurret(P).TurretLevel;                    
             if (PawnLevel >= 0)
             {
-            	if (TextFont != None)
-            		Canvas.Font = TextFont;
-    			Canvas.DrawColor = WhiteColor;
-		        Canvas.Style = 2;
-    			Canvas.FontScaleX = Canvas.default.FontScaleX * 2;
-    			Canvas.FontScaleY = Canvas.default.FontScaleY * 2;
+    			GetAxes(rotator(P.Location - CameraLocation), X, Y, Z);
+        		BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1));
+    
                 ptext = Left("**********",PawnLevel+1);
         		Canvas.TextSize(ptext, XL, YL);
         		Canvas.SetPos(BarLoc.X - (XL * 0.5), BarLoc.Y);
