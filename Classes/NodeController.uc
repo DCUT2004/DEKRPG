@@ -6,12 +6,11 @@ var RPGStatsInv StatsInv;
 var MutUT2004RPG RPGMut;
 
 var config float TimeBetweenChecks;
-var config float CheckRadius;
 
-var int SecondCount;
-var int EnemyCount;
-var int NumberIdleSpawns;
-var int innerloop;
+//Pickup siphoning variables
+var int PickupSiphonIntervalCounter;
+var config int PickupSiphonInterval;
+var config float PickupSiphonRadius, PickupDistributeRadius;
 
 simulated event PostBeginPlay()
 {
@@ -43,94 +42,113 @@ function SetPlayerSpawner(Controller PlayerC)
 		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
 
 	}
+	PickupSiphonIntervalCounter = 0;
 	SetTimer(TimeBetweenChecks, true);
-    SecondCount = 0;
-    EnemyCount = 0;
-    NumberIdleSpawns = 0;
-    innerloop = 0;
 }
 
+/*  Search for nearby pickups within a radius
+	Also search for nearby monsters within a radius
+	Distribute pickups that were given to this Node by other Nodes to nearby players
+ */
 function Timer()
 {
-	// lets see if we can link to anything
-	Local Pawn LoopP;
-    Local HealthCharger LoopHC;
-    Local HealthPack LoopHP;
-    Local HealthCharger LoopHCR;
-	Local Controller C;
-    local int NumberOfHealthSpawns;
-    local xPickupBase LoopPB;
 
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
-	    
-    NumberOfHealthSpawns = 0;
-
-    innerloop++;
-    if (innerloop >= 3)
-    {   // every 3 secs check for how many enemies we see
-    	foreach DynamicActors(class'Pawn', LoopP)
-    	{
-    		// first check if the pawn is anywhere near
-    	    if (LoopP != None &&  LoopP.Health > 0 && Pawn != None && VSize(LoopP.Location - Pawn.Location) < CheckRadius && FastTrace(LoopP.Location, Pawn.Location) && LoopP != Pawn)
-    	    {
-    			// ok, let's go for it
-    			C = LoopP.Controller;
-    			// must be either not controlled, or not on same team
-    			if (C == None || C.SameTeamAs(self) == false )
-    			{
-    				EnemyCount++;
-    			}
-    		}
-    	}
-    }
-    
-    // then every second see if we have health we can siphon
-	foreach DynamicActors(class'HealthCharger', LoopHC)
+	if (PickupSiphonIntervalCounter >= PickupSiphonInterval)
 	{
-		// first check if the pawn is anywhere near
-	    if (LoopHC != None && Pawn != None && VSize(LoopHC.Location - Pawn.Location) < CheckRadius && FastTrace(LoopHC.Location, Pawn.Location))
-	    {     
-			NumberOfHealthSpawns++;
-            if (LoopHC.myPickUp != None)
-                NumberIdleSpawns++;    
+		SiphonPickups();
+		PickupSiphonIntervalCounter = 0;
+	}
+	PickupSiphonIntervalCounter++;
+}
+
+/*  Search for nearby pickups within a radius
+	Immediately distribute them to all nearby players
+	Send the siphoned pickups to the NodeNetwork object, which will handle the distribution of pickups to other Nodes
+ */
+function SiphonPickups()
+{
+	local Pickup SiphonedPickup;
+	local Controller C, NextC;
+	local Pawn Ally;
+	local int PickupAmount;
+	local Inventory Inv;
+	local Weapon W;
+	local Array<Pickup> SiphonedPickups;
+
+	foreach DynamicActors(Class'Pickup', SiphonedPickup)
+	{
+		if (SiphonedPickup != None && VSize(SiphonedPickup.Location - Pawn.Location) <= PickupSiphonRadius && FastTrace(SiphonedPickup.Location, Pawn.Location) && !SiphonedPickup.IsInState('Sleeping')
+			&& !SiphonedPickup.IsA('DruidHealthPack') && !SiphonedPickup.IsA('DruidAdrenalinePickup') && !SiphonedPickup.IsA('WeaponPickup') && !SiphonedPickup.IsA('UDamagePack'))
+		{
+			Log("SiphonedPickup Class: " $ SiphonedPickup.Class);
+			C = Level.ControllerList;	//I'm thinking a ControllerList would be smaller to loop through than using DynamicActors to find pawns
+			while (C != None)
+			{
+				NextC = C.NextController;
+				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() == PlayerSpawner.GetTeamNum() && !C.Pawn.IsA('DruidBlock') && VSize(C.Pawn.Location - Pawn.Location) <= PickupDistributeRadius && FastTrace(C.Pawn.Location, Pawn.Location))
+				{
+					if (Vehicle(C.Pawn) != None)
+					{
+						if (Vehicle(C.Pawn).Driver != None)
+							Ally = Vehicle(C.Pawn).Driver;
+						else
+							Ally = None;	//A sentinel, empty turret, etc.
+					}
+					else
+						Ally = C.Pawn;
+					//Found the person. Heal them, resupply them, etc.
+					if (TournamentHealth(SiphonedPickup) != None)
+					{
+						PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount;
+						Ally.GiveHealth(PickupAmount, Ally.HealthMax);
+					}
+					else if (AdrenalinePickup(SiphonedPickup) != None)
+					{
+						PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount;
+						Ally.Controller.AwardAdrenaline(PickupAmount);
+					}
+					else if (ShieldPickup(SiphonedPickup) != None)
+					{
+						PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount;
+						Ally.AddShieldStrength(PickupAmount);
+					}
+					else if (Ammo(SiphonedPickup) != None && !Ally.IsA('Monster'))
+					{
+						PickupAmount = Ammo(SiphonedPickup).AmmoAmount;
+						for (Inv = Ally.Inventory; Inv != None; Inv = Inv.Inventory)
+						{
+							W = Weapon(Inv);
+							if (W != None && W.Class == SiphonedPickup.InventoryType)
+							{
+								if (W.bNoAmmoInstances && W.AmmoClass[0] != None && !class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.AmmoClass[0]))
+									W.AddAmmo(PickupAmount, 0);
+								if (W.AmmoClass[0] != W.AmmoClass[1] && W.AmmoClass[1] != None)
+									W.AddAmmo(PickupAmount, 1);
+								break;
+							}
+						}
+						//End weapon pickup loop
+					}
+				}
+				C = NextC;
+			}
+			//End player loop
+			//Before we search for the next pickup, add this pickup to the SiphonedPickups array so that it can be sent to the NodeNetwork in a package
+			SiphonedPickups.Insert(0, 1);
+			SiphonedPickups[0] = SiphonedPickup;
 		}
 	}
+	//End nearby pickup loop
 
+	//Send SiphonedPickups array to NodeNetwork for handling
+}
 
-    SecondCount++;
-    if (SecondCount >= 60)
-    {
-    	foreach RadiusActors(class'xPickupBase', LoopPB, CheckRadius)
-    	{
-    		// first check if the pawn is anywhere near
-    	    if (LoopPB != None)
-    	    {     
-    			Log("+++ PickupBase" @ LoopPB @ "pickup" @ LoopPB.myPickUp @ LoopPB.myPickUp.Class );    
-    		}
-    	}
-    	foreach DynamicActors(class'HealthCharger', LoopHCR)
-    	{
-    		// first check if the pawn is anywhere near
-    	    if (LoopHCR != None && Pawn != None && VSize(LoopHCR.Location - Pawn.Location) < CheckRadius && FastTrace(LoopHCR.Location, Pawn.Location))
-    	    {     
-    			Log("+++ HealthCharger" @ LoopHCR @ "pickup" @ LoopHCR.myPickUp @ LoopHCR.myPickUp.Class );    
-    		}
-    	}
-    	foreach DynamicActors(class'HealthPack', LoopHP)
-    	{
-    		// first check if the pawn is anywhere near
-    	    if (LoopHP != None && Pawn != None && VSize(LoopHP.Location - Pawn.Location) < CheckRadius && FastTrace(LoopHP.Location, Pawn.Location))
-    	    {     
-    			Log("+++ Pawn" @ Pawn @ "PlayerSpawner" @ PlayerSpawner @ "HealthPickup" @ LoopHP @ "base" @ LoopHP.PickUpBase @ LoopHP.PickUpBase.Class );    
-    		}
-    	}
-        
-        Log("++++ Node enemies in range = " @ EnemyCount @ "Idle health Spawn Points:" @ NumberIdleSpawns @ "(" @ NumberOfHealthSpawns @ "Pickups)");
-        SecondCount = 0;
-        EnemyCount = 0;
-        NumberIdleSpawns = 0;
-    }
+//Distribute the received Pickups from the NodeNetwork object to nearby players
+function DistributePickups(Array < Pickup > Pickups)
+{
+
 }
 
 simulated function Destroyed()
@@ -148,6 +166,8 @@ function LevelUp(int NodeLevel)
 
 defaultproperties
 {
-     CheckRadius=700.000000
+     PickupSiphonRadius=700.000000
+	 PickupSiphonInterval=5
+	 PickupDistributeRadius=1000.00
      TimeBetweenChecks=1.000000
 }

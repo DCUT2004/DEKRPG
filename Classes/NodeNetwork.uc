@@ -1,7 +1,7 @@
 class NodeNetwork extends Object
      config(UT2004RPG);
 
-var Array < Node > Nodes;
+var Array < Node > Nodes;     //All Nodes in the map
 var config float MinimumSpawnRadius;
 
 static function InsertNode(Node Node)
