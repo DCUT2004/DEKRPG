@@ -9,10 +9,15 @@ var bool IsLockedForSelf;
 var Controller PlayerSpawner;
 var Material LockOverlay;
 
+var int TurretLevel;
+var int MaxTurretLevel;
+var float PercentDamageIncreasePerLevel;
+var float PercentHealthIncreasePerLevel;
+
 replication
 {
 	reliable if (Role == ROLE_Authority)
-		NumHealers;
+		TurretLevel, NumHealers;
 }
 
 simulated event PostBeginPlay()
@@ -167,7 +172,12 @@ function bool IsEngineerLocked()
 
 simulated function KDriverEnter(Pawn P)
 {
+    local float HealthPct;
+    
 	Super.KDriverEnter(P);
+	HealthPct = float(Health) / HealthMax;
+    HealthMax *= 1 + (PercentHealthIncreasePerLevel * TurretLevel);
+	Health = Min(HealthMax, HealthPct * HealthMax);    // otherwise we are always not maxed when we enter the turret
 
     if (Weapon != None && Driver != None && xPawn(Driver) != None && Driver.HasUDamage())
 		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, xPawn(Driver).UDamageTime - Level.TimeSeconds, false);
@@ -288,9 +298,27 @@ simulated function Destroyed_HandleDriver()
 			Driver.StopDriving(self);
 }
 
+function LevelUp()
+{
+    if (TurretLevel == MaxTurretLevel)
+        return;
+        
+    TurretLevel += 1;
+    HealthMax *= (1 + PercentHealthIncreasePerLevel);              // for if anyone is currently in it. Overriden on DriverEnter
+    
+    // no increase in the weapon fire rate due to driver enter/leave problems combining with other abilities.
+    // no increase in range as they don't have a range
+    
+    // damage increased handled in RPGClass.
+}
+
 defaultproperties
 {
      LockOverlay=FinalBlend'D-E-K-HoloGramFX.FullFB.HoloMaterial_2'
      DefaultWeaponClassName="DruidMiniTurretWeapon"
      DriverDamageMult=0.000000
+     TurretLevel=0
+     MaxTurretLevel=5
+     PercentDamageIncreasePerLevel=0.14
+     PercentHealthIncreasePerLevel=0.1
 }

@@ -177,7 +177,7 @@ function KDriverEnter(Pawn P)
 	Super.KDriverEnter(P);
 	HealthPct = float(Health) / HealthMax;
     HealthMax *= 1 + (PercentHealthIncreasePerLevel * TurretLevel);
-	Health = HealthPct * HealthMax;    // otherwise we are always not maxed when we enter the turret
+	Health = Min(HealthMax, HealthPct * HealthMax);    // otherwise we are always not maxed when we enter the turret
 
     if (Weapon != None && Driver != None && xPawn(Driver) != None && Driver.HasUDamage())
 		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, xPawn(Driver).UDamageTime - Level.TimeSeconds, false);

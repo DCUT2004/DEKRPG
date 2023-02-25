@@ -347,7 +347,16 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
             if (BaseBallTurret(Instigator) != None)
             {
                 Damage *= 1 + (BaseBallTurret(Instigator).TurretLevel * BaseBallTurret(Instigator).PercentDamageIncreasePerLevel);
-                // Log("++++ RPGClass handledamage Instigator is BaseBallturret with Level" @ BaseBallTurret(Instigator).TurretLevel @ "per level increase" @ BaseBallTurret(Instigator).PercentDamageIncreasePerLevel @ "new damage:" @ Damage @ "for type:" @ DamageType @ "NumHealers:" @ BaseBallTurret(Instigator).NumHealers);
+            }
+            else
+            if (DruidEnergyTurret(Instigator) != None)
+            {
+                Damage *= 1 + (DruidEnergyTurret(Instigator).TurretLevel * DruidEnergyTurret(Instigator).PercentDamageIncreasePerLevel);
+            }
+            else
+            if (DruidMinigunTurret(Instigator) != None)
+            {
+                Damage *= 1 + (DruidMinigunTurret(Instigator).TurretLevel * DruidMinigunTurret(Instigator).PercentDamageIncreasePerLevel);
             }
 		}
 		if (ClassIsChildOf(Injured.Class, class'MissionPortalBall'))
