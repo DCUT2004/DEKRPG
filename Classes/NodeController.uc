@@ -8,9 +8,21 @@ var MutUT2004RPG RPGMut;
 var config float TimeBetweenChecks;
 
 //Pickup siphoning variables
-var int PickupSiphonIntervalCounter;
-var config int PickupSiphonInterval;
+var int TransmitCounter;
+var config int TransmitInterval;
 var config float PickupSiphonRadius, PickupDistributeRadius;
+
+var int DistributeCounter;
+var config int DistributeInterval;
+
+//A Packet is a struct containing pickups and charge that get transmitted out by a Node to the Network
+struct Packet
+{
+	var Array < Pickup > Pickups;
+	var float DeliveryTime;		//For determining when this Packet can be received by this Node
+};
+
+var Array < Packet > IncomingPackets;	//An array of Packets that are added to by other Nodes
 
 simulated event PostBeginPlay()
 {
@@ -42,39 +54,43 @@ function SetPlayerSpawner(Controller PlayerC)
 		StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
 
 	}
-	PickupSiphonIntervalCounter = 0;
+	TransmitCounter = 0;
+	DistributeCounter = 0;
 	SetTimer(TimeBetweenChecks, true);
 }
 
 /*  Search for nearby pickups within a radius
+	Distribute the siphoned pickups to other Nodes
 	Also search for nearby monsters within a radius
 	Distribute pickups that were given to this Node by other Nodes to nearby players
  */
 function Timer()
 {
-
+	local Array<Pickup> Pickups;
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
-	if (PickupSiphonIntervalCounter >= PickupSiphonInterval)
+	TransmitCounter++;
+	DistributeCounter++;
+	if (TransmitCounter >= TransmitInterval)
 	{
-		SiphonPickups();
-		PickupSiphonIntervalCounter = 0;
+		Pickups = SiphonPickups();	//O(n^3)
+		TransmitCounter = 0;
+		TransmitPacket(Pickups);	//O(n)
 	}
-	PickupSiphonIntervalCounter++;
+	if (DistributeCounter >= DistributeInterval)
+	{
+		DistributePacket();			//O(n^4)
+		DistributeCounter = 0;
+	}
 }
 
 /*  Search for nearby pickups within a radius
 	Immediately distribute them to all nearby players
-	Send the siphoned pickups to the NodeNetwork object, which will handle the distribution of pickups to other Nodes
+	Return an array of the siphoned pickups to prepare it for transmission to other Nodes
  */
-function SiphonPickups()
+function Array<Pickup> SiphonPickups()
 {
 	local Pickup SiphonedPickup;
-	local Controller C, NextC;
-	local Pawn Ally;
-	local int PickupAmount;
-	local Inventory Inv;
-	local Weapon W;
 	local Array<Pickup> SiphonedPickups;
 
 	foreach DynamicActors(Class'Pickup', SiphonedPickup)
@@ -82,79 +98,149 @@ function SiphonPickups()
 		if (SiphonedPickup != None && VSize(SiphonedPickup.Location - Pawn.Location) <= PickupSiphonRadius && FastTrace(SiphonedPickup.Location, Pawn.Location) && !SiphonedPickup.IsInState('Sleeping')
 			&& !SiphonedPickup.IsA('DruidHealthPack') && !SiphonedPickup.IsA('DruidAdrenalinePickup') && !SiphonedPickup.IsA('WeaponPickup') && !SiphonedPickup.IsA('UDamagePack'))
 		{
-			Log("SiphonedPickup Class: " $ SiphonedPickup.Class);
-			C = Level.ControllerList;	//I'm thinking a ControllerList would be smaller to loop through than using DynamicActors to find pawns
-			while (C != None)
-			{
-				NextC = C.NextController;
-				if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() == PlayerSpawner.GetTeamNum() && !C.Pawn.IsA('DruidBlock') && VSize(C.Pawn.Location - Pawn.Location) <= PickupDistributeRadius && FastTrace(C.Pawn.Location, Pawn.Location))
-				{
-					if (Vehicle(C.Pawn) != None)
-					{
-						if (Vehicle(C.Pawn).Driver != None)
-							Ally = Vehicle(C.Pawn).Driver;
-						else
-							Ally = None;	//A sentinel, empty turret, etc.
-					}
-					else
-						Ally = C.Pawn;
-					//Found the person. Heal them, resupply them, etc.
-					if (TournamentHealth(SiphonedPickup) != None)
-					{
-						PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount;
-						Ally.GiveHealth(PickupAmount, Ally.HealthMax);
-					}
-					else if (AdrenalinePickup(SiphonedPickup) != None)
-					{
-						PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount;
-						Ally.Controller.AwardAdrenaline(PickupAmount);
-					}
-					else if (ShieldPickup(SiphonedPickup) != None)
-					{
-						PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount;
-						Ally.AddShieldStrength(PickupAmount);
-					}
-					else if (Ammo(SiphonedPickup) != None && !Ally.IsA('Monster'))
-					{
-						PickupAmount = Ammo(SiphonedPickup).AmmoAmount;
-						for (Inv = Ally.Inventory; Inv != None; Inv = Inv.Inventory)
-						{
-							W = Weapon(Inv);
-							if (W != None && W.Class == SiphonedPickup.InventoryType)
-							{
-								if (W.bNoAmmoInstances && W.AmmoClass[0] != None && !class'MutUT2004RPG'.static.IsSuperWeaponAmmo(W.AmmoClass[0]))
-									W.AddAmmo(PickupAmount, 0);
-								if (W.AmmoClass[0] != W.AmmoClass[1] && W.AmmoClass[1] != None)
-									W.AddAmmo(PickupAmount, 1);
-								break;
-							}
-						}
-						//End weapon pickup loop
-					}
-				}
-				C = NextC;
-			}
-			//End player loop
-			//Before we search for the next pickup, add this pickup to the SiphonedPickups array so that it can be sent to the NodeNetwork in a package
+			DistributePickup(SiphonedPickup);
 			SiphonedPickups.Insert(0, 1);
 			SiphonedPickups[0] = SiphonedPickup;
 		}
 	}
-	//End nearby pickup loop
 
-	//Send SiphonedPickups array to NodeNetwork for handling
+	return SiphonedPickups;
 }
 
-//Distribute the received Pickups from the NodeNetwork object to nearby players
-function DistributePickups(Array < Pickup > Pickups)
+//Transmits a Packet out to other Nodes
+//Calculates the time at which a Packet should be scheduled to arrive for each Node
+//And places the Packet in that Node's IncomingPackets array with the DeliveryTime
+function TransmitPacket(Array<Pickup> Pickups)
 {
+	local int i;
+	local Node OtherNode;
+	local float DeliveryTime;
 
+	for (i = 0; i < Class'NodeNetwork'.default.Nodes.Length; i++)
+	{
+		if (Pawn != None && Pawn != Class'NodeNetwork'.default.Nodes[i])
+		{
+			OtherNode = Class'NodeNetwork'.default.Nodes[i];
+			if (OtherNode != None)
+			{
+				DeliveryTime = VSize(OtherNode.Location - Pawn.Location) / Class'NodeNetwork'.default.PacketSpeedPerSecond;
+				if (OtherNode.Controller != None && NodeController(OtherNode.Controller) != None)
+				{
+					//We may want to be careful here
+					//If DeliveryTime is large, then the IncomingPackets array can also be large
+					//Size of IncomingPackets from one Node can grow to DeliveryTime / TransmitInterval
+					//Decreasing TransmitInterval or decreasing PacketSpeedPerSecond can cause IncomingPackets array to be large
+					NodeController(OtherNode.Controller).IncomingPackets.Insert(0, 1);
+					NodeController(OtherNode.Controller).IncomingPackets[0].Pickups = Pickups;
+					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryTime = DeliveryTime;
+				}
+			}
+		}
+	}
+}
+
+//Distribute the received Packet from IncomingPackets if DeliveryTime is within 1 second
+//If the packet contains Pickups, distribute to nearby Players
+//If the packet contains Charge, then Charge this Node
+//Otherwise if DeliveryTime is a second or longer, just decrement the DeliveryTime and do nothing
+function DistributePacket()
+{
+	local int i, j;
+
+	for (i = 0; i < IncomingPackets.Length; i++)
+	{
+		if (IncomingPackets[i].DeliveryTime < DistributeInterval)
+		{
+			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
+				DistributePickup(IncomingPackets[i].Pickups[j]);
+			IncomingPackets.Remove(i, 1);
+		}
+		else
+			IncomingPackets[i].DeliveryTime -= DistributeInterval;
+	}
+}
+
+//Distribute the SiphonedPickup to all nearby players
+//This is called directly by SiphonPickups() (a pickup from this Node) and DistributePacket() (a pickup from another Node)
+function DistributePickup(Pickup SiphonedPickup)
+{
+	local Controller C, NextC;
+	local Pawn Ally;
+	local int PickupAmount;
+	local Inventory Inv;
+	local Weapon W;
+
+	if (SiphonedPickup == None)
+		return;
+
+	C = Level.ControllerList;
+	while (C != None)
+	{
+		NextC = C.NextController;
+		if (C != None && C.Pawn != None && C.Pawn.Health > 0 && C.Pawn.GetTeamNum() == PlayerSpawner.GetTeamNum() && !C.Pawn.IsA('DruidBlock') && VSize(C.Pawn.Location - Pawn.Location) <= PickupDistributeRadius && FastTrace(C.Pawn.Location, Pawn.Location))
+		{
+			if (Vehicle(C.Pawn) != None)
+			{
+				if (Vehicle(C.Pawn).Driver != None)
+					Ally = Vehicle(C.Pawn).Driver;
+				else
+					Ally = None;	//A sentinel, empty turret, etc.
+			}
+			else
+				Ally = C.Pawn;
+			//Found the person. Heal them, resupply them, etc.
+			if (Ally != None)
+			{
+				if (TournamentHealth(SiphonedPickup) != None)
+				{
+					PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount;
+					Ally.GiveHealth(PickupAmount, Ally.HealthMax);
+				}
+				else if (AdrenalinePickup(SiphonedPickup) != None)
+				{
+					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount;
+					Ally.Controller.AwardAdrenaline(PickupAmount);
+				}
+				else if (ShieldPickup(SiphonedPickup) != None)
+				{
+					PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount;
+					Ally.AddShieldStrength(PickupAmount);
+				}
+				else if (Ammo(SiphonedPickup) != None && !Ally.IsA('Monster'))
+				{
+					PickupAmount = Ammo(SiphonedPickup).AmmoAmount;
+					for (Inv = Ally.Inventory; Inv != None; Inv = Inv.Inventory)
+					{
+						W = Weapon(Inv);
+						if (W != None)
+						{
+							if (W.IsA('RPGWeapon'))
+								W = RPGWeapon(W).ModifiedWeapon;
+							if (W.FireModeClass[0] != None && W.FireModeClass[0].default.AmmoClass == SiphonedPickup.InventoryType)
+							{
+								W.AddAmmo(PickupAmount, 0);
+								break;
+							}
+							else if (W.FireModeClass[1] != None && W.FireModeClass[1].default.AmmoClass == SiphonedPickup.InventoryType)
+							{
+								W.AddAmmo(PickupAmount, 1);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		C = NextC;
+	}
 }
 
 simulated function Destroyed()
 {
 	if (PlayerReplicationInfo != None)
 		PlayerReplicationInfo.Destroy();
+	
+	IncomingPackets.Length = 0;
 
 	Super.Destroyed();
 }
@@ -167,7 +253,8 @@ function LevelUp(int NodeLevel)
 defaultproperties
 {
      PickupSiphonRadius=700.000000
-	 PickupSiphonInterval=5
 	 PickupDistributeRadius=1000.00
+	 TransmitInterval=5		//Transmit packets out every this many seconds
+	 DistributeInterval=1	//Distribute received packets out every this many seconds
      TimeBetweenChecks=1.000000
 }
