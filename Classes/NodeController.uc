@@ -11,6 +11,9 @@ var config float TimeBetweenChecks;
 var int TransmitCounter;
 var config int TransmitInterval;
 var config float PickupSiphonRadius, PickupDistributeRadius;
+var config float PickupSiphonMultiplier;	//How much of the original pickup value to siphon
+var config float PickupValueDecreasePerSecond;	//How much of the pickup's value is lost per second as it travels through the Network
+var config float MinimumPickupValue;		//The largest amount of a pickup's value that can be lost (i.e. the largest amount of a pickup that is preserved) as it travels through the Network
 
 var int DistributeCounter;
 var config int DistributeInterval;
@@ -22,7 +25,8 @@ var config int AttackInterval;
 struct Packet
 {
 	var Array < Pickup > Pickups;
-	var float DeliveryTime;		//For determining when this Packet can be received by this Node
+	var float DeliveryTime;		//For determining when this Packet can be received by this Node, in seconds
+	var float DeliveryDistance;
 };
 
 var Array < Packet > IncomingPackets;	//An array of Packets that are added to by other Nodes
@@ -70,6 +74,7 @@ function SetPlayerSpawner(Controller PlayerC)
 function Timer()
 {
 	local Array<Pickup> Pickups;
+
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
 	TransmitCounter++;
@@ -110,7 +115,7 @@ function Array<Pickup> SiphonPickups()
 		if (SiphonedPickup != None && VSize(SiphonedPickup.Location - Pawn.Location) <= PickupSiphonRadius && FastTrace(SiphonedPickup.Location, Pawn.Location) && !SiphonedPickup.IsInState('Sleeping')
 			&& !SiphonedPickup.IsA('DruidHealthPack') && !SiphonedPickup.IsA('DruidAdrenalinePickup') && !SiphonedPickup.IsA('WeaponPickup') && !SiphonedPickup.IsA('UDamagePack'))
 		{
-			DistributePickup(SiphonedPickup);
+			DistributePickup(SiphonedPickup, 0.0);
 			SiphonedPickups.Insert(0, 1);
 			SiphonedPickups[0] = SiphonedPickup;
 		}
@@ -126,6 +131,7 @@ function TransmitPacket(Array<Pickup> Pickups)
 {
 	local int i;
 	local Node OtherNode;
+	local float DeliveryDistance;
 	local float DeliveryTime;
 
 	for (i = 0; i < Class'NodeNetwork'.default.Nodes.Length; i++)
@@ -135,7 +141,8 @@ function TransmitPacket(Array<Pickup> Pickups)
 			OtherNode = Class'NodeNetwork'.default.Nodes[i];
 			if (OtherNode != None)
 			{
-				DeliveryTime = VSize(OtherNode.Location - Pawn.Location) / Class'NodeNetwork'.default.PacketSpeedPerSecond;
+				DeliveryDistance = VSize(OtherNode.Location - Pawn.Location);
+				DeliveryTime = DeliveryDistance / Class'NodeNetwork'.default.PacketSpeedPerSecond;
 				if (OtherNode.Controller != None && NodeController(OtherNode.Controller) != None)
 				{
 					//We may want to be careful here
@@ -145,6 +152,7 @@ function TransmitPacket(Array<Pickup> Pickups)
 					NodeController(OtherNode.Controller).IncomingPackets.Insert(0, 1);
 					NodeController(OtherNode.Controller).IncomingPackets[0].Pickups = Pickups;
 					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryTime = DeliveryTime;
+					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryDistance = DeliveryDistance;
 				}
 			}
 		}
@@ -164,7 +172,7 @@ function DistributePacket()
 		if (IncomingPackets[i].DeliveryTime < DistributeInterval)
 		{
 			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
-				DistributePickup(IncomingPackets[i].Pickups[j]);
+				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketSpeedPerSecond);
 			IncomingPackets.Remove(i, 1);
 		}
 		else
@@ -174,13 +182,14 @@ function DistributePacket()
 
 //Distribute the SiphonedPickup to all nearby players
 //This is called directly by SiphonPickups() (a pickup from this Node) and DistributePacket() (a pickup from another Node)
-function DistributePickup(Pickup SiphonedPickup)
+function DistributePickup(Pickup SiphonedPickup, float DeliveryTime)
 {
 	local Controller C, NextC;
 	local Pawn Ally;
 	local int PickupAmount;
 	local Inventory Inv;
 	local Weapon W;
+	local float DecreasedDeliveryValue, NewDeliveryValue;
 
 	if (SiphonedPickup == None)
 		return;
@@ -203,24 +212,26 @@ function DistributePickup(Pickup SiphonedPickup)
 			//Found the person. Heal them, resupply them, etc.
 			if (Ally != None)
 			{
+				DecreasedDeliveryValue = DeliveryTime * PickupValueDecreasePerSecond;
+				NewDeliveryValue = FMax(PickupSiphonMultiplier - DecreasedDeliveryValue, MinimumPickupValue);
 				if (TournamentHealth(SiphonedPickup) != None)
 				{
-					PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount;
+					PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
 					Ally.GiveHealth(PickupAmount, Ally.HealthMax);
 				}
 				else if (AdrenalinePickup(SiphonedPickup) != None)
 				{
-					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount;
+					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
 					Ally.Controller.AwardAdrenaline(PickupAmount);
 				}
 				else if (ShieldPickup(SiphonedPickup) != None)
 				{
-					PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount;
+					PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
 					Ally.AddShieldStrength(PickupAmount);
 				}
 				else if (Ammo(SiphonedPickup) != None && !Ally.IsA('Monster'))
 				{
-					PickupAmount = Ammo(SiphonedPickup).AmmoAmount;
+					PickupAmount = Ammo(SiphonedPickup).AmmoAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
 					for (Inv = Ally.Inventory; Inv != None; Inv = Inv.Inventory)
 					{
 						W = Weapon(Inv);
@@ -266,7 +277,10 @@ defaultproperties
 {
      PickupSiphonRadius=700.000000
 	 PickupDistributeRadius=1000.00
-	 TransmitInterval=5		//Transmit packets out every this many seconds
-	 DistributeInterval=1	//Distribute received packets out every this many seconds
+	 PickupSiphonMultiplier=0.30000			//30% of the pickup's value is siphoned and given to nearby players
+	 PickupValueDecreasePerSecond=0.0200	//Pickup's value decreases by 2% per second as it travels over the Network
+	 MinimumPickupValue=0.0500				//Pickup's value can decrease to as little as 5% over the Network
+	 TransmitInterval=5						//Transmit packets out every this many seconds
+	 DistributeInterval=1					//Distribute received packets out every this many seconds
      TimeBetweenChecks=1.000000
 }
