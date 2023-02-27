@@ -15,6 +15,9 @@ var config float PickupSiphonRadius, PickupDistributeRadius;
 var int DistributeCounter;
 var config int DistributeInterval;
 
+var int AttackCounter;
+var config int AttackInterval;
+
 //A Packet is a struct containing pickups and charge that get transmitted out by a Node to the Network
 struct Packet
 {
@@ -71,6 +74,7 @@ function Timer()
 	    return;
 	TransmitCounter++;
 	DistributeCounter++;
+	AttackCounter++;
 	if (TransmitCounter >= TransmitInterval)
 	{
 		Pickups = SiphonPickups();	//O(n^3)
@@ -82,7 +86,15 @@ function Timer()
 		DistributePacket();			//O(n^4)
 		DistributeCounter = 0;
 	}
+	if (AttackCounter >= AttackInterval)
+	{
+		Attack();
+		AttackCounter = 0;
+	}
 }
+
+//Overrideable method for different Node types
+function Attack();
 
 /*  Search for nearby pickups within a radius
 	Immediately distribute them to all nearby players
