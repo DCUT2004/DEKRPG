@@ -42,7 +42,15 @@ simulated event PostBeginPlay()
 
 function SetPlayerSpawner(Controller PlayerC)
 {
+    local AutoGunController NewController;
+    
 	PlayerSpawner = PlayerC;
+
+    // start off with a autogun controller
+    NewController = spawn(class'AutoGunController');
+    NewController.Possess(self);
+    NewController.SetPlayerSpawner(PlayerSpawner) ;
+    VehicleProjSpawnOffset.Z = 0;
 }
 
 function Timer()
@@ -174,10 +182,15 @@ simulated function KDriverEnter(Pawn P)
 {
     local float HealthPct;
     
+    Controller.Destroy();
+    Controller = None;
+    
 	Super.KDriverEnter(P);
+    
 	HealthPct = float(Health) / HealthMax;
     HealthMax *= 1 + (PercentHealthIncreasePerLevel * TurretLevel);
 	Health = Min(HealthMax, HealthPct * HealthMax);    // otherwise we are always not maxed when we enter the turret
+    VehicleProjSpawnOffset = default.VehicleProjSpawnOffset;
 
     if (Weapon != None && Driver != None && xPawn(Driver) != None && Driver.HasUDamage())
 		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, xPawn(Driver).UDamageTime - Level.TimeSeconds, false);
@@ -186,11 +199,21 @@ simulated function KDriverEnter(Pawn P)
 
 simulated function bool KDriverLeave( bool bForceLeave )
 {
+    local AutoGunController NewController;
+    local bool retval;
+     
+	retval = super.KDriverLeave(  bForceLeave );
+    
 	// sort out the Udamage overlay
 	if (Weapon != None && Controller != None && xPawn(Controller.Pawn) != None && Controller.Pawn.HasUDamage())
 		Weapon.SetOverlayMaterial(xPawn(Controller.Pawn).UDamageWeaponMaterial, 0, false);
 
-	return Super.KDriverLeave(bForceLeave);
+    // now add controller back in
+    NewController = spawn(class'AutoGunController');
+    NewController.Possess(self);
+    NewController.SetPlayerSpawner(PlayerSpawner) ;
+    VehicleProjSpawnOffset.Z = 0;
+    return retval;
 }
 
 function DriverDied()
@@ -296,6 +319,14 @@ simulated function Destroyed_HandleDriver()
 	if ( Role != ROLE_Authority )
 		if ( Driver.DrivenVehicle == self )
 			Driver.StopDriving(self);
+}
+
+simulated event Destroyed()
+{
+    Controller.Destroy();
+	Controller = None;
+
+	super.Destroyed();
 }
 
 function LevelUp()

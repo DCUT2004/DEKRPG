@@ -98,7 +98,7 @@ simulated function Timer()
 	{
 		// team mates go on TeamPawns. Opposite team go on Enemies
 		if (P != PlayerOwner.Pawn && P != PlayerDriver && !P.IsA('DruidBlock') && !P.IsA('DruidExplosive') && !P.IsA('EnergyWall') && !P.IsA('RedeemerWarhead') && !P.IsA('TarydiumCrystal') && !P.IsA('MissionPortalBall') && !P.IsA('MissionBalloon')
-         && (Vehicle(P) == None || BaseCeilingSentinel(P) != None || BaseFloorSentinel(P) != None || BaseTurretSentinel(P) != None || Node(P) != None || BaseBallTurret(P) != None || DruidEnergyTurret(P) != None || DruidMinigunTurret(P) != None))
+         && (Vehicle(P) == None || BaseCeilingSentinel(P) != None || BaseFloorSentinel(P) != None || BaseTurretSentinel(P) != None || Node(P) != None || BaseBallTurret(P) != None || DruidEnergyTurret(P) != None || DruidMinigunTurret(P) != None || BaseLinkTurret(P) != None))
 		{
 			// we have a valid pawn. Now is it good or bad?
 			if (P.Isa('Monster'))

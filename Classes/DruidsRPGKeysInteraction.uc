@@ -1881,6 +1881,9 @@ function PostRender(Canvas Canvas)
             else            
             if (DruidMinigunTurret(P) != None)
                 PawnLevel = DruidMinigunTurret(P).TurretLevel;                    
+            else            
+            if (BaseLinkTurret(P) != None)
+                PawnLevel = BaseLinkTurret(P).TurretLevel;                    
             if (PawnLevel >= 0)
             {
     			GetAxes(rotator(P.Location - CameraLocation), X, Y, Z);

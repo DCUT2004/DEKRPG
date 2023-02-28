@@ -1,13 +1,10 @@
-class DEKLightningTurret extends ASTurret_LinkTurret;
+class DEKLightningTurret extends BaseLinkTurret;
 
 var float LastHealTime;
 var array<Controller> Healers;
 var array<float> HealersLastLinkTime;
 var int NumHealers;
 var MutUT2004RPG RPGMut;
-var bool IsLockedForSelf;
-var Controller PlayerSpawner;
-var Material LockOverlay;
 
 replication
 {
@@ -41,11 +38,6 @@ simulated event PostBeginPlay()
 simulated function UpdateLinkColor( LinkAttachment.ELinkColor Color )
 {
 	return;
-}
-
-function SetPlayerSpawner(Controller PlayerC)
-{
-	PlayerSpawner = PlayerC;
 }
 
 function Timer()
@@ -132,29 +124,6 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
 	return healret;
 }
 
-function bool TryToDrive(Pawn P)
-{
-	if ( (P.Controller == None) || !P.Controller.bIsPlayer || Health <= 0 )
-		return false;
-
-	// Check for Locking by engineer....
-	if ( IsEngineerLocked() && P.Controller != PlayerSpawner )
-	{
-		if (PlayerController(P.Controller) != None)
-		{
-		    if (PlayerSpawner != None)
-				PlayerController(P.Controller).ReceiveLocalizedMessage(class'VehicleEngLockedMessage', 0, PlayerSpawner.PlayerReplicationInfo);
-			else
-				PlayerController(P.Controller).ReceiveLocalizedMessage(class'VehicleEngLockedMessage', 0);
-		}
-		return false;
-	}
-	else
-	{
-		return super.TryToDrive(P);
-	}
-}
-
 function EngineerLock()
 {
     IsLockedForSelf = True;
@@ -165,41 +134,6 @@ function EngineerUnlock()
 {
     IsLockedForSelf = False;
 	SetOverlayMaterial(LockOverlay, 0.0, false);
-}
-
-function bool IsEngineerLocked()
-{
-    return IsLockedForSelf;
-}
-
-function KDriverEnter(Pawn P)
-{
-	Super.KDriverEnter(P);
-
-    if (Weapon != None && Driver != None && xPawn(Driver) != None && Driver.HasUDamage())
-		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, xPawn(Driver).UDamageTime - Level.TimeSeconds, false);
-
-}
-
-function bool KDriverLeave( bool bForceLeave )
-{
-	if (Weapon != None && Controller != None && xPawn(Controller.Pawn) != None && Controller.Pawn.HasUDamage())
-		Weapon.SetOverlayMaterial(xPawn(Controller.Pawn).UDamageWeaponMaterial, 0, false);
-
-	return Super.KDriverLeave(bForceLeave);
-}
-
-function DriverDied()
-{
-	if (Weapon != None && xPawn(Driver) != None && Driver.HasUDamage())
-		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, 0, false);
-
-	Super.DriverDied();
-}
-
-function bool HasUDamage()
-{
-	return (Driver != None && Driver.HasUDamage());
 }
 
 defaultproperties

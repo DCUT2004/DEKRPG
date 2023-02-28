@@ -1,10 +1,7 @@
-class DruidLinkTurret extends ASTurret_LinkTurret;
+class DruidLinkTurret extends BaseLinkTurret;
 
 var Pawn SaveP;
 var RPGStatsInv SavePStats;
-var bool IsLockedForSelf;
-var Controller PlayerSpawner;
-var Material LockOverlay;
 
 simulated event PostBeginPlay()
 {
@@ -13,11 +10,6 @@ simulated event PostBeginPlay()
 	DefaultWeaponClassName=string(class'Weapon_DruidLink');
 
 	super.PostBeginPlay();
-}
-
-function SetPlayerSpawner(Controller PlayerC)
-{
-	PlayerSpawner = PlayerC;
 }
 
 static function RPGStatsInv GetStatsInvFor(Controller C, optional bool bMustBeOwner)
@@ -41,29 +33,6 @@ static function RPGStatsInv GetStatsInvFor(Controller C, optional bool bMustBeOw
 	return None;
 }
 
-function bool TryToDrive(Pawn P)
-{
-	if ( (P.Controller == None) || !P.Controller.bIsPlayer || Health <= 0 )
-		return false;
-
-	// Check for Locking by engineer....
-	if ( IsEngineerLocked() && P.Controller != PlayerSpawner )
-	{
-		if (PlayerController(P.Controller) != None)
-		{
-		    if (PlayerSpawner != None)
-				PlayerController(P.Controller).ReceiveLocalizedMessage(class'VehicleEngLockedMessage', 0, PlayerSpawner.PlayerReplicationInfo);
-			else
-				PlayerController(P.Controller).ReceiveLocalizedMessage(class'VehicleEngLockedMessage', 0);
-		}
-		return false;
-	}
-	else
-	{
-		return super.TryToDrive(P);
-	}
-}
-
 function EngineerLock()
 {
     IsLockedForSelf = True;
@@ -78,19 +47,14 @@ function EngineerUnlock()
 		TurretSwivel.SetOverlayMaterial(LockOverlay, 0.0, false);
 }
 
-function bool IsEngineerLocked()
-{
-    return IsLockedForSelf;
-}
-
 function KDriverEnter(Pawn P)
 {
 	local RPGStatsInv InstigatedStatsInv;
 	local Controller C;
 	
-	C = P.Controller;
-
 	Super.KDriverEnter( P );
+
+	C = P.Controller;
 
 	// for sharing xp to work, the RPGStatsInv has to have Instigator set to the Link Turret
 	// this is so LinkGun(InstigatorInv.Instigator.Weapon) is not None in RPGRules.ShareExperience
@@ -113,9 +77,6 @@ function KDriverEnter(Pawn P)
 
 event bool KDriverLeave( bool bForceLeave )
 {
-	if (Weapon != None && Controller != None && xPawn(Controller.Pawn) != None && Controller.Pawn.HasUDamage())
-		Weapon.SetOverlayMaterial(xPawn(Controller.Pawn).UDamageWeaponMaterial, 0, false);
-
 	if (SaveP != None)
 	{
 		if (SavePStats != None && SavePStats.Instigator == self)
@@ -127,19 +88,6 @@ event bool KDriverLeave( bool bForceLeave )
 	}
 
 	return super.KDriverLeave(  bForceLeave );
-}
-
-function DriverDied()
-{
-	if (Weapon != None && xPawn(Driver) != None && Driver.HasUDamage())
-		Weapon.SetOverlayMaterial(xPawn(Driver).UDamageWeaponMaterial, 0, false);
-
-	Super.DriverDied();
-}
-
-function bool HasUDamage()
-{
-	return (Driver != None && Driver.HasUDamage());
 }
 
 defaultproperties

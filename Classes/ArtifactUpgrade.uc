@@ -49,7 +49,7 @@ function Activate()
 
 		// See if we hit something.
        	AHit = Trace(HitLocation, HitNormal, BeamEndLocation, StartTrace, true);
-		if ((AHit == None) || (Pawn(AHit) == None) || ((Pawn(AHit).Controller == None) && BaseBallTurret(AHit) == None && DruidEnergyTurret(AHit) == None && DruidMinigunTurret(AHit) == None))
+		if ((AHit == None) || (Pawn(AHit) == None) || ((Pawn(AHit).Controller == None) && BaseBallTurret(AHit) == None && DruidEnergyTurret(AHit) == None && DruidMinigunTurret(AHit) == None && BaseLinkTurret(AHit) == None))
 		{
 			// missed. 
             // Log("++++++ Upgrade Artifact didn't hit the right thing 1" @ HitPawn);
@@ -62,7 +62,7 @@ function Activate()
 		HitPawn = Pawn(AHit);
 		if ( HitPawn != Instigator && HitPawn.Health > 0 
             && ((HitPawn.Controller != None && HitPawn.Controller.SameTeamAs(Instigator.Controller))  
-                || ((BaseBallTurret(HitPawn) != None || DruidEnergyTurret(HitPawn) != None || DruidMinigunTurret(HitPawn) != None) && HitPawn.GetTeamNum() == Instigator.GetTeamNum() && Instigator.GetTeamNum() != 255 ) )
+                || ((BaseBallTurret(HitPawn) != None || DruidEnergyTurret(HitPawn) != None || DruidMinigunTurret(HitPawn) != None || BaseLinkTurret(HitPawn) != None) && HitPawn.GetTeamNum() == Instigator.GetTeamNum() && Instigator.GetTeamNum() != 255 ) )
 		    && VSize(HitPawn.Location - StartTrace) < MaxRange)
 		{
 			// ok, lets do the work. Give the sentinel/turret a levelup.
@@ -148,6 +148,18 @@ function Activate()
         			return;	// already maxed
                 }
                 DruidMinigunTurret(HitPawn).LevelUp();
+            }
+            else	
+			if (BaseLinkTurret(HitPawn) != None)
+            {
+                if (BaseLinkTurret(HitPawn).TurretLevel >= BaseLinkTurret(HitPawn).default.MaxTurretLevel)
+                {
+        			Instigator.ReceiveLocalizedMessage(MessageClass, 2000, None, None, Class);
+        			bActive = false;
+        			GotoState('');
+        			return;	// already maxed
+                }
+                BaseLinkTurret(HitPawn).LevelUp();
             }
             else
             {

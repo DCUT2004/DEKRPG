@@ -42,7 +42,14 @@ simulated event PostBeginPlay()
 
 function SetPlayerSpawner(Controller PlayerC)
 {
+    local ONSAutoGunController NewController;
 	PlayerSpawner = PlayerC;
+
+    // start off with a autogun controller
+    bAutoTurret = true;
+    NewController = spawn(class'ONSAutoGunController');
+    NewController.Possess(self);
+    NewController.SetPlayerSpawner(PlayerSpawner) ;
 }
 
 simulated function RawInput(float DeltaTime,
@@ -308,11 +315,42 @@ function KDriverEnter(Pawn P)
 {
     local float HealthPct;
     
+    Controller.Destroy();
+	Controller = None;
+    bAutoTurret = false;
+    
 	Super.KDriverEnter(P);
+    
 	HealthPct = float(Health) / HealthMax;
     HealthMax *= 1 + (PercentHealthIncreasePerLevel * TurretLevel);
 	Health = Min(HealthMax, HealthPct * HealthMax);    // otherwise we are always not maxed when we enter the turret
 }
+
+event bool KDriverLeave( bool bForceLeave )
+{
+    local bool retval;
+    local ONSAutoGunController NewController;
+     
+	retval = super.KDriverLeave(  bForceLeave );
+    
+    // now add controller back in
+    bAutoTurret = true;
+    NewController = spawn(class'ONSAutoGunController');
+    NewController.Possess(self);
+    NewController.SetPlayerSpawner(PlayerSpawner) ;
+    
+    return retval;
+}
+
+simulated event Destroyed()
+{
+    Controller.Destroy();
+	Controller = None;
+    bAutoTurret = false;
+
+	super.Destroyed();
+}
+
 function LevelUp()
 {
     if (TurretLevel == MaxTurretLevel)

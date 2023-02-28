@@ -358,6 +358,11 @@ static simulated function HandleDamage(out int Damage, Pawn Injured, Pawn Instig
             {
                 Damage *= 1 + (DruidMinigunTurret(Instigator).TurretLevel * DruidMinigunTurret(Instigator).PercentDamageIncreasePerLevel);
             }
+            else
+            if (BaseLinkTurret(Instigator) != None)
+            {
+                Damage *= 1 + (BaseLinkTurret(Instigator).TurretLevel * BaseLinkTurret(Instigator).PercentDamageIncreasePerLevel);
+            }
 		}
 		if (ClassIsChildOf(Injured.Class, class'MissionPortalBall'))
 		{
