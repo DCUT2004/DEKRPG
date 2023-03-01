@@ -7,6 +7,10 @@ var MutUT2004RPG RPGMut;
 
 var config float TimeBetweenChecks;
 
+//Charge variables
+var int Charge;
+var config int ChargeDrainPerSecond, MaxCharge;
+
 //Pickup siphoning variables
 var int TransmitCounter;
 var config int TransmitInterval;
@@ -63,6 +67,8 @@ function SetPlayerSpawner(Controller PlayerC)
 	}
 	TransmitCounter = 0;
 	DistributeCounter = 0;
+	AttackCounter = 0;
+	Charge = 0;
 	SetTimer(TimeBetweenChecks, true);
 }
 
@@ -77,25 +83,36 @@ function Timer()
 
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
-	TransmitCounter++;
-	DistributeCounter++;
-	AttackCounter++;
-	if (TransmitCounter >= TransmitInterval)
+	if (Charge >= ChargeDrainPerSecond)
 	{
-		Pickups = SiphonPickups();	//O(n^3)
-		TransmitCounter = 0;
-		TransmitPacket(Pickups);	//O(n)
+		TransmitCounter++;
+		DistributeCounter++;
+		AttackCounter++;
+		if (TransmitCounter >= TransmitInterval)
+		{
+			Pickups = SiphonPickups();	//O(n^3)
+			TransmitCounter = 0;
+			TransmitPacket(Pickups);	//O(n)
+		}
+		if (DistributeCounter >= DistributeInterval)
+		{
+			DistributePacket();			//O(n^4)
+			DistributeCounter = 0;
+		}
+		if (AttackCounter >= AttackInterval)
+		{
+			Attack();
+			AttackCounter = 0;
+		}
 	}
-	if (DistributeCounter >= DistributeInterval)
-	{
-		DistributePacket();			//O(n^4)
-		DistributeCounter = 0;
-	}
-	if (AttackCounter >= AttackInterval)
-	{
-		Attack();
-		AttackCounter = 0;
-	}
+	Charge = Max(0, Charge - ChargeDrainPerSecond);
+	Log("Charge: " $ Charge);
+}
+
+function AddCharge(int Amount)
+{
+	Charge = Min(Charge + Amount, MaxCharge);
+	Log("Adding charge: " $ Charge $ "/" $ MaxCharge);
 }
 
 //Overrideable method for different Node types
@@ -275,6 +292,8 @@ function LevelUp(int NodeLevel)
 
 defaultproperties
 {
+	 ChargeDrainPerSecond=10
+	 MaxCharge=500
      PickupSiphonRadius=700.000000
 	 PickupDistributeRadius=1000.00
 	 PickupSiphonMultiplier=0.30000			//30% of the pickup's value is siphoned and given to nearby players

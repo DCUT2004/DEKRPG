@@ -44,6 +44,18 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 	super(ASTurret).Explode( HitLocation, Vect(0,0,1) ); // Overriding Explosion direction
 }
 
+function bool HealDamage(int Amount, Controller Healer, class<DamageType> DamageType)
+{
+    if (Health < HealthMax)
+        return Super.HealDamage(Amount, Healer, DamageType);
+    else
+    {
+        if (Controller != None && NodeController(Controller) != None)
+            NodeController(Controller).AddCharge(Amount);
+        return Super.HealDamage(Amount, Healer, DamageType);
+    }
+}
+
 function LevelUp()
 {
     if (NodeLevel == MaxNodeLevel)
