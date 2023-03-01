@@ -16,6 +16,8 @@ var int MaxTurretLevel;
 var float PercentDamageIncreasePerLevel;
 var float PercentHealthIncreasePerLevel;
 
+var bool IsAutoGunTurret;
+
 replication
 {
 	reliable if (Role == ROLE_Authority)
@@ -45,11 +47,14 @@ function SetPlayerSpawner(Controller PlayerC)
     local ONSAutoGunController NewController;
 	PlayerSpawner = PlayerC;
 
-    // start off with a autogun controller
-    bAutoTurret = true;
-    NewController = spawn(class'ONSAutoGunController');
-    NewController.Possess(self);
-    NewController.SetPlayerSpawner(PlayerSpawner) ;
+    if (IsAutoGunTurret)
+    {
+        // start off with a autogun controller
+        bAutoTurret = true;
+        NewController = spawn(class'ONSAutoGunController');
+        NewController.Possess(self);
+        NewController.SetPlayerSpawner(PlayerSpawner) ;
+    }
 }
 
 simulated function RawInput(float DeltaTime,
@@ -289,8 +294,6 @@ function EngineerLock()
 	SetOverlayMaterial(LockOverlay, 50000.0, True);
 	if (Gun != None)
 		Gun.SetOverlayMaterial(LockOverlay, 50000.0, True);
-
-
 }
 
 function EngineerUnlock()
@@ -315,8 +318,11 @@ function KDriverEnter(Pawn P)
 {
     local float HealthPct;
     
-    Controller.Destroy();
-	Controller = None;
+    if (Controller != None)
+    {
+        Controller.Destroy();
+    	Controller = None;
+    }
     bAutoTurret = false;
     
 	Super.KDriverEnter(P);
@@ -333,19 +339,25 @@ event bool KDriverLeave( bool bForceLeave )
      
 	retval = super.KDriverLeave(  bForceLeave );
     
-    // now add controller back in
-    bAutoTurret = true;
-    NewController = spawn(class'ONSAutoGunController');
-    NewController.Possess(self);
-    NewController.SetPlayerSpawner(PlayerSpawner) ;
+    if (IsAutoGunTurret)
+    {
+        // now add controller back in
+        bAutoTurret = true;
+        NewController = spawn(class'ONSAutoGunController');
+        NewController.Possess(self);
+        NewController.SetPlayerSpawner(PlayerSpawner) ;
+    }
     
     return retval;
 }
 
 simulated event Destroyed()
 {
-    Controller.Destroy();
-	Controller = None;
+    if (Controller != None)
+    {
+        Controller.Destroy();
+    	Controller = None;
+    }
     bAutoTurret = false;
 
 	super.Destroyed();

@@ -16,7 +16,7 @@ var int MaxVehicles;
 var int MaxBuildings;
 var int MaxNodes;
 
-// for keeping track of what we ahve summoned
+// for keeping track of what we have summoned
 var array<Pawn> SummonedSentinels;
 var array<int> SummonedSentinelPoints;
 var int UsedSentinelPoints;
@@ -47,6 +47,7 @@ var localized string TooManyExtra;
 
 var int PlayerLevel;
 var float FastBuildPercent;		// the actual percent of the recovery time to use
+var bool HasAutoTurrets;
 
 //client side only
 var PlayerController PC;

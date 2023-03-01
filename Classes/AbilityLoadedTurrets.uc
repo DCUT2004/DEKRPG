@@ -20,6 +20,16 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local LoadedInv LoadedInv;
 	Local RPGArtifact Artifact;
 	Local int StartLevel;
+	local EngineerPointsInv EInv;
+
+	EInv = class'AbilityLoadedEngineer'.static.GetEngInv(Other);
+    if (EInv != None)
+    {
+        if (AbilityLevel >= 5)
+            EInv.HasAutoTurrets = true;
+        else
+            EInv.HasAutoTurrets = false;
+    }
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv != None)
@@ -74,7 +84,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
      AbilityName="Turret Builder"
-     Description="Learn turrets to summon. At each level, you can summon better items. |Cost (per level): 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17..."
+     Description="Learn turrets to summon. At each level, you can summon better items. |Cost (per level): 3,4,5,6,7..."
      StartingCost=3
      CostAddPerLevel=1
      MaxLevel=20
