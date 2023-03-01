@@ -3,7 +3,7 @@ class NodeNetwork extends Object
 
 var Array < Node > Nodes;     //All Nodes in the map
 var config float MinimumSpawnRadius;
-var config float PacketSpeedPerSecond;
+var config float PacketDistancePerSecond;
 
 static function InsertNode(Node Node)
 {
@@ -35,5 +35,5 @@ static function bool CanSpawnNode(vector NodeLocation)
 defaultproperties
 {
      MinimumSpawnRadius=1000.00
-     PacketSpeedPerSecond=1000.00
+     PacketDistancePerSecond=1000.00
 }

@@ -13,7 +13,7 @@ var config int TransmitInterval;
 var config float PickupSiphonRadius, PickupDistributeRadius;
 var config float PickupSiphonMultiplier;	//How much of the original pickup value to siphon
 var config float PickupValueDecreasePerSecond;	//How much of the pickup's value is lost per second as it travels through the Network
-var config float MinimumPickupValue;		//The largest amount of a pickup's value that can be lost (i.e. the largest amount of a pickup that is preserved) as it travels through the Network
+var config float MinimumPickupValue;		//The largest amount of a pickup's value that can be lost (i.e. the smallest amount of a pickup that is preserved) as it travels through the Network
 
 var int DistributeCounter;
 var config int DistributeInterval;
@@ -142,13 +142,13 @@ function TransmitPacket(Array<Pickup> Pickups)
 			if (OtherNode != None)
 			{
 				DeliveryDistance = VSize(OtherNode.Location - Pawn.Location);
-				DeliveryTime = DeliveryDistance / Class'NodeNetwork'.default.PacketSpeedPerSecond;
+				DeliveryTime = DeliveryDistance / Class'NodeNetwork'.default.PacketDistancePerSecond;
 				if (OtherNode.Controller != None && NodeController(OtherNode.Controller) != None)
 				{
 					//We may want to be careful here
 					//If DeliveryTime is large, then the IncomingPackets array can also be large
 					//Size of IncomingPackets from one Node can grow to DeliveryTime / TransmitInterval
-					//Decreasing TransmitInterval or decreasing PacketSpeedPerSecond can cause IncomingPackets array to be large
+					//Decreasing TransmitInterval or decreasing PacketDistancePerSecond can cause IncomingPackets array to be large
 					NodeController(OtherNode.Controller).IncomingPackets.Insert(0, 1);
 					NodeController(OtherNode.Controller).IncomingPackets[0].Pickups = Pickups;
 					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryTime = DeliveryTime;
@@ -172,7 +172,7 @@ function DistributePacket()
 		if (IncomingPackets[i].DeliveryTime < DistributeInterval)
 		{
 			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
-				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketSpeedPerSecond);
+				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketDistancePerSecond);
 			IncomingPackets.Remove(i, 1);
 		}
 		else
