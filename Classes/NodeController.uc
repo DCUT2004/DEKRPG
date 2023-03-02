@@ -8,16 +8,18 @@ var MutUT2004RPG RPGMut;
 var config float TimeBetweenChecks;
 
 //Charge variables
-var int Charge;
-var config int ChargeDrainPerSecond, MaxCharge;
+var float Charge;
+var float AccumulatedChargeForNetwork;			//How much charge has been accumulated for other Nodes since the last transmission
+var config float ChargeDrainPerSecond;
+var config int MaxCharge;
 
 //Pickup siphoning variables
 var int TransmitCounter;
 var config int TransmitInterval;
 var config float PickupSiphonRadius, PickupDistributeRadius;
-var config float PickupSiphonMultiplier;	//How much of the original pickup value to siphon
+var config float PickupSiphonMultiplier;		//How much of the original pickup value to siphon
 var config float PickupValueDecreasePerSecond;	//How much of the pickup's value is lost per second as it travels through the Network
-var config float MinimumPickupValue;		//The largest amount of a pickup's value that can be lost (i.e. the smallest amount of a pickup that is preserved) as it travels through the Network
+var config float MinimumPickupValue;			//The largest amount of a pickup's value that can be lost (i.e. the smallest amount of a pickup that is preserved) as it travels through the Network
 
 var int DistributeCounter;
 var config int DistributeInterval;
@@ -29,11 +31,13 @@ var config int AttackInterval;
 struct Packet
 {
 	var Array < Pickup > Pickups;
-	var float DeliveryTime;		//For determining when this Packet can be received by this Node, in seconds
+	var float ReceivedCharge;
+	var float DeliveryTime;						//For determining when this Packet can be received by this Node, in seconds
 	var float DeliveryDistance;
 };
 
-var Array < Packet > IncomingPackets;	//An array of Packets that are added to by other Nodes
+//An array of Packets that are added to by other Nodes
+var Array < Packet > IncomingPackets;
 
 simulated event PostBeginPlay()
 {
@@ -69,6 +73,7 @@ function SetPlayerSpawner(Controller PlayerC)
 	DistributeCounter = 0;
 	AttackCounter = 0;
 	Charge = 0;
+	Class'NodeNetwork'.default.TotalDrainPerSecond += ChargeDrainPerSecond;
 	SetTimer(TimeBetweenChecks, true);
 }
 
@@ -83,21 +88,16 @@ function Timer()
 
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
-	if (Charge >= ChargeDrainPerSecond)
-	{
 		TransmitCounter++;
 		DistributeCounter++;
 		AttackCounter++;
+	if (Charge >= ChargeDrainPerSecond)
+	{
 		if (TransmitCounter >= TransmitInterval)
 		{
 			Pickups = SiphonPickups();	//O(n^3)
 			TransmitCounter = 0;
 			TransmitPacket(Pickups);	//O(n)
-		}
-		if (DistributeCounter >= DistributeInterval)
-		{
-			DistributePacket();			//O(n^4)
-			DistributeCounter = 0;
 		}
 		if (AttackCounter >= AttackInterval)
 		{
@@ -105,14 +105,26 @@ function Timer()
 			AttackCounter = 0;
 		}
 	}
+	if (DistributeCounter >= DistributeInterval)
+	{
+		DistributePacket();			//O(n^4)
+		DistributeCounter = 0;
+	}
 	Charge = Max(0, Charge - ChargeDrainPerSecond);
-	Log("Charge: " $ Charge);
 }
 
-function AddCharge(int Amount)
+/*  Called by Node.HealDamage(), when an Engineer is linking to this Node
+	The amount of Charge will be divided among the number of Nodes in the network
+	Charge this Node instantly
+	Then add to AccumulatedChargeForNetwork, to be distributed to other Nodes on the next call to TransmitPacket()
+ */
+function DirectCharge(int Amount)
 {
-	Charge = Min(Charge + Amount, MaxCharge);
-	Log("Adding charge: " $ Charge $ "/" $ MaxCharge);
+	local float ChargeToAdd;
+
+	ChargeToAdd = Amount * (ChargeDrainPerSecond / Class'NodeNetwork'.default.TotalDrainPerSecond);
+	Charge = Min(Charge + ChargeToAdd, MaxCharge);
+	AccumulatedChargeForNetwork += Amount;
 }
 
 //Overrideable method for different Node types
@@ -150,6 +162,7 @@ function TransmitPacket(Array<Pickup> Pickups)
 	local Node OtherNode;
 	local float DeliveryDistance;
 	local float DeliveryTime;
+	local NodeController OtherNodeController;
 
 	for (i = 0; i < Class'NodeNetwork'.default.Nodes.Length; i++)
 	{
@@ -166,14 +179,17 @@ function TransmitPacket(Array<Pickup> Pickups)
 					//If DeliveryTime is large, then the IncomingPackets array can also be large
 					//Size of IncomingPackets from one Node can grow to DeliveryTime / TransmitInterval
 					//Decreasing TransmitInterval or decreasing PacketDistancePerSecond can cause IncomingPackets array to be large
-					NodeController(OtherNode.Controller).IncomingPackets.Insert(0, 1);
-					NodeController(OtherNode.Controller).IncomingPackets[0].Pickups = Pickups;
-					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryTime = DeliveryTime;
-					NodeController(OtherNode.Controller).IncomingPackets[0].DeliveryDistance = DeliveryDistance;
+					OtherNodeController = NodeController(OtherNode.Controller);
+					OtherNodeController.IncomingPackets.Insert(0, 1);
+					OtherNodeController.IncomingPackets[0].Pickups = Pickups;
+					OtherNodeController.IncomingPackets[0].ReceivedCharge = AccumulatedChargeForNetwork * (OtherNodeController.ChargeDrainPerSecond / Class'NodeNetwork'.default.TotalDrainPerSecond);
+					OtherNodeController.IncomingPackets[0].DeliveryTime = DeliveryTime;
+					OtherNodeController.IncomingPackets[0].DeliveryDistance = DeliveryDistance;
 				}
 			}
 		}
 	}
+	AccumulatedChargeForNetwork = 0;
 }
 
 //Distribute the received Packet from IncomingPackets if DeliveryTime is within 1 second
@@ -190,6 +206,8 @@ function DistributePacket()
 		{
 			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
 				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketDistancePerSecond);
+			if (IncomingPackets[i].ReceivedCharge > 0.0)
+				Charge = Min(Charge + IncomingPackets[i].ReceivedCharge, MaxCharge);
 			IncomingPackets.Remove(i, 1);
 		}
 		else
@@ -281,6 +299,8 @@ simulated function Destroyed()
 		PlayerReplicationInfo.Destroy();
 	
 	IncomingPackets.Length = 0;
+
+	Class'NodeNetwork'.default.TotalDrainPerSecond -= ChargeDrainPerSecond;
 
 	Super.Destroyed();
 }

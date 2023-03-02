@@ -50,8 +50,9 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
         return Super.HealDamage(Amount, Healer, DamageType);
     else
     {
-        if (Controller != None && NodeController(Controller) != None)
-            NodeController(Controller).AddCharge(Amount);
+        if (Healer != None && Healer.Pawn != None && Healer.Pawn.Weapon != None && Healer.Pawn.Weapon.IsA('RW_EngineerLink'))
+            if (Controller != None && NodeController(Controller) != None) 
+                NodeController(Controller).DirectCharge(Amount);
         return Super.HealDamage(Amount, Healer, DamageType);
     }
 }
