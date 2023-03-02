@@ -14,6 +14,7 @@ var bool IsLockedForSelf;
 var Controller PlayerSpawner;
 var Material LockOverlay;
 
+var bool IsAutoGunTurret;
 
 replication
 {
@@ -47,11 +48,14 @@ function SetPlayerSpawner(Controller PlayerC)
     
 	PlayerSpawner = PlayerC;
 
-    // start off with a autogun controller
-    NewController = spawn(class'AutoGunController');
-    NewController.Possess(self);
-    NewController.SetPlayerSpawner(PlayerSpawner) ;
-    VehicleProjSpawnOffset.Z = 0;
+    if (IsAutoGunTurret)
+    {
+        // start off with a autogun controller
+        NewController = spawn(class'AutoGunController');
+        NewController.Possess(self);
+        NewController.SetPlayerSpawner(PlayerSpawner) ;
+        VehicleProjSpawnOffset.Z = 0;
+    }
 }
 
 function Timer()
@@ -182,8 +186,11 @@ function KDriverEnter(Pawn P)
 {
     local float HealthPct;
     
-    Controller.Destroy();
-    Controller = None;
+    if (Controller != None)
+    {
+        Controller.Destroy();
+        Controller = None;
+    }
     
 	Super.KDriverEnter(P);
     
@@ -207,11 +214,15 @@ function bool KDriverLeave( bool bForceLeave )
 
 	retval = Super.KDriverLeave(bForceLeave);
 
-    // now add controller back in
-    NewController = spawn(class'AutoGunController');
-    NewController.Possess(self);
-    NewController.SetPlayerSpawner(PlayerSpawner) ;
-    VehicleProjSpawnOffset.Z = 0;
+    if (IsAutoGunTurret)
+    {
+        // now add controller back in
+        NewController = spawn(class'AutoGunController');
+        NewController.Possess(self);
+        NewController.SetPlayerSpawner(PlayerSpawner) ;
+        VehicleProjSpawnOffset.Z = 0;
+    }
+    
     return retval;
 }
 
@@ -230,8 +241,11 @@ function bool HasUDamage()
 
 simulated event Destroyed()
 {
-    Controller.Destroy();
-	Controller = None;
+    if (Controller != None)
+    {
+        Controller.Destroy();
+    	Controller = None;
+    }
 
 	super.Destroyed();
 }

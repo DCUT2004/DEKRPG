@@ -104,29 +104,27 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 		NewTurret.AutoTurretControllerClass = None;	// force it to be manual
 		
 		if (DruidMinigunTurret(NewTurret) != None)
+        {
+            DruidMinigunTurret(NewTurret).IsAutoGunTurret = epi.HasAutoTurrets;
 		    DruidMinigunTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DruidLinkTurret(NewTurret) != None)
-		    DruidLinkTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DruidBallTurret(NewTurret) != None)
-		    DruidBallTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
+        }
+		else if (BaseBallTurret(NewTurret) != None)
+        {
+            BaseBallTurret(NewTurret).IsAutoGunTurret = epi.HasAutoTurrets;
+		    BaseBallTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
+        }
+		else if (BaseLinkTurret(NewTurret) != None)
+        {
+            BaseLinkTurret(NewTurret).IsAutoGunTurret = epi.HasAutoTurrets;
+ 		    BaseLinkTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
+       }
 		else if (DruidEnergyTurret(NewTurret) != None)
+        {
+            DruidEnergyTurret(NewTurret).IsAutoGunTurret = epi.HasAutoTurrets;
 		    DruidEnergyTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
+        }
 		else if (DruidIonCannon(NewTurret) != None)
 		    DruidIonCannon(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKLynxTurret(NewTurret) != None)
-		    DEKLynxTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKOdinTurret(NewTurret) != None)
-		    DEKOdinTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKSolarTurret(NewTurret) != None)
-		    DEKSolarTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKLightningTurret(NewTurret) != None)
-		    DEKLightningTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKPlasmaTurret(NewTurret) != None)
-		    DEKPlasmaTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKStingerTurret(NewTurret) != None)
-		    DEKStingerTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
-		else if (DEKSkyMineTurret(NewTurret) != None)
-		    DEKSkyMineTurret(NewTurret).SetPlayerSpawner(Instigator.Controller);
 	}
 
 	SetStartHealth(NewTurret);
