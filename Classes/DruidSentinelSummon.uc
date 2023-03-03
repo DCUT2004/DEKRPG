@@ -84,6 +84,12 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
         else
             return CreateSentinel(class'DruidLightningSentinel',30,150,180,class'DruidLightningSentinelController',0, Points, P, SpawnLoc, epi);
     	break;
+    case class'DruidTeslaSentinel':
+		if (bOnCeiling)
+            return CreateSentinel(class'DruidCeilingTeslaSentinel',-80,120,-160,class'DruidTeslaSentinelController',0, Points, P, SpawnLoc, epi);
+        else
+            return CreateSentinel(class'DruidTeslaSentinel',30,150,180,class'DruidTeslaSentinelController',0, Points, P, SpawnLoc, epi);
+    	break;
     case class'DruidDefenseSentinel':
 		if (bOnCeiling)
             return CreateSentinel(class'DruidCeilingDefenseSentinel',-80,120,-160,class'DruidDefenseSentinelController',0, Points, P, SpawnLoc, epi);
@@ -204,6 +210,12 @@ function bool  CreateSentinel(class<Pawn> SentinelClass,int SpawnHeightOffset,in
     {
     	DruidLightningSentinelController(SentinelController).Possess(NewSentinel);
     	DruidLightningSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
+    }
+    else
+    if ( DruidTeslaSentinelController(SentinelController) != None )
+    {
+    	DruidTeslaSentinelController(SentinelController).Possess(NewSentinel);
+    	DruidTeslaSentinelController(SentinelController).SetPlayerSpawner(Instigator.Controller);
     }
     else
     if ( AutoGunController(SentinelController) != None )
