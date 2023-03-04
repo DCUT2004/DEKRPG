@@ -46,6 +46,6 @@ function Tick(float DeltaTime)
 
 defaultproperties
 {
-     AttractRange=3000
+     AttractRange=1800
      TargetRange=3000
 }

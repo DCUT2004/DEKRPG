@@ -104,5 +104,5 @@ function TraceFire(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     DamageMin=21
+     DamageMin=28
 }

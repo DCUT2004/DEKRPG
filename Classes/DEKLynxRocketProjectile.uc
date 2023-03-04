@@ -69,7 +69,7 @@ defaultproperties
 {
      Speed=2000.000000
      MaxSpeed=2000.000000
-     Damage=58.500000
+     Damage=62.000000
      DamageRadius=120.000000
      MyDamageType=Class'DEKRPG999X.DamTypeLynxRocket'
 }

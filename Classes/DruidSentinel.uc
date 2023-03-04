@@ -23,7 +23,7 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 
 defaultproperties
 {
-     TargetRange=1200.000000
+     TargetRange=1800.000000
      DefaultWeaponClassName="DruidWeaponSentinel"
      bNoTeamBeacon=False
 }
