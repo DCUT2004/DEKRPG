@@ -39,6 +39,12 @@ struct Packet
 //An array of Packets that are added to by other Nodes
 var Array < Packet > IncomingPackets;
 
+replication
+{
+	reliable if (ROLE == ROLE_Authority)
+		Charge, MaxCharge;
+}
+
 simulated event PostBeginPlay()
 {
 	local Mutator m;

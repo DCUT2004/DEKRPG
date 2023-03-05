@@ -91,6 +91,6 @@ defaultproperties
      Skins(0)=TexEnvMap'VMVehicles-TX.Environments.ReflectionEnv'
      Skins(1)=TexEnvMap'VMVehicles-TX.Environments.ReflectionEnv'
      AmbientGlow=250
-     CollisionRadius=0.000000
-     CollisionHeight=0.000000
+     CollisionRadius=10.000000
+     CollisionHeight=20.000000
 }

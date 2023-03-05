@@ -751,7 +751,7 @@ function PreRender(Canvas Canvas)
 	local rotator CameraRotation;
 	local Pawn Enemy;
 	local Pawn P;
-	local float ShieldMax, CurShield;
+	local float ShieldMax, CurShield, Charge, MaxCharge;
 	local float HM66, HM33, MedMax, SHMax;
 
 	if (ViewportOwner == None || ViewportOwner.Actor == None || ViewportOwner.Actor.Pawn == None || ViewportOwner.Actor.Pawn.Health <= 0)
@@ -889,6 +889,10 @@ function PreRender(Canvas Canvas)
 			{
 				BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight * 1.25 + BarVSize / 2) * vect(0,0,1) - P.CollisionRadius * Y);
 			}
+			else if (P.IsA('Node'))
+			{
+				BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1));
+			}
 			else
 			{
 				BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) - P.CollisionRadius * Y);
@@ -911,6 +915,12 @@ function PreRender(Canvas Canvas)
 				CurShield = 0;
 			if (CurShield > ShieldMax)
 				CurShield = ShieldMax;
+
+			if (P.IsA('Node') && P.Controller != None && NodeController(P.Controller) != None)
+			{
+				Charge = NodeController(P.Controller).Charge;
+				MaxCharge = NodeController(P.Controller).MaxCharge;
+			}
 	
 			if (EnemyList.HardCorePawns[i] > 0)
 			{
@@ -944,6 +954,28 @@ function PreRender(Canvas Canvas)
     				Canvas.SetPos(BarLoc.X+(BarUSize*XScale*((CurShield/ShieldMax)/2)), BarLoc.Y );
     				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale*(1.00 - (CurShield/ShieldMax)), BarVSize*YScale, 0, 0, BarUSize, BarVSize);
                 }
+				else if (Node(P) != None)
+				{
+    				// Make the white bar
+    				Canvas.SetPos(BarLoc.X, BarLoc.Y);
+    				Canvas.DrawColor = class'HUD'.default.WhiteColor;
+    				if(Charge >= MaxCharge)
+    				{	// want bright yellow as the charge is full
+    					Canvas.DrawColor.A = 255;
+    					Canvas.DrawColor.B = 0;
+    					Canvas.DrawColor.G = 255;
+    					Canvas.DrawColor.R = 255;
+    				}
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+    				Canvas.DrawColor.A = 255;
+    				Canvas.DrawColor.B = 0;
+    		
+    				// want an orange color, with less red as it gets healthier
+    				Canvas.DrawColor.R = 128;
+    				Canvas.DrawColor.G = Clamp(Int(128*Charge/MaxCharge), 0, 255);
+					Canvas.SetPos(BarLoc.X, BarLoc.Y);
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize*(1.00 - (Charge/MaxCharge)), BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+				}
 			}
 		}
 	}
