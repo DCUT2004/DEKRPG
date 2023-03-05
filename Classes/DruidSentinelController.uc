@@ -98,5 +98,5 @@ simulated function Destroyed()
 defaultproperties
 {
      AttractRange=1200
-     TargetRange=1200
+     TargetRange=1800
 }

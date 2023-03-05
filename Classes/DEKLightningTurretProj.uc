@@ -202,8 +202,10 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 				DriverLevel = StatsInv.DataObject.Level;
 
 				if (Level.TimeSeconds > DEKLightningTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKLightningTurret(Instigator).NumHealers > 0)
+                {
 					Damage = Damage * class'RW_EngineerLink'.static.DamageIncreasedByLinkers(DEKLightningTurret(Instigator).NumHealers);
 					DamageRadius = DamageRadius * class'RW_EngineerLink'.static.DamageIncreasedByLinkers(DEKLightningTurret(Instigator).NumHealers);
+                }
 			}
 		}
 

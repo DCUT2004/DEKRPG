@@ -6,7 +6,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 {
     local Projectile p;
 
-	p = Weapon.Spawn(class'PROJ_DruidBallTurretBAll', Instigator, , Start, Dir);
+	p = Weapon.Spawn(class'PROJ_DruidBallTurretBall', Instigator, , Start, Dir);
     if ( p == None )
         return None;
 		
