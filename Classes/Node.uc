@@ -6,6 +6,15 @@ var int NodeLevel;
 var int MaxNodeLevel;
 var float PercentHealthIncreasePerLevel;
 
+var float Charge;
+var config int MaxCharge;
+
+replication
+{
+	reliable if (ROLE == ROLE_Authority)
+		Charge, MaxCharge;
+}
+
 simulated event PostNetBeginPlay()
 {
 	// Static (non rotating) base
@@ -25,6 +34,7 @@ simulated event PostNetBeginPlay()
 	}
 
 	super(ASVehicle).PostNetBeginPlay();
+	Charge = 0;
 }
 
 function AddDefaultInventory()
@@ -80,6 +90,7 @@ simulated function Destroyed()
 defaultproperties
 {
      NodeLevel=0
+	 MaxCharge=500
      MaxNodeLevel=5
      PercentHealthIncreasePerLevel=0.1
      TurretBaseClass=Class'DEKRPG999X.DruidLinkSentinelBase'

@@ -916,10 +916,10 @@ function PreRender(Canvas Canvas)
 			if (CurShield > ShieldMax)
 				CurShield = ShieldMax;
 
-			if (P.IsA('Node') && P.Controller != None && NodeController(P.Controller) != None)
+			if (P.IsA('Node') )
 			{
-				Charge = NodeController(P.Controller).Charge;
-				MaxCharge = NodeController(P.Controller).MaxCharge;
+				Charge = Node(P).Charge;
+				MaxCharge = Node(P).MaxCharge;
 			}
 	
 			if (EnemyList.HardCorePawns[i] > 0)

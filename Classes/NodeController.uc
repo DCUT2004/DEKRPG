@@ -8,10 +8,8 @@ var MutUT2004RPG RPGMut;
 var config float TimeBetweenChecks;
 
 //Charge variables
-var float Charge;
 var float AccumulatedChargeForNetwork;			//How much charge has been accumulated for other Nodes since the last transmission
 var config float ChargeDrainPerSecond;
-var config int MaxCharge;
 
 //Pickup siphoning variables
 var int TransmitCounter;
@@ -38,12 +36,6 @@ struct Packet
 
 //An array of Packets that are added to by other Nodes
 var Array < Packet > IncomingPackets;
-
-replication
-{
-	reliable if (ROLE == ROLE_Authority)
-		Charge, MaxCharge;
-}
 
 simulated event PostBeginPlay()
 {
@@ -78,7 +70,6 @@ function SetPlayerSpawner(Controller PlayerC)
 	TransmitCounter = 0;
 	DistributeCounter = 0;
 	AttackCounter = 0;
-	Charge = 0;
 	Class'NodeNetwork'.default.TotalDrainPerSecond += ChargeDrainPerSecond;
 	SetTimer(TimeBetweenChecks, true);
 }
@@ -91,13 +82,16 @@ function SetPlayerSpawner(Controller PlayerC)
 function Timer()
 {
 	local Array<Pickup> Pickups;
+    local Node node;
 
 	if (Pawn == None || PlayerSpawner == None)
 	    return;
-		TransmitCounter++;
-		DistributeCounter++;
-		AttackCounter++;
-	if (Charge >= ChargeDrainPerSecond)
+
+    node = Node(Pawn);        
+	TransmitCounter++;
+	DistributeCounter++;
+	AttackCounter++;
+	if (node.Charge >= ChargeDrainPerSecond)
 	{
 		if (TransmitCounter >= TransmitInterval)
 		{
@@ -116,7 +110,7 @@ function Timer()
 		DistributePacket();			//O(n^4)
 		DistributeCounter = 0;
 	}
-	Charge = Max(0, Charge - ChargeDrainPerSecond);
+	node.Charge = Max(0, node.Charge - ChargeDrainPerSecond);
 }
 
 /*  Called by Node.HealDamage(), when an Engineer is linking to this Node
@@ -129,7 +123,7 @@ function DirectCharge(int Amount)
 	local float ChargeToAdd;
 
 	ChargeToAdd = Amount * (ChargeDrainPerSecond / Class'NodeNetwork'.default.TotalDrainPerSecond);
-	Charge = Min(Charge + ChargeToAdd, MaxCharge);
+	Node(Pawn).Charge = Min(Node(Pawn).Charge + ChargeToAdd, Node(Pawn).MaxCharge);
 	AccumulatedChargeForNetwork += Amount;
 }
 
@@ -213,7 +207,7 @@ function DistributePacket()
 			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
 				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketDistancePerSecond);
 			if (IncomingPackets[i].ReceivedCharge > 0.0)
-				Charge = Min(Charge + IncomingPackets[i].ReceivedCharge, MaxCharge);
+				Node(Pawn).Charge = Min(Node(Pawn).Charge + IncomingPackets[i].ReceivedCharge, Node(Pawn).MaxCharge);
 			IncomingPackets.Remove(i, 1);
 		}
 		else
@@ -319,7 +313,6 @@ function LevelUp(int NodeLevel)
 defaultproperties
 {
 	 ChargeDrainPerSecond=10
-	 MaxCharge=500
      PickupSiphonRadius=700.000000
 	 PickupDistributeRadius=1000.00
 	 PickupSiphonMultiplier=0.30000			//30% of the pickup's value is siphoned and given to nearby players
