@@ -6,7 +6,7 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 {
     local Projectile p;
 
-	p = Weapon.Spawn(class'PROJ_FireBallTurretLarge', Instigator, , Start, Dir);
+	p = Weapon.Spawn(class'FlameProj', Instigator, , Start, Dir);
     if ( p == None )
         return None;
 		
@@ -18,8 +18,8 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
 
 defaultproperties
 {
-     TeamProjectileClasses(0)=Class'DEKRPG999X.PROJ_FireBallTurretLarge'
-     TeamProjectileClasses(1)=Class'DEKRPG999X.PROJ_FireBallTurretLarge'
+     TeamProjectileClasses(0)=Class'DEKRPG999X.FlameProj'
+     TeamProjectileClasses(1)=Class'DEKRPG999X.FlameProj'
      FireSound=None
-     FireRate=1.200000
+     FireRate=0.100000
 }
