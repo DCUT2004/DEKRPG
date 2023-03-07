@@ -12,13 +12,13 @@ simulated function Destroyed()
 
 simulated function PostBeginPlay()
 {
+	Velocity = Speed * vector(Rotation);
 	if ( Level.NetMode != NM_DedicatedServer)
 	{
 		SmokeTrail = Spawn(class'Flamethrower',self);
     	if ( SmokeTrail != None )
     		SmokeTrail.SetBase( Self );
 	}
-	Velocity = Speed * vector(Rotation);
     
 	Super.PostBeginPlay();
 }
@@ -78,8 +78,10 @@ simulated function ProcessTouch(Actor Other, Vector HitLocation)
 	}
 }
 
-function Explode(vector HitLocation, vector HitNormal)
+simulated function Explode(vector HitLocation, vector HitNormal)
 {
+	if ( (ExplosionDecal != None) && (Level.NetMode != NM_DedicatedServer) )
+		Spawn(ExplosionDecal,self,,Location, rotator(-HitNormal));
 	Destroy();
 }
 
@@ -118,4 +120,5 @@ defaultproperties
      AmbientGlow=254
      bCollideWorld=False
      bIgnoreOutOfWorld=True
+     ExplosionDecal=class'RocketMark'
 }

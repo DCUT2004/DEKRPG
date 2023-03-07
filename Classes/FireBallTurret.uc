@@ -21,4 +21,5 @@ defaultproperties
      EntryRadius=120.000000
      FPCamPos=(X=-25.000000,Y=13.000000,Z=93.000000)
      VehicleNameString="FireBall Turret"
+	 VehicleProjSpawnOffset=(X=138,Y=-75,Z=+16)
 }

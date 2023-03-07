@@ -7,8 +7,6 @@ simulated function PostBeginPlay()
 {
 	if ( Level.NetMode != NM_DedicatedServer)
 	{
-		if ( !Level.bDropDetail )
-			spawn(class'RocketSmokeRing',,,Location, Rotation );
 		Flames = Spawn(FlamesClass,self);
     	if ( Flames != None )
     		Flames.SetBase( Self );
