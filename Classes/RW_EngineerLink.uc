@@ -341,6 +341,55 @@ static function float XPForLinker(float xpGained, int NumLinkers)
 
 }
 
+static function DistributeHealingXP(RPGStatsInv StatsInv, int DriverLevel, array<Controller> Healers, float old_xp, MutUT2004RPG RPGMut)
+{
+	local RPGStatsInv HealerStatsInv;
+	local float cur_xp,xp_each,xp_diff,xp_given_away;
+	local int i;
+	local Controller C;
+
+	if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
+		return;
+
+	cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
+	xp_diff = cur_xp - old_xp;
+	if (xp_diff > 0 && Healers.Length > 0)
+	{
+		// split the xp amongst the healers
+		xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , Healers.length);
+		xp_given_away = 0;
+
+		for (i = 0; i < Healers.length; i++)
+		{
+			if (Healers[i].Pawn != None && Healers[i].Pawn.Health > 0)
+			{
+				C = Healers[i];
+				if (DruidLinkSentinelController(C) != None)
+					HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
+				else
+				if (LinkNodeController(C) != None)
+					HealerStatsInv = LinkNodeController(C).StatsInv;
+				else
+					HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
+
+				if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
+					HealerStatsInv.DataObject.AddExperienceFraction(xp_each, RPGMut, Healers[i].Pawn.PlayerReplicationInfo);
+				xp_given_away += xp_each;
+			}
+		}
+		// now adjust the turret operator
+		if (xp_given_away > 0)
+		{
+			StatsInv.DataObject.ExperienceFraction -= xp_given_away;
+			while (StatsInv.DataObject.ExperienceFraction < 0)
+			{
+				StatsInv.DataObject.ExperienceFraction += 1.0;
+				StatsInv.DataObject.Experience -= 1;
+			}
+		}
+	}
+}
+
 defaultproperties
 {
      DamageBonusFromLinks(0)=1.000000

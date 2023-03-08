@@ -17,11 +17,9 @@ function SuperExplosion()
 	local Emitter E;
 	local actor HitActor;
 	local vector HitLocation, HitNormal;
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
     local int DriverLevel;
-    local Controller C;
 	
 	if ( Role == ROLE_Authority )
 	{
@@ -41,46 +39,7 @@ function SuperExplosion()
 
 		HurtRadius(ComboDamage, ComboRadius, class'DamTypeSkyMineCombo', ComboMomentumTransfer, Location );
 
-		if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-		{
-			cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-			xp_diff = cur_xp - old_xp;
-			if (xp_diff > 0 && DEKSkyMineTurret(Instigator).NumHealers > 0)
-//			if (xp_diff > 0 && Level.TimeSeconds > DEKSkyMineTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKSkyMineTurret(Instigator).NumHealers > 0)
-			{
-				// split the xp amongst the healers
-				xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKSkyMineTurret(Instigator).Healers.length);
-				xp_given_away = 0;
-
-				for(i = 0; i < DEKSkyMineTurret(Instigator).Healers.length; i++)
-				{
-					if (DEKSkyMineTurret(Instigator).Healers[i].Pawn != None && DEKSkyMineTurret(Instigator).Healers[i].Pawn.Health >0)
-					{
-						   C = DEKSkyMineTurret(Instigator).Healers[i];
-						   if (DruidLinkSentinelController(C) != None)
-								HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-						   else
-								HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-							if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKSkyMineTurret(Instigator).RPGMut, DEKSkyMineTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-							xp_given_away += xp_each;
-					}
-				}
-				// now adjust the turret operator
-				if (xp_given_away > 0)
-				{
-					StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-					while (StatsInv.DataObject.ExperienceFraction < 0)
-					{
-						StatsInv.DataObject.ExperienceFraction += 1.0;
-						StatsInv.DataObject.Experience -= 1;
-					}
-				}
-
-
-			}
-			// DEKSkyMineTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-		}
+        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
 	}
 
 	E = Spawn(class'DEKSkyMineComboEffect');
@@ -152,11 +111,9 @@ function Timer()
 
 simulated function Explode(vector HitLocation,vector HitNormal)
 {
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
     local int DriverLevel;
-    local Controller C;
 	local DEKSkyMineImpactFX FX_Impact;
 	
 	if ( Role == ROLE_Authority )
@@ -176,47 +133,9 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
         HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-		if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-		{
-			cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-			xp_diff = cur_xp - old_xp;
-			if (xp_diff > 0 && DEKSkyMineTurret(Instigator).NumHealers > 0)
-//			if (xp_diff > 0 && Level.TimeSeconds > DEKSkyMineTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKSkyMineTurret(Instigator).NumHealers > 0)
-			{
-				// split the xp amongst the healers
-				xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKSkyMineTurret(Instigator).Healers.length);
-				xp_given_away = 0;
-
-				for(i = 0; i < DEKSkyMineTurret(Instigator).Healers.length; i++)
-				{
-					if (DEKSkyMineTurret(Instigator).Healers[i].Pawn != None && DEKSkyMineTurret(Instigator).Healers[i].Pawn.Health >0)
-					{
-						   C = DEKSkyMineTurret(Instigator).Healers[i];
-						   if (DruidLinkSentinelController(C) != None)
-								HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-						   else
-								HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-							if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKSkyMineTurret(Instigator).RPGMut, DEKSkyMineTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-							xp_given_away += xp_each;
-					}
-				}
-				// now adjust the turret operator
-				if (xp_given_away > 0)
-				{
-					StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-					while (StatsInv.DataObject.ExperienceFraction < 0)
-					{
-						StatsInv.DataObject.ExperienceFraction += 1.0;
-						StatsInv.DataObject.Experience -= 1;
-					}
-				}
-
-
-			}
-			// DEKSkyMineTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-		}
+        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
 	}
+
     if ( EffectIsRelevant(Location, false) )
 	{
 		FX_Impact = Spawn(class'DEKSkyMineImpactFX',,, HitLocation + HitNormal * 2, rotator(HitNormal));

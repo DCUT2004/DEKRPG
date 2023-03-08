@@ -96,11 +96,10 @@ function TraceFire(Vector Start, Rotator Dir)
 	local Actor Other;
 	local ONSWeaponPawn WeaponPawn;
 	local Vehicle VehicleInstigator;
-	local RPGStatsInv StatsInv, HealerStatsInv;
-    local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
+	local RPGStatsInv StatsInv;
+    local float old_xp;
 	local int Damage, i;
 	local int DriverLevel;
-    local Controller C;
 
 	MaxRange();
 
@@ -168,45 +167,8 @@ function TraceFire(Vector Start, Rotator Dir)
 					Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
 				HitNormal = vect(0,0,0);
 	
-				if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-			{
-					cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-					xp_diff = cur_xp - old_xp;
-					if (xp_diff > 0 && DEKSolarTurret(Instigator).NumHealers > 0)
-	//				if (xp_diff > 0 && Level.TimeSeconds > DEKSolarTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKSolarTurret(Instigator).NumHealers > 0)
-					{
-						// split the xp amongst the healers
-						xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKSolarTurret(Instigator).Healers.length);		// use Healers.length rather than NumHealers - should be same but 
-						xp_given_away = 0;
-	
-						for(i = 0; i < DEKSolarTurret(Instigator).Healers.length; i++)
-						{
-							if (DEKSolarTurret(Instigator).Healers[i].Pawn != None && DEKSolarTurret(Instigator).Healers[i].Pawn.Health >0)
-							{
-								C = DEKSolarTurret(Instigator).Healers[i];
-								if (DruidLinkSentinelController(C) != None)
-									HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-								else
-									HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-								if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-									HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKSolarTurret(Instigator).RPGMut, DEKSolarTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-								xp_given_away += xp_each;
-							}
-						}
-						// now adjust the turret operator
-						if (xp_given_away > 0)
-						{
-							StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-							while (StatsInv.DataObject.ExperienceFraction < 0)
-							{
-								StatsInv.DataObject.ExperienceFraction += 1.0;
-								StatsInv.DataObject.Experience -= 1;
-							}
-						}
-	
-					}
-					// DEKSolarTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-				}
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSolarTurret(Instigator).Healers, old_xp, DEKSolarTurret(Instigator).RPGMut);
+
 				if (Vehicle(Other) != None || Pawn(Other) == None)
 				{
 					HitCount++;

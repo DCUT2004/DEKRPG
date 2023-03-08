@@ -5,14 +5,11 @@ simulated function HurtRadius( float DamageAmount, float DamageRadius, class<Dam
 	local actor Victims;
 	local float damageScale, dist;
 	local vector dir;
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
     local int DriverLevel;
 	local Pawn P;
 	local bool bSameTeam;
-    local Controller C;
-
 
 	if( bHurtEntry )
 		return;
@@ -66,43 +63,7 @@ simulated function HurtRadius( float DamageAmount, float DamageRadius, class<Dam
 		}
 	}
 
-	if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-	{
-		cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-		xp_diff = cur_xp - old_xp;
-		if (xp_diff > 0 && DruidIonCannon(Instigator).NumHealers > 0)
-//		if (xp_diff > 0 && Level.TimeSeconds > DruidIonCannon(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DruidIonCannon(Instigator).NumHealers > 0)
-		{
-			// split the xp amongst the healers
-			xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DruidIonCannon(Instigator).Healers.length);		// use Healers.length rather than NumHealers - should be same but 
-			xp_given_away = 0;
-
-			for(i = 0; i < DruidIonCannon(Instigator).Healers.length; i++)
-			{
-				if (DruidIonCannon(Instigator).Healers[i].Pawn != None && DruidIonCannon(Instigator).Healers[i].Pawn.Health >0)
-				{
-				    C = DruidIonCannon(Instigator).Healers[i];
-				    if (DruidLinkSentinelController(C) != None)
-						HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-				    else
-						HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-					if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-						HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DruidIonCannon(Instigator).RPGMut, DruidIonCannon(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-					xp_given_away += xp_each;
-				}
-			}
-			// now adjust the turret operator
-			if (xp_given_away > 0)
-			{
-				StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-				while (StatsInv.DataObject.ExperienceFraction < 0)
-				{
-					StatsInv.DataObject.ExperienceFraction += 1.0;
-					StatsInv.DataObject.Experience -= 1;
-				}
-			}
-		}
-	}
+    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidIonCannon(Instigator).Healers, old_xp, DruidIonCannon(Instigator).RPGMut);
 
 	bHurtEntry = false;
 }

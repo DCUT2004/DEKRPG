@@ -12,7 +12,7 @@ var config int MaxCharge;
 replication
 {
 	reliable if (ROLE == ROLE_Authority)
-		Charge, MaxCharge;
+		Charge, MaxCharge, NodeLevel;
 }
 
 simulated event PostNetBeginPlay()

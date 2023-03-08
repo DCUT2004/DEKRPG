@@ -240,9 +240,8 @@ function TraceFire(Vector Start, Rotator Dir)
 	local ONSWeaponPawn WeaponPawn;
 	local int i, j, DriverLevel;
 	local array<DEKOdinThickTraceHelper.THitInfo> Hits;
-    local RPGStatsInv StatsInv, HealerStatsInv;
-    local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local Controller C;
+    local RPGStatsInv StatsInv;
+    local float old_xp;
 
 	MaxRange();
 
@@ -323,46 +322,7 @@ function TraceFire(Vector Start, Rotator Dir)
 				Other.TakeDamage(RandRange(DamageMin, DamageMax), Instigator, HitLocation, Momentum * Normal(HitLocation - Start), DamageType);
 			HitNormal = vect(0,0,0);
 	
-			if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-			{
-				cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-				xp_diff = cur_xp - old_xp;
-				if (xp_diff > 0 && DEKOdinTurret(Instigator).NumHealers > 0)
-	//			if (xp_diff > 0 && Level.TimeSeconds > DEKOdinTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKOdinTurret(Instigator).NumHealers > 0)
-				{
-					// split the xp amongst the healers
-					xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKOdinTurret(Instigator).Healers.length);		// use Healers.length rather than NumHealers - should be same but 
-					xp_given_away = 0;
-	
-					for(i = 0; i < DEKOdinTurret(Instigator).Healers.length; i++)
-					{
-						if (DEKOdinTurret(Instigator).Healers[i].Pawn != None && DEKOdinTurret(Instigator).Healers[i].Pawn.Health >0)
-						{
-						    C = DEKOdinTurret(Instigator).Healers[i];
-						    if (DruidLinkSentinelController(C) != None)
-								HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-						    else
-								HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-							if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKOdinTurret(Instigator).RPGMut, DEKOdinTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-							xp_given_away += xp_each;
-						}
-					}
-					// now adjust the turret operator
-					if (xp_given_away > 0)
-					{
-						StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-						while (StatsInv.DataObject.ExperienceFraction < 0)
-						{
-							StatsInv.DataObject.ExperienceFraction += 1.0;
-							StatsInv.DataObject.Experience -= 1;
-						}
-					}
-	
-				}
-				// DEKOdinTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-			}
-
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
         }
 			
 	}
@@ -399,7 +359,7 @@ function TraceFire(Vector Start, Rotator Dir)
 			break;
 
 		if (Other != Self && Other != Instigator && (Other.bWorldGeometry || Other.bProjTarget || Other.bBlockActors))
-{
+        {
 			SpawnHitEffects(Other, HitLocation, HitNormal);
 			Damage = RandRange(DamageMin, DamageMax);
 			if (Other.TraceThisActor(HitLocation, HitNormal, TraceEnd, TraceStart))
@@ -421,60 +381,26 @@ function TraceFire(Vector Start, Rotator Dir)
 				}
 			}
 			if (ONSPowerCore(Other) == None && ONSPowerNodeEnergySphere(Other) == None)  // Sweet Hackaliciousness
+            {
 				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
-			HitNormal = vect(0,0,0);
-			
-			if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-			{
-				cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-				xp_diff = cur_xp - old_xp;
-				if (xp_diff > 0 && DEKOdinTurret(Instigator).NumHealers > 0)
-	//			if (xp_diff > 0 && Level.TimeSeconds > DEKOdinTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKOdinTurret(Instigator).NumHealers > 0)
-				{
-					// split the xp amongst the healers
-					xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKOdinTurret(Instigator).Healers.length);		// use Healers.length rather than NumHealers - should be same but 
-					xp_given_away = 0;
-	
-					for(i = 0; i < DEKOdinTurret(Instigator).Healers.length; i++)
-					{
-						if (DEKOdinTurret(Instigator).Healers[i].Pawn != None && DEKOdinTurret(Instigator).Healers[i].Pawn.Health >0)
-						{
-						    C = DEKOdinTurret(Instigator).Healers[i];
-						    if (DruidLinkSentinelController(C) != None)
-								HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-						    else
-								HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-							if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKOdinTurret(Instigator).RPGMut, DEKOdinTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-							xp_given_away += xp_each;
-						}
-					}
-					// now adjust the turret operator
-					if (xp_given_away > 0)
-					{
-						StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-						while (StatsInv.DataObject.ExperienceFraction < 0)
-						{
-							StatsInv.DataObject.ExperienceFraction += 1.0;
-							StatsInv.DataObject.Experience -= 1;
-						}
-					}
-	
-				}
-				// DEKOdinTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-			}
-			else
-			HitLocation = Hits[i].HitLocation;
-			HitNormal = Hits[i].Hitnormal;
-			if (Pawn(Other) != None && Pawn(Other).Weapon != None && Pawn(Other).Weapon.CheckReflect(HitLocation, RefNormal, (DamageMin + DamageMax) / 3))
-			{
-				// successfully blocked by shieldgun, apply reduced damage but increased momentum
-				Other.TakeDamage(Damage * 0.3, Instigator, HitLocation, 1.5 * Momentum * Normal(HitLocation - Start), DamageType);
-			}
-			else
-			{
-				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum * Normal(HitLocation - Start), DamageType);
-			}
+    			HitNormal = vect(0,0,0);
+    			
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
+            }
+            else
+            {
+    			HitLocation = Hits[i].HitLocation;
+    			HitNormal = Hits[i].Hitnormal;
+    			if (Pawn(Other) != None && Pawn(Other).Weapon != None && Pawn(Other).Weapon.CheckReflect(HitLocation, RefNormal, (DamageMin + DamageMax) / 3))
+    			{
+    				// successfully blocked by shieldgun, apply reduced damage but increased momentum
+    				Other.TakeDamage(Damage * 0.3, Instigator, HitLocation, 1.5 * Momentum * Normal(HitLocation - Start), DamageType);
+    			}
+    			else
+    			{
+    				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum * Normal(HitLocation - Start), DamageType);
+    			}
+            }
 		}
 	}
 	if (ImpactNormal != vect(0,0,0))

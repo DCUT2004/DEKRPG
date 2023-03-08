@@ -132,7 +132,6 @@ function Timer()
 	// now update the replicated value
 	if (NumHealers != validHealers)
 		NumHealers = validHealers;
-
 }
 
 function bool HealDamage(int Amount, Controller Healer, class<DamageType> DamageType)
@@ -158,7 +157,7 @@ function bool HealDamage(int Amount, Controller Healer, class<DamageType> Damage
 	if (Healer != None && TeamLink(Healer.GetTeamNum()))
 	{	
 		// check the healer is an engineer
-		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None))
+		if (Healer.Pawn != None && ((Healer.Pawn.Weapon != None && RW_EngineerLink(Healer.Pawn.Weapon) != None) || DruidLinkSentinel(Healer.Pawn) != None || LinkNode(Healer.Pawn) != None))
 		{
 
 			// now add to list

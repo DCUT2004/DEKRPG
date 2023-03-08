@@ -58,6 +58,10 @@ simulated singular function Touch(Actor Other)
 
 simulated function ProcessTouch(Actor Other, Vector HitLocation)
 {
+    local int DriverLevel;
+    local float old_xp;
+    local RPGStatsInv StatsInv;
+
 	if ( Instigator != None && (Other == Instigator) )
 		return;
 
@@ -69,10 +73,27 @@ simulated function ProcessTouch(Actor Other, Vector HitLocation)
 		{
 			if ( Instigator == None || Instigator.Controller == None )
 				Other.SetDelayedDamageInstigatorController( InstigatorController );
+                
 			if (Lifespan > 0)
             {
+    			// find the current dataobject
+    			if (FireBallTurret(Instigator) != None && FireBallTurret(Instigator).Driver != None)
+    			{
+    				StatsInv = RPGStatsInv(FireBallTurret(Instigator).Driver.FindInventoryType(class'RPGStatsInv'));
+    				if (StatsInv != None && StatsInv.DataObject != None)
+    				{
+    					old_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
+    					DriverLevel = StatsInv.DataObject.Level;
+    
+    					if (Level.TimeSeconds > FireBallTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && FireBallTurret(Instigator).NumHealers > 0)
+    						Damage = Damage * class'RW_EngineerLink'.static.DamageIncreasedByLinkers(FireBallTurret(Instigator).NumHealers);
+    				}
+    			}
+
                 // Log("+++++++ FlameProj about to do" @ Damage @ "damage to" @ Other @ "LifeSpan" @ LifeSpan @ "time:" @ Level.TimeSeconds);
 				Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
+
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, FireBallTurret(Instigator).Healers, old_xp, FireBallTurret(Instigator).RPGMut);
             }
 		}
 	}

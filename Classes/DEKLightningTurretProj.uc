@@ -47,10 +47,10 @@ simulated function Timer()
     local float Distance, BeamLength;
     local vector Momentum, Direction;
     local DEKLightningTurretMiniBolt Bolt;
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i, DriverLevel, MostHealth;
-    local Controller C, D, BestC;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
+	local int DriverLevel, MostHealth;
+    local Controller C, BestC;
 	
 	if (Rand(99) <= DischargeChance)
 	{
@@ -118,44 +118,7 @@ simulated function Timer()
 
 				BestC.Pawn.TakeDamage(MiniboltDamage, Instigator, BestC.Pawn.Location, Momentum, MiniboltDamageType);
 
-				if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-				{
-					cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-					xp_diff = cur_xp - old_xp;
-					if (xp_diff > 0 && DEKLightningTurret(Instigator).NumHealers > 0)
-//					if (xp_diff > 0 && Level.TimeSeconds > DEKLightningTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKLightningTurret(Instigator).NumHealers > 0)
-					{
-						// split the xp amongst the healers
-						xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKLightningTurret(Instigator).Healers.length);
-						xp_given_away = 0;
-
-						for(i = 0; i < DEKLightningTurret(Instigator).Healers.length; i++)
-						{
-							if (DEKLightningTurret(Instigator).Healers[i].Pawn != None && DEKLightningTurret(Instigator).Healers[i].Pawn.Health >0)
-							{
-								D = DEKLightningTurret(Instigator).Healers[i];
-								if (DruidLinkSentinelController(D) != None)
-									HealerStatsInv = DruidLinkSentinelController(D).StatsInv;
-								else
-									HealerStatsInv = RPGStatsInv(D.Pawn.FindInventoryType(class'RPGStatsInv'));
-								if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-									HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKLightningTurret(Instigator).RPGMut, DEKLightningTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-								xp_given_away += xp_each;
-							}
-						}
-						// now adjust the turret operator
-						if (xp_given_away > 0)
-						{
-							StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-							while (StatsInv.DataObject.ExperienceFraction < 0)
-							{
-								StatsInv.DataObject.ExperienceFraction += 1.0;
-								StatsInv.DataObject.Experience -= 1;
-							}
-						}
-					}
-					// DEKLightningTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-				}
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 			//}
 		}
 		else
@@ -185,11 +148,9 @@ simulated function HitWall (vector HitNormal, actor Wall)
 
 simulated function Explode(vector HitLocation,vector HitNormal)
 {
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
     local int DriverLevel;
-    local Controller C;
 
 	if ( Role == ROLE_Authority )
 	{
@@ -211,44 +172,7 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
 		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-		if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-		{
-			cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-			xp_diff = cur_xp - old_xp;
-			if (xp_diff > 0 && DEKLightningTurret(Instigator).NumHealers > 0)
-//			if (xp_diff > 0 && Level.TimeSeconds > DEKLightningTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKLightningTurret(Instigator).NumHealers > 0)
-			{
-				// split the xp amongst the healers
-				xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKLightningTurret(Instigator).Healers.length);
-				xp_given_away = 0;
-
-				for(i = 0; i < DEKLightningTurret(Instigator).Healers.length; i++)
-				{
-					if (DEKLightningTurret(Instigator).Healers[i].Pawn != None && DEKLightningTurret(Instigator).Healers[i].Pawn.Health >0)
-					{
-					    C = DEKLightningTurret(Instigator).Healers[i];
-					    if (DruidLinkSentinelController(C) != None)
-							HealerStatsInv = DruidLinkSentinelController(C).StatsInv;
-					    else
-							HealerStatsInv = RPGStatsInv(C.Pawn.FindInventoryType(class'RPGStatsInv'));
-						if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-							HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKLightningTurret(Instigator).RPGMut, DEKLightningTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-						xp_given_away += xp_each;
-					}
-				}
-				// now adjust the turret operator
-				if (xp_given_away > 0)
-				{
-					StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-					while (StatsInv.DataObject.ExperienceFraction < 0)
-					{
-						StatsInv.DataObject.ExperienceFraction += 1.0;
-						StatsInv.DataObject.Experience -= 1;
-					}
-				}
-			}
-			// DEKLightningTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-		}
+        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 	}
 
 	PlaySound(Sound'ONSBPSounds.ShieldActivate',,3.5*TransientSoundVolume);
@@ -265,11 +189,10 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
     local float Distance, BeamLength;
     local vector Direction;
     local DEKLightningTurretMiniBolt Bolt;
-	local Controller C, D, NextC;
+	local Controller C, NextC;
 	local Pawn Victim;
-	local RPGStatsInv StatsInv, HealerStatsInv;
-	local float old_xp,cur_xp,xp_each,xp_diff,xp_given_away;
-	local int i;
+	local RPGStatsInv StatsInv;
+	local float old_xp;
     local int DriverLevel;
 	local Actor A;
 	
@@ -324,47 +247,7 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 					}
 				}
 
-				if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
-				{
-					cur_xp = StatsInv.DataObject.Experience + StatsInv.DataObject.ExperienceFraction;
-					xp_diff = cur_xp - old_xp;
-					if (xp_diff > 0 && DEKLightningTurret(Instigator).NumHealers > 0)
-//					if (xp_diff > 0 && Level.TimeSeconds > DEKLightningTurret(Instigator).LastHealTime + class'EngineerLinkGun'.default.HealTimeDelay && DEKLightningTurret(Instigator).NumHealers > 0)
-					{
-						// split the xp amongst the healers
-						xp_each = class'RW_EngineerLink'.static.XPForLinker(xp_diff , DEKLightningTurret(Instigator).Healers.length);
-						xp_given_away = 0;
-
-						for(i = 0; i < DEKLightningTurret(Instigator).Healers.length; i++)
-						{
-							if (DEKLightningTurret(Instigator).Healers[i].Pawn != None && DEKLightningTurret(Instigator).Healers[i].Pawn.Health >0)
-							{
-							    D = DEKLightningTurret(Instigator).Healers[i];
-							    if (DruidLinkSentinelController(D) != None)
-									HealerStatsInv = DruidLinkSentinelController(D).StatsInv;
-							    else
-									HealerStatsInv = RPGStatsInv(D.Pawn.FindInventoryType(class'RPGStatsInv'));
-								if (HealerStatsInv != None && HealerStatsInv.DataObject != None)
-								{
-									HealerStatsInv.DataObject.AddExperienceFraction(xp_each, DEKLightningTurret(Instigator).RPGMut, DEKLightningTurret(Instigator).Healers[i].Pawn.PlayerReplicationInfo);
-								}
-								xp_given_away += xp_each;
-							}
-						}
-						// now adjust the turret operator
-						if (xp_given_away > 0)
-						{
-							StatsInv.DataObject.ExperienceFraction -= xp_given_away;
-							while (StatsInv.DataObject.ExperienceFraction < 0)
-							{
-								StatsInv.DataObject.ExperienceFraction += 1.0;
-								StatsInv.DataObject.Experience -= 1;
-							}
-						}
-
-					}
-					// DEKLightningTurret(Instigator).Healers.length = 0;	// we have just paid them, so scrub their names
-				}
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 		}
 		PlaySound(Sound'GeneralAmbience.electricalfx6', SLOT_None, 10.0);
 		Instigator.PlaySound(Sound'GeneralAmbience.electricalfx6', SLOT_None, 10.0);
