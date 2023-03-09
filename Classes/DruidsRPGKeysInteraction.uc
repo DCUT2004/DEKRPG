@@ -1100,7 +1100,7 @@ function PostRender(Canvas Canvas)
 	local string pText;
 	local Summonifact Sf;
 	local int UsedPoints, TotalPoints, PointsLeft, iRecoveryTime;
-	local int UsedVPoints, TotalVPoints, UsedTPoints, TotalTPoints, UsedSPoints, TotalSPoints, UsedBPoints, TotalBPoints;
+	local int UsedVPoints, TotalVPoints, UsedTPoints, TotalTPoints, UsedSPoints, TotalSPoints, UsedBPoints, TotalBPoints, UsedNPoints, TotalNPoints;
 	local int UsedMonsterPoints, TotalMonsterPoints;
 	local int iNumHealers;
 	local float XLSmall, YLSmall, MPBarX, MPBarY;
@@ -1232,7 +1232,9 @@ function PostRender(Canvas Canvas)
 		TotalBPoints=EInv.TotalBuildingPoints;
 		UsedSPoints=EInv.UsedSentinelPoints;
 		TotalSPoints=EInv.TotalSentinelPoints;
-		TotalPoints = TotalSPoints+TotalTPoints+TotalVPoints+TotalBPoints;
+		UsedNPoints=EInv.UsedNodePoints;
+		TotalNPoints=EInv.TotalNodePoints;
+		TotalPoints = TotalSPoints+TotalTPoints+TotalVPoints+TotalBPoints+TotalNPoints;
 		iRecoveryTime = EInv.GetRecoveryTime();
 	}
 	else 
@@ -1300,6 +1302,11 @@ function PostRender(Canvas Canvas)
 			{
 				UsedPoints=UsedSPoints;
 				TotalPoints=TotalSPoints;
+			}
+			else if (DruidNodeSummon(sf) != None)
+			{
+				UsedPoints=UsedNPoints;
+				TotalPoints=TotalNPoints;
 			}
 			PointsLeft = TotalPoints-UsedPoints;
 			Canvas.SetPos(4, Canvas.ClipY * 0.75 - YL * 1.3);

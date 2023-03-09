@@ -5,7 +5,7 @@ var config float DamageRadius;
 var config float HeightDifference;
 var config float MaxDamage;
 var config float MinDamage;
-var class<xEmitter> RingEmitterClass;  
+var class<Emitter> RingEmitterClass;  
 
 var float PercentRangeIncreasePerLevel;
 var float PercentDamageIncreasePerLevel;
@@ -19,7 +19,7 @@ function Attack()
     local bool InHeightRange;
     local float ThisHeightDiff;
 
-	spawn(class'DEKRPG999X.FireRingEmitter',,,Pawn.Location, rot(0,0,0));
+	spawn(RingEmitterClass,,,Pawn.Location, rot(0,0,0));
     
 	C = Level.ControllerList;
 	while (C != None)
@@ -83,6 +83,6 @@ defaultproperties
      MinDamage=10.000000
      PercentRangeIncreasePerLevel=0.1
      PercentDamageIncreasePerLevel=0.1
-     RingEmitterClass=Class'DEKRPG999X.FireRingEmitter'
+     RingEmitterClass=class'DEKRPG999X.FireRingEmitter'
 	 ChargeDrainPerSecond=2
 }
