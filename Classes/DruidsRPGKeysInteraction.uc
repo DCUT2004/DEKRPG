@@ -891,7 +891,7 @@ function PreRender(Canvas Canvas)
 			}
 			else if (P.IsA('Node'))
 			{
-				BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1));
+				BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1) - P.CollisionRadius * Y);
 			}
 			else
 			{
@@ -966,7 +966,7 @@ function PreRender(Canvas Canvas)
     					Canvas.DrawColor.G = 255;
     					Canvas.DrawColor.R = 255;
     				}
-    				Canvas.DrawTile(HealthBarMaterial, BarUSize, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize*XScale, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
     				Canvas.DrawColor.A = 255;
     				Canvas.DrawColor.B = 0;
     		
@@ -974,7 +974,7 @@ function PreRender(Canvas Canvas)
     				Canvas.DrawColor.R = 128;
     				Canvas.DrawColor.G = Clamp(Int(128*Charge/MaxCharge), 0, 255);
 					Canvas.SetPos(BarLoc.X, BarLoc.Y);
-    				Canvas.DrawTile(HealthBarMaterial, BarUSize*(1.00 - (Charge/MaxCharge)), BarVSize*YScale, 0, 0, BarUSize, BarVSize);
+    				Canvas.DrawTile(HealthBarMaterial, BarUSize*(1.00 - (Charge/MaxCharge))*XScale, BarVSize*YScale, 0, 0, BarUSize, BarVSize);
 				}
 			}
 		}
