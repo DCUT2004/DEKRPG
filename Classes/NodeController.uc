@@ -312,7 +312,7 @@ function LevelUp(int NodeLevel)
 
 defaultproperties
 {
-	 ChargeDrainPerSecond=10
+	 ChargeDrainPerSecond=1
      PickupSiphonRadius=700.000000
 	 PickupDistributeRadius=1000.00
 	 PickupSiphonMultiplier=0.30000			//30% of the pickup's value is siphoned and given to nearby players
