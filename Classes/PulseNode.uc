@@ -1,4 +1,4 @@
-class LinkNode extends Node
+class PulseNode extends Node
     config(UT2004RPG);
 
 #exec OBJ LOAD FILE=..\Textures\UT2004Weapons.utx
@@ -17,7 +17,7 @@ simulated event PostNetBeginPlay()
 
 defaultproperties
 {
-     VehicleNameString="Link Node"
-     Skins(0)=Shader'UT2004Weapons.Shaders.PowerPulseShader'
-     Skins(1)=Shader'UT2004Weapons.Shaders.PowerPulseShader'
+     VehicleNameString="Pulse Node"
+     Skins(0)=Shader'UT2004Weapons.Shaders.PowerPulseShaderBlue'
+     Skins(1)=Shader'UT2004Weapons.Shaders.PowerPulseShaderBlue'
 }
