@@ -2,7 +2,7 @@ class DruidTeslaSentinel extends DruidLightningSentinel;
 
 defaultproperties
 {
-     TurretBaseClass=Class'DEKRPG999X.DruidLightningSentinelBase'
+     TurretBaseClass=Class'DEKRPG999X.DruidTeslaSentinelBase'
      VehicleNameString="Tesla Sentinel"
      bCanBeBaseForPawns=False
      Mesh=SkeletalMesh'AS_Vehicles_M.FloorTurretGun'
