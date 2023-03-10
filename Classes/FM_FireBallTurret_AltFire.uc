@@ -1,6 +1,6 @@
 class FM_FireBallTurret_AltFire extends FM_BallTurret_Fire;
 
-#exec  AUDIO IMPORT NAME="PlasmaTurretAltFire" FILE="Sounds\PlasmaTurretAltFire.WAV" GROUP="TurretSounds"
+#exec  AUDIO IMPORT NAME="FireballTurretAltFire" FILE="Sounds\FireballTurretAltFire.WAV" GROUP="TurretSounds"
 
 function DoFireEffect()
 {
@@ -27,10 +27,18 @@ function projectile SpawnProjectile(Vector Start, Rotator Dir)
     if ( p == None )
         return None;
 		
-	Instigator.PlaySound(Sound'DEKRPG999X.TurretSounds.PlasmaTurretAltFire',,150.000);
+	if (Instigator != None)
+		Instigator.AmbientSound = Sound'FireballTurretAltFire';
 
     p.Damage *= DamageAtten;
     return p;
+}
+
+
+function StopFiring()
+{
+	if (Instigator != None)
+		Instigator.AmbientSound = None;
 }
 
 defaultproperties
