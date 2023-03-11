@@ -80,6 +80,9 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
         case class'FireRingNode':
 			NC = spawn(class'FireRingNodeController');
             break;
+        case class'PulseNode':
+			NC = spawn(class'PulseNodeController');
+            break;
         Default:
 			NC = spawn(class'NodeController');
         	break;

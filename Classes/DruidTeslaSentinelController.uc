@@ -77,9 +77,9 @@ function Timer()
 defaultproperties
 {
      HitEmitterClass=Class'DEKRPG999X.LightningBeamEmitter'
-     MaxDamagePerHit=40
-     MinDamagePerHit=20
+     MaxDamagePerHit=70
+     MinDamagePerHit=30
      TargetRadius=1200.000000
-     TimeBetweenShots=1.0
+     TimeBetweenShots=2.0
      FullyChargedCount=10
 }
