@@ -1,6 +1,9 @@
 class DruidBlock extends Pawn;
+
 #exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209C.usx
+
 var byte Team;
+var Controller PlayerSpawner;
 
 function SetTeamNum(byte T)
 {
