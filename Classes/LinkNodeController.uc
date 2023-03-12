@@ -90,6 +90,7 @@ function LevelUp(int NodeLevel)
 
 defaultproperties
 {
+	 ChargeDrainPerSecond=2
      TimeBetweenChecks=0.300000
      LinkRadius=700.000000
      VehicleHealPerShot=20.000000
