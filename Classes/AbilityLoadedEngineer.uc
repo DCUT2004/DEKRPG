@@ -84,6 +84,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local EngTransLauncher ETrans;
 	local RW_EngineerLink EGun;
     local ArtifactUpgrade AU;
+	local ArtifactKillItem AKI;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv == None)
@@ -124,6 +125,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 			return; //get em next pass I guess?
 
 		AU.GiveTo(Other);
+		if(Other.SelectedItem == None)
+			Other.NextItem();
+	}
+
+	AKI = ArtifactKillItem(Other.FindInventoryType(class'ArtifactKillItem'));
+	if(AKI == None)
+	{
+		AKI = Other.spawn(class'ArtifactKillItem', Other,,, rot(0,0,0));
+		if(AKI == None)
+			return; //get em next pass I guess?
+
+		AKI.GiveTo(Other);
 		if(Other.SelectedItem == None)
 			Other.NextItem();
 	}

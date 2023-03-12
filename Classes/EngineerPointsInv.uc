@@ -1098,29 +1098,30 @@ function KillAllSentinels()
 	local int i;
 	
 	for(i = 0; i < 100 && SummonedSentinels.length > 0; i++)
-		KillFirstSentinel();
+		KillSentinel(i);
 }
 
-function KillFirstSentinel()
+function KillSentinel(int i)
 {
-	if(SummonedSentinels.length == 0)
+	if (i < 0 || i >= SummonedSentinels.Length || SummonedSentinels.length == 0)
 		return; //nothing to kill
-	if(SummonedSentinels[0] != None)
+
+	if(SummonedSentinels[i] != None)
 	{
 		if (Vehicle(SummonedSentinels[0]) != None && Vehicle(SummonedSentinels[0]).Driver != None)
 			Vehicle(SummonedSentinels[0]).EjectDriver();
-		SummonedSentinels[0].Health = 0;
-		SummonedSentinels[0].LifeSpan = 0.1 * SummonedSentinels.length; //so the server will do it in it's own time and not all at once...
-	}		
+		SummonedSentinels[i].Health = 0;
+		SummonedSentinels[i].LifeSpan = 0.1 * (i + 1); //so the server will do it in it's own time and not all at once...
 		
-	UsedSentinelPoints -= SummonedSentinelPoints[0];
-	if(UsedSentinelPoints < 0)
-	{
-		Warn("Sentinel Points less than zero!");
-		UsedSentinelPoints = 0; //just an emergency checkertrap in case something interesting happens
+		UsedSentinelPoints -= SummonedSentinelPoints[i];
+		if(UsedSentinelPoints < 0)
+		{
+			Warn("Sentinel Points less than zero!");
+			UsedSentinelPoints = 0; //just an emergency checkertrap in case something interesting happens
+		}
+		SummonedSentinels.remove(i, 1);
+		SummonedSentinelPoints.remove(i, 1);
 	}
-	SummonedSentinels.remove(0, 1);
-	SummonedSentinelPoints.remove(0, 1);
 }
 
 function KillAllNodes()
@@ -1128,29 +1129,29 @@ function KillAllNodes()
 	local int i;
 	
 	for(i = 0; i < 100 && SummonedNodes.length > 0; i++)
-		KillFirstNode();
+		KillNode(i);
 }
 
-function KillFirstNode()
+function KillNode(int i)
 {
-	if(SummonedNodes.length == 0)
+	if(i < 0 || i >= SummonedNodes.length || SummonedNodes.length == 0)
 		return; //nothing to kill
-	if(SummonedNodes[0] != None)
+	if(SummonedNodes[i] != None)
 	{
-		if (Vehicle(SummonedNodes[0]) != None && Vehicle(SummonedNodes[0]).Driver != None)
-			Vehicle(SummonedNodes[0]).EjectDriver();
-		SummonedNodes[0].Health = 0;
-		SummonedNodes[0].LifeSpan = 0.1 * SummonedNodes.length; //so the server will do it in it's own time and not all at once...
+		if (Vehicle(SummonedNodes[i]) != None && Vehicle(SummonedNodes[i]).Driver != None)
+			Vehicle(SummonedNodes[i]).EjectDriver();
+		SummonedNodes[i].Health = 0;
+		SummonedNodes[i].LifeSpan = 0.1 * (i + 1); //so the server will do it in it's own time and not all at once...
 	}		
 		
-	UsedNodePoints -= SummonedNodePoints[0];
+	UsedNodePoints -= SummonedNodePoints[i];
 	if(UsedNodePoints < 0)
 	{
 		Warn("Node Points less than zero!");
 		UsedNodePoints = 0; //just an emergency checkertrap in case something interesting happens
 	}
-	SummonedNodes.remove(0, 1);
-	SummonedNodePoints.remove(0, 1);
+	SummonedNodes.remove(i, 1);
+	SummonedNodePoints.remove(i, 1);
 }
 
 function KillAllTurrets()
@@ -1215,31 +1216,48 @@ function KillVehicle(int i)
 function KillAllBuildings()
 {
 	local int i;
+
 	
-	for(i = 0; i < 100 && SummonedBuildings.length > 0; i++)
-		KillFirstBuilding();
+	for(i = 0; i < SummonedBuildings.Length; i++)
+	{
+		if(SummonedBuildings[i] != None)
+		{
+			if (Vehicle(SummonedBuildings[i]) != None && Vehicle(SummonedBuildings[i]).Driver != None)
+				Vehicle(SummonedBuildings[i]).EjectDriver();
+			SummonedBuildings[i].Health = 0;
+			SummonedBuildings[i].LifeSpan = 0.1 * (i + 1); //so the server will do it in it's own time and not all at once...
+		}		
+			
+		UsedBuildingPoints -= SummonedBuildingPoints[i];
+		if(UsedBuildingPoints < 0)
+		{
+			Warn("Building Points less than zero!");
+			UsedBuildingPoints = 0; //just an emergency checkertrap in case something interesting happens
+		}
+	}
+	SummonedBuildings.Length = 0;	//Clear out the array
 }
 
-function KillFirstBuilding()
+function KillBuilding(int i)
 {
-	if(SummonedBuildings.length == 0)
+	if(i < 0 || i >= SummonedBuildings.Length)
 		return; //nothing to kill
-	if(SummonedBuildings[0] != None)
+	if(SummonedBuildings[i] != None)
 	{
-		if (Vehicle(SummonedBuildings[0]) != None && Vehicle(SummonedBuildings[0]).Driver != None)
-			Vehicle(SummonedBuildings[0]).EjectDriver();
-		SummonedBuildings[0].Health = 0;
-		SummonedBuildings[0].LifeSpan = 0.1 * SummonedBuildings.length; //so the server will do it in it's own time and not all at once...
+		if (Vehicle(SummonedBuildings[i]) != None && Vehicle(SummonedBuildings[i]).Driver != None)
+			Vehicle(SummonedBuildings[i]).EjectDriver();
+		SummonedBuildings[i].Health = 0;
+		SummonedBuildings[i].LifeSpan = 0.1 * (i + 1); //so the server will do it in it's own time and not all at once...
 	}		
 		
-	UsedBuildingPoints -= SummonedBuildingPoints[0];
+	UsedBuildingPoints -= SummonedBuildingPoints[i];
 	if(UsedBuildingPoints < 0)
 	{
 		Warn("Building Points less than zero!");
 		UsedBuildingPoints = 0; //just an emergency checkertrap in case something interesting happens
 	}
-	SummonedBuildings.remove(0, 1);
-	SummonedBuildingPoints.remove(0, 1);
+	SummonedBuildings.remove(i, 1);
+	SummonedBuildingPoints.remove(i, 1);
 }
 
 simulated function Destroyed()

@@ -59,12 +59,6 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 		}
 	}
 
-	if (Default.SentinelConfigs.length > 0 && StartLevel <= 1)
-	{
-		Artifact = Other.spawn(class'ArtifactKillAllSentinels', Other,,, rot(0,0,0));
-		Artifact.GiveTo(Other);
-	}
-
 // I'm guessing that NextItem is here to ensure players don't start with
 // no item selected.  So the if should stop weird artifact scrambles.
 	if(Other.SelectedItem == None)

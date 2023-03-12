@@ -45,6 +45,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			return false;
 
 		SetStartHealth(NewBlock);
+		NewBlock.PlayerSpawner = Instigator.Controller;
 
 		if ( Role == Role_Authority )
 		{
@@ -107,6 +108,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			if (NewBlock != None)
 			{
 				SetStartHealth(NewBlock);
+				NewBlock.PlayerSpawner = Instigator.Controller;
 
 				if ( Role == Role_Authority )
 					ApplyStatsToConstruction(NewBlock,Instigator);	// now apply stats to block
