@@ -51,8 +51,8 @@ defaultproperties
 {
      AttackInterval=5
      DamageRadius=2000.000000
-     MaxDamage=20.000000
-     MinDamage=5.000000
+     MaxDamage=40.000000
+     MinDamage=15.000000
      PercentRangeIncreasePerLevel=0.1
      PercentDamageIncreasePerLevel=0.1
      PulseEmitterClass=class'DEKRPG999X.PulseNodeEmitter'

@@ -79,8 +79,8 @@ defaultproperties
      AttackInterval=5
      DamageRadius=700.000000
      HeightDifference=50
-     MaxDamage=30.000000
-     MinDamage=10.000000
+     MaxDamage=80.000000
+     MinDamage=30.000000
      PercentRangeIncreasePerLevel=0.1
      PercentDamageIncreasePerLevel=0.1
      RingEmitterClass=class'DEKRPG999X.FireRingEmitter'
