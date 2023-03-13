@@ -13,7 +13,7 @@ var float PercentHealIncreasePerLevel;
 
 function Timer()
 {
-    // coming at at 0.3 instead of 1.0 to maintain links. But need to adjust timing of other calls.
+    // coming at at 0.25 instead of 1.0 to maintain links. But need to adjust timing of other calls.
     local Node node;
 
 	if (Pawn == None || PlayerSpawner == None)
@@ -92,9 +92,9 @@ function LevelUp(int NodeLevel)
 defaultproperties
 {
 	 ChargeDrainPerSecond=2
-     TimeBetweenChecks=0.300000
+     TimeBetweenChecks=0.250000
      LinkRadius=700.000000
-     VehicleHealPerShot=20.000000
+     VehicleHealPerShot=15.000000
      TurretLinkEmitterClass=Class'DEKRPG999X.DruidLinkSentinelBeamEffect'
      VehicleLinkEmitterClass=Class'DEKRPG999X.BronzeBoltEmitter'
      PercentRangeIncreasePerLevel=0.1
