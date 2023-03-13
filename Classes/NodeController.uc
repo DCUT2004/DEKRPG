@@ -25,6 +25,10 @@ var config int DistributeInterval;
 var int AttackCounter;
 var config int AttackInterval;
 
+// upgrade variables
+var float PercentPickupRangeIncreasePerLevel;
+var float PercentPickupMultiplierIncreasePerLevel;
+
 //A Packet is a struct containing pickups and charge that get transmitted out by a Node to the Network
 struct Packet
 {
@@ -307,7 +311,9 @@ simulated function Destroyed()
 
 function LevelUp(int NodeLevel)
 {
-     // TODO
+     PickupSiphonRadius += default.PickupSiphonRadius * PercentPickupRangeIncreasePerLevel;
+     PickupDistributeRadius += default.PickupDistributeRadius * PercentPickupRangeIncreasePerLevel;
+     PickupSiphonMultiplier += default.PickupSiphonMultiplier * PercentPickupMultiplierIncreasePerLevel;
 }
 
 defaultproperties
@@ -321,4 +327,6 @@ defaultproperties
 	 TransmitInterval=5						//Transmit packets out every this many seconds
 	 DistributeInterval=1					//Distribute received packets out every this many seconds
      TimeBetweenChecks=1.000000
+     PercentPickupRangeIncreasePerLevel=0.1
+     PercentPickupMultiplierIncreasePerLevel=0.1
 }

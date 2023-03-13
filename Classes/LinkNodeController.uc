@@ -86,6 +86,7 @@ function LevelUp(int NodeLevel)
 {
      LinkRadius += default.LinkRadius * PercentRangeIncreasePerLevel;
      VehicleHealPerShot += default.VehicleHealPerShot * PercentHealIncreasePerLevel;
+     Super.LevelUp(NodeLevel);
 }
 
 defaultproperties

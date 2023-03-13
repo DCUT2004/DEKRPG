@@ -45,6 +45,7 @@ function LevelUp(int NodeLevel)
      DamageRadius += default.DamageRadius * PercentRangeIncreasePerLevel;
      MaxDamage += default.MaxDamage * PercentDamageIncreasePerLevel;
      MinDamage += default.MinDamage * PercentDamageIncreasePerLevel;
+     Super.LevelUp(NodeLevel);
 }
 
 defaultproperties
