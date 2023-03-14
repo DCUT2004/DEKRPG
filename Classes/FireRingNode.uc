@@ -18,6 +18,7 @@ simulated event PostNetBeginPlay()
 defaultproperties
 {
      VehicleNameString="Fire Ring Node"
+	 MaxCharge=1200
      Skins(0)=Texture'EpicParticles.Flares.FlameWave3'
      Skins(1)=Texture'EpicParticles.Flares.FlameWave3'
 }

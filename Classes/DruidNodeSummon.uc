@@ -90,8 +90,8 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
         
 		if ( NC != None )
 		{
-			NC.SetPlayerSpawner(Instigator.Controller);
 			NC.Possess(NewNode);
+			NC.SetPlayerSpawner(Instigator.Controller);
 
 			// now allow player to get xp bonus
 			ApplyStatsToConstruction(NewNode,Instigator);

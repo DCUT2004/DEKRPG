@@ -18,6 +18,7 @@ simulated event PostNetBeginPlay()
 defaultproperties
 {
      VehicleNameString="Pulse Node"
+	 MaxCharge=1200
      Skins(0)=Shader'UT2004Weapons.Shaders.PowerPulseShaderBlue'
      Skins(1)=Shader'UT2004Weapons.Shaders.PowerPulseShaderBlue'
 }

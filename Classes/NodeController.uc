@@ -58,6 +58,8 @@ simulated event PostBeginPlay()
 
 function SetPlayerSpawner(Controller PlayerC)
 {
+    local float MinCharge;
+    
 	PlayerSpawner = PlayerC;
 	if (PlayerSpawner.PlayerReplicationInfo != None && PlayerSpawner.PlayerReplicationInfo.Team != None )
 	{
@@ -75,6 +77,14 @@ function SetPlayerSpawner(Controller PlayerC)
 	DistributeCounter = 0;
 	AttackCounter = 0;
 	Class'NodeNetwork'.default.TotalDrainPerSecond += ChargeDrainPerSecond;
+    
+    // set the initial charge to be the same as the lowest on the network
+    if (Node(Pawn) != None)         // Possess should have been called before SetPlayerSpawner
+    {
+        MinCharge = Class'NodeNetwork'.static.GetLowestChargeValue();
+        Node(Pawn).Charge = FMin(Node(Pawn).MaxCharge, FMax(0, MinCharge * ChargeDrainPerSecond));
+    }
+    
 	SetTimer(TimeBetweenChecks, true);
 }
 
@@ -128,7 +138,7 @@ function DirectCharge(int Amount)
 
 	ChargeToAdd = Amount * (ChargeDrainPerSecond / Class'NodeNetwork'.default.TotalDrainPerSecond);
 	Node(Pawn).Charge = Min(Node(Pawn).Charge + ChargeToAdd, Node(Pawn).MaxCharge);
-	AccumulatedChargeForNetwork += Amount;
+	AccumulatedChargeForNetwork += FMax(0, Amount - ChargeToAdd);
 }
 
 //Overrideable method for different Node types
@@ -261,7 +271,8 @@ function DistributePickup(Pickup SiphonedPickup, float DeliveryTime)
 				else if (AdrenalinePickup(SiphonedPickup) != None)
 				{
 					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
-					Ally.Controller.AwardAdrenaline(PickupAmount);
+                    if (Ally.Controller != None)
+					   Ally.Controller.AwardAdrenaline(PickupAmount);
 				}
 				else if (ShieldPickup(SiphonedPickup) != None)
 				{

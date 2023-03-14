@@ -41,6 +41,50 @@ static function bool CanSpawnNode(vector NodeLocation)
      return true;
 }
 
+// return the lowest amount of charge for a node on the network, adjusted for Drain rate
+static function float GetLowestChargeValue()
+{
+    local float MinCharge;
+    local float ThisNodeCharge;
+    local float ChargeDrainPerSecond;
+    local int i;
+    
+    if (default.Nodes.length == 0)
+        return 0;
+        
+    MinCharge = -1;    
+	for (i = 0; i < default.Nodes.length; i ++)
+    {
+        if (default.Nodes[i] != None)
+       {
+            ThisNodeCharge = default.Nodes[i].Charge;
+            if (ThisNodeCharge == 0)
+                if (MinCharge < 0)
+                    MinCharge = 0; 
+
+            ChargeDrainPerSecond = 0;            
+            if (NodeController(default.Nodes[i].Controller) != None)
+                ChargeDrainPerSecond = NodeController(default.Nodes[0].Controller).ChargeDrainPerSecond;    
+
+            if (ChargeDrainPerSecond > 0)    
+            {
+                if (MinCharge < 0 || ThisNodeCharge / ChargeDrainPerSecond < MinCharge)
+                    MinCharge = ThisNodeCharge / ChargeDrainPerSecond;    
+            }    
+            else
+            {
+                if (MinCharge < 0 || ThisNodeCharge < MinCharge)
+                    MinCharge  = ThisNodeCharge;
+            }
+       }
+    }
+
+    if (MinCharge < 0)
+        return 0;
+    else
+        return MinCharge;
+}
+
 defaultproperties
 {
      MinimumSpawnRadius=1000.00

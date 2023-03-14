@@ -34,7 +34,6 @@ simulated event PostNetBeginPlay()
 	}
 
 	super(ASVehicle).PostNetBeginPlay();
-	Charge = 0;
 }
 
 function AddDefaultInventory()
@@ -90,7 +89,7 @@ simulated function Destroyed()
 defaultproperties
 {
      NodeLevel=0
-	 MaxCharge=500
+	 MaxCharge=400
      MaxNodeLevel=5
      PercentHealthIncreasePerLevel=0.1
      TurretBaseClass=Class'DEKRPG999X.DruidLinkSentinelBase'

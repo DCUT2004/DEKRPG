@@ -22,5 +22,5 @@ defaultproperties
 {
      TeamProjectileClasses(0)=Class'DEKRPG999X.PROJ_BlasterSent'
      TeamProjectileClasses(1)=Class'DEKRPG999X.PROJ_BlasterSent'
-     FireRate=0.330000
+     FireRate=0.500000
 }

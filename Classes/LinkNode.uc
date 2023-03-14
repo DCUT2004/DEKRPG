@@ -18,6 +18,7 @@ simulated event PostNetBeginPlay()
 defaultproperties
 {
      VehicleNameString="Link Node"
+	 MaxCharge=800
      Skins(0)=Shader'UT2004Weapons.Shaders.PowerPulseShader'
      Skins(1)=Shader'UT2004Weapons.Shaders.PowerPulseShader'
 }
