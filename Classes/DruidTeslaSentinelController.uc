@@ -78,7 +78,7 @@ defaultproperties
 {
      HitEmitterClass=Class'DEKRPG999X.LightningBeamEmitter'
      MaxDamagePerHit=60
-     MinDamagePerHit=30
+     MinDamagePerHit=25
      TargetRadius=1000.000000
      TimeBetweenShots=2.0
      FullyChargedCount=10
