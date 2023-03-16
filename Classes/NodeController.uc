@@ -273,6 +273,8 @@ function DistributePickup(Pickup SiphonedPickup, float DeliveryTime)
 					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
                     if (Ally.Controller != None)
 					   Ally.Controller.AwardAdrenaline(PickupAmount);
+					else if (Ally.DrivenVehicle != None && Ally.DrivenVehicle.Controller != None)
+						Ally.DrivenVehicle.Controller.AwardAdrenaline(PickupAmount);
 				}
 				else if (ShieldPickup(SiphonedPickup) != None)
 				{
