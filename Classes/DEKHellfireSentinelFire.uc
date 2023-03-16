@@ -50,6 +50,6 @@ simulated function bool AllowFire()
 defaultproperties
 {
      FireSound=Sound'ONSVehicleSounds-S.Tank.TankFire01'
-     FireRate=3.000000
+     FireRate=2.500000
      ProjectileClass=Class'DEKRPG999X.DEKHellfireSentinelProj'
 }

@@ -5,6 +5,7 @@ class AbilityLoadedBuildings extends CostRPGAbility
 struct BuildingConfig
 {
     var int Level;
+	var string SubClass;
 	Var String FriendlyName;
 	var Class<Pawn> Building;
 	var int Points;
@@ -20,6 +21,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local LoadedInv LoadedInv;
 	Local RPGArtifact Artifact;
 	Local int StartLevel;
+	local RPGStatsInv StatsInv;
+    local string SubClassName;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv != None)
@@ -43,12 +46,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 	LoadedInv.LEBAbilityLevel = AbilityLevel;
 
+	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+    SubClassName = class'DruidArtifactLoaded'.static.GetSubClassName(StatsInv.Data);
+    if (SubClassName == "")
+        return;
+
 	// now we are going to give them the correct artifacts. If just going up by one level, then we just add on the new ones, 
 	for(i = 0; i < Default.BuildingConfigs.length; i++)
 	{
 		if(Default.BuildingConfigs[i].Building != None) //make sure the object is sane.
 		{
-			if (Default.BuildingConfigs[i].Level >= StartLevel && Default.BuildingConfigs[i].Level <= AbilityLevel)
+			if (Default.BuildingConfigs[i].Level >= StartLevel && Default.BuildingConfigs[i].Level <= AbilityLevel && 
+                (default.BuildingConfigs[i].SubClass == "" || default.BuildingConfigs[i].SubClass == SubClassName))
 			{
 				Artifact = Other.spawn(class'DruidBuildingSummon', Other,,, rot(0,0,0));
 				if(Artifact == None)

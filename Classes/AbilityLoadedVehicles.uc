@@ -7,6 +7,7 @@ var config Array<string> IncludeVehicleGametypes;
 struct VehicleConfig
 {
     var int Level;
+	var string SubClass;
 	Var String FriendlyName;
 	var Class<Pawn> Vehicle;
 	var int Points;
@@ -23,6 +24,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	Local RPGArtifact Artifact;
 	local bool bAddVehicles;
 	Local int StartLevel;
+	local RPGStatsInv StatsInv;
+    local string SubClassName;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv != None)
@@ -58,11 +61,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	// now we are going to give them the correct artifacts. If just going up by one level, then we could just add on the new ones, but then the order of artifacts gets screwed
 	if (bAddVehicles)
 	{
+        StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+        SubClassName = class'DruidArtifactLoaded'.static.GetSubClassName(StatsInv.Data);
+        if (SubClassName == "")
+            return;
+
+
 		for(i = 0; i < Default.VehicleConfigs.length; i++)
 		{
-    		if(Default.VehicleConfigs[i].Vehicle != None) //make sure the object is sane.
+    		if (Default.VehicleConfigs[i].Vehicle != None) //make sure the object is sane.
     		{
-    			if (Default.VehicleConfigs[i].Level >= StartLevel && Default.VehicleConfigs[i].Level <= AbilityLevel)
+    			if (Default.VehicleConfigs[i].Level >= StartLevel && Default.VehicleConfigs[i].Level <= AbilityLevel && 
+                    (default.VehicleConfigs[i].SubClass == "" || default.VehicleConfigs[i].SubClass == SubClassName))
     			{
     				Artifact = Other.spawn(class'DruidVehicleSummon', Other,,, rot(0,0,0));
     				if(Artifact == None)

@@ -5,6 +5,7 @@ class AbilityLoadedTurrets extends CostRPGAbility
 struct TurretConfig
 {
     var int Level;
+	var string SubClass;
 	Var String FriendlyName;
 	var Class<Pawn> Turret;
 	var int Points;
@@ -21,6 +22,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	Local RPGArtifact Artifact;
 	Local int StartLevel;
 	local EngineerPointsInv EInv;
+	local RPGStatsInv StatsInv;
+    local string SubClassName;
 
 	EInv = class'AbilityLoadedEngineer'.static.GetEngInv(Other);
     if (EInv != None)
@@ -53,12 +56,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 	LoadedInv.LETAbilityLevel = AbilityLevel;
 
+	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+    SubClassName = class'DruidArtifactLoaded'.static.GetSubClassName(StatsInv.Data);
+    if (SubClassName == "")
+        return;
+
 	// now we are going to give them the correct artifacts. If just going up by one level, then we just add on the new ones, 
 	for(i = 0; i < Default.TurretConfigs.length; i++)
 	{
 		if(Default.TurretConfigs[i].Turret != None) //make sure the object is sane.
 		{
-			if (Default.TurretConfigs[i].Level >= StartLevel && Default.TurretConfigs[i].Level <= AbilityLevel)
+			if (Default.TurretConfigs[i].Level >= StartLevel && Default.TurretConfigs[i].Level <= AbilityLevel && 
+                (default.TurretConfigs[i].SubClass == "" || default.TurretConfigs[i].SubClass == SubClassName))
 			{
 				Artifact = Other.spawn(class'DruidTurretSummon', Other,,, rot(0,0,0));
 				if(Artifact == None)

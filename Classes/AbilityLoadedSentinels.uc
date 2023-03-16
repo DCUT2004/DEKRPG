@@ -5,6 +5,7 @@ class AbilityLoadedSentinels extends CostRPGAbility
 struct SentinelConfig
 {
     var int Level;
+	var string SubClass;
 	Var String FriendlyName;
 	var Class<Pawn> Sentinel;
 	var int Points;
@@ -20,6 +21,8 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 	local LoadedInv LoadedInv;
 	Local RPGArtifact Artifact;
 	Local int StartLevel;
+	local RPGStatsInv StatsInv;
+    local string SubClassName;
 
 	LoadedInv = LoadedInv(Other.FindInventoryType(class'LoadedInv'));
 	if(LoadedInv != None)
@@ -43,12 +46,18 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 
 	LoadedInv.LESAbilityLevel = AbilityLevel;
 
+	StatsInv = RPGStatsInv(Other.FindInventoryType(class'RPGStatsInv'));
+    SubClassName = class'DruidArtifactLoaded'.static.GetSubClassName(StatsInv.Data);
+    if (SubClassName == "")
+        return;
+
 	// now we are going to give them the correct artifacts. If just going up by one level, then we just add on the new ones, 
 	for(i = 0; i < Default.SentinelConfigs.length; i++)
 	{
 		if(Default.SentinelConfigs[i].Sentinel != None) //make sure the object is sane.
 		{
-			if (Default.SentinelConfigs[i].Level >= StartLevel && Default.SentinelConfigs[i].Level <= AbilityLevel)
+			if (Default.SentinelConfigs[i].Level >= StartLevel && Default.SentinelConfigs[i].Level <= AbilityLevel && 
+                (default.SentinelConfigs[i].SubClass == "" || default.SentinelConfigs[i].SubClass == SubClassName))
 			{
 				Artifact = Other.spawn(class'DruidSentinelSummon', Other,,, rot(0,0,0));
 				if(Artifact == None)
