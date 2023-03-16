@@ -25,6 +25,11 @@ simulated function Destroyed()
 	Super.Destroyed();
 }
 
+function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
+{
+     // Log("+++++ DruidEnergyWallController LevelUp");
+}
+
 defaultproperties
 {
 }

@@ -59,7 +59,8 @@ function DoTrace(Vector Start, Rotator Dir)
 				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
 				HitNormal = Vect(0,0,0);
 
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidMinigunTurret(Instigator).Healers, old_xp, DruidMinigunTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidMinigunTurret(Instigator).Healers, old_xp, DruidMinigunTurret(Instigator).RPGMut);
 
 			}
 			else if ( WeaponAttachment(Weapon.ThirdPersonActor) != None )

@@ -65,7 +65,8 @@ simulated function ProcessTouch( Actor Other, Vector HitLocation )
 
 			Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 
-            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKStingerTurret(Instigator).Healers, old_xp, DEKStingerTurret(Instigator).RPGMut);
+            if (StatsInv != None)
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKStingerTurret(Instigator).Healers, old_xp, DEKStingerTurret(Instigator).RPGMut);
 		}
 	}
 	Destroy();

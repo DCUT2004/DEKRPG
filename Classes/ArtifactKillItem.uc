@@ -72,6 +72,7 @@ function Activate()
 			else if (DruidSentinelController(HitPawn.Controller) != None && DruidSentinelController(HitPawn.Controller).PlayerSpawner != None && DruidSentinelController(HitPawn.Controller).PlayerSpawner == Instigator.Controller
 			|| DruidDefenseSentinelController(HitPawn.Controller) != None && DruidDefenseSentinelController(HitPawn.Controller).PlayerSpawner != None && DruidDefenseSentinelController(HitPawn.Controller).PlayerSpawner == Instigator.Controller
 			|| DruidLightningSentinelController(HitPawn.Controller) != None && DruidLightningSentinelController(HitPawn.Controller).PlayerSpawner != None && DruidLightningSentinelController(HitPawn.Controller).PlayerSpawner == Instigator.Controller
+			|| DruidEnergyWallController(HitPawn.Controller) != None && DruidEnergyWallController(HitPawn.Controller).PlayerSpawner != None && DruidEnergyWallController(HitPawn.Controller).PlayerSpawner == Instigator.Controller
 			|| AutoGunController(HitPawn.Controller) != None && AutoGunController(HitPawn.Controller).PlayerSpawner != None && AutoGunController(HitPawn.Controller).PlayerSpawner == Instigator.Controller)
 			{
 				KillItem(HitPawn, "SENTINEL");

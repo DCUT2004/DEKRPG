@@ -322,7 +322,8 @@ function TraceFire(Vector Start, Rotator Dir)
 				Other.TakeDamage(RandRange(DamageMin, DamageMax), Instigator, HitLocation, Momentum * Normal(HitLocation - Start), DamageType);
 			HitNormal = vect(0,0,0);
 	
-            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
+            if (StatsInv != None)
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
         }
 			
 	}
@@ -385,7 +386,8 @@ function TraceFire(Vector Start, Rotator Dir)
 				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
     			HitNormal = vect(0,0,0);
     			
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKOdinTurret(Instigator).Healers, old_xp, DEKOdinTurret(Instigator).RPGMut);
             }
             else
             {

@@ -93,7 +93,8 @@ simulated function ProcessTouch(Actor Other, Vector HitLocation)
                 // Log("+++++++ FlameProj about to do" @ Damage @ "damage to" @ Other @ "LifeSpan" @ LifeSpan @ "time:" @ Level.TimeSeconds);
 				Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, FireBallTurret(Instigator).Healers, old_xp, FireBallTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, FireBallTurret(Instigator).Healers, old_xp, FireBallTurret(Instigator).RPGMut);
             }
 		}
 	}

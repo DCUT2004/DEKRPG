@@ -63,7 +63,8 @@ simulated function HurtRadius( float DamageAmount, float DamageRadius, class<Dam
 		}
 	}
 
-    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidIonCannon(Instigator).Healers, old_xp, DruidIonCannon(Instigator).RPGMut);
+    if (StatsInv != None)
+        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidIonCannon(Instigator).Healers, old_xp, DruidIonCannon(Instigator).RPGMut);
 
 	bHurtEntry = false;
 }

@@ -348,6 +348,8 @@ static function DistributeHealingXP(RPGStatsInv StatsInv, int DriverLevel, array
 	local int i;
 	local Controller C;
 
+    if (StatsInv == None)
+        return;
 	if (StatsInv != None && StatsInv.DataObject != None && DriverLevel == StatsInv.DataObject.Level)		// if the driver has levelled, then do not share xp
 		return;
 

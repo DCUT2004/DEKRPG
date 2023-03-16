@@ -34,7 +34,8 @@ simulated function ProcessTouch (Actor Other, vector HitLocation)
 
 			Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 
-            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, BaseBallTurret(Instigator).Healers, old_xp, BaseBallTurret(Instigator).RPGMut);
+            if (StatsInv != None)
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, BaseBallTurret(Instigator).Healers, old_xp, BaseBallTurret(Instigator).RPGMut);
 		}
 
 		Explode(HitLocation, -Normal(Velocity));

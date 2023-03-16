@@ -22,7 +22,8 @@ function BlowUp(vector HitLocation)
 		}
 		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLynxTurret(Instigator).Healers, old_xp, DEKLynxTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLynxTurret(Instigator).Healers, old_xp, DEKLynxTurret(Instigator).RPGMut);
 	}
 }
 

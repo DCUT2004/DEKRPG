@@ -47,7 +47,8 @@ function TraceFire(Vector Start, Rotator Dir)
 				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
 			HitNormal = vect(0,0,0);
 	
-            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidEnergyTurret(Instigator).Healers, old_xp, DruidEnergyTurret(Instigator).RPGMut);
+            if (StatsInv != None)
+                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidEnergyTurret(Instigator).Healers, old_xp, DruidEnergyTurret(Instigator).RPGMut);
 
         }
     }

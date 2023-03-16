@@ -87,7 +87,8 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 		//Other.TakeDamage(Damage, Instigator, HitLocation, MomentumTransfer * Normal(Velocity), MyDamageType);
 		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidBallTurret(Instigator).Healers, old_xp, DruidBallTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DruidBallTurret(Instigator).Healers, old_xp, DruidBallTurret(Instigator).RPGMut);
 	}
     
 	Destroy();

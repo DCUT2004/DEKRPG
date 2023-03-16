@@ -87,7 +87,8 @@ simulated function Explode(vector HitLocation, vector HitNormal)
 
 		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKPlasmaTurret(Instigator).Healers, old_xp, DEKPlasmaTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKPlasmaTurret(Instigator).Healers, old_xp, DEKPlasmaTurret(Instigator).RPGMut);
 	}
 	Destroy();
 }

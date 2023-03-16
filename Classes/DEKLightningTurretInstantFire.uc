@@ -77,7 +77,8 @@ simulated function DoTrace(Vector Start, Rotator Dir)
 				Other.TakeDamage(Damage, Instigator, HitLocation, Momentum*X, DamageType);
 				HitNormal = Vect(0,0,0);
 
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 
 			}
 			else if ( WeaponAttachment(Weapon.ThirdPersonActor) != None )

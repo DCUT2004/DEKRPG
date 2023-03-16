@@ -39,7 +39,8 @@ function SuperExplosion()
 
 		HurtRadius(ComboDamage, ComboRadius, class'DamTypeSkyMineCombo', ComboMomentumTransfer, Location );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
 	}
 
 	E = Spawn(class'DEKSkyMineComboEffect');
@@ -133,7 +134,8 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
         HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKSkyMineTurret(Instigator).Healers, old_xp, DEKSkyMineTurret(Instigator).RPGMut);
 	}
 
     if ( EffectIsRelevant(Location, false) )

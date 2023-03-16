@@ -118,7 +118,8 @@ simulated function Timer()
 
 				BestC.Pawn.TakeDamage(MiniboltDamage, Instigator, BestC.Pawn.Location, Momentum, MiniboltDamageType);
 
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 			//}
 		}
 		else
@@ -172,7 +173,8 @@ simulated function Explode(vector HitLocation,vector HitNormal)
 
 		HurtRadius(Damage, DamageRadius, MyDamageType, MomentumTransfer, HitLocation );
 
-        class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
+        if (StatsInv != None)
+            class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 	}
 
 	PlaySound(Sound'ONSBPSounds.ShieldActivate',,3.5*TransientSoundVolume);
@@ -247,7 +249,8 @@ function TakeDamage(int Damage, Pawn EventInstigator, vector HitLocation, vector
 					}
 				}
 
-                class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
+                if (StatsInv != None)
+                    class'RW_EngineerLink'.static.DistributeHealingXP(StatsInv, DriverLevel, DEKLightningTurret(Instigator).Healers, old_xp, DEKLightningTurret(Instigator).RPGMut);
 		}
 		PlaySound(Sound'GeneralAmbience.electricalfx6', SLOT_None, 10.0);
 		Instigator.PlaySound(Sound'GeneralAmbience.electricalfx6', SLOT_None, 10.0);

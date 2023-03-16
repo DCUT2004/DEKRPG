@@ -1,4 +1,4 @@
-class DruidEnergyWall extends ASTurret
+class DruidEnergyWall extends BaseTurretSentinel
 	config(UT2004RPG);
 
 var config int DamagePerHit;
@@ -138,6 +138,9 @@ simulated event touch (Actor Other)
 	
 	if (Role < ROLE_Authority)
 		return;			// dont try to do anything clientside
+        
+    if (Controller == None || DruidEnergyWallController(Controller) == None)
+        return;
 
 	PC = DruidEnergyWallController(Controller).PlayerSpawner;
     
@@ -173,7 +176,7 @@ simulated event touch (Actor Other)
 		return;		// not pawn so no use hurting, or is already dead
 		
 	// let's hit them for damage
-	if ( Controller == None || DruidEnergyWallController(Controller) == None || DruidEnergyWallController(Controller).PlayerSpawner == None  || DruidEnergyWallController(Controller).PlayerSpawner.Pawn == None)
+	if ( DruidEnergyWallController(Controller) == None || DruidEnergyWallController(Controller).PlayerSpawner == None  || DruidEnergyWallController(Controller).PlayerSpawner.Pawn == None)
 		return; 
 	
 	if (P == PC.Pawn )
@@ -209,6 +212,18 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 
 }
 
+function LevelUp()
+{
+    if (SentinelLevel == MaxSentinelLevel)
+        return;
+        
+    super.LevelUp();
+    
+    DamagePerHit += default.DamagePerHit * PercentDamageIncreasePerLevel;
+    MinDamage += default.MinDamage * PercentDamageIncreasePerLevel;
+    MaxDamage += default.MaxDamage * PercentDamageIncreasePerLevel;
+}
+
 defaultproperties
 {
 	DamagePerHit=40
@@ -217,7 +232,7 @@ defaultproperties
 	DamageFraction=0.3
 	VehicleNameString="Energy Wall"
 	bNoTeamBeacon=false
-	MaxGap=600
+	MaxGap=900
 	MinGap=80
 	Height=120
 	DefaultController=class'DruidEnergyWallController'
@@ -253,4 +268,5 @@ defaultproperties
  	bNonHumanControl=true
 	AutoTurretControllerClass=None
 	DamageAdjust=1.0
+	PercentDamageIncreasePerLevel=0.15
 }

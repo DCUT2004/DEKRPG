@@ -37,9 +37,14 @@ function LevelUp()
         DruidLightningSentinelController(Controller).LevelUp(PercentDamageIncreasePerLevel, PercentFireRateIncreasePerLevel, PercentRangeIncreasePerLevel, PercentHealthIncreasePerLevel);
     }
     else
-    if (Controller != None && AutoGunController (Controller) != None)
+    if (Controller != None && AutoGunController(Controller) != None)
     {
-        AutoGunController (Controller).LevelUp(PercentDamageIncreasePerLevel, PercentFireRateIncreasePerLevel, PercentRangeIncreasePerLevel, PercentHealthIncreasePerLevel);
+        AutoGunController(Controller).LevelUp(PercentDamageIncreasePerLevel, PercentFireRateIncreasePerLevel, PercentRangeIncreasePerLevel, PercentHealthIncreasePerLevel);
+    }
+    else
+    if (Controller != None && DruidEnergyWallController(Controller) != None)
+    {
+        DruidEnergyWallController(Controller).LevelUp(PercentDamageIncreasePerLevel, PercentFireRateIncreasePerLevel, PercentRangeIncreasePerLevel, PercentHealthIncreasePerLevel);
     }
     
     // now update the weapon fire rate - if there is one
