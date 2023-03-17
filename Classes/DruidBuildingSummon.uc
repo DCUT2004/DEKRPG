@@ -22,6 +22,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 	local DruidExplosive NewExpl;
     local int AmountCHB;
     local class<DruidBlock> ThisBlock;
+    local ForceBlockController FBC;
 
     AmountCHB = class'AbilityConstructionHealthBonus'.static.GetLevelConstructionHealthBonus(P);
           
@@ -49,6 +50,17 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 
 		if ( Role == Role_Authority )
 		{
+            if (DruidForceBlock(NewBlock) != None || DruidForceSmallBlock(NewBlock) != None || DruidForceHugeBlock(NewBlock) != None)
+            {
+                // it is a block that hurts monsters, so add a controller
+                FBC = spawn(class'ForceBlockController');
+                if (FBC != None)
+                {
+                    FBC.Possess(NewBlock);
+                    FBC.SetPlayerSpawner(Instigator.Controller);
+                }
+            }
+                    
 			// now apply stats to block
 			ApplyStatsToConstruction(NewBlock,Instigator);
 		}
@@ -102,8 +114,7 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 			}
 
             ThisBlock = GetBlockToSpawn(class<DruidBlock>(class<DruidMultiBlock>(SummonItem).default.Blocks[i].BlockType), AmountCHB);
-			NewBlock = epi.SummonBlock(ThisBlock, PointsEach+PointsLeft, P, 
-				BlockLoc,SpawnRotation);	
+			NewBlock = epi.SummonBlock(ThisBlock, PointsEach+PointsLeft, P,	BlockLoc,SpawnRotation);	
 			PointsLeft = 0;
 			if (NewBlock != None)
 			{
@@ -111,7 +122,20 @@ function bool SpawnIt(TranslocatorBeacon Beacon, Pawn P, EngineerPointsInv epi)
 				NewBlock.PlayerSpawner = Instigator.Controller;
 
 				if ( Role == Role_Authority )
+                {
+                    if (DruidForceBlock(NewBlock) != None || DruidForceSmallBlock(NewBlock) != None || DruidForceHugeBlock(NewBlock) != None)
+                    {
+                        // it is a block that hurts monsters, so add a controller
+                        FBC = spawn(class'ForceBlockController');
+                        if (FBC != None)
+                        {
+                            FBC.Possess(NewBlock);
+                            FBC.SetPlayerSpawner(Instigator.Controller);
+                        }
+                    }
+                    
 					ApplyStatsToConstruction(NewBlock,Instigator);	// now apply stats to block
+                }
 			}
 			NewBlock = None;
 		}

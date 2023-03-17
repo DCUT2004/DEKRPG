@@ -15,4 +15,5 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 defaultproperties
 {
      Skins(0)=AS_FX_TX.WhiteShield_FB
+	VehicleNameString="Force Block"
 }

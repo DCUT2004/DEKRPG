@@ -51,7 +51,7 @@ function LevelUp(int NodeLevel)
 defaultproperties
 {
      AttackInterval=5
-     DamageRadius=2000.000000
+     DamageRadius=1500.000000
      MaxDamage=40.000000
      MinDamage=15.000000
      PercentRangeIncreasePerLevel=0.1

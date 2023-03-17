@@ -80,6 +80,6 @@ defaultproperties
      MaxDamagePerHit=60
      MinDamagePerHit=25
      TargetRadius=1000.000000
-     TimeBetweenShots=2.0
+     TimeBetweenShots=2.5
      FullyChargedCount=10
 }

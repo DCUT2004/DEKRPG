@@ -1,8 +1,8 @@
-class DruidBlock extends Pawn;
+class DruidBlock extends Vehicle;
 
 #exec OBJ LOAD FILE=..\StaticMeshes\DEKStaticsMaster209C.usx
 
-var byte Team;
+// var byte Team;
 var Controller PlayerSpawner;
 
 function SetTeamNum(byte T)
@@ -112,4 +112,5 @@ defaultproperties
      bBlockPlayers=True
      bUseCollisionStaticMesh=True
      Mass=10000.000000
+     bNonHumanControl=true
 }
