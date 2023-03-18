@@ -1,6 +1,7 @@
 class Node extends ASTurret
     config(UT2004RPG);
-#exec OBJ LOAD FILE=..\Animations\AS_Vehicles_M.ukx
+
+#exec OBJ LOAD FILE=..\Sounds\AnnouncerFemale2K4.uax
 
 var int NodeLevel;
 var int MaxNodeLevel;
@@ -45,12 +46,12 @@ simulated function Explode( vector HitLocation, vector HitNormal )
 {
 	local NodeController C;
 	
-	C = NodeController(self.Controller);
+	C = NodeController(Controller);
 	
 	if (C != None && C.PlayerSpawner != None && PlayerController(C.PlayerSpawner) != None)
-		PlayerController(C.PlayerSpawner).ClientPlaySound(Sound'AnnouncerAssault.Generic.MS_sentinel_destroyed');
+		PlayerController(C.PlayerSpawner).ClientPlaySound(Sound'AnnouncerFemale2K4.Generic.Red_powernode_destroyed');
 		
-	super(ASTurret).Explode( HitLocation, Vect(0,0,1) ); // Overriding Explosion direction
+	Super.Explode( HitLocation, Vect(0,0,1) ); // Overriding Explosion direction
 }
 
 function bool HealDamage(int Amount, Controller Healer, class<DamageType> DamageType)
