@@ -67,10 +67,8 @@ function DoLinks()
 						if (HitEmitter != None)
 							HitEmitter.mSpawnVecA = LoopP.Location;
 					}
-				    else if (LoopP.Health < LoopP.HealthMax)
+				    else if (LoopP.GiveHealth(VehicleHealPerShot, LoopP.HealthMax))
 				    {
-					    // can at least add some health
-						LoopP.GiveHealth(VehicleHealPerShot, LoopP.HealthMax);
 						HitEmitter = spawn(VehicleLinkEmitterClass,,, Pawn.Location, rotator(LoopP.Location - Pawn.Location));
 						if (HitEmitter != None)
 							HitEmitter.mSpawnVecA = LoopP.Location;

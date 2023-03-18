@@ -212,14 +212,11 @@ function DoHealing()
 				    if (Vehicle(LoopP) != None || DruidExplosive(LoopP) != None || DruidEnergyWall(LoopP) != None)
 				    {
 						// looking good so far. Now let's check if on same team
-						if (LoopP.GetTeamNum() == DefPawn.GetTeamNum() && LoopP.Health < LoopP.HealthMax)
+						if (LoopP.GetTeamNum() == DefPawn.GetTeamNum() && LoopP.GiveHealth(max(1,(DefPawn.ArmorHealingAmount * DefPawn.ArmorHealingLevel * LoopP.HealthMax)/100.0), LoopP.HealthMax))
 						{
-						    // can add some health
-							LoopP.GiveHealth(max(1,(DefPawn.ArmorHealingAmount * DefPawn.ArmorHealingLevel * LoopP.HealthMax)/100.0), LoopP.HealthMax);
 							HitEmitter = spawn(ArmorEmitterClass,,, DefPawn.Location, rotator(LoopP.Location - DefPawn.Location));
 							if (HitEmitter != None)
 								HitEmitter.mSpawnVecA = LoopP.Location;
-
 						}
 					}
 					if (DruidBlock(LoopP) != None && !LoopP.IsA('RingBlue') && !LoopP.IsA('RingRed') && !LoopP.IsA('RingGold') && !LoopP.IsA('TarydiumCrystal') && !LoopP.IsA('MissionBalloon'))
