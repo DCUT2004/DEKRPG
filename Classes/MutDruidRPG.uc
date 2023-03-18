@@ -206,6 +206,8 @@ defaultproperties
      ArtifactKeyConfigs(13)=(Alias="SelectRemoteBooster",ArtifactClass=Class'DEKRPG999X.ArtifactRemoteBooster')
      ArtifactKeyConfigs(14)=(Alias="SelectResurrect",ArtifactClass=Class'DEKRPG999X.ArtifactResurrect')
      ArtifactKeyConfigs(15)=(Alias="SelectRemoteAmplifier",ArtifactClass=Class'DEKRPG999X.ArtifactRemoteAmplifier')
+     ArtifactKeyConfigs(16)=(Alias="SelectKillItem",ArtifactClass=Class'DEKRPG999X.ArtifactKillItem')
+     ArtifactKeyConfigs(17)=(Alias="SelectUpgrade",ArtifactClass=Class'DEKRPG999X.ArtifactUpgrade')
      GroupName="DruidsRPG"
      FriendlyName="DEKRPG999X Druid's RPG Game Rules"
      Description="DEKRPG is an extension of DruidsRPG by Druid, Shantara and Szlat, and Mysterial's UT2004RPG. DEKRPG expands on abilities, artifacts, magic weapons, and adds an interactive mission system."

@@ -18,7 +18,7 @@ defaultproperties
      KeyData(12)=(Alias="SelectMax",KeyLabel="Select Max Modifier")
      KeyData(13)=(Alias="SelectPlusOne",KeyLabel="Select Plus One Modifier")
      KeyData(14)=(Alias="SelectBolt",KeyLabel="Select Lightning Bolt")
-     KeyData(15)=(Alias="SelectRepulsion",KeyLabel="Select Repulsion")
+     KeyData(15)=(Alias="SelectKillItem",KeyLabel="Select KillItem")
      KeyData(16)=(Alias="SelectFreezeBomb",KeyLabel="Select FreezeBomb")
      KeyData(17)=(Alias="SelectPoisonBlast",KeyLabel="Select PoisonBlast")
      KeyData(18)=(Alias="SelectMegaBlast",KeyLabel="Select MegaBlast")
@@ -53,4 +53,5 @@ defaultproperties
      KeyData(47)=(Alias="SelectGlowStreak",KeyLabel="Select Glow Streak")
      KeyData(48)=(Alias="SelectMeteor",KeyLabel="Select Meteor")
      KeyData(49)=(Alias="SelectRemoteAmplifier",KeyLabel="Select Remote Amplifier")
+     KeyData(50)=(Alias="SelectUpgrade",KeyLabel="Select Upgrade")
 }

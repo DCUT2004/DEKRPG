@@ -463,9 +463,9 @@ exec function SelectBolt()
 	SelectThisArtifact("SelectBolt");
 }
 
-exec function SelectRepulsion()
+exec function SelectKillItem()
 {
-	SelectThisArtifact("SelectRepulsion");
+	SelectThisArtifact("SelectKillItem");
 }
 
 exec function SelectFreezeBomb()
@@ -616,6 +616,11 @@ exec function SelectMeteor()
 exec function SelectRemoteAmplifier()
 {
 	SelectThisArtifact("SelectRemoteAmplifier");
+}
+
+exec function SelectUpgrade()
+{
+	SelectThisArtifact("SelectUpgrade");
 }
 
 function string GetSummonFriendlyName(Inventory Inv)
