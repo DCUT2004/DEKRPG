@@ -1,11 +1,12 @@
-class BaseCeilingSentinel extends ASVehicle_Sentinel_Ceiling;
+class BaseCeilingSentinel extends ASVehicle_Sentinel_Ceiling
+    config(UT2004RPG);
 
 var int SentinelLevel;
-var int MaxSentinelLevel;
-var float PercentDamageIncreasePerLevel;
-var float PercentFireRateIncreasePerLevel;
-var float PercentRangeIncreasePerLevel;
-var float PercentHealthIncreasePerLevel;
+var config int MaxSentinelLevel;
+var config float PercentDamageIncreasePerLevel;
+var config float PercentFireRateIncreasePerLevel;
+var config float PercentRangeIncreasePerLevel;
+var config float PercentHealthIncreasePerLevel;
 
 var config float TargetRange;
 

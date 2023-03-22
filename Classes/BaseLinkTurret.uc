@@ -1,9 +1,10 @@
-class BaseLinkTurret extends ASTurret_LinkTurret;
+class BaseLinkTurret extends ASTurret_LinkTurret
+    config(UT2004RPG);
 
 var int TurretLevel;
-var int MaxTurretLevel;
-var float PercentDamageIncreasePerLevel;
-var float PercentHealthIncreasePerLevel;
+var config int MaxTurretLevel;
+var config float PercentDamageIncreasePerLevel;
+var config float PercentHealthIncreasePerLevel;
 
 var bool IsLockedForSelf;
 var Controller PlayerSpawner;

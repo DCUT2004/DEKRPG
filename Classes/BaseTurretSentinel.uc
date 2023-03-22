@@ -1,11 +1,12 @@
-class BaseTurretSentinel extends ASTurret;
+class BaseTurretSentinel extends ASTurret
+    config(UT2004RPG);
 
 var int SentinelLevel;
-var int MaxSentinelLevel;
-var float PercentDamageIncreasePerLevel;
-var float PercentFireRateIncreasePerLevel;
-var float PercentRangeIncreasePerLevel;
-var float PercentHealthIncreasePerLevel;
+var config int MaxSentinelLevel;
+var config float PercentDamageIncreasePerLevel;
+var config float PercentFireRateIncreasePerLevel;
+var config float PercentRangeIncreasePerLevel;
+var config float PercentHealthIncreasePerLevel;
 
 replication
 {

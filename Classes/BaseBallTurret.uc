@@ -1,9 +1,10 @@
-class BaseBallTurret extends ASTurret_BallTurret;
+class BaseBallTurret extends ASTurret_BallTurret
+	config(UT2004RPG);
 
 var int TurretLevel;
-var int MaxTurretLevel;
-var float PercentDamageIncreasePerLevel;
-var float PercentHealthIncreasePerLevel;
+var config int MaxTurretLevel;
+var config float PercentDamageIncreasePerLevel;
+var config float PercentHealthIncreasePerLevel;
 
 var float LastHealTime;
 var array<Controller> Healers;
