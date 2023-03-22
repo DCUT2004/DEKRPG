@@ -2,7 +2,7 @@ class DruidTeslaSentinelController extends DruidLightningSentinelController
 	config(UT2004RPG);
     
 var int NoShootCount; 
-var int FullyChargedCount;   
+var config int FullyChargedCount;   
 
 function Timer()
 {
