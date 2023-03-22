@@ -235,7 +235,7 @@ function DistributePickup(Pickup SiphonedPickup, float DeliveryTime)
 {
 	local Controller C, NextC;
 	local Pawn Ally;
-	local int PickupAmount;
+	local float PickupAmount;
 	local Inventory Inv;
 	local Weapon W;
 	local float DecreasedDeliveryValue, NewDeliveryValue;
