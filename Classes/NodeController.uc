@@ -265,25 +265,25 @@ function DistributePickup(Pickup SiphonedPickup, float DeliveryTime)
 				NewDeliveryValue = FMax(PickupSiphonMultiplier - DecreasedDeliveryValue, MinimumPickupValue);
 				if (TournamentHealth(SiphonedPickup) != None)
 				{
-					PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
+					PickupAmount = TournamentHealth(SiphonedPickup).HealingAmount * NewDeliveryValue;
 					Ally.GiveHealth(PickupAmount, Ally.HealthMax);
 				}
 				else if (AdrenalinePickup(SiphonedPickup) != None)
 				{
-					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
+					PickupAmount = AdrenalinePickup(SiphonedPickup).AdrenalineAmount * NewDeliveryValue;
                     if (Ally.Controller != None)
-					   Ally.Controller.AwardAdrenaline(PickupAmount);
+						Ally.Controller.Adrenaline = FMin(Ally.Controller.AdrenalineMax, Ally.Controller.Adrenaline + PickupAmount);
 					else if (Ally.DrivenVehicle != None && Ally.DrivenVehicle.Controller != None)
-						Ally.DrivenVehicle.Controller.AwardAdrenaline(PickupAmount);
+						Ally.DrivenVehicle.Controller.Adrenaline = FMin(Ally.DrivenVehicle.Controller.AdrenalineMax, Ally.DrivenVehicle.Controller.Adrenaline + PickupAmount);
 				}
 				else if (ShieldPickup(SiphonedPickup) != None)
 				{
-					PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
+					PickupAmount = ShieldPickup(SiphonedPickup).ShieldAmount * NewDeliveryValue;
 					Ally.AddShieldStrength(PickupAmount);
 				}
 				else if (Ammo(SiphonedPickup) != None && !Ally.IsA('Monster'))
 				{
-					PickupAmount = Ammo(SiphonedPickup).AmmoAmount * (PickupSiphonMultiplier - DecreasedDeliveryValue);
+					PickupAmount = Ammo(SiphonedPickup).AmmoAmount * NewDeliveryValue;
 					for (Inv = Ally.Inventory; Inv != None; Inv = Inv.Inventory)
 					{
 						W = Weapon(Inv);
