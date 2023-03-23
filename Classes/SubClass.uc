@@ -165,12 +165,8 @@ defaultproperties
      AbilityConfigs(63)=(AvailableAbility=Class'DEKRPG999X.AbilityConstructionHealthBonus',MaxLevels=(0,0,0,0,7,5,0,0,0,0,0,0,0,9,7,0,0,0,0,5,0,5,5,7,0,0,0))
      AbilityConfigs(64)=(AvailableAbility=Class'DEKRPG999X.AbilityEngineerAwareness',MaxLevels=(0,0,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,0,0,1,0,1,1,1,0,0,0))
      AbilityConfigs(65)=(AvailableAbility=Class'DEKRPG999X.AbilityRapidBuild',MaxLevels=(0,0,0,0,15,12,0,0,0,0,0,0,0,15,15,0,0,0,0,12,0,12,12,15,0,0,0))
-     AbilityConfigs(68)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelResupply',MaxLevels=(0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,5,0,0,0))
-     AbilityConfigs(69)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelHealing',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0))
-     AbilityConfigs(70)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelShields',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0))
-     AbilityConfigs(71)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelEnergy',MaxLevels=(0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0))
-     AbilityConfigs(72)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelArmor',MaxLevels=(0,0,0,0,8,8,0,0,0,0,0,0,0,8,8,0,0,0,0,5,0,5,5,8,0,0,0))
-     AbilityConfigs(73)=(AvailableAbility=Class'DEKRPG999X.AbilitySpiderSteroids',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0))
-     AbilityConfigs(74)=(AvailableAbility=Class'DEKRPG999X.AbilityHardCore',MaxLevels=(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1))
+     AbilityConfigs(66)=(AvailableAbility=Class'DEKRPG999X.AbilityDefenseSentinelArmor',MaxLevels=(0,0,0,0,8,8,0,0,0,0,0,0,0,8,8,0,0,0,0,5,0,5,5,8,0,0,0))
+     AbilityConfigs(67)=(AvailableAbility=Class'DEKRPG999X.AbilitySpiderSteroids',MaxLevels=(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0))
+     AbilityConfigs(68)=(AvailableAbility=Class'DEKRPG999X.AbilityHardCore',MaxLevels=(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1))
      BotChance=1
 }
