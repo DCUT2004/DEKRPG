@@ -77,7 +77,7 @@ static function ModifyPawn(Pawn Other, int AbilityLevel)
 defaultproperties
 {
      AbilityName="Node Builder"
-     Description="Learn to summon nodes to gather resources. At each level, you can summon better items.||Cost (per level): 3,4,5,6,7,..."
+     Description="Learn to summon nodes to gather resources. Nodes will siphon nearby pickups and transmit them to other Nodes, providing nearby players with those pickup benefits. At each level, you can summon better items.||Cost (per level): 3,4,5,6,7,..."
      StartingCost=3
      CostAddPerLevel=1
      MaxLevel=20
