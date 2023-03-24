@@ -41,6 +41,10 @@ struct Packet
 //An array of Packets that are added to by other Nodes
 var Array < Packet > IncomingPackets;
 
+var Class<xEmitter> DistributeFXClass;
+
+#exec OBJ LOAD FILE=..\Sounds\MenuSounds.uax
+
 simulated event PostBeginPlay()
 {
 	local Mutator m;
@@ -164,6 +168,12 @@ function Array<Pickup> SiphonPickups()
 		}
 	}
 
+	if (SiphonedPickups.Length > 0 && Pawn != None)
+	{
+		Pawn.Spawn(DistributeFXClass,,,Pawn.Location);
+		Pawn.PlaySound(Sound'MenuSounds.J_MouseOver',,2.5*Pawn.TransientSoundVolume);
+	}
+
 	return SiphonedPickups;
 }
 
@@ -220,6 +230,11 @@ function DistributePacket()
 		{
 			for (j = 0; j < IncomingPackets[i].Pickups.Length; j++)
 				DistributePickup(IncomingPackets[i].Pickups[j], IncomingPackets[i].DeliveryDistance / Class'NodeNetwork'.default.PacketDistancePerSecond);
+			if (IncomingPackets[i].Pickups.Length > 0 && Pawn != None)
+			{
+				Pawn.Spawn(DistributeFXClass,,,Pawn.Location);
+				Pawn.PlaySound(Sound'MenuSounds.J_MouseOver',,2.5*Pawn.TransientSoundVolume);
+			}
 			if (IncomingPackets[i].ReceivedCharge > 0.0)
 				Node(Pawn).Charge = Min(Node(Pawn).Charge + IncomingPackets[i].ReceivedCharge, Node(Pawn).MaxCharge);
 			IncomingPackets.Remove(i, 1);
@@ -342,4 +357,5 @@ defaultproperties
      TimeBetweenChecks=1.000000
      PercentPickupRangeIncreasePerLevel=0.1
      PercentPickupMultiplierIncreasePerLevel=0.1
+	 DistributeFXClass=Class'HealerNaliHealthFX'
 }
