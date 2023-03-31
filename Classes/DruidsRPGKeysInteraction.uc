@@ -1198,6 +1198,8 @@ function PostRender(Canvas Canvas)
 		iNumHealers = DEKStingerTurret(ViewportOwner.Actor.Pawn).NumHealers;
 	else if (DEKSkyMineTurret(ViewportOwner.Actor.Pawn) != None)
 		iNumHealers = DEKSkyMineTurret(ViewportOwner.Actor.Pawn).NumHealers;
+	else if (BaseBallTurret(ViewportOwner.Actor.Pawn) != None)
+		iNumHealers = BaseBallTurret(ViewportOwner.Actor.Pawn).NumHealers;
 	if (iNumHealers > 0)
 	{
 		Canvas.FontScaleX = Canvas.default.FontScaleX;

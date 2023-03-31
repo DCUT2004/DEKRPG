@@ -59,7 +59,7 @@ function DoLinks()
 			    if (Vehicle(LoopP) != None || DruidEnergyWall(LoopP) != None)
 			    {
 			        // lets see what we can do to help. If a turret, then establish a link. If just a vehicle or sentinel, just heal if it needs it
-			        if (DruidMinigunTurret(LoopP) != None || DruidBallTurret(LoopP) != None || DruidEnergyTurret(LoopP) != None || DruidIonCannon(LoopP) != None || DEKLynxTurret(LoopP) != None || DEKSolarTurret(LoopP) != None || DEKOdinTurret(LoopP) != None || DEKLightningTurret(LoopP) != None || DEKPlasmaTurret(LoopP) != None || DEKStingerTurret(LoopP) != None || DEKSkyMineTurret(LoopP) != None)
+			        if (DruidMinigunTurret(LoopP) != None || DruidBallTurret(LoopP) != None || DruidEnergyTurret(LoopP) != None || DruidIonCannon(LoopP) != None || DEKLynxTurret(LoopP) != None || DEKSolarTurret(LoopP) != None || DEKOdinTurret(LoopP) != None || DEKLightningTurret(LoopP) != None || DEKPlasmaTurret(LoopP) != None || DEKStingerTurret(LoopP) != None || DEKSkyMineTurret(LoopP) != None || BaseBallTurret(LoopP) != None)
 					{   // not a link turret :(
 					    // estalish an xp link
 						LoopP.HealDamage(VehicleHealPerShot, self, class'DamTypeLinkShaft');
