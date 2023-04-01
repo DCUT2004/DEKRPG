@@ -911,6 +911,8 @@ function UnlockThisVehicle(vehicle v)
 	    DEKStingerTurret(v).EngineerUnlock();
 	else if (DEKSkyMineTurret(v) != None)
 	    DEKSkyMineTurret(v).EngineerUnlock();
+	else if (BaseBallTurret(v) != None)
+	    BaseBallTurret(v).EngineerUnlock();
 }
 
 function LockThisVehicle(vehicle v)
@@ -982,6 +984,8 @@ function LockThisVehicle(vehicle v)
 	    DEKStingerTurret(v).EngineerLock();
 	else if (DEKSkyMineTurret(v) != None)
 	    DEKSkyMineTurret(v).EngineerUnlock();
+	else if (BaseBallTurret(v) != None)
+	    BaseBallTurret(v).EngineerUnlock();
 }
 
 function LockCommand()

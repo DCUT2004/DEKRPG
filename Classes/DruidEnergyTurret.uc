@@ -44,16 +44,18 @@ simulated event PostBeginPlay()
 
 function SetPlayerSpawner(Controller PlayerC)
 {
-    local AutoGunController NewController;
+    local AutoGunONSController NewController;
 	PlayerSpawner = PlayerC;
 
     if (IsAutoGunTurret)
     {
         // start off with a autogun controller
         bAutoTurret = true;
-        NewController = spawn(class'AutoGunController');
+        NewController = spawn(class'AutoGunONSController');
         NewController.Possess(self);
-        NewController.SetPlayerSpawner(PlayerSpawner) ;
+        NewController.SetPlayerSpawner(PlayerSpawner);
+        Controller = NewController;
+        AutoTurretControllerClass = class'AutoGunONSController';
     }
 }
 
@@ -321,8 +323,9 @@ function KDriverEnter(Pawn P)
     {
         Controller.Destroy();
     	Controller = None;
+        AutoTurretControllerClass = None;
     }
-    bAutoTurret = false;
+     bAutoTurret = false;
     
     Super.KDriverEnter(P);
     
@@ -334,7 +337,7 @@ function KDriverEnter(Pawn P)
 event bool KDriverLeave( bool bForceLeave )
 {
     local bool retval;
-    local AutoGunController NewController;
+    local AutoGunONSController NewController;
      
 	retval = super.KDriverLeave(  bForceLeave );
     
@@ -342,9 +345,11 @@ event bool KDriverLeave( bool bForceLeave )
     {
         // now add controller back in
         bAutoTurret = true;
-        NewController = spawn(class'AutoGunController');
+        NewController = spawn(class'AutoGunONSController');
         NewController.Possess(self);
         NewController.SetPlayerSpawner(PlayerSpawner) ;
+        Controller = NewController;
+        AutoTurretControllerClass = class'AutoGunONSController';
     }
     
     return retval;
@@ -358,6 +363,7 @@ simulated event Destroyed()
     	Controller = None;
     }
     bAutoTurret = false;
+    AutoTurretControllerClass = None;
 
 	super.Destroyed();
 }
