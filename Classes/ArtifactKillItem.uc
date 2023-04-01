@@ -105,6 +105,8 @@ function KillItem(Pawn Item, String ItemType)
 			if (EPI.SummonedBuildings[i] == Item)
 			{
 				EPI.KillBuilding(i);
+				EPI.SummonedBuildings.remove(i, 1);
+				EPI.SummonedBuildingPoints.remove(i, 1);
 				break;
 			}
 	}
@@ -114,6 +116,8 @@ function KillItem(Pawn Item, String ItemType)
 			if (EPI.SummonedTurrets[i] == Item)
 			{
 				EPI.KillTurret(i);
+				EPI.SummonedTurrets.remove(i, 1);
+				EPI.SummonedTurretPoints.remove(i, 1);
 				break;
 			}
 	}
@@ -123,6 +127,8 @@ function KillItem(Pawn Item, String ItemType)
 			if (EPI.SummonedSentinels[i] == Item)
 			{
 				EPI.KillSentinel(i);
+				EPI.SummonedSentinels.remove(i, 1);
+				EPI.SummonedSentinelPoints.remove(i, 1);
 				break;
 			}
 	}
@@ -132,6 +138,8 @@ function KillItem(Pawn Item, String ItemType)
 			if (EPI.SummonedNodes[i] == Item)
 			{
 				EPI.KillNode(i);
+				EPI.SummonedNodes.remove(i, 1);
+				EPI.SummonedNodePoints.remove(i, 1);
 				break;
 			}
 	}

@@ -1101,8 +1101,9 @@ function KillAllSentinels()
 {
 	local int i;
 	
-	for(i = 0; i < 100 && SummonedSentinels.length > 0; i++)
+	for(i = 0; i < SummonedSentinels.length ; i++)
 		KillSentinel(i);
+	SummonedSentinels.Length = 0;
 }
 
 function KillSentinel(int i)
@@ -1123,8 +1124,6 @@ function KillSentinel(int i)
 			Warn("Sentinel Points less than zero!");
 			UsedSentinelPoints = 0; //just an emergency checkertrap in case something interesting happens
 		}
-		SummonedSentinels.remove(i, 1);
-		SummonedSentinelPoints.remove(i, 1);
 	}
 }
 
@@ -1132,8 +1131,9 @@ function KillAllNodes()
 {
 	local int i;
 	
-	for(i = 0; i < 100 && SummonedNodes.length > 0; i++)
+	for(i = 0; i < SummonedNodes.Length; i++)
 		KillNode(i);
+	SummonedNodes.Length = 0;
 }
 
 function KillNode(int i)
@@ -1154,8 +1154,6 @@ function KillNode(int i)
 		Warn("Node Points less than zero!");
 		UsedNodePoints = 0; //just an emergency checkertrap in case something interesting happens
 	}
-	SummonedNodes.remove(i, 1);
-	SummonedNodePoints.remove(i, 1);
 }
 
 function KillAllTurrets()
@@ -1163,13 +1161,14 @@ function KillAllTurrets()
 	local int i;
 	
 	// note that if a turret is occupied we cannot kill it
-	for(i = SummonedTurrets.length; i > 0; i--)
-		KillTurret(i-1);
+	for(i = 0; i < SummonedTurrets.Length; i++)
+		KillTurret(i);
+	SummonedTurrets.Length = 0;
 }
 
 function KillTurret(int i)
 {
-	if(SummonedTurrets.length <= i)
+	if(i < 0 || i >= SummonedTurrets.Length || SummonedTurrets.Length == 0)
 		return; //nothing to kill
 	if(SummonedTurrets[i] != None && Vehicle(SummonedTurrets[i]) != None && Vehicle(SummonedTurrets[i]).Driver == None)
 	{
@@ -1183,8 +1182,6 @@ function KillTurret(int i)
 			Warn("Turret Points less than zero!");
 			UsedTurretPoints = 0; //just an emergency checkertrap in case something interesting happens
 		}
-		SummonedTurrets.remove(i, 1);
-		SummonedTurretPoints.remove(i, 1);
 	}
 }
 
@@ -1192,13 +1189,14 @@ function KillAllVehicles()
 {
 	local int i;
 	
-	for(i = SummonedVehicles.length; i > 0; i--)
-		KillVehicle(i-1);
+	for(i = 0; i < SummonedVehicles.Length; i++)
+		KillVehicle(i);
+	SummonedVehicles.Length = 0;
 }
 
 function KillVehicle(int i)
 {
-	if(SummonedVehicles.length <= i)
+	if(i < 0 || i >= SummonedVehicles.Length || SummonedVehicles.Length == 0)
 		return; //nothing to kill
 	if(SummonedVehicles[i] != None && Vehicle(SummonedVehicles[i]) != None && Vehicle(SummonedVehicles[i]).Driver == None)
 	{
@@ -1212,8 +1210,6 @@ function KillVehicle(int i)
 			Warn("Vehicle Points less than zero!");
 			UsedVehiclePoints = 0; //just an emergency checkertrap in case something interesting happens
 		}
-		SummonedVehicles.remove(i, 1);
-		SummonedVehiclePoints.remove(i, 1);
 	}
 }
 
@@ -1223,28 +1219,13 @@ function KillAllBuildings()
 
 	
 	for(i = 0; i < SummonedBuildings.Length; i++)
-	{
-		if(SummonedBuildings[i] != None)
-		{
-			if (Vehicle(SummonedBuildings[i]) != None && Vehicle(SummonedBuildings[i]).Driver != None)
-				Vehicle(SummonedBuildings[i]).EjectDriver();
-			SummonedBuildings[i].Health = 0;
-			SummonedBuildings[i].LifeSpan = 0.1 * (i + 1); //so the server will do it in it's own time and not all at once...
-		}		
-			
-		UsedBuildingPoints -= SummonedBuildingPoints[i];
-		if(UsedBuildingPoints < 0)
-		{
-			Warn("Building Points less than zero!");
-			UsedBuildingPoints = 0; //just an emergency checkertrap in case something interesting happens
-		}
-	}
-	SummonedBuildings.Length = 0;	//Clear out the array
+		KillBuilding(i);
+	SummonedBuildings.Length = 0;
 }
 
 function KillBuilding(int i)
 {
-	if(i < 0 || i >= SummonedBuildings.Length)
+	if(i < 0 || i >= SummonedBuildings.Length || SummonedBuildings.Length == 0)
 		return; //nothing to kill
 	if(SummonedBuildings[i] != None)
 	{
@@ -1260,8 +1241,6 @@ function KillBuilding(int i)
 		Warn("Building Points less than zero!");
 		UsedBuildingPoints = 0; //just an emergency checkertrap in case something interesting happens
 	}
-	SummonedBuildings.remove(i, 1);
-	SummonedBuildingPoints.remove(i, 1);
 }
 
 simulated function Destroyed()
@@ -1271,6 +1250,7 @@ simulated function Destroyed()
 	if(Level.NetMode == NM_DedicatedServer || Level.NetMode == NM_ListenServer || Level.NetMode == NM_Standalone)
 	{
 		setTimer(0, false);
+		KillAllNodes();
 		KillAllSentinels();
 		for(i = 0; i < SummonedVehicles.length; i++)
 			if(SummonedVehicles[i] != None)
