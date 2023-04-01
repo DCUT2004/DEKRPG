@@ -33,9 +33,13 @@ simulated function Timer()
             	if (!P.bDeleteMe && (TitanRock == None || TitanRock != None && TitanRock.Drawscale > 2) )	//Ignore the small chunks of Titan rocks
             	{
                     HitProjectile = true;
-            		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(P.Location - Pawn.Location));
-            		if (HitEmitter != None)
-            			HitEmitter.mSpawnVecA = P.Location;
+                    
+                    if (TitanRock == None || VSize(P.Velocity) > 0)
+                    {
+                		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(P.Location - Pawn.Location));
+                		if (HitEmitter != None)
+                			HitEmitter.mSpawnVecA = P.Location;
+                    }
             		
             		if (bDestroyProjs)
             		{
