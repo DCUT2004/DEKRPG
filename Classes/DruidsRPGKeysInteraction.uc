@@ -1120,6 +1120,7 @@ function PostRender(Canvas Canvas)
 	local rotator CameraRotation;
 	local float Dist, ScreenX;
     local int PawnLevel;
+    local float currentDistributionRadius, currentPickupRadius;
 	
 	if ( ViewportOwner == None || ViewportOwner.Actor == None || ViewportOwner.Actor.Pawn == None || ViewportOwner.Actor.Pawn.Health <= 0
 	     || (ViewportOwner.Actor.myHud != None && ViewportOwner.Actor.myHud.bShowScoreBoard)
@@ -1885,7 +1886,6 @@ function PostRender(Canvas Canvas)
     	if (TextFont != None)
     		Canvas.Font = TextFont;
         Canvas.Style = 2;
-		Canvas.DrawColor = WhiteColor;
 		Canvas.FontScaleX = Canvas.default.FontScaleX * 2;
 		Canvas.FontScaleY = Canvas.default.FontScaleY * 2;
        
@@ -1907,6 +1907,7 @@ function PostRender(Canvas Canvas)
 	
             // draw the sentinel/turret/node level
             PawnLevel = -1;
+		    Canvas.DrawColor = WhiteColor;
             if (BaseCeilingSentinel(P) != None)
                 PawnLevel = BaseCeilingSentinel(P).SentinelLevel;
             else
@@ -1917,7 +1918,16 @@ function PostRender(Canvas Canvas)
                 PawnLevel = BaseTurretSentinel(P).SentinelLevel;                    
             else            
             if (Node(P) != None)
-                PawnLevel = Node(P).NodeLevel;                    
+            {
+                PawnLevel = Node(P).NodeLevel;
+                // change the color to indicate the benefits from the node
+                currentDistributionRadius = class'NodeController'.default.PickupDistributeRadius * (1 + (PawnLevel * class'NodeController'.default.PercentPickupRangeIncreasePerLevel));
+                currentPickupRadius = class'NodeController'.default.PickupSiphonRadius * (1 + (PawnLevel * class'NodeController'.default.PercentPickupRangeIncreasePerLevel));
+                if (Dist < currentPickupRadius)
+		          Canvas.DrawColor = YellowColor;
+                else if (Dist < currentDistributionRadius)
+		          Canvas.DrawColor = GreenColor;
+            }                    
             else            
             if (BaseBallTurret(P) != None)
                 PawnLevel = BaseBallTurret(P).TurretLevel;                    
