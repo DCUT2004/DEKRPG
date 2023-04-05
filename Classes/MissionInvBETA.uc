@@ -75,21 +75,23 @@ static final function MissionInvBETA GetMissionInv(Controller C)
 {
 	local Inventory Inv;
 	local MissionInvBeta FoundMissionInv;
+	local int Counter;
 
 	if (C == None)
 		return None;
+
+	//Check if the Pawn has it first
+	if (C.Pawn != None && DEKPawn(C.Pawn) != None && DEKPawn(C.Pawn).MissionInv != None)
+		return DEKPawn(C.Pawn).MissionInv;
 		
-	for (Inv = C.Inventory; Inv != None; Inv = Inv.Inventory)
+	//Search through Controller when player spawns, since DEKPawn.MissionInv will be None
+	Counter = 0;
+	for (Inv = C.Inventory; Inv != None && Counter < 1000; Inv = Inv.Inventory)
 	{
 		FoundMissionInv = MissionInvBeta(Inv);
 		if (FoundMissionInv != None)
 			return FoundMissionInv;
-		
-			if (Inv.Inventory == Inv)
-			{
-				Inv.Inventory = None;
-				return None;
-			}
+		Counter++;
 	}
 
 	return None;
