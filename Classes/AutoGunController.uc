@@ -133,7 +133,7 @@ function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncre
 defaultproperties
 {
      AttractRange=1000
-     TargetRange=15000
+     TargetRange=2000
      DamageAdjust=1.000000
      CollisionAdjust=1.400000
      PickupSound=Sound'PickupSounds.AdrenelinPickup'
