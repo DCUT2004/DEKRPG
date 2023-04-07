@@ -4,13 +4,13 @@ class DruidSuperDefenseSentinelController extends DruidDefenseSentinelController
 simulated function Timer()
 {
 	// lets target some enemies
-	local Projectile P;
+	local Projectile P, TitanRock;
 	local xEmitter HitEmitter;
 	local Mutator m;
 	Local DruidDefenseSentinel DefPawn;
 	local ONSMineProjectile Mine;
-	local SMPTitanBigRock TitanRock;
-    local bool HitProjectile;
+    local bool HitProjectile, bIgnoreProjectile;
+	local int x;
 
 	if (PlayerSpawner == None || PlayerSpawner.Pawn == None || Pawn == None || Pawn.Health <= 0 || DruidDefenseSentinel(Pawn) == None)
 		return;		// going to die soon.
@@ -21,8 +21,18 @@ simulated function Timer()
 	// look for projectiles in range and take them all out
 	ForEach DynamicActors(class'Projectile',P)
 	{
-		if (P != None && FastTrace(P.Location, Pawn.Location) && TranslocatorBeacon(P) == None && UntargetedProjectile(P) == None && UntargetedSeekerProjectile(P) == None && DEKLightningTurretProj(P) == None && VSize(Pawn.Location - P.Location) <= DefPawn.TargetRadius)
+		if (P != None && FastTrace(P.Location, Pawn.Location) && VSize(Pawn.Location - P.Location) <= DefPawn.TargetRadius)
 		{
+			for (x = 0; x < Class'Utility_RPG'.default.IgnoredProjectiles.Length; x++)
+			{
+				if (ClassIsChildOf(P.Class, Class'Utility_RPG'.default.IgnoredProjectiles[x]))
+				{
+					bIgnoreProjectile = True;
+					break;
+				}
+			}
+			if (bIgnoreProjectile)
+				continue;
 			if ((P.InstigatorController == None ||
 				(P.InstigatorController != None &&
 					((TeamGame(Level.Game) != None && !P.InstigatorController.SameTeamAs(PlayerSpawner))	// not same team

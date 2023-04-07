@@ -44,6 +44,8 @@ function Timer()
 	local Projectile BestP;
 	local int ClosestPdist;
 	local int BestGuidedPdist;
+    local bool bIgnoreProjectile;
+	local int x;
 
 	if (Drone == None || Drone.protPawn == None || Drone.protPawn.Health <= 0)
 		return;		// going to die soon.
@@ -57,8 +59,18 @@ function Timer()
 		BestGuidedPdist = TargetRadius+1;
 		ForEach DynamicActors(class'Projectile',P)
 		{
-			if (P != None && FastTrace(P.Location, Drone.Location) && TranslocatorBeacon(P) == None && UntargetedProjectile(P) == None && UntargetedSeekerProjectile(P) == None && DEKLightningTurretProj(P) == None && VSize(Drone.Location - P.Location) <= TargetRadius)
+			if (P != None && FastTrace(P.Location, Drone.Location) && VSize(Drone.Location - P.Location) <= TargetRadius)
 			{
+				for (x = 0; x < Class'Utility_RPG'.default.IgnoredProjectiles.Length; x++)
+				{
+					if (ClassIsChildOf(P.Class, Class'Utility_RPG'.default.IgnoredProjectiles[x]))
+					{
+						bIgnoreProjectile = True;
+						break;
+					}
+				}
+				if (bIgnoreProjectile)
+					continue;
 				if ((P.InstigatorController == None ||
 					(P.InstigatorController != None &&
 						((TeamGame(Level.Game) != None && !P.InstigatorController.SameTeamAs(Drone.protPawn.Controller))	// not same team

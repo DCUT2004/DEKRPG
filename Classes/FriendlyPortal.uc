@@ -1,4 +1,4 @@
-class FriendlyPortal extends UntargetedProjectile
+class FriendlyPortal extends Projectile
 	config(UT2004RPG);
 
 var class<Emitter> OrbEffectClass;

@@ -28,7 +28,6 @@ var config bool bDestroyProjs;	//If true, defense sentinels will destroy hostile
 var config float DamageMultiplier;	//If bDestroyPojs is false, then this is the % of the hostile projectile's damage that will be multiplied
 var config int MinimumDamage;	//If bDestroyProjs is false, then this is the minimum amount a hostile projectile's damage will be (ie at most how much damage reduction gets applied)
 
-
 simulated event PostBeginPlay()
 {
 	local Mutator m;
@@ -258,7 +257,7 @@ function DoHealing()
 simulated function Timer()
 {
 	// lets target some enemies
-	local Projectile P;
+	local Projectile P, TitanRock;
 	local xEmitter HitEmitter;
 	local Projectile ClosestP;
 	local Projectile BestGuidedP;
@@ -268,7 +267,8 @@ simulated function Timer()
 	local Mutator m;
 	Local DruidDefenseSentinel DefPawn;
 	local ONSMineProjectile Mine;
-	local SMPTitanBigRock TitanRock;
+	local int x;
+	local bool bIgnoreProjectile;
 
 	if (PlayerSpawner == None || PlayerSpawner.Pawn == None || Pawn == None || Pawn.Health <= 0 || DruidDefenseSentinel(Pawn) == None)
 		return;		// going to die soon.
@@ -282,8 +282,19 @@ simulated function Timer()
 	BestGuidedPdist = TargetRadius+1;
 	ForEach DynamicActors(class'Projectile',P)
 	{
-		if (P != None && FastTrace(P.Location, Pawn.Location) && TranslocatorBeacon(P) == None && UntargetedProjectile(P) == None && UntargetedSeekerProjectile(P) == None && DEKLightningTurretProj(P) == None && VSize(Pawn.Location - P.Location) <= DefPawn.TargetRadius)
+		bIgnoreProjectile = False;
+		if (P != None && FastTrace(P.Location, Pawn.Location) && VSize(Pawn.Location - P.Location) <= DefPawn.TargetRadius)
 		{
+			for (x = 0; x < Class'Utility_RPG'.default.IgnoredProjectiles.Length; x++)
+			{
+				if (ClassIsChildOf(P.Class, Class'Utility_RPG'.default.IgnoredProjectiles[x]))
+				{
+					bIgnoreProjectile = True;
+					break;
+				}
+			}
+			if (bIgnoreProjectile)
+				continue;
 			if ((P.InstigatorController == None ||
 				(P.InstigatorController != None &&
 					((TeamGame(Level.Game) != None && !P.InstigatorController.SameTeamAs(PlayerSpawner))	// not same team
