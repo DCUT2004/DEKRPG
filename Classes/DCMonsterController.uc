@@ -7,7 +7,7 @@ var StatusEffectInventory StatusManager;
 function PostBeginPlay()
 {
 	Super.PostBeginPlay();
-	StatusManager = Class'DEKMonsterUtility'.static.SpawnStatusEffectInventory(Self);
+	StatusManager = Class'Utility_Monster'.static.SpawnStatusEffectInventory(Self);
 }
 
 function Possess(Pawn aPawn)

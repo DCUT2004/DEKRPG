@@ -1,10 +1,13 @@
 /*
-	DEKMonsterUtility is an Object that acts as a helper for most monsters
+	Utility_Monster is an Object that acts as a helper for most monsters
 	Provides all monsters with a StatusEffectInventory item when spawning
 	Adjusts damage for StatusEffects by calling StatusEffectDamageRules.HandleDamage()
  */
 
-class DEKMonsterUtility extends Object;
+class Utility_Monster extends Object
+	config(satoreMonsterPack);
+
+var config Array < Class < DamageType > > BunnyIgnoredDamTypes;
 
 static function StatusEffectInventory SpawnStatusEffectInventory(DCMonsterController MonsterController)
 {

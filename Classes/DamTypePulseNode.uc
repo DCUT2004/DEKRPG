@@ -1,4 +1,4 @@
-class DamTypePulseNode extends VehicleDamageType
+class DamTypePulseNode extends DamTypeNode
 	abstract;
 
 defaultproperties
@@ -7,5 +7,4 @@ defaultproperties
      DeathString="%o was burnt by %k's node."
      FemaleSuicide="%o had a pulsating experience."
      MaleSuicide="%o had a pulsating experience."
-     bDelayedDamage=True
 }

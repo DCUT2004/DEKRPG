@@ -1,4 +1,4 @@
-class DamTypeFireRingNode extends VehicleDamageType
+class DamTypeFireRingNode extends DamTypeNode
 	abstract;
 
 defaultproperties
@@ -7,5 +7,4 @@ defaultproperties
      DeathString="%o was burnt by %k's node."
      FemaleSuicide="%o had a burning experience."
      MaleSuicide="%o had a burning experience."
-     bDelayedDamage=True
 }

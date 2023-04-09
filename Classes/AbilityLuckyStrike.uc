@@ -156,10 +156,7 @@ static function DropPickups(Controller Killed, Controller Killer, class<Pickup> 
         pickupObj = Killer.spawn(PickupType,,,(Killed.Pawn.Location + 0.8 * Killed.Pawn.CollisionRadius * X + -0.5 * Killed.Pawn.CollisionRadius * Y),);
 
         if(pickupObj == None)
-        {
-            Log("Pinata2k4 spawn failure");
             return;
-        }
 
 		// Now apply the throwing velocity to the position of the pickup
 	    pickupObj.velocity = tossdir;
