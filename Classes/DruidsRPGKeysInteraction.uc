@@ -1121,6 +1121,7 @@ function PostRender(Canvas Canvas)
 	local float Dist, ScreenX;
     local int PawnLevel;
     local float currentDistributionRadius, currentPickupRadius;
+    local bool DrawStars;
 	
 	if ( ViewportOwner == None || ViewportOwner.Actor == None || ViewportOwner.Actor.Pawn == None || ViewportOwner.Actor.Pawn.Health <= 0
 	     || (ViewportOwner.Actor.myHud != None && ViewportOwner.Actor.myHud.bShowScoreBoard)
@@ -1879,7 +1880,7 @@ function PostRender(Canvas Canvas)
 		Canvas.DrawText("Guarding: " $ AGH.TargetPlayer.PlayerReplicationInfo.PlayerName);		
 	}
 
-	if (GiveItemsInv.EngAwarenessLevel > 0 && EnemyList != None)
+	if (EnemyList != None)
 	{
         // can't do this in PreRender because it screws up the scoreboard and stats
 	    Canvas.GetCameraLocation(CameraLocation, CameraRotation);
@@ -1904,7 +1905,8 @@ function PostRender(Canvas Canvas)
 	 			continue;
 			if (!P.FastTrace(P.Location + P.CollisionHeight * vect(0,0,1), ViewportOwner.Actor.Pawn.Location + ViewportOwner.Actor.Pawn.EyeHeight * vect(0,0,1)))
 				continue;
-	
+
+            DrawStars = GiveItemsInv.EngAwarenessLevel > 0;	
             // draw the sentinel/turret/node level
             PawnLevel = -1;
 		    Canvas.DrawColor = WhiteColor;
@@ -1919,6 +1921,7 @@ function PostRender(Canvas Canvas)
             else            
             if (Node(P) != None)
             {
+                DrawStars = true;       // always show stars
                 PawnLevel = Node(P).NodeLevel;
                 // change the color to indicate the benefits from the node
                 currentDistributionRadius = class'NodeController'.default.PickupDistributeRadius * (1 + (PawnLevel * class'NodeController'.default.PercentPickupRangeIncreasePerLevel));
@@ -1940,7 +1943,7 @@ function PostRender(Canvas Canvas)
             else            
             if (BaseLinkTurret(P) != None)
                 PawnLevel = BaseLinkTurret(P).TurretLevel;                    
-            if (PawnLevel >= 0)
+            if (PawnLevel >= 0 && DrawStars)
             {
     			GetAxes(rotator(P.Location - CameraLocation), X, Y, Z);
         		BarLoc = Canvas.WorldToScreen(P.Location + (P.CollisionHeight + BarVSize / 2) * vect(0,0,1));
