@@ -2,7 +2,7 @@ class DEKHellfireSentinelProjChild extends Projectile;
 
 var class<Emitter> ExplosionEffectClass;
 var	xemitter trail;
-var actor Glow;
+//var actor Glow;
 var float SpreadFactor;
 
 simulated function PostBeginPlay()
@@ -14,10 +14,10 @@ simulated function PostBeginPlay()
         PC = Level.GetLocalPlayerController();
         if (PC.ViewTarget != None && VSize(PC.ViewTarget.Location - Location) < 6000)
             Trail = Spawn(class'DEKHellfireSentinelProjTrail', self,, Location, R);
-        Glow = Spawn(class'FlakGlow', self);
+        //Glow = Spawn(class'FlakGlow', self);
     }
 
-    Super(Projectile).PostBeginPlay();
+    Super.PostBeginPlay();
 	Velocity = Vector(Rotation) * Speed;  
     R = Rotation;
     R.Roll = 32768;
@@ -28,8 +28,8 @@ simulated function destroyed()
 {
 	if ( Trail != None ) 
 		Trail.mRegen=False;
-	if ( glow != None )
-		Glow.Destroy();
+	//if ( glow != None )
+	//	Glow.Destroy();
 	Super.Destroyed();
 }
 

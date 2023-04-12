@@ -9,7 +9,7 @@ simulated function PostBeginPlay()
     local Rotator R;
 	
 	Velocity = Vector(Rotation) * Speed;  
-    Super(Projectile).PostBeginPlay();
+    Super.PostBeginPlay();
     R = Rotation;
 	Velocity.z += TossZ; 
     SetRotation(R);
