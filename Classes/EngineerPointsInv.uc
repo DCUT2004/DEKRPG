@@ -185,7 +185,7 @@ simulated function bool AllowedAnotherNode()
 
 simulated function bool AllowedMoreBuildings(int numReqd)
 {
-    if (SummonedBuildings.length + numReqd < MaxBuildings)    // blocks often get spawned in groups
+    if (SummonedBuildings.length + numReqd <= MaxBuildings)    // blocks often get spawned in groups
         return true;
 
 	return false;
