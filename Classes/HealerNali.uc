@@ -13,7 +13,7 @@ function PostNetBeginPlay()
 {
 	Instigator = self;
 	SummonedMonster = True;
-	
+
 	Super.PostNetBeginPlay();
 }
 
@@ -26,9 +26,9 @@ function RangedAttack(Actor A)
 {
 	local float decision;
 	local Pawn P;
-	
+
 	Super.RangedAttack(A);
-	
+
 	P = Pawn(A);
 
 	decision = FRand();
@@ -98,8 +98,8 @@ function AddHealth(float HealthDamage)
 {
 	local Pawn P;
 	local HealerNaliHealthFX HFX;
-	local HealerNaliAdrenFX AFX;	
-	local HealerNaliShieldFX SFX;	
+	local HealerNaliAdrenFX AFX;
+	local HealerNaliShieldFX SFX;
 	local float HealthAmount;
 	local Vehicle V;
 	local Monster M;
@@ -109,11 +109,11 @@ function AddHealth(float HealthDamage)
 	local int MaxShield;
 
 	HealthAmount = (HealthDamage + Rand(HealthDamageMax - HealthDamage));
-	
+
 	P = Controller.Enemy;
 	V = Vehicle(P);
 	M = Monster(P);
-	
+
 	if (P == None || P.Health<=0)
 		return;
 	if (M != None && M.ControllerClass != class'DEKFriendlyMonsterController')
@@ -146,7 +146,7 @@ function AddHealth(float HealthDamage)
 			ShieldCorona = Spawn(class'HealerNaliShieldCorona',Self);
 		}
 	}
-	
+
 	if (SoundChance > Rand(99))
 		Self.PlaySound(CallSound[Rand(3)]);
 }
@@ -202,17 +202,17 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 {
 	local Monster M;
 	local FriendlyMonsterInv Inv;
-	
+
 	M = Monster(InstigatedBy);
-	
+
 	if (M == None)
 		return;
-	
-	if (ClassIsChildOf(damageType, class'VehicleDamageType') || DamageType == class'DamTypeLightningRod' || DamageType == class'DamTypeEnhLightningRod' || DamageType == class'DamTypeLightningBolt'  || DamageType == class'DamTypeMassDrain'  || DamageType == class'DamTypeAerialTrap' || DamageType == class'DamTypeBombTrap' || DamageType == class'DamTypeFrostTrap' || DamageType == class'DamTypeLaserGrenadeLaser' || DamageType == class'DamTypeShockTrap' || DamageType == class'DamTypeShockTrapShock' || DamageType == class'DamTypeWildfireTrap' || DamageType == class'DamTypeDronePlasma')
+
+	if (ClassIsChildOf(damageType, class'VehicleDamageType') || DamageType == class'DamTypeLightningRod' || DamageType == class'DamTypeEnhLightningRod' || DamageType == class'DamTypeLightningBolt'  || DamageType == class'DamTypeMassDrain'  || DamageType == class'DamTypeAerialTrap' || DamageType == class'DamTypeBombTrap' || DamageType == class'DamTypeFrostTrap' || DamageType == class'DamTypeLaserGrenadeLaser' || DamageType == class'DamTypeShockTrap' || DamageType == class'DamTypeShockTrapShock' || DamageType == class'DamTypeWildfireTrap')
 	{
 		return; //These things are out of our control.
 	}
-	
+
 	if (InstigatedBy != None)
 	{
 		Inv = FriendlyMonsterInv(InstigatedBy.FindInventoryType(class'FriendlyMonsterInv'));
@@ -223,22 +223,22 @@ function TakeDamage(int Damage, Pawn instigatedBy, Vector hitlocation, Vector mo
 		if (M.ControllerClass != None && M.ControllerClass == class'DEKFriendlyMonsterController')
 			return;
 	}
-	
+
 	if (instigatedBy != None && instigatedBy.Controller != None)
 		Died(instigatedBy.Controller, DamageType, HitLocation);
-	
+
 	Super.TakeDamage(Damage, instigatedBy, hitlocation, momentum, damagetype);
 }
 
 function Died(Controller Killer, class<DamageType> damageType, vector HitLocation)
 {
 	local Actor A;
-	
+
 	A = spawn(class'NewTransEffectBlue', Self,, Self.Location, Self.Rotation);
 	if (A != None)
 		A.RemoteRole = ROLE_SimulatedProxy;
 	Self.PlaySound(Sound'satoreMonsterPackv120.fear1n');
-	
+
 	if (SummonedMonster)
 	{
 		Destroy();	// do not want to execute the invasion Killed function which decrements the number of monsters
