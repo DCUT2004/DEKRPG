@@ -1,28 +1,6 @@
 class DruidAdrenalineSurge extends CostRPGAbility
 	abstract;
 
-static simulated function int GetCost(RPGPlayerDataObject Data, int CurrentLevel)
-{
-	local int x;
-	local bool gotab;
-	
-	if (Data == None)
-		return 0;
-	
-	// now check for LoadedArtifacts 5
-	if (CurrentLevel >= 5)
-	{
-		gotab = false;
-		for (x = 0; x < Data.Abilities.length; x++)
-			if (Data.Abilities[x] == class'DruidArtifactLoaded' && Data.AbilityLevels[x] >= 25)
-				gotab = true;
-		if (!gotab)
-			return 0;
-	}
-
-	return super.GetCost(Data, CurrentLevel);
-}
-
 static function ScoreKill(Controller Killer, Controller Killed, bool bOwnedByKiller, int AbilityLevel)
 {
 	if (!bOwnedByKiller)
