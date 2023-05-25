@@ -44,7 +44,7 @@ simulated event PostBeginPlay()
 }
 
 function SetPlayerSpawner(Controller PlayerC)
-{	
+{
 	PlayerSpawner = PlayerC;
 	if (PlayerSpawner.PlayerReplicationInfo != None && PlayerSpawner.PlayerReplicationInfo.Team != None )
 	{
@@ -75,11 +75,11 @@ function DoHealing()
 	Local float NumHelped;
 	Local HealableDamageInv HDInv;
 	local Mutator m;
-	
+
 	if (Pawn == None || Pawn.Health <= 0 || DruidDefenseSentinel(Pawn) == None)
 	    return;
 	DefPawn = DruidDefenseSentinel(Pawn);
-	    
+
 	if (DefPawn.ShieldHealingLevel==0 && DefPawn.HealthHealingLevel==0 && DefPawn.AdrenalineHealingLevel==0 && DefPawn.ResupplyLevel==0 && DefPawn.ArmorHealingLevel == 0)
 	    return;
 
@@ -91,7 +91,7 @@ function DoHealing()
 	    return;
 	}
     bHealing = true;
-    
+
    // loop through all the pawns in range. Can't use controllers as blocks and unmanned turrets/vehicles do not have controllers.
 	foreach DynamicActors(class'Pawn', LoopP)
 	{
@@ -350,13 +350,13 @@ simulated function Timer()
 		BestP = BestGuidedP;
 	else
 		BestP = ClosestP;
-	TitanRock = SMPTitanBigRock(BestP);
-	if (BestP != None && !BestP.bDeleteMe && (TitanRock == None || TitanRock != None && TitanRock.Drawscale > 2) )	//Ignore the small chunks of Titan rocks
+	//TitanRock = SMPTitanBigRock(BestP);
+	if (BestP != None && !BestP.bDeleteMe )
 	{
 		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(BestP.Location - Pawn.Location));
 		if (HitEmitter != None)
 			HitEmitter.mSpawnVecA = BestP.Location;
-		
+
 		if (bDestroyProjs)
 		{
 			BestP.NetUpdateTime = Level.TimeSeconds - 1;
@@ -381,7 +381,7 @@ simulated function Timer()
 				if (BestP.Damage < MinimumDamage)
 					BestP.Damage = MinimumDamage;
 			}
-			
+
 			// ok, lets see if the initiator gets any xp
        		if (StatsInv == None && PlayerSpawner != None && PlayerSpawner.Pawn != None)
 	            StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
@@ -428,7 +428,7 @@ simulated function Destroyed()
 function LevelUp(float PercentDamageIncreasePerLevel, float PercentFireRateIncreasePerLevel, float PercentRangeIncreasePerLevel, float PercentHealthIncreasePerLevel)
 {
      TargetRadius *= (1 + PercentRangeIncreasePerLevel);
-     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);    
+     TimeBetweenShots *= (1-PercentFireRateIncreasePerLevel);
      SetTimer(TimeBetweenShots, true);
      // Log("+++++ DruidDefenseSentinelController LevelUp changing TargetRadius to" @ TargetRadius @ "default:" @ default.TargetRadius @ "and TimebetweenShots to" @ TimeBetweenShots @ "default:" @ default.TimeBetweenShots);
 }

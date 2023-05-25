@@ -2,15 +2,15 @@ class EnergyParticle extends SeekingRocketProj;
 var Class<xEmitter> RealSmokeTrailClass;
 var XEmitter RealSmokeTrail;
 
-#exec OBJ LOAD FILE=..\Textures\EpicParticles.uax
+#exec OBJ LOAD FILE=..\Textures\EpicParticles.utx
 
 simulated function PostBeginPlay()
 {
 	Super.PostBeginPlay();
-	
+
 	if (SmokeTrail != None)
 		SmokeTrail.Destroy();
-	
+
 	if (Corona != None)
 		Corona.Destroy();
 
@@ -41,7 +41,7 @@ simulated function Timer()
 
     if ( InitialDir == vect(0,0,0) )
         InitialDir = Normal(Velocity);
-         
+
 	Acceleration = vect(0,0,0);
 
 	// Do normal guidance to target.
@@ -50,13 +50,13 @@ simulated function Timer()
 	{
 		//Log("ForceDir Dot InitialDir > 0");
 		VelMag = VSize(Velocity);
-	
+
 		// track vehicles better
 		if ( Seeking.Physics == PHYS_Karma )
 			ForceDir = Normal(ForceDir * 0.8 * VelMag + Velocity);
 		else
 			ForceDir = Normal(ForceDir * 0.5 * VelMag + Velocity);
-		Velocity =  VelMag * ForceDir;  
+		Velocity =  VelMag * ForceDir;
 		Acceleration += 5 * ForceDir;
 	}
 	// Update rocket so it faces in the direction its going.

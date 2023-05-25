@@ -21,6 +21,7 @@ simulated function Timer()
 	// look for projectiles in range and take them all out
 	ForEach DynamicActors(class'Projectile',P)
 	{
+		bIgnoreProjectile = False;
 		if (P != None && FastTrace(P.Location, Pawn.Location) && VSize(Pawn.Location - P.Location) <= DefPawn.TargetRadius)
 		{
 			for (x = 0; x < Class'Utility_RPG'.default.IgnoredProjectiles.Length; x++)
@@ -39,18 +40,18 @@ simulated function Timer()
 					 || (TeamGame(Level.Game) == None && P.InstigatorController != PlayerSpawner)))))	// or just not me
 			{
 			    // its an enemy projectile
-            	TitanRock = SMPTitanBigRock(P);
-            	if (!P.bDeleteMe && (TitanRock == None || TitanRock != None && TitanRock.Drawscale > 2) )	//Ignore the small chunks of Titan rocks
+            	//TitanRock = SMPTitanBigRock(P);
+            	if (!P.bDeleteMe )
             	{
                     HitProjectile = true;
-                    
-                    if (TitanRock == None || VSize(P.Velocity) > 0)
+
+                    if (VSize(P.Velocity) > 0)
                     {
                 		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(P.Location - Pawn.Location));
                 		if (HitEmitter != None)
                 			HitEmitter.mSpawnVecA = P.Location;
                     }
-            		
+
             		if (bDestroyProjs)
             		{
             			P.NetUpdateTime = Level.TimeSeconds - 1;
@@ -75,7 +76,7 @@ simulated function Timer()
             				if (P.Damage < MinimumDamage)
             					P.Damage = MinimumDamage;
             			}
-            			
+
             			// ok, lets see if the initiator gets any xp
                    		if (StatsInv == None && PlayerSpawner != None && PlayerSpawner.Pawn != None)
             	            StatsInv = RPGStatsInv(PlayerSpawner.Pawn.FindInventoryType(class'RPGStatsInv'));
@@ -114,7 +115,7 @@ simulated function Timer()
 			}
 		}
 	}
-    
+
 	if (HitProjectile == false)
 	{
 	    // no projectile to shoot down. Let's see if there is anything else we can do. Try healing - but only in teamgames
