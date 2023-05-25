@@ -4,7 +4,7 @@ class DruidSuperDefenseSentinelController extends DruidDefenseSentinelController
 simulated function Timer()
 {
 	// lets target some enemies
-	local Projectile P, TitanRock;
+	local Projectile P;
 	local xEmitter HitEmitter;
 	local Mutator m;
 	Local DruidDefenseSentinel DefPawn;
@@ -40,7 +40,6 @@ simulated function Timer()
 					 || (TeamGame(Level.Game) == None && P.InstigatorController != PlayerSpawner)))))	// or just not me
 			{
 			    // its an enemy projectile
-            	//TitanRock = SMPTitanBigRock(P);
             	if (!P.bDeleteMe )
             	{
                     HitProjectile = true;

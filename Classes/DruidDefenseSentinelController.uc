@@ -257,7 +257,7 @@ function DoHealing()
 simulated function Timer()
 {
 	// lets target some enemies
-	local Projectile P, TitanRock;
+	local Projectile P;
 	local xEmitter HitEmitter;
 	local Projectile ClosestP;
 	local Projectile BestGuidedP;
@@ -350,7 +350,6 @@ simulated function Timer()
 		BestP = BestGuidedP;
 	else
 		BestP = ClosestP;
-	//TitanRock = SMPTitanBigRock(BestP);
 	if (BestP != None && !BestP.bDeleteMe )
 	{
 		HitEmitter = spawn(HitEmitterClass,,, Pawn.Location, rotator(BestP.Location - Pawn.Location));
